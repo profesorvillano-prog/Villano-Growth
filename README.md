@@ -43,9 +43,11 @@ Villano Growth (carpeta marketingskills)
 ├─ .claude/skills/        ← las skills (impeccable, …)
 ├─ plantilla-cliente/     ← base para clientes nuevos
 └─ clientes/
-   └─ dachshund-salud/    ← Cliente: Dachshund Salud (su index.html)
-       ├─ index.html
-       └─ .claude/settings.json   ← conecta con las skills
+   ├─ dachshund-salud/    ← Dachshund Salud (su index.html)
+   ├─ gian-fp-coach/      ← Gian FP Coach
+   ├─ japi-eaters/        ← Japi Eaters
+   ├─ family-eaters/      ← Family Eaters
+   └─ ingresos-extra-to/  ← Ingresos Extra TO (Sala de Skool)
 ```
 
 Cada cliente vive en su propia subcarpeta dentro de `clientes/`. Cuando crezca,
