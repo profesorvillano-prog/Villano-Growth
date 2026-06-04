@@ -15,6 +15,7 @@ reutilizar con todos mis clientes.
 | **impeccable** | Diseño de páginas web e interfaces (UI/UX). Trae 23 comandos: `/impeccable polish`, `/impeccable audit`, `/impeccable critique`, etc. Creada por Paul Bakaus — https://impeccable.style |
 | **claude-ads** | Auditoría y optimización de publicidad de pago (PPC): 22 sub-skills y 250+ comprobaciones en Google, Meta, YouTube, LinkedIn, TikTok, Microsoft, Apple y Amazon Ads. Comandos `/ads audit`, `/ads plan`, `/ads create`, etc. Creada por AgriciDaniel (MIT). |
 | **emil-design-eng** | Ingeniería de diseño: pulido de UI, diseño de componentes, animación y detalles que hacen que el software se sienta bien. Filosofía de Emil Kowalski — https://emilkowal.ski/skill |
+| **marketing-skills** | 43 skills de marketing: CRO, copywriting, cold email, prospecting, SEO/AI SEO, paid ads, SMS, creatividades, pricing, referrals, revops, customer research, planes de marketing, etc. Por Corey Haines (MIT). |
 
 *(Iremos añadiendo más skills aquí: análisis de clientes, copywriting, embudos, etc.)*
 

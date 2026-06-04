@@ -10,6 +10,7 @@
   "enabledPlugins": {
     "impeccable@marketingskills": true,
     "claude-ads@marketingskills": true,
-    "emil-design-eng@marketingskills": true
+    "emil-design-eng@marketingskills": true,
+    "marketing-skills@marketingskills": true
   }
 }

@@ -34,6 +34,15 @@
       "category": "design",
       "homepage": "https://emilkowal.ski/skill",
       "tags": ["design", "ui", "animation", "craft", "frontend"]
+    },
+    {
+      "name": "marketing-skills",
+      "description": "43 skills de marketing para founders y marketers técnicos: CRO, copywriting, cold email, prospecting, SEO, AI SEO, paid ads, SMS, creatividades, pricing, referrals, revops, customer research, planes de marketing AARRR y más. Por Corey Haines (MIT).",
+      "version": "2.3.0",
+      "source": "./plugins/marketing-skills",
+      "category": "marketing",
+      "homepage": "https://github.com/coreyhaines31/marketingskills",
+      "tags": ["marketing", "cro", "copywriting", "seo", "paid-ads", "growth", "pricing"]
     }
   ]
 }
