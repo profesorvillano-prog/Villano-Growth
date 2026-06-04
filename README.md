@@ -1,4 +1,4 @@
-# marketingskills — Mi biblioteca de skills (Marcelo Dachshund)
+# marketingskills — Mi biblioteca de skills
 
 Esta carpeta es **mi biblioteca de habilidades (skills) para Claude Code**.
 Aquí guardo las skills que quiero reutilizar con todos mis clientes.
