@@ -5,7 +5,7 @@ Repositorio del cliente: aquí van **sus productos, embudos, páginas web y arch
 ## Skills automáticas
 
 Este repo está conectado a mi biblioteca central de skills
-(`profesorvillano-prog/marketingskills`). Gracias al archivo
+(`profesorvillano-prog/Villano-Growth`). Gracias al archivo
 `.claude/settings.json`, al abrir este proyecto en Claude Code se cargan
 solas las skills (por ejemplo `impeccable`, con sus comandos `/impeccable …`).
 

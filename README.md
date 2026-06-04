@@ -4,10 +4,9 @@ Esta carpeta es **la biblioteca de habilidades (skills) de Villano Growth para
 Claude Code**. Aquí guardo, en un solo sitio, todo el conocimiento que quiero
 reutilizar con todos mis clientes.
 
-> Nota: la carpeta en GitHub se llama técnicamente `marketingskills`. La marca es
-> **Villano Growth**. Si quieres que también el nombre técnico sea `villano-growth`,
-> se puede renombrar en GitHub (Settings → Repository name) y yo actualizo la
-> línea de conexión de los clientes.
+> Repo en GitHub: `profesorvillano-prog/Villano-Growth`.
+> El catálogo de skills (marketplace) se llama internamente `marketingskills`,
+> por eso las skills se instalan como `impeccable@marketingskills`.
 
 ## ¿Qué hay dentro?
 
@@ -39,13 +38,15 @@ conecta el repo del cliente con esta biblioteca. Pasos detallados en
 [`plantilla-cliente/COMO-CREAR-UN-CLIENTE.md`](plantilla-cliente/COMO-CREAR-UN-CLIENTE.md).
 
 ```
-Villano Growth (carpeta marketingskills)
+Villano Growth (repo: Villano-Growth)
 ├─ .claude/skills/        ← las skills (impeccable, …)
 ├─ plantilla-cliente/     ← base para clientes nuevos
 └─ clientes/
-   └─ dachshund-salud/    ← Cliente: Dachshund Salud (su index.html)
-       ├─ index.html
-       └─ .claude/settings.json   ← conecta con las skills
+   ├─ dachshund-salud/    ← Dachshund Salud (su index.html)
+   ├─ gian-fp-coach/      ← Gian FP Coach
+   ├─ japi-eaters/        ← Japi Eaters
+   ├─ family-eaters/      ← Family Eaters
+   └─ ingresos-extra-to/  ← Ingresos Extra TO (Sala de Skool)
 ```
 
 Cada cliente vive en su propia subcarpeta dentro de `clientes/`. Cuando crezca,
