@@ -16,6 +16,15 @@
       "category": "design",
       "homepage": "https://impeccable.style",
       "tags": ["design", "frontend", "ui", "ux"]
+    },
+    {
+      "name": "claude-ads",
+      "description": "Auditoría y optimización de publicidad de pago (PPC): 22 sub-skills y 250+ comprobaciones en Google, Meta, YouTube, LinkedIn, TikTok, Microsoft, Apple y Amazon Ads. Incluye creatividades con IA, matemáticas PPC, tests A/B y tracking. Por AgriciDaniel (MIT).",
+      "version": "1.7.0",
+      "source": "./plugins/claude-ads",
+      "category": "marketing",
+      "homepage": "https://agricidaniel.com/blog/claude-code-ad-agency",
+      "tags": ["advertising", "ppc", "google-ads", "meta-ads", "audit", "marketing"]
     }
   ]
 }
