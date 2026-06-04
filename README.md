@@ -39,12 +39,18 @@ conecta el repo del cliente con esta biblioteca. Pasos detallados en
 [`plantilla-cliente/COMO-CREAR-UN-CLIENTE.md`](plantilla-cliente/COMO-CREAR-UN-CLIENTE.md).
 
 ```
-profesorvillano-prog/
-├─ marketingskills   ← Villano Growth (esta biblioteca de skills)
-├─ marcelo-dachshund ← Cliente 1
-├─ cliente-2         ← Cliente 2
-└─ …
+Villano Growth (carpeta marketingskills)
+├─ .claude/skills/        ← las skills (impeccable, …)
+├─ plantilla-cliente/     ← base para clientes nuevos
+└─ clientes/
+   └─ dachshund-salud/    ← Cliente: Dachshund Salud (su index.html)
+       ├─ index.html
+       └─ .claude/settings.json   ← conecta con las skills
 ```
+
+Cada cliente vive en su propia subcarpeta dentro de `clientes/`. Cuando crezca,
+cualquier cliente puede moverse a su propio repositorio sin cambiar nada
+(ya viene auto-contenido).
 
 ## Añadir más skills en el futuro
 
