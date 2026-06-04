@@ -25,6 +25,15 @@
       "category": "marketing",
       "homepage": "https://agricidaniel.com/blog/claude-code-ad-agency",
       "tags": ["advertising", "ppc", "google-ads", "meta-ads", "audit", "marketing"]
+    },
+    {
+      "name": "emil-design-eng",
+      "description": "Ingeniería de diseño: filosofía de Emil Kowalski sobre pulido de UI, diseño de componentes, animación y los detalles invisibles que hacen que el software se sienta bien.",
+      "version": "1.0.0",
+      "source": "./plugins/emil-design-eng",
+      "category": "design",
+      "homepage": "https://emilkowal.ski/skill",
+      "tags": ["design", "ui", "animation", "craft", "frontend"]
     }
   ]
 }
