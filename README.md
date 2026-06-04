@@ -13,6 +13,7 @@ reutilizar con todos mis clientes.
 | Skill | Para qué sirve |
 |-------|----------------|
 | **impeccable** | Diseño de páginas web e interfaces (UI/UX). Trae 23 comandos: `/impeccable polish`, `/impeccable audit`, `/impeccable critique`, etc. Creada por Paul Bakaus — https://impeccable.style |
+| **claude-ads** | Auditoría y optimización de publicidad de pago (PPC): 22 sub-skills y 250+ comprobaciones en Google, Meta, YouTube, LinkedIn, TikTok, Microsoft, Apple y Amazon Ads. Comandos `/ads audit`, `/ads plan`, `/ads create`, etc. Creada por AgriciDaniel (MIT). |
 
 *(Iremos añadiendo más skills aquí: análisis de clientes, copywriting, embudos, etc.)*
 

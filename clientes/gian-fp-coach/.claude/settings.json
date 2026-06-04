@@ -8,6 +8,7 @@
     }
   },
   "enabledPlugins": {
-    "impeccable@marketingskills": true
+    "impeccable@marketingskills": true,
+    "claude-ads@marketingskills": true
   }
 }
