@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "marketingskills",
+  "metadata": {
+    "description": "Biblioteca de skills (habilidades) reutilizables para Claude Code. Instala desde aquí en cualquier proyecto de cliente."
+  },
+  "owner": {
+    "name": "profesorvillano-prog"
+  },
+  "plugins": [
+    {
+      "name": "impeccable",
+      "description": "Fluidez de diseño frontend: 1 skill con 23 comandos (/impeccable polish, /impeccable audit, /impeccable critique, etc.) y detección de anti-patrones. Por Paul Bakaus (https://impeccable.style).",
+      "version": "3.5.0",
+      "source": "./plugins/impeccable",
+      "category": "design",
+      "homepage": "https://impeccable.style",
+      "tags": ["design", "frontend", "ui", "ux"]
+    }
+  ]
+}
