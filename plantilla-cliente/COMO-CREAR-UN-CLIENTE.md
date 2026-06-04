@@ -27,6 +27,6 @@ Pruébalo escribiendo, por ejemplo, `/impeccable polish`.
 Escribe estos dos comandos una vez en ese proyecto:
 
 ```
-/plugin marketplace add profesorvillano-prog/marketingskills
+/plugin marketplace add profesorvillano-prog/Villano-Growth
 /plugin install impeccable@marketingskills
 ```

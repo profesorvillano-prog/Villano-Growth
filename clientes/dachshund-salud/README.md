@@ -11,7 +11,7 @@ archivos.
 ## Skills
 
 Esta carpeta está conectada a la biblioteca **Villano Growth**
-(`profesorvillano-prog/marketingskills`) mediante `.claude/settings.json`. Al
+(`profesorvillano-prog/Villano-Growth`) mediante `.claude/settings.json`. Al
 trabajar aquí en Claude Code, las skills (como `impeccable`) se cargan solas.
 
 Para mejorar el diseño de la landing, por ejemplo:
