@@ -18,12 +18,12 @@
 
 <!-- Fuentes: pesos mínimos + carga no bloqueante -->
 <link rel="preload" as="style"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&family=Open+Sans:wght@400;500;600;700&display=swap">
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Open+Sans:wght@400;600;700&display=swap">
 <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&family=Open+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Open+Sans:wght@400;600;700&display=swap"
       media="print" onload="this.media='all'">
 <noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&family=Open+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Open+Sans:wght@400;600;700&display=swap">
 </noscript>
 
 <script>document.documentElement.classList.add('js');</script>
@@ -241,13 +241,13 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
 .testi-disc svg{color:var(--gb);margin-top:1px;}
 
 /* AUTORIDAD */
-.auth-photo{width:172px;border-radius:14px;overflow:hidden;margin:0 auto 20px;border:1px solid var(--gp);box-shadow:0 12px 34px rgba(45,74,62,.16);}
+.auth-photo{width:128px;border-radius:14px;overflow:hidden;margin:0 auto 18px;border:1px solid var(--gp);box-shadow:0 10px 28px rgba(45,74,62,.14);}
 .auth-photo img{width:100%;height:auto;display:block;}
 .auth-name{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:700;margin-bottom:4px;text-align:center;color:var(--t0);}
 .auth-role{font-size:12.5px;color:var(--gold);font-weight:600;margin-bottom:18px;text-align:center;line-height:1.55;letter-spacing:.2px;}
-.auth-text{font-size:14.5px;color:var(--t1);margin-bottom:10px;line-height:1.72;font-style:italic;font-family:'Montserrat',sans-serif;font-size:18px;}
+.auth-text{color:var(--t1);margin-bottom:10px;line-height:1.7;font-style:italic;font-family:'Montserrat',sans-serif;font-size:17px;max-width:42ch;margin-left:auto;margin-right:auto;text-align:center;}
 .auth-creds{list-style:none;margin-top:22px;}
-.auth-creds li{padding:14px 0;border-bottom:1px solid var(--br);font-size:13.5px;font-weight:500;color:var(--t1);display:flex;align-items:center;gap:13px;line-height:1.4;}
+.auth-creds li{padding:14px 0;border-bottom:1px solid var(--br);font-size:13.5px;font-weight:600;color:var(--t1);display:flex;align-items:center;gap:13px;line-height:1.4;}
 .auth-creds li:last-child{border-bottom:none;}
 .cred-ico{width:34px;height:34px;}
 
@@ -330,7 +330,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
 .footer a{color:var(--golb);text-decoration:none;}
 .footer .disc{max-width:480px;margin:10px auto 0;font-size:10.5px;line-height:1.55;color:rgba(255,255,255,.4);}
 .footer-links{display:flex;justify-content:center;align-items:center;gap:16px;margin:14px 0 10px;flex-wrap:wrap;}
-.footer-links a{color:rgba(255,255,255,.62);font-size:11.5px;font-weight:500;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:1px;transition:color .2s,border-color .2s;}
+.footer-links a{color:rgba(255,255,255,.62);font-size:11.5px;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:1px;transition:color .2s,border-color .2s;}
 .footer-links a:hover{color:var(--golb);border-color:rgba(200,150,46,.5);}
 .footer-links span{color:rgba(255,255,255,.22);font-size:10px;}
 
@@ -406,7 +406,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
 
   <div class="vid-wrap">
     <button type="button" class="vid-facade" id="vsl" aria-label="Reproducir el video del Dr. Marcelo">
-      <img class="vid-poster" width="960" height="540" fetchpriority="high"
+      <img class="vid-poster" width="960" height="540" fetchpriority="high" decoding="async"
            src="https://embed-ssl.wistia.com/deliveries/60910038d95d097e247fd3524fcaa533.jpg?image_crop_resized=480x270"
            srcset="https://embed-ssl.wistia.com/deliveries/60910038d95d097e247fd3524fcaa533.jpg?image_crop_resized=480x270 480w,
                    https://embed-ssl.wistia.com/deliveries/60910038d95d097e247fd3524fcaa533.jpg?image_crop_resized=720x405 720w"
@@ -420,9 +420,10 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
   </div>
 
   <p class="hero-p">
-    Ya probaste la croqueta premium, las cremas, el champú medicado, los corticoides…
-    y sigue igual. <strong>Esos tratamientos solo apagan el síntoma</strong> mientras el
-    incendio sigue adentro. La causa es nutricional y se corrige desde la raíz en
+    Lo llevaste a cada veterinario. Probaste la croqueta premium, las cremas, el champú
+    medicado, los corticoides… y verlo rascarse otra noche te rompe el corazón.
+    <strong>No estás fallándole: te dieron parches para un problema que empieza en su plato.</strong>
+    La causa es nutricional y se corrige desde la raíz en
     <span class="acc">90 días de acompañamiento 1-a-1</span>, sin fármacos y sin ensayo y error.
   </p>
 
@@ -595,17 +596,17 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
 <section class="sec sec-white">
 <div class="w">
 
-  <p class="kick rv">Casos reales · Resultados documentados</p>
-  <h2 class="stitle rv">De la crisis al protocolo</h2>
+  <p class="kick rv">No estás sola en esto</p>
+  <h2 class="stitle rv">Familias como la tuya, agotadas de los parches</h2>
   <p class="sdesc rv">
-    Estas familias dejaron atrás a los veterinarios que no resolvían nada. Sus perros hablan por sí solos.
+    Dejaron de tratar síntomas y atacaron la causa. No te pedimos que nos creas — mira a sus perros.
   </p>
 
   <div class="testi-stack rv">
     <div class="testi-card">
       <img class="testi-img" width="1308" height="480"
            src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69dde37ee34cc263fb992ae9.png"
-           alt="Max, Dachshund estándar de 7 años, antes y después del protocolo de recomposición — dermatitis crónica resuelta" loading="lazy">
+           alt="Max, Dachshund estándar de 7 años, antes y después del protocolo de recomposición — dermatitis crónica resuelta" loading="lazy" decoding="async">
       <div class="testi-body">
         <div class="testi-badges">
           <span class="badge badge-red"><svg class="i i-sm" aria-hidden="true"><use href="#flame"/></svg> Dermatitis crónica</span>
@@ -627,7 +628,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
     <div class="testi-card">
       <img class="testi-img" width="1320" height="490"
            src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69dde37e4753e162cc036f05.png"
-           alt="Dalí, Dachshund estándar de 3 años, recuperación de IVDD y obesidad sin fármacos" loading="lazy">
+           alt="Dalí, Dachshund estándar de 3 años, recuperación de IVDD y obesidad sin fármacos" loading="lazy" decoding="async">
       <div class="testi-body">
         <div class="testi-badges">
           <span class="badge badge-red"><svg class="i i-sm" aria-hidden="true"><use href="#alert"/></svg> IVDD + Obesidad</span>
@@ -663,20 +664,20 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
   <p class="kick rv" style="justify-content:center;">Quién está detrás del método</p>
 
   <div class="auth-photo rv">
-    <img width="1080" height="1350" src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69dde1c9e34cc263fb98c7e8.png" alt="Dr. Marcelo Hernán, médico veterinario especialista en Dachshund" loading="lazy">
+    <img width="1080" height="1350" src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69dde1c9e34cc263fb98c7e8.png" alt="Dr. Marcelo Hernán, médico veterinario especialista en Dachshund" loading="lazy" decoding="async">
   </div>
   <h3 class="auth-name rv">Dr. Marcelo Hernán</h3>
   <p class="auth-role rv">Médico Veterinario · Universidad de Concepción<br>Único veterinario en habla hispana 100% dedicado a la nutrición natural del Dachshund</p>
 
   <p class="auth-text rv">
-    "No soy el veterinario generalista que receta una bolsa de croquetas para salir del paso. El Dachshund no es 'un perro más'. Su columna, su metabolismo ultra-específico y su predisposición genética exigen una ingeniería nutricional que la industria ignora. Después de años viendo el mismo patrón —medicar, aliviar y esperar la siguiente recaída— decidí enfocarme en una sola misión. Empezó con mi propio perro, Hansel, y hoy es el Método Recomposición Dachshund que aplico a tu salchicha."
+    "El Dachshund no es 'un perro más': su columna y su metabolismo exigen una nutrición
+    que la industria ignora. Por eso dejé de medicar y esperar la próxima recaída — y me
+    dediqué a una sola cosa: devolverle a tu salchicha el cuerpo sano con el que nació."
   </p>
 
   <ul class="auth-creds rv">
     <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#paw"/></svg></div>Único en habla hispana 100% dedicado a la nutrición natural del Dachshund</li>
-    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#globe"/></svg></div>+3.000 dueños asesorados · +250 acompañamientos VIP completos</li>
-    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#book"/></svg></div>Creador de Dachshund Salud · Autor del método Dieta Salchicha Pro</li>
-    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#leaf"/></svg></div>Especialista en Dieta BARF · Nutrición natural funcional</li>
+    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#globe"/></svg></div>+3.000 dueños asesorados · +250 acompañamientos completos</li>
     <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#handshake"/></svg></div>Seguimiento 1:1 — no una consulta, una alianza de 90 días</li>
   </ul>
 
