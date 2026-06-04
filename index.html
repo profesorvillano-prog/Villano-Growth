@@ -197,6 +197,13 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
 .pullquote.light .attr{color:var(--gd);}
 .pullquote.light .attr::before{background:var(--gold);}
 
+/* CADENA INFLAMATORIA */
+.chain-lead{font-size:13px;font-weight:700;letter-spacing:.2px;color:var(--gd);text-align:center;margin-bottom:12px;}
+.chain{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 6px;margin-bottom:30px;padding:18px 14px;background:var(--gi);border:1px solid var(--br);border-radius:var(--r);}
+.chain .lk{font-size:12px;font-weight:700;color:var(--gd);background:var(--wh);border:1px solid var(--br);padding:7px 12px;border-radius:100px;white-space:nowrap;}
+.chain .lk.bad{color:var(--red);background:var(--rdb);border-color:#F1C9C4;}
+.chain svg{color:var(--gold);width:15px;height:15px;}
+
 /* TRIAD (microbioma) */
 .triad{display:flex;border:1px solid var(--br);border-radius:var(--r);overflow:hidden;margin-bottom:28px;background:var(--wh);}
 .triad-cell{flex:1;padding:22px 12px;text-align:center;border-right:1px solid var(--br);display:flex;flex-direction:column;align-items:center;gap:9px;}
@@ -413,10 +420,11 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
   </div>
 
   <p class="hero-p">
-    El IVDD, la dermatitis, el sobrepeso. Ya gastaste demasiado en "soluciones"
-    que solo apagan el síntoma.
-    <strong>La causa real es nutricional</strong> — y se corrige en
-    <span class="acc">90 días con acompañamiento clínico 1-a-1</span>, no con otro champú.
+    No es la temporada. No son las pulgas. No es "que ya está grande".
+    Es la <strong>inflamación que empieza en su plato</strong> — y que la croqueta, las
+    cremas y los corticoides solo tapan mientras el incendio sigue adentro.
+    La causa es nutricional y se corrige desde la raíz en
+    <span class="acc">90 días de acompañamiento 1-a-1</span>, sin fármacos y sin ensayo y error.
   </p>
 
   <a href="https://api.leadconnectorhq.com/widget/survey/1dl3euhcCV1c8cCJjetf" target="_blank" rel="noopener" class="btn">
@@ -447,7 +455,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
       <div class="tile tile-red pain-ico"><svg class="i" aria-hidden="true"><use href="#flame"/></svg></div>
       <div>
         <h4>La picazón que no para</h4>
-        <p>No es solo picazón. Es inflamación sistémica que ningún champú ni pomada va a alcanzar. El veneno está adentro, no afuera.</p>
+        <p>No es la temporada ni las pulgas. Es inflamación sistémica que ningún champú ni pomada va a alcanzar. La piel solo refleja lo que hay en el plato.</p>
       </div>
     </li>
     <li class="pain-item">
@@ -461,7 +469,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
       <div class="tile tile-red pain-ico"><svg class="i" aria-hidden="true"><use href="#route"/></svg></div>
       <div>
         <h4>El laberinto de consultas vacías</h4>
-        <p>Dermatólogos, cambios de alimento, sin resultado real. Nadie está mirando la biología única de un Dachshund.</p>
+        <p>Dermatólogos, croquetas "hipoalergénicas", una marca tras otra… y siguió igual. Hay un motivo: casi todas comparten el ingrediente que lo inflama. Nadie mira la biología única del Dachshund.</p>
       </div>
     </li>
     <li class="pain-item">
@@ -489,6 +497,22 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
   <h2 class="stitle rv">La picazón, el sobrepeso, la ansiedad — no son problemas distintos</h2>
   <p class="sdesc rv" style="margin-bottom:26px;">
     La picazón de tu Dachshund, su mal aliento, sus gases, su ansiedad cuando te vas — y hasta su reactividad — son la misma conversación biológica.
+  </p>
+
+  <p class="chain-lead rv">La cadena que nadie te explica:</p>
+  <div class="chain rv" aria-label="Croqueta ultraprocesada lleva a inflamación crónica, luego a sobrepeso, luego a presión sobre la columna y finalmente a IVDD">
+    <span class="lk">Croqueta ultraprocesada</span>
+    <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
+    <span class="lk">Inflamación crónica</span>
+    <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
+    <span class="lk">Sobrepeso</span>
+    <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
+    <span class="lk">Presión en la columna</span>
+    <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
+    <span class="lk bad">IVDD</span>
+  </div>
+  <p class="sdesc rv" style="margin-top:-18px;margin-bottom:26px;font-size:13px;">
+    1 de cada 4 Dachshunds desarrolla IVDD — y rara vez es solo genética. Casi siempre es inflamación crónica acumulada, plato tras plato.
   </p>
 
   <div class="triad rv">
@@ -643,14 +667,14 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
     <img width="1080" height="1350" src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69dde1c9e34cc263fb98c7e8.png" alt="Dr. Marcelo Hernán, médico veterinario especialista en Dachshund" loading="lazy">
   </div>
   <h3 class="auth-name rv">Dr. Marcelo Hernán</h3>
-  <p class="auth-role rv">Médico Veterinario · Universidad de Concepción<br>Especialista en nutrición natural · 100% dedicado al universo Dachshund</p>
+  <p class="auth-role rv">Médico Veterinario · Universidad de Concepción<br>Único veterinario en habla hispana 100% dedicado a la nutrición natural del Dachshund</p>
 
   <p class="auth-text rv">
-    "No soy el veterinario generalista que receta una bolsa de croquetas para salir del paso. El Dachshund no es 'un perro más'. Su columna, su metabolismo ultra-específico y su predisposición genética exigen una ingeniería nutricional que la industria ignora. Después de años viendo el mismo patrón —medicar, aliviar y esperar la siguiente recaída— decidí enfocarme en una sola misión."
+    "No soy el veterinario generalista que receta una bolsa de croquetas para salir del paso. El Dachshund no es 'un perro más'. Su columna, su metabolismo ultra-específico y su predisposición genética exigen una ingeniería nutricional que la industria ignora. Después de años viendo el mismo patrón —medicar, aliviar y esperar la siguiente recaída— decidí enfocarme en una sola misión. Empezó con mi propio perro, Hansel, y hoy es el Método Recomposición Dachshund que aplico a tu salchicha."
   </p>
 
   <ul class="auth-creds rv">
-    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#paw"/></svg></div>100% enfocado en el universo Dachshund — no trato otras razas</li>
+    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#paw"/></svg></div>Único en habla hispana 100% dedicado a la nutrición natural del Dachshund</li>
     <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#globe"/></svg></div>+3.000 dueños asesorados · +250 acompañamientos VIP completos</li>
     <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#book"/></svg></div>Creador de Dachshund Salud · Autor del método Dieta Salchicha Pro</li>
     <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#leaf"/></svg></div>Especialista en Dieta BARF · Nutrición natural funcional</li>
@@ -798,6 +822,11 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
     <details class="faq-item">
       <summary class="faq-q">¿Tendré que cocinar para mi perro? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
       <div class="faq-a-in">El método se basa en eficiencia biológica. Implementarás la Dieta Natural Cruda (BARF) de forma práctica, rápida y segura, con dosis exactas, guías de compra y acompañamiento en cada paso. No necesitas ser chef.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">Me da miedo el crudo: ¿y si se atora, le falta calcio o le da una bacteria? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
+      <div class="faq-a-in">Es un miedo lógico, y por eso nada queda librado al azar. Trabajamos con gramajes exactos calculados para tu perro —el calcio incluido—, una transición pausada y segura, pautas claras de manipulación e higiene, y seguimiento directo conmigo durante los 90 días. El riesgo real no es una transición guiada paso a paso: es seguir confiando en un ultraprocesado que inflama su intestino todos los días.</div>
     </details>
 
     <details class="faq-item">
