@@ -1,0 +1,12 @@
+{
+  "name": "emil-design-eng",
+  "description": "Ingeniería de diseño: la filosofía de Emil Kowalski sobre pulido de UI, diseño de componentes, decisiones de animación y los detalles invisibles que hacen que el software se sienta bien.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Emil Kowalski",
+    "url": "https://emilkowal.ski"
+  },
+  "homepage": "https://emilkowal.ski/skill",
+  "repository": "https://github.com/emilkowalski/skill",
+  "skills": "./skills/"
+}
