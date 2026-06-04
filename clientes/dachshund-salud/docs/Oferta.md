@@ -28,6 +28,7 @@ Dos rutas según el estado de salud del perro y el compromiso del dueño:
 | Nivel | Producto | Perfil del cliente | Precio |
 |---|---|---|---|
 | **Low ticket (volumen)** | Pack Salchicha Pro / Zen (ebooks + cursos) | Perro sano o problemas leves (caída de pelo, ansiedad, ligero sobrepeso) | **USD $47 – $97** |
+| **Suscripción / comunidad** | **Club DAX Saludable** | Dueño que quiere acompañamiento continuo y comunidad | **USD $37/mes** o **$197/año** (~$16/mes) |
 | **Core** | Plan Salchicha 30 (acompañamiento 30 días) | Problema concreto, quiere resultado rápido guiado | **USD $197** |
 | **High ticket (autoridad)** | Plan Salchicha VIP 90 / **Método Recomposición Dachshund** | Perro con enfermedad de base (dermatitis crónica, obesidad mórbida, hepático/renal, IVDD) | **USD $497** |
 
@@ -48,7 +49,23 @@ Dos rutas según el estado de salud del perro y el compromiso del dueño:
 - **Objetivo de negocio:** masificar la base de datos y generar ingresos
   recurrentes; puerta de entrada a la ascensión hacia el VIP.
 
-### 3.2 Plan Salchicha 30 — Core ($197)
+### 3.2 Club DAX Saludable — Suscripción / comunidad ($37/mes o $197/año)
+La **comunidad #1 en español** enfocada 100% en nutrición y salud del perro
+salchicha (mentorías quincenales en vivo con Marcelo). Es el peldaño de
+**ascensión** desde los productos de entrada y la puerta de ingresos recurrentes.
+- **Incluye:** método Salchicha Pro completo (protocolo de cambio a BARF,
+  transición de las 5 etapas, cálculo de ración), **biblioteca completa de ebooks
+  y cursos**, foro/comunidad, mapa de salud, mentorías quincenales grabadas.
+- **Valor de referencia:** adquirir todos los productos digitales por separado
+  superaría los **USD $1.000**.
+- **Precio:** $37/mes **o** $197/año (~$16/mes; precio que se mantiene de por
+  vida al ingresar).
+- **Bonos:** Reto de Activación de 7 días, Escáner de Vitalidad, acceso inmediato
+  a recursos y actualizaciones, descuentos en planes de acompañamiento, membresía
+  de por vida.
+- **CTA:** "Únete al Club" → página de registro (acceso en <3 minutos).
+
+### 3.3 Plan Salchicha 30 — Core ($197)
 Acompañamiento integral de **30 días**. Incluye:
 - **1 Consulta de estrategia 1:1** (videollamada): diagnóstico, plan nutricional
   y solución del problema.
@@ -62,7 +79,7 @@ Acompañamiento integral de **30 días**. Incluye:
 - **Resultado prometido:** en 30 días, transformar la salud y calidad de vida del
   perro. Cupos limitados.
 
-### 3.3 Plan Salchicha VIP 90 / Método Recomposición Dachshund — High ticket ($497)
+### 3.4 Plan Salchicha VIP 90 / Método Recomposición Dachshund — High ticket ($497)
 Acompañamiento premium de **90 días (3 meses)**. Incluye:
 - **3 Consultas de estrategia 1:1** (videollamadas): diagnóstico, ajustes y
   seguimiento de evolución real.
