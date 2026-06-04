@@ -1,7 +1,13 @@
-# marketingskills — Mi biblioteca de skills (Marcelo Dachshund)
+# Villano Growth — Biblioteca de Skills
 
-Esta carpeta es **mi biblioteca de habilidades (skills) para Claude Code**.
-Aquí guardo las skills que quiero reutilizar con todos mis clientes.
+Esta carpeta es **la biblioteca de habilidades (skills) de Villano Growth para
+Claude Code**. Aquí guardo, en un solo sitio, todo el conocimiento que quiero
+reutilizar con todos mis clientes.
+
+> Nota: la carpeta en GitHub se llama técnicamente `marketingskills`. La marca es
+> **Villano Growth**. Si quieres que también el nombre técnico sea `villano-growth`,
+> se puede renombrar en GitHub (Settings → Repository name) y yo actualizo la
+> línea de conexión de los clientes.
 
 ## ¿Qué hay dentro?
 
@@ -9,48 +15,42 @@ Aquí guardo las skills que quiero reutilizar con todos mis clientes.
 |-------|----------------|
 | **impeccable** | Diseño de páginas web e interfaces (UI/UX). Trae 23 comandos: `/impeccable polish`, `/impeccable audit`, `/impeccable critique`, etc. Creada por Paul Bakaus — https://impeccable.style |
 
-## Cómo usar estas skills
+*(Iremos añadiendo más skills aquí: análisis de clientes, copywriting, embudos, etc.)*
 
-### Opción 1 — Dentro de esta misma carpeta
-Si abres este proyecto (*Marcelo Dachshund / marketingskills*) en Claude Code,
-las skills de `.claude/skills/` ya están disponibles automáticamente. Solo escribe,
-por ejemplo, `/impeccable polish`.
+## Cómo trabajan juntas la biblioteca y los clientes
 
-### Opción 2 — En el proyecto de un cliente (recomendado)
-En cualquier otro proyecto de cliente, instala esta biblioteca con **un comando**:
+Las skills viven **aquí** (Villano Growth). Cada cliente vive en **su propia
+carpeta**. Aunque estén separadas, **al trabajar se usan juntas**:
 
 ```
-/plugin marketplace add profesorvillano-prog/marketingskills
-/plugin install impeccable@marketingskills
+Villano Growth (esta carpeta)        Marcelo Dachshund (carpeta del cliente)
+   └─ skills (impeccable, …)   ←──────  .claude/settings.json  (línea de conexión)
+
+  Abres la carpeta del cliente  →  las skills se cargan solas  →  /impeccable polish
 ```
 
-A partir de ahí tendrás los comandos `/impeccable ...` en ese proyecto.
+No hay que copiar las skills a cada cliente. Y si mejoro una skill aquí,
+**todos los clientes la reciben actualizada** al instante.
 
-## Gestionar clientes (1 repo por cliente)
+## Dar de alta un cliente nuevo
 
-Cada cliente tiene **su propio repositorio** (con sus productos, embudos y web),
-y todos usan las skills de esta biblioteca **sin copiarlas**:
+Usa la carpeta **`plantilla-cliente/`**: contiene el `.claude/settings.json` que
+conecta el repo del cliente con esta biblioteca. Pasos detallados en
+[`plantilla-cliente/COMO-CREAR-UN-CLIENTE.md`](plantilla-cliente/COMO-CREAR-UN-CLIENTE.md).
 
 ```
 profesorvillano-prog/
-├─ marketingskills      ← esta biblioteca (las skills, en un solo sitio)
-├─ marcelo-dachshund    ← Cliente 1
-├─ cliente-2            ← Cliente 2
+├─ marketingskills   ← Villano Growth (esta biblioteca de skills)
+├─ marcelo-dachshund ← Cliente 1
+├─ cliente-2         ← Cliente 2
 └─ …
 ```
-
-Para dar de alta un cliente nuevo, usa la carpeta **`plantilla-cliente/`**:
-contiene un `.claude/settings.json` que conecta el repo del cliente con esta
-biblioteca y carga las skills automáticamente. Pasos detallados en
-[`plantilla-cliente/COMO-CREAR-UN-CLIENTE.md`](plantilla-cliente/COMO-CREAR-UN-CLIENTE.md).
-
-Ventaja: cuando mejoras una skill aquí, **todos los clientes la reciben actualizada**.
 
 ## Añadir más skills en el futuro
 
 1. Copia la nueva skill dentro de `.claude/skills/<nombre>/`.
-2. Si quieres poder instalarla en proyectos de clientes, añádela también como
-   plugin en `plugins/<nombre>/` y regístrala en `.claude-plugin/marketplace.json`.
+2. Para poder instalarla en clientes, añádela también como plugin en
+   `plugins/<nombre>/` y regístrala en `.claude-plugin/marketplace.json`.
 3. Guarda los cambios (commit + push).
 
 ## Créditos y licencia
