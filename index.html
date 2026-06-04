@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="Método Recomposición Dachshund — acompañamiento clínico 1-a-1 de 90 días del Dr. Marcelo Hernán. Corrige la causa nutricional de la dermatitis, el sobrepeso y el IVDD en tu salchicha. Sin fármacos.">
+<title>Método Recomposición Dachshund — Acompañamiento Clínico 90 días · Dr. Marcelo Hernán</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://embed-ssl.wistia.com" crossorigin>
+
+<!-- Portada del VSL como LCP: precarga prioritaria (responsive) -->
+<link rel="preload" as="image" fetchpriority="high"
+      href="https://embed-ssl.wistia.com/deliveries/60910038d95d097e247fd3524fcaa533.jpg?image_crop_resized=480x270"
+      imagesrcset="https://embed-ssl.wistia.com/deliveries/60910038d95d097e247fd3524fcaa533.jpg?image_crop_resized=480x270 480w, https://embed-ssl.wistia.com/deliveries/60910038d95d097e247fd3524fcaa533.jpg?image_crop_resized=720x405 720w"
+      imagesizes="(max-width:680px) calc(100vw - 44px), 640px">
+
+<!-- Fuentes: pesos mínimos + carga no bloqueante -->
+<link rel="preload" as="style"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&family=Open+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&family=Open+Sans:wght@400;500;600;700&display=swap"
+      media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&family=Open+Sans:wght@400;500;600;700&display=swap">
+</noscript>
+
+<script>document.documentElement.classList.add('js');</script>
+
+<style>
+:root {
+  --gd:    #2D4A3E;
+  --gm:    #3B5E50;
+  --gb:    #4A7A64;
+  --gp:    #D6E8DF;
+  --gi:    #F2F7F4;
+  --gold:  #C8962E;
+  --golb:  #D4A33A;
+  --golp:  #FBF0DC;
+  --golw:  #FFFBF2;
+  --cr:    #F8F8F5;
+  --wh:    #FFFFFF;
+  --t0:    #18261E;
+  --t1:    #3A5045;
+  --t2:    #56695F;
+  --t3:    #7E948A;
+  --br:    #D8E5DF;
+  --red:   #B83228;
+  --rdb:   #FDF0EE;
+  --r:     12px;
+  --sat:   env(safe-area-inset-top,0px);
+  --sab:   env(safe-area-inset-bottom,0px);
+
+  /* z-index scale */
+  --z-float: 199;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  font-family:'Open Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--cr);color:var(--t0);
+  line-height:1.65;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* Desktop: brand backdrop so the centered column reads intentional */
+@media(min-width:760px){
+  body{
+    background:
+      radial-gradient(ellipse 50% 38% at 50% 0%,rgba(74,122,100,.10) 0%,transparent 70%),
+      var(--cr);
+  }
+}
+
+.w{width:100%;max-width:580px;margin:0 auto;padding:0 22px;}
+
+/* ICONS */
+svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round;width:22px;height:22px;flex:none;}
+.i-sm{width:16px;height:16px;}
+.i-lg{width:26px;height:26px;}
+
+/* HERO */
+.hero{
+  background:var(--gd);
+  padding:52px 0 58px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 80% 18%,rgba(200,150,46,.11) 0%,transparent 60%),
+    radial-gradient(ellipse 55% 60% at 8% 84%,rgba(74,122,100,.28) 0%,transparent 62%);
+  pointer-events:none;
+}
+.hero-inner{text-align:center;position:relative;}
+.hero h1{
+  font-family:'Montserrat',sans-serif;
+  font-size:clamp(26px,6.6vw,44px);
+  font-weight:800;line-height:1.12;
+  color:#fff;
+  margin-bottom:18px;
+  padding:0 2px;
+  letter-spacing:-.4px;
+  text-wrap:balance;
+  overflow-wrap:break-word;
+}
+.hero h1 em{color:var(--golb);font-style:italic;}
+.hero-p{
+  font-size:15px;color:rgba(255,255,255,.72);
+  margin-bottom:34px;line-height:1.72;
+  max-width:464px;margin-left:auto;margin-right:auto;
+}
+.hero-p strong{color:#fff;font-weight:600;}
+.hero-p .acc{color:var(--golb);font-weight:600;}
+
+.vid-wrap{margin:26px 0 22px;border-radius:14px;overflow:hidden;position:relative;width:100%;
+  box-shadow:0 18px 50px rgba(0,0,0,.32);border:1px solid rgba(255,255,255,.08);}
+.vid-facade{position:relative;display:block;width:100%;aspect-ratio:16/9;border:none;padding:0;margin:0;cursor:pointer;background:var(--gd);overflow:hidden;-webkit-tap-highlight-color:transparent;}
+.vid-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.vid-facade::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,28,22,.12),rgba(18,28,22,.42));transition:background .25s;}
+.vid-facade:hover::after{background:linear-gradient(180deg,rgba(18,28,22,.04),rgba(18,28,22,.32));}
+.vid-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:70px;height:70px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(200,150,46,.45);transition:transform .2s,background .2s;}
+.vid-play svg{margin-left:3px;}
+.vid-facade:hover .vid-play{transform:translate(-50%,-50%) scale(1.07);background:#d8a338;}
+.vid-facade:active .vid-play{transform:translate(-50%,-50%) scale(.96);}
+.vid-dur{position:absolute;bottom:11px;right:11px;z-index:2;background:rgba(0,0,0,.62);color:#fff;font-size:12px;font-weight:600;padding:3px 9px;border-radius:6px;letter-spacing:.3px;}
+@media(prefers-reduced-motion:reduce){.vid-facade::after,.vid-play{transition:none;}}
+
+/* BOTONES */
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  width:100%;background:var(--gold);color:#fff;
+  padding:18px 24px;border-radius:8px;
+  font-size:15px;font-weight:600;
+  text-decoration:none;border:none;cursor:pointer;
+  letter-spacing:.2px;line-height:1.25;text-align:center;
+  box-shadow:0 10px 30px rgba(200,150,46,.34);
+  transition:transform .15s,box-shadow .15s,background .2s;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+}
+.btn:hover{background:#d8a338;}
+.btn:active{transform:scale(.975);box-shadow:0 4px 14px rgba(200,150,46,.2);}
+.btn svg{color:#fff;}
+.btn-dark{background:var(--gd);box-shadow:0 10px 30px rgba(45,74,62,.24);}
+.btn-dark:hover{background:#345646;}
+.btn-sm{padding:15px 20px;font-size:14px;gap:7px;}
+.cta-note{text-align:center;margin-top:11px;font-size:11.5px;color:rgba(255,255,255,.58);letter-spacing:.2px;}
+.cta-note-dark{color:var(--t2);}
+
+.divider{height:1px;background:var(--br);}
+
+.sec{padding:54px 0;}
+.sec-alt{background:var(--gi);}
+.sec-dark{background:var(--gd);color:#fff;position:relative;overflow:hidden;}
+.sec-cream{background:var(--golw);}
+.sec-white{background:var(--wh);}
+
+/* section heading */
+.shead{margin-bottom:6px;}
+.stitle{font-family:'Montserrat',sans-serif;font-size:clamp(27px,6.2vw,37px);font-weight:700;line-height:1.1;margin-bottom:14px;color:var(--t0);letter-spacing:-.3px;text-wrap:balance;}
+.stitle-l{color:#fff;}
+.kick{display:inline-flex;align-items:center;gap:9px;font-family:'Open Sans',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.3px;color:var(--gold);margin-bottom:14px;}
+.kick::before{content:'';width:22px;height:1.5px;background:var(--gold);border-radius:2px;}
+.kick-l{color:var(--golb);}
+.kick-l::before{background:var(--golb);}
+.sdesc{font-size:15px;color:var(--t1);line-height:1.72;max-width:70ch;}
+.sdesc-l{color:rgba(255,255,255,.7);}
+.acc{color:var(--gd);font-weight:600;}
+.sec-dark .acc{color:var(--golb);}
+
+/* ICON TILE (shared) */
+.tile{flex:none;display:flex;align-items:center;justify-content:center;border-radius:10px;}
+.tile-red{background:var(--rdb);color:var(--red);}
+.tile-grn{background:var(--gp);color:var(--gd);}
+.tile-gld{background:var(--golp);color:#a9781f;}
+
+/* PAIN */
+.pain-list{margin-top:26px;list-style:none;}
+.pain-item{display:flex;gap:15px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--br);}
+.pain-item:first-child{padding-top:0;}
+.pain-item:last-child{border-bottom:none;padding-bottom:0;}
+.pain-ico{width:42px;height:42px;}
+.pain-item h4{font-family:'Montserrat',sans-serif;font-size:19px;font-weight:700;margin-bottom:3px;color:var(--t0);line-height:1.2;}
+.pain-item p{font-size:13.5px;color:var(--t2);line-height:1.6;}
+
+/* PULLQUOTE (no side-stripe) */
+.pullquote{margin-top:32px;padding:30px 26px 24px;background:var(--gd);border-radius:var(--r);position:relative;overflow:hidden;}
+.pullquote .qmark{font-family:'Montserrat',sans-serif;font-size:84px;line-height:1;color:var(--golb);opacity:.32;position:absolute;top:6px;left:18px;pointer-events:none;}
+.pullquote p{font-family:'Montserrat',sans-serif;font-size:18px;font-style:italic;line-height:1.6;color:rgba(255,255,255,.94);margin-bottom:16px;position:relative;}
+.pullquote .attr{font-size:11.5px;font-style:normal;color:var(--golb);font-weight:600;letter-spacing:.4px;position:relative;display:flex;align-items:center;gap:8px;}
+.pullquote .attr::before{content:'';width:18px;height:1.5px;background:var(--golb);}
+.pullquote.light{background:var(--gi);}
+.pullquote.light .qmark{color:var(--gold);opacity:.28;}
+.pullquote.light p{color:var(--t0);}
+.pullquote.light .attr{color:var(--gd);}
+.pullquote.light .attr::before{background:var(--gold);}
+
+/* TRIAD (microbioma) */
+.triad{display:flex;border:1px solid var(--br);border-radius:var(--r);overflow:hidden;margin-bottom:28px;background:var(--wh);}
+.triad-cell{flex:1;padding:22px 12px;text-align:center;border-right:1px solid var(--br);display:flex;flex-direction:column;align-items:center;gap:9px;}
+.triad-cell:last-child{border-right:none;}
+.triad-cell .tile{width:42px;height:42px;}
+.triad-cell .tt{font-size:12.5px;font-weight:700;color:var(--gd);}
+.triad-cell .td{font-size:11.5px;color:var(--t2);line-height:1.42;}
+
+/* PASOS */
+.step{display:flex;gap:18px;align-items:flex-start;padding:24px 0;border-bottom:1px solid var(--br);}
+.step:first-child{padding-top:0;}
+.step:last-child{border-bottom:none;padding-bottom:0;}
+.step-n{width:44px;height:44px;flex:none;background:var(--gd);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:21px;font-weight:700;color:var(--golb);border-radius:10px;}
+.step h3{font-family:'Montserrat',sans-serif;font-size:21px;font-weight:700;margin-bottom:6px;color:var(--t0);line-height:1.18;}
+.step h3 .ph{display:block;font-family:'Open Sans',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:3px;}
+.step p{font-size:14px;color:var(--t2);line-height:1.64;}
+
+/* TESTIMONIOS */
+.testi-stack{display:flex;flex-direction:column;gap:20px;margin-top:30px;}
+.testi-card{background:var(--wh);border:1px solid var(--br);border-radius:var(--r);overflow:hidden;box-shadow:0 4px 18px rgba(45,74,62,.05);}
+.testi-img{width:100%;display:block;height:auto;background:var(--gi);}
+.testi-body{padding:20px 18px;}
+.testi-badges{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.badge{font-size:10.5px;font-weight:700;padding:5px 11px;border-radius:100px;letter-spacing:.3px;display:inline-flex;align-items:center;gap:5px;}
+.badge-red{background:var(--rdb);color:var(--red);}
+.badge-green{background:var(--gp);color:var(--gd);}
+.testi-quote{font-family:'Montserrat',sans-serif;font-size:17px;font-style:italic;line-height:1.5;color:var(--t0);margin-bottom:16px;}
+.testi-foot{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--br);}
+.testi-ava{width:38px;height:38px;flex:none;border-radius:50%;background:var(--gp);color:var(--gd);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:700;font-size:17px;}
+.testi-meta{flex:1;line-height:1.3;}
+.testi-meta .who{font-size:13px;font-weight:700;color:var(--t0);}
+.testi-meta .dog{font-size:11.5px;color:var(--t2);}
+.testi-time{font-size:10px;background:var(--gd);color:var(--golb);padding:5px 10px;border-radius:100px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;white-space:nowrap;}
+.testi-disc{display:flex;align-items:flex-start;gap:7px;justify-content:center;text-align:left;margin-top:16px;font-size:11px;color:var(--t3);line-height:1.45;max-width:440px;margin-left:auto;margin-right:auto;}
+.testi-disc svg{color:var(--gb);margin-top:1px;}
+
+/* AUTORIDAD */
+.auth-photo{width:172px;border-radius:14px;overflow:hidden;margin:0 auto 20px;border:1px solid var(--gp);box-shadow:0 12px 34px rgba(45,74,62,.16);}
+.auth-photo img{width:100%;height:auto;display:block;}
+.auth-name{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:700;margin-bottom:4px;text-align:center;color:var(--t0);}
+.auth-role{font-size:12.5px;color:var(--gold);font-weight:600;margin-bottom:18px;text-align:center;line-height:1.55;letter-spacing:.2px;}
+.auth-text{font-size:14.5px;color:var(--t1);margin-bottom:10px;line-height:1.72;font-style:italic;font-family:'Montserrat',sans-serif;font-size:18px;}
+.auth-creds{list-style:none;margin-top:22px;}
+.auth-creds li{padding:14px 0;border-bottom:1px solid var(--br);font-size:13.5px;font-weight:500;color:var(--t1);display:flex;align-items:center;gap:13px;line-height:1.4;}
+.auth-creds li:last-child{border-bottom:none;}
+.cred-ico{width:34px;height:34px;}
+
+/* OFERTA */
+.sec-dark .hero-glow{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 40% at 50% 0%,rgba(200,150,46,.10) 0%,transparent 65%);}
+.offer-head{text-align:center;margin-bottom:30px;position:relative;}
+.offer-head h3{font-family:'Montserrat',sans-serif;font-size:clamp(27px,6.4vw,39px);font-weight:700;color:#fff;line-height:1.08;margin-bottom:12px;text-wrap:balance;}
+.offer-head p{color:rgba(255,255,255,.66);font-size:14px;line-height:1.62;max-width:420px;margin:0 auto;}
+
+.benefit-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:12px;position:relative;}
+.bc{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:18px 16px;display:flex;flex-direction:column;gap:11px;}
+.bc.wide{grid-column:1/-1;flex-direction:row;align-items:flex-start;gap:14px;}
+.bc-icon{width:40px;height:40px;flex:none;background:rgba(200,150,46,.15);border:1px solid rgba(200,150,46,.24);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--golb);}
+.bc h4{font-size:13px;font-weight:700;color:#fff;line-height:1.32;}
+.bc p{font-size:12px;color:rgba(255,255,255,.62);line-height:1.55;}
+.bc.wide .bc-body{flex:1;}
+.bc.wide h4{font-size:14px;}
+.bc.wide p{font-size:13px;}
+
+.offer-warn{background:rgba(184,50,40,.12);border:1px solid rgba(184,50,40,.26);border-radius:12px;padding:20px 18px;font-size:13.5px;color:rgba(255,255,255,.78);line-height:1.62;margin-top:20px;position:relative;}
+.warn-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.warn-head .tile{width:30px;height:30px;background:rgba(184,50,40,.22);color:#f0a59c;border-radius:8px;}
+.warn-head strong{color:#fff;font-size:14px;font-weight:700;}
+
+/* GARANTÍA (surfaced trust) */
+.guarantee{background:var(--golw);border:1px solid var(--golp);border-radius:var(--r);padding:26px 22px;margin-top:24px;text-align:center;}
+.guar-seal{width:54px;height:54px;margin:0 auto 14px;border-radius:50%;background:var(--gd);color:var(--golb);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(45,74,62,.22);}
+.guar-seal svg{width:28px;height:28px;}
+.guarantee h4{font-family:'Montserrat',sans-serif;font-size:23px;font-weight:700;color:var(--t0);margin-bottom:10px;line-height:1.15;}
+.guarantee p{font-size:13.5px;color:var(--t1);line-height:1.66;max-width:440px;margin:0 auto;}
+.guarantee p strong{color:var(--gd);font-weight:600;}
+
+/* PARA QUIÉN */
+.fit-block{margin-bottom:28px;}
+.fit-block:last-child{margin-bottom:0;}
+.fit-h{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:11px;color:var(--t0);}
+.fit-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;}
+.fit-dot.yes{background:#DCFCE7;color:#166534;}
+.fit-dot.no{background:#FEE2E2;color:#B91C1C;}
+.fit-items{list-style:none;}
+.fit-items li{padding:12px 0;border-bottom:1px solid var(--br);font-size:14px;color:var(--t1);display:flex;align-items:flex-start;gap:11px;line-height:1.55;}
+.fit-items li:last-child{border-bottom:none;}
+.fit-items li svg{margin-top:2px;}
+.fit-items.yes li svg{color:#16A34A;}
+.fit-items.no li svg{color:var(--red);}
+
+/* FAQ */
+.faq-item{background:var(--wh);border:1px solid var(--br);border-radius:10px;margin-bottom:9px;overflow:hidden;}
+.faq-q{padding:17px 18px;font-size:14px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--t0);-webkit-tap-highlight-color:transparent;min-height:56px;line-height:1.4;list-style:none;}
+.faq-q::-webkit-details-marker{display:none;}
+.faq-tog{width:28px;height:28px;flex:none;background:var(--gi);border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--gd);transition:transform .3s,background .3s,color .3s;}
+.faq-item[open] .faq-q .faq-tog{background:var(--gd);color:#fff;transform:rotate(135deg);}
+.faq-a-in{padding:4px 18px 18px;font-size:14px;color:var(--t2);line-height:1.68;}
+
+/* SEÑALES DE ALERTA (no side-stripe) */
+.alert-stack{display:flex;flex-direction:column;gap:11px;margin:28px 0 8px;position:relative;}
+.alert-card{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:18px 16px;}
+.alert-tile{width:40px;height:40px;flex:none;border-radius:10px;background:rgba(200,150,46,.16);color:var(--golb);display:flex;align-items:center;justify-content:center;}
+.alert-left{flex:1;}
+.alert-signal{font-size:14px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.3;}
+.alert-consequence{font-size:12.5px;color:rgba(255,255,255,.66);line-height:1.55;}
+
+/* CTA FINAL */
+.form-box{background:var(--wh);border:1px solid var(--br);border-radius:var(--r);padding:26px 22px;margin-top:24px;position:relative;box-shadow:0 16px 40px rgba(0,0,0,.18);}
+.form-box .fh{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
+.form-steps{list-style:none;margin:18px 0 22px;}
+.form-steps li{display:flex;gap:13px;align-items:center;padding:12px 0;border-bottom:1px solid var(--br);font-size:14px;color:var(--t1);line-height:1.45;}
+.form-steps li:last-child{border-bottom:none;}
+.form-n{width:28px;height:28px;flex:none;background:var(--gd);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--golb);font-family:'Montserrat',sans-serif;}
+.form-box .cta-note{color:var(--t2);}
+
+/* FOOTER */
+.footer{
+  background:var(--t0);color:rgba(255,255,255,.5);
+  text-align:center;
+  padding:34px 20px calc(34px + var(--sab) + 76px);
+  font-size:12px;line-height:1.6;
+}
+.footer a{color:var(--golb);text-decoration:none;}
+.footer .disc{max-width:480px;margin:10px auto 0;font-size:10.5px;line-height:1.55;color:rgba(255,255,255,.4);}
+.footer-links{display:flex;justify-content:center;align-items:center;gap:16px;margin:14px 0 10px;flex-wrap:wrap;}
+.footer-links a{color:rgba(255,255,255,.62);font-size:11.5px;font-weight:500;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:1px;transition:color .2s,border-color .2s;}
+.footer-links a:hover{color:var(--golb);border-color:rgba(200,150,46,.5);}
+.footer-links span{color:rgba(255,255,255,.22);font-size:10px;}
+
+/* FLOATING CTA */
+.float-cta{position:fixed;bottom:0;left:0;right:0;background:rgba(18,28,22,.97);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);padding:12px 20px calc(12px + var(--sab));display:flex;align-items:center;justify-content:center;z-index:var(--z-float);transform:translateY(110%);transition:transform .35s cubic-bezier(.4,0,.2,1);border-top:1px solid rgba(200,150,46,.18);}
+.float-cta.show{transform:translateY(0);}
+.float-cta .btn{max-width:460px;}
+
+/* REVEAL — progressive enhancement; visible by default without JS */
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.2,.6,.2,1),transform .6s cubic-bezier(.2,.6,.2,1);}
+.js .rv.v{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .js .rv{opacity:1!important;transform:none!important;transition:none;}
+  .float-cta{transition:none;}
+  .faq-tog{transition:none;}
+}
+
+@media(min-width:620px){
+  .w{max-width:620px;}
+  .testi-stack{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+}
+@media(min-width:768px){
+  .w{max-width:680px;}
+  .sec{padding:72px 0;}
+  .hero{padding:64px 0 70px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ░░░ SVG SPRITE ░░░ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="stethoscope" viewBox="0 0 24 24"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></symbol>
+  <symbol id="alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+  <symbol id="pill" viewBox="0 0 24 24"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></symbol>
+  <symbol id="route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></symbol>
+  <symbol id="coins" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></symbol>
+  <symbol id="sprout" viewBox="0 0 24 24"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6c-2.9-1.2-4.9-1-6.1.4 1.4 1.3 3.4 2.3 5.4 2.6.6-1.2.5-2.2.7-3z"/></symbol>
+  <symbol id="shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
+  <symbol id="shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="activity" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+  <symbol id="power" viewBox="0 0 24 24"><path d="M12 2v10"/><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/></symbol>
+  <symbol id="leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></symbol>
+  <symbol id="microscope" viewBox="0 0 24 24"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></symbol>
+  <symbol id="meat" viewBox="0 0 24 24"><path d="M13.5 15.5 18 11a5 5 0 0 0-7-7l-4.5 4.5"/><path d="M13.5 15.5a5 5 0 0 1-7-7"/><circle cx="9" cy="11" r="1"/><path d="M5 21s-2-1-2-4 2-4 2-4"/></symbol>
+  <symbol id="droplets" viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 4.74 7 3.3c-.29 1.44-1.14 2.83-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></symbol>
+  <symbol id="flask" viewBox="0 0 24 24"><path d="M14 2v6a2 2 0 0 0 .24.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.75-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/><path d="M6.45 15h11.09"/><path d="M8.5 2h7"/></symbol>
+  <symbol id="chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+  <symbol id="video" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol>
+  <symbol id="paw" viewBox="0 0 24 24"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.05Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/></symbol>
+  <symbol id="globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+  <symbol id="book" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></symbol>
+  <symbol id="handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></symbol>
+  <symbol id="seal" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+</svg>
+
+<!-- HERO -->
+<section class="hero">
+<div class="w">
+<div class="hero-inner rv">
+
+  <h1>
+    Croqueta premium. Cremas. Champú.<br>
+    Todo lo que te dijo el veterinario.<br>
+    <em>Y tu Dachshund sigue igual.</em>
+  </h1>
+
+  <div class="vid-wrap">
+    <button type="button" class="vid-facade" id="vsl" aria-label="Reproducir el video del Dr. Marcelo">
+      <img class="vid-poster" width="960" height="540" fetchpriority="high"
+           src="https://embed-ssl.wistia.com/deliveries/60910038d95d097e247fd3524fcaa533.jpg?image_crop_resized=480x270"
+           srcset="https://embed-ssl.wistia.com/deliveries/60910038d95d097e247fd3524fcaa533.jpg?image_crop_resized=480x270 480w,
+                   https://embed-ssl.wistia.com/deliveries/60910038d95d097e247fd3524fcaa533.jpg?image_crop_resized=720x405 720w"
+           sizes="(max-width:680px) calc(100vw - 44px), 640px"
+           alt="El Dr. Marcelo Hernán explica el Método Recomposición Dachshund">
+      <span class="vid-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="26" height="26"><path d="M7 4v16l13-8z" fill="currentColor"/></svg>
+      </span>
+      <span class="vid-dur" aria-hidden="true">9:05</span>
+    </button>
+  </div>
+
+  <p class="hero-p">
+    El IVDD, la dermatitis, el sobrepeso. Ya gastaste demasiado en "soluciones"
+    que solo apagan el síntoma.
+    <strong>La causa real es nutricional</strong> — y se corrige en
+    <span class="acc">90 días con acompañamiento clínico 1-a-1</span>, no con otro champú.
+  </p>
+
+  <a href="https://api.leadconnectorhq.com/widget/survey/1dl3euhcCV1c8cCJjetf" target="_blank" rel="noopener" class="btn">
+    Evaluar el caso de mi salchicha
+    <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
+  </a>
+  <p class="cta-note">2 minutos · Sin costo · Respuesta personalizada según tu caso</p>
+
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROBLEMA -->
+<section class="sec sec-alt">
+<div class="w">
+
+  <p class="kick rv">El ciclo que agota todo</p>
+  <h2 class="stitle rv">Lo que está destruyendo a tu salchicha — y tu paciencia</h2>
+  <p class="sdesc rv">
+    Cada tratamiento apaga el síntoma mientras el incendio real sigue quemando adentro.
+    Y cada vez que vuelve, vuelve peor.
+  </p>
+
+  <ul class="pain-list rv">
+    <li class="pain-item">
+      <div class="tile tile-red pain-ico"><svg class="i" aria-hidden="true"><use href="#flame"/></svg></div>
+      <div>
+        <h4>La picazón que no para</h4>
+        <p>No es solo picazón. Es inflamación sistémica que ningún champú ni pomada va a alcanzar. El veneno está adentro, no afuera.</p>
+      </div>
+    </li>
+    <li class="pain-item">
+      <div class="tile tile-red pain-ico"><svg class="i" aria-hidden="true"><use href="#pill"/></svg></div>
+      <div>
+        <h4>La trampa de los corticoides</h4>
+        <p>El alivio de unos días es una ilusión costosa. Cada dosis silencia el síntoma mientras deteriora sus órganos vitales.</p>
+      </div>
+    </li>
+    <li class="pain-item">
+      <div class="tile tile-red pain-ico"><svg class="i" aria-hidden="true"><use href="#route"/></svg></div>
+      <div>
+        <h4>El laberinto de consultas vacías</h4>
+        <p>Dermatólogos, cambios de alimento, sin resultado real. Nadie está mirando la biología única de un Dachshund.</p>
+      </div>
+    </li>
+    <li class="pain-item">
+      <div class="tile tile-red pain-ico"><svg class="i" aria-hidden="true"><use href="#coins"/></svg></div>
+      <div>
+        <h4>La hemorragia financiera</h4>
+        <p>Miles invertidos en soluciones "premium" sin resultado duradero. Mientras la causa raíz sigue intacta.</p>
+      </div>
+    </li>
+  </ul>
+
+  <div class="pullquote rv">
+    <span class="qmark" aria-hidden="true">&ldquo;</span>
+    <p>Dermatitis. Sobrepeso. IVDD. Alergias crónicas. Tu veterinario los trata como problemas distintos. No lo son. Es un solo cuerpo inflamado mandando señales de auxilio. Y seguirá mandándolas hasta que alguien atienda la causa real.</p>
+    <div class="attr">Dr. Marcelo Hernán · Médico Veterinario, U. de Concepción</div>
+  </div>
+
+</div>
+</section>
+
+<!-- MICROBIOMA -->
+<section class="sec sec-white">
+<div class="w">
+  <p class="kick rv">Lo que tu veterinario no está conectando</p>
+  <h2 class="stitle rv">La picazón, el sobrepeso, la ansiedad — no son problemas distintos</h2>
+  <p class="sdesc rv" style="margin-bottom:26px;">
+    La picazón de tu Dachshund, su mal aliento, sus gases, su ansiedad cuando te vas — y hasta su reactividad — son la misma conversación biológica.
+  </p>
+
+  <div class="triad rv">
+    <div class="triad-cell">
+      <div class="tile tile-grn"><svg class="i" aria-hidden="true"><use href="#sprout"/></svg></div>
+      <div class="tt">Intestino</div>
+      <div class="td">La barrera rota libera toxinas al torrente</div>
+    </div>
+    <div class="triad-cell">
+      <div class="tile tile-grn"><svg class="i" aria-hidden="true"><use href="#shield"/></svg></div>
+      <div class="tt">Piel</div>
+      <div class="td">Grita lo que el intestino no puede decir</div>
+    </div>
+    <div class="triad-cell">
+      <div class="tile tile-grn"><svg class="i" aria-hidden="true"><use href="#activity"/></svg></div>
+      <div class="tt">Conducta</div>
+      <div class="td">Avisa lo que el cuerpo lleva semanas pidiendo</div>
+    </div>
+  </div>
+
+  <div class="pullquote light rv">
+    <span class="qmark" aria-hidden="true">&ldquo;</span>
+    <p>Mientras la mayoría trata cada síntoma como un problema separado, yo trato un solo cuerpo inflamado mandando señales en tres idiomas distintos.</p>
+    <div class="attr">Dr. Marcelo Hernán · Médico Veterinario, U. de Concepción</div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOLUCIÓN 3 FASES -->
+<section class="sec sec-cream">
+<div class="w">
+
+  <p class="kick rv">El sistema de recomposición</p>
+  <h2 class="stitle rv">3 fases. Sin fármacos. Desde el ADN de su nutrición.</h2>
+  <p class="sdesc rv">
+    No es un experimento. Es un sistema de recomposición metabólica probado caso a caso,
+    con primeras señales visibles habitualmente entre los 30 y 60 días, según la condición de partida
+    y el compromiso del Papá Perruno.
+  </p>
+
+  <div style="margin-top:28px;" class="rv">
+    <div class="step">
+      <div class="step-n">1</div>
+      <div>
+        <h3><span class="ph">Fase 01</span>El Apagón Inflamatorio</h3>
+        <p>El alimento "premium" es un cóctel ultraprocesado que el hígado de tu salchicha no está diseñado para metabolizar. Al saturarse, <span class="acc">el cuerpo usa la piel como vía de escape.</span> Primera misión: cortar la fuente del incendio.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div>
+        <h3><span class="ph">Fase 02</span>Restauración de la Frontera</h3>
+        <p>El 70% de las defensas viven en el intestino. Años de croquetas volvieron esa barrera permeable, disparando <span class="acc">una alerta roja constante en su piel.</span> En esta fase sellamos la frontera y devolvemos su sistema inmune.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div>
+        <h3><span class="ph">Fase 03</span>El Renacimiento del Ecosistema</h3>
+        <p>Antibióticos y mala nutrición convirtieron su interior en un desierto biológico. <span class="acc">Un perro con microbiota destruida está condenado a la inflamación perpetua.</span> Restauramos su ecosistema para que aprenda a sanarse solo.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:34px;" class="rv">
+    <a href="https://api.leadconnectorhq.com/widget/survey/1dl3euhcCV1c8cCJjetf" target="_blank" rel="noopener" class="btn btn-dark">
+      Evaluar el caso de mi salchicha
+      <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
+    </a>
+    <p class="cta-note cta-note-dark">2 minutos · Sin costo · Respuesta según tu caso</p>
+  </div>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TESTIMONIOS -->
+<section class="sec sec-white">
+<div class="w">
+
+  <p class="kick rv">Casos reales · Resultados documentados</p>
+  <h2 class="stitle rv">De la crisis al protocolo</h2>
+  <p class="sdesc rv">
+    Estas familias dejaron atrás a los veterinarios que no resolvían nada. Sus perros hablan por sí solos.
+  </p>
+
+  <div class="testi-stack rv">
+    <div class="testi-card">
+      <img class="testi-img" width="1308" height="480"
+           src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69dde37ee34cc263fb992ae9.png"
+           alt="Max, Dachshund estándar de 7 años, antes y después del protocolo de recomposición — dermatitis crónica resuelta" loading="lazy">
+      <div class="testi-body">
+        <div class="testi-badges">
+          <span class="badge badge-red"><svg class="i i-sm" aria-hidden="true"><use href="#flame"/></svg> Dermatitis crónica</span>
+          <span class="badge badge-green"><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg> Recuperación total</span>
+        </div>
+        <!-- TODO: reemplazar por la frase textual real de Francisca -->
+        <p class="testi-quote">"Probamos corticoides, dermatólogos y tres croquetas distintas. En cinco semanas con el método, Max dejó de rascarse por primera vez en años."</p>
+        <div class="testi-foot">
+          <div class="testi-ava">F</div>
+          <div class="testi-meta">
+            <div class="who">Francisca · Santiago, Chile</div>
+            <div class="dog">Max · Dachshund estándar · 7 años · Jabalí</div>
+          </div>
+          <span class="testi-time">35 días</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <img class="testi-img" width="1320" height="490"
+           src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69dde37e4753e162cc036f05.png"
+           alt="Dalí, Dachshund estándar de 3 años, recuperación de IVDD y obesidad sin fármacos" loading="lazy">
+      <div class="testi-body">
+        <div class="testi-badges">
+          <span class="badge badge-red"><svg class="i i-sm" aria-hidden="true"><use href="#alert"/></svg> IVDD + Obesidad</span>
+          <span class="badge badge-green"><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg> Sin fármacos</span>
+        </div>
+        <!-- TODO: reemplazar por la frase textual real de Roger -->
+        <p class="testi-quote">"Nos hablaban de cirugía por la columna y del sobrepeso. Sin un solo fármaco, en 40 días Dalí bajó de peso y volvió a moverse como cachorro."</p>
+        <div class="testi-foot">
+          <div class="testi-ava">R</div>
+          <div class="testi-meta">
+            <div class="who">Roger · Chile</div>
+            <div class="dog">Dalí · Dachshund estándar · 3 años · Rojo</div>
+          </div>
+          <span class="testi-time">40 días</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="testi-disc">
+    <svg class="i i-sm" aria-hidden="true"><use href="#info"/></svg>
+    Resultados reales de pacientes del Dr. Marcelo Hernán. Cada caso es individual; los resultados varían según la condición de partida y el compromiso del dueño.
+  </p>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AUTORIDAD -->
+<section class="sec sec-alt">
+<div class="w">
+
+  <p class="kick rv" style="justify-content:center;">Quién está detrás del método</p>
+
+  <div class="auth-photo rv">
+    <img width="1080" height="1350" src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69dde1c9e34cc263fb98c7e8.png" alt="Dr. Marcelo Hernán, médico veterinario especialista en Dachshund" loading="lazy">
+  </div>
+  <h3 class="auth-name rv">Dr. Marcelo Hernán</h3>
+  <p class="auth-role rv">Médico Veterinario · Universidad de Concepción<br>Especialista en nutrición natural · 100% dedicado al universo Dachshund</p>
+
+  <p class="auth-text rv">
+    "No soy el veterinario generalista que receta una bolsa de croquetas para salir del paso. El Dachshund no es 'un perro más'. Su columna, su metabolismo ultra-específico y su predisposición genética exigen una ingeniería nutricional que la industria ignora. Después de años viendo el mismo patrón —medicar, aliviar y esperar la siguiente recaída— decidí enfocarme en una sola misión."
+  </p>
+
+  <ul class="auth-creds rv">
+    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#paw"/></svg></div>100% enfocado en el universo Dachshund — no trato otras razas</li>
+    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#globe"/></svg></div>+3.000 dueños asesorados · +250 acompañamientos VIP completos</li>
+    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#book"/></svg></div>Creador de Dachshund Salud · Autor del método Dieta Salchicha Pro</li>
+    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#leaf"/></svg></div>Especialista en Dieta BARF · Nutrición natural funcional</li>
+    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#handshake"/></svg></div>Seguimiento 1:1 — no una consulta, una alianza de 90 días</li>
+  </ul>
+
+</div>
+</section>
+
+<!-- OFERTA -->
+<section class="sec sec-dark">
+<div class="hero-glow" aria-hidden="true"></div>
+<div class="w">
+
+  <div class="offer-head rv">
+    <p class="kick kick-l" style="justify-content:center;">Programa de transformación</p>
+    <h3>Método Recomposición Dachshund</h3>
+    <p>90 días de asesoría 1-a-1 personalizada. Reingeniería biológica completa. Sin pastillas. Sin ensayo y error.</p>
+  </div>
+
+  <div class="benefit-grid rv">
+    <div class="bc">
+      <div class="bc-icon"><svg class="i" aria-hidden="true"><use href="#microscope"/></svg></div>
+      <div>
+        <h4>Auditoría Metabólica Profunda</h4>
+        <p>Diagnóstico funcional inicial · Análisis de historial clínico, peso y BCS · Plan personalizado documentado por escrito que recibes el mismo día.</p>
+      </div>
+    </div>
+    <div class="bc">
+      <div class="bc-icon"><svg class="i" aria-hidden="true"><use href="#meat"/></svg></div>
+      <div>
+        <h4>Ingeniería Nutricional Personalizada</h4>
+        <p>Dieta natural cruda calculada al gramo · Lista de compras semanal · Guía de proveedores recomendados por país.</p>
+      </div>
+    </div>
+    <div class="bc">
+      <div class="bc-icon"><svg class="i" aria-hidden="true"><use href="#droplets"/></svg></div>
+      <div>
+        <h4>Protocolo Detox Hepático y Renal</h4>
+        <p>Suplementación funcional para cortar la fuga de toxinas · Calendario con dosis exactas semana a semana.</p>
+      </div>
+    </div>
+    <div class="bc">
+      <div class="bc-icon"><svg class="i" aria-hidden="true"><use href="#flask"/></svg></div>
+      <div>
+        <h4>Bio-Restauración Intestinal</h4>
+        <p>Pre y probióticos seleccionados · Guía de progresión por fases · Protocolo para sellar la frontera inmune.</p>
+      </div>
+    </div>
+    <div class="bc wide">
+      <div class="bc-icon"><svg class="i" aria-hidden="true"><use href="#chat"/></svg></div>
+      <div class="bc-body">
+        <h4>Línea Directa de WhatsApp con Marcelo</h4>
+        <p>Acceso prioritario para dudas en tiempo real · Fotos y videos de control sin esperar turno · Ajustes inmediatos del protocolo · Disponible los 90 días.</p>
+      </div>
+    </div>
+    <div class="bc wide">
+      <div class="bc-icon"><svg class="i" aria-hidden="true"><use href="#video"/></svg></div>
+      <div class="bc-body">
+        <h4>Sesiones de Ajuste y Seguimiento Clínico</h4>
+        <p>Videollamadas programadas de control · Recalibración del plan según resultados · Espacio para resolver dudas técnicas en profundidad.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="offer-warn rv">
+    <div class="warn-head">
+      <div class="tile"><svg class="i i-sm" aria-hidden="true"><use href="#alert"/></svg></div>
+      <strong>Este protocolo NO es para todos.</strong>
+    </div>
+    Es para dueños comprometidos que ven a su salchicha como un hijo y están listos para ejecutar cambios reales. Si buscas una pastilla mágica o no estás dispuesto a dejar la comida seca, este programa no es para ti.
+  </div>
+
+  <!-- GARANTÍA surfaced -->
+  <div class="guarantee rv">
+    <div class="guar-seal"><svg class="i" aria-hidden="true"><use href="#seal"/></svg></div>
+    <h4>Garantía de Acompañamiento Extendido</h4>
+    <p>
+      Si sigues el Método paso a paso durante los 90 días y reportas tus avances en los puntos de control,
+      y aun así no ves cambios visibles en la salud de tu hijo perruno,
+      <strong>extiendo el acompañamiento sin costo adicional</strong> hasta que la respuesta biológica se manifieste.
+      No te dejo solo: es la única forma honesta de garantizar resultados en medicina integrativa.
+    </p>
+  </div>
+
+</div>
+</section>
+
+<!-- PARA QUIÉN -->
+<section class="sec">
+<div class="w">
+
+  <p class="kick rv">¿Es para ti?</p>
+  <h2 class="stitle rv">Un protocolo serio para dueños cansados de los parches</h2>
+
+  <div class="fit-block rv">
+    <div class="fit-h"><span class="fit-dot yes"><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg></span> Este protocolo ES para ti si…</div>
+    <ul class="fit-items yes">
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Ya comprobaste que fármacos, corticoides y champús son solo parches costosos</li>
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Tu salchicha enfrenta dermatitis crónica, sobrepeso metabólico, alergias o riesgo de IVDD</li>
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Buscas mentoría directa de un experto, no un PDF descargable</li>
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Estás cansado/a de gastar en clínicas sin resolver la causa raíz</li>
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Entiendes que la salud de tu perro es estrategia, no suerte ni genética</li>
+    </ul>
+  </div>
+
+  <div class="fit-block rv">
+    <div class="fit-h"><span class="fit-dot no"><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg></span> Este protocolo NO es para ti si…</div>
+    <ul class="fit-items no">
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg>Esperas diagnósticos gratis por chat sin compromiso</li>
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg>No estás dispuesto/a a reemplazar las croquetas por alimentación real</li>
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg>Esperas resultados sin seguir dosis y protocolos exactos</li>
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg>El bienestar de tu salchicha no está por encima del costo de la inversión</li>
+    </ul>
+  </div>
+
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section class="sec sec-alt">
+<div class="w">
+
+  <p class="kick rv">Transparencia total</p>
+  <h2 class="stitle rv">Las preguntas que todos hacen antes de dar el paso</h2>
+
+  <div class="rv" style="margin-top:24px;">
+    <details class="faq-item">
+      <summary class="faq-q">¿Cómo funciona el primer contacto? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
+      <div class="faq-a-in">Completas un formulario de evaluación de 2 minutos con los datos de tu perro. Según tus respuestas, el Dr. Marcelo revisa tu caso, lo califica según lo que necesites y se contacta contigo con un plan 100% personalizado.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">No vivo en Chile. ¿Puedo acceder? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
+      <div class="faq-a-in">100% global. Atendemos familias en Chile, México, Argentina, Colombia, España, Costa Rica, Uruguay y cualquier lugar con conexión a internet. El seguimiento completo es por WhatsApp: la biología no tiene fronteras.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">¿Cuánto cuesta el programa? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
+      <div class="faq-a-in">La asesoría tiene un valor único de inversión que comparto después de conocer el caso de tu perro y validar que somos compatibles para trabajar juntos. Lo que sí puedo adelantarte: es una fracción de lo que estás gastando hoy en consultas, cirugías o tratamientos crónicos que no resuelven la causa raíz. Te explico exactamente qué incluye y qué no, antes de que tomes la decisión. Sin presión, sin urgencias artificiales.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">¿Tendré que cocinar para mi perro? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
+      <div class="faq-a-in">El método se basa en eficiencia biológica. Implementarás la Dieta Natural Cruda (BARF) de forma práctica, rápida y segura, con dosis exactas, guías de compra y acompañamiento en cada paso. No necesitas ser chef.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">¿Funciona si mi perro ya tiene diagnóstico veterinario? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
+      <div class="faq-a-in">Sí. El protocolo no reemplaza un diagnóstico: lo complementa con la causa raíz que la mayoría de los tratamientos ignora, la alimentación. Comparte el historial en el formulario y Marcelo evalúa el caso antes de comenzar.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">¿Hay garantía? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
+      <div class="faq-a-in">Sí, y es coherente con mi forma de trabajo. Si sigues el Método paso a paso durante los 90 días, reportas los avances en los puntos de control acordados, y aún así no ves cambios visibles en la salud de tu hijo perruno, extiendo el acompañamiento sin costo adicional hasta que la respuesta biológica se manifieste. Es la única forma honesta de garantizar resultados en medicina integrativa: con presencia real, no con devoluciones de dinero que dejan a tu perro igual de enfermo.</div>
+    </details>
+  </div>
+
+</div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="sec sec-dark" id="contactar" style="padding:60px 0 70px;">
+<div class="hero-glow" aria-hidden="true"></div>
+<div class="w">
+
+  <p class="kick kick-l rv" style="justify-content:center;">El paso que cambia todo</p>
+  <h2 class="stitle stitle-l rv" style="text-align:center;">
+    Tu salchicha no puede pedir ayuda.<br>Depende de ti.
+  </h2>
+  <p class="sdesc sdesc-l rv" style="text-align:center;margin:0 auto 30px;max-width:440px;">
+    Amar a tu perro no es solo abrazarlo y comprarle cosas bonitas. También es tomar
+    decisiones firmes cuando lo que has probado hasta ahora no está funcionando.
+    No esperes otro brote. No esperes otro susto de movilidad.
+  </p>
+
+  <div class="alert-stack rv">
+    <div class="alert-card">
+      <div class="alert-tile"><svg class="i i-sm" aria-hidden="true"><use href="#flame"/></svg></div>
+      <div class="alert-left">
+        <div class="alert-signal">Se rasca todos los días</div>
+        <div class="alert-consequence">Lo que ves en la piel ya lleva meses ocurriendo adentro. Cada semana sin intervención consolida el daño en la barrera intestinal.</div>
+      </div>
+    </div>
+    <div class="alert-card">
+      <div class="alert-tile"><svg class="i i-sm" aria-hidden="true"><use href="#coins"/></svg></div>
+      <div class="alert-left">
+        <div class="alert-signal">Sube de peso sin comer más</div>
+        <div class="alert-consequence">El metabolismo inflamado acumula grasa como defensa. Cada kilo extra es presión directa sobre una columna que no está diseñada para cargarlo.</div>
+      </div>
+    </div>
+    <div class="alert-card">
+      <div class="alert-tile"><svg class="i i-sm" aria-hidden="true"><use href="#route"/></svg></div>
+      <div class="alert-left">
+        <div class="alert-signal">Le cambiaste la croqueta y sigue igual</div>
+        <div class="alert-consequence">El problema no es la marca, es el formato. Ningún ultraprocesado, sin importar el precio, puede revertir la inflamación que el ultraprocesado causó.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-box rv">
+    <p class="fh">¿Cómo funciona?</p>
+    <ul class="form-steps">
+      <li><span class="form-n">1</span>Completas el formulario de evaluación en solo 2 minutos</li>
+      <li><span class="form-n">2</span>El Dr. Marcelo revisa el caso de tu salchicha</li>
+      <li><span class="form-n">3</span>Te contacta con un plan personalizado según la urgencia de tu caso</li>
+    </ul>
+    <a href="https://api.leadconnectorhq.com/widget/survey/1dl3euhcCV1c8cCJjetf" target="_blank" rel="noopener" class="btn">
+      Evaluar el caso de mi salchicha
+      <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
+    </a>
+    <p class="cta-note" style="margin-top:12px;">Sin costo · 2 minutos · Cupos de atención limitados</p>
+  </div>
+
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2026 Dr. Marcelo Hernán — Dachshund Salud · <a href="https://instagram.com/dachshundsalud" target="_blank" rel="noopener">@dachshundsalud</a> · Talca, Chile</p>
+  <div class="footer-links">
+    <a href="[URL-POLITICA-PRIVACIDAD]" target="_blank" rel="noopener">Política de Privacidad</a>
+    <span>·</span>
+    <a href="[URL-TERMINOS-CONDICIONES]" target="_blank" rel="noopener">Términos y Condiciones</a>
+  </div>
+  <p class="disc">El Método Recomposición Dachshund es un programa de acompañamiento nutricional integrativo. Cada caso se evalúa de forma individual antes de ser aceptado. El contenido y los resultados expuestos no reemplazan el diagnóstico clínico de un veterinario tratante: lo complementan abordando la causa nutricional. Los resultados varían según la condición de partida del perro, el compromiso en la implementación y la respuesta biológica individual. Dr. Marcelo Hernán · Médico Veterinario · Universidad de Concepción · Título profesional disponible bajo solicitud.</p>
+</footer>
+
+<!-- FLOATING CTA -->
+<div class="float-cta" id="floatCta">
+  <a href="https://api.leadconnectorhq.com/widget/survey/1dl3euhcCV1c8cCJjetf" target="_blank" rel="noopener" class="btn btn-sm">
+    Evaluar el caso de mi salchicha
+    <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
+  </a>
+</div>
+
+<script>
+// Salvaguarda: activar las fuentes si el navegador/plataforma ignoró el onload del <link>
+document.querySelectorAll('link[rel="stylesheet"][media="print"]').forEach(function(l){ l.media = 'all'; });
+
+// VSL: cargar el reproductor de Wistia solo al hacer click (evita ~14 MB en la carga inicial)
+const vsl = document.getElementById('vsl');
+if(vsl){
+  vsl.addEventListener('click', function(){
+    const wrap = vsl.parentElement;
+    wrap.innerHTML = '<wistia-player media-id="7gt1wo6ruy" aspect="1.7777777777777777" autoplay></wistia-player>';
+    ['https://fast.wistia.com/player.js','https://fast.wistia.com/embed/7gt1wo6ruy.js'].forEach(function(src,i){
+      const s = document.createElement('script');
+      s.src = src; s.async = true;
+      if(i === 1) s.type = 'module';
+      document.body.appendChild(s);
+    });
+  }, {once:true});
+}
+
+// Floating CTA: visible entre el final del hero y el CTA final.
+// Con IntersectionObserver (sin leer offsets en cada scroll → evita reflows forzados).
+const fc   = document.getElementById('floatCta');
+const hero = document.querySelector('.hero');
+const ag   = document.getElementById('contactar');
+if(fc && hero && ag && 'IntersectionObserver' in window){
+  let pastHero = false, atForm = false;
+  const update = () => fc.classList.toggle('show', pastHero && !atForm);
+  new IntersectionObserver(function(es){
+    const e = es[0];
+    pastHero = !e.isIntersecting && e.boundingClientRect.top < 0;
+    update();
+  }, {threshold:0}).observe(hero);
+  new IntersectionObserver(function(es){
+    atForm = es[0].isIntersecting;
+    update();
+  }, {rootMargin:'0px 0px -10% 0px', threshold:0}).observe(ag);
+}
+
+// Reveal on scroll (progressive enhancement)
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const revealEls = document.querySelectorAll('.rv');
+if(reduce || !('IntersectionObserver' in window)){
+  revealEls.forEach(el => el.classList.add('v'));
+}else{
+  const obs = new IntersectionObserver((es) => {
+    es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('v'); obs.unobserve(e.target); } });
+  }, {threshold:.08, rootMargin:'0px 0px -40px 0px'});
+  revealEls.forEach(el => obs.observe(el));
+}
+</script>
+</body>
+</html>
