@@ -26,6 +26,26 @@ En cualquier otro proyecto de cliente, instala esta biblioteca con **un comando*
 
 A partir de ahí tendrás los comandos `/impeccable ...` en ese proyecto.
 
+## Gestionar clientes (1 repo por cliente)
+
+Cada cliente tiene **su propio repositorio** (con sus productos, embudos y web),
+y todos usan las skills de esta biblioteca **sin copiarlas**:
+
+```
+profesorvillano-prog/
+├─ marketingskills      ← esta biblioteca (las skills, en un solo sitio)
+├─ marcelo-dachshund    ← Cliente 1
+├─ cliente-2            ← Cliente 2
+└─ …
+```
+
+Para dar de alta un cliente nuevo, usa la carpeta **`plantilla-cliente/`**:
+contiene un `.claude/settings.json` que conecta el repo del cliente con esta
+biblioteca y carga las skills automáticamente. Pasos detallados en
+[`plantilla-cliente/COMO-CREAR-UN-CLIENTE.md`](plantilla-cliente/COMO-CREAR-UN-CLIENTE.md).
+
+Ventaja: cuando mejoras una skill aquí, **todos los clientes la reciben actualizada**.
+
 ## Añadir más skills en el futuro
 
 1. Copia la nueva skill dentro de `.claude/skills/<nombre>/`.
