@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Test de Salud y Prevención — Dachshund Salud</title>
+  <title>Evaluación de Vitalidad — Dachshund Salud</title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,28 +22,17 @@
     .topbar-dot { width:4px; height:4px; border-radius:50%; background:var(--g); }
     .topbar-sub { font-size:12px; color:rgba(250,250,247,0.5); letter-spacing:0.03em; }
 
-    .hero { background: var(--v); padding: 44px 28px 60px; text-align: center; position: relative; overflow: hidden; }
-    .hero::after { content:''; position:absolute; width:360px; height:360px; border-radius:50%; background:var(--g); opacity:0.05; top:-140px; right:-80px; pointer-events:none; }
-    .hero-tag { font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--gb); margin-bottom:18px; }
-    .hero-title { font-family:'Fraunces',serif; font-weight:900; font-size:clamp(30px, 8vw, 44px); line-height:1.08; color:#FFFFFF; letter-spacing:-0.01em; }
-    .hero-title em { font-style:italic; color:var(--gb); }
-    .hero-sub { margin-top:18px; font-size:15px; font-weight:400; line-height:1.7; color:rgba(255,255,255,0.82); max-width:420px; margin-inline:auto; }
-    .hero-sub strong { color:#FFFFFF; font-weight:700; }
-    .hero-blocks { display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:420px; margin:24px auto 0; }
-    .hero-block { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:14px 12px; text-align:left; }
-    .hero-block-num { font-size:10px; font-weight:800; letter-spacing:0.12em; color:var(--gb); margin-bottom:4px; }
-    .hero-block-ttl { font-size:14px; font-weight:700; color:#fff; line-height:1.3; margin-bottom:3px; }
-    .hero-block-sub { font-size:11px; color:rgba(255,255,255,0.6); line-height:1.4; }
-    .btn-start { background:var(--g); color:var(--v); border:none; font-family:'Outfit',sans-serif; font-size:15px; font-weight:800; padding:16px 36px; border-radius:12px; cursor:pointer; margin-top:28px; display:inline-flex; align-items:center; gap:8px; box-shadow:0 6px 24px rgba(200,150,46,0.3); transition:transform .18s; }
-    .btn-start:hover { transform:translateY(-2px); }
-
-    .wave { background:var(--v); margin-bottom:-2px; }
-    .wave svg { display:block; width:100%; }
-
     .main { padding: 0 20px 80px; position: relative; z-index: 2; }
     .container { max-width: 560px; margin: 0 auto; }
 
-    .step-ind { padding: 24px 0 0; }
+    /* INICIO PEQUEÑO Y CLARO */
+    .intro-mini { background:var(--vc); border:1px solid var(--br); border-radius:16px; padding:18px 20px; margin-top:22px; }
+    .intro-mini-tag { font-size:10px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:var(--g); margin-bottom:7px; }
+    .intro-mini-ttl { font-family:'Fraunces',serif; font-size:19px; font-weight:800; color:var(--v); line-height:1.2; margin-bottom:7px; }
+    .intro-mini-sub { font-size:13px; color:var(--ts); line-height:1.55; }
+    .intro-mini-sub strong { color:var(--v); font-weight:700; }
+
+    .step-ind { padding: 18px 0 0; }
     .step-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
     .step-pill { font-size:11px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; padding:6px 12px; border-radius:20px; background:var(--vc); color:var(--v); }
     .step-count { font-size:12px; font-weight:600; color:var(--tf); }
@@ -56,9 +45,6 @@
     .q-area { font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--tf); }
     .q-text { font-size:15px; font-weight:600; color:var(--tm); line-height:1.45; margin-bottom:8px; }
     .q-hint { font-size:12px; color:var(--tf); line-height:1.5; margin-bottom:18px; }
-    .q-photo { margin-bottom:16px; }
-    .q-photo img { width:100%; border-radius:10px; border:1px solid var(--br); }
-    .q-photo-cap { font-size:11px; color:var(--tf); margin-top:6px; text-align:center; }
 
     .opt-list { display:flex; flex-direction:column; gap:8px; }
     .opt-row { display:flex; align-items:center; gap:12px; padding:14px 16px; border:1.5px solid var(--br); border-radius:12px; background:var(--cr); cursor:pointer; transition:border-color .15s, background .15s; user-select:none; }
@@ -79,21 +65,15 @@
     .photo-opt.sel::after { content: '✓'; position: absolute; top: -8px; right: -8px; width: 20px; height: 20px; background: var(--v); color: white; border-radius: 50%; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; line-height: 1; }
     .photo-wrap-sq { width: 100%; border-radius: 8px; overflow: hidden; aspect-ratio: 1/1; background: #f0f0f0; }
     .photo-wrap-sq img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .photo-wrap { width: 100%; border-radius: 8px; overflow: hidden; aspect-ratio: 2/3; background: #1a1a1a; }
-    .photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
     .vis-badge { font-size: 8px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; background:rgba(45,74,62,0.08); color:#2D4A3E; margin-bottom: 2px; }
     .vis-label { font-size: 10px; font-weight: 700; text-align: center; color: var(--v); line-height: 1.3; }
     .vis-sub { font-size: 9px; font-weight: 500; text-align: center; color: var(--tf); line-height: 1.3; }
 
     /* VIS GRID (SVG) */
     .vis-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
-
-    /* Mobile overrides */
     @media(max-width:500px) {
       .photo-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
       .vis-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-      .photo-grid .photo-opt:nth-child(4),
-      .photo-grid .photo-opt:nth-child(5) { grid-column: auto; }
       .vis-label { font-size: 10px; }
       .vis-sub { font-size: 9px; }
     }
@@ -143,17 +123,15 @@
 
     /* RESULTADO */
     .result-wrapper { padding-bottom: 60px; }
-    .result-intro { text-align:center; padding: 32px 20px 24px; }
+    .result-intro { text-align:center; padding: 32px 20px 20px; }
     .result-intro-tag { font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--g); margin-bottom:10px; }
-    .result-intro-title { font-family:'Fraunces',serif; font-size:clamp(26px,7vw,36px); font-weight:900; color:var(--v); line-height:1.1; }
-    .risk-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px; }
-    .risk-card { border-radius:18px; padding:24px 18px; text-align:center; color:#fff; }
-    .risk-card-tag { font-size:10px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; opacity:0.7; margin-bottom:8px; }
-    .risk-card-icon { font-size:28px; margin-bottom:6px; }
-    .risk-card-title { font-family:'Fraunces',serif; font-size:18px; font-weight:800; line-height:1.1; margin-bottom:16px; }
-    .risk-pct { font-family:'Fraunces',serif; font-size:48px; font-weight:900; line-height:1; margin-bottom:4px; }
+    .result-intro-title { font-family:'Fraunces',serif; font-size:clamp(26px,7vw,34px); font-weight:900; color:var(--v); line-height:1.1; }
+    .risk-card { border-radius:18px; padding:30px 22px; text-align:center; color:#fff; margin-top:16px; }
+    .risk-card-icon { font-size:30px; margin-bottom:6px; }
+    .risk-card-tag { font-size:11px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; opacity:0.7; margin-bottom:10px; }
+    .risk-pct { font-family:'Fraunces',serif; font-size:72px; font-weight:900; line-height:1; margin-bottom:4px; }
     .risk-pct-lbl { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; opacity:0.75; margin-bottom:14px; }
-    .risk-level { font-size:12px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; padding:6px 12px; border-radius:20px; background:rgba(255,255,255,0.18); display:inline-block; }
+    .risk-level { font-size:12px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; padding:7px 14px; border-radius:20px; background:rgba(255,255,255,0.18); display:inline-block; }
     .msg-card { background:var(--bl); border:1.5px solid var(--br); border-radius:16px; padding:20px; margin-top:14px; }
     .msg-card-tag { font-size:10px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:var(--tf); margin-bottom:8px; }
     .msg-card-txt { font-size:14px; color:var(--ts); line-height:1.6; }
@@ -188,54 +166,31 @@
     <span class="topbar-sub">Dr. Marcelo Hernán</span>
   </div>
 
-  <!-- HERO -->
-  <div class="screen" id="screen-hero">
-    <section class="hero">
-      <p class="hero-tag">🧭 Gratis · Exclusivo dueños salchicha</p>
-      <h1 class="hero-title">Test de <em>Salud</em><br>y <em>Prevención</em></h1>
-      <p class="hero-sub">Descubre el <strong>riesgo real</strong> al que se enfrenta tu perro — y qué tan preparado/a estás <strong>tú como dueño/a</strong> para cuidarlo como se merece.</p>
-      <div class="hero-blocks">
-        <div class="hero-block">
-          <div class="hero-block-num">PARTE 1 · 6 PREG</div>
-          <div class="hero-block-ttl">¿Qué tan buen<br>papá perruno eres?</div>
-          <div class="hero-block-sub">Qué tan actualizado/a estás</div>
-        </div>
-        <div class="hero-block">
-          <div class="hero-block-num">PARTE 2 · 6 PREG</div>
-          <div class="hero-block-ttl">Salud actual de<br>tu salchicha</div>
-          <div class="hero-block-sub">Estado físico real</div>
-        </div>
-      </div>
-      <button class="btn-start" onclick="goToScreen('dueno')">
-        Empezar el test
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-      <p style="color:rgba(255,255,255,0.5); font-size:12px; margin-top:14px;">⏱ 3 minutos · 100% privado</p>
-    </section>
-    <div class="wave">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 50" preserveAspectRatio="none">
-        <path d="M0,0 C360,50 1080,50 1440,0 L1440,50 L0,50 Z" fill="#FAFAF7"/>
-      </svg>
-    </div>
-  </div>
-
-  <!-- PARTE 1: DUEÑO -->
-  <div class="screen active" id="screen-dueno">
+  <!-- PARTE 1: ALIMENTACIÓN (con inicio pequeño y claro) -->
+  <div class="screen active" id="screen-p1">
     <div class="main">
       <div class="container">
-        <div class="step-ind">
-          <div class="step-row">
-            <span class="step-pill">Parte 1 · ¿Qué tan buen papá perruno eres?</span>
-            <span class="step-count" id="dueno-count">0 de 6</span>
-          </div>
-          <div class="step-bar"><div class="step-fill" id="dueno-fill"></div></div>
+
+        <!-- Inicio pequeño y claro -->
+        <div class="intro-mini">
+          <div class="intro-mini-tag">Evaluación rápida · Gratis</div>
+          <div class="intro-mini-ttl">La situación actual de tu salchicha</div>
+          <div class="intro-mini-sub">Responde unas preguntas rápidas y descubre en <strong>2 minutos</strong> qué tan en riesgo está la salud de tu perro. Recibes tu resultado y un plan inicial en tu correo.</div>
         </div>
 
-        <!-- B1: Plato actual -->
+        <div class="step-ind">
+          <div class="step-row">
+            <span class="step-pill">Parte 1 · Alimentación</span>
+            <span class="step-count" id="p1-count">0 de 1</span>
+          </div>
+          <div class="step-bar"><div class="step-fill" id="p1-fill"></div></div>
+        </div>
+
+        <!-- Q1: Alimentación actual -->
         <div class="card">
           <div class="q-meta"><div class="q-num">1</div><div class="q-area">Alimentación actual</div></div>
           <div class="q-text">¿Cuál de estos platos se parece más al que le das hoy a tu salchicha?</div>
-          <div class="q-hint">Elige la opción más honesta — no la que "debería ser".</div>
+          <div class="q-hint">Elige la opción más honesta, no la que "debería ser".</div>
           <div class="photo-grid" data-q="b1">
             <div class="photo-opt" data-pts="3" onclick="pickVis(this,'b1')">
               <div class="vis-badge">P 1</div>
@@ -270,78 +225,8 @@
           </div>
         </div>
 
-        <!-- B2: Ingredientes etiqueta -->
-        <div class="card">
-          <div class="q-meta"><div class="q-num">2</div><div class="q-area">Etiqueta del alimento</div></div>
-          <div class="q-text">Toma la bolsa del alimento actual. ¿Cuántos ingredientes distintos lees?</div>
-          <div class="q-photo">
-            <img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69e7b328a1636a6c65e8b830.png" alt="Ejemplo de etiqueta de ingredientes" />
-            <div class="q-photo-cap">Ejemplo: así se ve la etiqueta de un alimento ultra-procesado típico.</div>
-          </div>
-          <div class="q-hint">Cuenta todos los que aparecen listados en la etiqueta trasera.</div>
-          <div class="opt-list" data-q="b2">
-            <div class="opt-row" data-pts="0" onclick="pickOpt(this,'b2')"><div class="opt-radio"></div><div class="opt-txt">Menos de 6 ingredientes (carnes y vegetales identificables)</div></div>
-            <div class="opt-row" data-pts="1" onclick="pickOpt(this,'b2')"><div class="opt-radio"></div><div class="opt-txt">Entre 7 y 15 ingredientes</div></div>
-            <div class="opt-row" data-pts="2" onclick="pickOpt(this,'b2')"><div class="opt-radio"></div><div class="opt-txt">Entre 16 y 25 ingredientes</div></div>
-            <div class="opt-row" data-pts="3" onclick="pickOpt(this,'b2')"><div class="opt-radio"></div><div class="opt-txt">Más de 25, o nunca he leído la etiqueta</div></div>
-          </div>
-        </div>
-
-        <!-- B3: Seguridad -->
-        <div class="card">
-          <div class="q-meta"><div class="q-num">3</div><div class="q-area">Seguridad sobre lo que le das</div></div>
-          <div class="q-text">¿Qué tan seguro/a estás de que lo que le das hoy es lo correcto para la salud de tu Dachshund?</div>
-          <div class="opt-list" data-q="b3">
-            <div class="opt-row" data-pts="0" onclick="pickOpt(this,'b3')"><div class="opt-radio"></div><div class="opt-txt">100% seguro/a — investigué y consulté</div></div>
-            <div class="opt-row" data-pts="1" onclick="pickOpt(this,'b3')"><div class="opt-radio"></div><div class="opt-txt">Más o menos — tengo dudas pero no graves</div></div>
-            <div class="opt-row" data-pts="2" onclick="pickOpt(this,'b3')"><div class="opt-radio"></div><div class="opt-txt">La verdad no mucho — a veces me siento culpable</div></div>
-            <div class="opt-row" data-pts="3" onclick="pickOpt(this,'b3')"><div class="opt-radio"></div><div class="opt-txt">Nada seguro/a — solo sigo lo que me dijeron</div></div>
-          </div>
-        </div>
-
-        <!-- B4: Realidad -->
-        <div class="card">
-          <div class="q-meta"><div class="q-num">4</div><div class="q-area">Tu realidad</div></div>
-          <div class="q-text">¿Cuál de estas frases se parece más a tu realidad?</div>
-          <div class="opt-list" data-q="b4">
-            <div class="opt-row" data-pts="3" onclick="pickOpt(this,'b4')"><div class="opt-radio"></div><div class="opt-txt">Solo le doy croqueta/pellet porque es lo más rápido.</div></div>
-            <div class="opt-row" data-pts="2" onclick="pickOpt(this,'b4')"><div class="opt-radio"></div><div class="opt-txt">Me recomendó el veterinario un alimento premium.</div></div>
-            <div class="opt-row" data-pts="2" onclick="pickOpt(this,'b4')"><div class="opt-radio"></div><div class="opt-txt">Quiero empezar una mejor dieta pero no sé por dónde empezar.</div></div>
-            <div class="opt-row" data-pts="1" onclick="pickOpt(this,'b4')"><div class="opt-radio"></div><div class="opt-txt">Estoy en transición hacia la dieta pero con dudas.</div></div>
-            <div class="opt-row" data-pts="0" onclick="pickOpt(this,'b4')"><div class="opt-radio"></div><div class="opt-txt">Sé qué darle de alimentación cruda y suplementos.</div></div>
-          </div>
-        </div>
-
-        <!-- B5: Inversión -->
-        <div class="card">
-          <div class="q-meta"><div class="q-num">5</div><div class="q-area">Inversión reciente</div></div>
-          <div class="q-text">En los últimos 6 meses, ¿en qué has invertido para tu salchicha?</div>
-          <div class="opt-list" data-q="b5">
-            <div class="opt-row" data-pts="3" onclick="pickOpt(this,'b5')"><div class="opt-radio"></div><div class="opt-txt">Solo en la bolsa de alimento (croqueta, pellet, etc).</div></div>
-            <div class="opt-row" data-pts="2" onclick="pickOpt(this,'b5')"><div class="opt-radio"></div><div class="opt-txt">Lo básico — vacunas y consultas de vez en cuando.</div></div>
-            <div class="opt-row" data-pts="2" onclick="pickOpt(this,'b5')"><div class="opt-radio"></div><div class="opt-txt">Consultas constantes al veterinario con alimento medicado.</div></div>
-            <div class="opt-row" data-pts="1" onclick="pickOpt(this,'b5')"><div class="opt-radio"></div><div class="opt-txt">Suplementos y algunos alimentos crudos.</div></div>
-            <div class="opt-row" data-pts="0" onclick="pickOpt(this,'b5')"><div class="opt-radio"></div><div class="opt-txt">Inversión constante en todo lo necesario para su cuidado.</div></div>
-          </div>
-        </div>
-
-        <!-- B6: Decisiones -->
-        <div class="card">
-          <div class="q-meta"><div class="q-num">6</div><div class="q-area">Tus decisiones diarias</div></div>
-          <div class="q-text">Cuando piensas en el día a día con tu salchicha, ¿qué priorizas?</div>
-          <div class="q-hint">No hay respuestas correctas — elige la que refleje tu realidad.</div>
-          <div class="opt-list" data-q="b6">
-            <div class="opt-row" data-pts="3" onclick="pickOpt(this,'b6')"><div class="opt-radio"></div><div class="opt-txt">Que sea práctico y rápido — tengo poco tiempo.</div></div>
-            <div class="opt-row" data-pts="2" onclick="pickOpt(this,'b6')"><div class="opt-radio"></div><div class="opt-txt">Que esté sano — pero solo reacciono cuando algo falla.</div></div>
-            <div class="opt-row" data-pts="2" onclick="pickOpt(this,'b6')"><div class="opt-radio"></div><div class="opt-txt">Darle gustos y momentos felices — es parte de la familia.</div></div>
-            <div class="opt-row" data-pts="1" onclick="pickOpt(this,'b6')"><div class="opt-radio"></div><div class="opt-txt">Cuidar su salud activamente — leo, pregunto, comparo.</div></div>
-            <div class="opt-row" data-pts="0" onclick="pickOpt(this,'b6')"><div class="opt-radio"></div><div class="opt-txt">Prevenir antes que curar — mi prioridad es su bienestar a largo plazo.</div></div>
-          </div>
-        </div>
-
         <div class="nav-row">
-          <button class="btn-nav btn-back" onclick="goToScreen('hero')">← Volver</button>
-          <button class="btn-nav btn-next" id="btn-next-dueno" onclick="goToScreen('perro')" disabled>
+          <button class="btn-nav btn-next" id="btn-next-p1" onclick="goToScreen('p2')" disabled>
             Continuar →
           </button>
         </div>
@@ -349,23 +234,23 @@
     </div>
   </div>
 
-  <!-- PARTE 2: PERRO -->
-  <div class="screen" id="screen-perro">
+  <!-- PARTE 2: SALUD DE LA SALCHICHA -->
+  <div class="screen" id="screen-p2">
     <div class="main">
       <div class="container">
         <div class="step-ind">
           <div class="step-row">
-            <span class="step-pill">Parte 2 · Salud actual de tu salchicha</span>
-            <span class="step-count" id="perro-count">0 de 6</span>
+            <span class="step-pill">Parte 2 · Salud de tu salchicha</span>
+            <span class="step-count" id="p2-count">0 de 7</span>
           </div>
-          <div class="step-bar"><div class="step-fill" id="perro-fill"></div></div>
+          <div class="step-bar"><div class="step-fill" id="p2-fill"></div></div>
         </div>
 
         <!-- A1: Condición corporal -->
         <div class="card">
           <div class="q-meta"><div class="q-num">1</div><div class="q-area">Condición corporal</div></div>
           <div class="q-text">¿Cuál de estos dachshunds se parece más a tu perro visto desde arriba?</div>
-          <div class="q-hint">Elige el que más se acerque — en posición parado.</div>
+          <div class="q-hint">Elige el que más se acerque, en posición parado.</div>
           <div class="photo-grid" data-q="a1">
             <div class="photo-opt" data-pts="2" onclick="pickVis(this,'a1')">
               <div class="vis-badge">CC 1</div>
@@ -542,21 +427,34 @@
           </div>
         </div>
 
-        <!-- A5: Enfermedad -->
+        <!-- A5: Diagnósticos (por separado) -->
         <div class="card">
           <div class="q-meta"><div class="q-num">5</div><div class="q-area">Diagnósticos y tratamientos</div></div>
           <div class="q-text">¿Tu perro tiene alguna enfermedad diagnosticada o tratamiento activo?</div>
           <div class="opt-list" data-q="a5">
-            <div class="opt-row" data-pts="0" onclick="pickOpt(this,'a5')"><div class="opt-radio"></div><div class="opt-txt">Ninguna — está sano según el veterinario</div></div>
+            <div class="opt-row" data-pts="0" onclick="pickOpt(this,'a5')"><div class="opt-radio"></div><div class="opt-txt">Ninguna, está sano según el veterinario</div></div>
             <div class="opt-row" data-pts="1" onclick="pickOpt(this,'a5')"><div class="opt-radio"></div><div class="opt-txt">Problema leve: gastritis ocasional, alergia suave, control de peso</div></div>
             <div class="opt-row" data-pts="2" onclick="pickOpt(this,'a5')"><div class="opt-radio"></div><div class="opt-txt">Problema moderado: caída de pelo constante, sobrepeso leve, diarrea ocasional</div></div>
             <div class="opt-row" data-pts="3" onclick="pickOpt(this,'a5')"><div class="opt-radio"></div><div class="opt-txt">Problema grave: IVDD, dermatitis crónica, diabetes, Cushing, obesidad severa, cirugía reciente</div></div>
           </div>
         </div>
 
+        <!-- B5: Inversión reciente -->
+        <div class="card">
+          <div class="q-meta"><div class="q-num">6</div><div class="q-area">Inversión reciente</div></div>
+          <div class="q-text">En los últimos 6 meses, ¿en qué has invertido para tu salchicha?</div>
+          <div class="opt-list" data-q="b5">
+            <div class="opt-row" data-pts="3" onclick="pickOpt(this,'b5')"><div class="opt-radio"></div><div class="opt-txt">Solo en la bolsa de alimento (croqueta, pellet, etc).</div></div>
+            <div class="opt-row" data-pts="2" onclick="pickOpt(this,'b5')"><div class="opt-radio"></div><div class="opt-txt">Lo básico: vacunas y consultas de vez en cuando.</div></div>
+            <div class="opt-row" data-pts="2" onclick="pickOpt(this,'b5')"><div class="opt-radio"></div><div class="opt-txt">Consultas constantes al veterinario con alimento medicado.</div></div>
+            <div class="opt-row" data-pts="1" onclick="pickOpt(this,'b5')"><div class="opt-radio"></div><div class="opt-txt">Suplementos y algunos alimentos crudos.</div></div>
+            <div class="opt-row" data-pts="0" onclick="pickOpt(this,'b5')"><div class="opt-radio"></div><div class="opt-txt">Inversión constante en todo lo necesario para su cuidado.</div></div>
+          </div>
+        </div>
+
         <!-- A6: Edad -->
         <div class="card">
-          <div class="q-meta"><div class="q-num">6</div><div class="q-area">Edad</div></div>
+          <div class="q-meta"><div class="q-num">7</div><div class="q-area">Edad</div></div>
           <div class="q-text">¿Qué edad tiene tu salchicha?</div>
           <div class="opt-list" data-q="a6">
             <div class="opt-row" data-pts="0" onclick="pickOpt(this,'a6')"><div class="opt-radio"></div><div class="opt-txt">Cachorro (menos de 1 año)</div></div>
@@ -567,8 +465,8 @@
         </div>
 
         <div class="nav-row">
-          <button class="btn-nav btn-back" onclick="goToScreen('dueno')">← Volver</button>
-          <button class="btn-nav btn-next" id="btn-next-perro" onclick="goToScreen('datos')" disabled>
+          <button class="btn-nav btn-back" onclick="goToScreen('p1')">← Volver</button>
+          <button class="btn-nav btn-next" id="btn-next-p2" onclick="goToScreen('datos')" disabled>
             Continuar →
           </button>
         </div>
@@ -632,7 +530,7 @@
         </div>
 
         <div class="nav-row">
-          <button class="btn-nav btn-back" onclick="goToScreen('perro')">← Volver</button>
+          <button class="btn-nav btn-back" onclick="goToScreen('p2')">← Volver</button>
           <button class="btn-nav btn-next" id="btn-finalizar" onclick="finalizarTest()" disabled>
             Ver mi resultado →
           </button>
@@ -647,8 +545,8 @@
       <div class="container">
         <div class="loading-screen">
           <div class="spinner"></div>
-          <div class="loading-label">Analizando tu test<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span></div>
-          <div class="loading-sub">Calculando el riesgo de tu salchicha<br>y tu nivel de conocimiento<br>con el protocolo del Dr. Marcelo Hernán</div>
+          <div class="loading-label">Analizando a tu salchicha<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span></div>
+          <div class="loading-sub">Calculando la situación actual de tu salchicha<br>con el protocolo del Dr. Marcelo Hernán</div>
         </div>
       </div>
     </div>
@@ -661,26 +559,15 @@
         <div class="result-wrapper">
           <div class="result-intro">
             <div class="result-intro-tag">Tu evaluación</div>
-            <div class="result-intro-title">Así estás <em style="font-style:italic;color:var(--g)">tú</em> y así está <em style="font-style:italic;color:var(--g)">tu salchicha</em></div>
+            <div class="result-intro-title">La situación actual<br>de tu salchicha</div>
           </div>
 
-          <div class="risk-grid">
-            <div class="risk-card" id="risk-card-dueno">
-              <div class="risk-card-icon">👤</div>
-              <div class="risk-card-tag">Tu nivel</div>
-              <div class="risk-card-title">Como<br>dueño/a</div>
-              <div class="risk-pct" id="pct-dueno">—</div>
-              <div class="risk-pct-lbl">Riesgo por<br>desconocimiento</div>
-              <div class="risk-level" id="lvl-dueno">—</div>
-            </div>
-            <div class="risk-card" id="risk-card-perro">
-              <div class="risk-card-icon">🐾</div>
-              <div class="risk-card-tag">Tu salchicha</div>
-              <div class="risk-card-title">Su estado<br>real</div>
-              <div class="risk-pct" id="pct-perro">—</div>
-              <div class="risk-pct-lbl">Riesgo para<br>su salud</div>
-              <div class="risk-level" id="lvl-perro">—</div>
-            </div>
+          <div class="risk-card" id="risk-card">
+            <div class="risk-card-icon">🐾</div>
+            <div class="risk-card-tag">Riesgo para su salud</div>
+            <div class="risk-pct" id="pct-perro">—</div>
+            <div class="risk-pct-lbl">Nivel de riesgo actual</div>
+            <div class="risk-level" id="lvl-perro">—</div>
           </div>
 
           <!-- CTA CALIFICADO (Silver/Gold): agenda -->
@@ -710,12 +597,7 @@
           <button class="btn-retry" onclick="reiniciar()">↺ Hacer el test de nuevo</button>
 
           <div class="msg-card">
-            <div class="msg-card-tag">🔎 Lectura para TI (como dueño/a)</div>
-            <div class="msg-card-txt" id="msg-dueno">—</div>
-          </div>
-
-          <div class="msg-card">
-            <div class="msg-card-tag">🐶 Lectura para TU SALCHICHA</div>
+            <div class="msg-card-tag">🐶 Lectura para tu salchicha</div>
             <div class="msg-card-txt" id="msg-perro">—</div>
           </div>
 
@@ -737,15 +619,14 @@
     const WEBHOOK_EVENT = 'https://services.leadconnectorhq.com/hooks/TzjuywpjnaS5aZn5RTs8/webhook-trigger/a6ec9e41-2742-4ba6-b43f-993bac1b6343';
 
     // ── Estado ──
-    const answers = {
-      b1: null, b2: null, b3: null, b4: null, b5: null, b6: null,
-      a1: null, a2: null, a3: null, a4: null, a5: null, a6: null
-    };
+    // 8 preguntas con puntaje: b1 alimentacion + 7 de salud (a1..a6 y b5 inversion reciente)
+    const answers = { b1: null, a1: null, a2: null, a3: null, a4: null, a5: null, b5: null, a6: null };
     const answersTxt = {};   // texto legible de cada respuesta (para el CRM)
     let inversion = null;    // 0..3 (pregunta calificadora)
     let inversionTxt = '';
 
-    let resultados = { pctDueno: 0, pctPerro: 0, lblDueno: '', lblPerro: '', tier: '', leadScore: 0, producto: '' };
+    const P2_KEYS = ['a1','a2','a3','a4','a5','b5','a6']; // orden de la Parte 2
+    const ALL_KEYS = ['b1','a1','a2','a3','a4','a5','b5','a6'];
 
     const INV_LABELS = {
       3: 'Lo necesario (sobre USD $450 o 2 pagos)',
@@ -770,18 +651,11 @@
       rojo:     { name: 'Zona roja',     bg: 'linear-gradient(135deg,#5C0A0A 0%,#380606 100%)' }
     };
 
-    const MSG_DUENO = {
-      verde:    'Sabes lo que haces y tienes el compromiso. <strong>Eres la excepción.</strong> Pero aún así, la raza cambia — estar actualizado es lo que separa a un buen dueño de uno excelente.',
-      amarillo: 'Tienes buenas intenciones pero información incompleta. Estás en la <strong>zona gris</strong>: haces algo natural, algo procesado, y esperas que sea suficiente. <strong>No lo es.</strong>',
-      naranja:  'Estás confiando en fuentes que no están entregándote la verdad. <strong>Si no te actualizas, tu salchicha paga la cuenta.</strong>',
-      rojo:     'Estás en un punto crítico de <strong>ignorancia nutricional</strong>. No es culpa tuya — nadie te enseñó. Pero desde que leíste esto, ya no tienes esa excusa.'
-    };
-
-    const MSG_PERRO = {
-      verde:    'Tu salchicha está en buen estado. <strong>No bajes la guardia</strong> — la raza tiene riesgos específicos. Lo que hagas hoy define los próximos 10 años.',
+    const MSG_RIESGO = {
+      verde:    'Tu salchicha está en buen estado. <strong>No bajes la guardia</strong>, la raza tiene riesgos específicos. Lo que hagas hoy define los próximos 10 años.',
       amarillo: 'Tu salchicha está en <strong>zona de prevención</strong>. Aún no hay daño, pero hay señales. Si no cambias algo en los próximos meses, esas señales se convierten en enfermedad.',
       naranja:  'Tu salchicha ya está pagando el precio de lo que come. <strong>Estás a tiempo de revertir, pero tiene que ser ya.</strong>',
-      rojo:     'Tu salchicha está en <strong>estado crítico</strong>. Los porcentajes que marcaste lo reflejan. Necesitas acompañamiento personalizado.'
+      rojo:     'Tu salchicha está en <strong>estado crítico</strong>. Las respuestas que marcaste lo reflejan. Necesitas acompañamiento personalizado.'
     };
 
     function goToScreen(id) {
@@ -822,21 +696,23 @@
     }
 
     function updateProgress() {
-      var dueno = ['b1','b2','b3','b4','b5','b6'].filter(function(k) { return answers[k] !== null; }).length;
-      var dEl = document.getElementById('dueno-count');
-      var dFill = document.getElementById('dueno-fill');
-      var dBtn = document.getElementById('btn-next-dueno');
-      if (dEl) dEl.textContent = dueno + ' de 6';
-      if (dFill) dFill.style.width = Math.round((dueno / 6) * 100) + '%';
-      if (dBtn) dBtn.disabled = (dueno < 6);
+      // Parte 1 (1 pregunta)
+      var p1 = (answers.b1 !== null) ? 1 : 0;
+      var p1El = document.getElementById('p1-count');
+      var p1Fill = document.getElementById('p1-fill');
+      var p1Btn = document.getElementById('btn-next-p1');
+      if (p1El) p1El.textContent = p1 + ' de 1';
+      if (p1Fill) p1Fill.style.width = (p1 * 100) + '%';
+      if (p1Btn) p1Btn.disabled = (p1 < 1);
 
-      var perro = ['a1','a2','a3','a4','a5','a6'].filter(function(k) { return answers[k] !== null; }).length;
-      var pEl = document.getElementById('perro-count');
-      var pFill = document.getElementById('perro-fill');
-      var pBtn = document.getElementById('btn-next-perro');
-      if (pEl) pEl.textContent = perro + ' de 6';
-      if (pFill) pFill.style.width = Math.round((perro / 6) * 100) + '%';
-      if (pBtn) pBtn.disabled = (perro < 6);
+      // Parte 2 (7 preguntas)
+      var p2 = P2_KEYS.filter(function(k) { return answers[k] !== null; }).length;
+      var p2El = document.getElementById('p2-count');
+      var p2Fill = document.getElementById('p2-fill');
+      var p2Btn = document.getElementById('btn-next-p2');
+      if (p2El) p2El.textContent = p2 + ' de 7';
+      if (p2Fill) p2Fill.style.width = Math.round((p2 / 7) * 100) + '%';
+      if (p2Btn) p2Btn.disabled = (p2 < 7);
     }
 
     function val(id) { var e = document.getElementById(id); return e ? e.value.trim() : ''; }
@@ -851,10 +727,10 @@
       document.getElementById('btn-finalizar').disabled = !(inversion !== null && nombre && emailOk && telOk && consent);
     }
 
-    function calcPct(keys) {
+    function calcPct() {
       var total = 0;
-      keys.forEach(function(k) { total += (answers[k] || 0); });
-      return Math.round((total / 18) * 100);
+      ALL_KEYS.forEach(function(k) { total += (answers[k] || 0); });
+      return Math.round((total / (ALL_KEYS.length * 3)) * 100); // 8 preguntas x 3 = 24
     }
 
     function getLabel(pct) {
@@ -864,40 +740,32 @@
       return 'rojo';
     }
 
-    // ── Calificacion: Lead Score (0-100), Tier y Producto Recomendado ──
-    function calcularLeadScore(pctPerro, inv) {
+    // ── Calificacion: Lead Score (0-100) y Tier ──
+    function calcularLeadScore(riskPct, inv) {
       var invPct = (inv / 3) * 100;
       // La inversion pesa mas: es la senal de compra mas fuerte
-      return Math.round(pctPerro * 0.4 + invPct * 0.6);
+      return Math.round(riskPct * 0.4 + invPct * 0.6);
     }
 
-    function calcularTier(pctPerro, inv) {
-      var enfermo = pctPerro > 50;             // zona naranja o roja
+    function calcularTier(riskPct, inv) {
+      var enfermo = riskPct > 50;              // zona naranja o roja
       if (inv === 0) return 'Out';             // descalificado por presupuesto
       if (enfermo && inv >= 3) return 'Gold';  // enfermo + inversion alta
       if (enfermo && inv === 2) return 'Silver'; // enfermo + inversion media
       return 'Bronce';                         // resto: bajo costo o sin urgencia de salud
     }
 
-    function productoRecomendado(tier) {
-      return (tier === 'Silver' || tier === 'Gold') ? 'High Ticket' : 'Skool';
-    }
-
-    function poblarResultado(pctDueno, pctPerro, lblDueno, lblPerro) {
-      document.getElementById('pct-dueno').textContent = pctDueno + '%';
-      document.getElementById('pct-perro').textContent = pctPerro + '%';
-      document.getElementById('lvl-dueno').textContent = LABELS[lblDueno].name;
-      document.getElementById('lvl-perro').textContent = LABELS[lblPerro].name;
-      document.getElementById('risk-card-dueno').style.background = LABELS[lblDueno].bg;
-      document.getElementById('risk-card-perro').style.background = LABELS[lblPerro].bg;
-      document.getElementById('msg-dueno').innerHTML = MSG_DUENO[lblDueno];
-      document.getElementById('msg-perro').innerHTML = MSG_PERRO[lblPerro];
+    function poblarResultado(riskPct, lbl) {
+      document.getElementById('pct-perro').textContent = riskPct + '%';
+      document.getElementById('lvl-perro').textContent = LABELS[lbl].name;
+      document.getElementById('risk-card').style.background = LABELS[lbl].bg;
+      document.getElementById('msg-perro').innerHTML = MSG_RIESGO[lbl];
     }
 
     function finalizarTest() {
       // Validar respuestas del test
-      var faltantes = Object.keys(answers).filter(function(k) { return answers[k] === null; });
-      if (faltantes.length > 0) { alert('Falta responder ' + faltantes.length + ' pregunta(s) del test.'); goToScreen('dueno'); return; }
+      var faltantes = ALL_KEYS.filter(function(k) { return answers[k] === null; });
+      if (faltantes.length > 0) { alert('Falta responder ' + faltantes.length + ' pregunta(s) del test.'); goToScreen('p1'); return; }
       if (inversion === null) { alert('Responde la pregunta de inversión.'); return; }
 
       // Validar datos
@@ -911,16 +779,10 @@
       if (!ok) return;
 
       // Calculos
-      var pctDueno = calcPct(['b1','b2','b3','b4','b5','b6']);
-      var pctPerro = calcPct(['a1','a2','a3','a4','a5','a6']);
-      var lblDueno = getLabel(pctDueno);
-      var lblPerro = getLabel(pctPerro);
-      var tier = calcularTier(pctPerro, inversion);
-      var leadScore = calcularLeadScore(pctPerro, inversion);
-      var producto = productoRecomendado(tier);
-      var califica = (tier === 'Silver' || tier === 'Gold');
-
-      resultados = { pctDueno: pctDueno, pctPerro: pctPerro, lblDueno: lblDueno, lblPerro: lblPerro, tier: tier, leadScore: leadScore, producto: producto };
+      var riskPct = calcPct();
+      var lbl = getLabel(riskPct);
+      var tier = calcularTier(riskPct, inversion);
+      var leadScore = calcularLeadScore(riskPct, inversion);
 
       // Payload a GHL: contacto + Tier + Lead Score + un campo por pregunta
       var payload = {
@@ -931,20 +793,15 @@
         // Calificacion
         'Lead Score': leadScore,
         'Tier': tier,
-        // Respuestas por pregunta (dueño)
-        d_alimentacion: answersTxt.b1 || '',
-        d_etiqueta: answersTxt.b2 || '',
-        d_seguridad: answersTxt.b3 || '',
-        d_realidad: answersTxt.b4 || '',
-        d_inversion_reciente: answersTxt.b5 || '',
-        d_prioridad: answersTxt.b6 || '',
-        // Respuestas por pregunta (perro)
-        p_condicion_corporal: answersTxt.a1 || '',
-        p_costillas: answersTxt.a2 || '',
-        p_energia: answersTxt.a3 || '',
-        p_pelaje: answersTxt.a4 || '',
-        p_enfermedad: answersTxt.a5 || '',
-        p_edad: answersTxt.a6 || '',
+        // Respuestas por pregunta
+        alimentacion: answersTxt.b1 || '',
+        condicion_corporal: answersTxt.a1 || '',
+        costillas: answersTxt.a2 || '',
+        energia: answersTxt.a3 || '',
+        pelaje: answersTxt.a4 || '',
+        diagnosticos: answersTxt.a5 || '',
+        inversion_reciente: answersTxt.b5 || '',
+        edad: answersTxt.a6 || '',
         // Pregunta de inversión (calificadora)
         inversion: inversionTxt
       };
@@ -955,7 +812,7 @@
         body: JSON.stringify(payload)
       }).catch(function(){});
 
-      poblarResultado(pctDueno, pctPerro, lblDueno, lblPerro);
+      poblarResultado(riskPct, lbl);
       mostrarCTA(tier);
 
       goToScreen('loading');
@@ -997,15 +854,14 @@
     }
 
     function reiniciar() {
-      Object.keys(answers).forEach(function(k) { answers[k] = null; delete answersTxt[k]; });
+      ALL_KEYS.forEach(function(k) { answers[k] = null; delete answersTxt[k]; });
       inversion = null; inversionTxt = '';
-      resultados = { pctDueno: 0, pctPerro: 0, lblDueno: '', lblPerro: '', tier: '', leadScore: 0, producto: '' };
       document.querySelectorAll('.opt-row, .vis-opt, .photo-opt').forEach(function(o) { o.classList.remove('sel'); });
       ['f-nombre','f-email','f-tel'].forEach(function(id){ var e = document.getElementById(id); if (e) e.value = ''; });
       var c = document.getElementById('f-consent'); if (c) c.checked = false;
       document.getElementById('btn-finalizar').disabled = true;
       updateProgress();
-      goToScreen('hero');
+      goToScreen('p1');
     }
 
     // ── Listeners de datos + accesibilidad por teclado ──
