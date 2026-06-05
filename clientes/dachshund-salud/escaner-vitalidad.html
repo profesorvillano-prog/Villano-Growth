@@ -437,9 +437,11 @@
           <div class="q-text">¿Tu perro tiene alguna enfermedad diagnosticada o tratamiento activo?</div>
           <div class="opt-list" data-q="a5">
             <div class="opt-row" data-pts="0" onclick="pickOpt(this,'a5')"><div class="opt-radio"></div><div class="opt-txt">Ninguna, está sano según el veterinario</div></div>
-            <div class="opt-row" data-pts="1" onclick="pickOpt(this,'a5')"><div class="opt-radio"></div><div class="opt-txt">Problema leve: gastritis ocasional, alergia suave, control de peso</div></div>
-            <div class="opt-row" data-pts="2" onclick="pickOpt(this,'a5')"><div class="opt-radio"></div><div class="opt-txt">Problema moderado: caída de pelo constante, sobrepeso leve, diarrea ocasional</div></div>
-            <div class="opt-row" data-pts="3" onclick="pickOpt(this,'a5')"><div class="opt-radio"></div><div class="opt-txt">Problema grave: IVDD, dermatitis crónica, diabetes, Cushing, obesidad severa, cirugía reciente</div></div>
+            <div class="opt-row" data-pts="1" onclick="pickOpt(this,'a5')"><div class="opt-radio"></div><div class="opt-txt">Problema leve ocasional (gastritis, alergia suave)</div></div>
+            <div class="opt-row" data-pts="2" onclick="pickOpt(this,'a5')"><div class="opt-radio"></div><div class="opt-txt">Sobrepeso o inflamación</div></div>
+            <div class="opt-row" data-pts="3" onclick="pickOpt(this,'a5')"><div class="opt-radio"></div><div class="opt-txt">Dermatitis o problemas de piel (rascado, caída de pelo, ronchas)</div></div>
+            <div class="opt-row" data-pts="3" onclick="pickOpt(this,'a5')"><div class="opt-radio"></div><div class="opt-txt">IVDD o problema de columna / espalda</div></div>
+            <div class="opt-row" data-pts="3" onclick="pickOpt(this,'a5')"><div class="opt-radio"></div><div class="opt-txt">Otra enfermedad diagnosticada (diabetes, Cushing, cirugía reciente)</div></div>
           </div>
         </div>
 
@@ -496,10 +498,10 @@
           <p class="inv-intro">Si ya has invertido en veterinarios y soluciones que no resolvieron el problema de raíz, y existiera un método paso a paso para revertir las enfermedades de tu salchicha en 90 días:</p>
           <div class="q-text">¿Cuánto estarías dispuesto a invertir en una solución definitiva para tu perro?</div>
           <div class="opt-list" data-q="inv">
-            <div class="opt-row" data-iv="3" onclick="pickInv(this)"><div class="opt-radio"></div><div class="opt-txt">Lo necesario para resolverlo de raíz (sobre USD $450, o en 2 pagos)</div></div>
-            <div class="opt-row" data-iv="2" onclick="pickInv(this)"><div class="opt-radio"></div><div class="opt-txt">Hasta cerca de USD $200 por ahora</div></div>
-            <div class="opt-row" data-iv="1" onclick="pickInv(this)"><div class="opt-radio"></div><div class="opt-txt">Solo busco opciones gratuitas o de bajo costo</div></div>
-            <div class="opt-row" data-iv="0" onclick="pickInv(this)"><div class="opt-radio"></div><div class="opt-txt">No estoy en condiciones de invertir en este momento</div></div>
+            <div class="opt-row" data-iv="3" onclick="pickInv(this)"><div class="opt-radio"></div><div class="opt-txt">+250 USD</div></div>
+            <div class="opt-row" data-iv="2" onclick="pickInv(this)"><div class="opt-radio"></div><div class="opt-txt">Entre 200 y 250 USD</div></div>
+            <div class="opt-row" data-iv="1" onclick="pickInv(this)"><div class="opt-radio"></div><div class="opt-txt">Entre 100 y 200 USD</div></div>
+            <div class="opt-row" data-iv="0" onclick="pickInv(this)"><div class="opt-radio"></div><div class="opt-txt">No estoy en condiciones de invertir</div></div>
           </div>
         </div>
 
@@ -664,10 +666,10 @@
     const ALL_KEYS = ['b1','a1','a2','a3','a4','a5','b5','a6'];
 
     const INV_LABELS = {
-      3: 'Lo necesario (sobre USD $450 o 2 pagos)',
-      2: 'Hasta ~USD $200',
-      1: 'Solo opciones de bajo costo o gratis',
-      0: 'No puede invertir ahora'
+      3: '+250 USD',
+      2: 'Entre 200 y 250 USD',
+      1: 'Entre 100 y 200 USD',
+      0: 'No estoy en condiciones de invertir'
     };
 
     // Captura de origen (atribución del embudo)
