@@ -922,61 +922,31 @@
 
       resultados = { pctDueno: pctDueno, pctPerro: pctPerro, lblDueno: lblDueno, lblPerro: lblPerro, tier: tier, leadScore: leadScore, producto: producto };
 
-      // Payload a GHL
+      // Payload a GHL: contacto + Tier + Lead Score + un campo por pregunta
       var payload = {
+        // Contacto
         firstName: nombre,
         email: email,
         phone: tel,
-        // Campos personalizados de GHL (nombre exacto + version snake_case de respaldo)
+        // Calificacion
         'Lead Score': leadScore,
-        'Producto Recomendado': producto,
         'Tier': tier,
-        lead_score: leadScore,
-        producto_recomendado: producto,
-        tier: tier,
-        califica: califica,
-        // Resultados del test
-        pct_dueno: pctDueno,
-        pct_perro: pctPerro,
-        nivel_dueno: LABELS[lblDueno].name,
-        nivel_perro: LABELS[lblPerro].name,
-        inversion_nivel: inversion,
-        inversion_label: INV_LABELS[inversion],
-        inversion_texto: inversionTxt,
-        // Respuestas legibles (dueño)
+        // Respuestas por pregunta (dueño)
         d_alimentacion: answersTxt.b1 || '',
         d_etiqueta: answersTxt.b2 || '',
         d_seguridad: answersTxt.b3 || '',
         d_realidad: answersTxt.b4 || '',
         d_inversion_reciente: answersTxt.b5 || '',
         d_prioridad: answersTxt.b6 || '',
-        // Respuestas legibles (perro)
+        // Respuestas por pregunta (perro)
         p_condicion_corporal: answersTxt.a1 || '',
         p_costillas: answersTxt.a2 || '',
         p_energia: answersTxt.a3 || '',
         p_pelaje: answersTxt.a4 || '',
         p_enfermedad: answersTxt.a5 || '',
         p_edad: answersTxt.a6 || '',
-        // Puntajes numéricos por pregunta (0-3)
-        pts_d_alimentacion: answers.b1,
-        pts_d_etiqueta: answers.b2,
-        pts_d_seguridad: answers.b3,
-        pts_d_realidad: answers.b4,
-        pts_d_inversion_reciente: answers.b5,
-        pts_d_prioridad: answers.b6,
-        pts_p_condicion_corporal: answers.a1,
-        pts_p_costillas: answers.a2,
-        pts_p_energia: answers.a3,
-        pts_p_pelaje: answers.a4,
-        pts_p_enfermedad: answers.a5,
-        pts_p_edad: answers.a6,
-        // Totales de puntaje (máx 18 cada uno)
-        score_dueno: (answers.b1 + answers.b2 + answers.b3 + answers.b4 + answers.b5 + answers.b6),
-        score_perro: (answers.a1 + answers.a2 + answers.a3 + answers.a4 + answers.a5 + answers.a6),
-        // Metadata
-        fecha: new Date().toISOString(),
-        pagina: location.href,
-        ...origen
+        // Pregunta de inversión (calificadora)
+        inversion: inversionTxt
       };
 
       fetch(WEBHOOK, {
