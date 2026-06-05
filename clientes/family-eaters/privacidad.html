@@ -3,16 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Política de Privacidad · Family Eaters</title>
-<meta name="description" content="Política de Privacidad de Family Eaters (Josefina Pizarro). Cómo recopilamos, usamos y protegemos tus datos personales, incluida la publicidad en Meta. Conforme a la Ley N° 19.628 de Chile." />
+<title>Política de Privacidad · Comer en Paz</title>
+<meta name="description" content="Política de Privacidad de Comer en Paz (Josefina Pizarro). Cómo recopilamos, usamos y protegemos tus datos personales, incluida la publicidad en Meta. Conforme a la Ley N° 19.628 de Chile." />
 <meta name="robots" content="index, follow" />
-<meta name="theme-color" content="#2f6b4f" />
+<meta name="theme-color" content="#73264d" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥄</text></svg>" />
 
 <!--
   ════════════════════════════════════════════════════════════════
   PARA EL CLIENTE: revisa/ajusta antes de publicar:
-  · Si en algún momento usas un nombre de fantasía registrado o RUT,
-    añádelo en la sección "1. Responsable".
   · Confirma los encargados reales (sección 8): plataforma de pago,
     email marketing y hosting que utilices.
   · Esta plantilla es una base profesional; para casos sensibles,
@@ -22,20 +21,24 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,500;0,600;0,700;1,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 <style>
   :root {
-    --ink:       #18241d;
-    --green:     #2f6b4f;
-    --green-dp:  #234f3b;
-    --green-sf:  #e9f1ec;
-    --bg:        #f9faf8;
+    --ink:       #281622;
+    --plum:      #73264d;
+    --plum-dp:   #571636;
+    --plum-sf:   #f5e7ee;
+    --plum-line: #e6cdd9;
+    --apricot-sf:#fbeadb;
+    --apricot-tx:#8a451c;
+    --green:     #4f8466;
+    --green-sf:  #e4efe7;
+    --bg:        #fbf8fa;
     --surface:   #ffffff;
-    --line:      #e2e7e3;
-    --text:      #283129;
-    --muted:     #57645b;
-    --display: 'Petrona', Georgia, serif;
+    --text:      #2c1d27;
+    --muted:     #6f5d68;
+    --display: 'Bricolage Grotesque', 'Hanken Grotesk', sans-serif;
     --body: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
     --r: 14px;
   }
@@ -49,95 +52,67 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  a { color: var(--green-dp); }
-  .skip {
-    position: absolute; left: -9999px; top: 0;
-    background: var(--green); color: #fff; padding: 10px 16px; border-radius: 8px; z-index: 10;
-  }
+  a { color: var(--plum); }
+  .skip { position: absolute; left: -9999px; top: 0; background: var(--plum); color: #fff; padding: 10px 16px; border-radius: 8px; z-index: 10; }
   .skip:focus { left: 12px; top: 12px; }
 
   /* Header */
-  .nav {
-    background: var(--surface);
-    border-bottom: 1px solid var(--line);
-    position: sticky; top: 0; z-index: 5;
-  }
-  .nav-inner {
-    max-width: 880px; margin: 0 auto;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 16px; padding: 14px 22px;
-  }
-  .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-  .brand .logo {
-    width: 34px; height: 34px; border-radius: 9px;
-    background: var(--green); color: #fff;
-    display: inline-flex; align-items: center; justify-content: center;
-    font-family: var(--display); font-weight: 700; font-size: 1.05rem;
-  }
-  .brand .name { font-family: var(--display); font-weight: 700; font-size: 1.05rem; color: var(--ink); line-height: 1; }
-  .brand .name small { display: block; font-family: var(--body); font-weight: 500; font-size: 0.72rem; color: var(--muted); margin-top: 3px; letter-spacing: 0.02em; }
+  .nav { background: var(--surface); border-bottom: 1px solid var(--plum-line); position: sticky; top: 0; z-index: 5; }
+  .nav-inner { max-width: 880px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 22px; }
+  .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; }
+  .brand .logo { width: 36px; height: 36px; border-radius: 50%; background: var(--plum); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 700; font-size: 0.9rem; }
+  .brand .name { font-family: var(--display); font-weight: 800; font-size: 1.06rem; color: var(--ink); line-height: 1; letter-spacing: -0.01em; }
+  .brand .name small { display: block; font-family: var(--body); font-weight: 500; font-size: 0.72rem; color: var(--muted); margin-top: 4px; letter-spacing: 0.01em; }
   .nav-links { display: flex; gap: 18px; font-size: 0.9rem; }
-  .nav-links a { color: var(--muted); text-decoration: none; font-weight: 500; }
-  .nav-links a:hover { color: var(--green-dp); }
+  .nav-links a { color: var(--muted); text-decoration: none; font-weight: 600; }
+  .nav-links a:hover { color: var(--plum); }
   @media (max-width: 560px) { .nav-links a.opt { display: none; } }
 
   /* Layout */
   main { max-width: 760px; margin: 0 auto; padding: 56px 22px 40px; }
-  .doc-head { margin-bottom: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
-  .eyebrow { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
-  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.12; color: var(--ink); letter-spacing: -0.01em; }
+  .doc-head { margin-bottom: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--plum-line); }
+  .eyebrow { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--plum); margin-bottom: 12px; }
+  h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 5vw, 2.9rem); line-height: 1.1; color: var(--ink); letter-spacing: -0.02em; }
   .updated { margin-top: 14px; font-size: 0.9rem; color: var(--muted); }
   .intro { margin-top: 20px; font-size: 1.05rem; color: var(--text); }
 
   /* TOC */
-  .toc {
-    background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
-    padding: 22px 26px; margin-bottom: 40px;
-  }
+  .toc { background: var(--surface); border: 1px solid var(--plum-line); border-radius: var(--r); padding: 22px 26px; margin-bottom: 40px; }
   .toc h2 { font-family: var(--body); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 14px; }
   .toc ol { list-style: none; counter-reset: t; columns: 2; column-gap: 32px; }
   @media (max-width: 560px) { .toc ol { columns: 1; } }
   .toc li { counter-increment: t; margin-bottom: 9px; font-size: 0.92rem; break-inside: avoid; }
   .toc li a { text-decoration: none; color: var(--text); }
-  .toc li a::before { content: counter(t) ". "; color: var(--green); font-weight: 700; }
-  .toc li a:hover { color: var(--green-dp); text-decoration: underline; }
+  .toc li a::before { content: counter(t) ". "; color: var(--plum); font-weight: 700; }
+  .toc li a:hover { color: var(--plum); text-decoration: underline; }
 
   /* Sections */
   section { margin-bottom: 36px; scroll-margin-top: 80px; }
-  h2.sec { font-family: var(--display); font-weight: 700; font-size: 1.45rem; color: var(--ink); line-height: 1.25; margin-bottom: 14px; }
-  h2.sec .n { color: var(--green); }
+  h2.sec { font-family: var(--display); font-weight: 700; font-size: 1.45rem; color: var(--ink); line-height: 1.22; margin-bottom: 14px; letter-spacing: -0.01em; }
+  h2.sec .n { color: var(--plum); }
   h3 { font-family: var(--body); font-weight: 700; font-size: 1.02rem; color: var(--ink); margin: 22px 0 8px; }
   p { margin-bottom: 14px; }
-  ul, ol.list { margin: 0 0 16px 0; padding-left: 0; list-style: none; }
-  ul li, ol.list li { position: relative; padding-left: 26px; margin-bottom: 10px; }
-  ul li::before { content: ''; position: absolute; left: 6px; top: 11px; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
-  ol.list { counter-reset: li2; }
-  ol.list li { counter-increment: li2; }
-  ol.list li::before { content: counter(li2); position: absolute; left: 0; top: 1px; width: 19px; height: 19px; border-radius: 50%; background: var(--green-sf); color: var(--green-dp); font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  ul { margin: 0 0 16px 0; padding-left: 0; list-style: none; }
+  ul li { position: relative; padding-left: 26px; margin-bottom: 10px; }
+  ul li::before { content: ''; position: absolute; left: 6px; top: 11px; width: 7px; height: 7px; border-radius: 50%; background: var(--plum); }
   strong { color: var(--ink); font-weight: 700; }
 
-  .callout {
-    background: var(--green-sf); border: 1px solid #cfe0d6; border-radius: var(--r);
-    padding: 22px 26px; margin: 8px 0 20px;
-  }
+  .callout { background: var(--green-sf); border: 1px solid #cfe2d6; border-radius: var(--r); padding: 22px 26px; margin: 8px 0 20px; }
   .callout p:last-child { margin-bottom: 0; }
 
-  .contact-card {
-    background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
-    padding: 26px 28px; margin-top: 8px;
-  }
+  .contact-card { background: var(--surface); border: 1px solid var(--plum-line); border-radius: var(--r); padding: 26px 28px; margin-top: 8px; }
   .contact-card dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; font-size: 0.96rem; }
   .contact-card dt { color: var(--muted); }
   .contact-card dd { color: var(--ink); font-weight: 500; }
   .contact-card a { font-weight: 600; }
 
-  footer { background: var(--ink); color: rgba(255,255,255,0.7); margin-top: 24px; }
+  footer { background: var(--plum-dp); color: rgba(255,255,255,0.72); margin-top: 24px; }
   .foot-inner { max-width: 760px; margin: 0 auto; padding: 40px 22px; font-size: 0.86rem; line-height: 1.8; }
   .foot-inner strong { color: #fff; }
-  .foot-inner a { color: rgba(255,255,255,0.85); }
+  .foot-inner a { color: rgba(255,255,255,0.88); }
   .foot-links { margin-top: 14px; display: flex; gap: 16px; flex-wrap: wrap; }
 
-  :focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 4px; }
+  :focus-visible { outline: 3px solid var(--plum); outline-offset: 3px; border-radius: 4px; }
 </style>
 </head>
 <body>
@@ -145,11 +120,12 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <a class="brand" href="/" aria-label="Ir al inicio">
-      <span class="logo" aria-hidden="true">FE</span>
-      <span class="name">Family Eaters<small>Alimentación infantil sin peleas</small></span>
+    <a class="brand" href="./index.html" aria-label="Ir al inicio">
+      <span class="logo" aria-hidden="true">CP</span>
+      <span class="name">Comer en Paz<small>por Josefina Pizarro</small></span>
     </a>
     <div class="nav-links">
+      <a class="opt" href="./index.html">Inicio</a>
       <a href="./terminos.html">Términos y Condiciones</a>
     </div>
   </div>
@@ -160,7 +136,7 @@
     <span class="eyebrow">Legal</span>
     <h1>Política de Privacidad</h1>
     <p class="updated">Última actualización: 5 de junio de 2026</p>
-    <p class="intro">En Family Eaters cuidamos tus datos con el mismo respeto con el que acompañamos a tu familia. Aquí te explicamos, en lenguaje claro, qué datos recopilamos, para qué los usamos, con quién los compartimos y cómo puedes ejercer tus derechos.</p>
+    <p class="intro">En Comer en Paz cuidamos tus datos con el mismo respeto con el que acompañamos a tu familia. Aquí te explicamos, en lenguaje claro, qué datos recopilamos, para qué los usamos, con quién los compartimos y cómo puedes ejercer tus derechos.</p>
   </div>
 
   <nav class="toc" aria-label="Índice">
@@ -186,7 +162,7 @@
 
   <section id="responsable">
     <h2 class="sec"><span class="n">1.</span> Responsable de tus datos</h2>
-    <p>La responsable del tratamiento de tus datos personales es <strong>Josefina Pizarro</strong>, persona natural que opera bajo la marca <strong>Family Eaters</strong>, con domicilio en Lo Gallo 1885, Vitacura, Santiago de Chile.</p>
+    <p>La responsable del tratamiento de tus datos personales es <strong>Josefina Pizarro</strong>, terapeuta ocupacional y creadora del curso <strong>«Comer en Paz»</strong>, con domicilio en Lo Gallo 1885, Vitacura, Santiago de Chile.</p>
     <p>Puedes contactarnos en cualquier momento por los medios indicados en la sección 15.</p>
   </section>
 
@@ -315,7 +291,7 @@
     <p>Si tienes dudas sobre esta Política o sobre el tratamiento de tus datos, escríbenos:</p>
     <div class="contact-card">
       <dl>
-        <dt>Responsable</dt><dd>Josefina Pizarro · Family Eaters</dd>
+        <dt>Responsable</dt><dd>Josefina Pizarro · Comer en Paz</dd>
         <dt>Correo</dt><dd><a href="mailto:family.eaters.to@gmail.com">family.eaters.to@gmail.com</a></dd>
         <dt>Teléfono</dt><dd><a href="tel:+529844046192">+52 984 404 6192</a></dd>
         <dt>Domicilio</dt><dd>Lo Gallo 1885, Vitacura, Santiago de Chile</dd>
@@ -326,13 +302,13 @@
 
 <footer>
   <div class="foot-inner">
-    <strong>Family Eaters</strong> · Josefina Pizarro<br/>
+    <strong>Comer en Paz</strong> · Josefina Pizarro<br/>
     Lo Gallo 1885, Vitacura, Santiago de Chile · <a href="mailto:family.eaters.to@gmail.com">family.eaters.to@gmail.com</a> · <a href="tel:+529844046192">+52 984 404 6192</a>
     <div class="foot-links">
       <a href="./terminos.html">Términos y Condiciones</a>
       <a href="./privacidad.html">Política de Privacidad</a>
     </div>
-    <p style="margin-top:14px; color:rgba(255,255,255,0.5);">© 2026 Family Eaters. Todos los derechos reservados.</p>
+    <p style="margin-top:14px; color:rgba(255,255,255,0.5);">© 2026 Comer en Paz · Josefina Pizarro. Todos los derechos reservados.</p>
   </div>
 </footer>
 
