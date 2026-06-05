@@ -645,12 +645,25 @@
       { max: 240, label: 'Riesgo extremo',   color: '#E24B4A', msg: 'Estado de emergencia. El cuerpo de tu salchicha ya no puede más. <strong style="color:var(--gb)">Necesitas una intervención nutricional profesional de inmediato.</strong>' },
     ];
 
-    // ── Calificación: enfermo + dispuesto a invertir ──
+    // ── Calificacion: Lead Score (0-100), Tier y Producto Recomendado ──
+    function calcularLeadScore(score, inv) {
+      const healthPct = (score / 240) * 100; // gravedad del problema (0-100)
+      const invPct = (inv / 3) * 100;        // disposicion a invertir (0-100)
+      // La inversion pesa mas: es la senal de compra mas fuerte
+      return Math.round(healthPct * 0.4 + invPct * 0.6);
+    }
+
     function calcularTier(score, inv) {
-      const enfermo = score > 90; // riesgo moderado o superior
-      if (enfermo && inv >= 3) return 'gold';
-      if (enfermo && inv === 2) return 'silver';
-      return 'bronce';
+      const enfermo = score > 90;                // riesgo moderado o superior
+      if (inv === 0) return 'Out';               // descalificado por presupuesto
+      if (enfermo && inv >= 3) return 'Gold';    // enfermo + inversion alta
+      if (enfermo && inv === 2) return 'Silver'; // enfermo + inversion media
+      return 'Bronce';                           // resto: bajo costo o sin urgencia de salud
+    }
+
+    function productoRecomendado(tier) {
+      // High ticket solo para silver/gold (enfermos con presupuesto); el resto a Skool
+      return (tier === 'Silver' || tier === 'Gold') ? 'High Ticket' : 'Skool';
     }
 
     function submit() {
@@ -670,19 +683,27 @@
       const pct = Math.round((score/240)*100);
       const level = LEVELS.find(l => score <= l.max) || LEVELS[4];
       const tier = calcularTier(score, inversion);
-      const califica = (tier === 'gold' || tier === 'silver');
+      const leadScore = calcularLeadScore(score, inversion);
+      const producto = productoRecomendado(tier);
+      const califica = (tier === 'Silver' || tier === 'Gold');
 
       const payload = {
         firstName: nombre,
         email: email,
         phone: tel,
+        // Campos personalizados de GHL (nombre exacto + version snake_case de respaldo)
+        'Lead Score': leadScore,
+        'Producto Recomendado': producto,
+        'Tier': tier,
+        lead_score: leadScore,
+        producto_recomendado: producto,
+        tier: tier,
+        califica: califica,
         scanner_score: score,
         scanner_pct: pct,
         nivel_riesgo: level.label,
         inversion_nivel: inversion,
         inversion_label: INV_LABELS[inversion],
-        tier: tier,
-        califica: califica,
         q1_nutricion: answers[0],
         q2_corporal: answers[1],
         q3_piel: answers[2],
@@ -722,8 +743,8 @@
       document.getElementById('res-nivel').style.color = level.color;
       document.getElementById('res-msg').innerHTML = level.msg;
 
-      // CTA según calificación
-      if (tier === 'gold' || tier === 'silver') {
+      // CTA según calificación: Silver/Gold a agenda, el resto al lead magnet
+      if (tier === 'Silver' || tier === 'Gold') {
         document.getElementById('cta-calificado').classList.remove('hide');
       } else {
         document.getElementById('cta-bronce').classList.remove('hide');
