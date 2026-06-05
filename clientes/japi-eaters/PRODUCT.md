@@ -35,5 +35,8 @@ crema + terracota/sage y las fuentes-reflejo).
 
 ## Pendientes que el cliente reemplaza
 - VSL real en `.vsl-frame` (hay comentario con el snippet de iframe).
-- Foto real de Josefina en `.about-photo`.
 - Enlaces de Términos / Privacidad en el footer.
+
+## Notas
+- Foto de Josefina ya integrada (CDN filesafe.space, mismo que los testimonios).
+- Cargo oficial: Terapeuta ocupacional · Fundadora de ÉxiTO en Alimentación Infantil.

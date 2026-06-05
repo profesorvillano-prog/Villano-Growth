@@ -114,19 +114,18 @@
   .hero-kicker {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     background: var(--surface);
     border: 1px solid var(--plum-line);
-    color: var(--plum);
-    font-size: 0.82rem;
-    font-weight: 600;
-    padding: 7px 16px 7px 8px;
-    border-radius: 40px;
+    padding: 9px 20px 9px 10px;
+    border-radius: 16px;
     margin-bottom: 28px;
-    box-shadow: 0 2px 10px rgba(40,22,34,0.04);
+    text-align: left;
+    max-width: 100%;
+    box-shadow: 0 6px 18px -10px rgba(115,38,77,0.25);
   }
   .hero-kicker .avatar {
-    width: 26px; height: 26px;
+    width: 36px; height: 36px;
     border-radius: 50%;
     background: var(--plum);
     color: #fff;
@@ -135,8 +134,13 @@
     justify-content: center;
     font-family: var(--display);
     font-weight: 700;
-    font-size: 0.78rem;
+    font-size: 0.86rem;
+    flex-shrink: 0;
   }
+  .hero-kicker-text { display: flex; flex-direction: column; line-height: 1.25; }
+  .hero-kicker-text strong { font-size: 0.92rem; font-weight: 700; color: var(--ink); }
+  .hero-kicker-text span { font-size: 0.78rem; color: var(--muted); }
+  .hero-kicker-text span b { color: var(--plum); font-weight: 700; }
   .hero h1 {
     font-family: var(--display);
     font-size: clamp(2.2rem, 5.6vw, 3.9rem);
@@ -259,43 +263,54 @@
 
   /* ── DOLOR (sobre plum) ── */
   .pain {
-    background: var(--plum);
-    color: #fff;
+    background: linear-gradient(180deg, var(--plum-soft) 0%, #fceef0 100%);
     padding: 80px 20px;
+    border-top: 1px solid var(--plum-line);
+    border-bottom: 1px solid var(--plum-line);
   }
-  .pain-inner { max-width: 920px; margin: 0 auto; }
-  .pain h2 { color: #fff; }
-  .pain h2 .accent { color: var(--apricot); }
-  .pain-intro { color: rgba(255,255,255,0.78); font-size: 1.08rem; line-height: 1.72; margin-top: 16px; max-width: 58ch; }
+  .pain-inner { max-width: 960px; margin: 0 auto; }
+  .pain h2 { color: var(--ink); }
+  .pain h2 .accent { color: var(--plum); }
+  .pain-intro { color: var(--muted); font-size: 1.08rem; line-height: 1.72; margin-top: 16px; max-width: 58ch; }
   .pain-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 4px 40px;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 16px;
     margin-top: 40px;
   }
   .pain-item {
     display: flex;
-    gap: 14px;
+    gap: 15px;
     align-items: flex-start;
-    padding: 20px 0;
-    border-top: 1px solid rgba(255,255,255,0.12);
+    background: var(--surface);
+    border: 1px solid var(--plum-line);
+    border-radius: var(--r-sm);
+    padding: 22px 22px;
+    box-shadow: 0 12px 26px -20px rgba(115,38,77,0.55);
+    transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease), border-color 0.22s;
+  }
+  .pain-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--plum);
+    box-shadow: 0 18px 34px -20px rgba(115,38,77,0.6);
   }
   .pain-item .mark {
     flex-shrink: 0;
-    margin-top: 3px;
-    width: 22px; height: 22px;
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    background: var(--apricot-sf);
+    display: flex; align-items: center; justify-content: center;
   }
-  .pain-item .mark svg { width: 22px; height: 22px; stroke: var(--apricot); fill: none; stroke-width: 2; }
-  .pain-item p { color: rgba(255,255,255,0.9); font-size: 1rem; line-height: 1.62; }
+  .pain-item .mark svg { width: 21px; height: 21px; stroke: var(--apricot-tx); fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+  .pain-item p { color: var(--text); font-size: 0.97rem; line-height: 1.55; }
   .pain-outro {
-    margin-top: 46px;
-    padding: 28px 30px;
-    background: rgba(255,255,255,0.07);
+    margin-top: 28px;
+    padding: 30px 34px;
+    background: var(--plum);
     border-radius: var(--r);
     font-size: 1.08rem;
     line-height: 1.72;
-    color: rgba(255,255,255,0.82);
-    max-width: 64ch;
+    color: rgba(255,255,255,0.86);
   }
   .pain-outro strong { color: #fff; }
 
@@ -517,14 +532,12 @@
     width: 100%;
     aspect-ratio: 4/5;
     border-radius: 20px;
-    background: linear-gradient(160deg, var(--plum-soft), var(--apricot-sf));
+    overflow: hidden;
+    background: var(--plum-soft);
     border: 1px solid var(--plum-line);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
-    color: var(--plum);
-    text-align: center;
+    box-shadow: 0 24px 44px -26px rgba(115,38,77,0.55);
   }
-  .about-photo svg { width: 48px; height: 48px; stroke: var(--plum); fill: none; stroke-width: 1.5; opacity: 0.55; }
-  .about-photo span { font-size: 0.82rem; color: var(--muted); }
+  .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
   .about-text h2 { text-align: left; margin-bottom: 8px; }
   .about-role { color: var(--apricot-tx); font-weight: 600; font-size: 0.98rem; margin-bottom: 18px; }
   .about-text p { font-size: 1rem; line-height: 1.72; color: var(--muted); margin-bottom: 16px; }
@@ -698,7 +711,10 @@
 <header class="hero">
   <span class="hero-kicker">
     <span class="avatar" aria-hidden="true">JP</span>
-    Creado por Josefina Pizarro, terapeuta ocupacional
+    <span class="hero-kicker-text">
+      <strong>Josefina Pizarro</strong>
+      <span>Terapeuta ocupacional · Fundadora de <b>ÉxiTO en Alimentación Infantil</b></span>
+    </span>
   </span>
 
   <h1>Que tu hijo coma sin peleas, sin gritos y sin que la mesa te robe <span class="accent">la paz</span></h1>
@@ -719,8 +735,8 @@
 
   <div class="hero-trust">
     <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Acceso de por vida</span>
-    <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Garantía de 7 días</span>
     <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> +2.000 familias acompañadas</span>
+    <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Para niños de 1 a 10 años</span>
   </div>
 </header>
 
@@ -734,27 +750,27 @@
 
     <div class="pain-list reveal">
       <div class="pain-item">
-        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></span>
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 3v7a3 3 0 0 0 3 3v8M7 3v6M10 3v6M20 3v9h-3l1 9"/></svg></span>
         <p>Tu hijo rechaza casi todo lo que no es "lo de siempre" y la comida termina en llanto o en gritos.</p>
       </div>
       <div class="pain-item">
-        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></span>
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 12 5 5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/></svg></span>
         <p>Te angustia que no esté comiendo suficiente o que le falten nutrientes para crecer bien.</p>
       </div>
       <div class="pain-item">
-        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></span>
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M5 16H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1"/></svg></span>
         <p>Cocinas dos platos distintos, negocias, ruegas, distraes con la pantalla, y aun así nada funciona dos días seguidos.</p>
       </div>
       <div class="pain-item">
-        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></span>
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
         <p>Llevas meses, o años, en lo mismo, y sientes que el problema se agranda en lugar de resolverse.</p>
       </div>
       <div class="pain-item">
-        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></span>
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg></span>
         <p>No sabes si lo que hace tu hijo es normal para su edad o si es algo que deberías atender.</p>
       </div>
       <div class="pain-item">
-        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></span>
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2.5"/><path d="M12 18h.01"/></svg></span>
         <p>Probaste consejos de Google, de TikTok y del grupo de mamás, y ninguno te dio un camino claro que seguir.</p>
       </div>
     </div>
@@ -1031,14 +1047,13 @@
 <!-- SOBRE JOSEFINA -->
 <section class="section">
   <div class="about-grid reveal">
-    <div class="about-photo" aria-label="Foto de Josefina Pizarro">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
-      <span>Foto de Josefina</span>
+    <div class="about-photo">
+      <img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/6912b99c96d06aa3375e2140.jpeg" alt="Josefina Pizarro, terapeuta ocupacional y fundadora de Japi Eaters" loading="lazy" />
     </div>
     <div class="about-text">
       <h2>Hola, soy Josefina Pizarro</h2>
-      <p class="about-role">Terapeuta ocupacional especializada en alimentación infantil</p>
-      <p>Soy fundadora de <strong>Japi Eaters</strong> y creadora del método Comer en Paz. Llevo años ayudando a familias de Latinoamérica a que la hora de comer deje de ser una pelea y vuelva a ser un momento de encuentro.</p>
+      <p class="about-role">Terapeuta ocupacional · Fundadora de ÉxiTO en Alimentación Infantil</p>
+      <p>Soy fundadora de <strong>Japi Eaters</strong>, creadora del método Comer en Paz y de la formación <strong>ÉxiTO en Alimentación Infantil</strong>. Llevo años ayudando a familias de Latinoamérica a que la hora de comer deje de ser una pelea y vuelva a ser un momento de encuentro.</p>
       <p>He acompañado a <strong>más de 2.000 familias y profesionales</strong>, y conozco de cerca la mezcla de culpa, cansancio y preocupación con la que llega cada mamá. Por eso el método es claro, aplicable y con base en evidencia.</p>
       <p>Estoy formada en el <strong>SOS Approach to Feeding</strong> (Dra. Kay Toomey), <strong>Feeding Littles</strong>, Integración Sensorial y otras especializaciones en desarrollo infantil.</p>
       <div class="cred">
