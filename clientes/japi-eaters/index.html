@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Comer en Paz · Que tu hijo coma sin peleas | Josefina Pizarro · Japi Eaters</title>
+
+<!-- SEO -->
+<meta name="description" content="El método de la terapeuta ocupacional Josefina Pizarro para que tu hijo de 1 a 10 años coma variado sin peleas, sin gritos y sin que la mesa te robe la paz. Acceso de por vida y garantía de 7 días." />
+<meta name="author" content="Josefina Pizarro · Japi Eaters" />
+<meta name="theme-color" content="#73264d" />
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Comer en Paz · Que tu hijo coma sin peleas" />
+<meta property="og:description" content="El método paso a paso de la terapeuta Josefina Pizarro para que la hora de comer deje de ser una pelea. Para niños de 1 a 10 años." />
+<meta property="og:locale" content="es_ES" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥄</text></svg>" />
+
+<!-- Fonts: Bricolage Grotesque (display) + Hanken Grotesk (cuerpo) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script>document.documentElement.classList.add('js');</script>
+
+<style>
+  :root {
+    /* Plum como color de marca (calma + cuidado + premium), apricot para calidez/apetito,
+       verde solo como señal de "sí/avance". Fondo blanco-cálido tintado hacia el ciruela,
+       nunca crema. */
+    --ink:        #281622;
+    --plum:       #73264d;
+    --plum-deep:  #571636;
+    --plum-soft:  #f5e7ee;
+    --plum-line:  #e6cdd9;
+    --apricot:    #e2854a;   /* acento decorativo / fondos */
+    --apricot-tx: #8a451c;   /* apricot accesible para texto sobre fondos claros (AA) */
+    --apricot-sf: #fbeadb;
+    --green:      #4f8466;
+    --green-soft: #e4efe7;
+    --bg:      #fbf8fa;
+    --surface:    #ffffff;
+    --text:       #2c1d27;
+    --muted:      #6f5d68;
+    --wa:         #0b1a16;
+
+    --r:          18px;
+    --r-sm:       12px;
+
+    --display: 'Bricolage Grotesque', 'Hanken Grotesk', -apple-system, sans-serif;
+    --body:    'Hanken Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* escala z semántica */
+    --z-sticky: 100;
+    --z-mobilecta: 200;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--body);
+    background-color: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+  }
+  img { max-width: 100%; display: block; }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+
+  /* ── BARRA SUPERIOR (urgencia honesta) ── */
+  .top-bar {
+    background: var(--plum);
+    color: #fff;
+    text-align: center;
+    padding: 9px 18px;
+    font-size: 0.86rem;
+    font-weight: 500;
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .top-bar strong { font-weight: 700; }
+  .top-bar .countdown {
+    background: rgba(255,255,255,0.16);
+    padding: 2px 11px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--bg);
+    padding: 56px 20px 60px;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid var(--plum-line);
+  }
+  .hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--plum-line);
+    color: var(--plum);
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 7px 16px 7px 8px;
+    border-radius: 40px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 10px rgba(40,22,34,0.04);
+  }
+  .hero-kicker .avatar {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--plum);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 0.78rem;
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(2.2rem, 5.6vw, 3.9rem);
+    font-weight: 800;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 16ch;
+    margin: 0 auto 20px;
+  }
+  .hero h1 .accent { color: var(--plum); }
+  .hero-sub {
+    font-size: clamp(1.02rem, 2.2vw, 1.22rem);
+    color: var(--muted);
+    max-width: 56ch;
+    margin: 0 auto 34px;
+    line-height: 1.6;
+  }
+  .hero-sub strong { color: var(--text); font-weight: 600; }
+
+  /* ── VSL ── */
+  .vsl-block { max-width: 760px; margin: 0 auto 30px; }
+  /* Reemplaza el contenido de .vsl-frame por tu iframe real:
+     <iframe src="URL" style="width:100%;aspect-ratio:16/9;border:0;border-radius:18px;" allowfullscreen></iframe> */
+  .vsl-frame {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background:
+      radial-gradient(120% 140% at 50% 0%, #3a1428 0%, var(--wa) 70%);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    box-shadow: 0 24px 60px -24px rgba(40,22,34,0.5);
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  .vsl-play {
+    width: 70px; height: 70px;
+    background: var(--apricot);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px -6px rgba(226,133,74,0.6);
+    transition: transform 0.25s var(--ease);
+  }
+  .vsl-frame:hover .vsl-play { transform: scale(1.06); }
+  .vsl-play svg { width: 26px; height: 26px; fill: #fff; margin-left: 4px; }
+  .vsl-label {
+    color: rgba(255,255,255,0.62);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-cta {
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+    margin-bottom: 26px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--plum);
+    color: #fff;
+    font-family: var(--body);
+    font-size: 1.06rem;
+    font-weight: 700;
+    padding: 17px 40px;
+    border-radius: 60px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.18s var(--ease), box-shadow 0.2s;
+    box-shadow: 0 12px 28px -10px rgba(115,38,77,0.6);
+  }
+  .btn:hover { background: var(--plum-deep); transform: translateY(-2px); box-shadow: 0 16px 34px -10px rgba(115,38,77,0.65); }
+  .btn .arrow { transition: transform 0.2s var(--ease); }
+  .btn:hover .arrow { transform: translateX(3px); }
+  .btn-lg { font-size: 1.12rem; padding: 19px 46px; width: 100%; justify-content: center; }
+  .price-line { font-size: 0.9rem; color: var(--muted); }
+  .price-line s { opacity: 0.55; }
+  .price-line strong { color: var(--plum); font-weight: 700; }
+
+  .hero-trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px 18px;
+    font-size: 0.86rem;
+    color: var(--muted);
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  .hero-trust span { display: inline-flex; align-items: center; gap: 7px; }
+  .hero-trust svg { width: 16px; height: 16px; stroke: var(--green); fill: none; stroke-width: 2.4; }
+
+  /* ── SECCIÓN ── */
+  .section { padding: 76px 20px; max-width: 920px; margin: 0 auto; }
+  .section-head { max-width: 640px; }
+  h2 {
+    font-family: var(--display);
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  h2 .accent { color: var(--plum); }
+  .lead {
+    font-size: 1.08rem;
+    color: var(--muted);
+    margin-top: 16px;
+    line-height: 1.65;
+    max-width: 60ch;
+  }
+
+  /* ── DOLOR (sobre plum) ── */
+  .pain {
+    background: var(--plum);
+    color: #fff;
+    padding: 80px 20px;
+  }
+  .pain-inner { max-width: 920px; margin: 0 auto; }
+  .pain h2 { color: #fff; }
+  .pain h2 .accent { color: var(--apricot); }
+  .pain-intro { color: rgba(255,255,255,0.78); font-size: 1.08rem; line-height: 1.72; margin-top: 16px; max-width: 58ch; }
+  .pain-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 4px 40px;
+    margin-top: 40px;
+  }
+  .pain-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .pain-item .mark {
+    flex-shrink: 0;
+    margin-top: 3px;
+    width: 22px; height: 22px;
+  }
+  .pain-item .mark svg { width: 22px; height: 22px; stroke: var(--apricot); fill: none; stroke-width: 2; }
+  .pain-item p { color: rgba(255,255,255,0.9); font-size: 1rem; line-height: 1.62; }
+  .pain-outro {
+    margin-top: 46px;
+    padding: 28px 30px;
+    background: rgba(255,255,255,0.07);
+    border-radius: var(--r);
+    font-size: 1.08rem;
+    line-height: 1.72;
+    color: rgba(255,255,255,0.82);
+    max-width: 64ch;
+  }
+  .pain-outro strong { color: #fff; }
+
+  /* ── PARA QUIÉN ── */
+  .for-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 40px;
+  }
+  @media (max-width: 600px) { .for-grid { grid-template-columns: 1fr; } }
+  .for-col { border-radius: var(--r); padding: 30px 28px; }
+  .for-yes { background: var(--green-soft); border: 1px solid #cfe2d6; }
+  .for-no  { background: var(--plum-soft); border: 1px solid var(--plum-line); }
+  .for-col h3 {
+    font-family: var(--display);
+    font-size: 1.18rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+  }
+  .for-yes h3 { color: #2f6048; }
+  .for-no h3  { color: var(--plum); }
+  .for-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; font-size: 0.98rem; line-height: 1.5; color: var(--text); }
+  .for-row:last-child { margin-bottom: 0; }
+  .for-row svg { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; stroke-width: 2.4; fill: none; }
+  .for-yes svg { stroke: var(--green); }
+  .for-no svg  { stroke: var(--plum); }
+
+  /* ── MÉTODO (acordeón de pasos) ── */
+  .method { background: var(--plum-soft); padding: 80px 20px; }
+  .method-inner { max-width: 920px; margin: 0 auto; }
+  .steps { margin-top: 40px; display: flex; flex-direction: column; gap: 12px; }
+  .step {
+    background: var(--surface);
+    border-radius: var(--r-sm);
+    border: 1px solid var(--plum-line);
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .step.open { border-color: var(--plum); box-shadow: 0 10px 30px -16px rgba(115,38,77,0.4); }
+  .step-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--body);
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--plum);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .step-htext { flex: 1; min-width: 0; }
+  .step-when {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--apricot-tx);
+    margin-bottom: 4px;
+  }
+  .step-head h3 {
+    font-family: var(--display);
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .step-chev { flex-shrink: 0; color: var(--plum); transition: transform 0.3s var(--ease); }
+  .step-chev svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.4; }
+  .step.open .step-chev { transform: rotate(180deg); }
+  .step-body { max-height: 0; overflow: hidden; transition: max-height 0.34s var(--ease); }
+  .step.open .step-body { max-height: 340px; }
+  .step-body p {
+    padding: 0 22px 22px 78px;
+    font-size: 0.98rem;
+    color: var(--muted);
+    line-height: 1.66;
+  }
+  @media (max-width: 560px) { .step-body p { padding-left: 22px; } }
+
+  /* ── MATERIAL DE APOYO ── */
+  .material {
+    background: var(--surface);
+    border: 1px solid var(--plum-line);
+    border-radius: var(--r);
+    padding: 34px 32px;
+    margin-top: 28px;
+  }
+  .material-head { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 22px; }
+  .material-head .ic {
+    flex-shrink: 0;
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    background: var(--green-soft);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .material-head .ic svg { width: 24px; height: 24px; stroke: var(--green); fill: none; stroke-width: 2; }
+  .material-head h3 { font-family: var(--display); font-size: 1.24rem; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
+  .material-head p { font-size: 0.92rem; color: var(--muted); margin-top: 3px; }
+  .material-list { display: flex; flex-wrap: wrap; gap: 10px; }
+  .material-item {
+    background: var(--plum-soft);
+    color: var(--plum);
+    padding: 9px 16px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  /* ── TESTIMONIOS ── */
+  .testi { background: var(--bg); padding: 80px 20px; }
+  .testi-inner { max-width: 1100px; margin: 0 auto; }
+  .testi-carousel { position: relative; margin-top: 40px; overflow: hidden; padding: 8px 4px; }
+  .testi-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s var(--ease);
+    will-change: transform;
+    align-items: stretch;
+  }
+  .testi-card {
+    background: var(--surface);
+    border-radius: 20px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 14px 40px -22px rgba(40,22,34,0.45);
+    border: 1px solid var(--plum-line);
+    min-width: calc(33.333% - 14px);
+    max-width: calc(33.333% - 14px);
+    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  }
+  @media (max-width: 1024px) { .testi-card { min-width: calc(50% - 10px); max-width: calc(50% - 10px); } }
+  @media (max-width: 700px)  { .testi-card { min-width: calc(100% - 8px); max-width: calc(100% - 8px); } }
+  @media (hover: hover) { .testi-card:hover { transform: translateY(-4px); box-shadow: 0 22px 50px -24px rgba(40,22,34,0.5); } }
+
+  .testi-img {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background: var(--wa);
+    overflow: hidden;
+  }
+  .testi-img img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
+
+  .testi-meta { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-top: 1px solid var(--plum-line); }
+  .testi-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--plum-soft);
+    color: var(--plum);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+  .testi-name { font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
+  .testi-role { font-size: 0.78rem; color: var(--muted); margin-top: 2px; line-height: 1.3; }
+
+  .testi-controls { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 28px; }
+  .testi-btn {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid var(--plum);
+    background: var(--surface);
+    color: var(--plum);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, color 0.2s, transform 0.15s var(--ease);
+  }
+  .testi-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.4; }
+  .testi-btn:hover { background: var(--plum); color: #fff; transform: scale(1.05); }
+  .testi-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+  .testi-dots { display: flex; gap: 8px; align-items: center; }
+  .testi-dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--plum-line); cursor: pointer; transition: background 0.2s, width 0.2s; border: none; padding: 0; }
+  .testi-dot::before { content: ''; position: absolute; inset: -8px; } /* zona táctil 24px */
+  .testi-dot.active { background: var(--plum); width: 22px; border-radius: 4px; }
+
+  .testi-highlight {
+    background: var(--plum-soft);
+    border: 1px solid var(--plum-line);
+    border-radius: var(--r);
+    padding: 32px 34px;
+    margin-top: 40px;
+    display: flex;
+    gap: 26px;
+    align-items: center;
+  }
+  @media (max-width: 600px) { .testi-highlight { flex-direction: column; align-items: flex-start; padding: 28px 24px; } }
+  .testi-highlight .num {
+    font-family: var(--display);
+    font-size: 3.4rem; font-weight: 800;
+    color: var(--plum); line-height: 1; flex-shrink: 0;
+    letter-spacing: -0.03em;
+  }
+  .testi-highlight p { font-size: 1.05rem; color: var(--muted); line-height: 1.68; }
+  .testi-highlight strong { color: var(--ink); }
+
+  /* ── SOBRE JOSEFINA ── */
+  .about-grid { display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: center; margin-top: 12px; }
+  @media (max-width: 680px) { .about-grid { grid-template-columns: 1fr; } .about-photo { max-width: 240px; margin: 0 auto; } }
+  .about-photo {
+    width: 100%;
+    aspect-ratio: 4/5;
+    border-radius: 20px;
+    background: linear-gradient(160deg, var(--plum-soft), var(--apricot-sf));
+    border: 1px solid var(--plum-line);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    color: var(--plum);
+    text-align: center;
+  }
+  .about-photo svg { width: 48px; height: 48px; stroke: var(--plum); fill: none; stroke-width: 1.5; opacity: 0.55; }
+  .about-photo span { font-size: 0.82rem; color: var(--muted); }
+  .about-text h2 { text-align: left; margin-bottom: 8px; }
+  .about-role { color: var(--apricot-tx); font-weight: 600; font-size: 0.98rem; margin-bottom: 18px; }
+  .about-text p { font-size: 1rem; line-height: 1.72; color: var(--muted); margin-bottom: 16px; }
+  .about-text p strong { color: var(--text); font-weight: 600; }
+  .cred { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; padding-top: 22px; border-top: 1px solid var(--plum-line); }
+  .cred-item { display: flex; gap: 11px; align-items: flex-start; font-size: 0.92rem; color: var(--muted); }
+  .cred-item svg { flex-shrink: 0; width: 18px; height: 18px; stroke: var(--green); fill: none; stroke-width: 2.4; margin-top: 2px; }
+
+  /* ── GARANTÍA ── */
+  .guarantee {
+    display: flex; gap: 30px; align-items: center;
+    background: var(--green-soft);
+    border: 1px solid #cfe2d6;
+    border-radius: var(--r);
+    padding: 34px 34px;
+    margin-top: 28px;
+  }
+  @media (max-width: 600px) { .guarantee { flex-direction: column; text-align: center; } }
+  .guarantee .badge {
+    width: 92px; height: 92px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--green);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .guarantee .badge svg { width: 44px; height: 44px; stroke: var(--green); fill: none; stroke-width: 1.8; }
+  .guarantee h3 { font-family: var(--display); font-size: 1.3rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em; }
+  .guarantee p { font-size: 0.98rem; color: var(--muted); line-height: 1.68; }
+
+  /* ── PRECIO ── */
+  .pricing { background: var(--plum); padding: 80px 20px; }
+  .pricing-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+  .pricing h2 { color: #fff; }
+  .pricing h2 .accent { color: var(--apricot); }
+  .pricing-sub { color: rgba(255,255,255,0.78); font-size: 1.06rem; margin-top: 14px; }
+
+  .price-card {
+    background: var(--surface);
+    border-radius: 22px;
+    padding: 44px 38px;
+    margin: 40px auto 0;
+    position: relative;
+    text-align: center;
+    max-width: 470px;
+    box-shadow: 0 30px 70px -30px rgba(0,0,0,0.5);
+  }
+  .price-badge {
+    display: inline-block;
+    background: var(--apricot-sf);
+    color: var(--apricot-tx);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 30px;
+    margin-bottom: 18px;
+  }
+  .price-was { font-size: 1rem; color: var(--muted); text-decoration: line-through; }
+  .price-now {
+    font-family: var(--display);
+    font-size: 4rem; font-weight: 800;
+    color: var(--plum); line-height: 1; margin: 4px 0 6px;
+    letter-spacing: -0.03em;
+  }
+  .price-now sup { font-size: 1.7rem; vertical-align: top; margin-top: 8px; display: inline-block; }
+  .price-note { font-size: 0.86rem; color: var(--muted); margin-bottom: 18px; }
+  .price-warn {
+    background: var(--apricot-sf);
+    border-radius: var(--r-sm);
+    padding: 11px 16px;
+    font-size: 0.86rem;
+    color: var(--apricot-tx);
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .price-warn strong { font-weight: 700; }
+  .price-list { text-align: left; margin: 0 0 26px; }
+  .price-list li { list-style: none; display: flex; gap: 11px; align-items: flex-start; margin-bottom: 12px; font-size: 0.96rem; color: var(--text); }
+  .price-list svg { flex-shrink: 0; width: 19px; height: 19px; stroke: var(--green); fill: none; stroke-width: 2.4; margin-top: 2px; }
+  .pay-note { margin-top: 16px; font-size: 0.82rem; color: var(--muted); display: inline-flex; align-items: center; gap: 7px; justify-content: center; }
+  .pay-note svg { width: 15px; height: 15px; stroke: var(--muted); fill: none; stroke-width: 2; }
+
+  .countdown-block {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: var(--r);
+    padding: 24px 30px;
+    margin: 30px auto 0;
+    max-width: 540px;
+  }
+  .countdown-block p { color: rgba(255,255,255,0.72); font-size: 0.9rem; margin-bottom: 10px; }
+  .countdown-big {
+    font-family: var(--display);
+    font-size: 2.2rem; font-weight: 800;
+    color: var(--apricot); letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── FAQ ── */
+  .faq-list { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+  .faq-item { background: var(--surface); border: 1px solid var(--plum-line); border-radius: var(--r-sm); overflow: hidden; }
+  .faq-q {
+    width: 100%; text-align: left;
+    background: none; border: none; cursor: pointer;
+    padding: 22px 26px;
+    font-family: var(--body);
+    font-size: 1rem; font-weight: 600; color: var(--ink);
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  }
+  .faq-q:hover { background: var(--plum-soft); }
+  .faq-arrow { transition: transform 0.3s var(--ease); flex-shrink: 0; color: var(--plum); }
+  .faq-arrow svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.4; }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+  .faq-a { padding: 0 26px; max-height: 0; overflow: hidden; transition: max-height 0.35s var(--ease), padding 0.25s; font-size: 0.97rem; line-height: 1.7; color: var(--muted); }
+  .faq-item.open .faq-a { max-height: 420px; padding-bottom: 22px; }
+
+  /* ── CTA FINAL ── */
+  .final { background: var(--plum); text-align: center; padding: 72px 20px; }
+  .final h2 { color: #fff; max-width: 18ch; margin: 0 auto 14px; }
+  .final h2 .accent { color: var(--apricot); }
+  .final p { color: rgba(255,255,255,0.65); margin-top: 14px; font-size: 0.88rem; }
+  .final .btn { background: #fff; color: var(--plum); box-shadow: 0 14px 30px -12px rgba(0,0,0,0.45); }
+  .final .btn:hover { background: var(--apricot-sf); color: var(--plum-deep); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--plum-deep); padding: 40px 20px; text-align: center; }
+  footer p { color: rgba(255,255,255,0.5); font-size: 0.8rem; line-height: 1.8; }
+  footer a { color: rgba(255,255,255,0.7); text-decoration: underline; }
+
+  /* ── STICKY MÓVIL ── */
+  .sticky-cta {
+    display: none;
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--plum);
+    padding: 12px 18px calc(12px + env(safe-area-inset-bottom,0px));
+    z-index: var(--z-mobilecta);
+    text-align: center;
+    box-shadow: 0 -6px 24px -8px rgba(40,22,34,0.4);
+  }
+  .sticky-cta a { color: #fff; font-weight: 700; font-size: 1rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+  @media (max-width: 640px) { .sticky-cta { display: block; } body { padding-bottom: 64px; } }
+
+  @media (max-width: 640px) {
+    .hero { padding: 44px 18px 48px; }
+    .price-card { padding: 40px 24px; }
+  }
+
+  /* ── Reveal (mejora un default ya visible) ── */
+  html.js .reveal { opacity: 0; transform: translateY(22px); }
+  html.js .reveal.visible,
+  .reveal { opacity: 1; transform: none; transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    html.js .reveal { opacity: 1; transform: none; }
+  }
+  :focus-visible { outline: 3px solid var(--plum); outline-offset: 3px; border-radius: 6px; }
+</style>
+</head>
+<body>
+
+<!-- BARRA SUPERIOR -->
+<div class="top-bar" role="region" aria-label="Oferta por tiempo limitado">
+  Precio de lanzamiento hasta el <strong id="fomo-date"></strong>. Quedan
+  <span class="countdown" id="banner-countdown">--:--:--</span>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <span class="hero-kicker">
+    <span class="avatar" aria-hidden="true">JP</span>
+    Creado por Josefina Pizarro, terapeuta ocupacional
+  </span>
+
+  <h1>Que tu hijo coma sin peleas, sin gritos y sin que la mesa te robe <span class="accent">la paz</span></h1>
+
+  <p class="hero-sub">El método paso a paso para que <strong>dejes de pelear en cada comida</strong> y tu hijo aprenda a comer más variado, a su propio ritmo. Pensado para niños de 1 a 10 años.</p>
+
+  <div class="vsl-block">
+    <div class="vsl-frame" role="img" aria-label="Video de presentación del curso Comer en Paz">
+      <span class="vsl-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+      <span class="vsl-label">Reemplaza este bloque con tu video</span>
+    </div>
+  </div>
+
+  <div class="hero-cta">
+    <a href="#precio" class="btn">Quiero el curso por $47 <span class="arrow" aria-hidden="true">→</span></a>
+    <p class="price-line"><s>Antes $97</s> · hoy <strong>$47 USD</strong> · pago único, acceso de por vida</p>
+  </div>
+
+  <div class="hero-trust">
+    <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Acceso de por vida</span>
+    <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Garantía de 7 días</span>
+    <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> +2.000 familias acompañadas</span>
+  </div>
+</header>
+
+<!-- DOLOR -->
+<section class="pain">
+  <div class="pain-inner">
+    <div class="section-head">
+      <h2>Si la hora de comer se volvió <span class="accent">lo peor del día</span>, no estás sola</h2>
+      <p class="pain-intro">Probablemente llegaste hasta aquí porque alguna de estas frases describe tu rutina. Léelas con calma:</p>
+    </div>
+
+    <div class="pain-list reveal">
+      <div class="pain-item">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></span>
+        <p>Tu hijo rechaza casi todo lo que no es "lo de siempre" y la comida termina en llanto o en gritos.</p>
+      </div>
+      <div class="pain-item">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></span>
+        <p>Te angustia que no esté comiendo suficiente o que le falten nutrientes para crecer bien.</p>
+      </div>
+      <div class="pain-item">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></span>
+        <p>Cocinas dos platos distintos, negocias, ruegas, distraes con la pantalla, y aun así nada funciona dos días seguidos.</p>
+      </div>
+      <div class="pain-item">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></span>
+        <p>Llevas meses, o años, en lo mismo, y sientes que el problema se agranda en lugar de resolverse.</p>
+      </div>
+      <div class="pain-item">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></span>
+        <p>No sabes si lo que hace tu hijo es normal para su edad o si es algo que deberías atender.</p>
+      </div>
+      <div class="pain-item">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></span>
+        <p>Probaste consejos de Google, de TikTok y del grupo de mamás, y ninguno te dio un camino claro que seguir.</p>
+      </div>
+    </div>
+
+    <p class="pain-outro reveal"><strong>No es tu culpa.</strong> A ninguna mamá le enseñaron qué hacer cuando un niño rechaza la comida. Lo que te falta no es paciencia ni amor: es un método. Y eso es exactamente lo que vas a encontrar aquí, explicado simple y listo para aplicar desde la próxima comida.</p>
+  </div>
+</section>
+
+<!-- PARA QUIÉN -->
+<section class="section">
+  <div class="section-head">
+    <h2>Hecho para <span class="accent">familias reales</span>, no para recetarios perfectos</h2>
+  </div>
+  <div class="for-grid reveal">
+    <div class="for-col for-yes">
+      <h3>Es para ti si…</h3>
+      <div class="for-row"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Tienes un hijo de 1 a 10 años al que le cuesta comer.</span></div>
+      <div class="for-row"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>La hora de comer genera peleas o ansiedad en tu casa.</span></div>
+      <div class="for-row"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Quieres pasos concretos para aplicar, no solo teoría.</span></div>
+      <div class="for-row"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Buscas una solución con base en evidencia, no mitos sueltos.</span></div>
+      <div class="for-row"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Quieres mejorar la relación de tu hijo con la comida a largo plazo.</span></div>
+    </div>
+    <div class="for-col for-no">
+      <h3>No es para ti si…</h3>
+      <div class="for-row"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Esperas una solución mágica que funcione de un día para otro.</span></div>
+      <div class="for-row"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Tu hijo tiene una condición médica que requiere terapia especializada presencial.</span></div>
+      <div class="for-row"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg><span>No estás dispuesta a hacer algún cambio en la rutina familiar.</span></div>
+      <div class="for-row"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Quieres obligar a tu hijo a comer sin entender por qué se resiste.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MÉTODO -->
+<section class="method">
+  <div class="method-inner">
+    <div class="section-head">
+      <h2>De pelear en cada plato a <span class="accent">comer en paz</span>, paso a paso</h2>
+      <p class="lead">Avanzas a tu ritmo. Cada etapa se apoya en la anterior, y muchas familias notan los primeros cambios en la convivencia desde la primera semana.</p>
+    </div>
+
+    <div class="steps reveal" id="stepsAccordion">
+
+      <div class="step open">
+        <button class="step-head" type="button" aria-expanded="true">
+          <span class="step-num">1</span>
+          <span class="step-htext">
+            <span class="step-when">Semana 1</span>
+            <h3>Entiende qué está pasando de verdad</h3>
+          </span>
+          <span class="step-chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div class="step-body">
+          <p>Vas a descubrir por qué tu hijo come así. No es capricho ni mala crianza. Cuando entiendes la raíz, baja la angustia de inmediato y cambia tu forma de reaccionar en la mesa.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <button class="step-head" type="button" aria-expanded="false">
+          <span class="step-num">2</span>
+          <span class="step-htext">
+            <span class="step-when">Semana 1 y 2</span>
+            <h3>Baja la tensión de las comidas</h3>
+          </span>
+          <span class="step-chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div class="step-body">
+          <p>Cambios pequeños en la rutina, el entorno y tu propio rol que reducen el conflicto desde la primera comida. Sin pelear, sin negociar y sin tener que cocinar dos platos distintos.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <button class="step-head" type="button" aria-expanded="false">
+          <span class="step-num">3</span>
+          <span class="step-htext">
+            <span class="step-when">Semana 2 y 3</span>
+            <h3>Introduce alimentos nuevos sin batalla</h3>
+          </span>
+          <span class="step-chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div class="step-body">
+          <p>Aprendes a acercar a tu hijo a nuevos sabores y texturas a través del juego y la curiosidad, sin presión y sin obligarlo. Para muchas familias, este es el punto que más las sorprende.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <button class="step-head" type="button" aria-expanded="false">
+          <span class="step-num">4</span>
+          <span class="step-htext">
+            <span class="step-when">Semana 3 y 4</span>
+            <h3>Nutrición real, sin obsesionarte</h3>
+          </span>
+          <span class="step-chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div class="step-body">
+          <p>Sabrás qué ofrecer, en qué cantidad y cómo darte cuenta de si tu hijo está comiendo suficiente, sin caer en la trampa del plato perfecto ni en contar nutrientes uno por uno.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <button class="step-head" type="button" aria-expanded="false">
+          <span class="step-num">5</span>
+          <span class="step-htext">
+            <span class="step-when">Para el día a día</span>
+            <h3>Resuelve las situaciones reales que ya te imaginas</h3>
+          </span>
+          <span class="step-chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div class="step-body">
+          <p>La lonchera del colegio, las cenas en familia, los viajes, los cumpleaños, los niños más grandes y los hermanos con gustos opuestos. Soluciones concretas para cada escenario que hoy te genera estrés.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="material reveal">
+      <div class="material-head">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></span>
+        <div>
+          <h3>Con material de apoyo para aplicar todo</h3>
+          <p>Recursos descargables dentro de cada módulo para que pongas en práctica lo aprendido el mismo día.</p>
+        </div>
+      </div>
+      <div class="material-list">
+        <div class="material-item">Guías de rutinas por edad</div>
+        <div class="material-item">Planificadores de comidas</div>
+        <div class="material-item">Checklists de avance</div>
+        <div class="material-item">Audios para momentos de estrés</div>
+        <div class="material-item">Guiones de cada lección</div>
+        <div class="material-item">Actividades para hacer con tu hijo</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testi">
+  <div class="testi-inner">
+    <div class="section-head">
+      <h2>Lo que cuentan las familias <span class="accent">y las terapeutas</span></h2>
+      <p class="lead">Capturas reales de WhatsApp, de mamás que aplicaron el método y de terapeutas formadas conmigo. Nada editado, nada inventado.</p>
+    </div>
+
+    <div class="testi-carousel reveal">
+      <div class="testi-track" id="testiTrack">
+
+        <article class="testi-card">
+          <div class="testi-img"><img src="https://assets.cdn.filesafe.space/JqAbiuDc6L5D9p6g5RBf/media/6a137ac46cc0eead5cc9c275.jpg" alt="Mensaje de WhatsApp de Alina, mamá de Matías: «Gracias Jose enserio, esto me ha cambiado la vida»" loading="lazy" /></div>
+          <div class="testi-meta">
+            <div class="testi-avatar" aria-hidden="true">A</div>
+            <div>
+              <div class="testi-name">Alina, mamá de Matías</div>
+              <div class="testi-role">"Esto me ha cambiado la vida"</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testi-card">
+          <div class="testi-img"><img src="https://assets.cdn.filesafe.space/JqAbiuDc6L5D9p6g5RBf/media/6a137abb6cc0eead5cc9c1ed.jpg" alt="Mensaje de WhatsApp de una familia que pasó de comer solo spaghetti a incorporar arroz y lechuga en 8 días" loading="lazy" /></div>
+          <div class="testi-meta">
+            <div class="testi-avatar" aria-hidden="true">M</div>
+            <div>
+              <div class="testi-name">Mamá del programa</div>
+              <div class="testi-role">"De spaghetti a arroz y lechuga en 8 días"</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testi-card">
+          <div class="testi-img"><img src="https://assets.cdn.filesafe.space/JqAbiuDc6L5D9p6g5RBf/media/6a137abbfe2210f89e6a2286.jpg" alt="Mensaje de WhatsApp sobre Ethan: de comer solo colados a probar carne asada y uva verde" loading="lazy" /></div>
+          <div class="testi-meta">
+            <div class="testi-avatar" aria-hidden="true">E</div>
+            <div>
+              <div class="testi-name">Mamá de Ethan</div>
+              <div class="testi-role">"De solo colados a carne asada y uva"</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testi-card">
+          <div class="testi-img"><img src="https://assets.cdn.filesafe.space/JqAbiuDc6L5D9p6g5RBf/media/6a137abbe05851175c6d5e48.jpg" alt="Mensaje de WhatsApp sobre Leito: volvió a comer pollo, incluso sin desmenuzar" loading="lazy" /></div>
+          <div class="testi-meta">
+            <div class="testi-avatar" aria-hidden="true">L</div>
+            <div>
+              <div class="testi-name">Mamá de Leito</div>
+              <div class="testi-role">"Volvió a comer pollo, sin desmenuzar"</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testi-card">
+          <div class="testi-img"><img src="https://assets.cdn.filesafe.space/JqAbiuDc6L5D9p6g5RBf/media/6a137abb6cc0eead5cc9c1ee.jpg" alt="Mensaje de WhatsApp sobre Lauti: pidió comer patitas de pollo y se comió 8" loading="lazy" /></div>
+          <div class="testi-meta">
+            <div class="testi-avatar" aria-hidden="true">L</div>
+            <div>
+              <div class="testi-name">Mamá de Lauti</div>
+              <div class="testi-role">"Pidió patitas de pollo y se comió 8"</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testi-card">
+          <div class="testi-img"><img src="https://assets.cdn.filesafe.space/JqAbiuDc6L5D9p6g5RBf/media/6a137abbe05851175c6d5e46.jpg" alt="Mensaje de WhatsApp de la terapeuta @to.catavilia, alumna de la formación, agradeciendo por las pautas aplicadas con sus pacientes" loading="lazy" /></div>
+          <div class="testi-meta">
+            <div class="testi-avatar" aria-hidden="true">C</div>
+            <div>
+              <div class="testi-name">@to.catavilia</div>
+              <div class="testi-role">Alumna de mi formación · Terapeuta ocupacional</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testi-card">
+          <div class="testi-img"><img src="https://assets.cdn.filesafe.space/JqAbiuDc6L5D9p6g5RBf/media/6a137abbe05851175c6d5e47.jpg" alt="Mensaje de WhatsApp de una alumna de la formación: una paciente empezó a comer naranja y fideos con salsa por primera vez" loading="lazy" /></div>
+          <div class="testi-meta">
+            <div class="testi-avatar" aria-hidden="true">F</div>
+            <div>
+              <div class="testi-name">Alumna de mi formación</div>
+              <div class="testi-role">"Empezó a comer naranja y fideos con salsa"</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testi-card">
+          <div class="testi-img"><img src="https://assets.cdn.filesafe.space/JqAbiuDc6L5D9p6g5RBf/media/6a137ac33c3aed7c63ae8ac2.jpg" alt="Mensaje de WhatsApp de una alumna de la formación: en 6 sesiones su paciente probó un alimento nuevo en cada una" loading="lazy" /></div>
+          <div class="testi-meta">
+            <div class="testi-avatar" aria-hidden="true">F</div>
+            <div>
+              <div class="testi-name">Alumna de mi formación</div>
+              <div class="testi-role">"6 sesiones, 1 alimento nuevo en cada una"</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testi-card">
+          <div class="testi-img"><img src="https://assets.cdn.filesafe.space/JqAbiuDc6L5D9p6g5RBf/media/6a137ac3e05851175c6d5e9c.jpg" alt="Mensaje de WhatsApp de una alumna de la formación aplicando ideas del método con un niño usando la pista de su amigo el tren" loading="lazy" /></div>
+          <div class="testi-meta">
+            <div class="testi-avatar" aria-hidden="true">F</div>
+            <div>
+              <div class="testi-name">Alumna de mi formación</div>
+              <div class="testi-role">"Armé una pista con su amigo el tren"</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testi-card">
+          <div class="testi-img"><img src="https://assets.cdn.filesafe.space/JqAbiuDc6L5D9p6g5RBf/media/6a137ac33c3aed7c63ae8ad4.jpg" alt="Mensaje de WhatsApp de una alumna de la formación: antes el niño no comía nada y ahora come salchicha, yogurt y milanesa" loading="lazy" /></div>
+          <div class="testi-meta">
+            <div class="testi-avatar" aria-hidden="true">F</div>
+            <div>
+              <div class="testi-name">Alumna de mi formación</div>
+              <div class="testi-role">"Antes nada, ahora salchicha, yogurt y milanesa"</div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <div class="testi-controls">
+      <button class="testi-btn" id="testiPrev" aria-label="Testimonio anterior"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+      <div class="testi-dots" id="testiDots" role="tablist" aria-label="Selector de testimonios"></div>
+      <button class="testi-btn" id="testiNext" aria-label="Testimonio siguiente"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+    </div>
+
+    <div class="testi-highlight reveal">
+      <div class="num">8</div>
+      <p><strong>días para ver cambios reales.</strong> Eso es lo que le tomó a una familia pasar de un solo alimento aceptado a sumar arroz y lechuga, siguiendo el método paso a paso de Comer en Paz.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- SOBRE JOSEFINA -->
+<section class="section">
+  <div class="about-grid reveal">
+    <div class="about-photo" aria-label="Foto de Josefina Pizarro">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+      <span>Foto de Josefina</span>
+    </div>
+    <div class="about-text">
+      <h2>Hola, soy Josefina Pizarro</h2>
+      <p class="about-role">Terapeuta ocupacional especializada en alimentación infantil</p>
+      <p>Soy fundadora de <strong>Japi Eaters</strong> y creadora del método Comer en Paz. Llevo años ayudando a familias de Latinoamérica a que la hora de comer deje de ser una pelea y vuelva a ser un momento de encuentro.</p>
+      <p>He acompañado a <strong>más de 2.000 familias y profesionales</strong>, y conozco de cerca la mezcla de culpa, cansancio y preocupación con la que llega cada mamá. Por eso el método es claro, aplicable y con base en evidencia.</p>
+      <p>Estoy formada en el <strong>SOS Approach to Feeding</strong> (Dra. Kay Toomey), <strong>Feeding Littles</strong>, Integración Sensorial y otras especializaciones en desarrollo infantil.</p>
+      <div class="cred">
+        <div class="cred-item"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Docente universitaria en alimentación infantil.</span></div>
+        <div class="cred-item"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Expositora en congresos internacionales de terapia ocupacional.</span></div>
+        <div class="cred-item"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Más de 2.000 familias y profesionales formados en Latinoamérica.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTÍA -->
+<section class="section" style="padding-top:0;">
+  <div class="section-head">
+    <h2>Pruébalo sin <span class="accent">ningún riesgo</span></h2>
+  </div>
+  <div class="guarantee reveal">
+    <div class="badge" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>
+    </div>
+    <div>
+      <h3>Garantía de 7 días</h3>
+      <p>Tienes 7 días completos para conocer el curso por dentro. Si no es lo que esperabas, te devolvemos el 100% de tu dinero, sin preguntas y sin trámites complicados. Es la garantía estándar de Hotmart, la plataforma donde está alojado el curso.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIO -->
+<section class="pricing" id="precio">
+  <div class="pricing-inner">
+    <div class="section-head" style="margin:0 auto; text-align:center;">
+      <h2>Empieza hoy al <span class="accent">precio de lanzamiento</span></h2>
+      <p class="pricing-sub">Un pago único. Sin suscripciones, sin letra chica.</p>
+    </div>
+
+    <div class="price-card reveal">
+      <span class="price-badge">Precio de lanzamiento</span>
+      <p class="price-was">Precio normal: $97 USD</p>
+      <div class="price-now"><sup>$</sup>47</div>
+      <p class="price-note">USD · pago único · acceso de por vida</p>
+      <div class="price-warn">El precio sube a $97 el <strong id="fomo-date-2"></strong>. Faltan <strong id="price-countdown"></strong>.</div>
+      <ul class="price-list">
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> El método completo en video, audio y texto</li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Pensado para niños de 1 a 10 años</li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Material de apoyo descargable en cada módulo</li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Acceso de por vida, con actualizaciones</li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Garantía de 7 días sin preguntas</li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Acceso inmediato al terminar el pago</li>
+      </ul>
+      <a href="https://pay.hotmart.com/X100644818E" target="_blank" rel="noopener" class="btn btn-lg">Quiero empezar por $47 <span class="arrow" aria-hidden="true">→</span></a>
+      <p class="pay-note"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Pago seguro a través de Hotmart</p>
+    </div>
+
+    <div class="countdown-block">
+      <p>El precio de lanzamiento termina en:</p>
+      <div class="countdown-big" id="main-countdown">--:--:--</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="section-head" style="text-align:center; margin:0 auto;">
+    <h2>Preguntas frecuentes</h2>
+  </div>
+  <div class="faq-list reveal">
+    <div class="faq-item">
+      <button class="faq-q" type="button" aria-expanded="false">¿Para qué edad sirve el curso? <span class="faq-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></button>
+      <div class="faq-a">Está pensado para cuidadores de niños de 1 a 10 años. La mayoría de los conceptos sirven para todo ese rango, y hay secciones específicas para distintas etapas del desarrollo.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" type="button" aria-expanded="false">¿En cuánto tiempo voy a ver resultados? <span class="faq-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></button>
+      <div class="faq-a">Muchas familias notan cambios en la dinámica de las comidas desde la primera semana, sobre todo en el nivel de conflicto y de estrés. Sumar variedad de alimentos toma un poco más, y eso es completamente normal. Cada pequeño paso cuenta.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" type="button" aria-expanded="false">¿Cuánto tiempo necesito por semana? <span class="faq-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></button>
+      <div class="faq-a">Cada módulo tiene videos cortos y material descargable. Puedes avanzar en 20 a 30 minutos al día y aplicar lo que aprendes directamente en las comidas de tu rutina.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" type="button" aria-expanded="false">¿Y si mi hijo tiene una condición médica o necesidades especiales? <span class="faq-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></button>
+      <div class="faq-a">Este curso no reemplaza la terapia especializada para niños con dificultades oromotoras, TEA u otras condiciones médicas que afecten la alimentación. Incluye orientación para saber cuándo buscar ayuda profesional. Si tu hijo ya está en terapia, el curso puede complementarla muy bien.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" type="button" aria-expanded="false">¿Puedo pedir reembolso si no me convence? <span class="faq-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></button>
+      <div class="faq-a">Sí. Tienes 7 días desde la compra para solicitar el reembolso completo a través de Hotmart, sin necesidad de justificar nada.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" type="button" aria-expanded="false">¿El acceso es de por vida? <span class="faq-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></button>
+      <div class="faq-a">Sí. Una vez que compras, el acceso es tuyo para siempre. Puedes volver al curso cuando lo necesites, con todas las actualizaciones futuras incluidas.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="final">
+  <h2>La mesa puede volver a ser <span class="accent">un momento de paz</span></h2>
+  <p style="color:rgba(255,255,255,0.82); font-size:1.05rem; max-width:48ch; margin:0 auto 26px;">Empieza hoy y aplica el primer cambio en la próxima comida.</p>
+  <a href="#precio" class="btn">Quiero empezar por $47 <span class="arrow" aria-hidden="true">→</span></a>
+  <p>Acceso inmediato · Garantía de 7 días · Pago seguro</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    © <span id="year"></span> Josefina Pizarro · Japi Eaters · Todos los derechos reservados<br/>
+    <a href="#">Términos y condiciones</a> · <a href="#">Política de privacidad</a><br/>
+    Curso alojado en <a href="https://hotmart.com" target="_blank" rel="noopener">Hotmart</a>
+  </p>
+</footer>
+
+<!-- STICKY MÓVIL -->
+<div class="sticky-cta">
+  <a href="#precio">Empieza hoy por $47 USD <span aria-hidden="true">→</span></a>
+</div>
+
+<script>
+  // ── CUENTA REGRESIVA ──
+  function getTargetDate() {
+    const key = 'cep_deadline';
+    let stored = sessionStorage.getItem(key);
+    if (!stored) {
+      const t = new Date();
+      t.setDate(t.getDate() + 7);
+      t.setHours(23, 59, 59, 0);
+      stored = t.toISOString();
+      sessionStorage.setItem(key, stored);
+    }
+    return new Date(stored);
+  }
+
+  const target = getTargetDate();
+
+  function formatDate(d) {
+    const months = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    return `${d.getDate()} de ${months[d.getMonth()]}`;
+  }
+
+  ['fomo-date','fomo-date-2'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = formatDate(target);
+  });
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = target - now;
+    const ids = ['banner-countdown','main-countdown','price-countdown'];
+    if (diff <= 0) {
+      ids.forEach(id => { const el = document.getElementById(id); if (el) el.textContent = '¡Tiempo agotado!'; });
+      return;
+    }
+    const totalH = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    const d = Math.floor(totalH / 24);
+    const hrs = totalH % 24;
+    const fmt = `${d}d ${String(hrs).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+    ids.forEach(id => { const el = document.getElementById(id); if (el) el.textContent = fmt; });
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ── REVEAL AL HACER SCROLL ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── CARRUSEL DE TESTIMONIOS ──
+  (function() {
+    const track = document.getElementById('testiTrack');
+    const dotsContainer = document.getElementById('testiDots');
+    const prevBtn = document.getElementById('testiPrev');
+    const nextBtn = document.getElementById('testiNext');
+    if (!track) return;
+
+    const cards = Array.from(track.querySelectorAll('.testi-card'));
+    let current = 0;
+    let autoTimer = null;
+
+    function getVisible() {
+      if (window.innerWidth >= 1025) return 3;
+      if (window.innerWidth >= 701) return 2;
+      return 1;
+    }
+    function totalSlides() { return Math.max(1, cards.length - getVisible() + 1); }
+
+    function buildDots() {
+      dotsContainer.innerHTML = '';
+      const total = totalSlides();
+      for (let i = 0; i < total; i++) {
+        const d = document.createElement('button');
+        d.type = 'button';
+        d.className = 'testi-dot' + (i === current ? ' active' : '');
+        d.setAttribute('role', 'tab');
+        d.setAttribute('aria-label', `Ir al testimonio ${i + 1}`);
+        d.addEventListener('click', () => { goTo(i); resetAuto(); });
+        dotsContainer.appendChild(d);
+      }
+    }
+
+    function goTo(idx) {
+      const max = totalSlides() - 1;
+      current = Math.max(0, Math.min(idx, max));
+      const cardW = cards[0].getBoundingClientRect().width;
+      const gap = 20;
+      track.style.transform = `translateX(-${current * (cardW + gap)}px)`;
+      dotsContainer.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === max;
+    }
+
+    function resetAuto() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => { goTo(current + 1 >= totalSlides() ? 0 : current + 1); }, 6000);
+    }
+
+    prevBtn.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+    nextBtn.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+    track.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    track.addEventListener('mouseleave', resetAuto);
+
+    let touchStartX = 0;
+    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+    track.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) { goTo(diff > 0 ? current + 1 : current - 1); resetAuto(); }
+    }, {passive:true});
+
+    buildDots();
+    goTo(0);
+    resetAuto();
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => { current = 0; buildDots(); goTo(0); }, 150);
+    });
+  })();
+
+  // ── ACORDEÓN DE PASOS ──
+  document.querySelectorAll('#stepsAccordion .step-head').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('#stepsAccordion .step').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.step-head').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+
+  // ── ACORDEÓN FAQ ──
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+</script>
+</body>
+</html>
