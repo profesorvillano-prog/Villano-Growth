@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Política de Privacidad · Family Eaters</title>
+<meta name="description" content="Política de Privacidad de Family Eaters (Josefina Pizarro). Cómo recopilamos, usamos y protegemos tus datos personales, incluida la publicidad en Meta. Conforme a la Ley N° 19.628 de Chile." />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#2f6b4f" />
+
+<!--
+  ════════════════════════════════════════════════════════════════
+  PARA EL CLIENTE: revisa/ajusta antes de publicar:
+  · Si en algún momento usas un nombre de fantasía registrado o RUT,
+    añádelo en la sección "1. Responsable".
+  · Confirma los encargados reales (sección 8): plataforma de pago,
+    email marketing y hosting que utilices.
+  · Esta plantilla es una base profesional; para casos sensibles,
+    valídala con un abogado en Chile.
+  ════════════════════════════════════════════════════════════════
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,500;0,600;0,700;1,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink:       #18241d;
+    --green:     #2f6b4f;
+    --green-dp:  #234f3b;
+    --green-sf:  #e9f1ec;
+    --bg:        #f9faf8;
+    --surface:   #ffffff;
+    --line:      #e2e7e3;
+    --text:      #283129;
+    --muted:     #57645b;
+    --display: 'Petrona', Georgia, serif;
+    --body: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    --r: 14px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a { color: var(--green-dp); }
+  .skip {
+    position: absolute; left: -9999px; top: 0;
+    background: var(--green); color: #fff; padding: 10px 16px; border-radius: 8px; z-index: 10;
+  }
+  .skip:focus { left: 12px; top: 12px; }
+
+  /* Header */
+  .nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    position: sticky; top: 0; z-index: 5;
+  }
+  .nav-inner {
+    max-width: 880px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 14px 22px;
+  }
+  .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand .logo {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: var(--green); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--display); font-weight: 700; font-size: 1.05rem;
+  }
+  .brand .name { font-family: var(--display); font-weight: 700; font-size: 1.05rem; color: var(--ink); line-height: 1; }
+  .brand .name small { display: block; font-family: var(--body); font-weight: 500; font-size: 0.72rem; color: var(--muted); margin-top: 3px; letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 18px; font-size: 0.9rem; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-weight: 500; }
+  .nav-links a:hover { color: var(--green-dp); }
+  @media (max-width: 560px) { .nav-links a.opt { display: none; } }
+
+  /* Layout */
+  main { max-width: 760px; margin: 0 auto; padding: 56px 22px 40px; }
+  .doc-head { margin-bottom: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+  .eyebrow { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.12; color: var(--ink); letter-spacing: -0.01em; }
+  .updated { margin-top: 14px; font-size: 0.9rem; color: var(--muted); }
+  .intro { margin-top: 20px; font-size: 1.05rem; color: var(--text); }
+
+  /* TOC */
+  .toc {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+    padding: 22px 26px; margin-bottom: 40px;
+  }
+  .toc h2 { font-family: var(--body); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 14px; }
+  .toc ol { list-style: none; counter-reset: t; columns: 2; column-gap: 32px; }
+  @media (max-width: 560px) { .toc ol { columns: 1; } }
+  .toc li { counter-increment: t; margin-bottom: 9px; font-size: 0.92rem; break-inside: avoid; }
+  .toc li a { text-decoration: none; color: var(--text); }
+  .toc li a::before { content: counter(t) ". "; color: var(--green); font-weight: 700; }
+  .toc li a:hover { color: var(--green-dp); text-decoration: underline; }
+
+  /* Sections */
+  section { margin-bottom: 36px; scroll-margin-top: 80px; }
+  h2.sec { font-family: var(--display); font-weight: 700; font-size: 1.45rem; color: var(--ink); line-height: 1.25; margin-bottom: 14px; }
+  h2.sec .n { color: var(--green); }
+  h3 { font-family: var(--body); font-weight: 700; font-size: 1.02rem; color: var(--ink); margin: 22px 0 8px; }
+  p { margin-bottom: 14px; }
+  ul, ol.list { margin: 0 0 16px 0; padding-left: 0; list-style: none; }
+  ul li, ol.list li { position: relative; padding-left: 26px; margin-bottom: 10px; }
+  ul li::before { content: ''; position: absolute; left: 6px; top: 11px; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+  ol.list { counter-reset: li2; }
+  ol.list li { counter-increment: li2; }
+  ol.list li::before { content: counter(li2); position: absolute; left: 0; top: 1px; width: 19px; height: 19px; border-radius: 50%; background: var(--green-sf); color: var(--green-dp); font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  strong { color: var(--ink); font-weight: 700; }
+
+  .callout {
+    background: var(--green-sf); border: 1px solid #cfe0d6; border-radius: var(--r);
+    padding: 22px 26px; margin: 8px 0 20px;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .contact-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+    padding: 26px 28px; margin-top: 8px;
+  }
+  .contact-card dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; font-size: 0.96rem; }
+  .contact-card dt { color: var(--muted); }
+  .contact-card dd { color: var(--ink); font-weight: 500; }
+  .contact-card a { font-weight: 600; }
+
+  footer { background: var(--ink); color: rgba(255,255,255,0.7); margin-top: 24px; }
+  .foot-inner { max-width: 760px; margin: 0 auto; padding: 40px 22px; font-size: 0.86rem; line-height: 1.8; }
+  .foot-inner strong { color: #fff; }
+  .foot-inner a { color: rgba(255,255,255,0.85); }
+  .foot-links { margin-top: 14px; display: flex; gap: 16px; flex-wrap: wrap; }
+
+  :focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<a href="#contenido" class="skip">Saltar al contenido</a>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/" aria-label="Ir al inicio">
+      <span class="logo" aria-hidden="true">FE</span>
+      <span class="name">Family Eaters<small>Alimentación infantil sin peleas</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="./terminos.html">Términos y Condiciones</a>
+    </div>
+  </div>
+</nav>
+
+<main id="contenido">
+  <div class="doc-head">
+    <span class="eyebrow">Legal</span>
+    <h1>Política de Privacidad</h1>
+    <p class="updated">Última actualización: 5 de junio de 2026</p>
+    <p class="intro">En Family Eaters cuidamos tus datos con el mismo respeto con el que acompañamos a tu familia. Aquí te explicamos, en lenguaje claro, qué datos recopilamos, para qué los usamos, con quién los compartimos y cómo puedes ejercer tus derechos.</p>
+  </div>
+
+  <nav class="toc" aria-label="Índice">
+    <h2>Contenido</h2>
+    <ol>
+      <li><a href="#responsable">Responsable de tus datos</a></li>
+      <li><a href="#datos">Qué datos recopilamos</a></li>
+      <li><a href="#como">Cómo los recopilamos</a></li>
+      <li><a href="#finalidades">Para qué usamos tus datos</a></li>
+      <li><a href="#consentimiento">Base y consentimiento</a></li>
+      <li><a href="#meta">Publicidad en Meta y Pixel</a></li>
+      <li><a href="#cookies">Cookies y tecnologías similares</a></li>
+      <li><a href="#comparte">Con quién compartimos datos</a></li>
+      <li><a href="#transferencias">Transferencias internacionales</a></li>
+      <li><a href="#conservacion">Por cuánto tiempo los guardamos</a></li>
+      <li><a href="#derechos">Tus derechos</a></li>
+      <li><a href="#seguridad">Seguridad de la información</a></li>
+      <li><a href="#menores">Privacidad de los menores</a></li>
+      <li><a href="#cambios">Cambios en esta política</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ol>
+  </nav>
+
+  <section id="responsable">
+    <h2 class="sec"><span class="n">1.</span> Responsable de tus datos</h2>
+    <p>La responsable del tratamiento de tus datos personales es <strong>Josefina Pizarro</strong>, persona natural que opera bajo la marca <strong>Family Eaters</strong>, con domicilio en Lo Gallo 1885, Vitacura, Santiago de Chile.</p>
+    <p>Puedes contactarnos en cualquier momento por los medios indicados en la sección 15.</p>
+  </section>
+
+  <section id="datos">
+    <h2 class="sec"><span class="n">2.</span> Qué datos recopilamos</h2>
+    <p>Recopilamos únicamente los datos necesarios para entregarte nuestros contenidos y mejorar tu experiencia:</p>
+    <h3>Datos que tú nos entregas</h3>
+    <ul>
+      <li><strong>Datos de identificación y contacto:</strong> nombre, correo electrónico y, cuando lo proporcionas, número de teléfono.</li>
+      <li><strong>Datos de la compra:</strong> si adquieres un producto, la información necesaria para procesar el pago a través de nuestra plataforma de pago. No almacenamos los datos completos de tu tarjeta; los procesa directamente la pasarela de pago.</li>
+      <li><strong>Comunicaciones:</strong> los mensajes que nos envías por correo, WhatsApp o redes sociales.</li>
+    </ul>
+    <h3>Datos que se recopilan automáticamente</h3>
+    <ul>
+      <li><strong>Datos de navegación:</strong> dirección IP, tipo de dispositivo y navegador, páginas visitadas y tiempo de permanencia.</li>
+      <li><strong>Identificadores de cookies</strong> y tecnologías similares (ver sección 7).</li>
+      <li><strong>Datos de interacción publicitaria:</strong> cuando llegas a nosotros a través de un anuncio en Facebook o Instagram, o completas un formulario dentro de esas plataformas.</li>
+    </ul>
+  </section>
+
+  <section id="como">
+    <h2 class="sec"><span class="n">3.</span> Cómo los recopilamos</h2>
+    <ul>
+      <li>Cuando completas un formulario en nuestro sitio o página de captura (por ejemplo, para descargar un recurso gratuito o el e-book).</li>
+      <li>Cuando completas un <strong>formulario de clientes potenciales (Lead Ads)</strong> dentro de Facebook o Instagram.</li>
+      <li>Cuando compras uno de nuestros productos.</li>
+      <li>Mediante cookies y el píxel de seguimiento, al navegar por nuestras páginas.</li>
+      <li>Cuando te comunicas con nosotros de forma directa.</li>
+    </ul>
+  </section>
+
+  <section id="finalidades">
+    <h2 class="sec"><span class="n">4.</span> Para qué usamos tus datos</h2>
+    <ul>
+      <li>Entregarte el recurso, e-book o curso que solicitaste y darte acceso al mismo.</li>
+      <li>Enviarte correos con contenido, novedades y ofertas relacionadas (marketing por email), siempre que lo hayas consentido.</li>
+      <li>Mostrarte y medir nuestra publicidad en Meta y otras plataformas, incluida la creación de públicos y el remarketing.</li>
+      <li>Procesar tus compras y brindarte soporte y atención.</li>
+      <li>Analizar y mejorar nuestro sitio, nuestros contenidos y nuestras campañas.</li>
+      <li>Cumplir con obligaciones legales y tributarias aplicables en Chile.</li>
+    </ul>
+  </section>
+
+  <section id="consentimiento">
+    <h2 class="sec"><span class="n">5.</span> Base y consentimiento</h2>
+    <p>Tratamos tus datos sobre la base de tu <strong>consentimiento libre, informado y específico</strong>, que otorgas al entregarnos tus datos y aceptar esta Política, conforme a la <strong>Ley N° 19.628 sobre Protección de la Vida Privada</strong>. También tratamos datos cuando es necesario para ejecutar una compra que solicitas o para cumplir obligaciones legales.</p>
+    <p>Puedes retirar tu consentimiento en cualquier momento, sin que ello afecte la licitud del tratamiento previo. Cada correo de marketing incluye un enlace para darte de baja con un clic.</p>
+  </section>
+
+  <section id="meta">
+    <h2 class="sec"><span class="n">6.</span> Publicidad en Meta y Pixel</h2>
+    <p>Realizamos publicidad en <strong>Facebook e Instagram (Meta Platforms, Inc.)</strong>. Para mostrar anuncios relevantes y medir sus resultados utilizamos:</p>
+    <ul>
+      <li><strong>Píxel de Meta</strong> y la <strong>API de Conversiones</strong>, que registran acciones en nuestro sitio (visitas, descargas, compras) y las asocian de forma seudonimizada a tu cuenta de Meta.</li>
+      <li><strong>Públicos personalizados y similares</strong>, creados a partir de tu correo (de forma cifrada) o de tu actividad, para mostrarte anuncios o evitar mostrarte campañas que ya no te interesan.</li>
+      <li><strong>Formularios de clientes potenciales (Lead Ads)</strong>, cuando dejas tus datos sin salir de Facebook o Instagram.</li>
+    </ul>
+    <div class="callout">
+      <p>Meta actúa como tratante independiente y/o conjunto de estos datos según sus propias políticas. Puedes revisar y gestionar tus preferencias de anuncios directamente en la configuración de tu cuenta de Facebook e Instagram, y conocer su tratamiento en la <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">Política de Privacidad de Meta</a>.</p>
+    </div>
+  </section>
+
+  <section id="cookies">
+    <h2 class="sec"><span class="n">7.</span> Cookies y tecnologías similares</h2>
+    <p>Usamos cookies propias y de terceros para que el sitio funcione, recordar tus preferencias, analizar el tráfico y medir nuestra publicidad. Distinguimos:</p>
+    <ul>
+      <li><strong>Necesarias:</strong> imprescindibles para el funcionamiento del sitio.</li>
+      <li><strong>Analíticas:</strong> nos ayudan a entender cómo se usa el sitio (por ejemplo, herramientas de analítica web).</li>
+      <li><strong>Publicitarias:</strong> permiten medir y personalizar la publicidad (por ejemplo, el píxel de Meta).</li>
+    </ul>
+    <p>Puedes configurar o bloquear las cookies desde tu navegador. Si las desactivas, algunas funciones del sitio podrían no estar disponibles.</p>
+  </section>
+
+  <section id="comparte">
+    <h2 class="sec"><span class="n">8.</span> Con quién compartimos datos</h2>
+    <p>No vendemos tus datos. Solo los compartimos con proveedores que nos prestan servicios (encargados del tratamiento) y que están obligados a protegerlos:</p>
+    <ul>
+      <li><strong>Plataforma de pago</strong>, para procesar tus compras de forma segura.</li>
+      <li><strong>Proveedor de email marketing</strong>, para enviarte nuestras comunicaciones.</li>
+      <li><strong>Servicios de alojamiento y analítica web</strong>, para operar y medir el sitio.</li>
+      <li><strong>Meta Platforms</strong>, en los términos descritos en la sección 6.</li>
+      <li><strong>Autoridades competentes</strong>, cuando exista una obligación legal de informar.</li>
+    </ul>
+  </section>
+
+  <section id="transferencias">
+    <h2 class="sec"><span class="n">9.</span> Transferencias internacionales</h2>
+    <p>Algunos de nuestros proveedores (por ejemplo, Meta o plataformas de email y pago) se encuentran fuera de Chile, principalmente en Estados Unidos. Al utilizarlos, tus datos pueden ser tratados en el extranjero bajo las salvaguardas y políticas de privacidad de cada proveedor. Al aceptar esta Política, consientes dichas transferencias.</p>
+  </section>
+
+  <section id="conservacion">
+    <h2 class="sec"><span class="n">10.</span> Por cuánto tiempo los guardamos</h2>
+    <p>Conservamos tus datos mientras mantengas una relación con nosotros (por ejemplo, mientras estés suscrito o tengas acceso a un producto) y, después, durante el tiempo necesario para cumplir obligaciones legales, contables y tributarias. Cuando dejan de ser necesarios, los eliminamos o anonimizamos de forma segura.</p>
+  </section>
+
+  <section id="derechos">
+    <h2 class="sec"><span class="n">11.</span> Tus derechos</h2>
+    <p>Conforme a la Ley N° 19.628, tienes derecho a:</p>
+    <ul>
+      <li><strong>Acceder</strong> a los datos personales que tenemos sobre ti.</li>
+      <li><strong>Rectificar</strong> los datos inexactos o desactualizados.</li>
+      <li><strong>Cancelar (eliminar)</strong> tus datos cuando proceda.</li>
+      <li><strong>Oponerte</strong> a determinados tratamientos, como el envío de comunicaciones comerciales.</li>
+      <li><strong>Bloquear</strong> temporalmente el uso de tus datos.</li>
+    </ul>
+    <p>Para ejercer cualquiera de estos derechos, escríbenos a <a href="mailto:family.eaters.to@gmail.com">family.eaters.to@gmail.com</a> indicando tu solicitud. Responderemos en los plazos que establece la ley. Si consideras que tus derechos no fueron atendidos, puedes recurrir a las autoridades competentes en Chile.</p>
+  </section>
+
+  <section id="seguridad">
+    <h2 class="sec"><span class="n">12.</span> Seguridad de la información</h2>
+    <p>Aplicamos medidas técnicas y organizativas razonables para proteger tus datos contra accesos no autorizados, pérdida o alteración. Ningún sistema es 100% infalible, pero trabajamos con proveedores que cumplen estándares reconocidos de seguridad.</p>
+  </section>
+
+  <section id="menores">
+    <h2 class="sec"><span class="n">13.</span> Privacidad de los menores</h2>
+    <p>Nuestros contenidos están dirigidos a <strong>madres, padres y cuidadores adultos</strong>. No recopilamos de forma intencional datos de niñas y niños. Si crees que un menor nos ha proporcionado datos, contáctanos y los eliminaremos.</p>
+  </section>
+
+  <section id="cambios">
+    <h2 class="sec"><span class="n">14.</span> Cambios en esta política</h2>
+    <p>Podemos actualizar esta Política para reflejar cambios legales o en nuestros servicios. Publicaremos la versión vigente en esta página, indicando la fecha de la última actualización. Te recomendamos revisarla periódicamente.</p>
+  </section>
+
+  <section id="contacto">
+    <h2 class="sec"><span class="n">15.</span> Contacto</h2>
+    <p>Si tienes dudas sobre esta Política o sobre el tratamiento de tus datos, escríbenos:</p>
+    <div class="contact-card">
+      <dl>
+        <dt>Responsable</dt><dd>Josefina Pizarro · Family Eaters</dd>
+        <dt>Correo</dt><dd><a href="mailto:family.eaters.to@gmail.com">family.eaters.to@gmail.com</a></dd>
+        <dt>Teléfono</dt><dd><a href="tel:+529844046192">+52 984 404 6192</a></dd>
+        <dt>Domicilio</dt><dd>Lo Gallo 1885, Vitacura, Santiago de Chile</dd>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <strong>Family Eaters</strong> · Josefina Pizarro<br/>
+    Lo Gallo 1885, Vitacura, Santiago de Chile · <a href="mailto:family.eaters.to@gmail.com">family.eaters.to@gmail.com</a> · <a href="tel:+529844046192">+52 984 404 6192</a>
+    <div class="foot-links">
+      <a href="./terminos.html">Términos y Condiciones</a>
+      <a href="./privacidad.html">Política de Privacidad</a>
+    </div>
+    <p style="margin-top:14px; color:rgba(255,255,255,0.5);">© 2026 Family Eaters. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+</body>
+</html>
