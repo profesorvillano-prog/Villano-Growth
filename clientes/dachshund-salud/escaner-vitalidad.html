@@ -733,7 +733,7 @@
     // ── Endpoints (verificar valores de producción) ──
     const SKOOL_URL     = 'https://www.skool.com/marcelo-dachshund-5314'; // comunidad Skool (Bronce/Out)
     const AGENDA_URL    = 'https://salchichapro.com/agendatullamada-page'; // sesión de evaluación (Silver/Gold)
-    const WEBHOOK       = 'https://services.leadconnectorhq.com/hooks/TzjuywpjnaS5aZn5RTs8/webhook-trigger/368e4a5e-86d8-4f38-88fe-d0f342335662';
+    const WEBHOOK       = 'https://services.leadconnectorhq.com/hooks/TzjuywpjnaS5aZn5RTs8/webhook-trigger/7522b4c1-8e23-47d4-b88c-5650a30daa6d';
     const WEBHOOK_EVENT = 'https://services.leadconnectorhq.com/hooks/TzjuywpjnaS5aZn5RTs8/webhook-trigger/a6ec9e41-2742-4ba6-b43f-993bac1b6343';
 
     // ── Estado ──
@@ -942,6 +942,7 @@
         nivel_perro: LABELS[lblPerro].name,
         inversion_nivel: inversion,
         inversion_label: INV_LABELS[inversion],
+        inversion_texto: inversionTxt,
         // Respuestas legibles (dueño)
         d_alimentacion: answersTxt.b1 || '',
         d_etiqueta: answersTxt.b2 || '',
@@ -956,6 +957,25 @@
         p_pelaje: answersTxt.a4 || '',
         p_enfermedad: answersTxt.a5 || '',
         p_edad: answersTxt.a6 || '',
+        // Puntajes numéricos por pregunta (0-3)
+        pts_d_alimentacion: answers.b1,
+        pts_d_etiqueta: answers.b2,
+        pts_d_seguridad: answers.b3,
+        pts_d_realidad: answers.b4,
+        pts_d_inversion_reciente: answers.b5,
+        pts_d_prioridad: answers.b6,
+        pts_p_condicion_corporal: answers.a1,
+        pts_p_costillas: answers.a2,
+        pts_p_energia: answers.a3,
+        pts_p_pelaje: answers.a4,
+        pts_p_enfermedad: answers.a5,
+        pts_p_edad: answers.a6,
+        // Totales de puntaje (máx 18 cada uno)
+        score_dueno: (answers.b1 + answers.b2 + answers.b3 + answers.b4 + answers.b5 + answers.b6),
+        score_perro: (answers.a1 + answers.a2 + answers.a3 + answers.a4 + answers.a5 + answers.a6),
+        // Metadata
+        fecha: new Date().toISOString(),
+        pagina: location.href,
         ...origen
       };
 
