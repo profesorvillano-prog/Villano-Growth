@@ -1,4 +1,4 @@
-# Japi Eaters — Contexto de producto y marca
+# Family Eaters — Contexto de producto y marca
 
 ## Producto
 **Comer en Paz**: curso online de la terapeuta ocupacional **Josefina Pizarro**
