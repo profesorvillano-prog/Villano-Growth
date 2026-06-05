@@ -112,6 +112,10 @@
     .card-inv .q-num { background:var(--g); color:var(--v); }
     .inv-intro { font-size:13px; color:var(--ts); line-height:1.6; margin-bottom:14px; }
 
+    /* NOTA: resultados al correo */
+    .email-note { background:var(--vc); border:1px solid var(--br); border-radius:12px; padding:13px 15px; font-size:13px; color:var(--v); font-weight:600; line-height:1.45; display:flex; gap:9px; align-items:flex-start; margin-bottom:18px; }
+    .email-note span.ic { font-size:16px; line-height:1.2; }
+
     /* LOADING */
     .loading-screen { text-align:center; padding:80px 24px; }
     .spinner { width:48px; height:48px; border:3px solid var(--br); border-top-color:var(--v); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 20px; }
@@ -166,8 +170,8 @@
     <span class="topbar-sub">Dr. Marcelo Hernán</span>
   </div>
 
-  <!-- PARTE 1: ALIMENTACIÓN (con inicio pequeño y claro) -->
-  <div class="screen active" id="screen-p1">
+  <!-- ════ PÁGINA 1: 3 preguntas (con inicio pequeño y claro) ════ -->
+  <div class="screen active" id="screen-q1">
     <div class="main">
       <div class="container">
 
@@ -180,13 +184,13 @@
 
         <div class="step-ind">
           <div class="step-row">
-            <span class="step-pill">Parte 1 · Alimentación</span>
-            <span class="step-count" id="p1-count">0 de 1</span>
+            <span class="step-pill">Parte 1 de 3</span>
+            <span class="step-count" id="q1-count">0 de 3</span>
           </div>
-          <div class="step-bar"><div class="step-fill" id="p1-fill"></div></div>
+          <div class="step-bar"><div class="step-fill" id="q1-fill"></div></div>
         </div>
 
-        <!-- Q1: Alimentación actual -->
+        <!-- Alimentación actual -->
         <div class="card">
           <div class="q-meta"><div class="q-num">1</div><div class="q-area">Alimentación actual</div></div>
           <div class="q-text">¿Cuál de estos platos se parece más al que le das hoy a tu salchicha?</div>
@@ -225,30 +229,9 @@
           </div>
         </div>
 
-        <div class="nav-row">
-          <button class="btn-nav btn-next" id="btn-next-p1" onclick="goToScreen('p2')" disabled>
-            Continuar →
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PARTE 2: SALUD DE LA SALCHICHA -->
-  <div class="screen" id="screen-p2">
-    <div class="main">
-      <div class="container">
-        <div class="step-ind">
-          <div class="step-row">
-            <span class="step-pill">Parte 2 · Salud de tu salchicha</span>
-            <span class="step-count" id="p2-count">0 de 7</span>
-          </div>
-          <div class="step-bar"><div class="step-fill" id="p2-fill"></div></div>
-        </div>
-
-        <!-- A1: Condición corporal -->
+        <!-- Condición corporal -->
         <div class="card">
-          <div class="q-meta"><div class="q-num">1</div><div class="q-area">Condición corporal</div></div>
+          <div class="q-meta"><div class="q-num">2</div><div class="q-area">Condición corporal</div></div>
           <div class="q-text">¿Cuál de estos dachshunds se parece más a tu perro visto desde arriba?</div>
           <div class="q-hint">Elige el que más se acerque, en posición parado.</div>
           <div class="photo-grid" data-q="a1">
@@ -285,9 +268,9 @@
           </div>
         </div>
 
-        <!-- A2: Costillas al tacto -->
+        <!-- Costillas al tacto -->
         <div class="card">
-          <div class="q-meta"><div class="q-num">2</div><div class="q-area">Costillas al tacto</div></div>
+          <div class="q-meta"><div class="q-num">3</div><div class="q-area">Costillas al tacto</div></div>
           <div class="q-text">Pasa la mano por el costado de tu salchicha. ¿Qué sientes?</div>
           <div class="q-hint">Cierra los ojos. Desliza la palma desde el lomo hacia la panza.</div>
           <div class="vis-grid" data-q="a2">
@@ -376,9 +359,30 @@
           </div>
         </div>
 
-        <!-- A3: Energía y movilidad -->
+        <div class="nav-row">
+          <button class="btn-nav btn-next" id="btn-next-q1" onclick="goToScreen('q2')" disabled>
+            Continuar →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ PÁGINA 2: 3 preguntas ════ -->
+  <div class="screen" id="screen-q2">
+    <div class="main">
+      <div class="container">
+        <div class="step-ind">
+          <div class="step-row">
+            <span class="step-pill">Parte 2 de 3</span>
+            <span class="step-count" id="q2-count">0 de 3</span>
+          </div>
+          <div class="step-bar"><div class="step-fill" id="q2-fill"></div></div>
+        </div>
+
+        <!-- Energía y movilidad -->
         <div class="card">
-          <div class="q-meta"><div class="q-num">3</div><div class="q-area">Energía y movilidad</div></div>
+          <div class="q-meta"><div class="q-num">1</div><div class="q-area">Energía y movilidad</div></div>
           <div class="q-text">¿Cómo se mueve tu salchicha en el día a día?</div>
           <div class="q-hint">Elige la que más se parezca a su comportamiento habitual.</div>
           <div class="photo-grid" data-q="a3">
@@ -415,9 +419,9 @@
           </div>
         </div>
 
-        <!-- A4: Pelaje -->
+        <!-- Pelaje -->
         <div class="card">
-          <div class="q-meta"><div class="q-num">4</div><div class="q-area">Pelaje, piel y digestión</div></div>
+          <div class="q-meta"><div class="q-num">2</div><div class="q-area">Pelaje, piel y digestión</div></div>
           <div class="q-text">¿Cómo está el pelaje y la piel de tu perro?</div>
           <div class="opt-list" data-q="a4">
             <div class="opt-row" data-pts="0" onclick="pickOpt(this,'a4')"><div class="opt-radio"></div><div class="opt-txt">Brillante, suave, sin caspa, sin pelo caído</div></div>
@@ -427,9 +431,9 @@
           </div>
         </div>
 
-        <!-- A5: Diagnósticos (por separado) -->
+        <!-- Diagnósticos -->
         <div class="card">
-          <div class="q-meta"><div class="q-num">5</div><div class="q-area">Diagnósticos y tratamientos</div></div>
+          <div class="q-meta"><div class="q-num">3</div><div class="q-area">Diagnósticos y tratamientos</div></div>
           <div class="q-text">¿Tu perro tiene alguna enfermedad diagnosticada o tratamiento activo?</div>
           <div class="opt-list" data-q="a5">
             <div class="opt-row" data-pts="0" onclick="pickOpt(this,'a5')"><div class="opt-radio"></div><div class="opt-txt">Ninguna, está sano según el veterinario</div></div>
@@ -439,9 +443,31 @@
           </div>
         </div>
 
-        <!-- B5: Inversión reciente -->
+        <div class="nav-row">
+          <button class="btn-nav btn-back" onclick="goToScreen('q1')">← Volver</button>
+          <button class="btn-nav btn-next" id="btn-next-q2" onclick="goToScreen('q3')" disabled>
+            Continuar →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ PÁGINA 3: 3 preguntas (incluye la calificadora) ════ -->
+  <div class="screen" id="screen-q3">
+    <div class="main">
+      <div class="container">
+        <div class="step-ind">
+          <div class="step-row">
+            <span class="step-pill">Parte 3 de 3</span>
+            <span class="step-count" id="q3-count">0 de 3</span>
+          </div>
+          <div class="step-bar"><div class="step-fill" id="q3-fill"></div></div>
+        </div>
+
+        <!-- Inversión reciente -->
         <div class="card">
-          <div class="q-meta"><div class="q-num">6</div><div class="q-area">Inversión reciente</div></div>
+          <div class="q-meta"><div class="q-num">1</div><div class="q-area">Inversión reciente</div></div>
           <div class="q-text">En los últimos 6 meses, ¿en qué has invertido para tu salchicha?</div>
           <div class="opt-list" data-q="b5">
             <div class="opt-row" data-pts="3" onclick="pickOpt(this,'b5')"><div class="opt-radio"></div><div class="opt-txt">Solo en la bolsa de alimento (croqueta, pellet, etc).</div></div>
@@ -452,9 +478,9 @@
           </div>
         </div>
 
-        <!-- A6: Edad -->
+        <!-- Edad -->
         <div class="card">
-          <div class="q-meta"><div class="q-num">7</div><div class="q-area">Edad</div></div>
+          <div class="q-meta"><div class="q-num">2</div><div class="q-area">Edad</div></div>
           <div class="q-text">¿Qué edad tiene tu salchicha?</div>
           <div class="opt-list" data-q="a6">
             <div class="opt-row" data-pts="0" onclick="pickOpt(this,'a6')"><div class="opt-radio"></div><div class="opt-txt">Cachorro (menos de 1 año)</div></div>
@@ -464,31 +490,9 @@
           </div>
         </div>
 
-        <div class="nav-row">
-          <button class="btn-nav btn-back" onclick="goToScreen('p1')">← Volver</button>
-          <button class="btn-nav btn-next" id="btn-next-p2" onclick="goToScreen('datos')" disabled>
-            Continuar →
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PARTE 3: INVERSIÓN + DATOS -->
-  <div class="screen" id="screen-datos">
-    <div class="main">
-      <div class="container">
-        <div class="step-ind">
-          <div class="step-row">
-            <span class="step-pill">Parte 3 · Tu decisión</span>
-            <span class="step-count">Casi listo</span>
-          </div>
-          <div class="step-bar"><div class="step-fill" style="width:92%"></div></div>
-        </div>
-
-        <!-- Pregunta calificadora de inversión -->
+        <!-- Inversión (pregunta calificadora) -->
         <div class="card card-inv">
-          <div class="q-meta"><div class="q-num">$</div><div class="q-area">Tu decisión</div></div>
+          <div class="q-meta"><div class="q-num">3</div><div class="q-area">Tu decisión</div></div>
           <p class="inv-intro">Si ya has invertido en veterinarios y soluciones que no resolvieron el problema de raíz, y existiera un método paso a paso para revertir las enfermedades de tu salchicha en 90 días:</p>
           <div class="q-text">¿Cuánto estarías dispuesto a invertir en una solución definitiva para tu perro?</div>
           <div class="opt-list" data-q="inv">
@@ -499,11 +503,33 @@
           </div>
         </div>
 
-        <!-- Datos del dueño -->
+        <div class="nav-row">
+          <button class="btn-nav btn-back" onclick="goToScreen('q2')">← Volver</button>
+          <button class="btn-nav btn-next" id="btn-next-q3" onclick="goToScreen('datos')" disabled>
+            Continuar →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ PÁGINA FINAL: solo contacto ════ -->
+  <div class="screen" id="screen-datos">
+    <div class="main">
+      <div class="container">
+        <div class="step-ind">
+          <div class="step-row">
+            <span class="step-pill">Último paso</span>
+            <span class="step-count">Tus datos</span>
+          </div>
+          <div class="step-bar"><div class="step-fill" style="width:100%"></div></div>
+        </div>
+
         <div class="card">
-          <div class="q-meta"><div class="q-num">✓</div><div class="q-area">Tus datos</div></div>
-          <div class="q-text">¿A dónde te enviamos tu informe y tu plan de acción?</div>
-          <div class="q-hint">Recibes tu resultado completo y un plan de acción inicial en tu correo.</div>
+          <div class="email-note">
+            <span class="ic">📩</span>
+            <span>Tu resultado completo y tu plan de acción <strong>llegan a tu correo</strong>. Déjanos dónde enviártelos.</span>
+          </div>
 
           <div class="field">
             <label class="field-label" for="f-nombre">Tu nombre <span>*</span></label>
@@ -530,9 +556,9 @@
         </div>
 
         <div class="nav-row">
-          <button class="btn-nav btn-back" onclick="goToScreen('p2')">← Volver</button>
+          <button class="btn-nav btn-back" onclick="goToScreen('q3')">← Volver</button>
           <button class="btn-nav btn-next" id="btn-finalizar" onclick="finalizarTest()" disabled>
-            Ver mi resultado →
+            Enviar y ver mi resultado →
           </button>
         </div>
       </div>
@@ -560,6 +586,11 @@
           <div class="result-intro">
             <div class="result-intro-tag">Tu evaluación</div>
             <div class="result-intro-title">La situación actual<br>de tu salchicha</div>
+          </div>
+
+          <div class="email-note" style="margin-top:16px;">
+            <span class="ic">📩</span>
+            <span>Te enviamos tu <strong>informe completo y tu plan de acción</strong> a tu correo. Aquí tienes un adelanto.</span>
           </div>
 
           <div class="risk-card" id="risk-card">
@@ -619,13 +650,17 @@
     const WEBHOOK_EVENT = 'https://services.leadconnectorhq.com/hooks/TzjuywpjnaS5aZn5RTs8/webhook-trigger/a6ec9e41-2742-4ba6-b43f-993bac1b6343';
 
     // ── Estado ──
-    // 8 preguntas con puntaje: b1 alimentacion + 7 de salud (a1..a6 y b5 inversion reciente)
+    // 8 preguntas con puntaje. Paginas: P1 [b1,a1,a2] · P2 [a3,a4,a5] · P3 [b5,a6,inv]
     const answers = { b1: null, a1: null, a2: null, a3: null, a4: null, a5: null, b5: null, a6: null };
     const answersTxt = {};   // texto legible de cada respuesta (para el CRM)
     let inversion = null;    // 0..3 (pregunta calificadora)
     let inversionTxt = '';
 
-    const P2_KEYS = ['a1','a2','a3','a4','a5','b5','a6']; // orden de la Parte 2
+    const PAGE_KEYS = {
+      q1: ['b1','a1','a2'],
+      q2: ['a3','a4','a5'],
+      q3: ['b5','a6']        // + la pregunta de inversion (se cuenta aparte)
+    };
     const ALL_KEYS = ['b1','a1','a2','a3','a4','a5','b5','a6'];
 
     const INV_LABELS = {
@@ -692,39 +727,38 @@
       el.classList.add('sel');
       inversion = parseInt(el.dataset.iv, 10);
       inversionTxt = el.querySelector('.opt-txt').textContent.trim();
-      checkDatos();
+      updateProgress();
+    }
+
+    function setPage(id, answered, total) {
+      var c = document.getElementById(id + '-count');
+      var f = document.getElementById(id + '-fill');
+      var b = document.getElementById('btn-next-' + id);
+      if (c) c.textContent = answered + ' de ' + total;
+      if (f) f.style.width = Math.round((answered / total) * 100) + '%';
+      if (b) b.disabled = (answered < total);
     }
 
     function updateProgress() {
-      // Parte 1 (1 pregunta)
-      var p1 = (answers.b1 !== null) ? 1 : 0;
-      var p1El = document.getElementById('p1-count');
-      var p1Fill = document.getElementById('p1-fill');
-      var p1Btn = document.getElementById('btn-next-p1');
-      if (p1El) p1El.textContent = p1 + ' de 1';
-      if (p1Fill) p1Fill.style.width = (p1 * 100) + '%';
-      if (p1Btn) p1Btn.disabled = (p1 < 1);
-
-      // Parte 2 (7 preguntas)
-      var p2 = P2_KEYS.filter(function(k) { return answers[k] !== null; }).length;
-      var p2El = document.getElementById('p2-count');
-      var p2Fill = document.getElementById('p2-fill');
-      var p2Btn = document.getElementById('btn-next-p2');
-      if (p2El) p2El.textContent = p2 + ' de 7';
-      if (p2Fill) p2Fill.style.width = Math.round((p2 / 7) * 100) + '%';
-      if (p2Btn) p2Btn.disabled = (p2 < 7);
+      setPage('q1', PAGE_KEYS.q1.filter(function(k){ return answers[k] !== null; }).length, 3);
+      setPage('q2', PAGE_KEYS.q2.filter(function(k){ return answers[k] !== null; }).length, 3);
+      var q3 = PAGE_KEYS.q3.filter(function(k){ return answers[k] !== null; }).length + (inversion !== null ? 1 : 0);
+      setPage('q3', q3, 3);
+      checkDatos();
     }
 
     function val(id) { var e = document.getElementById(id); return e ? e.value.trim() : ''; }
 
     function checkDatos() {
+      var btn = document.getElementById('btn-finalizar');
+      if (!btn) return;
       var nombre = val('f-nombre');
       var email  = val('f-email');
       var tel    = val('f-tel');
       var consent = document.getElementById('f-consent').checked;
       var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       var telOk = /^[+]?[\d\s().-]{7,}$/.test(tel);
-      document.getElementById('btn-finalizar').disabled = !(inversion !== null && nombre && emailOk && telOk && consent);
+      btn.disabled = !(inversion !== null && nombre && emailOk && telOk && consent);
     }
 
     function calcPct() {
@@ -765,8 +799,8 @@
     function finalizarTest() {
       // Validar respuestas del test
       var faltantes = ALL_KEYS.filter(function(k) { return answers[k] === null; });
-      if (faltantes.length > 0) { alert('Falta responder ' + faltantes.length + ' pregunta(s) del test.'); goToScreen('p1'); return; }
-      if (inversion === null) { alert('Responde la pregunta de inversión.'); return; }
+      if (faltantes.length > 0) { alert('Falta responder ' + faltantes.length + ' pregunta(s) del test.'); goToScreen('q1'); return; }
+      if (inversion === null) { alert('Responde la pregunta de inversión.'); goToScreen('q3'); return; }
 
       // Validar datos
       var ok = true;
@@ -861,7 +895,7 @@
       var c = document.getElementById('f-consent'); if (c) c.checked = false;
       document.getElementById('btn-finalizar').disabled = true;
       updateProgress();
-      goToScreen('p1');
+      goToScreen('q1');
     }
 
     // ── Listeners de datos + accesibilidad por teclado ──
