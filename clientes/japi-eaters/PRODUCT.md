@@ -1,39 +1,68 @@
 # Japi Eaters — Contexto de producto y marca
 
-## Producto
-**Comer en Paz**: curso online de la terapeuta ocupacional **Josefina Pizarro**
-para que niños de **1 a 10 años** coman sin peleas. Método paso a paso, con
-material descargable. Vendido en **Hotmart** (`pay.hotmart.com/X100644818E`).
+> Marca de **Josefina Pizarro**, Terapeuta Ocupacional chilena especializada en
+> alimentación infantil. "Japi Eaters" = *Happy Eaters* (Comedores Felices) + el
+> nombre de Josefina (**Ja**pi). Detalle completo en `docs/`.
 
-- Precio de lanzamiento: **$47 USD** (normal $97), pago único, acceso de por vida.
-- Garantía de 7 días (estándar Hotmart).
+## Producto principal
 
-## Avatar
-**Mamá** (1ª persona) de un niño selectivo con la comida. Llega agotada, con
-culpa y preocupación por la nutrición de su hijo. Ya probó consejos sueltos de
-internet sin un método. Busca algo claro, aplicable y con respaldo profesional.
-Tono: cálido, cercano, sin culpabilizar, con autoridad clínica que tranquiliza.
+**ÉxiTO en Alimentación Infantil** — Programa de Especialización Avanzada con
+Certificación Internacional. Formación **high ticket** para **terapeutas
+ocupacionales pediátricas** de Latinoamérica que atienden casos de niños/as con
+desafíos en la alimentación (selectividad, TEA, rechazo de alimentos, dificultades
+sensoriales/motoras, familias frustradas).
 
-## Registro
-`brand` (landing de venta; el diseño ES el producto).
+- **Promesa:** en **90 días**, dejar de improvisar y aprender un método claro para
+  evaluar, intervenir y guiar a las familias, con avances reales en la mesa del
+  hogar.
+- **Precio:** **$1.250 USD** (pago completo o hasta 4 cuotas). *(Ver discrepancia
+  de precio en `docs/Oferta.md`.)*
+- **Duración:** 4 meses (90 días para certificarse); extensión opcional ~US$80/mes.
+- **Garantía:** reembolso total 15 días + garantía de resultado.
+- **Plataforma:** Skool + mentorías en vivo (Zoom) + comunidad WhatsApp.
 
-## Sistema de diseño (index.html)
-Decidido para NO parecer plantilla genérica de IA (se evitó el monocultivo
-crema + terracota/sage y las fuentes-reflejo).
+## Avatar (resumen)
 
-- **Tipografía**: Bricolage Grotesque (display) + Hanken Grotesk (cuerpo).
-  Se evitan Playfair/DM/Inter/Fraunces (lista reflex-reject de impeccable).
-- **Color (estrategia Committed)**:
-  - `--plum #73264d` color de marca (calma, cuidado, premium) y CTA estructural.
-  - `--apricot #e2854a` acento cálido / apetito (CTA final, badges).
-  - `--green #4f8466` señal de "sí / avance" (checks, columna "es para ti").
-  - `--bg #fbf8fa` blanco cálido tintado hacia el ciruela (nunca crema/sand).
-  - Texto `--ink #281622`, `--muted #6f5d68` (contraste AA verificado).
-- **Sin**: blobs de gradiente radial, plantilla hero-métrica, eyebrows
-  mayúscula en cada sección, side-stripe borders, gradient-text, emoji decorativos.
-- Iconografía: SVG de línea propios (no emoji).
+**Terapeuta Ocupacional pediátrica**, mujer latinoamericana (Chile/Argentina como
+mercados fuertes), 25-45 años, 1-5+ años de experiencia. Atiende niños con TEA y
+desafíos del neurodesarrollo, gana $500-$1.000 USD/mes. Su dolor: **inseguridad
+clínica** frente a casos de alimentación — siente que improvisa, no tiene un paso a
+paso, ve avances en sesión pero no en casa. Su deseo profundo: sentirse **experta**,
+dejar el síndrome del impostor, cobrar más sin culpa, ser la referente de su
+ciudad. Construido con datos reales de **1.079 leads/alumnas**. Detalle en
+`docs/Avatar.md`.
 
-## Pendientes que el cliente reemplaza
-- VSL real en `.vsl-frame` (hay comentario con el snippet de iframe).
-- Foto real de Josefina en `.about-photo`.
-- Enlaces de Términos / Privacidad en el footer.
+- **Enemigo común:** la improvisación clínica.
+- **Big idea:** "El éxito en alimentación infantil no sucede en la sesión, sucede
+  en la **mesa de la familia**."
+
+## Voz de marca
+
+Cercana y cálida (colega-amiga que sabe mucho sin hacerte sentir menos), con
+autoridad clínica desde la empatía. Motivadora ("Tú puedes", "No estás sola", "No
+es tu culpa"), visual y práctica, muchos emojis de **frutas y verduras**.
+
+- **Palabras prohibidas:** "paciente" → usuario/niño-a · solo "niño" → "niño y
+  niña"/"niñ@" · "papás" → "familia"/"mamá".
+- **Paleta de marca:** púrpura `#9755D8`, lavanda `#BB99FF`, acento `#A188FF`.
+- Detalle completo en `docs/Voz-y-Marca.md`.
+
+## Registro de marca
+
+`brand` (landing de venta + ecosistema de marketing; el diseño ES el producto).
+
+## Base de conocimiento
+
+Toda la información operativa, clínica y de marketing vive en
+[`docs/`](./docs/README.md): Avatar, Oferta, Formación y metodología, Conocimiento
+de nicho, Mensajes y copy, Casos de éxito, FAQ, Voz/marca y Operaciones/embudo.
+
+## Pendientes / decisiones del cliente
+
+- **Construir la landing de ÉxiTO** dirigida a TOs (no a mamás), con la paleta
+  púrpura de marca.
+- **Confirmar precio vigente** ($1.250 vs. proyecciones de $1.500-$3.500).
+- **Confirmar avales de certificación** comunicados públicamente hoy (UNESCO/CinCO/
+  UMX/ZOOCEO histórico vs. IACISPE / educación continua EE.UU. proyectado).
+- **Definir cifras oficiales de prueba social** (~190 alumnas / +250 certificadas /
+  +2.000 en todos los programas).

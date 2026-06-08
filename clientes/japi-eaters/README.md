@@ -1,6 +1,13 @@
 # Cliente: Japi Eaters
 
-Carpeta del cliente **Japi Eaters**. Aquí va todo lo suyo: web, embudos, copy y archivos.
+Carpeta del cliente **Japi Eaters** (Josefina Pizarro). Aquí va todo lo suyo: web,
+embudos, copy y archivos.
+
+Producto principal: **ÉxiTO en Alimentación Infantil** — formación high-ticket de
+certificación para terapeutas ocupacionales pediátricas.
+
+- 📄 Contexto rápido: [`PRODUCT.md`](./PRODUCT.md)
+- 📚 Base de conocimiento completa: [`docs/`](./docs/README.md)
 
 ## Skills
 
