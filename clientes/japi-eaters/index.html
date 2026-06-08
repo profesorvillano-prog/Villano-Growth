@@ -48,20 +48,22 @@ nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.97);backdrop
 #hero{background:var(--w);padding:96px 56px 72px;border-bottom:1px solid var(--bdr);position:relative;overflow:hidden}
 #hero::before{content:'';position:absolute;top:-80px;right:-80px;width:560px;height:560px;border-radius:50%;background:var(--p50);opacity:.75}
 #hero::after{content:'';position:absolute;bottom:-60px;left:38%;width:260px;height:260px;border-radius:50%;background:var(--gl);opacity:.3}
-.hero-wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 340px;gap:56px;align-items:start;position:relative;z-index:1}
-.hero-ey{display:flex;align-items:center;gap:10px;margin-bottom:24px}
-.hero-ey-line{width:26px;height:2px;background:var(--g)}
-.hero-ey-txt{font-size:11px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--gd)}
-#hero h1{font-size:clamp(36px,4vw,54px);font-weight:700;line-height:1.1;letter-spacing:-.5px;margin-bottom:20px;color:var(--ink)}
+.hero-wrap{max-width:880px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1}
+.hero-ey{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:22px}
+.hero-ey-line{width:32px;height:2px;background:var(--g)}
+.hero-ey-txt{font-size:clamp(14px,1.7vw,17px);font-weight:600;letter-spacing:.2px;text-transform:none;color:var(--p600);max-width:30ch;line-height:1.4}
+#hero h1{font-size:clamp(34px,5vw,56px);font-weight:700;line-height:1.08;letter-spacing:-.5px;margin-bottom:22px;color:var(--ink);text-wrap:balance}
 #hero h1 em{font-style:italic;color:var(--p600)}
-.hero-sub{font-size:18px;color:var(--mid);max-width:500px;margin-bottom:36px;line-height:1.72;font-weight:300}
-.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px}
+.hero-sub{font-size:clamp(17px,2vw,20px);color:var(--mid);max-width:640px;margin:0 auto 32px;line-height:1.7;font-weight:300;text-wrap:pretty}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
 .btn-p{background:var(--p600);color:#fff;padding:14px 28px;border-radius:8px;font-size:15px;font-weight:500;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
 .btn-p:hover{background:var(--p800);transform:translateY(-1px)}
 .btn-g{background:transparent;border:1.5px solid var(--bds);color:var(--mid);padding:14px 22px;border-radius:8px;font-size:15px;font-weight:400;text-decoration:none;transition:all .2s}
 .btn-g:hover{border-color:var(--p400);color:var(--p600)}
-.hero-stats{display:flex;gap:32px;padding-top:32px;border-top:1px solid var(--bdr)}
-.hero-vsl{width:100%;max-width:560px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin:28px 0;background:#000;border:1px solid var(--bdr)}
+.hero-stats{display:flex;gap:clamp(24px,5vw,56px);justify-content:center;padding-top:32px;border-top:1px solid var(--bdr)}
+.hero-vsl{width:100%;max-width:760px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;margin:8px auto 32px;background:#000;border:1px solid var(--bdr);box-shadow:0 24px 60px -24px rgba(38,33,92,0.4)}
+.hero-note{font-size:13px;color:var(--mut);margin-bottom:40px;display:flex;align-items:center;justify-content:center;gap:8px}
+.hero-note::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--g)}
 .hs strong{display:block;font-family:'Libre Baskerville',serif;font-size:32px;font-weight:700;color:var(--p600);line-height:1}
 .hs span{font-size:12px;color:var(--mut);margin-top:4px;display:block}
 /* hero card */
@@ -269,6 +271,14 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:44px 56px;text-a
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
+/* ─── ICON SYSTEM (line icons, currentColor) ─── */
+.pitem-emoji svg,.iico svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.pitem-emoji{color:var(--p600);display:flex;align-items:center;justify-content:center}
+.iico{color:var(--p600)}
+.mcico svg{width:19px;height:19px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.chours svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.vt-play-btn svg{width:18px;height:18px;fill:#fff;stroke:none;margin-left:2px}
+
 /* ─── RESPONSIVE — iPhone & iPad first ─── */
 
 /* iPad (768–1024px) */
@@ -305,7 +315,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:44px 56px;text-a
   #hero{padding:56px 16px 48px}
   #hero h1{font-size:30px;letter-spacing:-.3px}
   .hero-sub{font-size:16px}
-  .hero-vsl{border-radius:10px;margin:20px 0}
+  .hero-vsl{border-radius:12px;margin:16px auto 24px}
   .hero-stats{flex-wrap:wrap;gap:16px}
   .hs strong{font-size:26px}
   .hcard{padding:20px}
@@ -371,35 +381,23 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:44px 56px;text-a
 <!-- 1. HERO -->
 <section id="hero">
   <div class="hero-wrap">
-    <div>
-      <div class="hero-ey reveal">
-        <div class="hero-ey-line"></div>
-        <span class="hero-ey-txt">Para Terapeutas Ocupacionales que atienden niños que no comen</span>
-      </div>
-      <h1 class="reveal">No te faltan juegos. <em>Te falta un método.</em></h1>
-      <p class="hero-sub reveal">Cada vez te derivan más niños con selectividad, TEA o rechazo a la comida — y cada vez sientes que improvisas más. Aquí dejas de adivinar: aprendes a evaluar, priorizar e intervenir paso a paso, y a lograr que los avances pasen donde de verdad importan — en la mesa de la familia.</p>
-      <div class="hero-vsl reveal">
-        <div class="wistia_embed wistia_async_a11zzf0ot2 videoFoam=true" style="height:100%;position:relative;width:100%"></div>
-      </div>
-      <div class="hero-ctas reveal">
-        <a href="https://api.leadconnectorhq.com/widget/survey/99dHSXOPhwj6kFpE7TOy?notrack=true" target="_blank" rel="noopener" class="btn-p">Postular a la próxima edición →</a>
-      </div>
-      <div class="hero-stats reveal">
-        <div class="hs"><strong>+2.000</strong><span>Alumnas en LATAM</span></div>
-        <div class="hs"><strong>+250</strong><span>TOs certificadas</span></div>
-        <div class="hs"><strong>90 días</strong><span>Al método completo</span></div>
-      </div>
+    <div class="hero-ey reveal">
+      <span class="hero-ey-line"></span>
+      <span class="hero-ey-txt">Para Terapeutas Ocupacionales que atienden niños que no comen</span>
     </div>
-    <div class="hcard reveal">
-      <div class="hcard-top">
-        <p>Certificación Internacional</p>
-        <h3>ÉxiTO en Alimentación Infantil</h3>
-      </div>
-      <div class="crow"><div class="cico">📚</div><div class="ctxt"><strong>8 módulos clínicos + Bootcamp Express</strong><span>Clases grabadas, breves y aplicadas</span></div></div>
-      <div class="crow"><div class="cico">👥</div><div class="ctxt"><strong>Mentorías grupales + 4 sesiones 1:1</strong><span>Acompañamiento real, individual y grupal</span></div></div>
-      <div class="crow"><div class="cico">🛠️</div><div class="ctxt"><strong>Herramientas clínicas descargables</strong><span>Pautas, formularios y apoyos visuales</span></div></div>
-      <div class="crow"><div class="cico">🎓</div><div class="ctxt"><strong>Certificación — 72 horas pedagógicas</strong><span>ZOOCEO · IACISPE</span></div></div>
-      <div><div class="cbadge">Próxima edición disponible</div></div>
+    <h1 class="reveal">No te faltan actividades. <em>Te falta un método para lograr avances reales en casa.</em></h1>
+    <p class="hero-sub reveal">Cada vez te derivan más niños con selectividad, TEA o rechazo a la comida, y cada vez sientes que improvisas más. En 90 días aprendes a evaluar, priorizar e intervenir con un método claro, y a guiar a las familias para que los avances se sostengan en la mesa del hogar.</p>
+    <div class="hero-vsl reveal">
+      <div class="wistia_embed wistia_async_a11zzf0ot2 videoFoam=true" style="height:100%;position:relative;width:100%"></div>
+    </div>
+    <div class="hero-ctas reveal">
+      <a href="https://api.leadconnectorhq.com/widget/survey/99dHSXOPhwj6kFpE7TOy?notrack=true" target="_blank" rel="noopener" class="btn-p">Postular a la próxima edición →</a>
+    </div>
+    <p class="hero-note reveal">Próxima edición · cupos limitados por acompañamiento personalizado</p>
+    <div class="hero-stats reveal">
+      <div class="hs"><strong>+2.000</strong><span>Alumnas en LATAM</span></div>
+      <div class="hs"><strong>+250</strong><span>TOs certificadas</span></div>
+      <div class="hs"><strong>90 días</strong><span>Al método completo</span></div>
     </div>
   </div>
 </section>
@@ -411,14 +409,14 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:44px 56px;text-a
     <h2 class="reveal">¿Te suena familiar <em>alguna de estas situaciones?</em></h2>
     <p class="id-sub reveal">Estos no son límites personales — son señales de una formación universitaria que nunca profundizó en alimentación infantil.</p>
     <div class="pgrid">
-      <div class="pitem reveal"><div class="pitem-emoji">🗓️</div><div class="pitem-body"><strong>Improvisar en sesión</strong><span>Llegas pensando "¿qué actividad hago hoy?" sin un plan clínico claro.</span></div></div>
-      <div class="pitem reveal"><div class="pitem-emoji">🏠</div><div class="pitem-body"><strong>Sin respuesta para la familia</strong><span>Cuando preguntan "¿y en casa?", no tienes una respuesta firme que darles.</span></div></div>
-      <div class="pitem reveal"><div class="pitem-emoji">📊</div><div class="pitem-body"><strong>Avances solo en sesión</strong><span>El niño prueba algo contigo — pero en casa todo sigue igual.</span></div></div>
-      <div class="pitem reveal"><div class="pitem-emoji">🧠</div><div class="pitem-body"><strong>El enfoque sensorial no alcanza</strong><span>Sospechas que no todo es sensorial, pero no sabes por dónde más entrar al caso.</span></div></div>
-      <div class="pitem reveal"><div class="pitem-emoji">📚</div><div class="pitem-body"><strong>Más cursos, misma inseguridad</strong><span>Ya hiciste diplomados y certificaciones, y aún así sientes que improvisas.</span></div></div>
-      <div class="pitem reveal"><div class="pitem-emoji">📨</div><div class="pitem-body"><strong>Derivaciones que no puedes rechazar</strong><span>Casos de alimentación llegan cada vez más y piensas "no sé si estoy lista".</span></div></div>
-      <div class="pitem reveal"><div class="pitem-emoji">🤝</div><div class="pitem-body"><strong>Decisiones sin respaldo</strong><span>Sin colegas del tema, validas tus decisiones clínicas contigo misma.</span></div></div>
-      <div class="pitem reveal"><div class="pitem-emoji">📉</div><div class="pitem-body"><strong>Resultados inconsistentes</strong><span>Hay casos que avanzan y otros en los que no sabes exactamente por qué.</span></div></div>
+      <div class="pitem reveal"><div class="pitem-emoji"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 3 21 3 21 8"/><path d="M4 20 21 3"/><polyline points="21 16 21 21 16 21"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg></div><div class="pitem-body"><strong>Improvisar en sesión</strong><span>Llegas pensando "¿qué actividad hago hoy?" sin un plan clínico claro.</span></div></div>
+      <div class="pitem reveal"><div class="pitem-emoji"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="pitem-body"><strong>Sin respuesta para la familia</strong><span>Cuando preguntan "¿y en casa?", no tienes una respuesta firme que darles.</span></div></div>
+      <div class="pitem reveal"><div class="pitem-emoji"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="pitem-body"><strong>Avances solo en sesión</strong><span>El niño prueba algo contigo — pero en casa todo sigue igual.</span></div></div>
+      <div class="pitem reveal"><div class="pitem-emoji"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div><div class="pitem-body"><strong>El enfoque sensorial no alcanza</strong><span>Sospechas que no todo es sensorial, pero no sabes por dónde más entrar al caso.</span></div></div>
+      <div class="pitem reveal"><div class="pitem-emoji"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><div class="pitem-body"><strong>Más cursos, misma inseguridad</strong><span>Ya hiciste diplomados y certificaciones, y aún así sientes que improvisas.</span></div></div>
+      <div class="pitem reveal"><div class="pitem-emoji"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg></div><div class="pitem-body"><strong>Derivaciones que no puedes rechazar</strong><span>Casos de alimentación llegan cada vez más y piensas "no sé si estoy lista".</span></div></div>
+      <div class="pitem reveal"><div class="pitem-emoji"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="pitem-body"><strong>Decisiones sin respaldo</strong><span>Sin colegas del tema, validas tus decisiones clínicas contigo misma.</span></div></div>
+      <div class="pitem reveal"><div class="pitem-emoji"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></div><div class="pitem-body"><strong>Resultados inconsistentes</strong><span>Hay casos que avanzan y otros en los que no sabes exactamente por qué.</span></div></div>
     </div>
   </div>
 </section>
@@ -519,7 +517,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:44px 56px;text-a
       </div>
     </div>
     <div class="mcall reveal">
-      <div class="mcico">⚠</div>
+      <div class="mcico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
       <div class="mct"><strong>El error más frecuente: empezar por el paso 4.</strong><p>Se aplican técnicas sensoriales sobre niños emocionalmente bloqueados, en familias que presionan — y nada cambia. El Método ÉxiTO respeta el orden clínico que lo hace funcionar.</p></div>
     </div>
   </div>
@@ -536,29 +534,29 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:44px 56px;text-a
       <button class="tbtn" onclick="showTab('h',this)">Herramientas</button>
     </div>
     <div id="tab-c" class="ipanel on reveal">
-      <div class="iitem"><div class="iico">📚</div><div class="itxt"><strong>8 módulos clínicos paso a paso</strong><span>Grabados, breves. Avanzas a tu propio ritmo.</span></div></div>
-      <div class="iitem"><div class="iico">🚀</div><div class="itxt"><strong>Bootcamp Express de 2 días</strong><span>Arranque intensivo al inicio de la edición.</span></div></div>
-      <div class="iitem"><div class="iico">🤖</div><div class="itxt"><strong>Módulo de IA aplicada</strong><span>Informes y materiales clínicos en minutos.</span></div></div>
-      <div class="iitem"><div class="iico">🎁</div><div class="itxt"><strong>Bonus: Control de Esfínteres</strong><span>Contenido adicional de alta demanda clínica.</span></div></div>
-      <div class="iitem"><div class="iico">🎞️</div><div class="itxt"><strong>Webinars adicionales</strong><span>Biblioteca en permanente crecimiento.</span></div></div>
-      <div class="iitem"><div class="iico">📖</div><div class="itxt"><strong>Bibliografía especializada</strong><span>Referencias clínicas actualizadas.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><div class="itxt"><strong>8 módulos clínicos paso a paso</strong><span>Grabados, breves. Avanzas a tu propio ritmo.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="itxt"><strong>Bootcamp Express de 2 días</strong><span>Arranque intensivo al inicio de la edición.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg></div><div class="itxt"><strong>Módulo de IA aplicada</strong><span>Informes y materiales clínicos en minutos.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div><div class="itxt"><strong>Bonus: Control de Esfínteres</strong><span>Contenido adicional de alta demanda clínica.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div><div class="itxt"><strong>Webinars adicionales</strong><span>Biblioteca en permanente crecimiento.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><div class="itxt"><strong>Bibliografía especializada</strong><span>Referencias clínicas actualizadas.</span></div></div>
     </div>
     <div id="tab-a" class="ipanel">
-      <div class="iitem"><div class="iico">📅</div><div class="itxt"><strong>Mentorías grupales semanales en vivo</strong><span>Sábados o domingos — casos reales en tiempo real.</span></div></div>
-      <div class="iitem"><div class="iico">🎯</div><div class="itxt"><strong>3 sesiones 1:1 con TO asignada</strong><span>Trabajo clínico personalizado, obligatorio e incluido.</span></div></div>
-      <div class="iitem"><div class="iico">🧠</div><div class="itxt"><strong>Sesión 1:1 de Mentalidad con Coach Experta</strong><span>Identidad profesional y creencias limitantes.</span></div></div>
-      <div class="iitem"><div class="iico">💬</div><div class="itxt"><strong>Comunidad Skool + WhatsApp</strong><span>Red activa de TOs especializadas toda la semana.</span></div></div>
-      <div class="iitem"><div class="iico">📲</div><div class="itxt"><strong>Soporte personalizado</strong><span>Respuesta a dudas clínicas durante toda la formación.</span></div></div>
-      <div class="iitem"><div class="iico">🌿</div><div class="itxt"><strong>Sesiones grupales de mindset</strong><span>Bienestar profesional y confianza clínica colectiva.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="itxt"><strong>Mentorías grupales semanales en vivo</strong><span>Sábados o domingos — casos reales en tiempo real.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><div class="itxt"><strong>3 sesiones 1:1 con TO asignada</strong><span>Trabajo clínico personalizado, obligatorio e incluido.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></div><div class="itxt"><strong>Sesión 1:1 de Mentalidad con Coach Experta</strong><span>Identidad profesional y creencias limitantes.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div><div class="itxt"><strong>Comunidad Skool + WhatsApp</strong><span>Red activa de TOs especializadas toda la semana.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><div class="itxt"><strong>Soporte personalizado</strong><span>Respuesta a dudas clínicas durante toda la formación.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div class="itxt"><strong>Sesiones grupales de mindset</strong><span>Bienestar profesional y confianza clínica colectiva.</span></div></div>
     </div>
     <div id="tab-h" class="ipanel">
-      <div class="iitem"><div class="iico">📋</div><div class="itxt"><strong>Pautas de evaluación e intervención</strong><span>Instrumentos clínicos listos para aplicar.</span></div></div>
-      <div class="iitem"><div class="iico">🗂️</div><div class="itxt"><strong>Formularios para entrevistar familias</strong><span>Guías estructuradas de anamnesis y seguimiento.</span></div></div>
-      <div class="iitem"><div class="iico">🖨️</div><div class="itxt"><strong>Apoyos visuales descargables</strong><span>Material imprimible para sesiones y familias.</span></div></div>
-      <div class="iitem"><div class="iico">🗓️</div><div class="itxt"><strong>Cronograma semana a semana</strong><span>Hoja de ruta clara durante toda la formación.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div><div class="itxt"><strong>Pautas de evaluación e intervención</strong><span>Instrumentos clínicos listos para aplicar.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><div class="itxt"><strong>Formularios para entrevistar familias</strong><span>Guías estructuradas de anamnesis y seguimiento.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="itxt"><strong>Apoyos visuales descargables</strong><span>Material imprimible para sesiones y familias.</span></div></div>
+      <div class="iitem"><div class="iico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/></svg></div><div class="itxt"><strong>Cronograma semana a semana</strong><span>Hoja de ruta clara durante toda la formación.</span></div></div>
     </div>
     <div class="cert-blk reveal">
-      <div class="chours">🎓 72 horas pedagógicas</div>
+      <div class="chours"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.5 3 6 3s6-2 6-3v-5"/></svg> 72 horas pedagógicas</div>
       <h3>Certificación Internacional incluida</h3>
       <p>Avalada y emitida por instituciones certificadoras internacionales reconocidas. Válida en Latinoamérica y España como educación continua especializada.</p>
       <div class="cert-logos-wrap">
@@ -642,47 +640,47 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:44px 56px;text-a
     <div class="vtgrid">
 
       <div class="vtcard reveal" onclick="openVideo('https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69fab7387167fd9a35aa79ab.mov')">
-        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69fab6f3247534830e76cdd6.png" alt="Natalia Fierro" loading="lazy"><div class="vt-play"><div class="vt-play-btn">▶</div></div></div>
+        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69fab6f3247534830e76cdd6.png" alt="Natalia Fierro" loading="lazy"><div class="vt-play"><div class="vt-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg></div></div></div>
         <div class="vt-info"><strong>Natalia Fierro</strong><span>Terapeuta Ocupacional</span></div>
       </div>
 
       <div class="vtcard reveal" onclick="openVideo('https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f9f0f6c8c667361e40f.mp4')">
-        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0f0f6c8c37e361d45e.png" alt="Agustina Pérez" loading="lazy"><div class="vt-play"><div class="vt-play-btn">▶</div></div></div>
+        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0f0f6c8c37e361d45e.png" alt="Agustina Pérez" loading="lazy"><div class="vt-play"><div class="vt-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg></div></div></div>
         <div class="vt-info"><strong>Agustina Pérez</strong><span>Terapeuta Ocupacional</span></div>
       </div>
 
       <div class="vtcard reveal" onclick="openVideo('https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377fb20f6c8cba5e61e53a.mp4')">
-        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0fb480b36a7aae7d77.png" alt="Carolina Zeballos" loading="lazy"><div class="vt-play"><div class="vt-play-btn">▶</div></div></div>
+        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0fb480b36a7aae7d77.png" alt="Carolina Zeballos" loading="lazy"><div class="vt-play"><div class="vt-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg></div></div></div>
         <div class="vt-info"><strong>Carolina Zeballos</strong><span>Terapeuta Ocupacional</span></div>
       </div>
 
       <div class="vtcard reveal" onclick="openVideo('https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/693798c11855f99cad626e54.mp4')">
-        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0f4b202f867cdb29db.png" alt="Romina Bordón" loading="lazy"><div class="vt-play"><div class="vt-play-btn">▶</div></div></div>
+        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0f4b202f867cdb29db.png" alt="Romina Bordón" loading="lazy"><div class="vt-play"><div class="vt-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg></div></div></div>
         <div class="vt-info"><strong>Romina Bordón</strong><span>Terapeuta Ocupacional</span></div>
       </div>
 
       <div class="vtcard reveal" onclick="openVideo('https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69379645578cc74e539f6181.mp4')">
-        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0f0f6c8c54d761d45d.png" alt="Thalia Reyes" loading="lazy"><div class="vt-play"><div class="vt-play-btn">▶</div></div></div>
+        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0f0f6c8c54d761d45d.png" alt="Thalia Reyes" loading="lazy"><div class="vt-play"><div class="vt-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg></div></div></div>
         <div class="vt-info"><strong>Thalia Reyes</strong><span>Terapeuta Ocupacional</span></div>
       </div>
 
       <div class="vtcard reveal" onclick="openVideo('https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/693798dc578cc7f0d79fd5be.mp4')">
-        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0fb480b377cdae7d76.png" alt="Victoria Coronel" loading="lazy"><div class="vt-play"><div class="vt-play-btn">▶</div></div></div>
+        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0fb480b377cdae7d76.png" alt="Victoria Coronel" loading="lazy"><div class="vt-play"><div class="vt-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg></div></div></div>
         <div class="vt-info"><strong>Victoria Coronel</strong><span>Terapeuta Ocupacional</span></div>
       </div>
 
       <div class="vtcard reveal" onclick="openVideo('https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/693799151855f9f4f0627add.mp4')">
-        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0f2922ae6a2b0dcde4.png" alt="Loreto Pérez" loading="lazy"><div class="vt-play"><div class="vt-play-btn">▶</div></div></div>
+        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0f2922ae6a2b0dcde4.png" alt="Loreto Pérez" loading="lazy"><div class="vt-play"><div class="vt-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg></div></div></div>
         <div class="vt-info"><strong>Loreto Pérez</strong><span>Terapeuta Ocupacional</span></div>
       </div>
 
       <div class="vtcard reveal" onclick="openVideo('https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/6937961e169a42ec6dd4f060.mp4')">
-        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0f4b202f12fcdb29dd.png" alt="Constanza Hernández" loading="lazy"><div class="vt-play"><div class="vt-play-btn">▶</div></div></div>
+        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0f4b202f12fcdb29dd.png" alt="Constanza Hernández" loading="lazy"><div class="vt-play"><div class="vt-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg></div></div></div>
         <div class="vt-info"><strong>Constanza Hernández</strong><span>Terapeuta Ocupacional</span></div>
       </div>
 
       <div class="vtcard reveal" onclick="openVideo('https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/693798af169a428498d561ab.mp4')">
-        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0f4b202fb7cedb29dc.png" alt="Paula Valenzuela" loading="lazy"><div class="vt-play"><div class="vt-play-btn">▶</div></div></div>
+        <div class="vt-thumb"><img src="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/69377f0f4b202fb7cedb29dc.png" alt="Paula Valenzuela" loading="lazy"><div class="vt-play"><div class="vt-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg></div></div></div>
         <div class="vt-info"><strong>Paula Valenzuela</strong><span>Nutricionista</span></div>
       </div>
 
