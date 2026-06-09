@@ -104,6 +104,39 @@ CAMPAÑA 2 — RETARGETING (optimizar a "Schedule")                ← 25-30% bu
 - Empezar por **Grupo A**. La zona horaria importa: ofrece franjas compatibles con
   los países activos para subir el show rate.
 
+### ¿Cuántos conjuntos? (pocos conjuntos, muchos anuncios dentro)
+
+Las **enfermedades son anuncios, NO conjuntos**. Error clásico: 1 conjunto por
+enfermedad (6 conjuntos) → cada uno se queda sin datos y ninguno sale de
+aprendizaje. Cada conjunto necesita ~$10-20/día para juntar datos.
+
+| Fase | Presupuesto | Conjuntos | Cómo |
+|---|---|---|---|
+| **Validación** | ~$50/día | **1 conjunto** (Prospección, broad, Grupo A) | 5 anuncios = 1 por enfermedad. Leer ganador **a nivel de anuncio**. |
+| **Crecimiento** | ~$80-100/día | **2-3 conjuntos** | 1 Prospección broad + 1 Retargeting (+ opcional 1 para testear formato AI) |
+| **Escala** | $150+/día | 3-5 conjuntos | Duplicar ganadores, abrir Grupo B, más retargeting |
+
+"Miedo al crudo" no es conjunto en frío → va como anuncio en **Retargeting**.
+
+### ¿A cámara, IA o mezclados? (mezclados; Marcelo a cámara = caballo de batalla)
+
+- El **talking head de Marcelo** es el activo más fuerte: el avatar valora autoridad
+  + ciencia + trato humano, y es un high ticket de $497 basado en confianza en un
+  veterinario real. Es lo que cierra.
+- **No usar avatar de IA imitando a Marcelo** para el mensaje de autoridad central
+  (se siente falso, erosiona confianza).
+- La **IA** brilla para: ganchos/pattern interrupts, b-roll, antes/después,
+  animación de texto y **escalar variaciones rápido y barato**.
+
+**Cómo combinarlo sin canibalizar el test:**
+1. **Fase 1 (validación):** los 5 anuncios = **todos talking head de Marcelo**, uno
+   por enfermedad. Primero se valida qué *ángulo* gana (el ángulo pesa más que el
+   formato).
+2. **Fase 2:** sobre el ángulo ganador, crear variaciones de formato (1 IA/b-roll +
+   1 talking head) para testear formato como variable.
+3. **No mezclar IA + talking head al azar dentro del mismo anuncio.** El formato se
+   testea, no se revuelve.
+
 ---
 
 ## 4. Presupuesto — 3 escenarios + recomendación
