@@ -118,24 +118,37 @@ aprendizaje. Cada conjunto necesita ~$10-20/día para juntar datos.
 
 "Miedo al crudo" no es conjunto en frío → va como anuncio en **Retargeting**.
 
-### ¿A cámara, IA o mezclados? (mezclados; Marcelo a cámara = caballo de batalla)
+### Dos formatos de creativo: faceless IA vs talking head de Marcelo
 
-- El **talking head de Marcelo** es el activo más fuerte: el avatar valora autoridad
-  + ciencia + trato humano, y es un high ticket de $497 basado en confianza en un
-  veterinario real. Es lo que cierra.
-- **No usar avatar de IA imitando a Marcelo** para el mensaje de autoridad central
-  (se siente falso, erosiona confianza).
-- La **IA** brilla para: ganchos/pattern interrupts, b-roll, antes/después,
-  animación de texto y **escalar variaciones rápido y barato**.
+Hay dos activos: **videos IA faceless** (perro dachshund + voz en off sobre el
+problema) y **talking head de Marcelo**. NO separarlos por formato en 2 conjuntos
+en frío. Van juntos en el mismo conjunto de prospección, como anuncios distintos.
 
-**Cómo combinarlo sin canibalizar el test:**
-1. **Fase 1 (validación):** los 5 anuncios = **todos talking head de Marcelo**, uno
-   por enfermedad. Primero se valida qué *ángulo* gana (el ángulo pesa más que el
-   formato).
-2. **Fase 2:** sobre el ángulo ganador, crear variaciones de formato (1 IA/b-roll +
-   1 talking head) para testear formato como variable.
-3. **No mezclar IA + talking head al azar dentro del mismo anuncio.** El formato se
-   testea, no se revuelve.
+**Por qué no separar por formato en frío:**
+1. **Fragmenta el aprendizaje** — cada conjunto necesita ~15-20 conv/semana; partido
+   en 2 ninguno sale de aprendizaje.
+2. **Solapamiento de audiencia** — 2 conjuntos al mismo broad = pujas contra ti
+   mismo, sube el CPM.
+3. **La diversidad de creativos dentro del conjunto ayuda al algoritmo**
+   (Andromeda/Entity-ID): Meta reparte según quién responde a cada formato.
+4. El ganador se lee **a nivel de anuncio**, no de conjunto.
+
+**Si quieres un test de formato limpio:** usar el **A/B test nativo de Meta (Split
+Test)** (divide audiencia sin solapamiento), no 2 conjuntos normales.
+
+**La forma inteligente de separarlos: por ETAPA, no por formato.**
+
+| Formato | Fortaleza | Dónde brilla |
+|---|---|---|
+| **Faceless IA (perro + voz en off, dolor)** | Scroll-stopper, barato en volumen, agita el problema | 🔥 Caballo de batalla en **Prospección** (frío), uno por enfermedad |
+| **Talking head de Marcelo** | Autoridad, confianza, cierra | 🟢 **Retargeting** (calienta y cierra) + algunos en prospección |
+
+- Conjunto **Prospección** = faceless IA por enfermedad (+ 1-2 talking head para que
+  Meta compare).
+- Conjunto **Retargeting** = Marcelo talking head + manejo de objeción/precio.
+- Los formatos se separan solos por funnel, no por conjunto en frío.
+- 2 conjuntos por formato en prospección solo con presupuesto alto ($100+/día) o vía
+  Split Test controlado.
 
 ---
 
