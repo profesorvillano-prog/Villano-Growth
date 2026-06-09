@@ -15,7 +15,7 @@
 
 ## Guion (para leer a cámara)
 
-Colega, antes de que sigas, te pido un favor: no cierres este video. Es corto, pero es importante, sobre todo si de verdad quieres asegurar tu lugar en la videollamada que acabas de agendar para tu salchicha.
+Antes de que sigas, te pido un favor: no cierres este video. Es corto, pero es importante, sobre todo si de verdad quieres asegurar tu lugar en la videollamada que acabas de agendar para tu salchicha.
 
 Soy el Dr. Marcelo Hernán, médico veterinario y creador del Método Recomposición Dachshund, en Dachshund Salud.
 
@@ -27,7 +27,7 @@ Primero: en las próximas horas vas a recibir un mensaje por WhatsApp. Y quiero 
 
 Segundo: el día de la reunión vas a tener una conversación real conmigo, no con un vendedor. Voy a querer entender dónde está hoy tu salchicha: su piel, su peso, su columna, su digestión, qué has probado y qué no ha funcionado. Para eso me va a servir que llegues con un par de fotos de tu perro y, si los tienes, sus últimos exámenes. Ahí vamos a ver juntos qué le está pasando de verdad y si el Método es para ti y para tu perro. Eso requiere que estés presente, con tiempo y sin interrupciones.
 
-Tercero: si después de todo lo que ves en este video, de la llamada conmigo, de revisar los casos reales que están más abajo, sientes que esto no es para ti, me parece completamente válido. Pero si lo agendaste con intención real, te pido que le des a esta conversación el espacio que merece.
+Tercero: si después de todo lo que ves en este video y de la llamada conmigo sientes que esto no es para ti, me parece completamente válido. Pero si lo agendaste con intención real, te pido que le des a esta conversación el espacio que merece.
 
 Y aquí quiero ser todavía más transparente contigo, porque tiene que ver con cómo trabajo. Como te dije, no tengo equipo. A cada perro que entra al Método lo acompaño yo, personalmente, por WhatsApp, todos los días durante 90 días. Eso significa que solo puedo tomar un número muy limitado de casos al mes. No es marketing ni "cupos falsos": es matemática. Es lo único que me permite que cada salchicha que entra tenga un resultado real y no se quede a medias.
 
@@ -57,11 +57,7 @@ El Método se sostiene en tres pilares simples: la microbiota intestinal, que es
 
 Y quiero decirte algo sobre cómo respaldo esto. No te voy a prometer una recuperación del 100% en una fecha exacta, porque eso sería deshonesto: el cuerpo de cada perro responde a su ritmo. Lo que sí te prometo es presencia real. Si sigues el Método paso a paso durante los 90 días y reportas tus avances en cada control, y aun así no ves cambios visibles, yo extiendo el acompañamiento sin costo adicional, hasta que el cuerpo de tu salchicha responda. Esa es, para mí, la única forma honesta de garantizar un proceso en medicina integrativa: no devolviéndote el dinero, sino quedándome contigo hasta que funcione.
 
-No quiero convencerte de nada. Prefiero que lo veas tú misma.
-
-Por eso, más abajo en esta misma página, vas a encontrar los casos de perros reales que ya pasaron por esto: con su antes y su después, su problema y el tiempo que tardó en resolverse. Y si quieres más, en mi Instagram, @dachshundsalud, tengo cientos de casos y comentarios reales de sus dueños.
-
-Léelos con calma. Fíjate no solo en el resultado, sino en de dónde venían esas familias: agotadas, llenas de tratamientos que no resolvían nada, sintiendo culpa por no saber si estaban alimentando bien a su perro. Probablemente te suene. Eso te va a dar una idea mucho más honesta de lo que significa entrar al Método.
+No quiero convencerte de nada. Quiero que lleguemos a esa videollamada y lo veamos juntos, con el caso real de tu perro sobre la mesa.
 
 Eso es todo por ahora. Gracias por dar el paso por la salud de tu salchicha. Revisa tu WhatsApp, confírmame tu llamada, y prepárate para conversar con calma. Yo empiezo donde la medicina termina, y muy pronto lo vamos a ver juntos en tu perro. Un abrazo, y dale uno de mi parte a tu salchicha.
 
