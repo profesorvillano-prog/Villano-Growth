@@ -6,6 +6,27 @@
 
 ---
 
+## 0. Si ya intentaste importar y salió error
+
+El error **"Link Object ID — El formato es incorrecto"** ocurría porque el campo de
+página tenía un texto placeholder; ese campo **solo acepta un ID numérico**. Ya está
+**corregido** (vacío) en esta versión del Excel. El aviso **"Falta el vídeo"** es solo
+una advertencia (el video se sube en la interfaz), no bloquea.
+
+Pasos para reimportar limpio:
+1. Si se creó una campaña vacía `META_Leads_Recompo_...` en el intento anterior,
+   **bórrala** (no alcanzó a importar anuncios, estaban bloqueados).
+2. Importa de nuevo este Excel corregido. Ahora solo verás advertencias de "Falta el
+   vídeo", y los anuncios **sí entran** (en PAUSED).
+3. Completa página y video en la interfaz (ver abajo).
+
+> **Mejor aún:** si pones tu **Page ID numérico** en la columna *Link Object ID*
+> antes de importar, evitas tener que asignar la página anuncio por anuncio. El Page
+> ID lo ves en tu página de Facebook → "Acerca de" / "Transparencia de la página", o
+> en Configuración del negocio → Cuentas → Páginas.
+
+---
+
 ## 1. Importante: 3 cosas que el Excel NO puede llevar
 
 La plantilla oficial de Meta **no tiene columnas** para esto, así que se completa al
@@ -34,8 +55,8 @@ de gastar):
 
 | Columna | Valor puesto | Verifica |
 |---|---|---|
-| **Link Object ID** | `<TU_PAGE_ID>` | Poner tu Page ID real |
-| **Story ID** (filas Marcelo) | `<STORY_ID_MARCELO_1/2>` | Poner el ID del post real o dejar vacío y armar en UI |
+| **Link Object ID** | *(vacío)* | Se asigna la página en la interfaz. Solo acepta el **ID numérico** de la página, nunca texto |
+| **Story ID** (filas Marcelo) | *(vacío)* | Se conecta el post existente en la interfaz. Solo acepta **ID numérico** |
 | **Ad Set Daily Budget** | `50` | En la moneda de tu cuenta. Ajusta si tu cuenta usa otra |
 | **Countries** | `ES, CL, UY, CR, PR, US` | Grupo A. Agrega MX/CO solo al escalar |
 | **Locales** | `Spanish` | Si el importador se queja, déjalo vacío y pon "Español" en la interfaz |
