@@ -9,6 +9,10 @@
 1. IA_Dermatitis · 2. IA_Alergias · 3. IA_IVDD · 4. IA_Sobrepeso ·
 5. IA_EnergiaBaja · 6. Marcelo_Dermatitis · 7. Marcelo_IVDD
 
+> **Sin retargeting por ahora.** Solo 1 campaña → 1 conjunto (Prospección) → 7
+> anuncios. Con un único conjunto, CBO y ABO son equivalentes: deja el presupuesto
+> en el conjunto ($50/día). El retargeting se evaluará más adelante.
+
 ---
 
 # PARTE A — PASO A PASO DE CONFIGURACIÓN
