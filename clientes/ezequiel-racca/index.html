@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#0C3A39">
+<meta name="theme-color" content="#091F1E">
 <meta name="description" content="Enfermedades autoinmunes de la piel — dermatitis, psoriasis, vitíligo y lupus. La picazón, las manchas y los brotes no empiezan en la piel: empiezan en el intestino. Se abordan desde la causa, con nutrición funcional y respaldo médico, sin depender de corticoides de por vida. Acompañamiento de Ezequiel Racca.">
 <title>Raíz Autoinmune — Tu piel no es el problema, es el mensajero · Ezequiel Racca</title>
 
@@ -15,49 +15,50 @@
 <!-- Portada del VSL como LCP: precarga prioritaria (responsive) -->
 <!-- TODO: reemplazar por la portada real del VSL de Ezequiel (Wistia/YouTube) -->
 <link rel="preload" as="image" fetchpriority="high"
-      href="https://placehold.co/720x405/0C3A39/8FD6CE.png?text=VSL+Ezequiel+Racca"
-      imagesrcset="https://placehold.co/480x270/0C3A39/8FD6CE.png?text=VSL 480w, https://placehold.co/720x405/0C3A39/8FD6CE.png?text=VSL 720w"
-      imagesizes="(max-width:680px) calc(100vw - 44px), 640px">
+      href="https://placehold.co/720x405/091F1E/8FD6CE.png?text=VSL+Ezequiel+Racca"
+      imagesrcset="https://placehold.co/480x270/091F1E/8FD6CE.png?text=VSL 480w, https://placehold.co/720x405/091F1E/8FD6CE.png?text=VSL 720w"
+      imagesizes="(max-width:680px) calc(100vw - 40px), 660px">
 
 <!-- Tipografía: Spectral (titulares, serif clínico) + Hanken Grotesk (cuerpo) · carga no bloqueante -->
 <link rel="preload" as="style"
-      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spectral:ital,wght@0,500;0,600;1,500&display=swap">
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
 <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spectral:ital,wght@0,500;0,600;1,500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
       media="print" onload="this.media='all'">
 <noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spectral:ital,wght@0,500;0,600;1,500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
 </noscript>
 
 <script>document.documentElement.classList.add('js');</script>
 
 <style>
 :root{
-  /* Estrategia de color: comprometida con un teal/petróleo profundo (calma clínica),
-     acento coral/arcilla para la acción y la advertencia. Sin amarillo. */
+  /* Color: comprometido con un teal/petróleo profundo (calma clínica),
+     acento coral/arcilla para la acción. Sin amarillo. */
+  --abyss:#091F1E;       /* fondo más profundo (hero) */
   --pine:#0C3A39;        /* secciones oscuras */
   --pine-2:#0F4847;
   --pine-3:#13605E;
   --teal:#0F7E7C;        /* primario / vínculos */
-  --teal-d:#0B6463;
+  --teal-d:#0A6463;
   --mint:#E4F0ED;        /* superficie tintada hacia el teal */
   --mint-2:#F0F6F4;
 
-  --coral:#CF5540;       /* acento de marca (el llamado, énfasis) */
-  --coral-d:#B5432E;     /* coral para texto pequeño sobre claro */
+  --coral:#CF5540;       /* acento de marca (el llamado, la acción) */
+  --coral-d:#B0402B;     /* coral para texto sobre claro */
   --coral-tint:#FBEBE6;
   --coral-line:#F1C9BF;
 
-  --bg:#F2F6F4;          /* fondo: off-white frío, tintado al teal (no crema) */
+  --bg:#F1F5F3;          /* fondo: off-white frío, tintado al teal */
   --wh:#FFFFFF;
-  --ink:#15231F;         /* texto principal */
-  --ink-2:#3C4F4A;       /* texto secundario */
-  --ink-3:#566963;       /* texto atenuado (≥4.5 sobre claro) */
-  --line:#D8E4E0;
+  --ink:#13211E;         /* texto principal */
+  --ink-2:#3A4D48;       /* texto secundario */
+  --ink-3:#536662;       /* texto atenuado (≥4.5 sobre claro) */
+  --line:#D6E2DE;
   --line-2:#E7EFEC;
 
-  --r:14px;
-  --r-sm:10px;
+  --r:16px;
+  --r-sm:11px;
   --sat:env(safe-area-inset-top,0px);
   --sab:env(safe-area-inset-bottom,0px);
 
@@ -65,8 +66,10 @@
   --body:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 
   --z-float:60;
-
   --ease:cubic-bezier(.22,.61,.18,1);
+
+  /* grano sutil para superficies oscuras (sensación de copia impresa) */
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
@@ -77,24 +80,16 @@ body{
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   overflow-x:hidden;
 }
-@media(min-width:760px){
-  body{
-    background:
-      radial-gradient(120% 50% at 50% -10%, rgba(15,126,124,.07) 0%, transparent 60%),
-      var(--bg);
-  }
-}
 ::selection{background:var(--coral);color:#fff;}
 
-.w{width:100%;max-width:600px;margin:0 auto;padding:0 22px;}
+.w{width:100%;max-width:620px;margin:0 auto;padding:0 20px;}
 
-h1,h2,h3,.display{font-family:var(--display);font-weight:600;letter-spacing:-.012em;line-height:1.1;text-wrap:balance;}
+h1,h2,h3,.display{font-family:var(--display);font-weight:600;letter-spacing:-.015em;line-height:1.08;text-wrap:balance;}
 p{text-wrap:pretty;}
 strong{font-weight:600;}
 
-svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;width:22px;height:22px;flex:none;}
+svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;width:22px;height:22px;flex:none;}
 .i-sm{width:16px;height:16px;}
-.i-lg{width:26px;height:26px;}
 
 /* ─── BOTONES ─── */
 .btn{
@@ -103,312 +98,308 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
   padding:18px 24px;border-radius:var(--r-sm);
   font-family:var(--body);font-size:16px;font-weight:700;letter-spacing:.1px;line-height:1.2;
   text-decoration:none;border:none;cursor:pointer;text-align:center;
-  box-shadow:0 12px 26px -12px rgba(181,67,46,.7);
-  transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease);
+  box-shadow:0 14px 30px -14px rgba(176,64,43,.72);
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease);
   -webkit-tap-highlight-color:transparent;touch-action:manipulation;
 }
-.btn:hover{background:var(--coral-d);transform:translateY(-2px);box-shadow:0 18px 30px -14px rgba(181,67,46,.72);}
-.btn:active{transform:translateY(0);box-shadow:0 6px 14px -8px rgba(181,67,46,.6);}
-.btn-ghost{background:transparent;color:#fff;box-shadow:none;border:1.5px solid rgba(255,255,255,.28);font-weight:600;}
-.btn-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.55);transform:none;}
+.btn:hover{background:var(--coral-d);transform:translateY(-2px);box-shadow:0 20px 34px -16px rgba(176,64,43,.74);}
+.btn:active{transform:translateY(0);box-shadow:0 6px 14px -8px rgba(176,64,43,.6);}
 .btn-sm{padding:14px 20px;font-size:14.5px;gap:7px;}
-.cta-note{text-align:center;margin-top:11px;font-size:12.5px;color:var(--ink-3);letter-spacing:.1px;}
-.cta-note.on-dark{color:rgba(255,255,255,.62);}
+.cta-note{text-align:center;margin-top:12px;font-size:12.5px;color:var(--ink-3);letter-spacing:.1px;}
+.cta-note.on-dark{color:rgba(255,255,255,.6);}
 
 /* ─── SECCIONES ─── */
-.sec{padding:62px 0;}
+.sec{padding:clamp(58px,9vw,98px) 0;}
 .sec-mint{background:var(--mint-2);}
 .sec-white{background:var(--wh);}
 .sec-dark{background:var(--pine);color:rgba(255,255,255,.82);position:relative;overflow:hidden;}
+.sec-dark::after{content:'';position:absolute;inset:0;background:var(--grain);opacity:.05;mix-blend-mode:overlay;pointer-events:none;}
 .sec-dark h2,.sec-dark h3{color:#fff;}
-.divider{height:1px;background:var(--line);}
+.sec-dark>.w{position:relative;z-index:1;}
+.rule{height:1px;background:var(--line);border:none;}
 
-.flag{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--coral-d);margin-bottom:16px;letter-spacing:.1px;}
-.flag::before{content:'';width:8px;height:8px;border-radius:2px;background:var(--coral);flex:none;}
+/* Etiqueta de sección: cursiva serif (sistema de marca), no el eyebrow en mayúsculas */
+.flag{display:inline-flex;align-items:center;gap:13px;font-family:var(--display);font-style:italic;font-weight:500;font-size:16px;color:var(--teal-d);margin-bottom:16px;letter-spacing:.005em;}
+.flag::before{content:'';width:28px;height:1px;background:currentColor;opacity:.55;}
 .flag.on-dark{color:#8FD6CE;}
-.flag.on-dark::before{background:#3FB6AF;}
+.flag.center{justify-content:center;}
 
-.stitle{font-size:clamp(25px,5.4vw,35px);line-height:1.12;color:var(--ink);margin-bottom:14px;}
+.stitle{font-size:clamp(26px,5.6vw,37px);line-height:1.1;color:var(--ink);margin-bottom:15px;}
 .sec-dark .stitle{color:#fff;}
-.lead{font-size:16.5px;color:var(--ink-2);line-height:1.66;max-width:64ch;}
+.lead{font-size:17px;color:var(--ink-2);line-height:1.66;max-width:60ch;}
 .sec-dark .lead{color:rgba(255,255,255,.74);}
 .acc{color:var(--teal-d);font-weight:600;}
 .sec-dark .acc{color:#8FD6CE;}
-.mt-l{margin-top:34px;}
+.mt-l{margin-top:36px;}
 
-/* ─── TILES ─── */
+/* ─── TILES (refinados: anillo fino, baja saturación) ─── */
 .tile{flex:none;display:flex;align-items:center;justify-content:center;border-radius:var(--r-sm);}
-.tile-coral{background:var(--coral-tint);color:var(--coral-d);}
-.tile-teal{background:var(--mint);color:var(--teal-d);}
+.tile-coral{background:var(--coral-tint);color:var(--coral-d);box-shadow:inset 0 0 0 1px var(--coral-line);}
+.tile-teal{background:var(--mint);color:var(--teal-d);box-shadow:inset 0 0 0 1px rgba(15,126,124,.16);}
 
 /* ─── TOPBAR ─── */
-.topbar{position:sticky;top:0;z-index:50;background:rgba(12,58,57,.96);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08);padding-top:var(--sat);}
-.topbar .w{display:flex;align-items:center;justify-content:space-between;height:58px;}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;}
-.brand-mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(150deg,var(--teal),var(--pine-3));display:grid;place-items:center;flex:none;color:#fff;}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(9,31,30,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid rgba(143,214,206,.14);padding-top:var(--sat);}
+.topbar .w{display:flex;align-items:center;justify-content:space-between;height:58px;max-width:680px;}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:#fff;}
+.brand-mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(152deg,var(--teal),var(--pine-3));display:grid;place-items:center;flex:none;color:#fff;box-shadow:inset 0 0 0 1px rgba(143,214,206,.25);}
 .brand-mark svg{width:17px;height:17px;}
-.brand-name{font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:-.01em;line-height:1;}
-.brand-name span{display:block;font-family:var(--body);font-weight:500;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(143,214,206,.85);margin-top:3px;}
-.topbar .tcta{font-size:13.5px;font-weight:600;color:#fff;text-decoration:none;border:1.5px solid rgba(143,214,206,.4);padding:8px 15px;border-radius:8px;transition:background .18s,border-color .18s;white-space:nowrap;}
-.topbar .tcta:hover{background:rgba(255,255,255,.07);border-color:#8FD6CE;}
+.brand-name{font-family:var(--display);font-weight:600;font-size:16.5px;letter-spacing:-.01em;line-height:1;}
+.brand-name span{display:block;font-family:var(--body);font-weight:500;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(143,214,206,.8);margin-top:4px;}
+.topbar .tcta{font-size:13.5px;font-weight:600;color:#fff;text-decoration:none;border:1.5px solid rgba(143,214,206,.4);padding:8px 15px;border-radius:9px;transition:background .2s,border-color .2s;white-space:nowrap;}
+.topbar .tcta:hover{background:rgba(143,214,206,.1);border-color:#8FD6CE;}
 
-/* ─── HERO ─── */
-.hero{background:var(--pine);color:rgba(255,255,255,.82);position:relative;overflow:hidden;padding:48px 0 60px;}
-.hero::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(60% 42% at 82% 12%, rgba(15,126,124,.34) 0%, transparent 62%),
-    radial-gradient(56% 50% at 4% 96%, rgba(207,85,64,.14) 0%, transparent 60%);
-}
-.hero-inner{position:relative;text-align:center;}
+/* ─── HERO (VSL inmediatamente debajo del header) ─── */
+.hero{background:var(--abyss);color:rgba(255,255,255,.82);position:relative;overflow:hidden;padding:34px 0 56px;}
+.hero::before{content:'';position:absolute;inset:0;background:var(--grain);opacity:.055;mix-blend-mode:overlay;pointer-events:none;}
+.hero-contour{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+.hero-glow{position:absolute;inset:0;pointer-events:none;z-index:0;background:radial-gradient(58% 40% at 78% 6%,rgba(15,126,124,.3),transparent 64%),radial-gradient(50% 44% at 2% 100%,rgba(207,85,64,.12),transparent 62%);}
+.hero-inner{position:relative;z-index:1;text-align:center;}
 
-/* El LLAMADO: dirigido a quien vive con la enfermedad. Coral, no amarillo. */
+/* EL LLAMADO: dirigido a quien vive con la enfermedad. Coral, no amarillo. */
 .hero-call{
-  display:inline-flex;align-items:flex-start;gap:11px;text-align:left;
-  background:rgba(207,85,64,.13);border:1px solid rgba(207,85,64,.42);
-  color:#F6D4CB;border-radius:var(--r-sm);
-  padding:12px 16px;margin-bottom:26px;font-size:14px;line-height:1.5;max-width:480px;
+  display:inline-flex;align-items:center;gap:10px;text-align:left;
+  background:rgba(207,85,64,.12);border:1px solid rgba(207,85,64,.4);
+  color:#F4D2C9;border-radius:100px;
+  padding:9px 17px;margin-bottom:24px;font-size:13.5px;line-height:1.45;
 }
-.hero-call .dot{flex:none;width:9px;height:9px;border-radius:50%;background:var(--coral);margin-top:5px;box-shadow:0 0 0 4px rgba(207,85,64,.18);}
+.hero-call .dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 4px rgba(207,85,64,.2);}
 .hero-call strong{color:#fff;font-weight:600;}
 
-.hero h1{
-  font-size:clamp(28px,7vw,46px);font-weight:600;line-height:1.08;color:#fff;
-  margin-bottom:20px;letter-spacing:-.018em;overflow-wrap:break-word;
-}
-.hero h1 .myth{color:#F08B76;font-style:italic;position:relative;white-space:nowrap;}
-.hero h1 .myth::after{content:'';position:absolute;left:-1px;right:-1px;top:54%;height:2px;background:#F08B76;border-radius:2px;transform:rotate(-1.4deg);opacity:.85;}
-.hero-p{font-size:16.5px;color:rgba(255,255,255,.78);line-height:1.7;max-width:50ch;margin:0 auto 30px;}
-.hero-p strong{color:#fff;}
-.hero-p .em{color:#8FD6CE;font-weight:600;}
-
 /* VSL */
-.vid-wrap{margin:26px auto 28px;max-width:640px;border-radius:16px;overflow:hidden;position:relative;
-  box-shadow:0 30px 60px -28px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.1);}
+.vid-wrap{margin:0 auto 30px;max-width:660px;border-radius:18px;overflow:hidden;position:relative;
+  box-shadow:0 40px 80px -36px rgba(0,0,0,.75);border:1px solid rgba(143,214,206,.14);}
 .vid-facade{position:relative;display:block;width:100%;aspect-ratio:16/9;border:none;padding:0;margin:0;cursor:pointer;background:var(--pine-2);overflow:hidden;-webkit-tap-highlight-color:transparent;}
 .vid-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-.vid-facade::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,30,30,.1),rgba(8,30,30,.46));transition:background .25s;}
-.vid-facade:hover::after{background:linear-gradient(180deg,rgba(8,30,30,.02),rgba(8,30,30,.34));}
-.vid-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:74px;height:74px;border-radius:50%;background:var(--coral);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 34px -8px rgba(207,85,64,.7);transition:transform .2s var(--ease),background .2s;}
-.vid-play svg{margin-left:3px;}
+.vid-facade::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,22,22,.12),rgba(6,22,22,.5));transition:background .25s;}
+.vid-facade:hover::after{background:linear-gradient(180deg,rgba(6,22,22,.04),rgba(6,22,22,.38));}
+.vid-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:78px;height:78px;border-radius:50%;background:var(--coral);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 16px 38px -8px rgba(207,85,64,.72);transition:transform .22s var(--ease),background .22s;}
+.vid-play svg{margin-left:4px;}
 .vid-facade:hover .vid-play{transform:translate(-50%,-50%) scale(1.07);background:var(--coral-d);}
 .vid-facade:active .vid-play{transform:translate(-50%,-50%) scale(.95);}
-.vid-dur{position:absolute;bottom:11px;right:11px;z-index:2;background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:600;padding:3px 9px;border-radius:6px;letter-spacing:.3px;}
-.vid-label{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:30px 16px 13px;text-align:left;font-size:13.5px;font-weight:600;color:#fff;background:linear-gradient(to top,rgba(6,24,24,.9),transparent);}
+.vid-dur{position:absolute;bottom:12px;right:12px;z-index:2;background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:600;padding:3px 9px;border-radius:6px;letter-spacing:.3px;}
+.vid-label{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:34px 18px 14px;text-align:left;font-family:var(--display);font-style:italic;font-size:15px;font-weight:500;color:#fff;background:linear-gradient(to top,rgba(5,20,20,.92),transparent);}
 
-.hero-cta{max-width:420px;margin:0 auto;}
-.hero-trust{margin:24px auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:9px 22px;font-size:13px;color:rgba(255,255,255,.62);max-width:520px;}
+.hero h1{font-size:clamp(29px,7vw,49px);font-weight:600;line-height:1.06;color:#fff;margin-bottom:20px;letter-spacing:-.022em;overflow-wrap:break-word;}
+.hero h1 .myth{color:#F08B76;font-style:italic;position:relative;white-space:nowrap;}
+.hero h1 .myth::after{content:'';position:absolute;left:-1px;right:-1px;top:55%;height:2px;background:#F08B76;border-radius:2px;transform:rotate(-1.3deg);opacity:.85;}
+.hero-p{font-size:17px;color:rgba(255,255,255,.78);line-height:1.7;max-width:52ch;margin:0 auto 30px;}
+.hero-p strong{color:#fff;}
+.hero-p .em{color:#8FD6CE;font-weight:600;}
+.hero-cta{max-width:430px;margin:0 auto;}
+.hero-trust{margin:26px auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:9px 22px;font-size:13px;color:rgba(255,255,255,.6);max-width:520px;}
 .hero-trust span{display:inline-flex;align-items:center;gap:7px;}
 .hero-trust svg{color:#8FD6CE;}
 
-/* ─── PROBLEMA (lista diferenciada, sin grid de tarjetas idénticas) ─── */
-.pain-list{margin-top:30px;list-style:none;}
-.pain-item{display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-bottom:1px solid var(--line);}
-.pain-item:first-child{padding-top:4px;}
-.pain-item:last-child{border-bottom:none;padding-bottom:4px;}
-.pain-ico{width:44px;height:44px;}
-.pain-item h4{font-family:var(--display);font-size:18.5px;font-weight:600;margin-bottom:5px;color:var(--ink);line-height:1.22;letter-spacing:-.01em;}
+/* ─── PROBLEMA ─── */
+.pain-list{margin-top:32px;list-style:none;}
+.pain-item{display:flex;gap:18px;align-items:flex-start;padding:22px 0;border-top:1px solid var(--line);}
+.pain-item:first-child{border-top:none;padding-top:6px;}
+.pain-item:last-child{padding-bottom:4px;}
+.pain-ico{width:46px;height:46px;}
+.pain-item h4{font-family:var(--display);font-size:19px;font-weight:600;margin-bottom:6px;color:var(--ink);line-height:1.2;letter-spacing:-.01em;}
 .pain-item p{font-size:15px;color:var(--ink-2);line-height:1.58;}
 
 /* PULLQUOTE (tarjeta completa, sin franja lateral) */
-.pullquote{margin-top:34px;padding:30px 26px 24px;background:var(--pine);border-radius:var(--r);position:relative;overflow:hidden;}
-.pullquote .qmark{font-family:var(--display);font-size:92px;line-height:1;color:#8FD6CE;opacity:.26;position:absolute;top:2px;left:18px;pointer-events:none;}
-.pullquote p{font-family:var(--display);font-weight:500;font-size:19px;line-height:1.46;color:rgba(255,255,255,.96);margin-bottom:16px;position:relative;letter-spacing:-.01em;}
-.pullquote .attr{font-size:12px;font-weight:600;color:#8FD6CE;letter-spacing:.4px;position:relative;display:flex;align-items:center;gap:8px;text-transform:uppercase;}
-.pullquote .attr::before{content:'';width:18px;height:1.5px;background:#8FD6CE;}
+.pullquote{margin-top:36px;padding:34px 28px 26px;background:var(--pine);border-radius:var(--r);position:relative;overflow:hidden;}
+.pullquote::after{content:'';position:absolute;inset:0;background:var(--grain);opacity:.05;mix-blend-mode:overlay;pointer-events:none;}
+.pullquote .qmark{font-family:var(--display);font-size:100px;line-height:1;color:#8FD6CE;opacity:.22;position:absolute;top:0;left:18px;pointer-events:none;}
+.pullquote p{font-family:var(--display);font-weight:500;font-size:20px;line-height:1.46;color:rgba(255,255,255,.97);margin-bottom:18px;position:relative;letter-spacing:-.01em;}
+.pullquote .attr{font-size:13px;font-weight:600;color:#8FD6CE;letter-spacing:.3px;position:relative;display:flex;align-items:center;gap:9px;}
+.pullquote .attr::before{content:'';width:20px;height:1.5px;background:#8FD6CE;}
 .pullquote.light{background:var(--mint);}
-.pullquote.light .qmark{color:var(--teal);opacity:.28;}
+.pullquote.light::after{display:none;}
+.pullquote.light .qmark{color:var(--teal);opacity:.26;}
 .pullquote.light p{color:var(--ink);}
 .pullquote.light .attr{color:var(--teal-d);}
 .pullquote.light .attr::before{background:var(--teal);}
 
 /* ─── DIAGRAMA INTESTINO–INMUNE–PIEL ─── */
-.triad{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:28px;background:var(--wh);}
-.triad-cell{padding:24px 12px;text-align:center;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:10px;}
+.triad{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:30px;background:var(--wh);}
+.triad-cell{padding:26px 12px;text-align:center;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:11px;}
 .triad-cell:last-child{border-right:none;}
-.triad-cell .tile{width:46px;height:46px;}
-.triad-cell .tt{font-family:var(--display);font-size:15px;font-weight:600;color:var(--teal-d);}
+.triad-cell .tile{width:48px;height:48px;}
+.triad-cell .tt{font-family:var(--display);font-size:15.5px;font-weight:600;color:var(--teal-d);}
 .triad-cell .td{font-size:12.5px;color:var(--ink-3);line-height:1.45;}
 
 /* CADENA */
-.chain{margin:30px 0 8px;list-style:none;}
-.chain-row{display:flex;align-items:center;gap:14px;padding:16px;background:var(--wh);border:1px solid var(--line);border-radius:12px;}
+.chain{margin:32px 0 8px;list-style:none;}
+.chain-row{display:flex;align-items:center;gap:15px;padding:17px;background:var(--wh);border:1px solid var(--line);border-radius:13px;}
 .chain-row.danger{background:var(--coral-tint);border-color:var(--coral-line);}
-.chain-ico{width:42px;height:42px;flex:none;border-radius:10px;background:var(--mint);color:var(--teal-d);display:flex;align-items:center;justify-content:center;}
-.chain-row.danger .chain-ico{background:rgba(207,85,64,.13);color:var(--coral-d);}
-.chain-tt{font-family:var(--display);font-size:16px;font-weight:600;color:var(--ink);line-height:1.2;letter-spacing:-.01em;}
+.chain-ico{width:44px;height:44px;flex:none;border-radius:11px;background:var(--mint);color:var(--teal-d);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(15,126,124,.14);}
+.chain-row.danger .chain-ico{background:rgba(207,85,64,.12);color:var(--coral-d);box-shadow:inset 0 0 0 1px var(--coral-line);}
+.chain-tt{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.2;letter-spacing:-.01em;}
 .chain-row.danger .chain-tt{color:var(--coral-d);}
 .chain-td{font-size:13px;color:var(--ink-2);line-height:1.45;margin-top:3px;}
-.chain-arrow{display:flex;justify-content:center;padding:6px 0;color:var(--pine-3);}
-.chain-arrow svg{width:20px;height:20px;transform:rotate(90deg);opacity:.55;}
-.chain-fact{margin-top:24px;display:flex;gap:16px;align-items:center;padding:22px 20px;background:var(--pine);border-radius:var(--r);}
-.chain-fact .big{font-family:var(--display);font-size:46px;font-weight:600;color:#8FD6CE;line-height:.9;letter-spacing:-.02em;flex:none;}
-.chain-fact span{font-size:14px;color:rgba(255,255,255,.78);line-height:1.55;}
+.chain-arrow{display:flex;justify-content:center;padding:7px 0;color:var(--pine-3);}
+.chain-arrow svg{width:20px;height:20px;transform:rotate(90deg);opacity:.5;}
+.chain-fact{margin-top:26px;display:flex;gap:18px;align-items:center;padding:24px 22px;background:var(--pine);border-radius:var(--r);position:relative;overflow:hidden;}
+.chain-fact::after{content:'';position:absolute;inset:0;background:var(--grain);opacity:.05;mix-blend-mode:overlay;pointer-events:none;}
+.chain-fact .big{font-family:var(--display);font-size:50px;font-weight:600;color:#8FD6CE;line-height:.9;letter-spacing:-.02em;flex:none;position:relative;}
+.chain-fact span{font-size:14px;color:rgba(255,255,255,.78);line-height:1.55;position:relative;}
 
-/* ─── MÉTODO (secuencia real → numeración justificada) ─── */
-.phase{display:flex;gap:18px;align-items:flex-start;padding:26px 0;border-bottom:1px solid var(--line);}
-.phase:first-child{padding-top:6px;}
-.phase:last-child{border-bottom:none;}
-.phase-n{width:46px;height:46px;flex:none;background:var(--pine);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:20px;font-weight:600;color:#8FD6CE;border-radius:12px;}
-.phase h3{font-family:var(--display);font-size:20px;font-weight:600;margin-bottom:7px;color:var(--ink);line-height:1.18;letter-spacing:-.01em;}
-.phase h3 .tag{display:block;font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--coral-d);margin-bottom:5px;}
-.phase p{font-size:14.5px;color:var(--ink-2);line-height:1.6;}
+/* ─── MÉTODO ─── */
+.phase{display:flex;gap:20px;align-items:flex-start;padding:28px 0;border-top:1px solid var(--line);}
+.phase:first-child{border-top:none;padding-top:6px;}
+.phase:last-child{padding-bottom:0;}
+.phase-n{width:48px;height:48px;flex:none;background:var(--pine);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:21px;font-weight:600;color:#8FD6CE;border-radius:13px;box-shadow:inset 0 0 0 1px rgba(143,214,206,.18);}
+.phase h3{font-family:var(--display);font-size:21px;font-weight:600;margin-bottom:8px;color:var(--ink);line-height:1.16;letter-spacing:-.01em;}
+.phase h3 .tag{display:block;font-family:var(--display);font-style:italic;font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--coral-d);margin-bottom:5px;}
+.phase p{font-size:15px;color:var(--ink-2);line-height:1.6;}
 
 /* COMER SÍ / NO */
-.eat{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px;}
-.eat-col{border-radius:var(--r);padding:22px 20px;}
+.eat{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:32px;}
+.eat-col{border-radius:var(--r);padding:24px 20px;}
 .eat-yes{background:var(--mint);border:1px solid rgba(15,126,124,.2);}
 .eat-no{background:var(--coral-tint);border:1px solid var(--coral-line);}
-.eat-col h4{font-family:var(--display);font-size:16px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:9px;letter-spacing:-.01em;}
+.eat-col h4{font-family:var(--display);font-size:16.5px;font-weight:600;margin-bottom:15px;display:flex;align-items:center;gap:9px;letter-spacing:-.01em;}
 .eat-yes h4{color:var(--teal-d);}
 .eat-no h4{color:var(--coral-d);}
 .eat-col ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;}
-.eat-col li{font-size:13.5px;background:rgba(255,255,255,.8);border:1px solid var(--line-2);padding:6px 12px;border-radius:8px;color:var(--ink);}
+.eat-col li{font-size:13.5px;background:rgba(255,255,255,.82);border:1px solid var(--line-2);padding:7px 13px;border-radius:9px;color:var(--ink);}
 
 /* OBJECIÓN */
-.objection{margin-top:32px;background:var(--wh);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;}
-.obj-head{padding:22px 22px 0;}
-.obj-head .tag{font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--coral-d);}
-.obj-head h3{font-family:var(--display);font-size:20px;font-weight:600;color:var(--ink);margin-top:7px;line-height:1.22;letter-spacing:-.01em;}
-.obj-fears{list-style:none;padding:16px 22px 4px;}
-.obj-fears li{display:flex;gap:11px;align-items:flex-start;padding:9px 0;font-size:14px;color:var(--ink-2);line-height:1.5;font-style:italic;}
+.objection{margin-top:34px;background:var(--wh);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;}
+.obj-head{padding:24px 24px 0;}
+.obj-head .tag{font-family:var(--display);font-style:italic;font-size:15px;font-weight:500;color:var(--coral-d);}
+.obj-head h3{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);margin-top:8px;line-height:1.2;letter-spacing:-.01em;}
+.obj-fears{list-style:none;padding:18px 24px 4px;}
+.obj-fears li{display:flex;gap:12px;align-items:flex-start;padding:9px 0;font-size:14.5px;color:var(--ink-2);line-height:1.5;font-style:italic;}
 .obj-fears li svg{color:var(--ink-3);margin-top:3px;flex:none;}
-.obj-body{padding:18px 22px 24px;border-top:1px solid var(--line);background:var(--mint-2);}
-.obj-body p{font-size:14.5px;color:var(--ink-2);line-height:1.66;}
+.obj-body{padding:20px 24px 26px;border-top:1px solid var(--line);background:var(--mint-2);}
+.obj-body p{font-size:15px;color:var(--ink-2);line-height:1.66;}
 .obj-body p strong{color:var(--teal-d);}
-.obj-body p+p{margin-top:11px;}
+.obj-body p+p{margin-top:12px;}
 
 /* ─── AUTORIDAD ─── */
-.auth-photo{width:178px;border-radius:16px;overflow:hidden;margin:0 auto 22px;border:1px solid var(--line);box-shadow:0 16px 38px -18px rgba(12,58,57,.5);}
+.auth-photo{width:184px;border-radius:18px;overflow:hidden;margin:0 auto 24px;border:1px solid var(--line);box-shadow:0 20px 44px -20px rgba(12,58,57,.55);}
 .auth-photo img{width:100%;height:auto;display:block;}
-.auth-name{font-family:var(--display);font-size:27px;font-weight:600;margin-bottom:5px;text-align:center;color:var(--ink);letter-spacing:-.015em;}
-.auth-role{font-size:13px;color:var(--teal-d);font-weight:600;margin-bottom:20px;text-align:center;line-height:1.5;}
-.auth-text{font-family:var(--display);font-size:18px;font-style:italic;font-weight:500;color:var(--ink);margin-bottom:12px;line-height:1.55;}
-.auth-creds{list-style:none;margin-top:24px;}
-.auth-creds li{padding:15px 0;border-bottom:1px solid var(--line);font-size:14px;font-weight:500;color:var(--ink-2);display:flex;align-items:center;gap:14px;line-height:1.4;}
-.auth-creds li:last-child{border-bottom:none;}
-.cred-ico{width:36px;height:36px;flex:none;}
+.auth-name{font-family:var(--display);font-size:28px;font-weight:600;margin-bottom:6px;text-align:center;color:var(--ink);letter-spacing:-.015em;}
+.auth-role{font-size:13px;color:var(--teal-d);font-weight:600;margin-bottom:22px;text-align:center;line-height:1.5;}
+.auth-text{font-family:var(--display);font-size:19px;font-style:italic;font-weight:500;color:var(--ink);margin-bottom:12px;line-height:1.55;}
+.auth-creds{list-style:none;margin-top:26px;}
+.auth-creds li{padding:16px 0;border-top:1px solid var(--line);font-size:14px;font-weight:500;color:var(--ink-2);display:flex;align-items:center;gap:15px;line-height:1.4;}
+.auth-creds li:first-child{border-top:none;}
+.cred-ico{width:38px;height:38px;flex:none;}
 
 /* ─── OFERTA ─── */
-.sec-dark .glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 40% at 50% 0%,rgba(15,126,124,.22) 0%,transparent 62%);}
-.offer-head{text-align:center;margin-bottom:30px;position:relative;}
-.offer-head h3{font-family:var(--display);font-size:clamp(25px,5.8vw,36px);font-weight:600;color:#fff;line-height:1.1;margin-bottom:12px;letter-spacing:-.015em;}
+.offer-head{text-align:center;margin-bottom:32px;}
+.offer-head h3{font-family:var(--display);font-size:clamp(27px,5.8vw,38px);font-weight:600;color:#fff;line-height:1.08;margin-bottom:14px;letter-spacing:-.018em;}
 .offer-head p{color:rgba(255,255,255,.7);font-size:15px;line-height:1.62;max-width:440px;margin:0 auto;}
 
-.benefit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative;}
-.bc{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:18px 16px;display:flex;flex-direction:column;gap:11px;}
-.bc.wide{grid-column:1/-1;flex-direction:row;align-items:flex-start;gap:14px;}
-.bc-icon{width:42px;height:42px;flex:none;background:rgba(143,214,206,.16);border:1px solid rgba(143,214,206,.26);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#8FD6CE;}
-.bc h4{font-family:var(--display);font-size:15px;font-weight:600;color:#fff;line-height:1.28;letter-spacing:-.01em;}
-.bc p{font-size:12.5px;color:rgba(255,255,255,.66);line-height:1.55;}
+.benefit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.bc{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.12);border-radius:13px;padding:20px 17px;display:flex;flex-direction:column;gap:12px;}
+.bc.wide{grid-column:1/-1;flex-direction:row;align-items:flex-start;gap:15px;}
+.bc-icon{width:44px;height:44px;flex:none;background:rgba(143,214,206,.14);border:1px solid rgba(143,214,206,.24);border-radius:11px;display:flex;align-items:center;justify-content:center;color:#8FD6CE;}
+.bc h4{font-family:var(--display);font-size:15.5px;font-weight:600;color:#fff;line-height:1.26;letter-spacing:-.01em;}
+.bc p{font-size:12.5px;color:rgba(255,255,255,.64);line-height:1.55;}
 .bc.wide .bc-body{flex:1;}
-.bc.wide h4{font-size:16px;}
+.bc.wide h4{font-size:16.5px;}
 .bc.wide p{font-size:13.5px;}
 
-.offer-warn{background:rgba(207,85,64,.13);border:1px solid rgba(207,85,64,.32);border-radius:12px;padding:20px 18px;font-size:14px;color:rgba(255,255,255,.8);line-height:1.6;margin-top:22px;position:relative;}
-.warn-head{display:flex;align-items:center;gap:11px;margin-bottom:9px;}
-.warn-head .tile{width:32px;height:32px;background:rgba(207,85,64,.24);color:#F6BCB0;border-radius:9px;}
-.warn-head strong{color:#fff;font-size:15px;font-weight:600;font-family:var(--display);letter-spacing:-.01em;}
+.offer-warn{background:rgba(207,85,64,.12);border:1px solid rgba(207,85,64,.3);border-radius:13px;padding:22px 20px;font-size:14px;color:rgba(255,255,255,.8);line-height:1.6;margin-top:24px;}
+.warn-head{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.warn-head .tile{width:34px;height:34px;background:rgba(207,85,64,.22);color:#F6BCB0;border-radius:9px;box-shadow:none;}
+.warn-head strong{color:#fff;font-size:15.5px;font-weight:600;font-family:var(--display);letter-spacing:-.01em;}
 
-.guarantee{background:var(--mint);border:1px solid rgba(15,126,124,.22);border-radius:var(--r);padding:28px 22px;margin-top:24px;text-align:center;position:relative;}
-.guar-seal{width:56px;height:56px;margin:0 auto 16px;border-radius:50%;background:var(--pine);color:#8FD6CE;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px -10px rgba(12,58,57,.6);}
+.guarantee{background:var(--mint);border:1px solid rgba(15,126,124,.2);border-radius:var(--r);padding:30px 24px;margin-top:24px;text-align:center;}
+.guar-seal{width:58px;height:58px;margin:0 auto 17px;border-radius:50%;background:var(--pine);color:#8FD6CE;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 26px -10px rgba(12,58,57,.6);}
 .guar-seal svg{width:28px;height:28px;}
-.guarantee h4{font-family:var(--display);font-size:22px;font-weight:600;color:var(--ink);margin-bottom:11px;line-height:1.18;letter-spacing:-.015em;}
+.guarantee h4{font-family:var(--display);font-size:23px;font-weight:600;color:var(--ink);margin-bottom:12px;line-height:1.16;letter-spacing:-.015em;}
 .guarantee p{font-size:14px;color:var(--ink-2);line-height:1.64;max-width:440px;margin:0 auto;}
 .guarantee p strong{color:var(--teal-d);}
 
 /* ─── PARA QUIÉN ─── */
-.fit-block{margin-bottom:30px;}
+.fit-block{margin-bottom:32px;}
 .fit-block:last-child{margin-bottom:0;}
-.fit-h{font-family:var(--display);font-size:19px;font-weight:600;margin-bottom:15px;display:flex;align-items:center;gap:12px;color:var(--ink);letter-spacing:-.01em;}
-.fit-dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;}
-.fit-dot.yes{background:var(--mint);color:var(--teal-d);}
-.fit-dot.no{background:var(--coral-tint);color:var(--coral-d);}
+.fit-h{font-family:var(--display);font-size:20px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:13px;color:var(--ink);letter-spacing:-.01em;}
+.fit-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;}
+.fit-dot.yes{background:var(--mint);color:var(--teal-d);box-shadow:inset 0 0 0 1px rgba(15,126,124,.18);}
+.fit-dot.no{background:var(--coral-tint);color:var(--coral-d);box-shadow:inset 0 0 0 1px var(--coral-line);}
 .fit-items{list-style:none;}
-.fit-items li{padding:13px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--ink-2);display:flex;align-items:flex-start;gap:12px;line-height:1.52;}
-.fit-items li:last-child{border-bottom:none;}
+.fit-items li{padding:14px 0;border-top:1px solid var(--line);font-size:14.5px;color:var(--ink-2);display:flex;align-items:flex-start;gap:12px;line-height:1.52;}
+.fit-items li:first-child{border-top:none;}
 .fit-items li svg{margin-top:3px;flex:none;}
 .fit-items.yes li svg{color:var(--teal);}
 .fit-items.no li svg{color:var(--coral);}
 
 /* ─── TESTIMONIOS ─── */
-.testi-stack{display:flex;flex-direction:column;gap:20px;margin-top:30px;}
-.testi-card{background:var(--wh);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 6px 20px -12px rgba(12,58,57,.18);}
+.testi-stack{display:flex;flex-direction:column;gap:20px;margin-top:32px;}
+.testi-card{background:var(--wh);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 8px 24px -14px rgba(12,58,57,.2);}
 .testi-img{width:100%;display:block;height:auto;background:var(--mint);}
-.testi-body{padding:20px 18px;}
-.testi-badges{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.testi-body{padding:22px 20px;}
+.testi-badges{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:15px;}
 .badge{font-size:11px;font-weight:600;padding:5px 11px;border-radius:100px;letter-spacing:.2px;display:inline-flex;align-items:center;gap:5px;}
 .badge-coral{background:var(--coral-tint);color:var(--coral-d);}
 .badge-teal{background:var(--mint);color:var(--teal-d);}
-.testi-quote{font-family:var(--display);font-size:17px;font-weight:500;line-height:1.44;color:var(--ink);margin-bottom:16px;letter-spacing:-.01em;}
-.testi-foot{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--line);}
-.testi-ava{width:40px;height:40px;flex:none;border-radius:50%;background:var(--mint);color:var(--teal-d);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:16px;}
+.testi-quote{font-family:var(--display);font-size:18px;font-weight:500;line-height:1.42;color:var(--ink);margin-bottom:17px;letter-spacing:-.01em;}
+.testi-foot{display:flex;align-items:center;gap:12px;padding-top:15px;border-top:1px solid var(--line);}
+.testi-ava{width:42px;height:42px;flex:none;border-radius:50%;background:var(--mint);color:var(--teal-d);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:17px;box-shadow:inset 0 0 0 1px rgba(15,126,124,.16);}
 .testi-meta{flex:1;line-height:1.32;}
 .testi-meta .who{font-size:13.5px;font-weight:600;color:var(--ink);}
 .testi-meta .cond{font-size:12px;color:var(--ink-3);}
 .testi-time{font-size:10.5px;background:var(--pine);color:#8FD6CE;padding:5px 10px;border-radius:100px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;white-space:nowrap;}
-.testi-disc{display:flex;align-items:flex-start;gap:8px;text-align:left;margin-top:18px;font-size:11.5px;color:var(--ink-3);line-height:1.5;max-width:480px;margin-left:auto;margin-right:auto;}
+.testi-disc{display:flex;align-items:flex-start;gap:8px;text-align:left;margin-top:20px;font-size:11.5px;color:var(--ink-3);line-height:1.5;max-width:480px;margin-left:auto;margin-right:auto;}
 .testi-disc svg{color:var(--pine-3);margin-top:1px;flex:none;}
 
 /* ─── FAQ ─── */
-.faq{margin-top:24px;}
-.faq-item{background:var(--wh);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden;}
-.faq-q{padding:18px;font-size:15.5px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink);min-height:56px;line-height:1.38;list-style:none;font-family:var(--display);letter-spacing:-.01em;-webkit-tap-highlight-color:transparent;}
+.faq{margin-top:26px;}
+.faq-item{background:var(--wh);border:1px solid var(--line);border-radius:13px;margin-bottom:10px;overflow:hidden;}
+.faq-q{padding:19px;font-size:16px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink);min-height:58px;line-height:1.36;list-style:none;font-family:var(--display);letter-spacing:-.01em;-webkit-tap-highlight-color:transparent;}
 .faq-q::-webkit-details-marker{display:none;}
-.faq-tog{width:28px;height:28px;flex:none;background:var(--mint);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--teal-d);transition:transform .3s var(--ease),background .3s,color .3s;}
+.faq-tog{width:29px;height:29px;flex:none;background:var(--mint);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--teal-d);transition:transform .3s var(--ease),background .3s,color .3s;}
 .faq-item[open] .faq-tog{background:var(--pine);color:#fff;transform:rotate(135deg);}
-.faq-a{padding:2px 18px 19px;font-size:14.5px;color:var(--ink-2);line-height:1.66;}
+.faq-a{padding:2px 19px 20px;font-size:14.5px;color:var(--ink-2);line-height:1.66;}
 
 /* ─── CTA FINAL ─── */
-.alert-stack{display:flex;flex-direction:column;gap:11px;margin:28px 0 6px;position:relative;}
-.alert-card{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:18px 16px;}
-.alert-tile{width:40px;height:40px;flex:none;border-radius:10px;background:rgba(143,214,206,.15);color:#8FD6CE;display:flex;align-items:center;justify-content:center;}
-.alert-signal{font-family:var(--display);font-size:15px;font-weight:600;color:#fff;margin-bottom:5px;line-height:1.28;letter-spacing:-.01em;}
-.alert-consequence{font-size:12.5px;color:rgba(255,255,255,.66);line-height:1.55;}
+.alert-stack{display:flex;flex-direction:column;gap:11px;margin:30px 0 6px;}
+.alert-card{display:flex;align-items:flex-start;gap:15px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.13);border-radius:13px;padding:19px 17px;}
+.alert-tile{width:42px;height:42px;flex:none;border-radius:11px;background:rgba(143,214,206,.13);color:#8FD6CE;display:flex;align-items:center;justify-content:center;}
+.alert-signal{font-family:var(--display);font-size:15.5px;font-weight:600;color:#fff;margin-bottom:5px;line-height:1.26;letter-spacing:-.01em;}
+.alert-consequence{font-size:12.5px;color:rgba(255,255,255,.64);line-height:1.55;}
 
-.form-box{background:var(--wh);border:1px solid var(--line);border-radius:var(--r);padding:28px 22px;margin-top:26px;position:relative;box-shadow:0 24px 50px -28px rgba(0,0,0,.4);}
-.form-box .fh{font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--coral-d);}
-.form-box h3{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);margin-top:7px;letter-spacing:-.01em;}
-.field{margin-top:16px;}
+.form-box{background:var(--wh);border:1px solid var(--line);border-radius:var(--r);padding:30px 24px;margin-top:28px;box-shadow:0 30px 60px -32px rgba(0,0,0,.5);}
+.form-box .fh{font-family:var(--display);font-style:italic;font-size:15px;font-weight:500;color:var(--coral-d);}
+.form-box h3{font-family:var(--display);font-size:22px;font-weight:600;color:var(--ink);margin-top:7px;letter-spacing:-.012em;}
+.field{margin-top:17px;}
 .field label{display:block;font-size:13px;font-weight:600;margin-bottom:7px;color:var(--ink);}
 .field input,.field select,.field textarea{
   width:100%;font-family:var(--body);font-size:15.5px;color:var(--ink);
-  background:var(--mint-2);border:1.5px solid var(--line);border-radius:10px;padding:13px 14px;
+  background:var(--mint-2);border:1.5px solid var(--line);border-radius:11px;padding:13px 14px;
   transition:border-color .16s,box-shadow .16s,background .16s;
 }
 .field input::placeholder,.field textarea::placeholder{color:var(--ink-3);}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal);background:#fff;box-shadow:0 0 0 4px rgba(15,126,124,.13);}
-.field textarea{resize:vertical;min-height:74px;}
-.form-box .btn{margin-top:22px;}
+.field textarea{resize:vertical;min-height:76px;}
+.form-box .btn{margin-top:24px;}
 .form-box .cta-note{color:var(--ink-3);}
 
-.form-ok{display:none;text-align:center;padding:8px 0;}
+.form-ok{display:none;text-align:center;padding:10px 0;}
 .form-ok.show{display:block;}
-.ok-seal{width:60px;height:60px;border-radius:50%;background:var(--mint);color:var(--teal-d);display:grid;place-items:center;margin:0 auto 14px;}
+.ok-seal{width:62px;height:62px;border-radius:50%;background:var(--mint);color:var(--teal-d);display:grid;place-items:center;margin:0 auto 16px;box-shadow:inset 0 0 0 1px rgba(15,126,124,.18);}
 .ok-seal svg{width:30px;height:30px;}
-.form-ok h3{font-family:var(--display);font-size:22px;font-weight:600;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em;}
+.form-ok h3{font-family:var(--display);font-size:23px;font-weight:600;color:var(--ink);margin-bottom:9px;letter-spacing:-.012em;}
 .form-ok p{font-size:14.5px;color:var(--ink-2);line-height:1.6;max-width:380px;margin:0 auto;}
-.btn-wa{background:#1FA855;box-shadow:0 12px 26px -12px rgba(31,168,85,.6);margin-top:22px;}
+.btn-wa{background:#1FA855;box-shadow:0 14px 30px -14px rgba(31,168,85,.6);margin-top:24px;}
 .btn-wa:hover{background:#178b46;}
 
 /* ─── FOOTER ─── */
-.footer{background:var(--ink);color:rgba(255,255,255,.5);text-align:center;padding:40px 20px calc(40px + var(--sab) + 78px);font-size:12px;line-height:1.6;}
-.footer .brand{justify-content:center;margin-bottom:14px;}
+.footer{background:var(--ink);color:rgba(255,255,255,.5);text-align:center;padding:46px 20px calc(46px + var(--sab) + 78px);font-size:12px;line-height:1.6;}
+.footer .brand{justify-content:center;margin-bottom:16px;}
 .footer .brand-name{color:#fff;}
 .footer a{color:#8FD6CE;text-decoration:none;}
 .footer-links{display:flex;justify-content:center;align-items:center;gap:14px;margin:16px 0 12px;flex-wrap:wrap;}
-.footer-links a{color:rgba(255,255,255,.62);font-size:11.5px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:1px;transition:color .18s,border-color .18s;}
+.footer-links a{color:rgba(255,255,255,.6);font-size:11.5px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:1px;transition:color .2s,border-color .2s;}
 .footer-links a:hover{color:#8FD6CE;border-color:rgba(143,214,206,.5);}
 .footer-links span{color:rgba(255,255,255,.24);}
 .footer .disc{max-width:500px;margin:14px auto 0;font-size:10.5px;line-height:1.55;color:rgba(255,255,255,.4);}
 
 /* ─── FLOATING CTA ─── */
-.float-cta{position:fixed;left:0;right:0;bottom:0;background:rgba(12,58,57,.97);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);padding:11px 18px calc(11px + var(--sab));display:flex;justify-content:center;z-index:var(--z-float);transform:translateY(120%);transition:transform .34s var(--ease);border-top:1px solid rgba(143,214,206,.18);}
+.float-cta{position:fixed;left:0;right:0;bottom:0;background:rgba(9,31,30,.96);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);padding:11px 18px calc(11px + var(--sab));display:flex;justify-content:center;z-index:var(--z-float);transform:translateY(120%);transition:transform .34s var(--ease);border-top:1px solid rgba(143,214,206,.18);}
 .float-cta.show{transform:translateY(0);}
 .float-cta .btn{max-width:460px;}
 
 /* ─── REVEAL (progresivo; visible por defecto sin JS) ─── */
-.js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+.js .rv{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
 .js .rv.v{opacity:1;transform:none;}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
@@ -422,14 +413,12 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
 }
 @media(min-width:768px){
   .w{max-width:680px;}
-  .sec{padding:80px 0;}
-  .hero{padding:60px 0 72px;}
-  body{font-size:17px;}
+  .hero{padding:40px 0 70px;}
 }
 @media(max-width:430px){
   .eat{grid-template-columns:1fr;}
   .benefit-grid{grid-template-columns:1fr;}
-  .chain-fact{flex-direction:column;text-align:center;gap:10px;}
+  .chain-fact{flex-direction:column;text-align:center;gap:11px;}
 }
 </style>
 </head>
@@ -471,33 +460,46 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
   </div>
 </header>
 
-<!-- ░░░ HERO ░░░ -->
+<!-- ░░░ HERO · VSL inmediatamente debajo del header ░░░ -->
 <section class="hero">
+  <!-- Motivo de marca: curvas de nivel (capas de la piel / profundidad) -->
+  <svg class="hero-contour" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g fill="none" stroke="#8FD6CE" stroke-width="1">
+      <path d="M-40 90 C 160 40,300 150,470 95 S 760 40,860 110" opacity=".10"/>
+      <path d="M-40 165 C 150 120,320 220,500 160 S 770 115,860 185" opacity=".085"/>
+      <path d="M-40 245 C 170 200,300 300,480 245 S 780 200,860 270" opacity=".07"/>
+      <path d="M-40 330 C 150 285,330 385,510 325 S 770 285,860 355" opacity=".055"/>
+      <path d="M-40 420 C 170 375,300 470,480 415 S 780 375,860 445" opacity=".045"/>
+      <path d="M-40 515 C 150 470,330 565,510 510 S 770 470,860 540" opacity=".035"/>
+    </g>
+  </svg>
+  <span class="hero-glow" aria-hidden="true"></span>
 <div class="w">
 <div class="hero-inner rv">
 
   <!-- EL LLAMADO: dirigido a quien convive con la enfermedad -->
   <p class="hero-call">
     <span class="dot" aria-hidden="true"></span>
-    <span>Si convivís con <strong>dermatitis, psoriasis, vitíligo o lupus en la piel</strong> y ya te dijeron que es “para toda la vida”, leé esto con calma.</span>
+    <span>Para quien vive con <strong>dermatitis, psoriasis, vitíligo o lupus en la piel</strong></span>
   </p>
 
-  <h1>La picazón, las manchas y los brotes no se apagan con cremas ni con corticoides <span class="myth">de por vida</span>.</h1>
-
+  <!-- VSL -->
   <div class="vid-wrap">
     <button type="button" class="vid-facade" id="vsl" aria-label="Reproducir el video de Ezequiel Racca">
       <!-- TODO: reemplazar src/srcset por la portada real del VSL -->
       <img class="vid-poster" width="960" height="540" fetchpriority="high"
-           src="https://placehold.co/720x405/0C3A39/8FD6CE.png?text=VSL+Ezequiel+Racca"
-           srcset="https://placehold.co/480x270/0C3A39/8FD6CE.png?text=VSL 480w,
-                   https://placehold.co/720x405/0C3A39/8FD6CE.png?text=VSL 720w"
-           sizes="(max-width:680px) calc(100vw - 44px), 640px"
+           src="https://placehold.co/720x405/091F1E/8FD6CE.png?text=VSL+Ezequiel+Racca"
+           srcset="https://placehold.co/480x270/091F1E/8FD6CE.png?text=VSL 480w,
+                   https://placehold.co/720x405/091F1E/8FD6CE.png?text=VSL 720w"
+           sizes="(max-width:680px) calc(100vw - 40px), 660px"
            alt="Ezequiel Racca explica por qué las enfermedades autoinmunes de la piel empiezan en el intestino">
       <span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></span>
       <span class="vid-dur" aria-hidden="true">8:00</span>
-      <span class="vid-label">Mirá por qué tu piel no mejora, y qué se puede hacer distinto</span>
+      <span class="vid-label">Por qué tu piel no mejora, y qué se puede hacer distinto</span>
     </button>
   </div>
+
+  <h1>La picazón, las manchas y los brotes no se apagan con cremas ni con corticoides <span class="myth">de por vida</span>.</h1>
 
   <p class="hero-p">
     Te lo digo claro: <strong>dermatitis, psoriasis, vitíligo y lupus no son problemas distintos de la piel.</strong>
@@ -680,21 +682,21 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
     <div class="phase">
       <div class="phase-n">1</div>
       <div>
-        <h3><span class="tag">Fase 01</span>Apagar el incendio</h3>
-        <p>Primero retiramos lo que enciende la inflamación todos los días: ultraprocesados, azúcar, harinas, aceites y alimentos que tu sistema inmune lee como una amenaza. <span class="acc">Si no sacás la fuente del daño, nada de lo demás funciona.</span></p>
+        <h3><span class="tag">Fase uno</span>Apagar el incendio</h3>
+        <p>Primero retiramos lo que enciende la inflamación todos los días: ultraprocesados, azúcar, harinas, aceites y alimentos que tu sistema inmune lee como una amenaza. <span class="acc">Si no retiras la fuente del daño, nada de lo demás funciona.</span></p>
       </div>
     </div>
     <div class="phase">
       <div class="phase-n">2</div>
       <div>
-        <h3><span class="tag">Fase 02</span>Sellar la frontera intestinal</h3>
+        <h3><span class="tag">Fase dos</span>Sellar la frontera intestinal</h3>
         <p>Cerca del 80% de tu inmunidad vive en el intestino, y años de mala alimentación volvieron esa barrera permeable. <span class="acc">Reparamos el intestino permeable</span> con una alimentación ancestral de comida real para que el sistema inmune deje de recibir falsas alarmas.</p>
       </div>
     </div>
     <div class="phase">
       <div class="phase-n">3</div>
       <div>
-        <h3><span class="tag">Fase 03</span>Reconstruir la inmunidad</h3>
+        <h3><span class="tag">Fase tres</span>Reconstruir la inmunidad</h3>
         <p>En vez de apagar tus defensas con inmunosupresores, las regulamos desde la raíz. <span class="acc">Un sistema inmune equilibrado deja de atacar tu propia piel,</span> los brotes se espacian y el cuerpo recupera su capacidad de sanar.</p>
       </div>
     </div>
@@ -720,10 +722,10 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
     <ul class="obj-fears">
       <li><svg class="i i-sm" aria-hidden="true"><use href="#info"/></svg>“El médico me dijo que es genético, que tuve mala suerte.”</li>
       <li><svg class="i i-sm" aria-hidden="true"><use href="#info"/></svg>“Me dijeron que voy a tener que medicarme de por vida.”</li>
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#info"/></svg>“Si los médicos no lo curan, ¿quién sos vos para hacerlo?”</li>
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#info"/></svg>“Si los médicos no lo curan, ¿quién eres tú para hacerlo?”</li>
     </ul>
     <div class="obj-body">
-      <p>Esa desconfianza es lógica: crecimos escuchando que la grasa hace mal, que la proteína hace mal y que lo más sano es lo vegetal. La medicina tradicional trata la enfermedad autoinmune con inmunosupresores: te baja los síntomas <strong>a costa de bajarte la inmunidad.</strong> Convivís mejor, pero nunca tocás la causa.</p>
+      <p>Esa desconfianza es lógica: crecimos escuchando que la grasa hace mal, que la proteína hace mal y que lo más sano es lo vegetal. La medicina tradicional trata la enfermedad autoinmune con inmunosupresores: te baja los síntomas <strong>a costa de bajarte la inmunidad.</strong> Convives mejor, pero nunca tocas la causa.</p>
       <p>Esto no reemplaza a tu médico ni te pide abandonar tu tratamiento. Es lo contrario: <strong>sumamos un médico al programa</strong> y abordamos lo que en la consulta casi nunca se mira, la alimentación. No te prometo magia. Te muestro el otro camino, paso a paso, para que tu cuerpo deje de pelear contra sí mismo.</p>
     </div>
   </div>
@@ -828,10 +830,9 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
 
 <!-- ░░░ OFERTA ░░░ -->
 <section class="sec sec-dark">
-<div class="glow" aria-hidden="true"></div>
 <div class="w">
   <div class="offer-head rv">
-    <p class="flag on-dark" style="justify-content:center;">Programa de acompañamiento · 3 meses</p>
+    <p class="flag on-dark center">Programa de acompañamiento · 3 meses</p>
     <h3>Método Piel en Calma</h3>
     <p>Tres meses de acompañamiento personalizado para abordar la causa de tu enfermedad autoinmune de la piel desde la nutrición funcional, junto a un médico. Sin ensayo y error.</p>
   </div>
@@ -869,7 +870,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
       <div class="bc-icon"><svg class="i" aria-hidden="true"><use href="#chat"/></svg></div>
       <div class="bc-body">
         <h4>Línea directa de WhatsApp</h4>
-        <p>Acceso para tus dudas durante el proceso, con ajustes del plan según cómo responde tu piel. Acompañamiento real, no un PDF que descargás y olvidás.</p>
+        <p>Acceso para tus dudas durante el proceso, con ajustes del plan según cómo responde tu piel. Acompañamiento real, no un PDF que descargas y olvidas.</p>
       </div>
     </div>
     <div class="bc wide">
@@ -886,14 +887,14 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
       <div class="tile"><svg class="i i-sm" aria-hidden="true"><use href="#alert"/></svg></div>
       <strong>Este programa no es para todos.</strong>
     </div>
-    Es para personas decididas a cambiar lo que comen y a sostenerlo. Si buscás una pastilla mágica, o no estás dispuesto/a a dejar los ultraprocesados, el azúcar y las harinas, este acompañamiento no es para vos.
+    Es para personas decididas a cambiar lo que comen y a sostenerlo. Si buscas una pastilla mágica, o no estás dispuesto/a a dejar los ultraprocesados, el azúcar y las harinas, este acompañamiento no es para ti.
   </div>
 
   <div class="guarantee rv">
     <div class="guar-seal"><svg class="i" aria-hidden="true"><use href="#seal"/></svg></div>
     <h4>Garantía de acompañamiento</h4>
     <p>
-      Si seguís el método paso a paso durante los tres meses y reportás tus avances en los puntos de control,
+      Si sigues el método paso a paso durante los tres meses y reportas tus avances en los puntos de control,
       y aun así tu piel no muestra cambios, <strong>extiendo el acompañamiento sin costo adicional</strong>
       hasta que tu cuerpo responda. No te dejo solo/a: es la forma honesta de acompañar un proceso biológico.
     </p>
@@ -904,27 +905,27 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
 <!-- ░░░ PARA QUIÉN ░░░ -->
 <section class="sec sec-white">
 <div class="w">
-  <p class="flag rv">¿Es para vos?</p>
+  <p class="flag rv">¿Es para ti?</p>
   <h2 class="stitle rv">Un enfoque serio para quien ya se cansó de los parches</h2>
 
-  <div class="fit-block rv" style="margin-top:30px;">
-    <div class="fit-h"><span class="fit-dot yes"><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg></span>Este programa es para vos si…</div>
+  <div class="fit-block rv" style="margin-top:32px;">
+    <div class="fit-h"><span class="fit-dot yes"><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg></span>Este programa es para ti si…</div>
     <ul class="fit-items yes">
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Tenés dermatitis, psoriasis, vitíligo, lupus u otra enfermedad autoinmune de la piel</li>
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Tienes dermatitis, psoriasis, vitíligo, lupus u otra enfermedad autoinmune de la piel</li>
       <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Ya comprobaste que las cremas y los corticoides son parches que no resuelven la causa</li>
       <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Estás dispuesto/a a cambiar tu alimentación de verdad y a sostenerlo</li>
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Buscás acompañamiento directo, no un PDF ni un grupo más</li>
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Querés abordar la causa junto a tu tratamiento médico, no en lugar de él</li>
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Buscas acompañamiento directo, no un PDF ni un grupo más</li>
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Quieres abordar la causa junto a tu tratamiento médico, no en lugar de él</li>
     </ul>
   </div>
 
   <div class="fit-block rv">
-    <div class="fit-h"><span class="fit-dot no"><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg></span>Este programa no es para vos si…</div>
+    <div class="fit-h"><span class="fit-dot no"><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg></span>Este programa no es para ti si…</div>
     <ul class="fit-items no">
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg>Esperás un diagnóstico gratis por chat, sin compromiso</li>
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg>Esperas un diagnóstico gratis por chat, sin compromiso</li>
       <li><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg>No estás dispuesto/a a dejar los ultraprocesados, el azúcar y las harinas</li>
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg>Esperás resultados sin seguir el plan ni los pasos acordados</li>
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg>Querés dejar tu medicación por tu cuenta, sin acompañamiento médico</li>
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg>Esperas resultados sin seguir el plan ni los pasos acordados</li>
+      <li><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg>Quieres dejar tu medicación por tu cuenta, sin acompañamiento médico</li>
     </ul>
   </div>
 </div>
@@ -942,7 +943,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
       <div class="faq-a">No por tu cuenta, nunca. El programa cuenta con un médico que supervisa tu caso. A medida que tu cuerpo responde, cualquier ajuste de medicación se hace de forma segura y acompañada. Nuestro trabajo es la causa nutricional; no reemplazamos a tu médico tratante, lo sumamos.</div>
     </details>
     <details class="faq-item">
-      <summary class="faq-q">¿Sos médico?<span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
+      <summary class="faq-q">¿Eres médico?<span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
       <div class="faq-a">No, y lo digo con total claridad: soy odontólogo y me formé durante años en nutrición y medicina funcional, incluso en clínicas de EE.UU. dedicadas a pacientes autoinmunes. Precisamente por eso el programa lo llevo junto a un médico, para que la parte clínica esté siempre cubierta.</div>
     </details>
     <details class="faq-item">
@@ -963,24 +964,23 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
     </details>
     <details class="faq-item">
       <summary class="faq-q">No vivo en tu país. ¿Puedo acceder?<span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
-      <div class="faq-a">Sí. El acompañamiento es 100% online: por videollamada y WhatsApp. Atendemos personas en Argentina, Chile, México, Colombia, España y cualquier lugar con conexión a internet. La biología no tiene fronteras.</div>
+      <div class="faq-a">Sí. El acompañamiento es 100% online: por videollamada y WhatsApp. Atendemos personas en distintos países de habla hispana y en cualquier lugar con conexión a internet. La biología no tiene fronteras.</div>
     </details>
     <details class="faq-item">
       <summary class="faq-q">¿Hay garantía?<span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
-      <div class="faq-a">Sí, y es coherente con mi forma de trabajar. Si seguís el método paso a paso durante los tres meses, reportás tus avances en los puntos de control acordados y aun así tu piel no muestra cambios, extiendo el acompañamiento sin costo adicional hasta que tu cuerpo responda. Es la forma honesta de acompañar un proceso biológico: con presencia real.</div>
+      <div class="faq-a">Sí, y es coherente con mi forma de trabajar. Si sigues el método paso a paso durante los tres meses, reportas tus avances en los puntos de control acordados y aun así tu piel no muestra cambios, extiendo el acompañamiento sin costo adicional hasta que tu cuerpo responda. Es la forma honesta de acompañar un proceso biológico: con presencia real.</div>
     </details>
   </div>
 </div>
 </section>
 
 <!-- ░░░ CTA FINAL ░░░ -->
-<section class="sec sec-dark" id="contactar" style="padding:64px 0 72px;">
-<div class="glow" aria-hidden="true"></div>
+<section class="sec sec-dark" id="contactar">
 <div class="w">
-  <p class="flag on-dark rv" style="justify-content:center;">El paso que cambia todo</p>
+  <p class="flag on-dark center rv">El paso que cambia todo</p>
   <h2 class="stitle rv" style="text-align:center;">Tu piel ya te avisó. El próximo brote no tiene por qué llegar.</h2>
   <p class="lead rv" style="text-align:center;margin:0 auto 30px;max-width:46ch;">
-    Cada semana que esperás, la inflamación sigue trabajando adentro. No esperes el próximo brote ni la
+    Cada semana que esperas, la inflamación sigue trabajando adentro. No esperes el próximo brote ni la
     próxima crema que tampoco funciona. El primer paso es simple y no cuesta nada: contarnos tu caso.
   </p>
 
@@ -988,14 +988,14 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
     <div class="alert-card">
       <div class="alert-tile"><svg class="i i-sm" aria-hidden="true"><use href="#flame"/></svg></div>
       <div>
-        <div class="alert-signal">Te rascás o tenés brotes casi todos los días</div>
+        <div class="alert-signal">Te rascas o tienes brotes casi todos los días</div>
         <div class="alert-consequence">Lo que ves en la piel ya lleva meses ocurriendo adentro. Cada semana sin abordar la causa consolida la inflamación.</div>
       </div>
     </div>
     <div class="alert-card">
       <div class="alert-tile"><svg class="i i-sm" aria-hidden="true"><use href="#pill"/></svg></div>
       <div>
-        <div class="alert-signal">Vivís de corticoides y cada vez te duran menos</div>
+        <div class="alert-signal">Vives de corticoides y cada vez te duran menos</div>
         <div class="alert-consequence">El alivio se acorta porque el corticoide silencia el síntoma sin tocar la causa, mientras baja tu propia inmunidad.</div>
       </div>
     </div>
@@ -1010,8 +1010,8 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
 
   <div class="form-box rv">
     <div id="formWrap">
-      <p class="fh">Postulá a una evaluación</p>
-      <h3>Contanos tu caso en 2 minutos</h3>
+      <p class="fh">Postula a una evaluación</p>
+      <h3>Cuéntanos tu caso en 2 minutos</h3>
 
       <div class="field">
         <label for="nombre">Tu nombre</label>
@@ -1019,12 +1019,12 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
       </div>
       <div class="field">
         <label for="whatsapp">WhatsApp (con código de país)</label>
-        <input id="whatsapp" type="tel" placeholder="+54 9 11 …" autocomplete="tel" inputmode="tel">
+        <input id="whatsapp" type="tel" placeholder="+52 1 55 …" autocomplete="tel" inputmode="tel">
       </div>
       <div class="field">
-        <label for="enfermedad">¿Qué enfermedad de la piel tenés?</label>
+        <label for="enfermedad">¿Qué enfermedad de la piel tienes?</label>
         <select id="enfermedad">
-          <option value="" disabled selected>Elegí una opción</option>
+          <option value="" disabled selected>Elige una opción</option>
           <option>Dermatitis atópica / Eczema</option>
           <option>Psoriasis</option>
           <option>Vitíligo</option>
@@ -1034,9 +1034,9 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
         </select>
       </div>
       <div class="field">
-        <label for="tiempo">¿Hace cuánto la tenés?</label>
+        <label for="tiempo">¿Hace cuánto la tienes?</label>
         <select id="tiempo">
-          <option value="" disabled selected>Elegí una opción</option>
+          <option value="" disabled selected>Elige una opción</option>
           <option>Menos de 1 año</option>
           <option>1 a 3 años</option>
           <option>3 a 10 años</option>
@@ -1044,20 +1044,20 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
         </select>
       </div>
       <div class="field">
-        <label for="probado">¿Qué probaste hasta ahora?</label>
-        <textarea id="probado" placeholder="Cremas, corticoides, dietas, tratamientos… contanos brevemente."></textarea>
+        <label for="probado">¿Qué has probado hasta ahora?</label>
+        <textarea id="probado" placeholder="Cremas, corticoides, dietas, tratamientos… cuéntanos brevemente."></textarea>
       </div>
 
       <button type="button" class="btn" id="submitBtn">Evaluar mi caso<svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></button>
-      <p class="cta-note">Al enviar aceptás que te contactemos por WhatsApp. No compartimos tus datos.</p>
+      <p class="cta-note">Al enviar aceptas que te contactemos por WhatsApp. No compartimos tus datos.</p>
     </div>
 
     <div class="form-ok" id="formOk">
       <div class="ok-seal"><svg class="i" aria-hidden="true"><use href="#check"/></svg></div>
       <h3>Recibimos tu caso</h3>
-      <p>Vamos a revisarlo y te escribimos por WhatsApp para conversar tu situación y ver si encajás con el programa.</p>
+      <p>Vamos a revisarlo y te escribimos por WhatsApp para conversar tu situación y ver si encajas con el programa.</p>
       <!-- TODO: reemplazar el número por el WhatsApp Business real -->
-      <a href="https://wa.me/XXXXXXXXXXX?text=Hola,%20acabo%20de%20postular%20al%20programa%20de%20enfermedades%20autoinmunes%20de%20la%20piel" target="_blank" rel="noopener" class="btn btn-wa">Escribirnos ahora por WhatsApp<svg class="i i-sm" aria-hidden="true"><use href="#chat"/></svg></a>
+      <a href="https://wa.me/XXXXXXXXXXX?text=Hola,%20acabo%20de%20postular%20al%20programa%20de%20enfermedades%20autoinmunes%20de%20la%20piel" target="_blank" rel="noopener" class="btn btn-wa">Escribir ahora por WhatsApp<svg class="i i-sm" aria-hidden="true"><use href="#chat"/></svg></a>
     </div>
   </div>
 </div>
@@ -1069,8 +1069,8 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-lineca
     <span class="brand-mark"><svg class="i i-sm" aria-hidden="true"><use href="#leaf-mark"/></svg></span>
     <span class="brand-name">Raíz Autoinmune<span>Enfermedades de la piel</span></span>
   </a>
-  <!-- TODO: confirmar @usuario de Instagram (con 'autoinmune') y ciudad -->
-  <p>© 2026 Raíz Autoinmune · Ezequiel Racca · <a href="[URL-INSTAGRAM]" target="_blank" rel="noopener">@[usuario-instagram]</a> · Argentina</p>
+  <!-- TODO: confirmar @usuario de Instagram (con 'autoinmune') y ubicación -->
+  <p>© 2026 Raíz Autoinmune · Ezequiel Racca · <a href="[URL-INSTAGRAM]" target="_blank" rel="noopener">@[usuario-instagram]</a></p>
   <div class="footer-links">
     <a href="[URL-POLITICA-PRIVACIDAD]" target="_blank" rel="noopener">Política de Privacidad</a>
     <span>·</span>
@@ -1148,7 +1148,7 @@ if(vsl){
     var wa = document.getElementById('whatsapp').value.trim();
     var enf = document.getElementById('enfermedad').value;
     if(!nombre || !wa || !enf){
-      alert('Completá al menos tu nombre, tu WhatsApp y la enfermedad.');
+      alert('Completa al menos tu nombre, tu WhatsApp y la enfermedad.');
       return;
     }
     document.getElementById('formWrap').style.display = 'none';
