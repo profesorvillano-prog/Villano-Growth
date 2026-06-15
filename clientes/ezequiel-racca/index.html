@@ -39,6 +39,8 @@
   --gi:    #F5F1FA;
   --gold:  #C19330;
   --golb:  #D7B85A;
+  --goldt: #8F6410;
+  --goldbtn:#AD7C20;
   --golp:  #FBF1D9;
   --golw:  #FFFBF1;
   --cr:    #F8F6F4;
@@ -135,7 +137,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
 .vid-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 .vid-facade::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,18,40,.12),rgba(28,18,40,.42));transition:background .25s;}
 .vid-facade:hover::after{background:linear-gradient(180deg,rgba(28,18,40,.04),rgba(28,18,40,.32));}
-.vid-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:70px;height:70px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(193,147,48,.45);transition:transform .2s,background .2s;}
+.vid-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:70px;height:70px;border-radius:50%;background:var(--goldbtn);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(193,147,48,.45);transition:transform .2s,background .2s;}
 .vid-play svg{margin-left:3px;}
 .vid-facade:hover .vid-play{transform:translate(-50%,-50%) scale(1.07);background:#d2a23c;}
 .vid-facade:active .vid-play{transform:translate(-50%,-50%) scale(.96);}
@@ -145,7 +147,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
 /* BOTONES */
 .btn{
   display:flex;align-items:center;justify-content:center;gap:9px;
-  width:100%;background:var(--gold);color:#fff;
+  width:100%;background:var(--goldbtn);color:#fff;
   padding:18px 24px;border-radius:8px;
   font-family:var(--body);
   font-size:15px;font-weight:700;
@@ -155,7 +157,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
   transition:transform .15s,box-shadow .15s,background .2s;
   -webkit-tap-highlight-color:transparent;touch-action:manipulation;
 }
-.btn:hover{background:#d2a23c;}
+.btn:hover{background:#BD8520;}
 .btn:active{transform:scale(.975);box-shadow:0 4px 14px rgba(193,147,48,.2);}
 .btn svg{color:#fff;}
 .btn-dark{background:var(--gd);box-shadow:0 10px 30px rgba(58,42,82,.24);}
@@ -176,7 +178,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
 .shead{margin-bottom:6px;}
 .stitle{font-family:var(--display);font-size:clamp(24px,5.4vw,33px);font-weight:700;line-height:1.16;margin-bottom:14px;color:var(--t0);letter-spacing:-.4px;text-wrap:balance;}
 .stitle-l{color:#fff;}
-.kick{display:inline-flex;align-items:center;gap:9px;font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.kick{display:inline-flex;align-items:center;gap:9px;font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--goldt);margin-bottom:14px;}
 .kick::before{content:'';width:22px;height:1.5px;background:var(--gold);border-radius:2px;}
 .kick-l{color:var(--golb);}
 .kick-l::before{background:var(--golb);}
@@ -241,13 +243,13 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
 .step:last-child{border-bottom:none;padding-bottom:0;}
 .step-n{width:44px;height:44px;flex:none;background:var(--gd);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:19px;font-weight:800;color:var(--golb);border-radius:10px;}
 .step h3{font-family:var(--display);font-size:19px;font-weight:700;margin-bottom:6px;color:var(--t0);line-height:1.22;letter-spacing:-.2px;}
-.step h3 .ph{display:block;font-family:var(--body);font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.step h3 .ph{display:block;font-family:var(--body);font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--goldt);margin-bottom:4px;}
 .step p{font-size:14px;color:var(--t2);line-height:1.64;}
 
 /* OBJECIÓN ("es incurable / es genético") */
 .objection{margin-top:30px;background:var(--wh);border:1px solid var(--br);border-radius:var(--r);overflow:hidden;}
 .obj-head{padding:20px 20px 0;}
-.obj-head .ph{font-family:var(--body);font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
+.obj-head .ph{font-family:var(--body);font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--goldt);}
 .obj-head h3{font-family:var(--display);font-size:19px;font-weight:700;color:var(--t0);margin-top:6px;line-height:1.25;letter-spacing:-.2px;}
 .obj-fears{list-style:none;padding:16px 20px 4px;}
 .obj-fears li{display:flex;gap:11px;align-items:flex-start;padding:9px 0;font-size:13.5px;color:var(--t1);line-height:1.5;font-style:italic;}
@@ -273,14 +275,14 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
 .testi-meta .who{font-size:13px;font-weight:700;color:var(--t0);}
 .testi-meta .cond{font-size:11.5px;color:var(--t2);}
 .testi-time{font-size:10px;background:var(--gd);color:var(--golb);padding:5px 10px;border-radius:100px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;white-space:nowrap;}
-.testi-disc{display:flex;align-items:flex-start;gap:7px;justify-content:center;text-align:left;margin-top:16px;font-size:11px;color:var(--t3);line-height:1.45;max-width:440px;margin-left:auto;margin-right:auto;}
+.testi-disc{display:flex;align-items:flex-start;gap:7px;justify-content:center;text-align:left;margin-top:16px;font-size:11px;color:var(--t2);line-height:1.45;max-width:440px;margin-left:auto;margin-right:auto;}
 .testi-disc svg{color:var(--gb);margin-top:1px;}
 
 /* AUTORIDAD */
 .auth-photo{width:172px;border-radius:14px;overflow:hidden;margin:0 auto 20px;border:1px solid var(--gp);box-shadow:0 12px 34px rgba(58,42,82,.16);}
 .auth-photo img{width:100%;height:auto;display:block;}
 .auth-name{font-family:var(--display);font-size:25px;font-weight:800;margin-bottom:5px;text-align:center;color:var(--t0);letter-spacing:-.3px;}
-.auth-role{font-size:12.5px;color:var(--gold);font-weight:600;margin-bottom:18px;text-align:center;line-height:1.55;letter-spacing:.2px;}
+.auth-role{font-size:12.5px;color:var(--goldt);font-weight:600;margin-bottom:18px;text-align:center;line-height:1.55;letter-spacing:.2px;}
 .auth-text{font-size:15px;color:var(--t1);margin-bottom:10px;line-height:1.74;}
 .auth-creds{list-style:none;margin-top:22px;}
 .auth-creds li{padding:14px 0;border-bottom:1px solid var(--br);font-size:13.5px;font-weight:500;color:var(--t1);display:flex;align-items:center;gap:13px;line-height:1.4;}
@@ -349,7 +351,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
 
 /* CTA FINAL */
 .form-box{background:var(--wh);border:1px solid var(--br);border-radius:var(--r);padding:26px 22px;margin-top:24px;position:relative;box-shadow:0 16px 40px rgba(0,0,0,.18);}
-.form-box .fh{font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
+.form-box .fh{font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--goldt);}
 .form-steps{list-style:none;margin:18px 0 22px;}
 .form-steps li{display:flex;gap:13px;align-items:center;padding:12px 0;border-bottom:1px solid var(--br);font-size:14px;color:var(--t1);line-height:1.45;}
 .form-steps li:last-child{border-bottom:none;}
@@ -364,7 +366,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
   font-size:12px;line-height:1.6;
 }
 .footer a{color:var(--golb);text-decoration:none;}
-.footer .disc{max-width:480px;margin:10px auto 0;font-size:10.5px;line-height:1.55;color:rgba(255,255,255,.4);}
+.footer .disc{max-width:480px;margin:10px auto 0;font-size:10.5px;line-height:1.55;color:rgba(255,255,255,.6);}
 .footer-links{display:flex;justify-content:center;align-items:center;gap:16px;margin:14px 0 10px;flex-wrap:wrap;}
 .footer-links a{color:rgba(255,255,255,.62);font-size:11.5px;font-weight:500;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:1px;transition:color .2s,border-color .2s;}
 .footer-links a:hover{color:var(--golb);border-color:rgba(215,184,90,.5);}
