@@ -3,1084 +3,1315 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="description" content="Enfermedades autoinmunes de la piel — dermatitis, psoriasis, vitíligo y lupus. La picazón, las manchas y los brotes no empiezan en la piel: empiezan en el intestino. Se revierten desde la nutrición funcional, junto a un médico, sin depender de corticoides de por vida. Acompañamiento de Ezequiel Racca.">
-<title>Enfermedades autoinmunes de la piel — Todo empieza en el intestino · Ezequiel Racca</title>
+<meta name="theme-color" content="#0B1F1E">
+<meta name="description" content="Si tu dermatitis, psoriasis, vitíligo o lupus no mejora con el tratamiento convencional, hay una razón. Ezequiel Racca trabaja la causa real junto a un médico. Programa de acompañamiento personalizado, 100% online.">
+<title>Raíz Autoinmune · Ezequiel Racca</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://embed-ssl.wistia.com" crossorigin>
-
-<!-- Portada del VSL como LCP: precarga prioritaria (responsive) -->
-<!-- TODO: reemplazar por la portada real del VSL de Ezequiel (Wistia/YouTube) -->
-<link rel="preload" as="image" fetchpriority="high"
-      href="https://placehold.co/720x405/3A2A52/D7B85A.png?text=VSL+Ezequiel+Racca"
-      imagesrcset="https://placehold.co/480x270/3A2A52/D7B85A.png?text=VSL 480w, https://placehold.co/720x405/3A2A52/D7B85A.png?text=VSL 720w"
-      imagesizes="(max-width:680px) calc(100vw - 44px), 640px">
-
-<!-- Fuentes: Montserrat (titulares) + DM Sans (cuerpo) · carga no bloqueante -->
-<link rel="preload" as="style"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap">
-<link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap"
-      media="print" onload="this.media='all'">
-<noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap">
-</noscript>
-
-<script>document.documentElement.classList.add('js');</script>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
 
 <style>
+/* ─── TOKENS ─── */
 :root {
-  /* Paleta púrpura/ciruela (color de la concienciación autoinmune y del lupus) + acento dorado cálido */
-  --gd:    #3A2A52;
-  --gm:    #4B3868;
-  --gb:    #6B5290;
-  --gp:    #E7DCF3;
-  --gi:    #F5F1FA;
-  --gold:  #C19330;
-  --golb:  #D7B85A;
-  --golp:  #FBF1D9;
-  --golw:  #FFFBF1;
-  --cr:    #F8F6F4;
-  --wh:    #FFFFFF;
-  --t0:    #241A33;
-  --t1:    #463A57;
-  --t2:    #685B79;
-  --t3:    #968AA6;
-  --br:    #E4DCEC;
-  --red:   #B83228;
-  --rdb:   #FDF0EE;
-  --r:     12px;
-  --sat:   env(safe-area-inset-top,0px);
-  --sab:   env(safe-area-inset-bottom,0px);
+  /* Paleta: petróleo profundo + piedra cálida + acento mínimo */
+  --night:   #0B1F1E;   /* fondo más oscuro */
+  --deep:    #0E2D2B;   /* secciones oscuras principales */
+  --pine:    #1A4240;   /* hover, tiles oscuros */
+  --teal:    #2A6B66;   /* elemento primario */
+  --teal-l:  #3D8B85;   /* teal medio */
+  --sage:    #8DB8B4;   /* acento suave sobre oscuro */
+  --sage-l:  #C4DEDD;   /* sage muy claro */
 
-  /* tipografía */
-  --display:'Montserrat','DM Sans',-apple-system,sans-serif;
-  --body:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --stone:   #F5F0E8;   /* fondo principal — piedra cálida, no blanco puro */
+  --stone-2: #EDE8DF;   /* superficies secundarias */
+  --linen:   #FDFAF5;   /* blanco cálido para tarjetas */
 
-  /* z-index scale */
-  --z-float: 199;
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
-body{
-  font-family:var(--body);
-  background:var(--cr);color:var(--t0);
-  line-height:1.65;-webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
+  --ink:     #1A1A18;   /* texto principal */
+  --ink-2:   #3D3D3A;   /* texto cuerpo */
+  --ink-3:   #5E5E58;   /* texto auxiliar (oscurecido para contraste AA) */
+  --rule:    #DDD8CE;   /* separadores */
+  --rule-2:  #E8E4DB;
 
-/* Desktop: brand backdrop so the centered column reads intentional */
-@media(min-width:760px){
-  body{
-    background:
-      radial-gradient(ellipse 50% 38% at 50% 0%,rgba(107,82,144,.12) 0%,transparent 70%),
-      var(--cr);
-  }
+  /* Acento único: tierra — solo en CTA primario y señales de urgencia */
+  --terra:   #8B4A2A;   /* tierra oscura para texto */
+  --terra-l: #C47A56;   /* tierra media */
+  --terra-bg:#F5EAE3;   /* fondo tierra suave */
+  --terra-bd:#E0C4B4;   /* borde tierra */
+
+  --r:   14px;
+  --r-s:  9px;
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+
+  --display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ease:    cubic-bezier(.22, .61, .18, 1);
+
+  /* z-index escala semántica */
+  --z-float:  60;
+  --z-sticky: 50;
 }
 
-.w{width:100%;max-width:580px;margin:0 auto;padding:0 22px;}
-
-/* ICONS */
-svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
-  stroke-linecap:round;stroke-linejoin:round;width:22px;height:22px;flex:none;}
-.i-sm{width:16px;height:16px;}
-.i-lg{width:26px;height:26px;}
-
-/* HERO */
-.hero{
-  background:var(--gd);
-  padding:56px 0 58px;
-  padding-top:calc(40px + var(--sat));
-  position:relative;overflow:hidden;
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--body);
+  background: var(--stone);
+  color: var(--ink);
+  line-height: 1.65;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 60% 40% at 80% 18%,rgba(215,184,90,.12) 0%,transparent 60%),
-    radial-gradient(ellipse 55% 60% at 8% 84%,rgba(107,82,144,.34) 0%,transparent 62%);
-  pointer-events:none;
+::selection { background: var(--teal); color: #fff; }
+
+/* Foco visible y consistente para teclado en todos los elementos interactivos */
+:focus-visible {
+  outline: 2px solid var(--teal-l);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
-.hero-inner{text-align:center;position:relative;}
-.hero-eyebrow{
-  display:inline-block;
-  color:var(--golb);
-  font-size:12px;font-weight:700;
-  letter-spacing:2.5px;text-transform:uppercase;
-  margin-bottom:20px;
+.sec-dark :focus-visible,
+.sec-night :focus-visible,
+.hero :focus-visible,
+.float-cta :focus-visible { outline-color: var(--sage); }
+
+/* ─── LAYOUT ─── */
+.w  { width: 100%; max-width: 640px; margin: 0 auto; padding: 0 22px; }
+.wm { width: 100%; max-width: 800px; margin: 0 auto; padding: 0 22px; }
+
+/* ─── TIPO ─── */
+h1, h2, h3, .display { font-weight: 600; letter-spacing: -.025em; line-height: 1.1; text-wrap: balance; }
+p { text-wrap: pretty; }
+strong { font-weight: 600; }
+
+/* ─── BOTONES ─── */
+.btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; background: var(--deep); color: #fff;
+  padding: 17px 24px; border-radius: var(--r-s);
+  font-family: var(--body); font-size: 15.5px; font-weight: 500; letter-spacing: .2px; line-height: 1.2;
+  text-decoration: none; border: none; cursor: pointer; text-align: center;
+  transition: background .2s var(--ease), transform .18s var(--ease);
+  -webkit-tap-highlight-color: transparent;
 }
-.hero h1{
-  font-family:var(--display);
-  font-size:clamp(26px,6.4vw,41px);
-  font-weight:800;line-height:1.12;
-  color:#fff;
-  margin-bottom:18px;
-  padding:0 2px;
-  letter-spacing:-.5px;
-  text-wrap:balance;
-  overflow-wrap:break-word;
+.btn:hover  { background: var(--pine); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn-terra  { background: var(--terra); }
+.btn-terra:hover { background: #72391F; }
+.btn-sm { padding: 13px 20px; font-size: 14px; }
+.cta-note { text-align: center; margin-top: 11px; font-size: 12px; color: var(--ink-3); letter-spacing: .1px; }
+.cta-note.lt { color: rgba(255,255,255,.62); }
+
+/* ─── SECCIONES ─── */
+.sec        { padding: clamp(64px, 10vw, 108px) 0; }
+.sec-stone  { background: var(--stone); }
+.sec-stone2 { background: var(--stone-2); }
+.sec-linen  { background: var(--linen); }
+.sec-dark   { background: var(--deep); color: rgba(255,255,255,.8); }
+.sec-night  { background: var(--night); color: rgba(255,255,255,.8); }
+hr.rule { border: none; border-top: 1px solid var(--rule); margin: 0; }
+
+/* Label de sección */
+.eyebrow {
+  display: block; font-style: normal;
+  font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--teal-l); margin-bottom: 14px;
 }
-.hero h1 em{color:var(--golb);font-style:normal;}
-.hero-p{
-  font-size:15px;color:rgba(255,255,255,.74);
-  margin-bottom:32px;line-height:1.72;
-  max-width:472px;margin-left:auto;margin-right:auto;
+.eyebrow.lt { color: var(--sage); }
+.eyebrow.ct { text-align: center; }
+
+.stitle { font-size: clamp(28px, 5.8vw, 42px); color: var(--ink); margin-bottom: 18px; }
+.sec-dark  .stitle,
+.sec-night .stitle { color: #fff; }
+.lead { font-size: 17px; color: var(--ink-2); line-height: 1.72; max-width: 58ch; }
+.sec-dark  .lead,
+.sec-night .lead { color: rgba(255,255,255,.74); }
+.mt-m { margin-top: 28px; }
+.mt-l { margin-top: 40px; }
+.center { text-align: center; }
+.center .lead { margin-left: auto; margin-right: auto; }
+.acc { color: var(--teal); }
+.sec-dark  .acc,
+.sec-night .acc { color: var(--sage-l); }
+
+/* ─── HERO ─── */
+.hero {
+  background: var(--night);
+  color: rgba(255,255,255,.82);
+  padding: 0 0 72px;
+  position: relative; overflow: hidden;
 }
-.hero-p strong{color:#fff;font-weight:600;}
-.hero-p .acc{color:var(--golb);font-weight:600;}
-
-.vid-wrap{margin:24px 0 26px;border-radius:14px;overflow:hidden;position:relative;width:100%;
-  box-shadow:0 18px 50px rgba(0,0,0,.32);border:1px solid rgba(255,255,255,.08);}
-.vid-facade{position:relative;display:block;width:100%;aspect-ratio:16/9;border:none;padding:0;margin:0;cursor:pointer;background:var(--gd);overflow:hidden;-webkit-tap-highlight-color:transparent;}
-.vid-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
-.vid-facade::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,18,40,.12),rgba(28,18,40,.42));transition:background .25s;}
-.vid-facade:hover::after{background:linear-gradient(180deg,rgba(28,18,40,.04),rgba(28,18,40,.32));}
-.vid-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:70px;height:70px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(193,147,48,.45);transition:transform .2s,background .2s;}
-.vid-play svg{margin-left:3px;}
-.vid-facade:hover .vid-play{transform:translate(-50%,-50%) scale(1.07);background:#d2a23c;}
-.vid-facade:active .vid-play{transform:translate(-50%,-50%) scale(.96);}
-.vid-dur{position:absolute;bottom:11px;right:11px;z-index:2;background:rgba(0,0,0,.62);color:#fff;font-size:12px;font-weight:600;padding:3px 9px;border-radius:6px;letter-spacing:.3px;}
-@media(prefers-reduced-motion:reduce){.vid-facade::after,.vid-play{transition:none;}}
-
-/* BOTONES */
-.btn{
-  display:flex;align-items:center;justify-content:center;gap:9px;
-  width:100%;background:var(--gold);color:#fff;
-  padding:18px 24px;border-radius:8px;
-  font-family:var(--body);
-  font-size:15px;font-weight:700;
-  text-decoration:none;border:none;cursor:pointer;
-  letter-spacing:.2px;line-height:1.25;text-align:center;
-  box-shadow:0 10px 30px rgba(193,147,48,.34);
-  transition:transform .15s,box-shadow .15s,background .2s;
-  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+/* Textura grano muy sutil */
+.hero::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .04; mix-blend-mode: overlay;
 }
-.btn:hover{background:#d2a23c;}
-.btn:active{transform:scale(.975);box-shadow:0 4px 14px rgba(193,147,48,.2);}
-.btn svg{color:#fff;}
-.btn-dark{background:var(--gd);box-shadow:0 10px 30px rgba(58,42,82,.24);}
-.btn-dark:hover{background:#46335f;}
-.btn-sm{padding:15px 20px;font-size:14px;gap:7px;}
-.cta-note{text-align:center;margin-top:11px;font-size:11.5px;color:rgba(255,255,255,.58);letter-spacing:.2px;}
-.cta-note-dark{color:var(--t2);}
-
-.divider{height:1px;background:var(--br);}
-
-.sec{padding:54px 0;}
-.sec-alt{background:var(--gi);}
-.sec-dark{background:var(--gd);color:#fff;position:relative;overflow:hidden;}
-.sec-cream{background:var(--golw);}
-.sec-white{background:var(--wh);}
-
-/* section heading */
-.shead{margin-bottom:6px;}
-.stitle{font-family:var(--display);font-size:clamp(24px,5.4vw,33px);font-weight:700;line-height:1.16;margin-bottom:14px;color:var(--t0);letter-spacing:-.4px;text-wrap:balance;}
-.stitle-l{color:#fff;}
-.kick{display:inline-flex;align-items:center;gap:9px;font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
-.kick::before{content:'';width:22px;height:1.5px;background:var(--gold);border-radius:2px;}
-.kick-l{color:var(--golb);}
-.kick-l::before{background:var(--golb);}
-.sdesc{font-size:15px;color:var(--t1);line-height:1.72;max-width:70ch;}
-.sdesc-l{color:rgba(255,255,255,.7);}
-.acc{color:var(--gd);font-weight:600;}
-.sec-dark .acc{color:var(--golb);}
-
-/* ICON TILE (shared) */
-.tile{flex:none;display:flex;align-items:center;justify-content:center;border-radius:10px;}
-.tile-red{background:var(--rdb);color:var(--red);}
-.tile-grn{background:var(--gp);color:var(--gd);}
-.tile-gld{background:var(--golp);color:#a9781f;}
-
-/* PAIN */
-.pain-list{margin-top:26px;list-style:none;}
-.pain-item{display:flex;gap:15px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--br);}
-.pain-item:first-child{padding-top:0;}
-.pain-item:last-child{border-bottom:none;padding-bottom:0;}
-.pain-ico{width:42px;height:42px;}
-.pain-item h4{font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:4px;color:var(--t0);line-height:1.25;letter-spacing:-.2px;}
-.pain-item p{font-size:13.5px;color:var(--t2);line-height:1.6;}
-
-/* PULLQUOTE (no side-stripe) */
-.pullquote{margin-top:32px;padding:30px 26px 24px;background:var(--gd);border-radius:var(--r);position:relative;overflow:hidden;}
-.pullquote .qmark{font-family:Georgia,serif;font-size:84px;line-height:1;color:var(--golb);opacity:.32;position:absolute;top:6px;left:18px;pointer-events:none;}
-.pullquote p{font-family:var(--display);font-weight:600;font-size:17px;line-height:1.5;color:rgba(255,255,255,.96);margin-bottom:16px;position:relative;letter-spacing:-.2px;}
-.pullquote .attr{font-size:11.5px;font-weight:600;color:var(--golb);letter-spacing:.4px;position:relative;display:flex;align-items:center;gap:8px;}
-.pullquote .attr::before{content:'';width:18px;height:1.5px;background:var(--golb);}
-.pullquote.light{background:var(--gi);}
-.pullquote.light .qmark{color:var(--gold);opacity:.28;}
-.pullquote.light p{color:var(--t0);}
-.pullquote.light .attr{color:var(--gd);}
-.pullquote.light .attr::before{background:var(--gold);}
-
-/* TRIAD (intestino-piel-inmune) */
-.triad{display:flex;border:1px solid var(--br);border-radius:var(--r);overflow:hidden;margin-bottom:28px;background:var(--wh);}
-.triad-cell{flex:1;padding:22px 12px;text-align:center;border-right:1px solid var(--br);display:flex;flex-direction:column;align-items:center;gap:9px;}
-.triad-cell:last-child{border-right:none;}
-.triad-cell .tile{width:42px;height:42px;}
-.triad-cell .tt{font-family:var(--display);font-size:13px;font-weight:700;color:var(--gd);letter-spacing:.2px;}
-.triad-cell .td{font-size:11.5px;color:var(--t2);line-height:1.42;}
-
-/* CHAIN (cadena autoinmune) */
-.chain{margin:30px 0 8px;list-style:none;position:relative;}
-.chain-row{display:flex;align-items:center;gap:14px;padding:15px 16px;background:var(--wh);border:1px solid var(--br);border-radius:12px;}
-.chain-row.danger{background:var(--rdb);border-color:rgba(184,50,40,.22);}
-.chain-ico{width:40px;height:40px;flex:none;border-radius:10px;background:var(--gi);color:var(--gd);display:flex;align-items:center;justify-content:center;}
-.chain-row.danger .chain-ico{background:rgba(184,50,40,.12);color:var(--red);}
-.chain-tt{font-family:var(--display);font-size:14.5px;font-weight:700;color:var(--t0);line-height:1.25;letter-spacing:-.2px;}
-.chain-row.danger .chain-tt{color:var(--red);}
-.chain-td{font-size:12px;color:var(--t2);line-height:1.45;margin-top:2px;}
-.chain-arrow{display:flex;justify-content:center;padding:5px 0;color:var(--gb);}
-.chain-arrow svg{width:20px;height:20px;transform:rotate(90deg);}
-.chain-stat{margin-top:24px;padding:20px 18px;background:var(--gd);border-radius:var(--r);text-align:center;}
-.chain-stat b{font-family:var(--display);font-size:30px;font-weight:800;color:var(--golb);display:block;line-height:1;margin-bottom:8px;}
-.chain-stat span{font-size:13px;color:rgba(255,255,255,.78);line-height:1.55;display:block;max-width:380px;margin:0 auto;}
-
-/* PASOS */
-.step{display:flex;gap:18px;align-items:flex-start;padding:24px 0;border-bottom:1px solid var(--br);}
-.step:first-child{padding-top:0;}
-.step:last-child{border-bottom:none;padding-bottom:0;}
-.step-n{width:44px;height:44px;flex:none;background:var(--gd);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:19px;font-weight:800;color:var(--golb);border-radius:10px;}
-.step h3{font-family:var(--display);font-size:19px;font-weight:700;margin-bottom:6px;color:var(--t0);line-height:1.22;letter-spacing:-.2px;}
-.step h3 .ph{display:block;font-family:var(--body);font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
-.step p{font-size:14px;color:var(--t2);line-height:1.64;}
-
-/* OBJECIÓN ("es incurable / es genético") */
-.objection{margin-top:30px;background:var(--wh);border:1px solid var(--br);border-radius:var(--r);overflow:hidden;}
-.obj-head{padding:20px 20px 0;}
-.obj-head .ph{font-family:var(--body);font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
-.obj-head h3{font-family:var(--display);font-size:19px;font-weight:700;color:var(--t0);margin-top:6px;line-height:1.25;letter-spacing:-.2px;}
-.obj-fears{list-style:none;padding:16px 20px 4px;}
-.obj-fears li{display:flex;gap:11px;align-items:flex-start;padding:9px 0;font-size:13.5px;color:var(--t1);line-height:1.5;font-style:italic;}
-.obj-fears li svg{color:var(--t3);margin-top:2px;flex:none;}
-.obj-body{padding:16px 20px 22px;border-top:1px solid var(--br);background:var(--golw);}
-.obj-body p{font-size:14px;color:var(--t1);line-height:1.68;}
-.obj-body p strong{color:var(--gd);font-weight:600;}
-.obj-body p + p{margin-top:10px;}
-
-/* TESTIMONIOS */
-.testi-stack{display:flex;flex-direction:column;gap:20px;margin-top:30px;}
-.testi-card{background:var(--wh);border:1px solid var(--br);border-radius:var(--r);overflow:hidden;box-shadow:0 4px 18px rgba(58,42,82,.05);}
-.testi-img{width:100%;display:block;height:auto;background:var(--gi);}
-.testi-body{padding:20px 18px;}
-.testi-badges{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-.badge{font-size:10.5px;font-weight:700;padding:5px 11px;border-radius:100px;letter-spacing:.3px;display:inline-flex;align-items:center;gap:5px;}
-.badge-red{background:var(--rdb);color:var(--red);}
-.badge-green{background:var(--gp);color:var(--gd);}
-.testi-quote{font-family:var(--display);font-size:15.5px;font-weight:600;line-height:1.45;color:var(--t0);margin-bottom:16px;letter-spacing:-.2px;}
-.testi-foot{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--br);}
-.testi-ava{width:38px;height:38px;flex:none;border-radius:50%;background:var(--gp);color:var(--gd);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:15px;}
-.testi-meta{flex:1;line-height:1.3;}
-.testi-meta .who{font-size:13px;font-weight:700;color:var(--t0);}
-.testi-meta .cond{font-size:11.5px;color:var(--t2);}
-.testi-time{font-size:10px;background:var(--gd);color:var(--golb);padding:5px 10px;border-radius:100px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;white-space:nowrap;}
-.testi-disc{display:flex;align-items:flex-start;gap:7px;justify-content:center;text-align:left;margin-top:16px;font-size:11px;color:var(--t3);line-height:1.45;max-width:440px;margin-left:auto;margin-right:auto;}
-.testi-disc svg{color:var(--gb);margin-top:1px;}
-
-/* AUTORIDAD */
-.auth-photo{width:172px;border-radius:14px;overflow:hidden;margin:0 auto 20px;border:1px solid var(--gp);box-shadow:0 12px 34px rgba(58,42,82,.16);}
-.auth-photo img{width:100%;height:auto;display:block;}
-.auth-name{font-family:var(--display);font-size:25px;font-weight:800;margin-bottom:5px;text-align:center;color:var(--t0);letter-spacing:-.3px;}
-.auth-role{font-size:12.5px;color:var(--gold);font-weight:600;margin-bottom:18px;text-align:center;line-height:1.55;letter-spacing:.2px;}
-.auth-text{font-size:15px;color:var(--t1);margin-bottom:10px;line-height:1.74;}
-.auth-creds{list-style:none;margin-top:22px;}
-.auth-creds li{padding:14px 0;border-bottom:1px solid var(--br);font-size:13.5px;font-weight:500;color:var(--t1);display:flex;align-items:center;gap:13px;line-height:1.4;}
-.auth-creds li:last-child{border-bottom:none;}
-.cred-ico{width:34px;height:34px;}
-
-/* OFERTA */
-.sec-dark .hero-glow{position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 70% 40% at 50% 0%,rgba(215,184,90,.10) 0%,transparent 65%);}
-.offer-head{text-align:center;margin-bottom:30px;position:relative;}
-.offer-head h3{font-family:var(--display);font-size:clamp(24px,5.6vw,34px);font-weight:800;color:#fff;line-height:1.12;margin-bottom:12px;text-wrap:balance;letter-spacing:-.4px;}
-.offer-head p{color:rgba(255,255,255,.66);font-size:14px;line-height:1.62;max-width:420px;margin:0 auto;}
-
-.benefit-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:12px;position:relative;}
-.bc{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:18px 16px;display:flex;flex-direction:column;gap:11px;}
-.bc.wide{grid-column:1/-1;flex-direction:row;align-items:flex-start;gap:14px;}
-.bc-icon{width:40px;height:40px;flex:none;background:rgba(215,184,90,.15);border:1px solid rgba(215,184,90,.24);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--golb);}
-.bc h4{font-family:var(--display);font-size:13px;font-weight:700;color:#fff;line-height:1.32;}
-.bc p{font-size:12px;color:rgba(255,255,255,.62);line-height:1.55;}
-.bc.wide .bc-body{flex:1;}
-.bc.wide h4{font-size:14px;}
-.bc.wide p{font-size:13px;}
-
-.offer-warn{background:rgba(184,50,40,.12);border:1px solid rgba(184,50,40,.26);border-radius:12px;padding:20px 18px;font-size:13.5px;color:rgba(255,255,255,.78);line-height:1.62;margin-top:20px;position:relative;}
-.warn-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
-.warn-head .tile{width:30px;height:30px;background:rgba(184,50,40,.22);color:#f0a59c;border-radius:8px;}
-.warn-head strong{color:#fff;font-size:14px;font-weight:700;font-family:var(--display);}
-
-/* GARANTÍA (surfaced trust) */
-.guarantee{background:var(--golw);border:1px solid var(--golp);border-radius:var(--r);padding:26px 22px;margin-top:24px;text-align:center;}
-.guar-seal{width:54px;height:54px;margin:0 auto 14px;border-radius:50%;background:var(--gd);color:var(--golb);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(58,42,82,.22);}
-.guar-seal svg{width:28px;height:28px;}
-.guarantee h4{font-family:var(--display);font-size:21px;font-weight:700;color:var(--t0);margin-bottom:10px;line-height:1.2;letter-spacing:-.3px;}
-.guarantee p{font-size:13.5px;color:var(--t1);line-height:1.66;max-width:440px;margin:0 auto;}
-.guarantee p strong{color:var(--gd);font-weight:600;}
-
-/* PARA QUIÉN */
-.fit-block{margin-bottom:28px;}
-.fit-block:last-child{margin-bottom:0;}
-.fit-h{font-family:var(--display);font-size:18px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:11px;color:var(--t0);letter-spacing:-.2px;}
-.fit-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;}
-.fit-dot.yes{background:#DCFCE7;color:#166534;}
-.fit-dot.no{background:#FEE2E2;color:#B91C1C;}
-.fit-items{list-style:none;}
-.fit-items li{padding:12px 0;border-bottom:1px solid var(--br);font-size:14px;color:var(--t1);display:flex;align-items:flex-start;gap:11px;line-height:1.55;}
-.fit-items li:last-child{border-bottom:none;}
-.fit-items li svg{margin-top:2px;}
-.fit-items.yes li svg{color:#16A34A;}
-.fit-items.no li svg{color:var(--red);}
-
-/* FAQ */
-.faq-item{background:var(--wh);border:1px solid var(--br);border-radius:10px;margin-bottom:9px;overflow:hidden;}
-.faq-q{padding:17px 18px;font-size:14px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--t0);-webkit-tap-highlight-color:transparent;min-height:56px;line-height:1.4;list-style:none;font-family:var(--display);letter-spacing:-.1px;}
-.faq-q::-webkit-details-marker{display:none;}
-.faq-tog{width:28px;height:28px;flex:none;background:var(--gi);border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--gd);transition:transform .3s,background .3s,color .3s;}
-.faq-item[open] .faq-q .faq-tog{background:var(--gd);color:#fff;transform:rotate(135deg);}
-.faq-a-in{padding:4px 18px 18px;font-size:14px;color:var(--t2);line-height:1.68;}
-
-/* SEÑALES DE ALERTA (no side-stripe) */
-.alert-stack{display:flex;flex-direction:column;gap:11px;margin:28px 0 8px;position:relative;}
-.alert-card{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:18px 16px;}
-.alert-tile{width:40px;height:40px;flex:none;border-radius:10px;background:rgba(215,184,90,.16);color:var(--golb);display:flex;align-items:center;justify-content:center;}
-.alert-left{flex:1;}
-.alert-signal{font-family:var(--display);font-size:14px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.3;letter-spacing:-.1px;}
-.alert-consequence{font-size:12.5px;color:rgba(255,255,255,.66);line-height:1.55;}
-
-/* CTA FINAL */
-.form-box{background:var(--wh);border:1px solid var(--br);border-radius:var(--r);padding:26px 22px;margin-top:24px;position:relative;box-shadow:0 16px 40px rgba(0,0,0,.18);}
-.form-box .fh{font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
-.form-steps{list-style:none;margin:18px 0 22px;}
-.form-steps li{display:flex;gap:13px;align-items:center;padding:12px 0;border-bottom:1px solid var(--br);font-size:14px;color:var(--t1);line-height:1.45;}
-.form-steps li:last-child{border-bottom:none;}
-.form-n{width:28px;height:28px;flex:none;background:var(--gd);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--golb);font-family:var(--display);}
-.form-box .cta-note{color:var(--t2);}
-
-/* FOOTER */
-.footer{
-  background:var(--t0);color:rgba(255,255,255,.5);
-  text-align:center;
-  padding:34px 20px calc(34px + var(--sab) + 76px);
-  font-size:12px;line-height:1.6;
+/* Degradado radial suave: teal izquierda, nada derecha */
+.hero-glow {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(60% 80% at 0% 50%, rgba(42,107,102,.22), transparent 70%);
 }
-.footer a{color:var(--golb);text-decoration:none;}
-.footer .disc{max-width:480px;margin:10px auto 0;font-size:10.5px;line-height:1.55;color:rgba(255,255,255,.4);}
-.footer-links{display:flex;justify-content:center;align-items:center;gap:16px;margin:14px 0 10px;flex-wrap:wrap;}
-.footer-links a{color:rgba(255,255,255,.62);font-size:11.5px;font-weight:500;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:1px;transition:color .2s,border-color .2s;}
-.footer-links a:hover{color:var(--golb);border-color:rgba(215,184,90,.5);}
-.footer-links span{color:rgba(255,255,255,.22);font-size:10px;}
+.hero-inner { position: relative; z-index: 1; }
 
-/* FLOATING CTA */
-.float-cta{position:fixed;bottom:0;left:0;right:0;background:rgba(28,18,40,.97);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);padding:12px 20px calc(12px + var(--sab));display:flex;align-items:center;justify-content:center;z-index:var(--z-float);transform:translateY(110%);transition:transform .35s cubic-bezier(.4,0,.2,1);border-top:1px solid rgba(215,184,90,.18);}
-.float-cta.show{transform:translateY(0);}
-.float-cta .btn{max-width:460px;}
+/* Juego raíz · intestino en el headline */
+.h1-raiz {
+  display: inline-flex; align-items: baseline; gap: 10px;
+  background: rgba(141,184,180,.1);
+  border: 1px solid rgba(141,184,180,.22);
+  border-radius: 8px;
+  padding: 2px 14px 4px;
+  white-space: nowrap;
+}
+.h1-raiz .h1-sep { color: rgba(141,184,180,.35); font-weight: 300; font-size: .75em; }
+.h1-intestino { color: var(--sage); }
+.hero-conditions {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 6px 10px;
+  font-family: var(--body); font-size: 11px; font-weight: 500;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(141,184,180,.78);
+  margin-bottom: 28px; padding-top: 36px;
+}
+.hero-conditions span { line-height: 1; }
+.cdiv { color: rgba(141,184,180,.3); font-size: 13px; }
 
-/* REVEAL — progressive enhancement; visible by default without JS */
-.js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.2,.6,.2,1),transform .6s cubic-bezier(.2,.6,.2,1);}
-.js .rv.v{opacity:1;transform:none;}
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto;}
-  .js .rv{opacity:1!important;transform:none!important;transition:none;}
-  .float-cta{transition:none;}
-  .faq-tog{transition:none;}
+/* VSL */
+.vid-wrap {
+  max-width: 680px; margin: 0 auto 36px;
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 48px 96px -40px rgba(0,0,0,.85);
+  border: 1px solid rgba(141,184,180,.12);
+}
+.vid-facade {
+  display: block; width: 100%; aspect-ratio: 16/9;
+  position: relative; background: var(--deep);
+  border: none; padding: 0; cursor: pointer;
+  overflow: hidden; -webkit-tap-highlight-color: transparent;
+}
+.vid-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.vid-overlay { position: absolute; inset: 0; background: rgba(11,31,30,.4); transition: background .2s; }
+.vid-facade:hover .vid-overlay { background: rgba(11,31,30,.25); }
+.vid-play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 70px; height: 70px; border-radius: 50%;
+  background: rgba(255,255,255,.95);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .22s var(--ease), box-shadow .22s;
+  box-shadow: 0 8px 32px rgba(0,0,0,.4);
+}
+.vid-play svg { margin-left: 4px; }
+.vid-facade:hover .vid-play,
+.vid-facade:focus-visible .vid-play { transform: translate(-50%,-50%) scale(1.06); box-shadow: 0 12px 40px rgba(0,0,0,.5); }
+.vid-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 32px 20px 16px;
+  background: linear-gradient(transparent, rgba(11,31,30,.88));
+  font-style: italic; font-size: 15px; color: rgba(255,255,255,.88);
+  text-align: left;
 }
 
-@media(min-width:620px){
-  .w{max-width:620px;}
-  .testi-stack{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+/* Headline hero */
+.hero h1 {
+  font-size: clamp(30px, 7.2vw, 52px);
+  font-weight: 500; line-height: 1.07; color: #fff;
+  margin-bottom: 22px; letter-spacing: -.02em;
 }
-@media(min-width:768px){
-  .w{max-width:680px;}
-  .sec{padding:72px 0;}
-  .hero{padding:68px 0 70px;}
+/* La tachadura: única pieza de firma visual */
+.strike {
+  position: relative; display: inline;
+  color: rgba(255,255,255,.5);
+}
+.strike::after {
+  content: '';
+  position: absolute; left: -2px; right: -2px; top: 52%;
+  height: 1.5px; background: rgba(255,255,255,.4);
+  transform: rotate(-.5deg);
+}
+
+.hero-sub {
+  font-size: 17px; color: rgba(255,255,255,.74);
+  line-height: 1.72; max-width: 50ch; margin: 0 auto 32px;
+}
+.hero-sub strong { color: rgba(255,255,255,.94); }
+
+.hero-cta-wrap { max-width: 400px; margin: 0 auto; }
+
+.hero-signals {
+  margin: 28px auto 0; display: flex; flex-wrap: wrap;
+  justify-content: center; gap: 8px 24px;
+  font-size: 13px; color: rgba(255,255,255,.62);
+  max-width: 480px;
+}
+.hero-signals span { display: flex; align-items: center; gap: 7px; }
+.hero-signals span::before { content: ''; width: 14px; height: 1px; background: var(--sage); opacity: .6; }
+
+/* ─── APERTURA: frase de posición ─── */
+.position-block {
+  padding: clamp(48px, 7vw, 80px) 0;
+  background: var(--stone-2);
+  border-bottom: 1px solid var(--rule);
+}
+.position-block blockquote {
+  font-size: clamp(22px, 4.8vw, 33px);
+  font-weight: 400; font-style: italic;
+  line-height: 1.42; color: var(--ink);
+  letter-spacing: -.01em;
+  max-width: 52ch;
+}
+.position-block blockquote strong { font-style: normal; font-weight: 600; color: var(--teal); }
+.position-attr {
+  margin-top: 22px; display: flex; align-items: center; gap: 14px;
+  font-size: 13px; font-weight: 500; color: var(--ink-3);
+}
+.position-attr::before { content: ''; width: 32px; height: 1px; background: var(--teal-l); }
+
+/* ─── DOLOR ─── */
+.pain-items { margin-top: 36px; }
+.pain-item {
+  display: grid; grid-template-columns: 40px 1fr;
+  gap: 0 20px; padding: 26px 0;
+  border-top: 1px solid var(--rule);
+  align-items: start;
+}
+.pain-item:first-child { border-top: none; padding-top: 8px; }
+.pain-n {
+  font-size: 32px; font-weight: 300;
+  color: var(--rule); line-height: 1; padding-top: 4px;
+  user-select: none;
+}
+.pain-item h4 {
+  font-size: 20px; font-weight: 600;
+  margin-bottom: 7px; color: var(--ink); line-height: 1.2; letter-spacing: -.01em;
+}
+.pain-item p { font-size: 15px; color: var(--ink-2); line-height: 1.62; }
+
+/* ─── CADENA: intestino → piel ─── */
+.chain-visual { margin-top: 36px; }
+.chain-step {
+  display: flex; gap: 18px; align-items: flex-start;
+  padding: 22px 0; border-top: 1px solid rgba(141,184,180,.16);
+}
+.chain-step:first-child { border-top: none; }
+.chain-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--sage); flex: none; margin-top: 7px;
+  box-shadow: 0 0 0 4px rgba(141,184,180,.18);
+}
+.chain-dot.last { background: var(--terra-l); box-shadow: 0 0 0 4px rgba(196,122,86,.16); }
+.chain-step-body h4 {
+  font-size: 18px; font-weight: 600;
+  color: #fff; margin-bottom: 5px; letter-spacing: -.01em;
+}
+.chain-step-body p { font-size: 14px; color: rgba(255,255,255,.66); line-height: 1.58; }
+
+.fact-bar {
+  margin-top: 36px;
+  display: flex; gap: 20px; align-items: center;
+  padding: 28px 24px; border: 1px solid rgba(141,184,180,.18);
+  border-radius: var(--r); background: rgba(141,184,180,.06);
+}
+.fact-n {
+  font-size: 58px; font-weight: 600;
+  color: var(--sage); line-height: .9; flex: none; letter-spacing: -.03em;
+}
+.fact-bar p { font-size: 15px; color: rgba(255,255,255,.76); line-height: 1.6; }
+.fact-bar p strong { color: #fff; }
+
+/* ─── DIFERENCIA FUNCIONAL ─── */
+.diff-table { margin-top: 36px; border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden; }
+.diff-header {
+  display: grid; grid-template-columns: 1fr 1fr;
+  background: var(--stone-2); border-bottom: 1px solid var(--rule);
+}
+.diff-col-h {
+  padding: 14px 18px; font-size: 12px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3);
+}
+.diff-col-h:first-child { border-right: 1px solid var(--rule); }
+.diff-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--rule-2);
+}
+.diff-row:first-child { border-top: none; }
+.diff-cell {
+  padding: 16px 18px; font-size: 14px; line-height: 1.5; color: var(--ink-2);
+}
+.diff-cell:first-child { border-right: 1px solid var(--rule-2); color: var(--ink-3); font-style: italic; }
+.diff-cell strong { color: var(--ink); font-weight: 600; }
+
+/* ─── MÉTODO ─── */
+.phase-list { margin-top: 36px; }
+.phase {
+  padding: 32px 0; border-top: 1px solid var(--rule);
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.phase:first-child { border-top: none; padding-top: 8px; }
+.phase-n {
+  font-size: 48px; font-weight: 300;
+  color: var(--rule); line-height: .95; flex: none; width: 44px;
+  padding-top: 2px; user-select: none;
+}
+.phase-body h3 {
+  font-size: 23px; font-weight: 600;
+  margin-bottom: 10px; color: var(--ink); line-height: 1.18; letter-spacing: -.012em;
+}
+.phase-body h3 span {
+  display: block; font-family: var(--body); font-style: normal;
+  font-size: 11px; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 6px;
+}
+.phase-body p { font-size: 15px; color: var(--ink-2); line-height: 1.66; }
+
+/* Tabla alimentos */
+.food-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+.food-col { border-radius: var(--r); padding: 22px 18px; }
+.food-yes { background: rgba(42,107,102,.07); border: 1px solid rgba(42,107,102,.18); }
+.food-no  { background: rgba(139,74,42,.05); border: 1px solid var(--terra-bd); }
+.food-col h4 {
+  font-size: 16px; font-weight: 600;
+  margin-bottom: 14px; letter-spacing: -.01em;
+}
+.food-yes h4 { color: var(--teal); }
+.food-no  h4 { color: var(--terra); }
+.food-col ul { list-style: none; display: flex; flex-wrap: wrap; gap: 7px; }
+.food-col li {
+  font-size: 13px; background: rgba(255,255,255,.7);
+  border: 1px solid var(--rule); padding: 5px 12px;
+  border-radius: 7px; color: var(--ink-2);
+}
+
+/* ─── QUIÉN ES EZEQUIEL ─── */
+.auth-photo-wrap {
+  width: 160px; height: 160px;
+  border-radius: 50%; overflow: hidden;
+  border: 3px solid var(--rule); margin: 0 auto 24px;
+  box-shadow: 0 16px 40px -16px rgba(10,30,28,.35);
+}
+.auth-photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.auth-name {
+  font-size: 32px; font-weight: 600;
+  text-align: center; margin-bottom: 5px; letter-spacing: -.015em;
+}
+.auth-role {
+  font-size: 13px; color: var(--teal); font-weight: 500;
+  text-align: center; margin-bottom: 28px; line-height: 1.5; letter-spacing: .01em;
+}
+.auth-quote {
+  font-size: clamp(18px, 3.8vw, 22px);
+  font-style: italic; font-weight: 400; color: var(--ink);
+  line-height: 1.5; margin-bottom: 16px; letter-spacing: -.01em;
+}
+.auth-creds { list-style: none; margin-top: 30px; }
+.auth-creds li {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 15px 0; border-top: 1px solid var(--rule);
+  font-size: 14px; color: var(--ink-2); line-height: 1.5;
+}
+.auth-creds li:first-child { border-top: none; }
+.cred-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--teal-l); flex: none; margin-top: 6px;
+}
+
+/* ─── PROGRAMA ─── */
+.offer-head {
+  text-align: center; margin-bottom: 40px;
+  padding-bottom: 36px; border-bottom: 1px solid rgba(141,184,180,.15);
+}
+.offer-head h2 { color: #fff; font-size: clamp(30px, 6vw, 44px); margin-bottom: 14px; }
+.offer-head p  { font-size: 16px; color: rgba(255,255,255,.7); max-width: 48ch; margin: 0 auto; line-height: 1.68; }
+
+.includes-list { list-style: none; margin-top: 8px; }
+.incl {
+  display: flex; gap: 18px; align-items: flex-start;
+  padding: 22px 0; border-top: 1px solid rgba(141,184,180,.1);
+}
+.incl:first-child { border-top: none; }
+.incl-mark {
+  width: 32px; height: 32px; flex: none; border-radius: 8px;
+  background: rgba(141,184,180,.1); border: 1px solid rgba(141,184,180,.2);
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 2px;
+}
+.incl-mark svg { width: 15px; height: 15px; fill: none; stroke: var(--sage); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.incl-body h4 {
+  font-size: 18px; font-weight: 600;
+  color: #fff; margin-bottom: 5px; letter-spacing: -.01em;
+}
+.incl-body p { font-size: 14px; color: rgba(255,255,255,.66); line-height: 1.6; }
+
+.not-for {
+  margin-top: 36px; padding: 28px 24px;
+  border: 1px solid rgba(196,122,86,.25);
+  border-radius: var(--r);
+  background: rgba(139,74,42,.08);
+}
+.not-for-h {
+  font-size: 18px; font-weight: 600;
+  color: var(--terra-l); margin-bottom: 16px; letter-spacing: -.01em;
+}
+.not-for-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.not-for-list li { font-size: 14px; color: rgba(255,255,255,.66); line-height: 1.5; display: flex; gap: 10px; }
+.not-for-list li::before { content: '—'; color: rgba(196,122,86,.5); flex: none; }
+
+/* Garantía */
+.guarantee {
+  margin-top: 28px; padding: 28px 24px;
+  background: var(--stone); border-radius: var(--r);
+  border: 1px solid var(--rule);
+}
+.guar-h {
+  font-size: 21px; font-weight: 600;
+  color: var(--ink); margin-bottom: 10px; letter-spacing: -.01em;
+}
+.guarantee p { font-size: 14px; color: var(--ink-2); line-height: 1.65; }
+.guarantee p strong { color: var(--teal); }
+
+/* ─── PARA QUIÉN ─── */
+.fit-two { display: grid; gap: 0; }
+.fit-col { padding: 32px 0; border-top: 1px solid var(--rule); }
+.fit-col:first-child { border-top: none; }
+.fit-h {
+  font-size: 21px; font-weight: 600;
+  margin-bottom: 20px; letter-spacing: -.01em; color: var(--ink);
+  display: flex; align-items: center; gap: 12px;
+}
+.fit-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.fit-dot.y { background: var(--teal); }
+.fit-dot.n { background: var(--terra-l); }
+.fit-items { list-style: none; display: flex; flex-direction: column; gap: 0; }
+.fit-items li {
+  padding: 13px 0; border-top: 1px solid var(--rule-2);
+  font-size: 14.5px; color: var(--ink-2); line-height: 1.5;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.fit-items li:first-child { border-top: none; }
+.fit-items.y li::before { content: ''; width: 14px; height: 1px; background: var(--teal-l); flex: none; margin-top: 10px; }
+.fit-items.n li::before { content: ''; width: 14px; height: 1px; background: var(--terra-l); flex: none; margin-top: 10px; opacity: .5; }
+
+/* ─── TESTIMONIOS ─── */
+.testi-note {
+  background: var(--stone-2); border: 1px solid var(--rule);
+  border-radius: var(--r); padding: 28px 24px; text-align: center;
+  margin-top: 28px;
+}
+.testi-note p { font-size: 14px; color: var(--ink-2); line-height: 1.65; }
+.testi-note p strong { color: var(--ink); }
+
+/* ─── FAQ ─── */
+.faq { margin-top: 28px; }
+.faq-item { border-top: 1px solid var(--rule); }
+.faq-item:last-child { border-bottom: 1px solid var(--rule); }
+.faq-q {
+  padding: 20px 0; font-size: 16px; font-weight: 500;
+  cursor: pointer; display: flex; justify-content: space-between;
+  align-items: center; gap: 16px; color: var(--ink);
+  list-style: none;
+  letter-spacing: -.008em; -webkit-tap-highlight-color: transparent;
+  line-height: 1.3;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q:focus-visible { outline-offset: 4px; }
+.faq-ico {
+  width: 26px; height: 26px; flex: none;
+  border: 1px solid var(--rule); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-3); transition: transform .28s var(--ease), border-color .2s, color .2s;
+  font-size: 18px; font-weight: 300;
+}
+.faq-item[open] .faq-ico { transform: rotate(45deg); border-color: var(--teal); color: var(--teal); }
+.faq-a { padding: 0 0 22px; font-size: 14.5px; color: var(--ink-2); line-height: 1.7; max-width: 58ch; }
+.faq-a strong { color: var(--ink); }
+
+/* ─── CTA FINAL ─── */
+.ctaf-context { margin-bottom: 36px; }
+.ctaf-context p { font-size: 15px; color: rgba(255,255,255,.74); line-height: 1.68; }
+.ctaf-context p + p { margin-top: 14px; }
+.ctaf-context strong { color: rgba(255,255,255,.94); }
+
+.form-card {
+  background: var(--linen); border-radius: var(--r);
+  padding: 32px 26px;
+  box-shadow: 0 40px 80px -32px rgba(0,0,0,.6);
+}
+.form-card .form-ey { font-style: italic; font-size: 16px; color: var(--teal); margin-bottom: 6px; }
+.form-card h3 { font-size: 26px; font-weight: 600; color: var(--ink); margin-bottom: 22px; letter-spacing: -.015em; }
+.field { margin-bottom: 16px; }
+.field label { display: block; font-size: 12.5px; font-weight: 600; color: var(--ink-3); margin-bottom: 6px; letter-spacing: .04em; text-transform: uppercase; }
+.field input, .field select, .field textarea {
+  width: 100%; font-family: var(--body); font-size: 15px; color: var(--ink);
+  background: #fff; border: 1.5px solid var(--rule);
+  border-radius: var(--r-s); padding: 12px 14px;
+  transition: border-color .15s, box-shadow .15s;
+  appearance: none; -webkit-appearance: none;
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--ink-3); }
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none; border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(42,107,102,.12);
+}
+.field input.invalid, .field select.invalid, .field textarea.invalid {
+  border-color: var(--terra-l);
+  box-shadow: 0 0 0 3px rgba(196,122,86,.14);
+}
+.field textarea { resize: vertical; min-height: 72px; }
+.field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235E5E58' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
+.form-error {
+  font-size: 13px; color: var(--terra); line-height: 1.5;
+  margin-top: 4px; font-weight: 500;
+}
+.form-error[hidden] { display: none; }
+.form-card .btn { margin-top: 22px; }
+.form-card .cta-note { color: var(--ink-3); margin-top: 10px; }
+.form-ok { display: none; text-align: center; padding: 8px 0; }
+.form-ok.show { display: block; }
+.form-ok:focus-visible { outline: none; }
+.ok-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(42,107,102,.1); border: 1px solid rgba(42,107,102,.2); display: grid; place-items: center; margin: 0 auto 16px; }
+.ok-icon svg { width: 26px; height: 26px; fill: none; stroke: var(--teal); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.form-ok h3 { font-size: 26px; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
+.form-ok p  { font-size: 14px; color: var(--ink-2); line-height: 1.65; max-width: 360px; margin: 0 auto; }
+.btn-wa { background: #1a7a3c; margin-top: 22px; }
+.btn-wa:hover { background: #155f2f; }
+
+/* ─── FOOTER ─── */
+.footer {
+  background: var(--night); color: rgba(255,255,255,.45);
+  text-align: center; padding: 48px 22px calc(48px + var(--sab) + 72px);
+  font-size: 12px; line-height: 1.65;
+}
+.footer .brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  justify-content: center; margin-bottom: 18px; text-decoration: none;
+}
+.footer .brand-mark svg {
+  width: 22px; height: 22px; fill: none;
+  stroke: var(--sage); stroke-width: 1.6;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.footer .brand-name {
+  display: flex; flex-direction: column; line-height: 1.15;
+  text-align: left; color: rgba(255,255,255,.75); font-weight: 600; font-size: 15px;
+}
+.footer .brand-name span { font-size: 10px; font-weight: 400; letter-spacing: .04em; color: rgba(255,255,255,.42); }
+.footer a { color: var(--sage); text-decoration: none; }
+.footer-links { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin: 14px 0 10px; }
+.footer-links a { color: rgba(255,255,255,.55); font-size: 11.5px; border-bottom: 1px solid rgba(255,255,255,.15); padding-bottom: 1px; }
+.footer-links a:hover { color: var(--sage); }
+.disc { max-width: 520px; margin: 14px auto 0; font-size: 10.5px; color: rgba(255,255,255,.4); line-height: 1.62; }
+
+/* ─── FLOATING CTA ─── */
+.float-cta {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  background: rgba(11,31,30,.97);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(141,184,180,.14);
+  padding: 12px 20px calc(12px + var(--sab));
+  display: flex; justify-content: center; z-index: var(--z-float);
+  transform: translateY(110%);
+  transition: transform .32s var(--ease);
+}
+.float-cta.show { transform: translateY(0); }
+.float-cta .btn { max-width: 440px; }
+
+/* ─── REVEAL ─── */
+.js .rv { opacity: 0; transform: translateY(18px); transition: opacity .65s var(--ease), transform .65s var(--ease); }
+.js .rv.v { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .rv { opacity: 1 !important; transform: none !important; transition: none; }
+  .float-cta, .faq-ico, .btn, .vid-play { transition: none; }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (min-width: 620px) {
+  .fit-two { grid-template-columns: 1fr 1fr; gap: 48px; }
+  .fit-col { border-top: none; }
+}
+@media (max-width: 420px) {
+  .food-grid { grid-template-columns: 1fr; }
+  .diff-cell { font-size: 13px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ░░░ SVG SPRITE ░░░ -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <symbol id="stethoscope" viewBox="0 0 24 24"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></symbol>
-  <symbol id="alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
-  <symbol id="flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
-  <symbol id="pill" viewBox="0 0 24 24"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></symbol>
-  <symbol id="route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></symbol>
-  <symbol id="coins" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></symbol>
-  <symbol id="sprout" viewBox="0 0 24 24"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6c-2.9-1.2-4.9-1-6.1.4 1.4 1.3 3.4 2.3 5.4 2.6.6-1.2.5-2.2.7-3z"/></symbol>
-  <symbol id="shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
-  <symbol id="shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
-  <symbol id="activity" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
-  <symbol id="power" viewBox="0 0 24 24"><path d="M12 2v10"/><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/></symbol>
-  <symbol id="leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></symbol>
-  <symbol id="microscope" viewBox="0 0 24 24"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></symbol>
-  <symbol id="meat" viewBox="0 0 24 24"><path d="M13.5 15.5 18 11a5 5 0 0 0-7-7l-4.5 4.5"/><path d="M13.5 15.5a5 5 0 0 1-7-7"/><circle cx="9" cy="11" r="1"/><path d="M5 21s-2-1-2-4 2-4 2-4"/></symbol>
-  <symbol id="droplets" viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 4.74 7 3.3c-.29 1.44-1.14 2.83-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></symbol>
-  <symbol id="flask" viewBox="0 0 24 24"><path d="M14 2v6a2 2 0 0 0 .24.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.75-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/><path d="M6.45 15h11.09"/><path d="M8.5 2h7"/></symbol>
-  <symbol id="chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
-  <symbol id="video" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol>
-  <symbol id="scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></symbol>
-  <symbol id="globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
-  <symbol id="book" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></symbol>
-  <symbol id="handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></symbol>
-  <symbol id="seal" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></symbol>
-  <symbol id="check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
-  <symbol id="x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
-  <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
-  <symbol id="heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
-  <symbol id="info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
-</svg>
 
-<!-- HERO -->
+
+<!-- ░░░ HERO ░░░ -->
 <section class="hero">
-<div class="w">
-<div class="hero-inner rv">
+  <span class="hero-glow" aria-hidden="true"></span>
+  <div class="hero-inner">
+    <div class="w" style="text-align:center;">
 
-  <span class="hero-eyebrow">¿Ya probaste todo lo del dermatólogo?</span>
+      <!-- Identificador de condiciones: tipográfico, no pills -->
+      <div class="hero-conditions rv">
+        <span>Dermatitis atópica</span>
+        <span class="cdiv" aria-hidden="true">·</span>
+        <span>Psoriasis</span>
+        <span class="cdiv" aria-hidden="true">·</span>
+        <span>Vitíligo</span>
+        <span class="cdiv" aria-hidden="true">·</span>
+        <span>Lupus cutáneo</span>
+      </div>
 
-  <h1>
-    La picazón, las manchas y los brotes de tu piel
-    <em>no se apagan con cremas ni corticoides de por vida.</em>
-  </h1>
+      <!-- Headline completo -->
+      <div class="rv">
+        <h1>La piel no mejora<br>con corticoides ni medicina<br><span class="strike">de por vida</span>.<br>Mejora cuando curás<br>desde la <span class="h1-raiz">raíz <span class="h1-sep">·</span> <span class="h1-intestino">el intestino</span></span>.</h1>
+      </div>
 
-  <div class="vid-wrap">
-    <button type="button" class="vid-facade" id="vsl" aria-label="Reproducir el video de Ezequiel Racca">
-      <!-- TODO: reemplazar src/srcset por la portada real del VSL -->
-      <img class="vid-poster" width="960" height="540" fetchpriority="high"
-           src="https://placehold.co/720x405/3A2A52/D7B85A.png?text=VSL+Ezequiel+Racca"
-           srcset="https://placehold.co/480x270/3A2A52/D7B85A.png?text=VSL 480w,
-                   https://placehold.co/720x405/3A2A52/D7B85A.png?text=VSL 720w"
-           sizes="(max-width:680px) calc(100vw - 44px), 640px"
-           alt="Ezequiel Racca explica por qué las enfermedades autoinmunes de la piel empiezan en el intestino">
-      <span class="vid-play" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="26" height="26"><path d="M7 4v16l13-8z" fill="currentColor"/></svg>
-      </span>
-      <span class="vid-dur" aria-hidden="true">8:00</span>
-    </button>
+      <!-- VSL: debajo del headline -->
+    </div>
+
+    <div class="w rv">
+      <div class="vid-wrap">
+        <button type="button" class="vid-facade" id="vsl" aria-label="Reproducir presentación de Ezequiel Racca">
+          <!-- TODO: reemplazar por portada real del VSL -->
+          <img class="vid-poster" width="960" height="540" fetchpriority="high"
+               src="https://placehold.co/960x540/0E2D2B/8DB8B4?text=Ezequiel+Racca"
+               alt="Ezequiel Racca: por qué la piel no mejora sola">
+          <span class="vid-overlay" aria-hidden="true"></span>
+          <span class="vid-play" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z" fill="var(--deep)"/></svg>
+          </span>
+          <span class="vid-caption">Por qué la enfermedad autoinmune no mejora con lo que te recetan, y qué sí funciona</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="w" style="text-align:center;">
+      <p class="hero-sub rv">
+        Llevás años tratando la piel. Nadie te preguntó qué estás comiendo.<br>
+        <strong>Esto es diferente.</strong>
+      </p>
+      <div class="hero-cta-wrap rv">
+        <a href="#postular" class="btn btn-terra">Postular al programa</a>
+        <p class="cta-note lt">Sin costo · Cupos limitados · Respuesta en 24 h</p>
+      </div>
+      <div class="hero-signals rv">
+        <span>Acompañamiento personalizado</span>
+        <span>Con respaldo médico</span>
+        <span>100% online</span>
+      </div>
+    </div>
   </div>
-
-  <p class="hero-p">
-    Te lo digo claro:
-    <strong>dermatitis, psoriasis, vitíligo y lupus no son problemas distintos de la piel.</strong>
-    Son un mismo sistema inmune descontrolado mandando señales hacia afuera. La crema apaga
-    lo que se ve; el incendio sigue adentro. La causa real
-    <span class="acc">empieza en el intestino y se aborda desde la nutrición funcional, junto a un médico.</span>
-  </p>
-
-  <a href="#contactar" class="btn">
-    Evaluar mi caso
-    <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
-  </a>
-  <p class="cta-note">2 minutos · Sin costo · Respuesta personalizada según tu caso</p>
-
-</div>
-</div>
 </section>
 
-<div class="divider"></div>
-
-<!-- PROBLEMA -->
-<section class="sec sec-alt">
-<div class="w">
-
-  <p class="kick rv">El ciclo que nunca termina</p>
-  <h2 class="stitle rv">Cada tratamiento apaga el brote. La causa sigue intacta.</h2>
-  <p class="sdesc rv">
-    Ya gastaste demasiado en cremas, corticoides y consultas que solo calman lo que se ve por fuera.
-    Y cada vez que el brote vuelve, vuelve peor, porque nadie tocó el origen.
-  </p>
-
-  <ul class="pain-list rv">
-    <li class="pain-item">
-      <div class="tile tile-red pain-ico"><svg class="i" aria-hidden="true"><use href="#flame"/></svg></div>
-      <div>
-        <h4>La picazón y las ronchas que no paran</h4>
-        <p>No es el clima, ni el estrés, ni "tu piel sensible". Es una inflamación que viene de adentro, y ninguna pomada va a alcanzar la raíz. El problema no está en la superficie.</p>
-      </div>
-    </li>
-    <li class="pain-item">
-      <div class="tile tile-red pain-ico"><svg class="i" aria-hidden="true"><use href="#pill"/></svg></div>
-      <div>
-        <h4>La trampa de los corticoides</h4>
-        <p>El alivio de unos días es una ilusión. Cada ciclo silencia el síntoma mientras apaga tu inmunidad y te deja esperando el próximo brote, cada vez más fuerte.</p>
-      </div>
-    </li>
-    <li class="pain-item">
-      <div class="tile tile-red pain-ico"><svg class="i" aria-hidden="true"><use href="#scan"/></svg></div>
-      <div>
-        <h4>Las manchas que avanzan y te cambian la cara al espejo</h4>
-        <p>Psoriasis, vitíligo, eczema en la cara. No es solo dolor físico: es mirarte distinto, taparte, evitar fotos. El costo estético y emocional pesa tanto como la picazón.</p>
-      </div>
-    </li>
-    <li class="pain-item">
-      <div class="tile tile-red pain-ico"><svg class="i" aria-hidden="true"><use href="#route"/></svg></div>
-      <div>
-        <h4>"Es incurable. La vas a tener toda la vida."</h4>
-        <p>Te dijeron que es genético y que solo te queda medicarte para siempre. Pero el 70% de la población no nació con un error genético: nació con un plato que enferma.</p>
-      </div>
-    </li>
-  </ul>
-
-  <div class="pullquote rv">
-    <span class="qmark" aria-hidden="true">&ldquo;</span>
-    <p>Dermatitis. Psoriasis. Vitíligo. Lupus. La medicina tradicional los trata como problemas separados de la piel. No lo son. Es un solo sistema inmune descontrolado pidiendo ayuda. Y va a seguir pidiéndola hasta que alguien atienda la causa real.</p>
-    <div class="attr">Ezequiel Racca</div>
-  </div>
-
-</div>
-</section>
-
-<!-- INTESTINO–PIEL–INMUNE -->
-<section class="sec sec-white">
-<div class="w">
-  <p class="kick rv">Lo que la medicina tradicional no está conectando</p>
-  <h2 class="stitle rv">Tu piel grita lo que tu intestino no puede decir</h2>
-  <p class="sdesc rv" style="margin-bottom:26px;">
-    La enfermedad autoinmune es un problema del sistema inmune, no de la piel. Y el 80% de ese sistema
-    inmune se regula en el intestino. Cuando la barrera intestinal se rompe, el cuerpo empieza a atacarse
-    a sí mismo, y la piel es la primera en mostrarlo.
-  </p>
-
-  <div class="triad rv">
-    <div class="triad-cell">
-      <div class="tile tile-grn"><svg class="i" aria-hidden="true"><use href="#sprout"/></svg></div>
-      <div class="tt">Intestino</div>
-      <div class="td">La barrera permeable deja pasar lo que debería frenar</div>
-    </div>
-    <div class="triad-cell">
-      <div class="tile tile-grn"><svg class="i" aria-hidden="true"><use href="#shield"/></svg></div>
-      <div class="tt">Sistema inmune</div>
-      <div class="td">Se descontrola y ataca al propio tejido sano</div>
-    </div>
-    <div class="triad-cell">
-      <div class="tile tile-grn"><svg class="i" aria-hidden="true"><use href="#scan"/></svg></div>
-      <div class="tt">Piel</div>
-      <div class="td">Muestra la guerra interna: brotes, manchas, picazón</div>
-    </div>
-  </div>
-
-  <div class="pullquote light rv">
-    <span class="qmark" aria-hidden="true">&ldquo;</span>
-    <p>La enfermedad autoinmune la despierta la mala alimentación y la apaga la buena alimentación. Si el alimento te enfermó, el alimento también te puede sanar. Pero mientras no retires lo que hace el daño, nunca te vas a curar.</p>
-    <div class="attr">Ezequiel Racca</div>
+<!-- ░░░ POSICIÓN ░░░ -->
+<div class="position-block">
+  <div class="w rv">
+    <blockquote>
+      "La enfermedad autoinmune la despierta la mala alimentación y la apaga la buena alimentación.
+      El problema es que <strong>nadie en la medicina convencional lo está revisando</strong>
+      porque en la universidad no lo enseñan así."
+    </blockquote>
+    <div class="position-attr">Ezequiel Racca · Experto en medicina funcional</div>
   </div>
 </div>
-</section>
 
-<div class="divider"></div>
+<hr class="rule">
 
-<!-- LA CADENA AUTOINMUNE -->
-<section class="sec sec-alt">
-<div class="w">
-
-  <p class="kick rv">Cómo empieza realmente</p>
-  <h2 class="stitle rv">El brote no aparece de la nada. Es el final de una cadena.</h2>
-  <p class="sdesc rv">
-    Un día tu piel reacciona "sin razón". No es casualidad: es el último eslabón de un proceso
-    que se venía cocinando hace tiempo, plato tras plato.
-  </p>
-
-  <ul class="chain rv">
-    <li class="chain-row">
-      <div class="chain-ico"><svg class="i" aria-hidden="true"><use href="#pill"/></svg></div>
-      <div>
-        <div class="chain-tt">Alimentación que inflama</div>
-        <div class="chain-td">Ultraprocesados, harinas, azúcar, aceites y semillas que tu cuerpo no está diseñado para procesar</div>
-      </div>
-    </li>
-    <li class="chain-arrow" aria-hidden="true"><svg class="i"><use href="#arrow"/></svg></li>
-    <li class="chain-row">
-      <div class="chain-ico"><svg class="i" aria-hidden="true"><use href="#sprout"/></svg></div>
-      <div>
-        <div class="chain-tt">Intestino permeable</div>
-        <div class="chain-td">La barrera se rompe y deja pasar partículas a la sangre que nunca deberían llegar ahí</div>
-      </div>
-    </li>
-    <li class="chain-arrow" aria-hidden="true"><svg class="i"><use href="#arrow"/></svg></li>
-    <li class="chain-row">
-      <div class="chain-ico"><svg class="i" aria-hidden="true"><use href="#shield"/></svg></div>
-      <div>
-        <div class="chain-tt">Sistema inmune descontrolado</div>
-        <div class="chain-td">Entra en guerra permanente y empieza a confundir tejido sano con un enemigo</div>
-      </div>
-    </li>
-    <li class="chain-arrow" aria-hidden="true"><svg class="i"><use href="#arrow"/></svg></li>
-    <li class="chain-row">
-      <div class="chain-ico"><svg class="i" aria-hidden="true"><use href="#flame"/></svg></div>
-      <div>
-        <div class="chain-tt">Ataque al propio cuerpo</div>
-        <div class="chain-td">La inflamación se descarga en la piel: dermatitis, psoriasis, vitíligo</div>
-      </div>
-    </li>
-    <li class="chain-arrow" aria-hidden="true"><svg class="i"><use href="#arrow"/></svg></li>
-    <li class="chain-row danger">
-      <div class="chain-ico"><svg class="i" aria-hidden="true"><use href="#alert"/></svg></div>
-      <div>
-        <div class="chain-tt">Brotes crónicos · enfermedad que avanza</div>
-        <div class="chain-td">Sin abordar la causa, el cuadro se cronifica. En el lupus, además, el tiempo juega en contra.</div>
-      </div>
-    </li>
-  </ul>
-
-  <div class="chain-stat rv">
-    <b>80%</b>
-    <span>de tu sistema inmune se regula en el intestino. Por eso, mientras el plato siga inflamando, ninguna crema va a frenar lo que pasa adentro.</span>
-  </div>
-
-</div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SOLUCIÓN 3 FASES -->
-<section class="sec sec-cream">
-<div class="w">
-
-  <p class="kick rv">El enfoque funcional</p>
-  <h2 class="stitle rv">3 fases. Desde la nutrición. Junto a un médico.</h2>
-  <p class="sdesc rv">
-    No es una dieta de moda ni un experimento. Es un protocolo de medicina funcional aplicado caso a caso,
-    con primeras señales visibles habitualmente en las primeras semanas, según la condición de partida
-    y el compromiso de la persona.
-  </p>
-
-  <div style="margin-top:28px;" class="rv">
-    <div class="step">
-      <div class="step-n">1</div>
-      <div>
-        <h3><span class="ph">Fase 01</span>Apagar el incendio</h3>
-        <p>Primero retiramos lo que enciende la inflamación todos los días: ultraprocesados, azúcar, harinas, aceites y alimentos que tu sistema inmune lee como una amenaza. <span class="acc">Si no sacás la fuente del daño, nada de lo demás funciona.</span></p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-n">2</div>
-      <div>
-        <h3><span class="ph">Fase 02</span>Sellar la frontera intestinal</h3>
-        <p>El 80% de tu inmunidad vive en el intestino, y años de mala alimentación volvieron esa barrera permeable. <span class="acc">Reparamos el intestino permeable</span> con una alimentación ancestral de comida real para que el sistema inmune deje de recibir falsas alarmas.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-n">3</div>
-      <div>
-        <h3><span class="ph">Fase 03</span>Reconstruir la inmunidad</h3>
-        <p>En vez de apagar tus defensas con inmunosupresores, las regulamos desde la raíz. <span class="acc">Un sistema inmune equilibrado deja de atacar tu propia piel,</span> los brotes se espacian y el cuerpo recupera su capacidad de sanar.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- OBJECIÓN: "es incurable / es genético" -->
-  <div class="objection rv">
-    <div class="obj-head">
-      <span class="ph">¿Y lo que dice el médico?</span>
-      <h3>"Pero a mí me dijeron que es incurable, que es genético y que es para toda la vida."</h3>
-    </div>
-    <ul class="obj-fears">
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#info"/></svg>"El médico me dijo que es genético, que tuve mala suerte."</li>
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#info"/></svg>"Me dijeron que voy a tener que medicarme de por vida."</li>
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#info"/></svg>"Si los médicos no lo curan, ¿quién sos vos para hacerlo?"</li>
-    </ul>
-    <div class="obj-body">
-      <p>Esa desconfianza es lógica: crecimos escuchando que la grasa hace mal, que la proteína hace mal y que lo más sano es lo vegetal. La medicina tradicional trata la enfermedad autoinmune con inmunosupresores: te baja los síntomas <strong>a costa de bajarte la inmunidad.</strong> Convivís mejor, pero nunca tocás la causa.</p>
-      <p>Esto no reemplaza a tu médico ni te pide abandonar tu tratamiento. Es lo contrario: <strong>sumamos un médico al programa</strong> y abordamos lo que en la consulta casi nunca se mira, la alimentación. No te prometo magia. Te muestro el otro camino, paso a paso, para que tu cuerpo deje de pelear contra sí mismo.</p>
-    </div>
-  </div>
-
-  <div style="margin-top:34px;" class="rv">
-    <a href="#contactar" class="btn btn-dark">
-      Evaluar mi caso
-      <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
-    </a>
-    <p class="cta-note cta-note-dark">2 minutos · Sin costo · Respuesta según tu caso</p>
-  </div>
-
-</div>
-</section>
-
-<div class="divider"></div>
-
-<!-- TESTIMONIOS -->
-<section class="sec sec-white">
-<div class="w">
-
-  <p class="kick rv">Casos reales · Resultados documentados</p>
-  <h2 class="stitle rv">De vivir en brotes a recuperar la piel</h2>
-  <p class="sdesc rv">
-    Personas que dejaron atrás el ciclo de cremas y corticoides que no resolvía nada.
-    Su piel habla por sí sola.
-  </p>
-
-  <div class="testi-stack rv">
-    <div class="testi-card">
-      <!-- TODO: reemplazar por la imagen real antes/después (con consentimiento del paciente) -->
-      <img class="testi-img" width="1308" height="480"
-           src="https://placehold.co/1308x480/F5F1FA/6B5290.png?text=Antes+%2F+Despu%C3%A9s"
-           alt="Caso de dermatitis atópica antes y después del enfoque nutricional" loading="lazy">
-      <div class="testi-body">
-        <div class="testi-badges">
-          <span class="badge badge-red"><svg class="i i-sm" aria-hidden="true"><use href="#flame"/></svg> Dermatitis atópica</span>
-          <span class="badge badge-green"><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg> Sin corticoides</span>
-        </div>
-        <!-- TODO: reemplazar por la frase textual real del paciente -->
-        <p class="testi-quote">"Probé cremas, antihistamínicos y tres dermatólogos. Cambiando lo que comía, en cinco semanas dejé de rascarme por primera vez en años."</p>
-        <div class="testi-foot">
-          <div class="testi-ava">M</div>
-          <div class="testi-meta">
-            <div class="who">[Nombre] · [Ciudad, País]</div>
-            <div class="cond">Dermatitis atópica · brotes en cara y brazos</div>
-          </div>
-          <span class="testi-time">35 días</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="testi-card">
-      <!-- TODO: reemplazar por la imagen real antes/después (con consentimiento del paciente) -->
-      <img class="testi-img" width="1320" height="490"
-           src="https://placehold.co/1320x490/F5F1FA/6B5290.png?text=Antes+%2F+Despu%C3%A9s"
-           alt="Caso de psoriasis antes y después del enfoque nutricional funcional" loading="lazy">
-      <div class="testi-body">
-        <div class="testi-badges">
-          <span class="badge badge-red"><svg class="i i-sm" aria-hidden="true"><use href="#scan"/></svg> Psoriasis</span>
-          <span class="badge badge-green"><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg> Piel recuperada</span>
-        </div>
-        <!-- TODO: reemplazar por la frase textual real del paciente -->
-        <p class="testi-quote">"Me habían dicho que era para toda la vida. En dos meses las placas bajaron muchísimo y volví a usar manga corta sin pensarlo."</p>
-        <div class="testi-foot">
-          <div class="testi-ava">J</div>
-          <div class="testi-meta">
-            <div class="who">[Nombre] · [Ciudad, País]</div>
-            <div class="cond">Psoriasis en placas · codos y cuero cabelludo</div>
-          </div>
-          <span class="testi-time">60 días</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <p class="testi-disc">
-    <svg class="i i-sm" aria-hidden="true"><use href="#info"/></svg>
-    Casos reales del acompañamiento de Ezequiel Racca, publicados con consentimiento. Cada caso es individual; los resultados varían según la condición de partida, el compromiso y la respuesta biológica de cada persona. No reemplaza el tratamiento de tu médico.
-  </p>
-</div>
-</section>
-
-<div class="divider"></div>
-
-<!-- AUTORIDAD -->
-<section class="sec sec-alt">
-<div class="w">
-
-  <p class="kick rv" style="justify-content:center;">Quién está detrás del enfoque</p>
-
-  <div class="auth-photo rv">
-    <!-- TODO: reemplazar por la foto real de Ezequiel -->
-    <img width="1080" height="1350" src="https://placehold.co/1080x1350/3A2A52/D7B85A.png?text=Ezequiel+Racca" alt="Ezequiel Racca, especialista en nutrición funcional para enfermedades autoinmunes" loading="lazy">
-  </div>
-  <h3 class="auth-name rv">Ezequiel Racca</h3>
-  <p class="auth-role rv">Odontólogo · Formado en nutrición y medicina funcional<br>Especializado en enfermedades autoinmunes de la piel · Trabaja junto a un médico</p>
-
-  <p class="auth-text rv">
-    "No me presento como médico, porque no lo soy: soy odontólogo y me formé durante años en nutrición y medicina funcional, incluso en clínicas de Estados Unidos dedicadas solo a pacientes con enfermedades autoinmunes. Ahí vi algo que me voló la cabeza: enfermedades que la medicina llama incurables, revertidas con un solo cambio, la alimentación. Por eso este programa lo llevo junto a un médico, sin promesas mágicas y sin ir en contra de nadie. Solo muestro el camino que a mí me cambió la forma de ver la salud."
-  </p>
-
-  <ul class="auth-creds rv">
-    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#leaf"/></svg></div>Enfoque en nutrición y medicina funcional para enfermedades autoinmunes</li>
-    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#globe"/></svg></div>Formación en clínicas de EE.UU. dedicadas a pacientes autoinmunes</li>
-    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#stethoscope"/></svg></div>Programa acompañado por un médico para máxima seguridad clínica</li>
-    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#heart"/></svg></div>Creador del programa "Una vida sin medicamentos" (diabetes e hipertensión)</li>
-    <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#handshake"/></svg></div>Acompañamiento 1-a-1 cercano y respetuoso, no una consulta de paso</li>
-  </ul>
-
-</div>
-</section>
-
-<!-- OFERTA -->
-<section class="sec sec-dark">
-<div class="hero-glow" aria-hidden="true"></div>
-<div class="w">
-
-  <div class="offer-head rv">
-    <p class="kick kick-l" style="justify-content:center;">Programa de acompañamiento</p>
-    <h3>Método Piel en Calma</h3>
-    <p>3 meses de acompañamiento personalizado para revertir la causa de tu enfermedad autoinmune de la piel desde la nutrición funcional, junto a un médico. Sin ensayo y error.</p>
-  </div>
-
-  <div class="benefit-grid rv">
-    <div class="bc">
-      <div class="bc-icon"><svg class="i" aria-hidden="true"><use href="#microscope"/></svg></div>
-      <div>
-        <h4>Evaluación funcional inicial</h4>
-        <p>Revisión de tu historial, tu enfermedad y tus síntomas · Punto de partida claro y un plan documentado para tu caso.</p>
-      </div>
-    </div>
-    <div class="bc">
-      <div class="bc-icon"><svg class="i" aria-hidden="true"><use href="#meat"/></svg></div>
-      <div>
-        <h4>Plan de alimentación ancestral</h4>
-        <p>Comida real, basada en alimentos de un solo nutriente · Qué sí y qué no, sin adivinar · Lista de compras y transición paso a paso.</p>
-      </div>
-    </div>
-    <div class="bc">
-      <div class="bc-icon"><svg class="i" aria-hidden="true"><use href="#sprout"/></svg></div>
-      <div>
-        <h4>Protocolo intestino–piel</h4>
-        <p>Estrategia para sellar el intestino permeable y bajar la inflamación · Progresión por fases adaptada a tu evolución.</p>
-      </div>
-    </div>
-    <div class="bc">
-      <div class="bc-icon"><svg class="i" aria-hidden="true"><use href="#stethoscope"/></svg></div>
-      <div>
-        <h4>Respaldo médico</h4>
-        <p>Un médico dentro del programa · Seguimiento seguro de tu caso y de tu medicación, sin cambios por tu cuenta.</p>
-      </div>
-    </div>
-    <div class="bc wide">
-      <div class="bc-icon"><svg class="i" aria-hidden="true"><use href="#chat"/></svg></div>
-      <div class="bc-body">
-        <h4>Línea directa de WhatsApp</h4>
-        <p>Acceso para tus dudas durante el proceso · Ajustes del plan según cómo responde tu piel · Acompañamiento real, no un PDF que descargas y olvidas.</p>
-      </div>
-    </div>
-    <div class="bc wide">
-      <div class="bc-icon"><svg class="i" aria-hidden="true"><use href="#video"/></svg></div>
-      <div class="bc-body">
-        <h4>Sesiones de seguimiento</h4>
-        <p>Videollamadas de control programadas · Recalibración del plan según tus resultados · Espacio para resolver dudas en profundidad durante los 3 meses.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="offer-warn rv">
-    <div class="warn-head">
-      <div class="tile"><svg class="i i-sm" aria-hidden="true"><use href="#alert"/></svg></div>
-      <strong>Este programa NO es para todos.</strong>
-    </div>
-    Es para personas decididas a cambiar lo que comen y a sostenerlo. Si buscas una pastilla mágica, o no estás dispuesto/a a dejar los ultraprocesados, el azúcar y las harinas, este acompañamiento no es para ti.
-  </div>
-
-  <!-- GARANTÍA surfaced -->
-  <div class="guarantee rv">
-    <div class="guar-seal"><svg class="i" aria-hidden="true"><use href="#seal"/></svg></div>
-    <h4>Garantía de acompañamiento</h4>
-    <p>
-      Si seguís el método paso a paso durante los 3 meses y reportás tus avances en los puntos de control,
-      y aun así tu piel no muestra cambios, <strong>extiendo el acompañamiento sin costo adicional</strong>
-      hasta que tu cuerpo responda. No te dejo solo/a: es la forma honesta de acompañar un proceso biológico.
+<!-- ░░░ PROBLEMA ░░░ -->
+<section class="sec sec-linen">
+  <div class="w">
+    <span class="eyebrow rv">Lo que estás viviendo</span>
+    <h2 class="stitle rv">No es mala suerte ni genética.<br>Es un ciclo que se puede interrumpir.</h2>
+    <p class="lead rv">
+      Te dijeron que es incurable. Que es hereditario. Que lo mejor que podés hacer es manejarlo.
+      Pero hay una pregunta que casi ningún médico te hizo: <em>¿qué estás comiendo?</em>
     </p>
-  </div>
 
-</div>
-</section>
-
-<!-- PARA QUIÉN -->
-<section class="sec">
-<div class="w">
-
-  <p class="kick rv">¿Es para ti?</p>
-  <h2 class="stitle rv">Un enfoque serio para quien ya se cansó de los parches</h2>
-
-  <div class="fit-block rv">
-    <div class="fit-h"><span class="fit-dot yes"><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg></span> Este programa ES para ti si…</div>
-    <ul class="fit-items yes">
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Tienes dermatitis, psoriasis, vitíligo, lupus u otra enfermedad autoinmune de la piel</li>
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Ya comprobaste que las cremas y los corticoides son solo parches que no resuelven la causa</li>
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Estás dispuesto/a a cambiar tu alimentación de verdad y sostenerlo</li>
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Buscas acompañamiento directo, no un PDF ni un grupo más</li>
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#check"/></svg>Quieres abordar la causa junto a tu tratamiento médico, no en lugar de él</li>
-    </ul>
-  </div>
-
-  <div class="fit-block rv">
-    <div class="fit-h"><span class="fit-dot no"><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg></span> Este programa NO es para ti si…</div>
-    <ul class="fit-items no">
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg>Esperas un diagnóstico gratis por chat sin compromiso</li>
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg>No estás dispuesto/a a dejar los ultraprocesados, el azúcar y las harinas</li>
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg>Esperas resultados sin seguir el plan ni los pasos acordados</li>
-      <li><svg class="i i-sm" aria-hidden="true"><use href="#x"/></svg>Quieres dejar tu medicación por tu cuenta, sin acompañamiento médico</li>
-    </ul>
-  </div>
-
-</div>
-</section>
-
-<div class="divider"></div>
-
-<!-- FAQ -->
-<section class="sec sec-alt">
-<div class="w">
-
-  <p class="kick rv">Transparencia total</p>
-  <h2 class="stitle rv">Las preguntas que todos hacen antes de dar el paso</h2>
-
-  <div class="rv" style="margin-top:24px;">
-    <details class="faq-item">
-      <summary class="faq-q">¿Tengo que dejar mis medicamentos? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
-      <div class="faq-a-in">No por tu cuenta, nunca. El programa cuenta con un médico que supervisa tu caso. A medida que tu cuerpo responde, cualquier ajuste de medicación se hace de forma segura y acompañada. Nuestro trabajo es la causa nutricional; no reemplazamos a tu médico tratante, lo sumamos.</div>
-    </details>
-
-    <details class="faq-item">
-      <summary class="faq-q">¿Eres médico? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
-      <div class="faq-a-in">No, y lo digo con total claridad: soy odontólogo y me formé durante años en nutrición y medicina funcional, incluso en clínicas de EE.UU. dedicadas a pacientes autoinmunes. Precisamente por eso el programa lo llevo junto a un médico, para que la parte clínica esté siempre cubierta.</div>
-    </details>
-
-    <details class="faq-item">
-      <summary class="faq-q">Me dijeron que es incurable y genético. ¿Por qué esto sería distinto? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
-      <div class="faq-a-in">La medicina tradicional trata la enfermedad autoinmune con inmunosupresores: baja los síntomas bajando tu inmunidad, pero no toca la causa. La medicina funcional parte de otra idea: si la mala alimentación despertó la enfermedad, la buena alimentación ayuda a apagarla. No prometemos curas milagrosas; abordamos el origen que casi nadie mira y acompañamos el proceso con respaldo médico.</div>
-    </details>
-
-    <details class="faq-item">
-      <summary class="faq-q">¿La dieta es para toda la vida? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
-      <div class="faq-a-in">Al principio es más estricta, porque hay que cortar la inflamación. Con el tiempo se flexibiliza, pero la base es un estilo de vida de comida real. La mayoría no la abandona, no por obligación, sino porque se siente tan bien que no quiere volver a los brotes.</div>
-    </details>
-
-    <details class="faq-item">
-      <summary class="faq-q">¿Funciona para lupus, o solo para problemas de piel? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
-      <div class="faq-a-in">El enfoque sirve para enfermedades autoinmunes de la piel como dermatitis, psoriasis y vitíligo, y también para lupus, que es más delicado y exige seguimiento médico estrecho. Cada caso se evalúa individualmente antes de aceptarlo, y hay cuadros que requieren otro tipo de manejo. Por eso primero conocemos tu caso.</div>
-    </details>
-
-    <details class="faq-item">
-      <summary class="faq-q">¿Cuánto cuesta el programa? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
-      <div class="faq-a-in">Es una inversión que te comparto después de conocer tu caso y validar que somos compatibles para trabajar juntos. Lo que sí puedo adelantarte: suele ser una fracción de lo que ya gastaste en consultas, cremas y tratamientos que no resolvieron la causa. Te explico exactamente qué incluye antes de que decidas, sin presión ni urgencias artificiales.</div>
-    </details>
-
-    <details class="faq-item">
-      <summary class="faq-q">No vivo en tu país. ¿Puedo acceder? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
-      <div class="faq-a-in">Sí. El acompañamiento es 100% online: por videollamada y WhatsApp. Atendemos personas en Argentina, Chile, México, Colombia, España y cualquier lugar con conexión a internet. La biología no tiene fronteras.</div>
-    </details>
-
-    <details class="faq-item">
-      <summary class="faq-q">¿Hay garantía? <span class="faq-tog"><svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg></span></summary>
-      <div class="faq-a-in">Sí, y es coherente con mi forma de trabajar. Si seguís el método paso a paso durante los 3 meses, reportás tus avances en los puntos de control acordados y aun así tu piel no muestra cambios, extiendo el acompañamiento sin costo adicional hasta que tu cuerpo responda. Es la forma honesta de acompañar un proceso biológico: con presencia real.</div>
-    </details>
-  </div>
-
-</div>
-</section>
-
-<!-- CTA FINAL -->
-<section class="sec sec-dark" id="contactar" style="padding:60px 0 70px;">
-<div class="hero-glow" aria-hidden="true"></div>
-<div class="w">
-
-  <p class="kick kick-l rv" style="justify-content:center;">El paso que cambia todo</p>
-  <h2 class="stitle stitle-l rv" style="text-align:center;">
-    Tu piel ya te avisó.<br>El siguiente brote no tiene por qué llegar.
-  </h2>
-  <p class="sdesc sdesc-l rv" style="text-align:center;margin:0 auto 30px;max-width:440px;">
-    Cada semana que esperás, la inflamación sigue trabajando adentro. No esperes el próximo
-    brote ni la próxima crema que tampoco funciona. El primer paso es simple y no cuesta nada:
-    contarnos tu caso.
-  </p>
-
-  <div class="alert-stack rv">
-    <div class="alert-card">
-      <div class="alert-tile"><svg class="i i-sm" aria-hidden="true"><use href="#flame"/></svg></div>
-      <div class="alert-left">
-        <div class="alert-signal">Te rascas o tienes brotes casi todos los días</div>
-        <div class="alert-consequence">Lo que ves en la piel ya lleva meses ocurriendo adentro. Cada semana sin abordar la causa consolida la inflamación.</div>
+    <div class="pain-items rv">
+      <div class="pain-item">
+        <div class="pain-n">01</div>
+        <div>
+          <h4>El brote que "apareció sin razón"</h4>
+          <p>No apareció de la nada. Es el final de un proceso que viene ocurriendo hace meses adentro: una barrera intestinal que se rompió, un sistema inmune que perdió el control. Lo que ves en la piel es la señal, no el origen.</p>
+        </div>
       </div>
-    </div>
-    <div class="alert-card">
-      <div class="alert-tile"><svg class="i i-sm" aria-hidden="true"><use href="#pill"/></svg></div>
-      <div class="alert-left">
-        <div class="alert-signal">Vives de corticoides y cada vez te duran menos</div>
-        <div class="alert-consequence">El alivio se acorta porque el corticoide silencia el síntoma sin tocar la causa, mientras baja tu propia inmunidad.</div>
+      <div class="pain-item">
+        <div class="pain-n">02</div>
+        <div>
+          <h4>La cortisona que cada vez dura menos</h4>
+          <p>El corticoide baja la inflamación bajando tu inmunidad. Funciona al principio, después cada vez menos, y mientras tanto tu sistema de defensa se debilita. Es el ciclo que la medicina convencional normaliza, y del que trabajamos para salir.</p>
+        </div>
       </div>
-    </div>
-    <div class="alert-card">
-      <div class="alert-tile"><svg class="i i-sm" aria-hidden="true"><use href="#scan"/></svg></div>
-      <div class="alert-left">
-        <div class="alert-signal">Cambiaste de crema y de médico, y sigue igual</div>
-        <div class="alert-consequence">El problema no es la marca de la crema. Nada que se aplique por fuera revierte una inflamación que nace adentro.</div>
+      <div class="pain-item">
+        <div class="pain-n">03</div>
+        <div>
+          <h4>Lo que dejás de hacer</h4>
+          <p>Las manchas en la cara, la piel que no querés mostrar, los planes que evitás, las fotos que cancelás. El costo de la enfermedad autoinmune no es solo físico: es todo lo que dejás de hacer mientras esperás que algo mejore.</p>
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-n">04</div>
+        <div>
+          <h4>"Ya probé de todo"</h4>
+          <p>Cremas, antihistamínicos, biológicos, dietas de eliminación. Todo actuó sobre la piel. Ninguno preguntó qué está pasando en tu intestino, que es donde el 80% del sistema inmune se regula y donde empieza el problema.</p>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="form-box rv">
-    <p class="fh">¿Cómo funciona?</p>
-    <ul class="form-steps">
-      <li><span class="form-n">1</span>Completas el formulario de evaluación en solo 2 minutos</li>
-      <li><span class="form-n">2</span>Revisamos tu caso (tu enfermedad, tus síntomas y tu historial)</li>
-      <li><span class="form-n">3</span>Te contactamos con una orientación personalizada según tu caso</li>
-    </ul>
-    <!-- TODO: reemplazar [URL-FORMULARIO] por el link real del formulario / WhatsApp / typeform -->
-    <a href="[URL-FORMULARIO]" target="_blank" rel="noopener" class="btn">
-      Evaluar mi caso
-      <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
-    </a>
-    <p class="cta-note" style="margin-top:12px;">Sin costo · 2 minutos · Respuesta personalizada según tu caso</p>
-  </div>
-
-</div>
 </section>
 
-<!-- FOOTER -->
+<!-- ░░░ INTESTINO → PIEL ░░░ -->
+<section class="sec sec-dark">
+  <div class="w">
+    <span class="eyebrow lt rv">El mecanismo que conecta todo</span>
+    <h2 class="stitle rv">El intestino maneja el 80% de tu sistema inmune. Por eso empieza ahí.</h2>
+    <p class="lead rv">
+      No es una teoría alternativa, es anatomía. Cerca del 80% de las células inmunes del cuerpo
+      se encuentran en el tejido intestinal. Cuando la barrera se daña, el sistema inmune
+      empieza a cometer errores, y la piel paga el precio.
+    </p>
+
+    <div class="chain-visual rv">
+      <div class="chain-step">
+        <div class="chain-dot"></div>
+        <div class="chain-step-body">
+          <h4>Alimentación que inflama todos los días</h4>
+          <p>Ultraprocesados, harinas refinadas, azúcar, aceites de semillas. El cuerpo no está diseñado para procesarlos, pero los consume en grandes cantidades.</p>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-dot"></div>
+        <div class="chain-step-body">
+          <h4>Intestino permeable</h4>
+          <p>La barrera intestinal se deteriora y deja pasar al torrente sanguíneo partículas que nunca deberían llegar ahí: fragmentos de gluten, toxinas, químicos.</p>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-dot"></div>
+        <div class="chain-step-body">
+          <h4>Sistema inmune descontrolado</h4>
+          <p>En respuesta a ese flujo constante de agentes extraños, el sistema inmune entra en un estado de alerta permanente y empieza a confundir tejido sano con un enemigo.</p>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-dot last"></div>
+        <div class="chain-step-body">
+          <h4>Enfermedad autoinmune de la piel</h4>
+          <p>La inflamación se manifiesta donde el cuerpo es más visible: manchas en vitíligo, placas en psoriasis, erupciones en dermatitis y lupus cutáneo. El problema está adentro; la señal aparece afuera.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="fact-bar rv">
+      <span class="fact-n">80%</span>
+      <p>del sistema inmune se regula en el intestino. Por eso ninguna crema va a alcanzar la causa, y por eso la alimentación no es un detalle secundario: <strong>es el punto de partida del tratamiento.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ DIFERENCIA FUNCIONAL ░░░ -->
+<section class="sec sec-stone2">
+  <div class="w">
+    <span class="eyebrow rv">Medicina convencional vs. medicina funcional</span>
+    <h2 class="stitle rv">No es que la medicina convencional esté equivocada. Es que hace otra pregunta.</h2>
+    <p class="lead rv">
+      El médico convencional pregunta: <em>"¿cómo controlo el síntoma?"</em>
+      La medicina funcional pregunta: <em>"¿por qué apareció el síntoma?"</em>
+      Son preguntas diferentes, con tratamientos diferentes y resultados diferentes.
+    </p>
+
+    <div class="diff-table rv">
+      <div class="diff-header">
+        <div class="diff-col-h">Medicina convencional</div>
+        <div class="diff-col-h">Enfoque funcional (este programa)</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-cell">Trata la enfermedad con inmunosupresores: baja la respuesta inmune para reducir el daño</div>
+        <div class="diff-cell"><strong>Trabaja la causa:</strong> por qué el sistema inmune se descontroló y cómo regularizarlo</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-cell">La nutrición casi no entra en la consulta</div>
+        <div class="diff-cell"><strong>La alimentación es el protocolo,</strong> no un consejo al margen</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-cell">Resultado posible: convivir mejor con la enfermedad</div>
+        <div class="diff-cell"><strong>Resultado posible:</strong> reducir y espaciar los brotes mientras el sistema inmune se regula</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-cell">No reemplaza al médico tratante</div>
+        <div class="diff-cell"><strong>No reemplaza al médico tratante.</strong> Lo complementa sumando lo que él no hace: la causa nutricional</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ MÉTODO ░░░ -->
+<section class="sec sec-linen">
+  <div class="w">
+    <span class="eyebrow rv">Cómo funciona</span>
+    <h2 class="stitle rv">Tres fases. Una dirección: la causa.</h2>
+    <p class="lead rv">
+      No hay un protocolo genérico. Cada caso empieza con una evaluación del historial, la medicación y los síntomas.
+      Lo que sigue es un proceso personalizado, con acompañamiento real.
+    </p>
+
+    <div class="phase-list rv">
+      <div class="phase">
+        <div class="phase-n">1</div>
+        <div class="phase-body">
+          <h3><span>Primera fase</span>Retirar lo que inflama</h3>
+          <p>Antes de agregar cualquier cosa, retiramos lo que enciende el proceso inflamatorio todos los días: ultraprocesados, harinas refinadas, azúcar, aceites de semillas, aditivos. Sin este paso, nada de lo que venga después funciona. No es una dieta de moda: es eliminar lo que le genera ruido constante al sistema inmune.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-n">2</div>
+        <div class="phase-body">
+          <h3><span>Segunda fase</span>Sanar el intestino</h3>
+          <p>La barrera intestinal dañada es el puente entre la alimentación y la enfermedad. Con una alimentación de comida real de un solo ingrediente (carnes, huevos, pescado, algunos lácteos, pocas frutas y verduras) se le da al intestino lo que necesita para reconstruirse. Esta es la fase donde la mayoría empieza a notar los primeros cambios.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-n">3</div>
+        <div class="phase-body">
+          <h3><span>Tercera fase</span>Regular el sistema inmune</h3>
+          <p>Cuando el intestino recibe menos señales de peligro, el sistema inmune deja de estar en alerta permanente. Los brotes se empiezan a espaciar. Las defensas, que los inmunosupresores habían bajado, empiezan a recuperarse. Todo esto se monitorea con análisis de sangre a lo largo del proceso.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-grid rv">
+      <div class="food-col food-yes">
+        <h4>La base del plato</h4>
+        <ul>
+          <li>Carnes</li><li>Huevos</li><li>Pescado</li>
+          <li>Algunos lácteos</li><li>Pocas frutas</li><li>Pocas verduras</li>
+          <li>Comida de un solo ingrediente</li>
+        </ul>
+      </div>
+      <div class="food-col food-no">
+        <h4>Lo que se retira</h4>
+        <ul>
+          <li>Ultraprocesados</li><li>Harinas</li><li>Azúcar</li>
+          <li>Semillas</li><li>Aceites de semilla</li><li>Aditivos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ QUIÉN ES EZEQUIEL ░░░ -->
+<section class="sec sec-stone2">
+  <div class="w">
+    <div class="center rv">
+      <div class="auth-photo-wrap">
+        <!-- TODO: reemplazar por foto real de Ezequiel -->
+        <img src="https://placehold.co/320x320/1A4240/8DB8B4?text=Ezequiel" width="320" height="320" alt="Ezequiel Racca" loading="lazy">
+      </div>
+      <h2 class="auth-name">Ezequiel Racca</h2>
+      <p class="auth-role">Odontólogo (Universidad Nacional de Rosario, Argentina)<br>Health Coach en Nutrición Moderna · Especializado en medicina funcional<br>Trabaja junto a un médico en cada programa</p>
+    </div>
+
+    <p class="auth-quote rv">
+      "No me presento como médico porque no lo soy. Soy odontólogo, me formé durante años en nutrición y medicina funcional, y trabajé en clínicas de Estados Unidos que atienden únicamente pacientes con enfermedades autoinmunes. Ahí vi algo que me cambió la manera de ver la salud: enfermedades que la medicina llama incurables, revirtiéndose con un solo cambio sostenido en el tiempo. La alimentación."
+    </p>
+
+    <p class="lead rv" style="margin-top:14px;">
+      Por eso este programa lo llevo junto a un médico. No para reemplazar al médico de cada paciente,
+      sino para agregar lo que en la consulta convencional casi nunca entra: el trabajo sobre la causa nutricional.
+    </p>
+
+    <ul class="auth-creds rv">
+      <li><span class="cred-dot"></span>Odontólogo, Universidad Nacional de Rosario (Argentina)</li>
+      <li><span class="cred-dot"></span>Certificación Health Coach en Nutrición Moderna, Florida Global University (EE.UU.) y UCAM (España)</li>
+      <li><span class="cred-dot"></span>Certificado en Nutrición, Edutin Academy (EE.UU.)</li>
+      <li><span class="cred-dot"></span>Formación práctica en clínicas de EE.UU. especializadas en enfermedades autoinmunes</li>
+      <li><span class="cred-dot"></span>Creador del programa "Una vida sin medicamentos" para diabetes e hipertensión</li>
+      <li><span class="cred-dot"></span>Programa acompañado por un médico para seguridad clínica en cada caso</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ░░░ PROGRAMA ░░░ -->
+<section class="sec sec-night" id="programa">
+  <div class="w">
+    <div class="offer-head rv">
+      <span class="eyebrow lt ct">Programa de acompañamiento</span>
+      <h2>Raíz Autoinmune<br><em style="font-weight:400;font-size:.82em;opacity:.7;">3 meses · Personalizado · Con médico</em></h2>
+      <p>Un proceso de tres meses para abordar la causa nutricional de tu enfermedad autoinmune de la piel. Personalizado desde el primer día, con acompañamiento real y supervisión médica incluida.</p>
+    </div>
+
+    <ul class="includes-list rv">
+      <li class="incl">
+        <div class="incl-mark"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+        <div class="incl-body">
+          <h4>Evaluación inicial del caso</h4>
+          <p>Revisión de historial, síntomas, medicación y análisis de sangre. El punto de partida define el plan. No hay protocolo genérico.</p>
+        </div>
+      </li>
+      <li class="incl">
+        <div class="incl-mark"><svg viewBox="0 0 24 24"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg></div>
+        <div class="incl-body">
+          <h4>Plan de alimentación funcional</h4>
+          <p>Video explicativo completo con el protocolo de alimentación, alimentos permitidos y no permitidos, ideas de platos y horarios. La base de todo el proceso.</p>
+        </div>
+      </li>
+      <li class="incl">
+        <div class="incl-mark"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="incl-body">
+          <h4>Línea directa de WhatsApp</h4>
+          <p>Contacto directo con Ezequiel durante los tres meses para dudas cotidianas, ajustes del plan y acompañamiento en los momentos difíciles del proceso.</p>
+        </div>
+      </li>
+      <li class="incl">
+        <div class="incl-mark"><svg viewBox="0 0 24 24"><rect width="20" height="15" x="2" y="7" rx="2"/><polyline points="17 2 12 7 7 2"/></svg></div>
+        <div class="incl-body">
+          <h4>Videollamadas semanales de seguimiento</h4>
+          <p>Una sesión por semana para revisar avances, resolver dudas, ajustar el protocolo y marcar el próximo paso. El proceso no se deja solo.</p>
+        </div>
+      </li>
+      <li class="incl">
+        <div class="incl-mark"><svg viewBox="0 0 24 24"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg></div>
+        <div class="incl-body">
+          <h4>Supervisión médica incluida</h4>
+          <p>Un médico forma parte del programa. Los análisis de sangre se revisan durante el proceso y cualquier cambio en medicación se hace con acompañamiento clínico, nunca por cuenta propia.</p>
+        </div>
+      </li>
+      <li class="incl">
+        <div class="incl-mark"><svg viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="incl-body">
+          <h4>Biblioteca de recursos y recetas</h4>
+          <p>Acceso a una carpeta compartida con ejemplos de platos, ideas de menú semanal y material de apoyo para sostener el protocolo en la vida cotidiana.</p>
+        </div>
+      </li>
+    </ul>
+
+    <div class="not-for rv">
+      <div class="not-for-h">Este programa no es para todos.</div>
+      <ul class="not-for-list">
+        <li>Si esperás una solución sin cambiar lo que comés</li>
+        <li>Si no estás dispuesto/a a dejar los ultraprocesados, el azúcar y las harinas</li>
+        <li>Si buscás resultados sin seguir el proceso ni reportar avances</li>
+        <li>Si querés dejar la medicación por cuenta propia, sin supervisión médica</li>
+      </ul>
+    </div>
+
+    <div class="guarantee rv">
+      <div class="guar-h">Garantía de devolución total</div>
+      <p>
+        Si en cualquier momento del proceso sentís que el programa no cumplió con lo prometido,
+        <strong>te devolvemos el 100% de lo que invertiste.</strong>
+        Sin letra chica, sin condiciones. Así de simple.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ PARA QUIÉN ░░░ -->
+<section class="sec sec-stone">
+  <div class="w">
+    <span class="eyebrow rv">¿Es para vos?</span>
+    <h2 class="stitle rv">Un proceso serio requiere personas comprometidas.</h2>
+    <p class="lead rv">
+      Antes de postular, leé esto con honestidad. El programa funciona cuando hay compromiso real con el proceso.
+    </p>
+    <div class="fit-two rv mt-m">
+      <div class="fit-col">
+        <div class="fit-h"><span class="fit-dot y"></span>Es para vos si…</div>
+        <ul class="fit-items y">
+          <li>Tenés dermatitis, psoriasis, vitíligo, lupus cutáneo u otra enfermedad autoinmune de la piel</li>
+          <li>Ya viste que las cremas y los corticoides no resuelven la causa</li>
+          <li>Estás dispuesto/a a cambiar tu alimentación de forma real y sostenida</li>
+          <li>Querés acompañamiento directo, no un curso pregrabado que nadie sigue</li>
+          <li>Buscás trabajar la causa junto a tu tratamiento médico, no en lugar de él</li>
+        </ul>
+      </div>
+      <div class="fit-col">
+        <div class="fit-h"><span class="fit-dot n"></span>No es para vos si…</div>
+        <ul class="fit-items n">
+          <li>Esperás resultados sin cambiar lo que comés</li>
+          <li>No estás dispuesto/a a dejar los ultraprocesados, el azúcar ni las harinas</li>
+          <li>Buscás un diagnóstico gratuito sin compromiso de seguir adelante</li>
+          <li>Querés abandonar tu medicación sin supervisión médica</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ TESTIMONIOS (honestos) ░░░ -->
+<section class="sec sec-stone2">
+  <div class="w">
+    <span class="eyebrow rv">Casos reales</span>
+    <h2 class="stitle rv">Lo que dicen quienes ya pasaron por el proceso</h2>
+    <p class="lead rv">
+      Ezequiel trabajó durante años con pacientes con enfermedades autoinmunes en clínicas de Estados Unidos
+      y en su práctica privada. La mayoría de esos casos no pueden publicarse por acuerdos de confidencialidad.
+    </p>
+    <!-- TODO: reemplazar por testimonios reales con consentimiento documentado cuando estén disponibles -->
+    <div class="testi-note rv">
+      <p>
+        <strong>Los primeros testimonios de este programa específico están en proceso de recopilación.</strong><br>
+        Si querés conocer casos anteriores de trabajo con enfermedades inflamatorias crónicas,
+        podemos compartirlos de forma privada durante la conversación de evaluación.
+        Estamos construyendo este registro con honestidad, no con imágenes fabricadas.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ FAQ ░░░ -->
+<section class="sec sec-linen">
+  <div class="w">
+    <span class="eyebrow rv">Preguntas frecuentes</span>
+    <h2 class="stitle rv">Lo que casi todos preguntan antes de postular</h2>
+
+    <div class="faq rv">
+      <details class="faq-item">
+        <summary class="faq-q">¿Tengo que dejar mis medicamentos?<span class="faq-ico" aria-hidden="true">+</span></summary>
+        <div class="faq-a">No por tu cuenta, nunca. El programa cuenta con un médico que supervisa tu caso. A medida que el cuerpo responde, cualquier ajuste de medicación se hace de forma acompañada y segura. Nuestro trabajo es la causa nutricional. No reemplazamos a tu médico: lo complementamos.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">¿Sos médico?<span class="faq-ico" aria-hidden="true">+</span></summary>
+        <div class="faq-a">No, y lo digo sin rodeos: soy odontólogo, con formación extensa en nutrición y medicina funcional. Trabajé durante años en clínicas de EE.UU. dedicadas a pacientes autoinmunes. Precisamente por eso el programa lo llevo junto a un médico: para que la parte clínica siempre esté cubierta por quien tiene el título para hacerlo.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Me dijeron que es incurable. ¿Por qué esto sería distinto?<span class="faq-ico" aria-hidden="true">+</span></summary>
+        <div class="faq-a">La medicina convencional trabaja la enfermedad autoinmune con inmunosupresores: baja la respuesta inmune para reducir el daño. Es lo que tiene disponible y es legítimo. Lo que no hace, porque no es su enfoque, es preguntar por qué el sistema se descontroló. <strong>Esa es la pregunta que este programa trabaja.</strong> No prometemos curas: abordamos la causa nutricional que casi nadie revisa, con supervisión médica incluida.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">¿La dieta es para siempre?<span class="faq-ico" aria-hidden="true">+</span></summary>
+        <div class="faq-a">Al principio es más estricta porque hay que cortar la inflamación. Con el tiempo se flexibiliza. La mayoría de las personas que pasan por el proceso no quieren volver a lo anterior, no por obligación sino porque notan claramente la diferencia cuando se desvían. Es más un cambio de estilo de vida que una dieta temporal.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">¿En cuánto tiempo se ven resultados?<span class="faq-ico" aria-hidden="true">+</span></summary>
+        <div class="faq-a">Depende de la condición de partida, el tiempo de evolución de la enfermedad y el compromiso con el proceso. En general, los primeros cambios se empiezan a notar entre las semanas 4 y 8: menor frecuencia de picazón, brotes más espaciados, mejoras en energía. Los cambios visibles en la piel suelen tomar más tiempo. Esto no es un proceso rápido: es un proceso real.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">No vivo en Argentina. ¿Puedo acceder?<span class="faq-ico" aria-hidden="true">+</span></summary>
+        <div class="faq-a">Sí. El programa es 100% online, con videollamadas y WhatsApp. Trabajamos con personas en distintos países de habla hispana. La única condición es conexión a internet y ganas de seguir el proceso.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">¿Cuánto cuesta?<span class="faq-ico" aria-hidden="true">+</span></summary>
+        <div class="faq-a">El valor lo hablo con cada persona después de conocer el caso y validar que el programa es adecuado para su situación. No tiene sentido dar un número antes de eso. Lo que sí puedo decirte: es una inversión puntual en resolver la causa de algo que, sin abordarlo, seguirá generando gastos en consultas, cremas y tratamientos que no tocan el origen.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">¿Hay garantía?<span class="faq-ico" aria-hidden="true">+</span></summary>
+        <div class="faq-a">Sí. Si en cualquier momento del proceso sentís que el programa no cumplió con lo prometido, devolvemos el 100% de lo invertido. Sin condiciones ni criterios ambiguos. Así trabajamos.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ CTA FINAL ░░░ -->
+<section class="sec sec-dark" id="postular">
+  <div class="w">
+    <span class="eyebrow lt rv">El siguiente paso</span>
+    <h2 class="stitle rv">Cada semana que pasa, la inflamación sigue.<br>El intestino sigue esperando que alguien lo revise.</h2>
+
+    <div class="ctaf-context rv">
+      <p>
+        El proceso de postulación es simple: completá el formulario, revisamos el caso y nos contactamos
+        por WhatsApp para una conversación sin compromiso. Si el programa es adecuado para tu situación,
+        te explicamos exactamente qué incluye y cómo empezamos.
+      </p>
+      <p>
+        <strong>No hay presión ni urgencias artificiales.</strong> Si no es el momento o el programa no es
+        para tu situación, te lo decimos con la misma claridad.
+      </p>
+    </div>
+
+    <div class="form-card rv">
+      <form id="appForm" novalidate>
+        <p class="form-ey">Postulación al programa</p>
+        <h3>Contanos tu caso</h3>
+
+        <div class="field">
+          <label for="nombre">Nombre completo</label>
+          <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="whatsapp">WhatsApp (con código de país)</label>
+          <input id="whatsapp" name="whatsapp" type="tel" placeholder="+54 9 11…" autocomplete="tel" inputmode="tel" required>
+        </div>
+        <div class="field">
+          <label for="enfermedad">¿Qué enfermedad tenés?</label>
+          <select id="enfermedad" name="enfermedad" required>
+            <option value="" disabled selected>Seleccioná una opción</option>
+            <option>Dermatitis atópica / Eczema</option>
+            <option>Psoriasis</option>
+            <option>Vitíligo</option>
+            <option>Lupus cutáneo</option>
+            <option>Otra enfermedad autoinmune</option>
+            <option>Todavía no tengo diagnóstico</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="tiempo">¿Hace cuánto la tenés?</label>
+          <select id="tiempo" name="tiempo">
+            <option value="" disabled selected>Seleccioná una opción</option>
+            <option>Menos de 1 año</option>
+            <option>1 a 3 años</option>
+            <option>3 a 10 años</option>
+            <option>Más de 10 años</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="probado">¿Qué probaste hasta ahora?</label>
+          <textarea id="probado" name="probado" placeholder="Cremas, corticoides, dietas, tratamientos… contanos brevemente."></textarea>
+        </div>
+
+        <p class="form-error" id="formError" role="alert" hidden></p>
+
+        <button type="submit" class="btn btn-terra" id="submitBtn">Enviar mi postulación</button>
+        <p class="cta-note">Al enviar aceptás que te contactemos por WhatsApp. No compartimos tus datos con terceros.</p>
+      </form>
+
+      <div class="form-ok" id="formOk" tabindex="-1">
+        <div class="ok-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3>Recibimos tu postulación</h3>
+        <p>Vamos a revisar tu caso y te escribimos por WhatsApp en las próximas 24 horas.</p>
+        <!-- TODO: reemplazar XXXXXXXXXXX por el número real de WhatsApp Business -->
+        <a href="https://wa.me/XXXXXXXXXXX?text=Hola%20Ezequiel%2C%20acabo%20de%20postular%20al%20programa%20de%20enfermedades%20autoinmunes." target="_blank" rel="noopener" class="btn btn-wa">Escribir por WhatsApp ahora</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ FOOTER ░░░ -->
 <footer class="footer">
-  <!-- TODO: confirmar @usuario de Instagram (pendiente: definir nombre de cuenta con 'autoinmune') y ciudad -->
-  <p>© 2026 Ezequiel Racca · <a href="[URL-INSTAGRAM]" target="_blank" rel="noopener">@[usuario-instagram]</a> · Argentina</p>
+  <a href="#" class="brand" aria-label="Raíz Autoinmune">
+    <span class="brand-mark">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+    </span>
+    <span class="brand-name">Raíz Autoinmune<span>Ezequiel Racca</span></span>
+  </a>
+  <!-- TODO: actualizar @usuario y URL de Instagram una vez confirmado el nombre de cuenta -->
+  <p>© 2026 Raíz Autoinmune · Ezequiel Racca · <a href="#" target="_blank" rel="noopener">@[usuario-instagram]</a></p>
   <div class="footer-links">
-    <a href="[URL-POLITICA-PRIVACIDAD]" target="_blank" rel="noopener">Política de Privacidad</a>
-    <span>·</span>
-    <a href="[URL-TERMINOS-CONDICIONES]" target="_blank" rel="noopener">Términos y Condiciones</a>
+    <a href="#">Política de Privacidad</a>
+    <a href="#">Términos y Condiciones</a>
   </div>
-  <p class="disc">El Método Piel en Calma es un programa de acompañamiento en nutrición y medicina funcional, llevado adelante por Ezequiel Racca (odontólogo) junto a un médico. No constituye un acto médico ni un diagnóstico, y no reemplaza el tratamiento ni la medicación indicada por tu médico tratante: lo complementa abordando la causa nutricional. No abandones ni modifiques tu medicación sin supervisión profesional. Cada caso se evalúa de forma individual antes de ser aceptado. Los resultados varían según la condición de partida, el compromiso en la implementación y la respuesta biológica de cada persona.</p>
+  <p class="disc">
+    Raíz Autoinmune es un programa de acompañamiento en nutrición y medicina funcional, desarrollado por Ezequiel Racca (odontólogo, matrícula en Argentina) junto a un médico. No constituye un acto médico ni un diagnóstico clínico, y no reemplaza el tratamiento ni la medicación indicados por el médico tratante: los complementa abordando la causa nutricional. Ningún cambio de medicación debe realizarse sin supervisión profesional. Los resultados varían según la condición de partida, el tiempo de evolución, el compromiso con el protocolo y la respuesta biológica individual de cada persona. Se acepta un número limitado de postulantes por período; la aceptación depende de la evaluación del caso.
+  </p>
 </footer>
 
-<!-- FLOATING CTA -->
+<!-- ░░░ FLOATING CTA ░░░ -->
 <div class="float-cta" id="floatCta">
-  <a href="#contactar" class="btn btn-sm">
-    Evaluar mi caso
-    <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
-  </a>
+  <a href="#postular" class="btn btn-terra btn-sm">Postular al programa</a>
 </div>
 
 <script>
-// Salvaguarda: activar las fuentes si el navegador/plataforma ignoró el onload del <link>
-document.querySelectorAll('link[rel="stylesheet"][media="print"]').forEach(function(l){ l.media = 'all'; });
+// Activar tipografía si el navegador ignoró el onload
+document.querySelectorAll('link[rel="stylesheet"][media="print"]').forEach(function(l) { l.media = 'all'; });
 
-// VSL: cargar el reproductor solo al hacer click (evita cargar el video en la carga inicial)
-// TODO: reemplazar el media-id de Wistia (o sustituir por el embed de YouTube/Vimeo del VSL real)
-const vsl = document.getElementById('vsl');
-if(vsl){
-  vsl.addEventListener('click', function(){
-    const wrap = vsl.parentElement;
-    wrap.innerHTML = '<wistia-player media-id="REEMPLAZAR_MEDIA_ID" aspect="1.7777777777777777" autoplay></wistia-player>';
-    ['https://fast.wistia.com/player.js','https://fast.wistia.com/embed/REEMPLAZAR_MEDIA_ID.js'].forEach(function(src,i){
-      const s = document.createElement('script');
-      s.src = src; s.async = true;
-      if(i === 1) s.type = 'module';
-      document.body.appendChild(s);
+// Reveal on scroll
+(function() {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add('js');
+  var els = document.querySelectorAll('.rv');
+  if (reduce || !('IntersectionObserver' in window)) {
+    els.forEach(function(el) { el.classList.add('v'); });
+    return;
+  }
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); }
     });
-  }, {once:true});
-}
+  }, { threshold: .06, rootMargin: '0px 0px -36px 0px' });
+  els.forEach(function(el) { obs.observe(el); });
+})();
 
-// Floating CTA: visible entre el final del hero y el CTA final.
-const fc   = document.getElementById('floatCta');
-const hero = document.querySelector('.hero');
-const ag   = document.getElementById('contactar');
-if(fc && hero && ag && 'IntersectionObserver' in window){
-  let pastHero = false, atForm = false;
-  const update = () => fc.classList.toggle('show', pastHero && !atForm);
-  new IntersectionObserver(function(es){
-    const e = es[0];
+// Floating CTA
+(function() {
+  var fc   = document.getElementById('floatCta');
+  var hero = document.querySelector('.hero');
+  var form = document.getElementById('postular');
+  if (!fc || !hero || !form || !('IntersectionObserver' in window)) return;
+  var pastHero = false, atForm = false;
+  var update = function() { fc.classList.toggle('show', pastHero && !atForm); };
+  new IntersectionObserver(function(es) {
+    var e = es[0];
     pastHero = !e.isIntersecting && e.boundingClientRect.top < 0;
     update();
-  }, {threshold:0}).observe(hero);
-  new IntersectionObserver(function(es){
-    atForm = es[0].isIntersecting;
-    update();
-  }, {rootMargin:'0px 0px -10% 0px', threshold:0}).observe(ag);
-}
+  }, { threshold: 0 }).observe(hero);
+  new IntersectionObserver(function(es) {
+    atForm = es[0].isIntersecting; update();
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0 }).observe(form);
+})();
 
-// Reveal on scroll (progressive enhancement)
-const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const revealEls = document.querySelectorAll('.rv');
-if(reduce || !('IntersectionObserver' in window)){
-  revealEls.forEach(el => el.classList.add('v'));
-}else{
-  const obs = new IntersectionObserver((es) => {
-    es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('v'); obs.unobserve(e.target); } });
-  }, {threshold:.08, rootMargin:'0px 0px -40px 0px'});
-  revealEls.forEach(el => obs.observe(el));
-}
+// VSL
+(function() {
+  var btn = document.getElementById('vsl');
+  if (!btn) return;
+  btn.addEventListener('click', function() {
+    var wrap = btn.parentElement;
+    // TODO: reemplazar MEDIA_ID por el ID real del video en Wistia (o cambiar por embed de YouTube)
+    wrap.innerHTML = '<wistia-player media-id="MEDIA_ID" aspect="1.7777777777777777" autoplay></wistia-player>';
+    ['https://fast.wistia.com/player.js', 'https://fast.wistia.com/embed/MEDIA_ID.js'].forEach(function(src, i) {
+      var s = document.createElement('script');
+      s.src = src; s.async = true;
+      if (i === 1) s.type = 'module';
+      document.body.appendChild(s);
+    });
+  }, { once: true });
+})();
+
+// Formulario: validación inline accesible (sin alert)
+(function() {
+  var form = document.getElementById('appForm');
+  if (!form) return;
+  var errBox   = document.getElementById('formError');
+  var required = ['nombre', 'whatsapp', 'enfermedad'];
+
+  function clearError(el) {
+    el.classList.remove('invalid');
+    el.removeAttribute('aria-invalid');
+  }
+
+  required.forEach(function(id) {
+    var el = document.getElementById(id);
+    el.addEventListener('input',  function() { clearError(el); });
+    el.addEventListener('change', function() { clearError(el); });
+  });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var firstInvalid = null;
+    required.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el.value.trim()) {
+        el.classList.add('invalid');
+        el.setAttribute('aria-invalid', 'true');
+        if (!firstInvalid) firstInvalid = el;
+      }
+    });
+
+    if (firstInvalid) {
+      errBox.textContent = 'Para enviar tu postulación, completá tu nombre, tu WhatsApp y la enfermedad.';
+      errBox.hidden = false;
+      firstInvalid.focus();
+      return;
+    }
+    errBox.hidden = true;
+
+    // TODO: agregar aquí el fetch POST al webhook de GHL antes de mostrar el éxito
+    // fetch('URL_WEBHOOK_GHL', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({
+    //     nombre: document.getElementById('nombre').value.trim(),
+    //     whatsapp: document.getElementById('whatsapp').value.trim(),
+    //     enfermedad: document.getElementById('enfermedad').value,
+    //     tiempo: document.getElementById('tiempo').value,
+    //     probado: document.getElementById('probado').value.trim()
+    //   }) });
+
+    form.style.display = 'none';
+    var ok = document.getElementById('formOk');
+    ok.classList.add('show');
+    ok.focus();
+    ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+})();
 </script>
 </body>
 </html>
