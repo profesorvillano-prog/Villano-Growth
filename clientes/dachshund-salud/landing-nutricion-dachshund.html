@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nutrici&oacute;n Dachshund &middot; Los 5 cambios que tu salchicha elegir&iacute;a</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,900;1,9..40,400;1,9..40,500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --forest:#1B4332;
+  --forest2:#2D6A4F;
+  --sage:#52B788;
+  --mint:#B7E4C7;
+  --cream:#F7FBF4;
+  --warm:#FFFDF7;
+  --gold:#D4A017;
+  --gold-soft:#FFF8E1;
+  --ink:#1A1A1A;
+  --muted:#5A6052;
+  --card:#FFFFFF;
+  --line:#D8E8D0;
+  --shadow: 0 20px 50px rgba(27,67,50,.12);
+  --radius:16px;
+  --max:1100px;
+  --display:'DM Serif Display', Georgia, serif;
+  --body:'DM Sans', -apple-system, system-ui, sans-serif;
+}
+
+#sp-landing{font-family:var(--body); color:var(--ink); -webkit-font-smoothing:antialiased;}
+#sp-landing *{box-sizing:border-box; margin:0; padding:0;}
+#sp-landing img{max-width:100%; display:block;}
+#sp-landing a{color:inherit; text-decoration:none;}
+#sp-landing p{line-height:1.7; font-size:15.5px; color:var(--muted);}
+#sp-landing b, #sp-landing strong{color:var(--ink); font-weight:700;}
+
+/* UTILITY */
+#sp-landing .wrap{max-width:var(--max); margin:0 auto; padding:0 20px;}
+#sp-landing .spacer{height:24px;}
+
+/* TOPBAR */
+#sp-landing .topbar{
+  background:var(--forest);
+  color:#fff;
+  text-align:center;
+  padding:10px 16px;
+  font-size:13.5px;
+  font-weight:700;
+  letter-spacing:.3px;
+}
+#sp-landing .topbar span{color:var(--mint);}
+
+/* URGENCY PILL */
+#sp-landing .pill{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:12px; font-weight:900; letter-spacing:.4px; text-transform:uppercase;
+  padding:7px 14px; border-radius:999px;
+  background:var(--gold-soft); border:1.5px solid var(--gold);
+  color:#8B6914;
+}
+
+/* BUTTONS */
+#sp-landing .btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:18px 28px;
+  border-radius:14px; border:0;
+  background:var(--forest);
+  color:#fff !important;
+  font-family:var(--body);
+  font-weight:900; font-size:16px;
+  text-decoration:none !important;
+  box-shadow: 0 12px 30px rgba(27,67,50,.28);
+  transition: all .2s ease;
+  cursor:pointer; user-select:none;
+  line-height:1.2;
+  -webkit-tap-highlight-color:transparent;
+  width:fit-content;
+}
+#sp-landing .btn:hover{background:var(--forest2); transform:translateY(-1px); box-shadow: 0 16px 36px rgba(27,67,50,.32);}
+#sp-landing .btn:active{transform:translateY(0) scale(.99);}
+#sp-landing .btn.wide{width:100%;}
+#sp-landing .btn.secondary{
+  background:var(--card); color:var(--forest) !important;
+  border:2px solid var(--line); box-shadow:none;
+  font-weight:700;
+}
+#sp-landing .btn.secondary:hover{border-color:var(--sage); background:#F0F8F0;}
+#sp-landing .btn .arrow{font-size:18px; transition:transform .15s;}
+#sp-landing .btn:hover .arrow{transform:translateX(3px);}
+
+/* ==================== HERO ==================== */
+#sp-landing .hero{
+  background: linear-gradient(175deg, var(--cream) 0%, #fff 50%, var(--warm) 100%);
+  padding:36px 0 20px;
+  overflow:hidden;
+}
+#sp-landing .hero-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:32px;
+  align-items:center;
+}
+#sp-landing .hero h1{
+  font-family:var(--display);
+  font-size:clamp(30px,3.8vw,48px);
+  line-height:1.08;
+  letter-spacing:-.5px;
+  color:var(--ink);
+  margin:14px 0 16px;
+}
+#sp-landing .hero h1 em{
+  color:var(--forest);
+  font-style:italic;
+}
+#sp-landing .hero-sub{
+  font-size:16.5px;
+  line-height:1.65;
+  color:var(--muted);
+  max-width:56ch;
+}
+#sp-landing .hero-sub b{color:var(--forest2);}
+#sp-landing .hero-proof{
+  display:flex; align-items:center; gap:8px;
+  margin-top:14px;
+  font-size:13px; color:var(--muted); font-weight:500;
+}
+#sp-landing .hero-proof .dot{width:8px;height:8px;border-radius:50%;background:var(--sage);}
+
+#sp-landing .hero-art{
+  position:relative;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow: 0 24px 56px rgba(27,67,50,.14);
+}
+#sp-landing .hero-art img{width:100%;height:auto;display:block;}
+
+#sp-landing .hero-art--mobile{display:none;}
+#sp-landing .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:20px;}
+
+/* ==================== PROBLEM SECTION ==================== */
+#sp-landing .problem{
+  background:#fff;
+  padding:48px 0;
+}
+#sp-landing .problem-headline{
+  font-family:var(--display);
+  font-size:clamp(22px,2.8vw,34px);
+  text-align:center;
+  line-height:1.15;
+  max-width:48ch;
+  margin:0 auto 8px;
+}
+#sp-landing .problem-sub{
+  text-align:center;
+  max-width:62ch;
+  margin:0 auto;
+}
+#sp-landing .pain-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:28px;
+}
+#sp-landing .pain-card{
+  background:var(--warm);
+  border:1px solid #F0E8D0;
+  border-radius:14px;
+  padding:20px 18px;
+  text-align:center;
+}
+#sp-landing .pain-card .icon{font-size:32px; margin-bottom:8px;}
+#sp-landing .pain-card h4{font-size:14.5px; color:var(--ink); margin-bottom:4px;}
+#sp-landing .pain-card p{font-size:13px; line-height:1.5;}
+
+/* ==================== VSL ==================== */
+#sp-landing .vsl{
+  background:var(--cream);
+  padding:48px 0;
+}
+#sp-landing .vsl-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:24px;
+  align-items:start;
+}
+#sp-landing .video-wrap{
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:2px solid var(--line);
+  box-shadow: var(--shadow);
+  background:#000;
+}
+#sp-landing .video-wrap video{width:100%;height:auto;display:block;}
+#sp-landing .vsl-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:24px 20px;
+  box-shadow: 0 8px 20px rgba(27,67,50,.06);
+}
+#sp-landing .vsl-card h3{
+  font-family:var(--display);
+  font-size:22px;
+  margin-bottom:14px;
+}
+#sp-landing .check-list{list-style:none; display:grid; gap:12px;}
+#sp-landing .check-item{
+  display:flex; gap:10px; align-items:flex-start;
+  font-size:14.5px; line-height:1.55; color:var(--muted);
+}
+#sp-landing .check-icon{
+  width:22px; height:22px; border-radius:50%;
+  background:var(--cream); border:1.5px solid var(--mint);
+  display:grid; place-items:center;
+  color:var(--forest); font-weight:900; font-size:12px;
+  flex:0 0 22px; margin-top:1px;
+}
+
+/* ==================== BAND ==================== */
+#sp-landing .band{
+  background:var(--forest);
+  color:#fff;
+  padding:44px 0;
+}
+#sp-landing .band h3{
+  font-family:var(--display);
+  text-align:center;
+  font-size:clamp(22px,2.6vw,32px);
+  margin-bottom:28px;
+  font-weight:400;
+}
+#sp-landing .band-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:14px;
+}
+#sp-landing .band-item{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;
+  padding:22px 16px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+  min-height:200px; text-align:center;
+  transition: background .2s;
+}
+#sp-landing .band-item:hover{background:rgba(255,255,255,.14);}
+#sp-landing .band-item img{
+  width:88px; height:88px; object-fit:contain;
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.25));
+}
+#sp-landing .band-item span{color:#fff; font-weight:700; font-size:14px; line-height:1.3;}
+
+/* ==================== STORY ==================== */
+#sp-landing .story-section{
+  background:linear-gradient(180deg, #fff 0%, var(--cream) 100%);
+  padding:48px 0;
+}
+#sp-landing .story-grid{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:24px;
+  align-items:start;
+}
+#sp-landing .story-photo{
+  border-radius:20px;
+  overflow:hidden;
+  border:2px solid var(--line);
+  box-shadow: var(--shadow);
+}
+#sp-landing .story-photo img{width:100%; height:auto;}
+#sp-landing .story-content{display:flex; flex-direction:column; gap:12px;}
+#sp-landing .story-content h2{
+  font-family:var(--display);
+  font-size:clamp(22px,2.6vw,32px);
+  line-height:1.12;
+}
+#sp-landing .story-content h2 em{color:var(--forest); font-style:italic;}
+#sp-landing .story-quote{
+  border-left:4px solid var(--sage);
+  background:var(--cream);
+  padding:16px 18px;
+  border-radius:0 12px 12px 0;
+  font-size:15px;
+  line-height:1.65;
+  color:var(--muted);
+  font-style:italic;
+}
+#sp-landing .story-quote b{font-style:normal;}
+
+/* ==================== PACK ==================== */
+#sp-landing .pack-section{
+  background:#fff;
+  padding:48px 0;
+}
+#sp-landing .pack-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  align-items:start;
+  margin-top:24px;
+}
+#sp-landing .pack-art{
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:2px solid var(--line);
+  box-shadow:var(--shadow);
+  background:#fff;
+}
+#sp-landing .pack-art img{width:100%;height:auto;}
+#sp-landing .pack-card{
+  background:var(--card);
+  border:2px solid var(--forest);
+  border-radius:var(--radius);
+  padding:28px 22px;
+  box-shadow: 0 12px 30px rgba(27,67,50,.10);
+}
+#sp-landing .pack-card .price-row{
+  display:flex; align-items:baseline; gap:10px;
+  margin-bottom:16px;
+}
+#sp-landing .pack-card .price{
+  font-family:var(--display);
+  font-size:38px; color:var(--forest);
+}
+#sp-landing .pack-card .price-old{
+  font-size:16px; color:#999; text-decoration:line-through;
+}
+#sp-landing .pack-card .price-note{font-size:13px; color:var(--muted);}
+#sp-landing .pack-card .divider{
+  height:1px; background:var(--line); margin:16px 0;
+}
+#sp-landing .pack-guarantee{
+  display:flex; align-items:flex-start; gap:10px;
+  margin-top:16px; padding:14px;
+  background:var(--cream); border-radius:12px;
+  border:1px solid var(--line);
+  font-size:13px; color:var(--muted); line-height:1.5;
+}
+
+/* ==================== TESTIMONIALS ==================== */
+#sp-landing .testi{
+  background:var(--cream);
+  padding:48px 0;
+}
+#sp-landing .testi h2{
+  font-family:var(--display);
+  font-size:clamp(22px,2.6vw,32px);
+  text-align:center;
+  margin-bottom:24px;
+}
+#sp-landing .tgrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+#sp-landing .tcard{
+  background:#fff; border:1px solid var(--line);
+  border-radius:14px; overflow:hidden;
+  box-shadow: 0 6px 16px rgba(27,67,50,.06);
+  transition: transform .2s, box-shadow .2s;
+}
+#sp-landing .tcard:hover{transform:translateY(-3px); box-shadow: 0 12px 28px rgba(27,67,50,.12);}
+#sp-landing .tcard img{width:100%;height:100%;object-fit:cover;aspect-ratio:3/4;}
+#sp-landing .tcta{display:flex; justify-content:center; margin-top:24px;}
+
+/* ==================== FAQ ==================== */
+#sp-landing .faq{
+  background:#fff;
+  padding:48px 0;
+}
+#sp-landing .faq h2{
+  font-family:var(--display);
+  font-size:clamp(22px,2.6vw,32px);
+  text-align:center;
+  margin-bottom:20px;
+}
+#sp-landing .faq-grid{display:grid; gap:10px; max-width:780px; margin:0 auto;}
+#sp-landing details{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:16px 18px;
+  background:var(--card);
+  transition:background .2s;
+}
+#sp-landing details[open]{background:var(--cream); border-color:var(--sage);}
+#sp-landing summary{
+  cursor:pointer; font-weight:700; font-size:15px;
+  color:var(--ink); list-style:none;
+  display:flex; justify-content:space-between; align-items:center;
+}
+#sp-landing summary::-webkit-details-marker{display:none;}
+#sp-landing summary::after{content:"+"; font-size:20px; color:var(--sage); font-weight:300; transition:transform .2s;}
+#sp-landing details[open] summary::after{transform:rotate(45deg);}
+#sp-landing details p{margin-top:10px; font-size:14.5px; line-height:1.65;}
+
+/* ==================== FINAL CTA ==================== */
+#sp-landing .final-cta{
+  background:var(--forest);
+  color:#fff;
+  padding:48px 0;
+  text-align:center;
+}
+#sp-landing .final-cta h2{
+  font-family:var(--display);
+  font-size:clamp(24px,3vw,36px);
+  color:#fff;
+  margin-bottom:10px;
+  font-weight:400;
+}
+#sp-landing .final-cta p{color:rgba(255,255,255,.75); max-width:52ch; margin:0 auto 20px; font-size:16px;}
+#sp-landing .final-cta .btn{
+  background:#fff; color:var(--forest) !important;
+  font-size:17px; padding:20px 32px;
+  box-shadow: 0 14px 32px rgba(0,0,0,.2);
+}
+#sp-landing .final-cta .btn:hover{background:var(--mint); color:var(--forest) !important;}
+
+/* ==================== FOOTER ==================== */
+#sp-landing .footer{
+  padding:28px 0 48px;
+  color:var(--muted);
+  font-size:12.5px;
+  text-align:center;
+  background:#fff;
+}
+#sp-landing .footer a{color:var(--forest); font-weight:700; text-decoration:underline; text-underline-offset:2px;}
+
+/* ==================== ANIMATIONS ==================== */
+#sp-landing .reveal{opacity:0; transform:translateY(14px); transition:opacity .55s ease, transform .55s ease;}
+#sp-landing .reveal.on{opacity:1; transform:translateY(0);}
+
+/* ==================== RESPONSIVE ==================== */
+@media(max-width:1040px){
+  #sp-landing .hero-grid{grid-template-columns:1fr;}
+  #sp-landing .vsl-grid{grid-template-columns:1fr;}
+  #sp-landing .story-grid{grid-template-columns:1fr;}
+  #sp-landing .pack-grid{grid-template-columns:1fr;}
+  #sp-landing .pain-grid{grid-template-columns:repeat(2,1fr);}
+  #sp-landing .tgrid{grid-template-columns:repeat(2,1fr);}
+  #sp-landing .hero-art--desktop{display:none;}
+  #sp-landing .hero-art--mobile{display:block; margin:18px 0 8px;}
+}
+@media(max-width:520px){
+  #sp-landing .hero-actions{flex-direction:column; gap:10px;}
+  #sp-landing .btn{width:100%; justify-content:center; padding:18px 20px; font-size:15.5px;}
+  #sp-landing .btn.secondary{width:100%;}
+  #sp-landing .pain-grid{grid-template-columns:1fr;}
+  #sp-landing .tgrid{grid-template-columns:repeat(2,1fr);}
+  #sp-landing .band-item{min-height:180px;}
+  #sp-landing .pack-card{padding:22px 18px;}
+}
+@media(max-width:420px){
+  #sp-landing .tgrid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<section id="sp-landing">
+
+<!-- TOPBAR URGENCY -->
+<div class="topbar">
+  No tienes que cambiarlo todo hoy. <span>Tu salchicha solo necesita el primer cambio.</span> Y toma 30 segundos.
+</div>
+
+<!-- ==================== HERO ==================== -->
+<div class="hero">
+<div class="wrap">
+  <div class="hero-grid reveal" data-sp-reveal>
+    <div>
+      <span class="pill">&#x1F4D7; Paso 1 &middot; Serie Dachshund Salud</span>
+
+      <h1>
+        No tienes que eliminar la croqueta ma&ntilde;ana<br>
+        para transformar la salud de <em>tu salchicha.</em>
+      </h1>
+
+      <!-- MOBILE IMAGE -->
+      <div class="hero-art hero-art--mobile">
+        <img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/6965c83cc7683b50c4f76f44.svg"
+             alt="Dr. Marcelo Hern&aacute;n con el eBook Nutrici&oacute;n Dachshund" loading="lazy">
+      </div>
+
+      <p class="hero-sub">
+        <b>Nutrici&oacute;n Dachshund</b> es el m&eacute;todo gradual del Dr. Marcelo Hern&aacute;n, M&eacute;dico Veterinario
+        especialista en la raza: <b>5 cambios simples en el plato, uno a la vez</b>, para que en 30 d&iacute;as
+        veas resultados en el peso, la piel, la digesti&oacute;n y la energ&iacute;a de tu Hijo Perruno.
+        Sin dietas radicales. Sin riesgos. Sin culpa.
+      </p>
+
+      <div class="hero-proof">
+        <span class="dot"></span> +5 a&ntilde;os dedicado 100% a la raza Dachshund
+        <span class="dot"></span> El &uacute;nico veterinario en habla hispana enfocado solo en nutrici&oacute;n de Salchichas
+      </div>
+
+      <div class="hero-actions">
+        <a class="btn wide"
+           href="https://pay.hotmart.com/U99264026X?off=vnwvyzxm&hotfeature=51&_hi=eyJzaWQiOiI4ZDU4YjNmZmQxNzM0NDFhYTE2YzQxMTAyOGQ3YzI5ZiIsImNpZCI6IjE3Njg5NjI0NzI1OTg5NjI5OTcyNDMzNTI3MjkyMDAiLCJiaWQiOiIxNzY4OTYyNDcyNTk4OTYyOTk3MjQzMzUyNzI5MjAwIn0=.1768962475477&bid=1768962477908">
+          Quiero los 5 cambios para mi Salchicha <span class="arrow">&rarr;</span>
+        </a>
+        <a class="btn secondary" href="#sp-vsl">&#x25B6;&#xFE0F; Ver el video primero</a>
+      </div>
+    </div>
+
+    <!-- DESKTOP IMAGE -->
+    <div class="hero-art hero-art--desktop">
+      <img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/6965c83cc7683b50c4f76f44.svg"
+           alt="Dr. Marcelo Hern&aacute;n con el eBook Nutrici&oacute;n Dachshund" loading="lazy">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== PROBLEM AGITATION ==================== -->
+<div class="problem">
+<div class="wrap reveal" data-sp-reveal>
+  <h2 class="problem-headline">
+    &iquest;Le mezclas &ldquo;algo natural&rdquo; con la croqueta&hellip; y te quedas con la duda de si lo est&aacute;s haciendo bien?
+  </h2>
+  <p class="problem-sub">
+    Si te reconoces en alguna de estas frases, no hiciste nada mal. Te falt&oacute; informaci&oacute;n clara. Y eso tiene soluci&oacute;n.
+  </p>
+
+  <div class="pain-grid">
+    <div class="pain-card">
+      <div class="icon">&#x1F35A;</div>
+      <h4>&ldquo;Le doy lo que dice la bolsa y sigue con problemas&rdquo;</h4>
+      <p>Respetas las porciones, compras la croqueta &ldquo;premium&rdquo;&hellip; y los kilos, la caspa o los gases siguen ah&iacute;. La bolsa no est&aacute; hecha para tu Dachshund.</p>
+    </div>
+    <div class="pain-card">
+      <div class="icon">&#x1F630;</div>
+      <h4>&ldquo;Prob&eacute; algo natural y me dio miedo hacerlo mal&rdquo;</h4>
+      <p>Le agregaste pollo, caldo o verdura unos d&iacute;as y lo dejaste: miedo a intoxicarlo, a desbalancear, a que le falte calcio. Ese miedo es l&oacute;gico. Por eso este m&eacute;todo va paso a paso.</p>
+    </div>
+    <div class="pain-card">
+      <div class="icon">&#x2696;&#xFE0F;</div>
+      <h4>El sobrepeso que no baja</h4>
+      <p>En un Dachshund, cada kilo de m&aacute;s presiona directamente su columna. La buena noticia: el peso se corrige en el plato, y se puede empezar hoy.</p>
+    </div>
+    <div class="pain-card">
+      <div class="icon">&#x1F9B4;</div>
+      <h4>El miedo al lomo (IVDD)</h4>
+      <p>1 de cada 4 salchichas desarrolla problemas de disco, y el sobrepeso es el factor #1. Proteger su columna empieza por lo que come cada d&iacute;a.</p>
+    </div>
+    <div class="pain-card">
+      <div class="icon">&#x1F62C;</div>
+      <h4>Ansiedad por la comida</h4>
+      <p>Devora en segundos, pide m&aacute;s, ladra, se estresa. Las croquetas no sacian a un carn&iacute;voro. La calma tambi&eacute;n empieza en el plato.</p>
+    </div>
+    <div class="pain-card">
+      <div class="icon">&#x1F300;</div>
+      <h4>Informaci&oacute;n contradictoria</h4>
+      <p>Cada persona te dice algo distinto e internet es un caos. No necesitas m&aacute;s informaci&oacute;n: necesitas un orden claro de qu&eacute; hacer primero.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== VSL ==================== -->
+<div class="vsl" id="sp-vsl">
+<div class="wrap reveal" data-sp-reveal>
+  <h2 style="font-family:var(--display); text-align:center; font-size:clamp(22px,2.6vw,32px); margin-bottom:6px;">
+    La soluci&oacute;n no es un salto radical. Es un cambio a la vez.
+  </h2>
+  <p style="text-align:center; max-width:60ch; margin:0 auto 24px;">
+    Mira este video y descubre c&oacute;mo funciona el camino gradual: empiezas hoy,
+    sin eliminar la croqueta de un d&iacute;a para otro, y en 30 d&iacute;as los resultados se ven, se huelen y se tocan.
+  </p>
+
+  <div class="vsl-grid">
+    <div class="video-wrap">
+      <video
+        src="https://storage.googleapis.com/msgsndr/TzjuywpjnaS5aZn5RTs8/media/6965c6de98efbd5c693c2b68.mp4"
+        controls playsinline preload="metadata"></video>
+    </div>
+
+    <div class="vsl-card">
+      <h3>Dentro de Nutrici&oacute;n Dachshund aprender&aacute;s a:</h3>
+      <ul class="check-list">
+        <li class="check-item"><span class="check-icon">1</span> <b>Hidratar su plato</b> desde la primera comida: el cambio m&aacute;s simple y el que m&aacute;s se nota.</li>
+        <li class="check-item"><span class="check-icon">2</span> <b>Sumar prote&iacute;na real cocida</b> en porciones seguras para el tama&ntilde;o y la columna de un Dachshund.</li>
+        <li class="check-item"><span class="check-icon">3</span> <b>Incorporar probi&oacute;ticos naturales</b> como el k&eacute;fir para ordenar su digesti&oacute;n desde adentro.</li>
+        <li class="check-item"><span class="check-icon">4</span> <b>Agregar omega 3</b> para la piel, el pelaje y las articulaciones de tu Salchicha.</li>
+        <li class="check-item"><span class="check-icon">5</span> <b>Elegir frutas y verduras seguras</b> (y saber exactamente cu&aacute;les evitar).</li>
+        <li class="check-item"><span class="check-icon">&#x2713;</span> Todo con el orden, las cantidades y los tiempos claros. T&uacute; no adivinas: sigues los pasos.</li>
+      </ul>
+      <div style="margin-top:18px;">
+        <a class="btn wide"
+           href="https://pay.hotmart.com/U99264026X?off=vnwvyzxm&hotfeature=51&_hi=eyJzaWQiOiI4ZDU4YjNmZmQxNzM0NDFhYTE2YzQxMTAyOGQ3YzI5ZiIsImNpZCI6IjE3Njg5NjI0NzI1OTg5NjI5OTcyNDMzNTI3MjkyMDAiLCJiaWQiOiIxNzY4OTYyNDcyNTk4OTYyOTk3MjQzMzUyNzI5MjAwIn0=.1768962475477&bid=1768962477908">
+          Quiero empezar el Cambio 1 hoy &middot; $47 USD <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== BAND ==================== -->
+<div class="band">
+<div class="wrap reveal" data-sp-reveal>
+  <h3>&iquest;Qu&eacute; vas a notar en tu Salchicha con los 5 cambios?</h3>
+  <div class="band-grid">
+    <div class="band-item">
+      <img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/6965e20d98efbdfaa042aec7.png" alt="Menos ansiedad por la comida" loading="lazy">
+      <span>Menos ansiedad por la comida</span>
+    </div>
+    <div class="band-item">
+      <img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/6965e24398efbd61ba42b532.png" alt="Columna protegida" loading="lazy">
+      <span>Peso bajo control, columna protegida</span>
+    </div>
+    <div class="band-item">
+      <img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/6965e342c7683bf8c1fd0203.png" alt="Piel, pelo y energía" loading="lazy">
+      <span>Mejor piel, pelo y energ&iacute;a</span>
+    </div>
+    <div class="band-item">
+      <img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/6965e462f8a93b083f1ee14a.png" alt="Calma en casa" loading="lazy">
+      <span>M&aacute;s calma en casa</span>
+    </div>
+    <div class="band-item">
+      <img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/6965e502c7683b11d0fd2e21.png" alt="Diseñado para Dachshund" loading="lazy">
+      <span>Dise&ntilde;ado solo para Dachshund</span>
+    </div>
+    <div class="band-item">
+      <img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/6965e342c7683bf8c1fd0203.png" alt="Digestión ordenada" loading="lazy">
+      <span>Digesti&oacute;n ordenada, sin gases ni v&oacute;mitos</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== STORY ==================== -->
+<div class="story-section" id="sp-story">
+<div class="wrap reveal" data-sp-reveal>
+  <div class="story-grid">
+    <div class="story-photo">
+      <img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/6965e56598efbdd2884310af.png" alt="Dr. Marcelo Hern&aacute;n y Hansel" loading="lazy">
+    </div>
+    <div class="story-content">
+      <h2>Soy el Dr. Marcelo Hern&aacute;n y &eacute;l es <em>Hansel</em></h2>
+      <p>Soy M&eacute;dico Veterinario y con Hansel hice todo lo que se supone que hay que hacer &ldquo;bien&rdquo;: alimento comercial premium, controles al d&iacute;a, cuidados constantes.</p>
+      <p><b>Aun as&iacute;, viv&iacute;a ansioso por la comida. Por m&aacute;s marcas que probaba, siempre parec&iacute;a insatisfecho, pidiendo m&aacute;s.</b></p>
+
+      <div class="story-quote">
+        No era solo mi perro&hellip; <b>era mi hijo.</b> Y ah&iacute; entend&iacute; algo que lo cambi&oacute; todo:
+        <b>el problema no era Hansel. Era lo que hab&iacute;a en su plato todos los d&iacute;as.</b>
+      </div>
+
+      <p>Cuando empec&eacute; a cambiar su alimentaci&oacute;n, no lo hice todo de golpe. Fui paso a paso. Y los cambios se notaron r&aacute;pido: m&aacute;s calma, mejor digesti&oacute;n, pelaje brillante y una energ&iacute;a que no le conoc&iacute;a.</p>
+
+      <p><b>Llevo +5 a&ntilde;os dedicado 100% a la nutrici&oacute;n natural de perros Salchicha. Nutrici&oacute;n Dachshund es el primer paso de mi m&eacute;todo: los 5 cambios que le har&iacute;a al plato de cualquier Salchicha, en el orden exacto en que los har&iacute;a.</b></p>
+
+      <a class="btn"
+         href="https://pay.hotmart.com/U99264026X?off=vnwvyzxm&hotfeature=51&_hi=eyJzaWQiOiI4ZDU4YjNmZmQxNzM0NDFhYTE2YzQxMTAyOGQ3YzI5ZiIsImNpZCI6IjE3Njg5NjI0NzI1OTg5NjI5OTcyNDMzNTI3MjkyMDAiLCJiaWQiOiIxNzY4OTYyNDcyNTk4OTYyOTk3MjQzMzUyNzI5MjAwIn0=.1768962475477&bid=1768962477908">
+        Quiero el m&eacute;todo del Dr. Marcelo <span class="arrow">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== PACK ==================== -->
+<div class="pack-section" id="sp-pack">
+<div class="wrap reveal" data-sp-reveal>
+  <h2 style="font-family:var(--display); text-align:center; font-size:clamp(22px,2.6vw,32px); margin-bottom:4px;">
+    Nutrici&oacute;n Dachshund: los 5 cambios que tu salchicha elegir&iacute;a
+  </h2>
+  <p style="text-align:center; max-width:62ch; margin:0 auto;">
+    El Paso 1 de la Serie Dachshund Salud. Un plan gradual de 30 d&iacute;as para mejorar el plato de tu Hijo Perruno
+    sin saltos radicales y sin dejar de dormir tranquila.
+  </p>
+
+  <div class="pack-grid">
+    <div class="pack-art">
+      <img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/6965eb2c95f9f94fdafe2ca3.png" alt="eBook Nutrici&oacute;n Dachshund" loading="lazy">
+    </div>
+
+    <div class="pack-card" id="sp-checkout">
+      <div class="price-row">
+        <span class="price">$47 USD</span>
+        <span class="price-note">Acceso inmediato &bull; PDF descargable</span>
+      </div>
+
+      <ul class="check-list">
+        <li class="check-item"><span class="check-icon">&#x2713;</span> <b>Exclusivo por raza:</b> pensado SOLO para perros Salchicha, su columna y su digesti&oacute;n.</li>
+        <li class="check-item"><span class="check-icon">&#x2713;</span> <b>Gradual de verdad:</b> 5 cambios, uno a la vez, aunque hoy solo coma croquetas.</li>
+        <li class="check-item"><span class="check-icon">&#x2713;</span> <b>Sin adivinar:</b> qu&eacute;, cu&aacute;nto y en qu&eacute; orden. Ingredientes del supermercado.</li>
+        <li class="check-item"><span class="check-icon">&#x2713;</span> <b>30 d&iacute;as:</b> resultados que vas a ver, oler y tocar: peso, piel, pelaje y digesti&oacute;n.</li>
+        <li class="check-item"><span class="check-icon">&#x2713;</span> <b>Respaldo veterinario:</b> escrito por el Dr. Marcelo Hern&aacute;n, +5 a&ntilde;os dedicado a la raza.</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <a class="btn wide"
+         href="https://pay.hotmart.com/U99264026X?off=vnwvyzxm&hotfeature=51&_hi=eyJzaWQiOiI4ZDU4YjNmZmQxNzM0NDFhYTE2YzQxMTAyOGQ3YzI5ZiIsImNpZCI6IjE3Njg5NjI0NzI1OTg5NjI5OTcyNDMzNTI3MjkyMDAiLCJiaWQiOiIxNzY4OTYyNDcyNTk4OTYyOTk3MjQzMzUyNzI5MjAwIn0=.1768962475477&bid=1768962477908">
+        Descargar Nutrici&oacute;n Dachshund ahora <span class="arrow">&rarr;</span>
+      </a>
+
+      <div class="pack-guarantee">
+        <span style="font-size:20px;">&#x1F512;</span>
+        <span><b>Compra segura.</b> Pago procesado por Hotmart. Soporte: <b>dachshundsalud@gmail.com</b></span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== TESTIMONIALS ==================== -->
+<div class="testi" id="sp-testimonios">
+<div class="wrap reveal" data-sp-reveal>
+  <h2>Mam&aacute;s Perrunas que ya salieron de la duda</h2>
+
+  <div class="tgrid">
+    <div class="tcard"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69796ed495117149091fa173.jpg" alt="Testimonio 1" loading="lazy"></div>
+    <div class="tcard"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69796ed5bd9bc4504071a4fa.jpg" alt="Testimonio 2" loading="lazy"></div>
+    <div class="tcard"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69796ed4b9c85b51d4a51642.jpg" alt="Testimonio 3" loading="lazy"></div>
+    <div class="tcard"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69796ed44d506d3c0373ccb0.jpg" alt="Testimonio 4" loading="lazy"></div>
+    <div class="tcard"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69796ed4d119a538386defe9.jpg" alt="Testimonio 5" loading="lazy"></div>
+    <div class="tcard"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69796ed4d119a538386defe9.jpg" alt="Testimonio 6" loading="lazy"></div>
+    <div class="tcard"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69796ed5951171db381fa180.jpg" alt="Testimonio 7" loading="lazy"></div>
+    <div class="tcard"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69796ed495117149091fa173.jpg" alt="Testimonio 8" loading="lazy"></div>
+  </div>
+
+  <div class="tcta">
+    <a class="btn"
+       href="https://pay.hotmart.com/U99264026X?off=vnwvyzxm&hotfeature=51&_hi=eyJzaWQiOiI4ZDU4YjNmZmQxNzM0NDFhYTE2YzQxMTAyOGQ3YzI5ZiIsImNpZCI6IjE3Njg5NjI0NzI1OTg5NjI5OTcyNDMzNTI3MjkyMDAiLCJiaWQiOiIxNzY4OTYyNDcyNTk4OTYyOTk3MjQzMzUyNzI5MjAwIn0=.1768962475477&bid=1768962477908">
+      Quiero los 5 cambios por $47 USD <span class="arrow">&rarr;</span>
+    </a>
+  </div>
+</div>
+</div>
+
+<!-- ==================== FAQ ==================== -->
+<div class="faq" id="sp-faq">
+<div class="wrap reveal" data-sp-reveal>
+  <h2>Preguntas frecuentes</h2>
+  <div class="faq-grid">
+    <details>
+      <summary>&iquest;Sirve si mi perro hoy come solo croquetas?</summary>
+      <p><b>S&iacute;. El m&eacute;todo est&aacute; dise&ntilde;ado exactamente para ese punto de partida.</b> El Cambio 1 se aplica sobre el plato que ya le das, y de ah&iacute; avanzas un cambio a la vez, a tu ritmo.</p>
+    </details>
+    <details>
+      <summary>&iquest;Tengo que pasarlo a dieta cruda?</summary>
+      <p><b>No.</b> Nutrici&oacute;n Dachshund no usa carne cruda: trabaja con prote&iacute;na cocida e ingredientes simples del supermercado. Es el paso gradual, pensado justamente para quienes quieren mejorar el plato sin dar un salto radical.</p>
+    </details>
+    <details>
+      <summary>&iquest;Es seguro cambiar la alimentaci&oacute;n de un perro salchicha?</summary>
+      <p><b>S&iacute;, si se hace en orden.</b> El eBook fue escrito por un M&eacute;dico Veterinario especialista en la raza y te indica qu&eacute; agregar, cu&aacute;nto y cu&aacute;ndo, para que no improvises ni pongas en riesgo la salud de tu perro.</p>
+    </details>
+    <details>
+      <summary>&iquest;Necesito tiempo o experiencia para aplicarlo?</summary>
+      <p><b>No.</b> Cada cambio es simple y concreto, con ingredientes que ya conoces. No necesitas saber de nutrici&oacute;n ni pasar horas en la cocina: sigues los pasos en el orden indicado.</p>
+    </details>
+    <details>
+      <summary>&iquest;Cu&aacute;ndo voy a ver resultados?</summary>
+      <p>Cada perro es distinto, pero el plan est&aacute; dise&ntilde;ado para 30 d&iacute;as, y muchas familias notan mejoras antes: m&aacute;s calma con la comida, mejor digesti&oacute;n y m&aacute;s energ&iacute;a desde las primeras semanas.</p>
+    </details>
+    <details>
+      <summary>&iquest;Es solo para perros salchicha?</summary>
+      <p><b>S&iacute;.</b> Todo el contenido est&aacute; pensado <b>exclusivamente para Dachshund desde los 6 meses de edad</b>, considerando su columna, su fisiolog&iacute;a digestiva y su tendencia a la ansiedad por la comida.</p>
+    </details>
+    <details>
+      <summary>&iquest;Reemplaza un diagn&oacute;stico o la asesor&iacute;a del Dr. Marcelo?</summary>
+      <p><b>No.</b> Es un eBook educativo. Si tu perro presenta una condici&oacute;n importante (dolor, sospecha de IVDD, s&iacute;ntomas persistentes, alergias severas), lo correcto es una evaluaci&oacute;n profesional personalizada con el Dr. Marcelo.</p>
+    </details>
+  </div>
+</div>
+</div>
+
+<!-- ==================== FINAL CTA ==================== -->
+<div class="final-cta">
+<div class="wrap reveal" data-sp-reveal>
+  <h2>No hiciste nada mal. Te faltaba un camino claro.</h2>
+  <p>
+    Tu salchicha no puede elegir lo que come: depende 100% de ti. Y hoy el primer paso
+    es m&aacute;s simple de lo que crees. Un cambio a la vez, empezando por el plato de esta noche.
+  </p>
+  <a class="btn"
+     href="https://pay.hotmart.com/U99264026X?off=vnwvyzxm&hotfeature=51&_hi=eyJzaWQiOiI4ZDU4YjNmZmQxNzM0NDFhYTE2YzQxMTAyOGQ3YzI5ZiIsImNpZCI6IjE3Njg5NjI0NzI1OTg5NjI5OTcyNDMzNTI3MjkyMDAiLCJiaWQiOiIxNzY4OTYyNDcyNTk4OTYyOTk3MjQzMzUyNzI5MjAwIn0=.1768962475477&bid=1768962477908">
+    Empezar los 5 cambios por $47 USD <span class="arrow">&rarr;</span>
+  </a>
+</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  &copy; <span id="spYear"></span> &bull; Dachshund Salud &bull; Todos los derechos reservados<br>
+  Soporte (solo compra): <b>dachshundsalud@gmail.com</b><br>
+  <a href="https://salchichapro.com/politicasprivacidadsp" target="_blank" rel="noopener">Pol&iacute;ticas de Privacidad</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://salchichapro.com/terminoscondicionessp-410424" target="_blank" rel="noopener">T&eacute;rminos y Condiciones</a>
+</div>
+
+</section>
+
+<script>
+(function(){
+  var y=document.getElementById("spYear");
+  if(y) y.textContent=new Date().getFullYear();
+})();
+(function(){
+  var items=document.querySelectorAll("#sp-landing [data-sp-reveal]");
+  if(!items.length) return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting) e.target.classList.add("on");
+    });
+  },{threshold:0.1});
+  items.forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+</body>
+</html>
