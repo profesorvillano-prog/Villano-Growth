@@ -37,12 +37,12 @@ interna de la operación.
 
 ## 3. Usuarios y roles
 
-| Persona | Rol en la app | Uso principal |
-|---|---|---|
-| Sebastián (dueño) | Admin | Dashboard agencia, decisiones, metas |
-| Rodrigo | Manager | Gestión semanal de clientes: tracker, reuniones, revisiones |
-| Patricio | Miembro | Área contenido: acciones + métricas orgánico |
-| Javier | Miembro | Métricas, finanzas de campañas, procesos |
+| Persona | Función en la agencia | Rol en la app | Uso principal |
+|---|---|---|---|
+| Sebastián (dueño) | Estrategia, funnels y automatizaciones | Admin | Dashboard agencia, decisiones, metas, área Embudos |
+| Rodrigo | Ongoing de los clientes + campañas de Meta | Manager | Gestión semanal: tracker, reuniones, revisiones; área Tráfico |
+| Patricio | Contenido orgánico y estrategia | Miembro | Área Orgánico: acciones del proceso de contenido + estrategia viva |
+| Javier | Finanzas, logística de métricas y creación de embudos automatizados | Miembro | Carga/QA de métricas, benchmarks, construcción de embudos |
 
 Roles de acceso simples: **admin** (todo) y **miembro** (ejecuta y carga datos).
 
@@ -116,7 +116,7 @@ Plantilla inicial de acciones (derivada de SOPs + reuniones — editable):
 | Análisis de contenido de la semana | Orgánico | Semanal | Patricio |
 | Cargar métricas de ads (semana) | Tráfico | Semanal | Javier |
 | Revisar campañas / fatiga / CPL vs benchmark | Tráfico | Semanal | Rodrigo |
-| Revisar conversión del funnel (LP→lead→agenda / checkout) | Embudos | Semanal | Sebastián |
+| Revisar conversión del funnel (LP→lead→agenda / checkout) | Embudos | Semanal | Sebastián (R) · Javier (C) |
 | Seguimiento setter / pipeline de ventas | Ventas | Semanal | Rodrigo |
 | Reunión Org. Semanal | Agencia | Semanal (lunes) | Rodrigo |
 | Reunión Métricas | Agencia | Semanal | Javier |
