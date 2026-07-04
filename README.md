@@ -19,6 +19,11 @@ reutilizar con todos mis clientes.
 
 *(Iremos añadiendo más skills aquí: análisis de clientes, copywriting, embudos, etc.)*
 
+Además de las skills, el repo incluye **`remotion/`**: un proyecto de
+[Remotion](https://www.remotion.dev) para crear vídeos programáticos con React
+(creatividades en vídeo, animaciones para clientes, intros…). Instrucciones en
+[`remotion/README.md`](remotion/README.md).
+
 ## Cómo trabajan juntas la biblioteca y los clientes
 
 Las skills viven **aquí** (Villano Growth). Cada cliente vive en **su propia
