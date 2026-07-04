@@ -4,6 +4,10 @@
 > Fuentes: SOPs de contenido (Family-Eaters, Dr. Marcelo, Ezequiel), Excels de
 > métricas de tráfico (estructura idéntica en los 3 clientes), y reuniones del
 > equipo en Fathom (Org. Semanal, Métricas, revisiones por cliente, jun–jul 2026).
+> **v1.1** — incorpora las decisiones de la reunión "Villano Growth - Métricas"
+> del 2 de julio (transcripción completa): matriz RACI, ciclos de 14 días
+> escalonados por cliente, publicación/medición de orgánico vía GHL Social
+> Planner, estrategia viva por cliente y acciones del infoproductor en el tracker.
 
 ---
 
@@ -40,9 +44,20 @@ interna de la operación.
 | Patricio | Miembro | Área contenido: acciones + métricas orgánico |
 | Javier | Miembro | Métricas, finanzas de campañas, procesos |
 
-Roles simples: **admin** (todo) y **miembro** (ejecuta y carga datos). Cada
-acción/tarea tiene un **responsable** (RACI simplificado: responsable +
-opcional "aprueba" — suficiente; la matriz completa es sobre-ingeniería para 4 personas).
+Roles de acceso simples: **admin** (todo) y **miembro** (ejecuta y carga datos).
+
+**Matriz RACI por acción** (decisión de la reunión del 2/jul): cada acción
+recurrente lleva **R** (responsable, quien ejecuta) y **A** (accountable, quien
+responde si no pasa) obligatorios; **C** (consultado) e **I** (informado)
+opcionales. La app la hace operativa sin burocracia: R ve la acción en "Mi
+semana", A recibe la alerta si vence sin completarse, I ve el registro en el
+feed del cliente. Ejemplo real de la reunión: revisión de contenido → R:
+infoproductor (Marcelo) · A: Rodrigo · I: Sebastián/Patricio.
+
+**El infoproductor también tiene acciones en el tracker** (sin acceso a la
+app): revisar piezas en Notion y grabar en sus ventanas fijas (2–3 días al
+inicio y 2–3 a mitad de cada ciclo). Las marca su A (Rodrigo) — así queda
+registro de si el cuello de botella fue agencia o cliente.
 
 ## 4. Estructura de navegación
 
@@ -79,6 +94,14 @@ en `docs/analisis-starklab-habits.md`), pero por **cliente × semana**:
 - **Cadencias soportadas**: diaria, días específicos (L/X/V), semanal,
   **cada 14 días**, mensual. El sistema genera automáticamente las instancias
   de cada semana — nadie tiene que recordar qué toca.
+- **Ciclos de 14 días escalonados por cliente** (decisión del 2/jul: "que no
+  nos coincidan todos en la misma semana"). Cada cliente tiene su fecha ancla
+  de ciclo; la app reparte las revisiones para que en una semana toque
+  optimizar Family, en otra Ezequiel, etc.
+- **Regla del ciclo cerrado**: la planificación de 14 días no se altera a
+  mitad de ciclo (un viral en la semana 1 se replica recién en el ciclo
+  siguiente, día 15+). La app refuerza esto: el plan del ciclo en curso queda
+  "sellado" y las ideas nuevas caen en un backlog para el próximo ciclo.
 - Check con estado: pendiente → hecho / no aplica / bloqueado (con nota).
 - **% de cumplimiento semanal** por cliente y por responsable, y racha de
   semanas completas (gamificación mínima, útil para el equipo).
@@ -123,6 +146,15 @@ Misma taxonomía de los Excels actuales — cero curva de aprendizaje:
 Carga **manual primero** (igual que hoy), con integraciones después (fase 3):
 Meta Ads API y GHL para autocompletar inversión/tráfico y pipeline.
 
+**Nota sobre orgánico (decisión del 2/jul):** todo el contenido se publica por
+el **Social Planner de GHL**, que ya entrega seguidores, likes, comentarios y
+posts ganadores. La app no duplica ese detalle pieza a pieza en la v1: registra
+el resumen semanal/por ciclo (los KPIs del SOP: alcance, guardados, compartidos,
+mensajes, leads) para las revisiones y las metas, y en fase 3 lee GHL directo.
+El proceso semanal de contenido queda estandarizado y fijo para todos los
+clientes: **Selección → Creación → Revisión (cliente) → Recepción → Edición →
+Programación → Medición** — cada paso es una acción del tracker con su RACI.
+
 ### 5.3 Revisión cada 14 días
 
 Al vencer el ciclo, la app genera el **snapshot** (equivalente a la hoja
@@ -147,13 +179,30 @@ Progreso calculado desde las métricas cargadas — sin doble carga.
   revisiones de 14 días atrasadas. (El sistema no puede prometer análisis si no
   hay datos: la alerta de "dato faltante" es primera ciudadana.)
 
+### 5.6 Estrategia viva por cliente
+
+Reemplaza los PDFs de SOP y la "planilla de estrategia" que se planeó en la
+reunión del 2/jul: una ficha editable por cliente con **pilares de contenido,
+frecuencia de feed, pauta de historias (ej. L autoridad · X conversión · V
+educación), tono y oferta principal**. Se revisa ~1 vez al mes (en la reunión
+mensual con el cliente) y guarda historial de cambios — "frecuencia pasó de 2
+a 4 piezas/semana el 15/8" queda registrado y contextualiza las métricas. El
+proceso semanal estándar NO es editable por cliente: es el ancla del sistema.
+
+Aquí también viven los **colaboradores externos por cliente** (ej. Ina, setter
+de Marcelo): sus actividades diarias entran al tracker del cliente con su
+nombre como R y Rodrigo como A, sin darle acceso a la app en la v1. Sus
+comisiones se calculan fuera de la app (no es scope).
+
 ## 6. Modelo de datos (resumen)
 
 ```
 User(id, nombre, email, rol)
-Client(id, nombre, nicho, oferta, estado, notion_url)
+Client(id, nombre, nicho, oferta, estado, notion_url, ciclo_ancla)  ← fecha ancla del ciclo de 14 días
+ClientStrategy(id, client_id, pilares, frecuencia_feed, pauta_historias, tono, oferta, vigente_desde)
+Collaborator(id, client_id, nombre, rol_texto)  ← setter, editor externo, o el propio infoproductor
 Area(fija: organico | trafico | embudos | ventas | agencia)
-RecurringAction(id, client_id?, area, nombre, cadencia, dias?, responsable_id, activa)
+RecurringAction(id, client_id?, area, nombre, cadencia, dias?, R_id, A_id, C_ids?, I_ids?, activa)
 ActionInstance(id, action_id, fecha_objetivo, estado, nota, completed_by, completed_at)
 ContentPiece(id, client_id, fecha, pilar, formato, gancho, métricas…)
 StoryDay(id, client_id, fecha, tipo, métricas…)
@@ -197,9 +246,14 @@ de migrar las métricas.
 
 ## 10. Preguntas abiertas
 
-1. ¿El ciclo de 14 días es **global** (todos los clientes el mismo día) o
-   **por cliente** (según su fecha de inicio)? Impacta el generador de instancias.
-2. ¿Semana L–D o L–V para el tracker? (Historias de Marcelo son L–V; Family es diaria.)
-3. ¿Los clientes de mentoría (no DFY) entran en la v1 o solo los 3 DFY
-   (Family, Marcelo, Ezequiel)?
-4. ¿Moneda única USD o USD + CLP? (En reuniones aparecen ambas.)
+1. ~~¿Ciclo de 14 días global o por cliente?~~ **Resuelta (reunión 2/jul): por
+   cliente y escalonado**, para no acumular todas las revisiones la misma semana.
+2. ¿Semana L–D o L–V para el tracker? (Historias de Marcelo son L–V; Family es
+   diaria.) Propuesta: L–D con días de fin de semana atenuados.
+3. ¿Los clientes de mentoría (no DFY) entran en la v1 o solo los DFY
+   (Family, Marcelo, Ezequiel, + Fixus/Naty que entra a mitad de julio)?
+4. ¿Moneda única USD o USD + CLP? (En reuniones aparecen ambas; con Fixus se
+   cobra en CLP proporcional.)
+5. La reunión mensual con cada cliente (análisis de su negocio por área) ¿se
+   registra como una Revisión más en la app, o solo como acción del tracker?
+   Propuesta: acción del tracker que enlaza a la Revisión del ciclo vigente.
