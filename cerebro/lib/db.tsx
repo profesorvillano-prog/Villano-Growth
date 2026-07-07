@@ -1,14 +1,15 @@
 "use client";
 
-// Capa de datos editable: seeds de lib/data.ts + persistencia en localStorage.
-// El plan de contenido (frecuencia de feed/historias) genera acciones del tracker.
-// En fase 2 (Supabase) este provider se reemplaza por consultas reales con permisos.
+// Estado compartido de la app en Supabase (tabla app_state, documento 'main').
+// Todo el equipo lee y escribe el mismo estado; se refleja en vivo vía realtime.
+// El plan de contenido genera acciones del tracker.
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useContext, useEffect, useRef, useState, ReactNode } from "react";
 import {
   ACTIONS, Action, CAMPAIGNS, Campaign, CLIENTS, CONTENT_PLANS, ContentPlan,
   FINANZAS, ClientFinance, GOALS, Goal, KPIS, KPI, genContentActions,
 } from "./data";
+import { supabase } from "./supabase";
 
 export interface StrategyData {
   pilares: string;
@@ -34,58 +35,76 @@ const SEED: DBShape = {
   goals: GOALS,
   kpis: KPIS,
   finanzas: FINANZAS,
-  strategies: Object.fromEntries(
-    CLIENTS.map((c) => [c.id, { ...c.estrategia, oferta: c.oferta }])
-  ),
+  strategies: Object.fromEntries(CLIENTS.map((c) => [c.id, { ...c.estrategia, oferta: c.oferta }])),
   plans: JSON.parse(JSON.stringify(CONTENT_PLANS)),
 };
 
-const KEY = "vos-db-v2";
+const DOC_ID = "main";
 
 interface DBCtx extends DBShape {
   update: <K extends keyof DBShape>(key: K, value: DBShape[K]) => void;
   setContentPlan: (clientId: string, plan: ContentPlan) => void;
   reset: () => void;
+  synced: boolean;
 }
 
-const Ctx = createContext<DBCtx>({ ...SEED, update: () => {}, setContentPlan: () => {}, reset: () => {} });
+const Ctx = createContext<DBCtx>({ ...SEED, update: () => {}, setContentPlan: () => {}, reset: () => {}, synced: false });
 
 export function DataProvider({ children }: { children: ReactNode }) {
   const [db, setDb] = useState<DBShape>(SEED);
+  const [synced, setSynced] = useState(false);
+  const skipNextRealtime = useRef(false);
 
+  // Carga inicial + realtime
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(KEY);
-      if (raw) setDb({ ...SEED, ...JSON.parse(raw) });
-    } catch {}
+    let active = true;
+    (async () => {
+      const { data, error } = await supabase.from("app_state").select("data").eq("id", DOC_ID).maybeSingle();
+      if (!active) return;
+      if (data?.data) {
+        setDb({ ...SEED, ...(data.data as Partial<DBShape>) });
+      } else if (!error) {
+        // Primera vez: sembrar el estado por defecto
+        await supabase.from("app_state").upsert({ id: DOC_ID, data: SEED });
+      }
+      setSynced(true);
+    })();
+
+    const channel = supabase
+      .channel("app_state_changes")
+      .on("postgres_changes", { event: "*", schema: "public", table: "app_state", filter: `id=eq.${DOC_ID}` }, (payload) => {
+        if (skipNextRealtime.current) { skipNextRealtime.current = false; return; }
+        const next = (payload.new as any)?.data;
+        if (next) setDb({ ...SEED, ...next });
+      })
+      .subscribe();
+
+    return () => { active = false; supabase.removeChannel(channel); };
   }, []);
 
-  const persist = (next: DBShape) => {
-    try { localStorage.setItem(KEY, JSON.stringify(next)); } catch {}
+  const save = (next: DBShape) => {
+    skipNextRealtime.current = true;
+    supabase.from("app_state").upsert({ id: DOC_ID, data: next, updated_at: new Date().toISOString() }).then(() => {});
     return next;
   };
 
   const update = <K extends keyof DBShape>(key: K, value: DBShape[K]) => {
-    setDb((prev) => persist({ ...prev, [key]: value }));
+    setDb((prev) => save({ ...prev, [key]: value }));
   };
 
-  // Actualiza el plan y regenera las acciones "gen-<cliente>-" de ese cliente
   const setContentPlan = (clientId: string, plan: ContentPlan) => {
     setDb((prev) => {
       const plans = { ...prev.plans, [clientId]: plan };
       const actions = prev.actions
         .filter((a) => !a.id.startsWith(`gen-${clientId}-`))
         .concat(genContentActions(clientId, plan));
-      return persist({ ...prev, plans, actions });
+      return save({ ...prev, plans, actions });
     });
   };
 
-  const reset = () => {
-    try { localStorage.removeItem(KEY); } catch {}
-    setDb(SEED);
-  };
+  const reset = () => setDb((prev) => save(SEED));
 
-  return <Ctx.Provider value={{ ...db, update, setContentPlan, reset }}>{children}</Ctx.Provider>;
+  return <Ctx.Provider value={{ ...db, update, setContentPlan, reset, synced }}>{children}</Ctx.Provider>;
 }
 
 export const useData = () => useContext(Ctx);

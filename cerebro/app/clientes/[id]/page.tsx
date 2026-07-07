@@ -2,7 +2,7 @@
 
 // Perfil de cliente: resumen, tracker, métricas por área, revisiones y estrategia.
 
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { notFound } from "next/navigation";
 import { Shell } from "@/components/shell";
 import { Card, CardHead, Progress, Stat, Avatar, AreaBadge } from "@/components/ui";
@@ -15,6 +15,7 @@ import {
 } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { StrategyData, useData } from "@/lib/db";
+import { supabase } from "@/lib/supabase";
 import { AddBtn, DeleteBtn, ENum, ESelect, EText } from "@/components/editable";
 
 const TABS = ["Resumen", "Acciones", "Orgánico", "Ads HT", "Ads LT", "Revisiones", "Estrategia"] as const;
@@ -180,6 +181,7 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
 
       {tab === "Ads HT" && ht && (
         <div className="space-y-4">
+          <MetaLiveCard slugs={client.metaSlugs} color={client.color} />
           <CampaignsCard clientId={id} tipo="HT" />
           <Card>
             <CardHead title="Embudo semanal · High Ticket" sub="Meta Ads → VSL/Landing (GHL) → Lead → Agenda → Cierre · semáforo vs benchmark" />
@@ -190,6 +192,7 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
 
       {tab === "Ads LT" && lt && (
         <div className="space-y-4">
+          <MetaLiveCard slugs={client.metaSlugs} color={client.color} />
           <CampaignsCard clientId={id} tipo="LT" />
           <Card>
             <CardHead title="Embudo semanal · Low Ticket" sub="Meta Ads → VSL/Landing → Checkout → Compra" />
@@ -387,6 +390,125 @@ function ContentPlanEditor({ plan, onChange, color }: { plan: ContentPlan; onCha
       </div>
       <p className="border-t border-line px-5 py-3 text-[11px] text-dim">
         Las acciones generadas aparecen en la pestaña <span className="text-mute">Acciones</span> y en <span className="text-mute">Semana</span>, y se completan como cualquier hábito. Editá el plan y se re-sincronizan solas.
+      </p>
+    </Card>
+  );
+}
+
+// ---------- Meta Ads en vivo (datos reales desde Supabase campaign_metrics) ----------
+
+interface MetaRow {
+  fecha: string; account_name: string | null; campaign_name: string | null;
+  currency: string | null; spend: number; impressions: number; clicks: number;
+  leads: number; purchases: number; purchase_value: number; roas_meta: number;
+}
+
+function MetaLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
+  const [rows, setRows] = useState<MetaRow[] | null>(null);
+  const [syncedAt, setSyncedAt] = useState<string | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      const { data } = await supabase
+        .from("campaign_metrics")
+        .select("fecha, account_name, campaign_name, currency, spend, impressions, clicks, leads, purchases, purchase_value, roas_meta, synced_at")
+        .in("cliente", slugs)
+        .order("fecha", { ascending: false })
+        .limit(200);
+      if (!active) return;
+      setRows((data ?? []) as MetaRow[]);
+      if (data && data.length) setSyncedAt((data[0] as any).synced_at);
+    })();
+    return () => { active = false; };
+  }, [slugs.join(",")]);
+
+  if (rows === null) {
+    return <Card className="p-5 text-sm text-dim">Cargando Meta Ads…</Card>;
+  }
+  if (rows.length === 0) {
+    return (
+      <Card>
+        <CardHead title="Meta Ads · en vivo" sub="Sincronizado desde Facebook a Supabase" right={<span className="rounded-full border border-line px-2 py-0.5 text-[11px] text-dim">sin datos aún</span>} />
+        <p className="px-5 py-6 text-sm text-dim">Todavía no llegan métricas de este cliente. En cuanto la automatización cargue datos en <span className="text-mute">campaign_metrics</span>, aparecen acá automáticamente.</p>
+      </Card>
+    );
+  }
+
+  // Agrupa por campaña (o cuenta si no hay campaign_name)
+  const map = new Map<string, MetaRow & { dias: number }>();
+  for (const r of rows) {
+    const k = r.campaign_name || r.account_name || "Campaña";
+    const cur = map.get(k);
+    if (cur) {
+      cur.spend += Number(r.spend) || 0; cur.impressions += Number(r.impressions) || 0;
+      cur.clicks += Number(r.clicks) || 0; cur.leads += Number(r.leads) || 0;
+      cur.purchases += Number(r.purchases) || 0; cur.purchase_value += Number(r.purchase_value) || 0;
+      cur.dias += 1;
+    } else {
+      map.set(k, { ...r, spend: Number(r.spend) || 0, impressions: Number(r.impressions) || 0, clicks: Number(r.clicks) || 0, leads: Number(r.leads) || 0, purchases: Number(r.purchases) || 0, purchase_value: Number(r.purchase_value) || 0, dias: 1 });
+    }
+  }
+  const grouped = [...map.entries()];
+  const cur = rows[0].currency || "";
+  const money = (n: number) => `${cur ? cur + " " : "$"}${Math.round(n).toLocaleString("es-CL")}`;
+  const totSpend = grouped.reduce((s, [, r]) => s + r.spend, 0);
+  const totImpr = grouped.reduce((s, [, r]) => s + r.impressions, 0);
+
+  return (
+    <Card>
+      <CardHead
+        title="Meta Ads · en vivo"
+        sub="Datos reales sincronizados desde Facebook (Supabase)"
+        right={
+          <span className="flex items-center gap-2 text-[11px] text-dim">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ok" />
+            {syncedAt ? `sync ${new Date(syncedAt).toLocaleDateString("es-CL")}` : "en vivo"}
+          </span>
+        }
+      />
+      <div className="grid grid-cols-2 gap-3 px-5 py-4 sm:grid-cols-4">
+        <Stat label="Inversión (período)" value={money(totSpend)} />
+        <Stat label="Impresiones" value={totImpr.toLocaleString("es-CL")} />
+        <Stat label="Clics" value={grouped.reduce((s, [, r]) => s + r.clicks, 0).toLocaleString("es-CL")} />
+        <Stat label="CTR" value={totImpr ? ((grouped.reduce((s, [, r]) => s + r.clicks, 0) / totImpr) * 100).toFixed(2) + "%" : "—"} />
+      </div>
+      <div className="overflow-x-auto border-t border-line">
+        <table className="w-full min-w-[720px] border-collapse text-sm">
+          <thead>
+            <tr className="text-[11px] uppercase tracking-wide text-dim">
+              <th className="py-2 pl-5 pr-3 text-left font-medium">Campaña / cuenta</th>
+              <th className="px-3 py-2 text-right font-medium">Inversión</th>
+              <th className="px-3 py-2 text-right font-medium">Impres.</th>
+              <th className="px-3 py-2 text-right font-medium">Clics</th>
+              <th className="px-3 py-2 text-right font-medium">CTR</th>
+              <th className="px-3 py-2 text-right font-medium">CPC</th>
+              <th className="px-3 py-2 text-right font-medium">Leads</th>
+              <th className="py-2 pl-3 pr-5 text-right font-medium">Compras</th>
+            </tr>
+          </thead>
+          <tbody>
+            {grouped.map(([name, r]) => {
+              const ctr = r.impressions ? (r.clicks / r.impressions) * 100 : 0;
+              const cpc = r.clicks ? r.spend / r.clicks : 0;
+              return (
+                <tr key={name} className="border-t border-line/60 hover:bg-soft/25">
+                  <td className="py-2.5 pl-5 pr-3">{name} <span className="text-[10px] text-dim">· {r.dias}d</span></td>
+                  <td className="px-3 py-2.5 text-right tabular-nums">{money(r.spend)}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{r.impressions.toLocaleString("es-CL")}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{r.clicks}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums">{ctr.toFixed(2)}%</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{money(cpc)}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums">{r.leads}</td>
+                  <td className="py-2.5 pl-3 pr-5 text-right tabular-nums">{r.purchases}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <p className="border-t border-line px-5 py-2.5 text-[11px] text-dim">
+        El embudo semanal de abajo sigue siendo tu análisis manual con benchmarks; esta tabla es la data cruda que llega de Meta.
       </p>
     </Card>
   );

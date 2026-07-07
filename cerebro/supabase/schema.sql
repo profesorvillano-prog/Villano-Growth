@@ -157,3 +157,42 @@ begin
     execute format('create policy "equipo autenticado" on %I for all to authenticated using (true) with check (true)', t);
   end loop;
 end $$;
+
+-- ============================================================================
+-- FASE 2 · Estado real en Supabase (proyecto "Villano OS")
+-- ============================================================================
+
+-- Estado compartido de la app (un documento editable por todo el equipo)
+create table if not exists app_state (
+  id text primary key,
+  data jsonb not null,
+  updated_at timestamptz default now(),
+  updated_by uuid references auth.users(id)
+);
+
+-- Marcas del tracker: presencia de fila = marcado
+-- done = R ejecutó · reviewed = A revisó
+create table if not exists checks (
+  action_id  text not null,
+  day        date not null,
+  kind       text not null check (kind in ('done','reviewed')),
+  created_by uuid references auth.users(id) default auth.uid(),
+  created_at timestamptz default now(),
+  primary key (action_id, day, kind)
+);
+
+-- Métricas de Meta Ads (las carga una automatización externa: Facebook → Supabase)
+create table if not exists campaign_metrics (
+  id bigint generated always as identity primary key,
+  cliente text not null,          -- slug del cliente (ej. family_eaters)
+  fecha date not null,
+  account_id text, account_name text, currency text,
+  campaign_id text, campaign_name text, objective text,
+  spend numeric, impressions bigint, reach bigint, frequency numeric,
+  clicks bigint, ctr numeric, cpc numeric, cpm numeric,
+  roas_meta numeric, purchase_value numeric, leads bigint, purchases bigint,
+  raw jsonb, synced_at timestamptz default now()
+);
+
+-- RLS: todas restringidas a usuarios autenticados (el equipo).
+-- (políticas equivalentes creadas vía migración villano_os_state_and_checks)

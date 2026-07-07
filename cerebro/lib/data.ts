@@ -146,6 +146,7 @@ export interface Client {
   oferta: string;
   initials: string; // monograma profesional (reemplaza el emoji)
   color: string;
+  metaSlugs: string[]; // posibles valores de campaign_metrics.cliente (Meta Ads)
   cicloAncla: string; // inicio del ciclo de 14 días vigente
   estrategia: {
     pilares: string;
@@ -163,6 +164,7 @@ export const CLIENTS: Client[] = [
     oferta: "Programa / certificación (high ticket)",
     initials: "FE",
     color: "#34d399",
+    metaSlugs: ["family_eaters", "family"],
     cicloAncla: "2026-06-29",
     estrategia: {
       pilares: "Nutrición (educación) · Atracción",
@@ -178,6 +180,7 @@ export const CLIENTS: Client[] = [
     oferta: "Asesoría online + ebooks (HT + LT)",
     initials: "MH",
     color: "#fbbf24",
+    metaSlugs: ["marcelo", "dr_marcelo", "marcelo_hernan", "salchicha"],
     cicloAncla: "2026-06-22",
     estrategia: {
       pilares: "Nutrición y Salud · Atracción",
@@ -193,6 +196,7 @@ export const CLIENTS: Client[] = [
     oferta: "Sanando Autoinmune (high ticket)",
     initials: "EZ",
     color: "#a78bfa",
+    metaSlugs: ["ezequiel", "sanando_autoinmune", "autoinmune"],
     cicloAncla: "2026-07-06",
     estrategia: {
       pilares: "50% Nutrición · 50% Atracción (dolor)",
