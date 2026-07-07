@@ -2,18 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Tokens de tema — oscuro por defecto, claro vía [data-theme="light"] */
 :root {
+  --c-bg: 9 9 11;
+  --c-panel: 16 16 20;
+  --c-card: 19 19 24;
+  --c-line: 31 31 38;
+  --c-soft: 38 38 46;
+  --c-ink: 244 244 245;
+  --c-mute: 143 143 157;
+  --c-dim: 93 93 107;
+  --c-accent: 139 92 246;
+  --c-accent2: 167 139 250;
+  --c-ok: 52 211 153;
+  --c-warn: 251 191 36;
+  --c-bad: 251 113 133;
   color-scheme: dark;
 }
 
+[data-theme="light"] {
+  --c-bg: 246 246 249;
+  --c-panel: 255 255 255;
+  --c-card: 255 255 255;
+  --c-line: 228 228 234;
+  --c-soft: 238 238 243;
+  --c-ink: 26 26 32;
+  --c-mute: 95 95 110;
+  --c-dim: 155 155 168;
+  --c-accent: 124 58 237;
+  --c-accent2: 109 40 217;
+  --c-ok: 5 150 105;
+  --c-warn: 180 120 5;
+  --c-bad: 225 29 72;
+  color-scheme: light;
+}
+
 body {
-  background: #09090b;
-  color: #f4f4f5;
+  background: rgb(var(--c-bg));
+  color: rgb(var(--c-ink));
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: rgba(139, 92, 246, 0.35);
+  background: rgb(var(--c-accent) / 0.35);
 }
 
 ::-webkit-scrollbar {
@@ -21,7 +52,7 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #26262e;
+  background: rgb(var(--c-soft));
   border-radius: 8px;
 }
 ::-webkit-scrollbar-track {

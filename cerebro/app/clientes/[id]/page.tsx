@@ -9,7 +9,8 @@ import { Card, CardHead, Progress, Stat, Avatar, AreaBadge } from "@/components/
 import { TrackerGrid } from "@/components/tracker";
 import { FunnelTable } from "@/components/metrics";
 import {
-  ACTIONS, CLIENTS, FUNNEL_HT, FUNNEL_LT, GOALS, ORGANIC, REVIEWS, SALES,
+  ACTIONS, CAMPAIGNS, CLIENTS, FUNNEL_HT, FUNNEL_LT, GOALS, NOTION_STATES,
+  ORGANIC, ORGANIC_WEEKS, PROCESS_STEPS, REVIEWS, SALES,
   complianceFor, fmtVal,
 } from "@/lib/data";
 import { useStore } from "@/lib/store";
@@ -124,13 +125,50 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
             <Card className="p-4"><Stat label="Leads" value={String(org.leads)} tone="ok" /></Card>
           </div>
           <Card>
-            <CardHead title="Ejecución del plan de contenido" sub="El detalle pieza a pieza vive en GHL Social Planner — aquí se mide el resumen del ciclo" />
+            <CardHead title="Rendimiento semanal" sub="Las 4 métricas clave para vender orgánico en Instagram — revisión semanal de Patricio" />
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[560px] border-collapse text-sm">
+                <thead>
+                  <tr className="text-[11px] uppercase tracking-wide text-dim">
+                    <th className="py-2 pl-5 pr-3 text-left font-medium">Métrica</th>
+                    {["Sem 1", "Sem 2", "Sem 3", "Sem 4"].map((s) => (
+                      <th key={s} className="px-3 py-2 text-right font-medium">{s}</th>
+                    ))}
+                    <th className="py-2 pl-3 pr-5 text-right font-medium">Tendencia</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(ORGANIC_WEEKS[id] ?? []).map((r, i) => {
+                    const vals = r.values.filter((v): v is number => v !== null);
+                    const up = vals.length >= 2 && vals[vals.length - 1] > vals[0];
+                    return (
+                      <tr key={i} className="border-t border-line/60 hover:bg-soft/30">
+                        <td className="py-2 pl-5 pr-3 text-mute">{r.label}</td>
+                        {r.values.map((v, j) => (
+                          <td key={j} className={`px-3 py-2 text-right tabular-nums ${v === null ? "text-dim" : ""}`}>{fmtVal(v, r.fmt)}</td>
+                        ))}
+                        <td className={`py-2 pl-3 pr-5 text-right text-xs font-medium ${up ? "text-ok" : "text-warn"}`}>{up ? "↗ subiendo" : "→ plana"}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+          <Card>
+            <CardHead title="Ejecución del plan de contenido" sub="La planificación y las métricas por pieza (reels, stories, carruseles, YouTube) viven en la base de Notion del cliente" />
             <div className="px-5 py-4">
               <div className="mb-1.5 flex items-center justify-between text-xs">
-                <span className="text-mute">Piezas publicadas vs plan del ciclo</span>
+                <span className="text-mute">Piezas publicadas vs plan del ciclo (≥1 semana de antelación)</span>
                 <span className="tabular-nums text-ink">{org.piezasPublicadas}/{org.piezasPlan}</span>
               </div>
               <Progress pct={(org.piezasPublicadas / org.piezasPlan) * 100} color={client.color} />
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <span className="text-xs text-dim">Estados en Notion del cliente:</span>
+                {NOTION_STATES.map((s) => (
+                  <span key={s} className="rounded-full border border-line px-2 py-0.5 text-[11px] text-mute">{s}</span>
+                ))}
+              </div>
               <p className="mt-3 text-xs text-dim">Pauta vigente: {client.estrategia.frecuenciaFeed} · Historias: {client.estrategia.historias}</p>
             </div>
           </Card>
@@ -138,17 +176,23 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
       )}
 
       {tab === "Ads HT" && ht && (
-        <Card>
-          <CardHead title="ADS · High Ticket (agenda)" sub="Meta Ads → VSL/Landing (GHL) → Lead → Agenda → Cierre · semáforo vs benchmark" />
-          <FunnelTable rows={ht} />
-        </Card>
+        <div className="space-y-4">
+          <CampaignsCard clientId={id} tipo="HT" />
+          <Card>
+            <CardHead title="Embudo semanal · High Ticket" sub="Meta Ads → VSL/Landing (GHL) → Lead → Agenda → Cierre · semáforo vs benchmark" />
+            <FunnelTable rows={ht} />
+          </Card>
+        </div>
       )}
 
       {tab === "Ads LT" && lt && (
-        <Card>
-          <CardHead title="ADS · Low Ticket (venta directa)" sub="Meta Ads → VSL/Landing → Checkout → Compra" />
-          <FunnelTable rows={lt} />
-        </Card>
+        <div className="space-y-4">
+          <CampaignsCard clientId={id} tipo="LT" />
+          <Card>
+            <CardHead title="Embudo semanal · Low Ticket" sub="Meta Ads → VSL/Landing → Checkout → Compra" />
+            <FunnelTable rows={lt} />
+          </Card>
+        </div>
       )}
 
       {tab === "Revisiones" && (
@@ -193,7 +237,8 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
               ["Estrategia de historias", client.estrategia.historias],
               ["Tono de comunicación", client.estrategia.tono],
               ["Oferta principal", client.oferta],
-              ["Proceso semanal (fijo)", "Selección → Creación → Revisión (cliente) → Recepción → Edición → Programación → Medición"],
+              ["Proceso de contenido (SOP fijo)", PROCESS_STEPS.map((s) => s.split(" (")[0]).join(" → ")],
+              ["Estados en Notion del cliente", NOTION_STATES.join(" → ")],
             ].map(([k, v]) => (
               <div key={k} className="grid gap-1 px-5 py-3.5 sm:grid-cols-[220px_1fr]">
                 <dt className="text-xs font-medium uppercase tracking-wide text-dim">{k}</dt>
@@ -204,6 +249,51 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
         </Card>
       )}
     </Shell>
+  );
+}
+
+function CampaignsCard({ clientId, tipo }: { clientId: string; tipo: "HT" | "LT" }) {
+  const campaigns = CAMPAIGNS.filter((c) => c.clientId === clientId && c.tipo === tipo);
+  if (campaigns.length === 0) return null;
+  const estadoCls: Record<string, string> = {
+    activa: "text-ok border-ok/30",
+    aprendizaje: "text-warn border-warn/30",
+    pausada: "text-dim border-line",
+  };
+  return (
+    <Card>
+      <CardHead title="Por campaña" sub="Análisis semanal por campaña — decisiones de escala, iteración o pausa" />
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[640px] border-collapse text-sm">
+          <thead>
+            <tr className="text-[11px] uppercase tracking-wide text-dim">
+              <th className="py-2 pl-5 pr-3 text-left font-medium">Campaña</th>
+              <th className="px-3 py-2 text-left font-medium">Estado</th>
+              <th className="px-3 py-2 text-right font-medium">Inversión</th>
+              <th className="px-3 py-2 text-right font-medium">{tipo === "HT" ? "Leads" : "Compras"}</th>
+              <th className="px-3 py-2 text-right font-medium">{tipo === "HT" ? "CPL" : "CPA"}</th>
+              <th className="py-2 pl-3 pr-5 text-right font-medium">ROAS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {campaigns.map((c, i) => (
+              <tr key={i} className="border-t border-line/60 hover:bg-soft/30">
+                <td className="py-2.5 pl-5 pr-3">{c.nombre}</td>
+                <td className="px-3 py-2.5">
+                  <span className={`rounded-full border px-2 py-0.5 text-[11px] ${estadoCls[c.estado]}`}>{c.estado}</span>
+                </td>
+                <td className="px-3 py-2.5 text-right tabular-nums text-mute">{fmtVal(c.inversion, "usd")}</td>
+                <td className="px-3 py-2.5 text-right tabular-nums">{c.resultados}</td>
+                <td className="px-3 py-2.5 text-right tabular-nums text-mute">{fmtVal(c.costoPorResultado, "usd")}</td>
+                <td className={`py-2.5 pl-3 pr-5 text-right font-medium tabular-nums ${c.roas === null ? "text-dim" : c.roas >= 2 ? "text-ok" : "text-warn"}`}>
+                  {c.roas === null ? "—" : fmtVal(c.roas, "x")}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Card>
   );
 }
 

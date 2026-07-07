@@ -1,4 +1,4 @@
-# PRD — "Cerebro Villano" · Sistema operativo interno de la agencia
+# PRD — "Villano OS" (ex Cerebro Villano) · Sistema operativo interno de la agencia
 
 > Propuesta de producto para la app centralizada de gestión de Villano Growth.
 > Fuentes: SOPs de contenido (Family-Eaters, Dr. Marcelo, Ezequiel), Excels de
@@ -257,3 +257,69 @@ de migrar las métricas.
 5. La reunión mensual con cada cliente (análisis de su negocio por área) ¿se
    registra como una Revisión más en la app, o solo como acción del tracker?
    Propuesta: acción del tracker que enlaza a la Revisión del ciclo vigente.
+
+---
+
+## 11. v2 — Spec "Villano OS" (7 jul, brief de Sebastián)
+
+**Nombre definitivo: Villano OS.** Estética tipo GoHighLevel: tema claro y
+oscuro conmutable, limpio y profesional. *(Implementado en la app.)*
+
+### 11.1 Gobernanza — panel de gestión de Javier
+Javier administra el panel y controla el avance de Rodrigo, Patricio y
+Sebastián. Además es el único con la vista de **análisis financiero por
+cliente** (modelo de cobro, fee, inversión ads, facturación, ingreso agencia,
+margen). *(Implementado: página "Equipo · KPIs".)*
+
+### 11.2 Marco KPI → KRI (núcleo del sistema)
+Cada miembro tiene **acciones semanales literales (KPI)** que influyen en
+**resultados (KRI)**. Si un KRI se desvía, la conversación empieza por los
+KPIs. Set inicial por miembro:
+
+| Miembro | Funciones | KPIs semanales (ejemplos) | KRIs |
+|---|---|---|---|
+| Javier | Gestión del panel · SOPs · automatizaciones · finanzas | Auditoría de avance del equipo · cierre financiero por cliente · avance de automatizaciones | % SOP cumplido · margen por cliente |
+| Rodrigo | Ongoing cercano · WhatsApp 1ª línea · reuniones · Meta Ads | 100% de WhatsApps con última respuesta nuestra · reuniones confirmadas · revisión de campañas | Retención · show-up · CPL |
+| Patricio | Contenido orgánico | Revisión semanal por cuenta · piezas con ≥1 sem de antelación · métricas por pieza en Notion · ajuste de planificación | Leads orgánicos · interacción · guardados |
+| Sebastián | Funnels · optimización campañas · creativos · automatizaciones | Iteraciones de creativos · QA de funnels · automatizaciones | ROAS · costo por agenda · CVR |
+
+### 11.3 Contenido orgánico (Patricio)
+- **Revisión semanal por cuenta** con 3-4 métricas clave orientadas a que
+  Instagram venda orgánico: alcance, interacción, guardados+compartidos,
+  mensajes/DMs. *(Implementado: tabla "Rendimiento semanal" por cliente.)*
+- Tras el análisis, **ajusta la planificación en Notion**. Cada cliente tiene
+  su planificación escrita; se revisa y publica con **≥1 semana de antelación**.
+- **Proceso SOP fijo de 8 pasos**: Investigación (dummy account → ideas
+  ganadoras) → Planificación → Guión → Revisión → Grabación → Edición →
+  Programación → Análisis (métricas).
+- El **Notion del infoproductor** muestra solo 4 estados: **Planificado →
+  Revisado → Grabado → Publicado**. El resto es SOP interno de Patricio.
+- **Métricas por pieza** (stories, reels, carruseles, YouTube) se registran en
+  la **base de datos de Notion del cliente** para que todo quede conectado y
+  trackeable. *(Nota: esto reemplaza la idea v1.1 de medir pieza a pieza solo
+  en GHL — GHL publica, Notion es la fuente de métricas por pieza.)*
+- Cadencia: análisis rápido **semanal** (confirmar/ajustar) · análisis en
+  **equipo y entrega a cliente cada 14 días**.
+
+### 11.4 Meta Ads
+Misma estructura que orgánico: análisis semanal como agencia, 14 días en
+conjunto. La zona de métricas se analiza **por campaña** (inversión,
+resultados, CPL/CPA, ROAS, estado activa/aprendizaje/pausada) además del
+embudo semanal. *(Implementado: tabla "Por campaña" en Ads HT/LT.)*
+Campañas de Meta: Rodrigo junto con Sebastián.
+
+### 11.5 Roles v2 (reemplaza §3)
+- **Javier**: gestión del panel y del proceso (SOPs), evaluación y rendimiento,
+  métricas, avance de automatizaciones, finanzas por cliente.
+- **Rodrigo**: ongoing cercano con el cliente, confirmar reuniones, primera
+  línea de WhatsApp (siempre queda mensaje/respuesta nuestra), campañas de
+  Meta (con Sebastián).
+- **Patricio**: contenido orgánico (proceso completo de 8 pasos + métricas).
+- **Sebastián**: funnels, optimización de campañas, creativos,
+  automatizaciones, campañas de Meta.
+
+### 11.6 Pendiente de decidir
+- Integración real con Notion (leer estados Planificado/Revisado/Grabado/
+  Publicado y métricas por pieza vía API de Notion) — candidata a fase 3.
+- Umbrales exactos de cada KRI (definirlos en la primera reunión de métricas
+  con el panel andando).

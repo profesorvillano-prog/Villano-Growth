@@ -45,10 +45,12 @@ export default function ConfigPage() {
         <Card className="lg:col-span-2">
           <CardHead title="Principios del sistema" sub="Configuración que NO se toca por cliente" />
           <ul className="grid gap-3 px-5 py-4 text-sm text-mute sm:grid-cols-2">
-            <li className="flex gap-2"><span className="text-accent2">·</span>El proceso semanal de contenido es fijo para todos: Selección → Creación → Revisión → Recepción → Edición → Programación → Medición.</li>
-            <li className="flex gap-2"><span className="text-accent2">·</span>El plan del ciclo de 14 días queda sellado: las ideas nuevas van al backlog del ciclo siguiente.</li>
-            <li className="flex gap-2"><span className="text-accent2">·</span>Toda acción tiene R (ejecuta) y A (responde). Sin dueño, no existe.</li>
-            <li className="flex gap-2"><span className="text-accent2">·</span>Los entregables al infoproductor viven en Notion; el contenido se publica y mide en GHL. Esta app orquesta y decide.</li>
+            <li className="flex gap-2"><span className="text-accent2">·</span>Proceso de contenido fijo (SOP, 8 pasos): Investigación (dummy account) → Planificación → Guión → Revisión → Grabación → Edición → Programación → Análisis.</li>
+            <li className="flex gap-2"><span className="text-accent2">·</span>El cliente solo ve 4 estados en su Notion: Planificado → Revisado → Grabado → Publicado. El resto es SOP interno de Patricio.</li>
+            <li className="flex gap-2"><span className="text-accent2">·</span>Cada miembro tiene KPIs semanales literales que influyen sus KRIs. Si un KRI se desvía, se revisan los KPIs primero.</li>
+            <li className="flex gap-2"><span className="text-accent2">·</span>Análisis rápido semanal por área (orgánico y Meta Ads) · análisis en equipo y entrega al cliente cada 14 días.</li>
+            <li className="flex gap-2"><span className="text-accent2">·</span>WhatsApp de clientes: siempre queda un mensaje o respuesta nuestra al final (Rodrigo, 1ª línea).</li>
+            <li className="flex gap-2"><span className="text-accent2">·</span>Publicación con ≥1 semana de antelación; métricas por pieza en la base de Notion del cliente.</li>
           </ul>
         </Card>
       </div>
