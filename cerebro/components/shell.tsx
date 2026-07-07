@@ -67,7 +67,7 @@ export function Shell({ children, title, sub, right }: { children: ReactNode; ti
       </aside>
 
       <div className="flex-1 md:pl-60">
-        <header className="sticky top-0 z-10 border-b border-line bg-bg/80 backdrop-blur">
+        <header className="sticky top-0 z-10 border-b border-line bg-bg/80 shadow-[0_8px_24px_-16px_rgba(0,0,0,0.8)] backdrop-blur">
           <div className="flex items-center justify-between gap-4 px-6 py-4">
             <div>
               <h1 className="text-lg font-semibold">{title}</h1>
@@ -86,10 +86,11 @@ function NavItem({ href, label, icon, active }: { href: string; label: string; i
   return (
     <Link
       href={href}
-      className={`flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm transition-colors ${
+      className={`relative flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm transition-colors ${
         active ? "bg-accent/15 font-medium text-accent2" : "text-mute hover:bg-soft/60 hover:text-ink"
       }`}
     >
+      {active && <span className="absolute -left-3 top-1/2 h-4 w-[3px] -translate-y-1/2 rounded-full bg-accent" />}
       <span className="w-5 text-center text-xs opacity-80">{icon}</span>
       {label}
     </Link>

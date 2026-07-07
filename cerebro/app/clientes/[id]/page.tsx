@@ -9,7 +9,7 @@ import { Card, CardHead, Progress, Stat, Avatar, AreaBadge } from "@/components/
 import { TrackerGrid } from "@/components/tracker";
 import { FunnelTable } from "@/components/metrics";
 import {
-  ACTIONS, CLIENTS, Campaign, FUNNEL_HT, FUNNEL_LT, NOTION_STATES,
+  CLIENTS, Campaign, FUNNEL_HT, FUNNEL_LT, NOTION_STATES,
   ORGANIC, ORGANIC_WEEKS, PROCESS_STEPS, REVIEWS, SALES,
   complianceFor, fmtVal,
 } from "@/lib/data";
@@ -28,8 +28,7 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
 
   if (!client) notFound();
 
-  const actions = ACTIONS.filter((a) => a.clientId === id);
-  const pct = complianceFor(actions, done);
+  const pct = complianceFor(db.actions.filter((a) => a.clientId === id), done);
   const sales = SALES[id];
   const org = ORGANIC[id];
   const ht = FUNNEL_HT[id];
@@ -114,7 +113,7 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
       {tab === "Acciones" && (
         <Card>
           <CardHead title="Acciones recurrentes del cliente" sub="Incluye acciones del infoproductor y colaboradores (las marca su accountable)" />
-          <TrackerGrid actions={actions} />
+          <TrackerGrid filter={(a) => a.clientId === id} addClientId={id} />
         </Card>
       )}
 
