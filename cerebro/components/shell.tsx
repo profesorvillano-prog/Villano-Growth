@@ -4,27 +4,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import { CLIENTS } from "@/lib/data";
-import { useAuth } from "@/lib/auth";
 import { Avatar } from "./ui";
 
 function UserFooter() {
-  const { email, signOut } = useAuth();
-  const name = email ? email.split("@")[0] : "Usuario";
   return (
     <div className="border-t border-line px-4 py-3.5">
       <div className="flex items-center gap-2.5">
-        <Avatar name={name} size={28} />
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent/20 text-[11px] font-semibold text-accent2">VG</span>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-xs font-medium capitalize">{name}</p>
-          <p className="truncate text-[10px] text-dim">{email ?? "Villano Growth"}</p>
+          <p className="truncate text-xs font-medium">Villano Growth</p>
+          <p className="truncate text-[10px] text-dim">Panel del equipo</p>
         </div>
-        <button
-          onClick={() => signOut()}
-          title="Cerrar sesión"
-          className="flex h-7 w-7 items-center justify-center rounded-lg text-mute transition-colors hover:bg-soft hover:text-ink"
-        >
-          ⏻
-        </button>
       </div>
     </div>
   );
