@@ -1,13 +1,10 @@
 "use client";
 
-// Estado de checks del tracker con doble marca por celda:
-// done = el R ejecutó · reviewed = el A revisó.
-// Claves por FECHA real: `${actionId}|${YYYY-MM-DD}` — cada semana es independiente.
-// Persiste en localStorage (demo); en producción → Supabase (action_instances).
+// Marcas del tracker en Supabase (tabla checks). Clave local: `${actionId}|${YYYY-MM-DD}`.
+// done = el R ejecutó · reviewed = el A revisó. Realtime: se ven entre usuarios.
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { DONE_SEED, REVIEWED_SEED } from "./data";
-import { weekDates, isoKey } from "./date";
+import { supabase } from "./supabase";
 
 interface Store {
   done: Set<string>;
@@ -23,59 +20,65 @@ const Ctx = createContext<Store>({
   toggleReviewed: () => {},
 });
 
-const KEY = "vos-checks-v2";
-
-// Convierte seeds "actionId-dayIndex" a claves por fecha de la semana actual.
-function seedToDateKeys(seeds: string[]): string[] {
-  const iso = weekDates(0).map(isoKey);
-  return seeds.map((s) => {
-    const i = s.lastIndexOf("-");
-    const id = s.slice(0, i);
-    const day = parseInt(s.slice(i + 1), 10);
-    return `${id}|${iso[day] ?? day}`;
-  });
+// key "actionId|YYYY-MM-DD" → { action_id, day }
+function parseKey(key: string): { action_id: string; day: string } {
+  const i = key.lastIndexOf("|");
+  return { action_id: key.slice(0, i), day: key.slice(i + 1) };
 }
+const toKey = (action_id: string, day: string) => `${action_id}|${day}`;
 
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [done, setDone] = useState<Set<string>>(new Set());
   const [reviewed, setReviewed] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        setDone(new Set(parsed.done ?? []));
-        setReviewed(new Set(parsed.reviewed ?? []));
-        return;
+    let active = true;
+    (async () => {
+      const { data } = await supabase.from("checks").select("action_id, day, kind");
+      if (!active || !data) return;
+      const d = new Set<string>(), r = new Set<string>();
+      for (const row of data as { action_id: string; day: string; kind: string }[]) {
+        (row.kind === "reviewed" ? r : d).add(toKey(row.action_id, row.day));
       }
-    } catch {}
-    // Primera vez: sembrar el demo sobre la semana actual (fechas reales)
-    setDone(new Set(seedToDateKeys(DONE_SEED)));
-    setReviewed(new Set(seedToDateKeys(REVIEWED_SEED)));
+      setDone(d); setReviewed(r);
+    })();
+
+    const channel = supabase
+      .channel("checks_changes")
+      .on("postgres_changes", { event: "*", schema: "public", table: "checks" }, (payload) => {
+        const row = (payload.new ?? payload.old) as { action_id: string; day: string; kind: string };
+        const key = toKey(row.action_id, row.day);
+        const setter = row.kind === "reviewed" ? setReviewed : setDone;
+        setter((prev) => {
+          const next = new Set(prev);
+          if (payload.eventType === "DELETE") next.delete(key);
+          else next.add(key);
+          return next;
+        });
+      })
+      .subscribe();
+
+    return () => { active = false; supabase.removeChannel(channel); };
   }, []);
 
-  const persist = (d: Set<string>, r: Set<string>) => {
-    try { localStorage.setItem(KEY, JSON.stringify({ done: [...d], reviewed: [...r] })); } catch {}
-  };
-
-  const toggle = (key: string) => {
-    setDone((prev) => {
+  const toggleKind = (key: string, kind: "done" | "reviewed", setter: React.Dispatch<React.SetStateAction<Set<string>>>, current: Set<string>) => {
+    const { action_id, day } = parseKey(key);
+    const has = current.has(key);
+    // Optimista
+    setter((prev) => {
       const next = new Set(prev);
-      next.has(key) ? next.delete(key) : next.add(key);
-      persist(next, reviewed);
+      has ? next.delete(key) : next.add(key);
       return next;
     });
+    if (has) {
+      supabase.from("checks").delete().match({ action_id, day, kind }).then(() => {});
+    } else {
+      supabase.from("checks").upsert({ action_id, day, kind }).then(() => {});
+    }
   };
 
-  const toggleReviewed = (key: string) => {
-    setReviewed((prev) => {
-      const next = new Set(prev);
-      next.has(key) ? next.delete(key) : next.add(key);
-      persist(done, next);
-      return next;
-    });
-  };
+  const toggle = (key: string) => toggleKind(key, "done", setDone, done);
+  const toggleReviewed = (key: string) => toggleKind(key, "reviewed", setReviewed, reviewed);
 
   return <Ctx.Provider value={{ done, reviewed, toggle, toggleReviewed }}>{children}</Ctx.Provider>;
 }
