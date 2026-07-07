@@ -3,18 +3,22 @@
 // Dashboard agencia: salud por cliente, alertas y mi semana.
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Shell } from "@/components/shell";
 import { Card, CardHead, Progress, Semaforo, Stat, Avatar } from "@/components/ui";
 import { ALERTAS, CLIENTS, SALES, complianceFor, fmtVal } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { useData } from "@/lib/db";
+import { todayLongLabel, weekRangeLabel } from "@/lib/date";
 
 export default function Dashboard() {
   const { done } = useStore();
   const { goals, actions } = useData();
+  const [range, setRange] = useState("");
+  useEffect(() => setRange(weekRangeLabel()), []);
 
   return (
-    <Shell title="Dashboard" sub="Semana del 29 jun – 5 jul · vista agencia" right={<PillHoy />}>
+    <Shell title="Dashboard" sub={`${range ? "Semana del " + range + " · " : ""}vista agencia`} right={<PillHoy />}>
       <div className="grid gap-4 lg:grid-cols-3">
         {CLIENTS.map((c) => {
           const pct = complianceFor(actions.filter((a) => a.clientId === c.id), done);
@@ -113,9 +117,11 @@ export default function Dashboard() {
 }
 
 function PillHoy() {
+  const [label, setLabel] = useState("");
+  useEffect(() => setLabel(todayLongLabel()), []);
   return (
     <span className="rounded-full border border-line bg-panel px-3 py-1.5 text-xs text-mute">
-      Jueves 4 · <span className="font-medium text-ink">2 revisiones esta semana</span>
+      {label ? <span className="capitalize">{label}</span> : "Hoy"} · <span className="font-medium text-ink">2 revisiones esta semana</span>
     </span>
   );
 }
