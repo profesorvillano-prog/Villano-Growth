@@ -105,6 +105,9 @@ export const CAMPAIGNS: Campaign[] = [
   { clientId: "marcelo", tipo: "LT", nombre: "Ebook Pack Starter · Frío", estado: "activa", inversion: 210, resultados: 17, costoPorResultado: 12.4, roas: 2.6 },
   { clientId: "marcelo", tipo: "LT", nombre: "Ebook · Retarget IG 30d", estado: "activa", inversion: 80, resultados: 5, costoPorResultado: 16, roas: 2.1 },
   { clientId: "ezequiel", tipo: "HT", nombre: "Sanando Autoinmune · VSL Frío", estado: "aprendizaje", inversion: 120, resultados: 6, costoPorResultado: 20, roas: null },
+  { clientId: "family", tipo: "LT", nombre: "Guía descargable · Frío", estado: "activa", inversion: 150, resultados: 11, costoPorResultado: 13.6, roas: 2.9 },
+  { clientId: "family", tipo: "LT", nombre: "Mini-oferta · Retarget IG", estado: "activa", inversion: 90, resultados: 6, costoPorResultado: 15, roas: 2.2 },
+  { clientId: "ezequiel", tipo: "LT", nombre: "Mini-curso piel · Frío", estado: "aprendizaje", inversion: 80, resultados: 3, costoPorResultado: 26.7, roas: 1.8 },
 ];
 
 // ---------------- Rendimiento semanal de orgánico (3-4 métricas clave) ----------------
@@ -370,6 +373,19 @@ export const FUNNEL_HT: Record<string, FunnelRow[]> = {
 };
 
 export const FUNNEL_LT: Record<string, FunnelRow[]> = {
+  family: [
+    { section: "Inversión & Tráfico — Meta Ads", label: "Inversión", values: [120, 130, 150, null], fmt: "usd" },
+    { label: "CTR (enlace)", values: [2.1, 1.9, 2.3, null], fmt: "pct", benchmark: ">1,5%", status: "ok" },
+    { label: "CPC", values: [0.8, 0.9, 0.7, null], fmt: "usd", benchmark: "$0,5–1,7", status: "ok" },
+    { section: "Checkout & Venta — GHL", label: "Visitas LP", values: [640, 690, 780, null], fmt: "n" },
+    { label: "Iniciar pago", values: [16, 18, 23, null], fmt: "n" },
+    { label: "Compras (guía/mini)", values: [6, 7, 11, null], fmt: "n" },
+    { label: "Tasa checkout→compra", values: [37, 39, 48, null], fmt: "pct", benchmark: "20–40%", status: "ok" },
+    { label: "CVR total", values: [0.9, 1.0, 1.4, null], fmt: "pct", benchmark: "1–3%", status: "warn" },
+    { label: "Ticket / AOV", values: [37, 37, 39, null], fmt: "usd" },
+    { label: "Facturación", values: [222, 259, 429, null], fmt: "usd" },
+    { label: "ROAS", values: [1.9, 2.0, 2.9, null], fmt: "x", benchmark: "3–5x", status: "warn" },
+  ],
   marcelo: [
     { section: "Inversión & Tráfico — Meta Ads", label: "Inversión", values: [90, 90, 110, null], fmt: "usd" },
     { label: "CTR (enlace)", values: [1.8, 2.0, 2.2, null], fmt: "pct", benchmark: ">1,5%", status: "ok" },
@@ -382,6 +398,19 @@ export const FUNNEL_LT: Record<string, FunnelRow[]> = {
     { label: "Ticket / AOV", values: [27, 31, 34, null], fmt: "usd" },
     { label: "Facturación", values: [135, 217, 340, null], fmt: "usd" },
     { label: "ROAS", values: [1.5, 2.4, 3.1, null], fmt: "x", benchmark: "3–5x", status: "warn" },
+  ],
+  ezequiel: [
+    { section: "Inversión & Tráfico — Meta Ads", label: "Inversión", values: [null, null, 80, null], fmt: "usd" },
+    { label: "CTR (enlace)", values: [null, null, 2.2, null], fmt: "pct", benchmark: ">1,5%", status: "ok" },
+    { label: "CPC", values: [null, null, 0.9, null], fmt: "usd", benchmark: "$0,5–1,7", status: "ok" },
+    { section: "Checkout & Venta — GHL", label: "Visitas LP", values: [null, null, 320, null], fmt: "n" },
+    { label: "Iniciar pago", values: [null, null, 8, null], fmt: "n" },
+    { label: "Compras (mini-curso)", values: [null, null, 3, null], fmt: "n" },
+    { label: "Tasa checkout→compra", values: [null, null, 38, null], fmt: "pct", benchmark: "20–40%", status: "ok" },
+    { label: "CVR total", values: [null, null, 0.9, null], fmt: "pct", benchmark: "1–3%", status: "warn" },
+    { label: "Ticket / AOV", values: [null, null, 47, null], fmt: "usd" },
+    { label: "Facturación", values: [null, null, 141, null], fmt: "usd" },
+    { label: "ROAS", values: [null, null, 1.8, null], fmt: "x", benchmark: "3–5x", status: "warn" },
   ],
 };
 
