@@ -20,23 +20,6 @@
   color-scheme: dark;
 }
 
-[data-theme="light"] {
-  --c-bg: 246 246 249;
-  --c-panel: 255 255 255;
-  --c-card: 255 255 255;
-  --c-line: 228 228 234;
-  --c-soft: 238 238 243;
-  --c-ink: 26 26 32;
-  --c-mute: 95 95 110;
-  --c-dim: 155 155 168;
-  --c-accent: 124 58 237;
-  --c-accent2: 109 40 217;
-  --c-ok: 5 150 105;
-  --c-warn: 180 120 5;
-  --c-bad: 225 29 72;
-  color-scheme: light;
-}
-
 body {
   background: rgb(var(--c-bg));
   color: rgb(var(--c-ink));

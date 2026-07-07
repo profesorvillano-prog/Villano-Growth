@@ -12,14 +12,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={inter.variable} suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('vos-theme');if(t==='light')document.documentElement.dataset.theme='light'}catch(e){}`,
-          }}
-        />
-      </head>
+    <html lang="es" className={inter.variable}>
       <body className="font-sans">
         <StoreProvider>{children}</StoreProvider>
       </body>
