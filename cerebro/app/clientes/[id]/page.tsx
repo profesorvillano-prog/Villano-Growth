@@ -9,11 +9,13 @@ import { Card, CardHead, Progress, Stat, Avatar, AreaBadge } from "@/components/
 import { TrackerGrid } from "@/components/tracker";
 import { FunnelTable } from "@/components/metrics";
 import {
-  ACTIONS, CAMPAIGNS, CLIENTS, FUNNEL_HT, FUNNEL_LT, GOALS, NOTION_STATES,
+  ACTIONS, CLIENTS, Campaign, FUNNEL_HT, FUNNEL_LT, NOTION_STATES,
   ORGANIC, ORGANIC_WEEKS, PROCESS_STEPS, REVIEWS, SALES,
   complianceFor, fmtVal,
 } from "@/lib/data";
 import { useStore } from "@/lib/store";
+import { StrategyData, useData } from "@/lib/db";
+import { AddBtn, DeleteBtn, ENum, ESelect, EText } from "@/components/editable";
 
 const TABS = ["Resumen", "Acciones", "Orgánico", "Ads HT", "Ads LT", "Revisiones", "Estrategia"] as const;
 
@@ -22,6 +24,7 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
   const client = CLIENTS.find((c) => c.id === id);
   const [tab, setTab] = useState<(typeof TABS)[number]>("Resumen");
   const { done } = useStore();
+  const db = useData();
 
   if (!client) notFound();
 
@@ -32,7 +35,8 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
   const ht = FUNNEL_HT[id];
   const lt = FUNNEL_LT[id];
   const reviews = REVIEWS.filter((r) => r.clientId === id);
-  const goals = GOALS.filter((g) => g.clientId === id);
+  const goals = db.goals.filter((g) => g.clientId === id);
+  const estrategia = db.strategies[id] ?? { ...client.estrategia, oferta: client.oferta };
 
   return (
     <Shell
@@ -169,7 +173,7 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
                   <span key={s} className="rounded-full border border-line px-2 py-0.5 text-[11px] text-mute">{s}</span>
                 ))}
               </div>
-              <p className="mt-3 text-xs text-dim">Pauta vigente: {client.estrategia.frecuenciaFeed} · Historias: {client.estrategia.historias}</p>
+              <p className="mt-3 text-xs text-dim">Pauta vigente: {estrategia.frecuenciaFeed} · Historias: {estrategia.historias}</p>
             </div>
           </Card>
         </div>
@@ -229,20 +233,35 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
 
       {tab === "Estrategia" && (
         <Card>
-          <CardHead title="Estrategia viva" sub="Se revisa en la reunión mensual con el cliente · guarda historial de cambios" />
+          <CardHead title="Estrategia viva" sub="Editable — se revisa en la reunión mensual con el cliente. El proceso SOP y los estados de Notion son fijos." />
           <dl className="divide-y divide-line/60">
+            {(
+              [
+                ["Pilares de contenido", "pilares"],
+                ["Frecuencia — Feed", "frecuenciaFeed"],
+                ["Estrategia de historias", "historias"],
+                ["Tono de comunicación", "tono"],
+                ["Oferta principal", "oferta"],
+              ] as [string, keyof StrategyData][]
+            ).map(([label, key]) => (
+              <div key={key} className="grid gap-1 px-5 py-3.5 sm:grid-cols-[220px_1fr]">
+                <dt className="text-xs font-medium uppercase tracking-wide text-dim">{label}</dt>
+                <dd className="text-sm text-mute">
+                  <EText
+                    value={estrategia[key]}
+                    onSave={(v) => db.update("strategies", { ...db.strategies, [id]: { ...estrategia, [key]: v } })}
+                    className="text-sm"
+                  />
+                </dd>
+              </div>
+            ))}
             {[
-              ["Pilares de contenido", client.estrategia.pilares],
-              ["Frecuencia — Feed", client.estrategia.frecuenciaFeed],
-              ["Estrategia de historias", client.estrategia.historias],
-              ["Tono de comunicación", client.estrategia.tono],
-              ["Oferta principal", client.oferta],
               ["Proceso de contenido (SOP fijo)", PROCESS_STEPS.map((s) => s.split(" (")[0]).join(" → ")],
               ["Estados en Notion del cliente", NOTION_STATES.join(" → ")],
             ].map(([k, v]) => (
               <div key={k} className="grid gap-1 px-5 py-3.5 sm:grid-cols-[220px_1fr]">
                 <dt className="text-xs font-medium uppercase tracking-wide text-dim">{k}</dt>
-                <dd className="text-sm text-mute">{v}</dd>
+                <dd className="text-sm text-dim">{v} <span className="ml-1 text-[10px]">🔒</span></dd>
               </div>
             ))}
           </dl>
@@ -252,19 +271,33 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
   );
 }
 
+const ESTADO_OPTS = [
+  { value: "activa", label: "activa" },
+  { value: "aprendizaje", label: "aprendizaje" },
+  { value: "pausada", label: "pausada" },
+];
+
 function CampaignsCard({ clientId, tipo }: { clientId: string; tipo: "HT" | "LT" }) {
-  const campaigns = CAMPAIGNS.filter((c) => c.clientId === clientId && c.tipo === tipo);
-  if (campaigns.length === 0) return null;
-  const estadoCls: Record<string, string> = {
-    activa: "text-ok border-ok/30",
-    aprendizaje: "text-warn border-warn/30",
-    pausada: "text-dim border-line",
-  };
+  const { campaigns, update } = useData();
+  const rows = campaigns
+    .map((c, index) => ({ c, index }))
+    .filter(({ c }) => c.clientId === clientId && c.tipo === tipo);
+
+  const setCampaign = (index: number, patch: Partial<Campaign>) =>
+    update("campaigns", campaigns.map((c, i) => (i === index ? { ...c, ...patch } : c)));
+  const removeCampaign = (index: number) =>
+    update("campaigns", campaigns.filter((_, i) => i !== index));
+  const addCampaign = () =>
+    update("campaigns", [
+      ...campaigns,
+      { clientId, tipo, nombre: "Nueva campaña", estado: "aprendizaje" as const, inversion: 0, resultados: 0, costoPorResultado: 0, roas: null },
+    ]);
+
   return (
     <Card>
-      <CardHead title="Por campaña" sub="Análisis semanal por campaña — decisiones de escala, iteración o pausa" />
+      <CardHead title="Por campaña" sub="Editable — decisiones de escala, iteración o pausa por campaña" />
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[640px] border-collapse text-sm">
+        <table className="w-full min-w-[680px] border-collapse text-sm">
           <thead>
             <tr className="text-[11px] uppercase tracking-wide text-dim">
               <th className="py-2 pl-5 pr-3 text-left font-medium">Campaña</th>
@@ -276,22 +309,36 @@ function CampaignsCard({ clientId, tipo }: { clientId: string; tipo: "HT" | "LT"
             </tr>
           </thead>
           <tbody>
-            {campaigns.map((c, i) => (
-              <tr key={i} className="border-t border-line/60 hover:bg-soft/30">
-                <td className="py-2.5 pl-5 pr-3">{c.nombre}</td>
-                <td className="px-3 py-2.5">
-                  <span className={`rounded-full border px-2 py-0.5 text-[11px] ${estadoCls[c.estado]}`}>{c.estado}</span>
+            {rows.map(({ c, index }) => (
+              <tr key={index} className="group/row border-t border-line/60 hover:bg-soft/30">
+                <td className="py-2.5 pl-5 pr-3">
+                  <div className="flex items-center gap-1.5">
+                    <EText value={c.nombre} onSave={(v) => setCampaign(index, { nombre: v })} className="text-sm" />
+                    <DeleteBtn onClick={() => removeCampaign(index)} />
+                  </div>
                 </td>
-                <td className="px-3 py-2.5 text-right tabular-nums text-mute">{fmtVal(c.inversion, "usd")}</td>
-                <td className="px-3 py-2.5 text-right tabular-nums">{c.resultados}</td>
-                <td className="px-3 py-2.5 text-right tabular-nums text-mute">{fmtVal(c.costoPorResultado, "usd")}</td>
-                <td className={`py-2.5 pl-3 pr-5 text-right font-medium tabular-nums ${c.roas === null ? "text-dim" : c.roas >= 2 ? "text-ok" : "text-warn"}`}>
-                  {c.roas === null ? "—" : fmtVal(c.roas, "x")}
+                <td className="px-3 py-2.5">
+                  <ESelect value={c.estado} options={ESTADO_OPTS} onSave={(v) => setCampaign(index, { estado: v as Campaign["estado"] })} />
+                </td>
+                <td className="px-3 py-2.5 text-right text-mute">
+                  <ENum value={c.inversion} fmt="usd" onSave={(v) => setCampaign(index, { inversion: v ?? 0 })} />
+                </td>
+                <td className="px-3 py-2.5 text-right">
+                  <ENum value={c.resultados} onSave={(v) => setCampaign(index, { resultados: v ?? 0 })} />
+                </td>
+                <td className="px-3 py-2.5 text-right text-mute">
+                  <ENum value={c.costoPorResultado} fmt="usd" onSave={(v) => setCampaign(index, { costoPorResultado: v ?? 0 })} />
+                </td>
+                <td className={`py-2.5 pl-3 pr-5 text-right font-medium ${c.roas === null ? "text-dim" : c.roas >= 2 ? "text-ok" : "text-warn"}`}>
+                  <ENum value={c.roas} fmt="x" nullable onSave={(v) => setCampaign(index, { roas: v })} />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="border-t border-line px-5 py-3">
+        <AddBtn onClick={addCampaign}>Campaña {tipo}</AddBtn>
       </div>
     </Card>
   );

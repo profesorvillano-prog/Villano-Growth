@@ -3,8 +3,10 @@
 import { Shell } from "@/components/shell";
 import { Card, CardHead, Avatar } from "@/components/ui";
 import { CLIENTS, TEAM } from "@/lib/data";
+import { useData } from "@/lib/db";
 
 export default function ConfigPage() {
+  const { reset } = useData();
   return (
     <Shell title="Configuración" sub="Equipo, clientes y plantillas de acciones">
       <div className="grid gap-4 lg:grid-cols-2">
@@ -53,6 +55,19 @@ export default function ConfigPage() {
             <li className="flex gap-2"><span className="text-accent2">·</span>Publicación con ≥1 semana de antelación; métricas por pieza en la base de Notion del cliente.</li>
           </ul>
         </Card>
+      </div>
+
+      <div className="mt-4 flex items-center justify-between rounded-xl border border-line bg-card px-5 py-4">
+        <div>
+          <p className="text-sm font-medium">Datos de este navegador</p>
+          <p className="mt-0.5 text-xs text-mute">Las ediciones (metas, KPIs, campañas, estrategia, finanzas) se guardan localmente en modo demo.</p>
+        </div>
+        <button
+          onClick={() => { if (confirm("¿Restablecer todos los datos al demo original?")) reset(); }}
+          className="rounded-lg border border-line px-3 py-1.5 text-xs text-mute transition-colors hover:border-bad/50 hover:text-bad"
+        >
+          Restablecer demo
+        </button>
       </div>
     </Shell>
   );
