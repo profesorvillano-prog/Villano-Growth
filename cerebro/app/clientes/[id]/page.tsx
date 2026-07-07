@@ -9,9 +9,9 @@ import { Card, CardHead, Progress, Stat, Avatar, AreaBadge } from "@/components/
 import { TrackerGrid } from "@/components/tracker";
 import { FunnelTable } from "@/components/metrics";
 import {
-  CLIENTS, Campaign, FUNNEL_HT, FUNNEL_LT, NOTION_STATES,
-  ORGANIC, ORGANIC_WEEKS, PROCESS_STEPS, REVIEWS, SALES,
-  complianceFor, fmtVal,
+  CLIENTS, Campaign, ContentPlan, DAY_LABELS, FUNNEL_HT, FUNNEL_LT, HistoriasModo,
+  NOTION_STATES, ORGANIC, ORGANIC_WEEKS, PROCESS_STEPS, REVIEWS, SALES,
+  complianceFor, distributeDays, fmtVal,
 } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { StrategyData, useData } from "@/lib/db";
@@ -172,7 +172,7 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
                   <span key={s} className="rounded-full border border-line px-2 py-0.5 text-[11px] text-mute">{s}</span>
                 ))}
               </div>
-              <p className="mt-3 text-xs text-dim">Pauta vigente: {estrategia.frecuenciaFeed} · Historias: {estrategia.historias}</p>
+              <p className="mt-3 text-xs text-dim">Plan vigente: Feed {(db.plans[id]?.feedDias.length ?? 0)}/sem · Historias {db.plans[id]?.historiasModo === "diaria" ? "diarias" : db.plans[id]?.historiasModo === "lunvie" ? "L–V" : db.plans[id]?.historiasModo === "dias" ? `${db.plans[id]?.historiasDias.length}/sem` : "no"} · <span className="text-mute">se edita en Estrategia</span></p>
             </div>
           </Card>
         </div>
@@ -231,42 +231,164 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
       )}
 
       {tab === "Estrategia" && (
-        <Card>
-          <CardHead title="Estrategia viva" sub="Editable — se revisa en la reunión mensual con el cliente. El proceso SOP y los estados de Notion son fijos." />
-          <dl className="divide-y divide-line/60">
-            {(
-              [
-                ["Pilares de contenido", "pilares"],
-                ["Frecuencia — Feed", "frecuenciaFeed"],
-                ["Estrategia de historias", "historias"],
-                ["Tono de comunicación", "tono"],
-                ["Oferta principal", "oferta"],
-              ] as [string, keyof StrategyData][]
-            ).map(([label, key]) => (
-              <div key={key} className="grid gap-1 px-5 py-3.5 sm:grid-cols-[220px_1fr]">
-                <dt className="text-xs font-medium uppercase tracking-wide text-dim">{label}</dt>
-                <dd className="text-sm text-mute">
-                  <EText
-                    value={estrategia[key]}
-                    onSave={(v) => db.update("strategies", { ...db.strategies, [id]: { ...estrategia, [key]: v } })}
-                    className="text-sm"
-                  />
-                </dd>
-              </div>
-            ))}
-            {[
-              ["Proceso de contenido (SOP fijo)", PROCESS_STEPS.map((s) => s.split(" (")[0]).join(" → ")],
-              ["Estados en Notion del cliente", NOTION_STATES.join(" → ")],
-            ].map(([k, v]) => (
-              <div key={k} className="grid gap-1 px-5 py-3.5 sm:grid-cols-[220px_1fr]">
-                <dt className="text-xs font-medium uppercase tracking-wide text-dim">{k}</dt>
-                <dd className="text-sm text-dim">{v} <span className="ml-1 text-[10px]">🔒</span></dd>
-              </div>
-            ))}
-          </dl>
-        </Card>
+        <div className="space-y-4">
+          <ContentPlanEditor
+            plan={db.plans[id] ?? { feedTipo: "Publicación", feedDias: [1, 3], historiasModo: "diaria", historiasDias: [] }}
+            onChange={(plan) => db.setContentPlan(id, plan)}
+            color={client.color}
+          />
+          <Card>
+            <CardHead title="Estrategia viva" sub="Editable — se revisa en la reunión mensual con el cliente. El proceso SOP y los estados de Notion son fijos." />
+            <dl className="divide-y divide-line/60">
+              {(
+                [
+                  ["Pilares de contenido", "pilares"],
+                  ["Tono de comunicación", "tono"],
+                  ["Oferta principal", "oferta"],
+                ] as [string, keyof StrategyData][]
+              ).map(([label, key]) => (
+                <div key={key} className="grid gap-1 px-5 py-3.5 sm:grid-cols-[220px_1fr]">
+                  <dt className="text-xs font-medium uppercase tracking-wide text-dim">{label}</dt>
+                  <dd className="text-sm text-mute">
+                    <EText
+                      value={estrategia[key]}
+                      onSave={(v) => db.update("strategies", { ...db.strategies, [id]: { ...estrategia, [key]: v } })}
+                      className="text-sm"
+                    />
+                  </dd>
+                </div>
+              ))}
+              {[
+                ["Proceso de contenido (SOP fijo)", PROCESS_STEPS.map((s) => s.split(" (")[0]).join(" → ")],
+                ["Estados en Notion del cliente", NOTION_STATES.join(" → ")],
+              ].map(([k, v]) => (
+                <div key={k} className="grid gap-1 px-5 py-3.5 sm:grid-cols-[220px_1fr]">
+                  <dt className="text-xs font-medium uppercase tracking-wide text-dim">{k}</dt>
+                  <dd className="text-sm text-dim">{v} <span className="ml-1 text-[10px]">🔒</span></dd>
+                </div>
+              ))}
+            </dl>
+          </Card>
+        </div>
       )}
     </Shell>
+  );
+}
+
+// ---------- Editor del plan de contenido (frecuencia → acciones) ----------
+
+function DayChips({ active, onToggle, color = "#8b5cf6" }: { active: number[]; onToggle: (d: number) => void; color?: string }) {
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {DAY_LABELS.map((label, d) => {
+        const on = active.includes(d);
+        return (
+          <button
+            key={d}
+            onClick={() => onToggle(d)}
+            className={`flex h-8 w-8 items-center justify-center rounded-lg border text-xs font-semibold transition-all ${
+              on ? "text-white" : "border-line text-mute hover:border-accent/50 hover:text-ink"
+            }`}
+            style={on ? { background: color, borderColor: color } : undefined}
+          >
+            {label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+const HIST_MODOS: { value: HistoriasModo; label: string }[] = [
+  { value: "diaria", label: "Todos los días" },
+  { value: "lunvie", label: "Lun–Vie" },
+  { value: "dias", label: "Días específicos" },
+  { value: "no", label: "Sin historias" },
+];
+
+function ContentPlanEditor({ plan, onChange, color }: { plan: ContentPlan; onChange: (p: ContentPlan) => void; color: string }) {
+  const set = (patch: Partial<ContentPlan>) => onChange({ ...plan, ...patch });
+  const toggleFeed = (d: number) =>
+    set({ feedDias: plan.feedDias.includes(d) ? plan.feedDias.filter((x) => x !== d) : [...plan.feedDias, d].sort((a, b) => a - b) });
+  const toggleHist = (d: number) =>
+    set({ historiasDias: plan.historiasDias.includes(d) ? plan.historiasDias.filter((x) => x !== d) : [...plan.historiasDias, d].sort((a, b) => a - b) });
+
+  const histCount = plan.historiasModo === "diaria" ? 7 : plan.historiasModo === "lunvie" ? 5 : plan.historiasModo === "dias" ? plan.historiasDias.length : 0;
+
+  return (
+    <Card>
+      <CardHead
+        title="Plan de contenido"
+        sub="La frecuencia se convierte en acciones del tracker (Semana y Hoy). Elegí cuántas y en qué días."
+        right={
+          <span className="rounded-full border px-2.5 py-1 text-[11px]" style={{ borderColor: color + "66", color }}>
+            {plan.feedDias.length} feed/sem · {histCount ? `${histCount} historias/sem` : "sin historias"}
+          </span>
+        }
+      />
+      <div className="grid gap-6 px-5 py-5 lg:grid-cols-2">
+        {/* FEED */}
+        <div>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-dim">Feed</p>
+          <div className="mb-3 flex items-center gap-2 text-sm">
+            <span className="text-mute">Tipo de pieza:</span>
+            <EText value={plan.feedTipo} onSave={(v) => set({ feedTipo: v })} className="text-sm text-ink" />
+          </div>
+          <div className="mb-2 flex items-center gap-2">
+            <span className="text-xs text-mute">Publicaciones / semana:</span>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <button
+                key={n}
+                onClick={() => set({ feedDias: distributeDays(n) })}
+                className={`h-7 w-7 rounded-lg border text-xs font-semibold transition-colors ${
+                  plan.feedDias.length === n ? "border-accent bg-accent text-white" : "border-line text-mute hover:text-ink"
+                }`}
+              >
+                {n}
+              </button>
+            ))}
+            <span className="text-[11px] text-dim">(reparte parejo)</span>
+          </div>
+          <p className="mb-1.5 text-[11px] text-dim">O elegí los días manualmente:</p>
+          <DayChips active={plan.feedDias} onToggle={toggleFeed} color={color} />
+          <p className="mt-3 text-[11px] text-dim">
+            → Genera <span className="font-medium text-mute">{plan.feedDias.length}</span> acción(es) de feed, una por día elegido.
+          </p>
+        </div>
+
+        {/* HISTORIAS */}
+        <div>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-dim">Historias</p>
+          <div className="mb-3 flex flex-wrap gap-1.5">
+            {HIST_MODOS.map((m) => (
+              <button
+                key={m.value}
+                onClick={() => set({ historiasModo: m.value })}
+                className={`rounded-lg border px-3 py-1.5 text-xs transition-colors ${
+                  plan.historiasModo === m.value ? "border-accent bg-accent text-white" : "border-line text-mute hover:text-ink"
+                }`}
+              >
+                {m.label}
+              </button>
+            ))}
+          </div>
+          {plan.historiasModo === "dias" && (
+            <>
+              <p className="mb-1.5 text-[11px] text-dim">Días de historias:</p>
+              <DayChips active={plan.historiasDias} onToggle={toggleHist} color={color} />
+            </>
+          )}
+          <p className="mt-3 text-[11px] text-dim">
+            {plan.historiasModo === "no"
+              ? "→ No genera acción de historias."
+              : `→ Genera 1 acción de historias que se marca ${histCount === 7 ? "cada día" : `${histCount} día(s) por semana`}.`}
+          </p>
+        </div>
+      </div>
+      <p className="border-t border-line px-5 py-3 text-[11px] text-dim">
+        Las acciones generadas aparecen en la pestaña <span className="text-mute">Acciones</span> y en <span className="text-mute">Semana</span>, y se completan como cualquier hábito. Editá el plan y se re-sincronizan solas.
+      </p>
+    </Card>
   );
 }
 
