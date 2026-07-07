@@ -1,11 +1,13 @@
 "use client";
 
 // Estado de checks del tracker con doble marca por celda:
-// done = el R ejecutó · reviewed = el A revisó. Persiste en localStorage (demo);
-// en producción esta capa se reemplaza por Supabase (action_instances).
+// done = el R ejecutó · reviewed = el A revisó.
+// Claves por FECHA real: `${actionId}|${YYYY-MM-DD}` — cada semana es independiente.
+// Persiste en localStorage (demo); en producción → Supabase (action_instances).
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { DONE_SEED, REVIEWED_SEED } from "./data";
+import { weekDates, isoKey } from "./date";
 
 interface Store {
   done: Set<string>;
@@ -21,21 +23,36 @@ const Ctx = createContext<Store>({
   toggleReviewed: () => {},
 });
 
-const KEY = "vos-checks-v1";
+const KEY = "vos-checks-v2";
+
+// Convierte seeds "actionId-dayIndex" a claves por fecha de la semana actual.
+function seedToDateKeys(seeds: string[]): string[] {
+  const iso = weekDates(0).map(isoKey);
+  return seeds.map((s) => {
+    const i = s.lastIndexOf("-");
+    const id = s.slice(0, i);
+    const day = parseInt(s.slice(i + 1), 10);
+    return `${id}|${iso[day] ?? day}`;
+  });
+}
 
 export function StoreProvider({ children }: { children: ReactNode }) {
-  const [done, setDone] = useState<Set<string>>(new Set(DONE_SEED));
-  const [reviewed, setReviewed] = useState<Set<string>>(new Set(REVIEWED_SEED));
+  const [done, setDone] = useState<Set<string>>(new Set());
+  const [reviewed, setReviewed] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     try {
       const raw = localStorage.getItem(KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
-        if (parsed.done) setDone(new Set(parsed.done));
-        if (parsed.reviewed) setReviewed(new Set(parsed.reviewed));
+        setDone(new Set(parsed.done ?? []));
+        setReviewed(new Set(parsed.reviewed ?? []));
+        return;
       }
     } catch {}
+    // Primera vez: sembrar el demo sobre la semana actual (fechas reales)
+    setDone(new Set(seedToDateKeys(DONE_SEED)));
+    setReviewed(new Set(seedToDateKeys(REVIEWED_SEED)));
   }, []);
 
   const persist = (d: Set<string>, r: Set<string>) => {

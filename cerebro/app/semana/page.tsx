@@ -52,10 +52,10 @@ export default function SemanaPage() {
           </div>
           <div className="flex items-center gap-1 rounded-lg border border-line bg-panel p-1">
             <FilterBtn active={client === "todos"} onClick={() => setClient("todos")}>Todos</FilterBtn>
-            <FilterBtn active={client === "agencia"} onClick={() => setClient("agencia")}>🏢 Agencia</FilterBtn>
+            <FilterBtn active={client === "agencia"} onClick={() => setClient("agencia")}>Agencia</FilterBtn>
             {CLIENTS.map((c) => (
               <FilterBtn key={c.id} active={client === c.id} onClick={() => setClient(c.id)}>
-                {c.emoji} {c.nombre.split(" ")[0]}
+                {c.nombre.split(" ")[0]}
               </FilterBtn>
             ))}
           </div>

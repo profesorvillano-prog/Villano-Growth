@@ -39,7 +39,7 @@ export default function MetasPage() {
             .filter(({ g }) => g.clientId === c.id);
           return (
             <Card key={c.id}>
-              <CardHead title={`${c.emoji} ${c.nombre}`} sub={`${clientGoals.length} metas activas`} />
+              <CardHead title={c.nombre} sub={`${clientGoals.length} metas activas`} />
               <ul className="space-y-4 px-5 py-4">
                 {clientGoals.map(({ g, index }) => {
                   const pct = g.objetivo ? Math.min(100, Math.round((g.actual / g.objetivo) * 100)) : 0;

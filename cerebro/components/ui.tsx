@@ -37,6 +37,17 @@ export function AreaBadge({ area }: { area: Area }) {
   );
 }
 
+export function ClientMark({ initials, color, size = 32 }: { initials: string; color: string; size?: number }) {
+  return (
+    <span
+      className="inline-flex shrink-0 items-center justify-center rounded-lg font-semibold tracking-tight"
+      style={{ width: size, height: size, background: color + "22", color, fontSize: size * 0.4 }}
+    >
+      {initials}
+    </span>
+  );
+}
+
 export function Avatar({ name, size = 24 }: { name: string; size?: number }) {
   const special: Record<string, [string, string]> = {
     Setter: ["IN", "#f472b6"], // Ina

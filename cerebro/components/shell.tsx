@@ -44,7 +44,7 @@ export function Shell({ children, title, sub, right }: { children: ReactNode; ti
                   path?.startsWith(`/clientes/${c.id}`) ? "bg-soft text-ink" : "text-mute hover:bg-soft/60 hover:text-ink"
                 }`}
               >
-                <span className="flex h-6 w-6 items-center justify-center rounded-md text-xs" style={{ background: c.color + "22" }}>{c.emoji}</span>
+                <span className="flex h-6 w-6 items-center justify-center rounded-md text-[10px] font-semibold" style={{ background: c.color + "22", color: c.color }}>{c.initials}</span>
                 <span className="truncate">{c.nombre}</span>
               </Link>
             ))}

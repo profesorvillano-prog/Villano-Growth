@@ -14,7 +14,7 @@ create table clients (
   nombre text not null,
   nicho text,
   oferta text,
-  emoji text,
+  initials text,
   color text,
   estado text not null default 'activo',
   notion_url text,

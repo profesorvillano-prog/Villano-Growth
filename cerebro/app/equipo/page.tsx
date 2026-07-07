@@ -113,7 +113,12 @@ export default function EquipoPage() {
                 const c = clientById(f.clientId);
                 return (
                   <tr key={f.clientId} className="border-t border-line/60 hover:bg-soft/30">
-                    <td className="py-2.5 pl-5 pr-3 font-medium">{c?.emoji} {c?.nombre}</td>
+                    <td className="py-2.5 pl-5 pr-3 font-medium">
+                      <span className="flex items-center gap-2">
+                        {c && <span className="rounded px-1.5 py-0.5 text-[10px] font-semibold" style={{ background: c.color + "22", color: c.color }}>{c.initials}</span>}
+                        {c?.nombre}
+                      </span>
+                    </td>
                     <td className="px-3 py-2.5 text-xs text-mute">
                       <EText value={f.modelo} onSave={(v) => setFin(index, { modelo: v })} className="text-xs" />
                     </td>
