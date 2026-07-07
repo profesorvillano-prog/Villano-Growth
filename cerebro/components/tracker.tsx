@@ -1,8 +1,9 @@
 "use client";
 
-// Action Tracker: acciones × días, agrupado por área (orgánico separado de tráfico).
-// Cada celda tiene doble marca: cuadro superior = R ejecutó · franja inferior = A revisó.
-// Modo edición: nombre, área, R/A, cadencia y días son editables; agregar y eliminar.
+// Action Tracker con dos vistas:
+//  · Hoy — checklist grande del día (por rol en vista personal: primero Ejecutas (R), luego Revisas (A))
+//  · Semana — grilla acciones × días agrupada en secciones (áreas, o R/A en vista personal)
+// Cada instancia tiene doble marca: R ejecuta · A revisa (trabajo en paralelo).
 
 import { useState } from "react";
 import {
@@ -10,7 +11,7 @@ import {
 } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { useData } from "@/lib/db";
-import { Avatar } from "./ui";
+import { Avatar, AreaBadge } from "./ui";
 import { AddBtn, DeleteBtn, ESelect, EText } from "./editable";
 
 const TODAY = 3; // jueves (demo)
@@ -23,6 +24,26 @@ const CAD_OPTS: { value: Cadence; label: string }[] = [
   { value: "semanal", label: "semanal" },
   { value: "14d", label: "cada 14 días" },
 ];
+const INITIALS: Record<string, string> = {
+  Sebastián: "SE", Rodrigo: "RO", Patricio: "PA", Javier: "JA", Cliente: "CL", Setter: "IN",
+};
+
+type Row = { a: Action; index: number };
+type Group = { key: string; title: string; color: string; rows: Row[] };
+
+function buildGroups(rows: Row[], person: Person | null): Group[] {
+  const byArea = (list: Row[]) =>
+    [...list].sort((x, y) => AREA_ORDER.indexOf(x.a.area) - AREA_ORDER.indexOf(y.a.area));
+  if (person) {
+    return [
+      { key: "R", title: `Ejecutas · R`, color: "#8b5cf6", rows: byArea(rows.filter(({ a }) => a.R === person)) },
+      { key: "A", title: `Revisas · A`, color: "#34d399", rows: byArea(rows.filter(({ a }) => a.A === person && a.R !== person)) },
+    ].filter((g) => g.rows.length > 0);
+  }
+  return AREA_ORDER
+    .map((area) => ({ key: area, title: AREAS[area].label, color: AREAS[area].color, rows: rows.filter(({ a }) => a.area === area) }))
+    .filter((g) => g.rows.length > 0);
+}
 
 export function TrackerGrid({
   filter, showClient = false, addClientId = null, person = null,
@@ -30,8 +51,10 @@ export function TrackerGrid({
   const { done, reviewed, toggle, toggleReviewed } = useStore();
   const { actions, update } = useData();
   const [editing, setEditing] = useState(false);
+  const [mode, setMode] = useState<"hoy" | "semana">("hoy");
 
   const rows = actions.map((a, index) => ({ a, index })).filter(({ a }) => filter(a));
+  const groups = buildGroups(rows, person);
 
   const setAction = (index: number, patch: Partial<Action>) =>
     update("actions", actions.map((a, i) => (i === index ? { ...a, ...patch } : a)));
@@ -61,94 +84,251 @@ export function TrackerGrid({
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line px-5 py-2.5">
-        <p className="text-[11px] text-dim">
-          {person ? (
-            <>Vista de <span className="font-medium text-ink">{person}</span> — una casilla por su rol: ejecuta (R) o revisa (A). Las iniciales dim indican quién falta.</>
-          ) : (
-            <>
-              <span className="mr-1 inline-block h-2.5 w-2.5 rounded-[4px] border border-accent bg-accent align-middle" /> cuadro = R ejecuta (iniciales = falta) ·{" "}
-              <span className="mx-1 inline-block h-1 w-4 rounded-full bg-ok align-middle" /> franja = A revisó ·{" "}
-              <span className="mx-1 inline-block h-1 w-4 rounded-full bg-warn/70 align-middle" /> ámbar = falta revisión
-            </>
+        <div className="flex items-center gap-1 rounded-lg border border-line bg-panel p-1">
+          {(["hoy", "semana"] as const).map((m) => (
+            <button
+              key={m}
+              onClick={() => { setMode(m); if (m === "hoy") setEditing(false); }}
+              className={`rounded-md px-3 py-1 text-xs font-medium capitalize transition-colors ${
+                mode === m ? "bg-accent text-white" : "text-mute hover:text-ink"
+              }`}
+            >
+              {m === "hoy" ? "☀ Hoy" : "▦ Semana"}
+            </button>
+          ))}
+        </div>
+        <div className="flex items-center gap-3">
+          <p className="hidden text-[11px] text-dim sm:block">
+            {person ? (
+              <>Vista de <span className="font-medium text-ink">{person}</span> — primero lo que ejecuta, después lo que revisa</>
+            ) : (
+              <>
+                <span className="mr-1 inline-block h-2.5 w-2.5 rounded-[4px] border border-accent bg-accent align-middle" /> R ejecuta ·{" "}
+                <span className="mx-1 inline-block h-1 w-4 rounded-full bg-ok align-middle" /> A revisó ·{" "}
+                <span className="mx-1 inline-block h-1 w-4 rounded-full bg-warn/70 align-middle" /> falta revisión
+              </>
+            )}
+          </p>
+          {mode === "semana" && (
+            <div className="flex items-center gap-2">
+              {editing && <AddBtn onClick={addAction}>Acción</AddBtn>}
+              <button
+                onClick={() => setEditing(!editing)}
+                className={`rounded-lg border px-3 py-1.5 text-xs transition-colors ${
+                  editing ? "border-accent bg-accent text-white" : "border-line text-mute hover:border-accent/50 hover:text-ink"
+                }`}
+              >
+                {editing ? "✓ Listo" : "✎ Editar acciones"}
+              </button>
+            </div>
           )}
-        </p>
-        <div className="flex items-center gap-2">
-          {editing && <AddBtn onClick={addAction}>Acción</AddBtn>}
-          <button
-            onClick={() => setEditing(!editing)}
-            className={`rounded-lg border px-3 py-1.5 text-xs transition-colors ${
-              editing ? "border-accent bg-accent text-white" : "border-line text-mute hover:border-accent/50 hover:text-ink"
-            }`}
-          >
-            {editing ? "✓ Listo" : "✎ Editar acciones"}
-          </button>
         </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[760px] border-collapse text-sm">
-          <thead>
-            <tr className="text-[11px] uppercase tracking-wide text-dim">
-              <th className="w-[36%] py-2.5 pl-5 pr-3 text-left font-medium">Acción</th>
-              <th className="px-2 py-2.5 text-left font-medium">R / A</th>
-              {DAY_LABELS.map((d, i) => (
-                <th key={d} className="px-1 py-2.5 text-center font-medium">
-                  <span className={i === TODAY ? "inline-flex h-6 w-6 items-center justify-center rounded-full bg-accent font-semibold text-white" : ""}>{d}</span>
-                </th>
-              ))}
-              <th className="px-3 py-2.5 text-right font-medium">{editing ? "" : "Sem."}</th>
-            </tr>
-          </thead>
-          {AREA_ORDER.map((area) => {
-            const group = rows.filter(({ a }) => a.area === area);
-            if (group.length === 0) return null;
-            return (
-              <tbody key={area}>
-                <tr>
-                  <td colSpan={10} className="border-t border-line bg-panel/70 py-2 pl-5">
-                    <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest" style={{ color: AREAS[area].color }}>
-                      <span className="h-1.5 w-1.5 rounded-full" style={{ background: AREAS[area].color }} />
-                      {AREAS[area].label}
-                    </span>
-                  </td>
-                </tr>
-                {group.map(({ a, index }) => (
-                  <ActionRow
-                    key={a.id}
-                    a={a}
-                    index={index}
-                    editing={editing}
-                    showClient={showClient}
-                    person={person}
-                    done={done}
-                    reviewed={reviewed}
-                    toggle={toggle}
-                    toggleReviewed={toggleReviewed}
-                    setAction={setAction}
-                    removeAction={removeAction}
-                    toggleDay={toggleDay}
-                  />
-                ))}
-              </tbody>
-            );
-          })}
-        </table>
-      </div>
+      {mode === "hoy" ? (
+        <TodayView groups={groups} person={person} showClient={showClient} done={done} reviewed={reviewed} toggle={toggle} toggleReviewed={toggleReviewed} />
+      ) : (
+        <WeekView
+          groups={groups}
+          person={person}
+          editing={editing}
+          showClient={showClient}
+          done={done}
+          reviewed={reviewed}
+          toggle={toggle}
+          toggleReviewed={toggleReviewed}
+          setAction={setAction}
+          removeAction={removeAction}
+          toggleDay={toggleDay}
+        />
+      )}
     </div>
   );
 }
 
-const INITIALS: Record<string, string> = {
-  Sebastián: "SE", Rodrigo: "RO", Patricio: "PA", Javier: "JA", Cliente: "CL", Setter: "IN",
-};
+// ---------------- Vista HOY: checklist grande del día ----------------
+
+function TodayView({
+  groups, person, showClient, done, reviewed, toggle, toggleReviewed,
+}: {
+  groups: Group[];
+  person: Person | null;
+  showClient: boolean;
+  done: Set<string>;
+  reviewed: Set<string>;
+  toggle: (k: string) => void;
+  toggleReviewed: (k: string) => void;
+}) {
+  const todayGroups = groups
+    .map((g) => ({ ...g, rows: g.rows.filter(({ a }) => actionAppliesOn(a, TODAY)) }))
+    .filter((g) => g.rows.length > 0);
+
+  if (todayGroups.length === 0) {
+    return <p className="px-5 py-10 text-center text-sm text-dim">Nada programado para hoy 🎉</p>;
+  }
+
+  return (
+    <div className="divide-y divide-line/60">
+      {todayGroups.map((g) => {
+        const doneCount = g.rows.filter(({ a }) =>
+          g.key === "A" ? reviewed.has(`${a.id}-${TODAY}`) : done.has(`${a.id}-${TODAY}`)
+        ).length;
+        return (
+          <div key={g.key} className="px-5 py-4">
+            <div className="mb-3 flex items-center justify-between">
+              <p className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest" style={{ color: g.color }}>
+                <span className="h-1.5 w-1.5 rounded-full" style={{ background: g.color }} />
+                {g.title} · Jueves 4
+              </p>
+              <span className="text-xs tabular-nums text-dim">{doneCount}/{g.rows.length}</span>
+            </div>
+            <ul className="space-y-2">
+              {g.rows.map(({ a }) => {
+                const key = `${a.id}-${TODAY}`;
+                const isDone = done.has(key);
+                const isRev = reviewed.has(key);
+                const asReviewer = person !== null && a.A === person && a.R !== person;
+                const marked = asReviewer ? isRev : isDone;
+                const cliente = clientById(a.clientId);
+                return (
+                  <li
+                    key={a.id}
+                    className={`flex items-center gap-3 rounded-xl border px-4 py-3 transition-colors ${
+                      marked ? "border-line/60 bg-panel/40" : "border-line bg-panel/70 hover:border-accent/30"
+                    }`}
+                  >
+                    <button
+                      onClick={() => (asReviewer ? toggleReviewed(key) : toggle(key))}
+                      title={asReviewer ? "Marcar revisado (A)" : "Marcar ejecutado (R)"}
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border text-base transition-all ${
+                        marked
+                          ? asReviewer
+                            ? "border-ok bg-ok text-bg shadow-[0_0_12px_rgba(52,211,153,0.4)]"
+                            : "border-accent bg-accent text-white shadow-[0_0_12px_rgba(139,92,246,0.4)]"
+                          : "border-dashed border-accent/60 bg-accent/5 hover:bg-accent/20"
+                      }`}
+                    >
+                      {marked ? "✓" : ""}
+                    </button>
+                    <div className="min-w-0 flex-1">
+                      <p className={`truncate text-sm ${marked ? "text-dim line-through" : ""}`}>
+                        {showClient && <span className="mr-1.5">{cliente?.emoji ?? "🏢"}</span>}
+                        {a.nombre}
+                      </p>
+                      <div className="mt-1 flex items-center gap-2">
+                        <AreaBadge area={a.area} />
+                        {!person && (
+                          <span className="flex items-center gap-1 text-[11px] text-dim">
+                            <Avatar name={a.R} size={16} /> ejecuta · <Avatar name={a.A} size={16} /> revisa
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    {asReviewer ? (
+                      <span className={`shrink-0 rounded-full border px-2.5 py-1 text-[11px] ${isDone ? "border-ok/40 text-ok" : "border-warn/40 text-warn"}`}>
+                        {isDone ? `${INITIALS[a.R]} ejecutó ✓` : `Falta ${INITIALS[a.R]}`}
+                      </span>
+                    ) : (
+                      <button
+                        onClick={() => toggleReviewed(key)}
+                        title={person ? `Revisión del A (${a.A})` : `A (${a.A}) marca revisado`}
+                        className={`shrink-0 rounded-full border px-2.5 py-1 text-[11px] transition-colors ${
+                          isRev
+                            ? "border-ok bg-ok/15 text-ok"
+                            : isDone
+                            ? "border-warn/50 text-warn hover:bg-warn/10"
+                            : "border-line text-dim hover:text-mute"
+                        }`}
+                      >
+                        {isRev ? "Revisado ✓" : `Revisa ${INITIALS[a.A]}`}
+                      </button>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ---------------- Vista SEMANA: grilla acciones × días ----------------
+
+function WeekView({
+  groups, person, editing, showClient, done, reviewed, toggle, toggleReviewed, setAction, removeAction, toggleDay,
+}: {
+  groups: Group[];
+  person: Person | null;
+  editing: boolean;
+  showClient: boolean;
+  done: Set<string>;
+  reviewed: Set<string>;
+  toggle: (k: string) => void;
+  toggleReviewed: (k: string) => void;
+  setAction: (i: number, p: Partial<Action>) => void;
+  removeAction: (i: number) => void;
+  toggleDay: (i: number, a: Action, d: number) => void;
+}) {
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full min-w-[760px] border-collapse text-sm">
+        <thead>
+          <tr className="text-[11px] uppercase tracking-wide text-dim">
+            <th className="w-[36%] py-2.5 pl-5 pr-3 text-left font-medium">Acción</th>
+            <th className="px-2 py-2.5 text-left font-medium">R / A</th>
+            {DAY_LABELS.map((d, i) => (
+              <th key={d} className="px-1 py-2.5 text-center font-medium">
+                <span className={i === TODAY ? "inline-flex h-6 w-6 items-center justify-center rounded-full bg-accent font-semibold text-white" : ""}>{d}</span>
+              </th>
+            ))}
+            <th className="px-3 py-2.5 text-right font-medium">{editing ? "" : "Sem."}</th>
+          </tr>
+        </thead>
+        {groups.map((g) => (
+          <tbody key={g.key}>
+            <tr>
+              <td colSpan={10} className="border-t border-line bg-panel/70 py-2 pl-5">
+                <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest" style={{ color: g.color }}>
+                  <span className="h-1.5 w-1.5 rounded-full" style={{ background: g.color }} />
+                  {g.title}
+                </span>
+              </td>
+            </tr>
+            {g.rows.map(({ a, index }) => (
+              <ActionRow
+                key={a.id}
+                a={a}
+                index={index}
+                editing={editing}
+                showClient={showClient}
+                showArea={person !== null}
+                person={person}
+                done={done}
+                reviewed={reviewed}
+                toggle={toggle}
+                toggleReviewed={toggleReviewed}
+                setAction={setAction}
+                removeAction={removeAction}
+                toggleDay={toggleDay}
+              />
+            ))}
+          </tbody>
+        ))}
+      </table>
+    </div>
+  );
+}
 
 function ActionRow({
-  a, index, editing, showClient, person, done, reviewed, toggle, toggleReviewed, setAction, removeAction, toggleDay,
+  a, index, editing, showClient, showArea, person, done, reviewed, toggle, toggleReviewed, setAction, removeAction, toggleDay,
 }: {
   a: Action;
   index: number;
   editing: boolean;
   showClient: boolean;
+  showArea: boolean;
   person: Person | null;
   done: Set<string>;
   reviewed: Set<string>;
@@ -161,7 +341,6 @@ function ActionRow({
   const cells = Array.from({ length: 7 }, (_, d) => actionAppliesOn(a, d));
   const applicable = cells.filter(Boolean).length;
   const cliente = clientById(a.clientId);
-  // rol de la persona filtrada en esta acción (si es A y no R, su casilla es la revisión)
   const asReviewer = person !== null && a.A === person && a.R !== person;
   const doneCount = cells.filter(
     (ap, d) => ap && (asReviewer ? reviewed.has(`${a.id}-${d}`) : done.has(`${a.id}-${d}`))
@@ -177,6 +356,7 @@ function ActionRow({
           ) : (
             <span className={a.R === "Cliente" || a.R === "Setter" ? "text-mute" : ""}>{a.nombre}</span>
           )}
+          {showArea && !editing && <AreaBadge area={a.area} />}
         </div>
         {editing && (
           <div className="mt-1.5 flex items-center gap-2">
@@ -227,11 +407,9 @@ function ActionRow({
         const isToday = d === TODAY;
         const isFuture = d > TODAY;
 
-        // Vista personal: una sola casilla con el ticket del rol de esa persona
-        if (person && !editing) {
+        if (person) {
           const marked = asReviewer ? isRev : isDone;
           const onClick = () => !isFuture && (asReviewer ? toggleReviewed(key) : toggle(key));
-          // quién falta para que la celda quede completa del otro lado
           const otherPending = asReviewer ? !isDone : !isRev;
           const otherName = asReviewer ? a.R : a.A;
           return (
@@ -268,7 +446,6 @@ function ActionRow({
           );
         }
 
-        // Vista común (Todos): doble marca + quién falta por rellenar
         return (
           <td key={d} className="px-1 py-3 text-center">
             <div className="mx-auto flex w-7 flex-col items-center gap-[3px]">
