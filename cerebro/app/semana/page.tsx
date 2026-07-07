@@ -61,6 +61,7 @@ export default function SemanaPage() {
           filter={pred}
           showClient
           addClientId={client === "todos" || client === "agencia" ? null : client}
+          person={who === "Todos" ? null : who}
         />
       </Card>
 
