@@ -39,7 +39,7 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
 
   return (
     <Shell
-      title={`${client.emoji} ${client.nombre}`}
+      title={client.nombre}
       sub={`${client.nicho} · ${client.oferta}`}
       right={
         <span className="rounded-full border border-line bg-panel px-3 py-1.5 text-xs text-mute">

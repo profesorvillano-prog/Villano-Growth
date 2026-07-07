@@ -1,7 +1,7 @@
 "use client";
 
 import { Shell } from "@/components/shell";
-import { Card, CardHead, Avatar } from "@/components/ui";
+import { Card, CardHead, Avatar, ClientMark } from "@/components/ui";
 import { CLIENTS, TEAM } from "@/lib/data";
 import { useData } from "@/lib/db";
 
@@ -33,7 +33,7 @@ export default function ConfigPage() {
           <ul className="divide-y divide-line/60">
             {CLIENTS.map((c) => (
               <li key={c.id} className="flex items-center gap-3 px-5 py-3.5">
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg text-base" style={{ background: c.color + "22" }}>{c.emoji}</span>
+                <ClientMark initials={c.initials} color={c.color} size={32} />
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-medium">{c.nombre}</p>
                   <p className="truncate text-xs text-mute">{c.oferta}</p>

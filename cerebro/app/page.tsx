@@ -5,7 +5,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Shell } from "@/components/shell";
-import { Card, CardHead, Progress, Semaforo, Stat, Avatar } from "@/components/ui";
+import { Card, CardHead, Progress, Semaforo, Stat, Avatar, ClientMark } from "@/components/ui";
 import { ALERTAS, CLIENTS, SALES, complianceFor, fmtVal } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { useData } from "@/lib/db";
@@ -30,7 +30,7 @@ export default function Dashboard() {
               <Card className="h-full p-5 transition-colors group-hover:border-accent/40">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl text-lg" style={{ background: c.color + "22" }}>{c.emoji}</span>
+                    <ClientMark initials={c.initials} color={c.color} size={40} />
                     <div>
                       <p className="font-semibold leading-tight">{c.nombre}</p>
                       <p className="mt-0.5 text-xs text-mute">{c.nicho}</p>

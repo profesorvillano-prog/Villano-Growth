@@ -141,7 +141,7 @@ export interface Client {
   nombre: string;
   nicho: string;
   oferta: string;
-  emoji: string;
+  initials: string; // monograma profesional (reemplaza el emoji)
   color: string;
   cicloAncla: string; // inicio del ciclo de 14 días vigente
   estrategia: {
@@ -158,7 +158,7 @@ export const CLIENTS: Client[] = [
     nombre: "Family Eaters",
     nicho: "Alimentación infantil",
     oferta: "Programa / certificación (high ticket)",
-    emoji: "🥦",
+    initials: "FE",
     color: "#34d399",
     cicloAncla: "2026-06-29",
     estrategia: {
@@ -173,7 +173,7 @@ export const CLIENTS: Client[] = [
     nombre: "Dr. Marcelo Hernán",
     nicho: "Nutrición natural · perros salchicha",
     oferta: "Asesoría online + ebooks (HT + LT)",
-    emoji: "🌭",
+    initials: "MH",
     color: "#fbbf24",
     cicloAncla: "2026-06-22",
     estrategia: {
@@ -188,7 +188,7 @@ export const CLIENTS: Client[] = [
     nombre: "Ezequiel",
     nicho: "Autoinmunes de la piel · medicina funcional",
     oferta: "Sanando Autoinmune (high ticket)",
-    emoji: "🧬",
+    initials: "EZ",
     color: "#a78bfa",
     cicloAncla: "2026-07-06",
     estrategia: {
@@ -223,7 +223,7 @@ export const ACTIONS: Action[] = [
   { id: "f-ads", clientId: "family", area: "trafico", nombre: "Cargar métricas de ads (semana)", cadencia: "semanal", dias: [4], R: "Javier", A: "Rodrigo" },
   { id: "f-camp", clientId: "family", area: "trafico", nombre: "Revisar campañas · fatiga · CPL", cadencia: "semanal", dias: [2], R: "Rodrigo", A: "Sebastián" },
   { id: "f-fun", clientId: "family", area: "embudos", nombre: "Revisar conversión del funnel", cadencia: "semanal", dias: [4], R: "Sebastián", A: "Sebastián" },
-  { id: "f-rev", clientId: "family", area: "agencia", nombre: "Revisión de métricas (ciclo 14d)", cadencia: "14d", dias: [0], R: "Rodrigo", A: "Sebastián" },
+  { id: "f-rev", clientId: "family", area: "agencia", nombre: "Revisión de métricas (personal)", cadencia: "semanal", dias: [4], R: "Rodrigo", A: "Sebastián" },
   // Marcelo
   { id: "m-plan", clientId: "marcelo", area: "organico", nombre: "Planificar contenido del ciclo", cadencia: "14d", dias: [0], R: "Patricio", A: "Sebastián" },
   { id: "m-feed", clientId: "marcelo", area: "organico", nombre: "Publicar piezas de feed (GHL)", cadencia: "dias", dias: [1, 3], R: "Patricio", A: "Rodrigo" },
@@ -231,7 +231,7 @@ export const ACTIONS: Action[] = [
   { id: "m-graba", clientId: "marcelo", area: "organico", nombre: "Cliente: revisar Notion + grabar", cadencia: "14d", dias: [1], R: "Cliente", A: "Rodrigo" },
   { id: "m-setter", clientId: "marcelo", area: "ventas", nombre: "Setter: gestionar chats y agendas", cadencia: "diaria", R: "Setter", A: "Rodrigo" },
   { id: "m-ads", clientId: "marcelo", area: "trafico", nombre: "Cargar métricas de ads (semana)", cadencia: "semanal", dias: [4], R: "Javier", A: "Rodrigo" },
-  { id: "m-rev", clientId: "marcelo", area: "agencia", nombre: "Revisión de métricas (ciclo 14d)", cadencia: "14d", dias: [0], R: "Rodrigo", A: "Sebastián" },
+  { id: "m-rev", clientId: "marcelo", area: "agencia", nombre: "Revisión de métricas (personal)", cadencia: "semanal", dias: [4], R: "Rodrigo", A: "Sebastián" },
   // Ezequiel
   { id: "e-plan", clientId: "ezequiel", area: "organico", nombre: "Planificar contenido del ciclo", cadencia: "14d", dias: [0], R: "Patricio", A: "Sebastián" },
   { id: "e-feed", clientId: "ezequiel", area: "organico", nombre: "Video + carrusel de la semana", cadencia: "dias", dias: [1, 3], R: "Patricio", A: "Rodrigo" },
@@ -239,10 +239,10 @@ export const ACTIONS: Action[] = [
   { id: "e-graba", clientId: "ezequiel", area: "organico", nombre: "Cliente: grabar VSL + material", cadencia: "14d", dias: [1], R: "Cliente", A: "Rodrigo" },
   { id: "e-fun", clientId: "ezequiel", area: "embudos", nombre: "QA funnel HT (form → agenda)", cadencia: "semanal", dias: [2], R: "Sebastián", A: "Sebastián" },
   { id: "e-ads", clientId: "ezequiel", area: "trafico", nombre: "Cargar métricas de ads (semana)", cadencia: "semanal", dias: [4], R: "Javier", A: "Rodrigo" },
-  { id: "e-rev", clientId: "ezequiel", area: "agencia", nombre: "Revisión de métricas (ciclo 14d)", cadencia: "14d", dias: [0], R: "Rodrigo", A: "Sebastián" },
+  { id: "e-rev", clientId: "ezequiel", area: "agencia", nombre: "Revisión de métricas (personal)", cadencia: "semanal", dias: [4], R: "Rodrigo", A: "Sebastián" },
   // Agencia
   { id: "a-org", clientId: null, area: "agencia", nombre: "Reunión Org. Semanal", cadencia: "semanal", dias: [0], R: "Rodrigo", A: "Sebastián" },
-  { id: "a-met", clientId: null, area: "agencia", nombre: "Reunión Métricas", cadencia: "semanal", dias: [2], R: "Javier", A: "Sebastián" },
+  { id: "a-met", clientId: null, area: "agencia", nombre: "Reunión de métricas (quincenal · cada 15 días)", cadencia: "14d", dias: [1], R: "Javier", A: "Sebastián" },
   { id: "a-fin", clientId: null, area: "agencia", nombre: "Cierre financiero semanal", cadencia: "semanal", dias: [4], R: "Javier", A: "Sebastián" },
 ];
 
