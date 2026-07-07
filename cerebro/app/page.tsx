@@ -13,9 +13,16 @@ import { todayLongLabel, weekRangeLabel } from "@/lib/date";
 
 export default function Dashboard() {
   const { done } = useStore();
-  const { goals, actions } = useData();
+  const { goals, actions, plans } = useData();
   const [range, setRange] = useState("");
   useEffect(() => setRange(weekRangeLabel()), []);
+
+  const freqLabel = (id: string) => {
+    const p = plans[id];
+    if (!p) return "";
+    const hist = p.historiasModo === "diaria" ? "diarias" : p.historiasModo === "lunvie" ? "L–V" : p.historiasModo === "dias" ? `${p.historiasDias.length}/sem` : "no";
+    return `Feed ${p.feedDias.length}/sem · Historias ${hist}`;
+  };
 
   return (
     <Shell title="Dashboard" sub={`${range ? "Semana del " + range + " · " : ""}vista agencia`} right={<PillHoy />}>
@@ -45,7 +52,11 @@ export default function Dashboard() {
                   <Stat label="Cierres" value={String(sales.cierres)} hint={`${sales.agendasPend} agendas pend.`} />
                 </div>
 
-                <div className="mt-5">
+                <div className="mt-4 flex items-center gap-1.5 text-[11px] text-dim">
+                  <span className="rounded-md bg-soft/60 px-1.5 py-0.5 text-mute">{freqLabel(c.id)}</span>
+                </div>
+
+                <div className="mt-3">
                   <div className="mb-1.5 flex items-center justify-between text-xs">
                     <span className="text-mute">Cumplimiento semanal</span>
                     <span className="font-medium tabular-nums text-ink">{pct}%</span>

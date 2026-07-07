@@ -215,27 +215,73 @@ export interface Action {
   A: Person;
 }
 
-export const ACTIONS: Action[] = [
+// ---------------- Plan de contenido → genera acciones de orgánico ----------------
+// La frecuencia de feed e historias de la estrategia se traduce en acciones
+// concretas del tracker (una por día asignado). IDs con prefijo "gen-<cliente>-".
+
+export type HistoriasModo = "diaria" | "lunvie" | "dias" | "no";
+
+export interface ContentPlan {
+  feedTipo: string;      // ej. "Carrusel/Video"
+  feedDias: number[];    // días de publicación de feed (0=Lun … 6=Dom)
+  historiasModo: HistoriasModo;
+  historiasDias: number[]; // solo si historiasModo === "dias"
+}
+
+export const CONTENT_PLANS: Record<string, ContentPlan> = {
+  family: { feedTipo: "Carrusel/Video", feedDias: [1, 3], historiasModo: "diaria", historiasDias: [] },
+  marcelo: { feedTipo: "Carrusel/Reel", feedDias: [1, 3], historiasModo: "lunvie", historiasDias: [] },
+  ezequiel: { feedTipo: "Video+Carrusel", feedDias: [1, 3], historiasModo: "dias", historiasDias: [0, 2, 4] },
+};
+
+// Distribuye N publicaciones de forma pareja a lo largo de la semana (L–D)
+export function distributeDays(n: number): number[] {
+  if (n <= 0) return [];
+  if (n >= 7) return [0, 1, 2, 3, 4, 5, 6];
+  const out: number[] = [];
+  for (let i = 0; i < n; i++) out.push(Math.round((i * 7) / n) % 7);
+  return [...new Set(out)].sort((a, b) => a - b);
+}
+
+export function genContentActions(clientId: string, plan: ContentPlan): Action[] {
+  const acts: Action[] = [];
+  plan.feedDias.forEach((day, i) => {
+    acts.push({
+      id: `gen-${clientId}-feed-${day}`,
+      clientId, area: "organico",
+      nombre: `Publicar feed · ${plan.feedTipo}${plan.feedDias.length > 1 ? ` (${i + 1}/${plan.feedDias.length})` : ""}`,
+      cadencia: "dias", dias: [day], R: "Patricio", A: "Rodrigo",
+    });
+  });
+  if (plan.historiasModo !== "no") {
+    const dias = plan.historiasModo === "lunvie" ? [0, 1, 2, 3, 4] : plan.historiasModo === "dias" ? plan.historiasDias : [];
+    acts.push({
+      id: `gen-${clientId}-hist`,
+      clientId, area: "organico",
+      nombre: plan.historiasModo === "diaria" ? "Publicar historia (diaria)" : "Publicar historia",
+      cadencia: plan.historiasModo === "diaria" ? "diaria" : "dias",
+      dias, R: "Patricio", A: "Rodrigo",
+    });
+  }
+  return acts;
+}
+
+// Acciones fijas (no generadas por el plan de contenido)
+const MANUAL_ACTIONS: Action[] = [
   // Family
   { id: "f-plan", clientId: "family", area: "organico", nombre: "Planificar contenido del ciclo", cadencia: "14d", dias: [0], R: "Patricio", A: "Sebastián" },
-  { id: "f-feed", clientId: "family", area: "organico", nombre: "Publicar piezas de feed (GHL)", cadencia: "dias", dias: [1, 3], R: "Patricio", A: "Rodrigo" },
-  { id: "f-hist", clientId: "family", area: "organico", nombre: "Historias del día", cadencia: "diaria", R: "Patricio", A: "Rodrigo" },
   { id: "f-ads", clientId: "family", area: "trafico", nombre: "Cargar métricas de ads (semana)", cadencia: "semanal", dias: [4], R: "Javier", A: "Rodrigo" },
   { id: "f-camp", clientId: "family", area: "trafico", nombre: "Revisar campañas · fatiga · CPL", cadencia: "semanal", dias: [2], R: "Rodrigo", A: "Sebastián" },
   { id: "f-fun", clientId: "family", area: "embudos", nombre: "Revisar conversión del funnel", cadencia: "semanal", dias: [4], R: "Sebastián", A: "Sebastián" },
   { id: "f-rev", clientId: "family", area: "agencia", nombre: "Revisión de métricas (personal)", cadencia: "semanal", dias: [4], R: "Rodrigo", A: "Sebastián" },
   // Marcelo
   { id: "m-plan", clientId: "marcelo", area: "organico", nombre: "Planificar contenido del ciclo", cadencia: "14d", dias: [0], R: "Patricio", A: "Sebastián" },
-  { id: "m-feed", clientId: "marcelo", area: "organico", nombre: "Publicar piezas de feed (GHL)", cadencia: "dias", dias: [1, 3], R: "Patricio", A: "Rodrigo" },
-  { id: "m-hist", clientId: "marcelo", area: "organico", nombre: "Historias (L–V)", cadencia: "dias", dias: [0, 1, 2, 3, 4], R: "Patricio", A: "Rodrigo" },
   { id: "m-graba", clientId: "marcelo", area: "organico", nombre: "Cliente: revisar Notion + grabar", cadencia: "14d", dias: [1], R: "Cliente", A: "Rodrigo" },
   { id: "m-setter", clientId: "marcelo", area: "ventas", nombre: "Setter: gestionar chats y agendas", cadencia: "diaria", R: "Setter", A: "Rodrigo" },
   { id: "m-ads", clientId: "marcelo", area: "trafico", nombre: "Cargar métricas de ads (semana)", cadencia: "semanal", dias: [4], R: "Javier", A: "Rodrigo" },
   { id: "m-rev", clientId: "marcelo", area: "agencia", nombre: "Revisión de métricas (personal)", cadencia: "semanal", dias: [4], R: "Rodrigo", A: "Sebastián" },
   // Ezequiel
   { id: "e-plan", clientId: "ezequiel", area: "organico", nombre: "Planificar contenido del ciclo", cadencia: "14d", dias: [0], R: "Patricio", A: "Sebastián" },
-  { id: "e-feed", clientId: "ezequiel", area: "organico", nombre: "Video + carrusel de la semana", cadencia: "dias", dias: [1, 3], R: "Patricio", A: "Rodrigo" },
-  { id: "e-hist", clientId: "ezequiel", area: "organico", nombre: "Historias (L·X·V según pauta)", cadencia: "dias", dias: [0, 2, 4], R: "Patricio", A: "Rodrigo" },
   { id: "e-graba", clientId: "ezequiel", area: "organico", nombre: "Cliente: grabar VSL + material", cadencia: "14d", dias: [1], R: "Cliente", A: "Rodrigo" },
   { id: "e-fun", clientId: "ezequiel", area: "embudos", nombre: "QA funnel HT (form → agenda)", cadencia: "semanal", dias: [2], R: "Sebastián", A: "Sebastián" },
   { id: "e-ads", clientId: "ezequiel", area: "trafico", nombre: "Cargar métricas de ads (semana)", cadencia: "semanal", dias: [4], R: "Javier", A: "Rodrigo" },
@@ -244,6 +290,12 @@ export const ACTIONS: Action[] = [
   { id: "a-org", clientId: null, area: "agencia", nombre: "Reunión Org. Semanal", cadencia: "semanal", dias: [0], R: "Rodrigo", A: "Sebastián" },
   { id: "a-met", clientId: null, area: "agencia", nombre: "Reunión de métricas (quincenal · cada 15 días)", cadencia: "14d", dias: [1], R: "Javier", A: "Sebastián" },
   { id: "a-fin", clientId: null, area: "agencia", nombre: "Cierre financiero semanal", cadencia: "semanal", dias: [4], R: "Javier", A: "Sebastián" },
+];
+
+// Estado inicial: manuales + acciones generadas desde los planes por defecto
+export const ACTIONS: Action[] = [
+  ...MANUAL_ACTIONS,
+  ...Object.entries(CONTENT_PLANS).flatMap(([id, plan]) => genContentActions(id, plan)),
 ];
 
 // Checks demo: revisados por el A esta semana (key: actionId-dayIndex)
