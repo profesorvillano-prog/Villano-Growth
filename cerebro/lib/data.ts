@@ -14,11 +14,127 @@ export const AREAS: Record<Area, { label: string; color: string }> = {
 export type Person = "Sebastián" | "Rodrigo" | "Patricio" | "Javier" | "Cliente" | "Setter";
 
 export const TEAM: { name: Person; role: string; initials: string }[] = [
-  { name: "Sebastián", role: "Estrategia · Funnels · Automatizaciones", initials: "SE" },
-  { name: "Rodrigo", role: "Ongoing de clientes · Meta Ads", initials: "RO" },
-  { name: "Patricio", role: "Contenido orgánico · Estrategia", initials: "PA" },
-  { name: "Javier", role: "Finanzas · Métricas · Embudos automatizados", initials: "JA" },
+  { name: "Javier", role: "Gestión del panel · SOPs · Automatizaciones · Finanzas por cliente", initials: "JA" },
+  { name: "Rodrigo", role: "Ongoing cercano · WhatsApp 1ª línea · Reuniones · Meta Ads", initials: "RO" },
+  { name: "Patricio", role: "Contenido orgánico · Planificación Notion · Métricas por pieza", initials: "PA" },
+  { name: "Sebastián", role: "Funnels · Optimización de campañas · Creativos · Automatizaciones", initials: "SE" },
 ];
+
+// Proceso de contenido (SOP fijo, 8 pasos) y estados visibles en el Notion del cliente
+export const PROCESS_STEPS = [
+  "Investigación (dummy account → ideas ganadoras)",
+  "Planificación",
+  "Guión",
+  "Revisión",
+  "Grabación",
+  "Edición",
+  "Programación",
+  "Análisis (métricas)",
+] as const;
+
+export const NOTION_STATES = ["Planificado", "Revisado", "Grabado", "Publicado"] as const;
+
+// ---------------- KPI → KRI por miembro ----------------
+// KPI = acción semanal literal · KRI = resultado que esa acción influye
+
+export interface KPI {
+  person: Person;
+  accion: string;
+  meta: number;
+  actual: number;
+  kri: string;
+}
+
+export const KPIS: KPI[] = [
+  // Patricio — orgánico
+  { person: "Patricio", accion: "Revisión semanal de rendimiento por cuenta", meta: 3, actual: 2, kri: "Leads orgánicos · interacción" },
+  { person: "Patricio", accion: "Piezas publicadas con ≥1 semana de antelación", meta: 6, actual: 5, kri: "Constancia → alcance" },
+  { person: "Patricio", accion: "Métricas por pieza cargadas en Notion DB", meta: 6, actual: 3, kri: "Ideas ganadoras detectadas" },
+  { person: "Patricio", accion: "Ajuste de planificación en Notion post-análisis", meta: 3, actual: 2, kri: "Tasa de guardados/compartidos" },
+  // Rodrigo — ongoing + Meta
+  { person: "Rodrigo", accion: "WhatsApps de clientes con última respuesta nuestra", meta: 100, actual: 92, kri: "Retención de clientes" },
+  { person: "Rodrigo", accion: "Reuniones de la semana confirmadas", meta: 4, actual: 4, kri: "Show-up de reuniones" },
+  { person: "Rodrigo", accion: "Revisión de campañas Meta (con Sebastián)", meta: 3, actual: 2, kri: "CPL · fatiga de anuncios" },
+  // Sebastián — funnels + campañas
+  { person: "Sebastián", accion: "Iteraciones de creativos / campañas", meta: 2, actual: 2, kri: "ROAS · costo por agenda" },
+  { person: "Sebastián", accion: "QA de funnels (LP → lead → agenda)", meta: 3, actual: 3, kri: "CVR del embudo" },
+  { person: "Sebastián", accion: "Automatizaciones nuevas o corregidas", meta: 1, actual: 1, kri: "Show-up · velocidad de respuesta" },
+  // Javier — gestión
+  { person: "Javier", accion: "Auditoría de avance del equipo (panel)", meta: 1, actual: 1, kri: "% SOP cumplido" },
+  { person: "Javier", accion: "Cierre financiero por cliente", meta: 1, actual: 1, kri: "Margen por cliente" },
+  { person: "Javier", accion: "Avance de automatizaciones documentado", meta: 1, actual: 0, kri: "Horas ahorradas / procesos" },
+];
+
+// ---------------- Finanzas por cliente (vista de Javier) ----------------
+
+export interface ClientFinance {
+  clientId: string;
+  modelo: string;
+  feeMensual: number;
+  inversionAds: number;
+  facturacionCliente: number;
+  ingresoAgencia: number; // fee + rev share
+  margen: number;         // ingreso - costos operativos asignados
+}
+
+export const FINANZAS: ClientFinance[] = [
+  { clientId: "family", modelo: "Proyecto interno (100%)", feeMensual: 0, inversionAds: 800, facturacionCliente: 2670, ingresoAgencia: 2670, margen: 1490 },
+  { clientId: "marcelo", modelo: "Retainer + 35% rev share", feeMensual: 250, inversionAds: 850, facturacionCliente: 1142, ingresoAgencia: 650, margen: 310 },
+  { clientId: "ezequiel", modelo: "Setup $2k + retainer $500", feeMensual: 500, inversionAds: 120, facturacionCliente: 0, ingresoAgencia: 500, margen: 260 },
+];
+
+// ---------------- Campañas de Meta (análisis por campaña) ----------------
+
+export interface Campaign {
+  clientId: string;
+  tipo: "HT" | "LT";
+  nombre: string;
+  estado: "activa" | "aprendizaje" | "pausada";
+  inversion: number;
+  resultados: number;      // leads (HT) o compras (LT)
+  costoPorResultado: number;
+  roas: number | null;
+}
+
+export const CAMPAIGNS: Campaign[] = [
+  { clientId: "family", tipo: "HT", nombre: "VSL Frío · Padres 28-45", estado: "activa", inversion: 520, resultados: 24, costoPorResultado: 21.7, roas: 4.1 },
+  { clientId: "family", tipo: "HT", nombre: "Retarget · Vieron VSL 50%", estado: "activa", inversion: 180, resultados: 7, costoPorResultado: 25.7, roas: 3.2 },
+  { clientId: "family", tipo: "HT", nombre: "Testimonios · Lookalike 2%", estado: "aprendizaje", inversion: 100, resultados: 2, costoPorResultado: 50, roas: null },
+  { clientId: "marcelo", tipo: "HT", nombre: "VSL Salchicha enfermo · Frío", estado: "activa", inversion: 400, resultados: 18, costoPorResultado: 22.2, roas: 1.9 },
+  { clientId: "marcelo", tipo: "HT", nombre: "Autoridad veterinaria · Frío", estado: "aprendizaje", inversion: 160, resultados: 8, costoPorResultado: 20, roas: null },
+  { clientId: "marcelo", tipo: "LT", nombre: "Ebook Pack Starter · Frío", estado: "activa", inversion: 210, resultados: 17, costoPorResultado: 12.4, roas: 2.6 },
+  { clientId: "marcelo", tipo: "LT", nombre: "Ebook · Retarget IG 30d", estado: "activa", inversion: 80, resultados: 5, costoPorResultado: 16, roas: 2.1 },
+  { clientId: "ezequiel", tipo: "HT", nombre: "Sanando Autoinmune · VSL Frío", estado: "aprendizaje", inversion: 120, resultados: 6, costoPorResultado: 20, roas: null },
+];
+
+// ---------------- Rendimiento semanal de orgánico (3-4 métricas clave) ----------------
+
+export interface OrganicWeekRow {
+  label: string;
+  values: (number | null)[];
+  fmt?: "pct" | "n";
+}
+
+export const ORGANIC_WEEKS: Record<string, OrganicWeekRow[]> = {
+  family: [
+    { label: "Alcance", values: [11200, 12800, 15400, null], fmt: "n" },
+    { label: "Interacción", values: [4.2, 4.6, 5.1, null], fmt: "pct" },
+    { label: "Guardados + compartidos", values: [180, 210, 250, null], fmt: "n" },
+    { label: "Mensajes / DMs", values: [14, 17, 21, null], fmt: "n" },
+  ],
+  marcelo: [
+    { label: "Alcance", values: [6900, 7200, 8600, null], fmt: "n" },
+    { label: "Interacción", values: [3.4, 3.8, 4.2, null], fmt: "pct" },
+    { label: "Guardados + compartidos", values: [70, 85, 110, null], fmt: "n" },
+    { label: "Mensajes / DMs", values: [11, 12, 15, null], fmt: "n" },
+  ],
+  ezequiel: [
+    { label: "Alcance", values: [900, 1600, 2400, null], fmt: "n" },
+    { label: "Interacción", values: [5.8, 6.1, 6.6, null], fmt: "pct" },
+    { label: "Guardados + compartidos", values: [28, 41, 55, null], fmt: "n" },
+    { label: "Mensajes / DMs", values: [3, 5, 7, null], fmt: "n" },
+  ],
+};
 
 export interface Client {
   id: string;

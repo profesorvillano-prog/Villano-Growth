@@ -2,16 +2,40 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { CLIENTS } from "@/lib/data";
 import { Avatar } from "./ui";
 
 const NAV = [
   { href: "/", label: "Dashboard", icon: "◧" },
   { href: "/semana", label: "Semana", icon: "☑" },
+  { href: "/equipo", label: "Equipo · KPIs", icon: "▥" },
   { href: "/metas", label: "Metas", icon: "◎" },
   { href: "/config", label: "Configuración", icon: "⚙" },
 ];
+
+function ThemeToggle() {
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  useEffect(() => {
+    setTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
+  }, []);
+  const toggle = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    if (next === "light") document.documentElement.dataset.theme = "light";
+    else delete document.documentElement.dataset.theme;
+    try { localStorage.setItem("vos-theme", next); } catch {}
+  };
+  return (
+    <button
+      onClick={toggle}
+      title={theme === "dark" ? "Cambiar a tema claro" : "Cambiar a tema oscuro"}
+      className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-panel text-sm text-mute transition-colors hover:text-ink"
+    >
+      {theme === "dark" ? "☀" : "☾"}
+    </button>
+  );
+}
 
 export function Shell({ children, title, sub, right }: { children: ReactNode; title: string; sub?: string; right?: ReactNode }) {
   const path = usePathname();
@@ -22,15 +46,15 @@ export function Shell({ children, title, sub, right }: { children: ReactNode; ti
         <div className="flex items-center gap-2.5 px-5 py-5">
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-sm font-bold text-white shadow-[0_0_18px_rgba(139,92,246,0.45)]">V</span>
           <div>
-            <p className="text-sm font-semibold leading-none">Cerebro Villano</p>
-            <p className="mt-1 text-[10px] uppercase tracking-widest text-dim">Agency OS</p>
+            <p className="text-sm font-semibold leading-none">Villano OS</p>
+            <p className="mt-1 text-[10px] uppercase tracking-widest text-dim">Panel de agencia</p>
           </div>
         </div>
 
         <nav className="mt-2 flex-1 space-y-6 overflow-y-auto px-3 pb-6">
           <div>
             <p className="px-2 pb-2 text-[10px] font-semibold uppercase tracking-widest text-dim">Operación</p>
-            {NAV.slice(0, 2).map((n) => <NavItem key={n.href} {...n} active={path === n.href} />)}
+            {NAV.slice(0, 3).map((n) => <NavItem key={n.href} {...n} active={path === n.href} />)}
           </div>
           <div>
             <p className="px-2 pb-2 text-[10px] font-semibold uppercase tracking-widest text-dim">Clientes</p>
@@ -49,7 +73,7 @@ export function Shell({ children, title, sub, right }: { children: ReactNode; ti
           </div>
           <div>
             <p className="px-2 pb-2 text-[10px] font-semibold uppercase tracking-widest text-dim">Agencia</p>
-            {NAV.slice(2).map((n) => <NavItem key={n.href} {...n} active={path === n.href} />)}
+            {NAV.slice(3).map((n) => <NavItem key={n.href} {...n} active={path === n.href} />)}
           </div>
         </nav>
 
@@ -71,7 +95,7 @@ export function Shell({ children, title, sub, right }: { children: ReactNode; ti
               <h1 className="text-lg font-semibold">{title}</h1>
               {sub && <p className="mt-0.5 text-xs text-mute">{sub}</p>}
             </div>
-            <div className="flex items-center gap-3">{right}</div>
+            <div className="flex items-center gap-3">{right}<ThemeToggle /></div>
           </div>
         </header>
         <main className="mx-auto max-w-6xl px-6 py-6">{children}</main>
