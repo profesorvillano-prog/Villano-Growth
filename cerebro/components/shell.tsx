@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import { CLIENTS } from "@/lib/data";
 import { Avatar } from "./ui";
 
@@ -14,28 +14,6 @@ const NAV = [
   { href: "/config", label: "Configuración", icon: "⚙" },
 ];
 
-function ThemeToggle() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
-  useEffect(() => {
-    setTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
-  }, []);
-  const toggle = () => {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    if (next === "light") document.documentElement.dataset.theme = "light";
-    else delete document.documentElement.dataset.theme;
-    try { localStorage.setItem("vos-theme", next); } catch {}
-  };
-  return (
-    <button
-      onClick={toggle}
-      title={theme === "dark" ? "Cambiar a tema claro" : "Cambiar a tema oscuro"}
-      className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-panel text-sm text-mute transition-colors hover:text-ink"
-    >
-      {theme === "dark" ? "☀" : "☾"}
-    </button>
-  );
-}
 
 export function Shell({ children, title, sub, right }: { children: ReactNode; title: string; sub?: string; right?: ReactNode }) {
   const path = usePathname();
@@ -95,7 +73,7 @@ export function Shell({ children, title, sub, right }: { children: ReactNode; ti
               <h1 className="text-lg font-semibold">{title}</h1>
               {sub && <p className="mt-0.5 text-xs text-mute">{sub}</p>}
             </div>
-            <div className="flex items-center gap-3">{right}<ThemeToggle /></div>
+            <div className="flex items-center gap-3">{right}</div>
           </div>
         </header>
         <main className="mx-auto max-w-6xl px-6 py-6">{children}</main>
