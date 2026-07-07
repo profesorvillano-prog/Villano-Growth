@@ -5,16 +5,16 @@
 //  · Semana — grilla acciones × días agrupada en secciones (áreas, o R/A en vista personal)
 // Cada instancia tiene doble marca: R ejecuta · A revisa (trabajo en paralelo).
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AREAS, Action, Area, Cadence, DAY_LABELS, Person, actionAppliesOn, clientById,
 } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { useData } from "@/lib/db";
+import { todayIndex, todayLabel, weekDayNumbers } from "@/lib/date";
 import { Avatar, AreaBadge } from "./ui";
 import { AddBtn, DeleteBtn, ESelect, EText } from "./editable";
 
-const TODAY = 3; // jueves (demo)
 const AREA_ORDER: Area[] = ["organico", "trafico", "embudos", "ventas", "agencia"];
 const PEOPLE_OPTS = (["Sebastián", "Rodrigo", "Patricio", "Javier", "Cliente", "Setter"] as Person[])
   .map((p) => ({ value: p, label: p }));
@@ -52,6 +52,9 @@ export function TrackerGrid({
   const { actions, update } = useData();
   const [editing, setEditing] = useState(false);
   const [mode, setMode] = useState<"hoy" | "semana">("hoy");
+  // -1 hasta montar (server y primer render cliente coinciden → sin desajuste)
+  const [today, setToday] = useState(-1);
+  useEffect(() => setToday(todayIndex()), []);
 
   const rows = actions.map((a, index) => ({ a, index })).filter(({ a }) => filter(a));
   const groups = buildGroups(rows, person);
@@ -126,13 +129,14 @@ export function TrackerGrid({
       </div>
 
       {mode === "hoy" ? (
-        <TodayView groups={groups} person={person} showClient={showClient} done={done} reviewed={reviewed} toggle={toggle} toggleReviewed={toggleReviewed} />
+        <TodayView groups={groups} person={person} showClient={showClient} today={today} done={done} reviewed={reviewed} toggle={toggle} toggleReviewed={toggleReviewed} />
       ) : (
         <WeekView
           groups={groups}
           person={person}
           editing={editing}
           showClient={showClient}
+          today={today}
           done={done}
           reviewed={reviewed}
           toggle={toggle}
@@ -149,42 +153,45 @@ export function TrackerGrid({
 // ---------------- Vista HOY: checklist grande del día ----------------
 
 function TodayView({
-  groups, person, showClient, done, reviewed, toggle, toggleReviewed,
+  groups, person, showClient, today, done, reviewed, toggle, toggleReviewed,
 }: {
   groups: Group[];
   person: Person | null;
   showClient: boolean;
+  today: number;
   done: Set<string>;
   reviewed: Set<string>;
   toggle: (k: string) => void;
   toggleReviewed: (k: string) => void;
 }) {
+  if (today < 0) return <p className="px-5 py-10 text-center text-sm text-dim">…</p>;
   const todayGroups = groups
-    .map((g) => ({ ...g, rows: g.rows.filter(({ a }) => actionAppliesOn(a, TODAY)) }))
+    .map((g) => ({ ...g, rows: g.rows.filter(({ a }) => actionAppliesOn(a, today)) }))
     .filter((g) => g.rows.length > 0);
 
   if (todayGroups.length === 0) {
     return <p className="px-5 py-10 text-center text-sm text-dim">Nada programado para hoy 🎉</p>;
   }
+  const dLabel = todayLabel();
 
   return (
     <div className="divide-y divide-line/60">
       {todayGroups.map((g) => {
         const doneCount = g.rows.filter(({ a }) =>
-          g.key === "A" ? reviewed.has(`${a.id}-${TODAY}`) : done.has(`${a.id}-${TODAY}`)
+          g.key === "A" ? reviewed.has(`${a.id}-${today}`) : done.has(`${a.id}-${today}`)
         ).length;
         return (
           <div key={g.key} className="px-5 py-4">
             <div className="mb-3 flex items-center justify-between">
               <p className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest" style={{ color: g.color }}>
                 <span className="h-1.5 w-1.5 rounded-full" style={{ background: g.color }} />
-                {g.title} · Jueves 4
+                {g.title} · {dLabel}
               </p>
               <span className="text-xs tabular-nums text-dim">{doneCount}/{g.rows.length}</span>
             </div>
             <ul className="space-y-2">
               {g.rows.map(({ a }) => {
-                const key = `${a.id}-${TODAY}`;
+                const key = `${a.id}-${today}`;
                 const isDone = done.has(key);
                 const isRev = reviewed.has(key);
                 const asReviewer = person !== null && a.A === person && a.R !== person;
@@ -257,12 +264,13 @@ function TodayView({
 // ---------------- Vista SEMANA: grilla acciones × días ----------------
 
 function WeekView({
-  groups, person, editing, showClient, done, reviewed, toggle, toggleReviewed, setAction, removeAction, toggleDay,
+  groups, person, editing, showClient, today, done, reviewed, toggle, toggleReviewed, setAction, removeAction, toggleDay,
 }: {
   groups: Group[];
   person: Person | null;
   editing: boolean;
   showClient: boolean;
+  today: number;
   done: Set<string>;
   reviewed: Set<string>;
   toggle: (k: string) => void;
@@ -271,6 +279,7 @@ function WeekView({
   removeAction: (i: number) => void;
   toggleDay: (i: number, a: Action, d: number) => void;
 }) {
+  const nums = weekDayNumbers();
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-[760px] border-collapse text-sm">
@@ -280,7 +289,15 @@ function WeekView({
             <th className="px-2 py-2.5 text-left font-medium">R / A</th>
             {DAY_LABELS.map((d, i) => (
               <th key={d} className="px-1 py-2.5 text-center font-medium">
-                <span className={i === TODAY ? "inline-flex h-6 w-6 items-center justify-center rounded-full bg-accent font-semibold text-white" : ""}>{d}</span>
+                <span
+                  className={
+                    i === today
+                      ? "inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-accent px-1 font-semibold text-white"
+                      : "text-dim"
+                  }
+                >
+                  {d}<span className="ml-0.5 text-[9px] opacity-70">{nums[i]}</span>
+                </span>
               </th>
             ))}
             <th className="px-3 py-2.5 text-right font-medium">{editing ? "" : "Sem."}</th>
@@ -305,6 +322,7 @@ function WeekView({
                 showClient={showClient}
                 showArea={person !== null}
                 person={person}
+                today={today}
                 done={done}
                 reviewed={reviewed}
                 toggle={toggle}
@@ -322,7 +340,7 @@ function WeekView({
 }
 
 function ActionRow({
-  a, index, editing, showClient, showArea, person, done, reviewed, toggle, toggleReviewed, setAction, removeAction, toggleDay,
+  a, index, editing, showClient, showArea, person, today, done, reviewed, toggle, toggleReviewed, setAction, removeAction, toggleDay,
 }: {
   a: Action;
   index: number;
@@ -330,6 +348,7 @@ function ActionRow({
   showClient: boolean;
   showArea: boolean;
   person: Person | null;
+  today: number;
   done: Set<string>;
   reviewed: Set<string>;
   toggle: (k: string) => void;
@@ -404,8 +423,8 @@ function ActionRow({
         const key = `${a.id}-${d}`;
         const isDone = done.has(key);
         const isRev = reviewed.has(key);
-        const isToday = d === TODAY;
-        const isFuture = d > TODAY;
+        const isToday = d === today;
+        const isFuture = today >= 0 && d > today;
 
         if (person) {
           const marked = asReviewer ? isRev : isDone;

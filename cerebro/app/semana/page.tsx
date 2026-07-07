@@ -2,13 +2,14 @@
 
 // Tracker global de la semana: todas las acciones (agencia + clientes), filtrables.
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Shell } from "@/components/shell";
 import { Card, CardHead } from "@/components/ui";
 import { TrackerGrid, AreaLegend } from "@/components/tracker";
 import { Action, CLIENTS, Person, complianceFor } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { useData } from "@/lib/db";
+import { weekRangeLabel } from "@/lib/date";
 
 const PEOPLE: (Person | "Todos")[] = ["Todos", "Sebastián", "Rodrigo", "Patricio", "Javier"];
 
@@ -17,6 +18,8 @@ export default function SemanaPage() {
   const [client, setClient] = useState<string>("todos");
   const { done } = useStore();
   const { actions } = useData();
+  const [range, setRange] = useState("");
+  useEffect(() => setRange(weekRangeLabel()), []);
 
   const pred = (a: Action) =>
     (who === "Todos" || a.R === who || a.A === who) &&
@@ -26,7 +29,7 @@ export default function SemanaPage() {
   return (
     <Shell
       title="Semana"
-      sub="29 jun – 5 jul · acciones recurrentes de agencia y clientes"
+      sub={`${range ? range + " · " : ""}acciones recurrentes de agencia y clientes`}
       right={<span className="rounded-full border border-line bg-panel px-3 py-1.5 text-xs text-mute">Cumplimiento: <span className="font-semibold text-ink">{pct}%</span></span>}
     >
       <Card>
