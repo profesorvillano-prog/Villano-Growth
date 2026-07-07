@@ -5,11 +5,13 @@
 import Link from "next/link";
 import { Shell } from "@/components/shell";
 import { Card, CardHead, Progress, Semaforo, Stat, Avatar } from "@/components/ui";
-import { ACTIONS, ALERTAS, CLIENTS, GOALS, SALES, complianceFor, fmtVal } from "@/lib/data";
+import { ACTIONS, ALERTAS, CLIENTS, SALES, complianceFor, fmtVal } from "@/lib/data";
 import { useStore } from "@/lib/store";
+import { useData } from "@/lib/db";
 
 export default function Dashboard() {
   const { done } = useStore();
+  const { goals } = useData();
 
   return (
     <Shell title="Dashboard" sub="Semana del 29 jun – 5 jul · vista agencia" right={<PillHoy />}>
@@ -91,7 +93,7 @@ export default function Dashboard() {
           <Card>
             <CardHead title="Metas del mes" right={<Link href="/metas" className="text-xs font-medium text-accent2 hover:underline">Todas →</Link>} />
             <ul className="space-y-3 px-5 py-4">
-              {GOALS.slice(0, 3).map((g, i) => {
+              {goals.slice(0, 3).map((g, i) => {
                 const pct = Math.min(100, Math.round((g.actual / g.objetivo) * 100));
                 return (
                   <li key={i}>
