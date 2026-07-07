@@ -5,7 +5,11 @@ import { AREAS, Area } from "@/lib/data";
 
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <section className={`rounded-xl border border-line bg-card ${className}`}>{children}</section>
+    <section
+      className={`rounded-2xl border border-line bg-card shadow-[inset_0_1px_0_0_rgba(255,255,255,0.03),0_16px_40px_-20px_rgba(0,0,0,0.7)] ${className}`}
+    >
+      {children}
+    </section>
   );
 }
 

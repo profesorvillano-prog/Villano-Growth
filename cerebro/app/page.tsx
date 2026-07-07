@@ -5,20 +5,19 @@
 import Link from "next/link";
 import { Shell } from "@/components/shell";
 import { Card, CardHead, Progress, Semaforo, Stat, Avatar } from "@/components/ui";
-import { ACTIONS, ALERTAS, CLIENTS, SALES, complianceFor, fmtVal } from "@/lib/data";
+import { ALERTAS, CLIENTS, SALES, complianceFor, fmtVal } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { useData } from "@/lib/db";
 
 export default function Dashboard() {
   const { done } = useStore();
-  const { goals } = useData();
+  const { goals, actions } = useData();
 
   return (
     <Shell title="Dashboard" sub="Semana del 29 jun – 5 jul · vista agencia" right={<PillHoy />}>
       <div className="grid gap-4 lg:grid-cols-3">
         {CLIENTS.map((c) => {
-          const actions = ACTIONS.filter((a) => a.clientId === c.id);
-          const pct = complianceFor(actions, done);
+          const pct = complianceFor(actions.filter((a) => a.clientId === c.id), done);
           const sales = SALES[c.id];
           const roas = sales.inversionCiclo > 0 ? sales.facturacionCiclo / sales.inversionCiclo : 0;
           const estado = roas >= 2 && pct >= 30 ? "ok" : roas >= 1 || pct >= 30 ? "warn" : "bad";

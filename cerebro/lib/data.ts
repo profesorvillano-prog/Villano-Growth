@@ -246,6 +246,11 @@ export const ACTIONS: Action[] = [
   { id: "a-fin", clientId: null, area: "agencia", nombre: "Cierre financiero semanal", cadencia: "semanal", dias: [4], R: "Javier", A: "Sebastián" },
 ];
 
+// Checks demo: revisados por el A esta semana (key: actionId-dayIndex)
+export const REVIEWED_SEED: string[] = [
+  "f-hist-0", "f-hist-1", "f-feed-1", "m-setter-0", "m-setter-1", "e-plan-0", "a-org-0",
+];
+
 // Checks demo ya hechos esta semana (key: actionId-dayIndex)
 export const DONE_SEED: string[] = [
   "f-hist-0", "f-hist-1", "f-hist-2", "f-feed-1", "f-camp-2",

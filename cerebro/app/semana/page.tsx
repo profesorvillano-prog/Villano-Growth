@@ -6,8 +6,9 @@ import { useState } from "react";
 import { Shell } from "@/components/shell";
 import { Card, CardHead } from "@/components/ui";
 import { TrackerGrid, AreaLegend } from "@/components/tracker";
-import { ACTIONS, CLIENTS, Person, complianceFor } from "@/lib/data";
+import { Action, CLIENTS, Person, complianceFor } from "@/lib/data";
 import { useStore } from "@/lib/store";
+import { useData } from "@/lib/db";
 
 const PEOPLE: (Person | "Todos")[] = ["Todos", "Sebastián", "Rodrigo", "Patricio", "Javier"];
 
@@ -15,13 +16,12 @@ export default function SemanaPage() {
   const [who, setWho] = useState<(typeof PEOPLE)[number]>("Todos");
   const [client, setClient] = useState<string>("todos");
   const { done } = useStore();
+  const { actions } = useData();
 
-  const filtered = ACTIONS.filter(
-    (a) =>
-      (who === "Todos" || a.R === who || a.A === who) &&
-      (client === "todos" || (client === "agencia" ? a.clientId === null : a.clientId === client))
-  );
-  const pct = complianceFor(filtered, done);
+  const pred = (a: Action) =>
+    (who === "Todos" || a.R === who || a.A === who) &&
+    (client === "todos" || (client === "agencia" ? a.clientId === null : a.clientId === client));
+  const pct = complianceFor(actions.filter(pred), done);
 
   return (
     <Shell
@@ -57,12 +57,16 @@ export default function SemanaPage() {
             ))}
           </div>
         </div>
-        <TrackerGrid actions={filtered} showClient />
+        <TrackerGrid
+          filter={pred}
+          showClient
+          addClientId={client === "todos" || client === "agencia" ? null : client}
+        />
       </Card>
 
       <p className="mt-4 text-xs text-dim">
-        Las instancias se generan solas según la cadencia de cada acción (diaria, días fijos, semanal, ciclo de 14 días escalonado por cliente).
-        R = responsable ejecuta · A = accountable recibe la alerta si vence.
+        Cada área trabaja separada: Orgánico, Tráfico, Embudos, Ventas y Agencia tienen su propia sección.
+        En cada celda: el cuadro lo marca el R al ejecutar y la franja inferior la marca el A al revisar — así se ve el trabajo en paralelo.
       </p>
     </Shell>
   );
