@@ -25,8 +25,8 @@ const CAD_OPTS: { value: Cadence; label: string }[] = [
 ];
 
 export function TrackerGrid({
-  filter, showClient = false, addClientId = null,
-}: { filter: (a: Action) => boolean; showClient?: boolean; addClientId?: string | null }) {
+  filter, showClient = false, addClientId = null, person = null,
+}: { filter: (a: Action) => boolean; showClient?: boolean; addClientId?: string | null; person?: Person | null }) {
   const { done, reviewed, toggle, toggleReviewed } = useStore();
   const { actions, update } = useData();
   const [editing, setEditing] = useState(false);
@@ -62,8 +62,15 @@ export function TrackerGrid({
     <div>
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line px-5 py-2.5">
         <p className="text-[11px] text-dim">
-          <span className="mr-1 inline-block h-2.5 w-2.5 rounded-[4px] border border-accent bg-accent align-middle" /> cuadro = R ejecuta ·{" "}
-          <span className="mx-1 inline-block h-1 w-4 rounded-full bg-ok align-middle" /> franja = A revisó — trabajo en paralelo
+          {person ? (
+            <>Vista de <span className="font-medium text-ink">{person}</span> — una casilla por su rol: ejecuta (R) o revisa (A). Las iniciales dim indican quién falta.</>
+          ) : (
+            <>
+              <span className="mr-1 inline-block h-2.5 w-2.5 rounded-[4px] border border-accent bg-accent align-middle" /> cuadro = R ejecuta (iniciales = falta) ·{" "}
+              <span className="mx-1 inline-block h-1 w-4 rounded-full bg-ok align-middle" /> franja = A revisó ·{" "}
+              <span className="mx-1 inline-block h-1 w-4 rounded-full bg-warn/70 align-middle" /> ámbar = falta revisión
+            </>
+          )}
         </p>
         <div className="flex items-center gap-2">
           {editing && <AddBtn onClick={addAction}>Acción</AddBtn>}
@@ -112,6 +119,7 @@ export function TrackerGrid({
                     index={index}
                     editing={editing}
                     showClient={showClient}
+                    person={person}
                     done={done}
                     reviewed={reviewed}
                     toggle={toggle}
@@ -130,13 +138,18 @@ export function TrackerGrid({
   );
 }
 
+const INITIALS: Record<string, string> = {
+  Sebastián: "SE", Rodrigo: "RO", Patricio: "PA", Javier: "JA", Cliente: "CL", Setter: "IN",
+};
+
 function ActionRow({
-  a, index, editing, showClient, done, reviewed, toggle, toggleReviewed, setAction, removeAction, toggleDay,
+  a, index, editing, showClient, person, done, reviewed, toggle, toggleReviewed, setAction, removeAction, toggleDay,
 }: {
   a: Action;
   index: number;
   editing: boolean;
   showClient: boolean;
+  person: Person | null;
   done: Set<string>;
   reviewed: Set<string>;
   toggle: (k: string) => void;
@@ -147,8 +160,12 @@ function ActionRow({
 }) {
   const cells = Array.from({ length: 7 }, (_, d) => actionAppliesOn(a, d));
   const applicable = cells.filter(Boolean).length;
-  const doneCount = cells.filter((ap, d) => ap && done.has(`${a.id}-${d}`)).length;
   const cliente = clientById(a.clientId);
+  // rol de la persona filtrada en esta acción (si es A y no R, su casilla es la revisión)
+  const asReviewer = person !== null && a.A === person && a.R !== person;
+  const doneCount = cells.filter(
+    (ap, d) => ap && (asReviewer ? reviewed.has(`${a.id}-${d}`) : done.has(`${a.id}-${d}`))
+  ).length;
 
   return (
     <tr className="group/row border-t border-line/60 transition-colors hover:bg-soft/25">
@@ -209,13 +226,56 @@ function ActionRow({
         const isRev = reviewed.has(key);
         const isToday = d === TODAY;
         const isFuture = d > TODAY;
+
+        // Vista personal: una sola casilla con el ticket del rol de esa persona
+        if (person && !editing) {
+          const marked = asReviewer ? isRev : isDone;
+          const onClick = () => !isFuture && (asReviewer ? toggleReviewed(key) : toggle(key));
+          // quién falta para que la celda quede completa del otro lado
+          const otherPending = asReviewer ? !isDone : !isRev;
+          const otherName = asReviewer ? a.R : a.A;
+          return (
+            <td key={d} className="px-1 py-3 text-center">
+              <div className="mx-auto flex w-7 flex-col items-center gap-[3px]">
+                <button
+                  onClick={onClick}
+                  disabled={isFuture}
+                  title={asReviewer ? `Tu revisión (A) — ${DAY_LABELS[d]}` : `Tu ejecución (R) — ${DAY_LABELS[d]}`}
+                  className={`flex h-6 w-7 items-center justify-center rounded-md border text-xs transition-all ${
+                    marked
+                      ? asReviewer
+                        ? "border-ok bg-ok text-bg shadow-[0_0_10px_rgba(52,211,153,0.4)]"
+                        : "border-accent bg-accent text-white shadow-[0_0_10px_rgba(139,92,246,0.4)]"
+                      : isFuture
+                      ? "cursor-default border-line/60 bg-transparent opacity-30"
+                      : isToday
+                      ? "border-dashed border-accent/70 bg-accent/10 hover:bg-accent/25"
+                      : "border-line bg-soft/50 hover:border-accent/50"
+                  }`}
+                >
+                  {marked ? "✓" : ""}
+                </button>
+                <span
+                  title={otherPending && !isFuture ? `Falta ${otherName} (${asReviewer ? "ejecutar" : "revisar"})` : "Contraparte al día"}
+                  className={`text-[8px] font-semibold leading-none ${
+                    isFuture ? "opacity-0" : otherPending ? "text-warn/80" : "text-ok/70"
+                  }`}
+                >
+                  {otherPending && !isFuture ? INITIALS[otherName] ?? "?" : "·"}
+                </span>
+              </div>
+            </td>
+          );
+        }
+
+        // Vista común (Todos): doble marca + quién falta por rellenar
         return (
           <td key={d} className="px-1 py-3 text-center">
             <div className="mx-auto flex w-7 flex-col items-center gap-[3px]">
               <button
                 onClick={() => !isFuture && toggle(key)}
                 disabled={isFuture}
-                title={`R (${a.R}) ejecutó — ${DAY_LABELS[d]}`}
+                title={isDone ? `R (${a.R}) ejecutó — ${DAY_LABELS[d]}` : `Falta ejecutar: ${a.R} — ${DAY_LABELS[d]}`}
                 className={`flex h-6 w-7 items-center justify-center rounded-md border text-xs transition-all ${
                   isDone
                     ? "border-accent bg-accent text-white shadow-[0_0_10px_rgba(139,92,246,0.4)]"
@@ -226,17 +286,25 @@ function ActionRow({
                     : "border-line bg-soft/50 hover:border-accent/50"
                 }`}
               >
-                {isDone ? "✓" : ""}
+                {isDone ? "✓" : isFuture ? "" : <span className="text-[8px] font-semibold text-dim">{INITIALS[a.R] ?? ""}</span>}
               </button>
               <button
                 onClick={() => !isFuture && toggleReviewed(key)}
                 disabled={isFuture}
-                title={`A (${a.A}) revisó — ${DAY_LABELS[d]}`}
+                title={
+                  isRev
+                    ? `A (${a.A}) revisó — ${DAY_LABELS[d]}`
+                    : isDone
+                    ? `Falta revisión de ${a.A} — ${DAY_LABELS[d]}`
+                    : `A (${a.A}) revisa — ${DAY_LABELS[d]}`
+                }
                 className={`h-[5px] w-7 rounded-full transition-all ${
                   isRev
                     ? "bg-ok shadow-[0_0_6px_rgba(52,211,153,0.55)]"
                     : isFuture
                     ? "cursor-default bg-soft/40"
+                    : isDone
+                    ? "bg-warn/60 hover:bg-ok/50"
                     : "bg-soft hover:bg-ok/40"
                 }`}
               />
