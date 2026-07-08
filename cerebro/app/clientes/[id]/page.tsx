@@ -7,9 +7,8 @@ import { notFound } from "next/navigation";
 import { Shell } from "@/components/shell";
 import { Card, CardHead, Progress, Stat, Avatar, AreaBadge } from "@/components/ui";
 import { TrackerGrid } from "@/components/tracker";
-import { FunnelTable } from "@/components/metrics";
 import {
-  CLIENTS, Campaign, ContentPlan, DAY_LABELS, FUNNEL_HT, FUNNEL_LT, HistoriasModo,
+  CLIENTS, ContentPlan, DAY_LABELS, HistoriasModo,
   NOTION_STATES, ORGANIC, ORGANIC_WEEKS, PROCESS_STEPS, REVIEWS, SALES,
   complianceFor, distributeDays, fmtVal,
 } from "@/lib/data";
@@ -18,7 +17,7 @@ import { StrategyData, useData } from "@/lib/db";
 import { supabase } from "@/lib/supabase";
 import { AddBtn, DeleteBtn, ENum, ESelect, EText } from "@/components/editable";
 
-const TABS = ["Resumen", "Acciones", "Orgánico", "Ads HT", "Ads LT", "Revisiones", "Estrategia"] as const;
+const TABS = ["Resumen", "Acciones", "Orgánico", "Meta Ads", "Revisiones", "Estrategia"] as const;
 
 export default function ClientPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -32,8 +31,6 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
   const pct = complianceFor(db.actions.filter((a) => a.clientId === id), done);
   const sales = SALES[id];
   const org = ORGANIC[id];
-  const ht = FUNNEL_HT[id];
-  const lt = FUNNEL_LT[id];
   const reviews = REVIEWS.filter((r) => r.clientId === id);
   const goals = db.goals.filter((g) => g.clientId === id);
   const estrategia = db.strategies[id] ?? { ...client.estrategia, oferta: client.oferta };
@@ -49,21 +46,17 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
       }
     >
       <nav className="mb-5 flex flex-wrap gap-1 rounded-xl border border-line bg-panel p-1">
-        {TABS.map((t) => {
-          const disabled = (t === "Ads LT" && !lt) || (t === "Ads HT" && !ht);
-          return (
-            <button
-              key={t}
-              disabled={disabled}
-              onClick={() => setTab(t)}
-              className={`rounded-lg px-3.5 py-1.5 text-sm transition-colors ${
-                tab === t ? "bg-accent text-white" : disabled ? "cursor-not-allowed text-dim/50" : "text-mute hover:text-ink"
-              }`}
-            >
-              {t}
-            </button>
-          );
-        })}
+        {TABS.map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className={`rounded-lg px-3.5 py-1.5 text-sm transition-colors ${
+              tab === t ? "bg-accent text-white" : "text-mute hover:text-ink"
+            }`}
+          >
+            {t}
+          </button>
+        ))}
       </nav>
 
       {tab === "Resumen" && (
@@ -179,26 +172,8 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
         </div>
       )}
 
-      {tab === "Ads HT" && ht && (
-        <div className="space-y-4">
-          <MetaLiveCard slugs={client.metaSlugs} color={client.color} />
-          <CampaignsCard clientId={id} tipo="HT" />
-          <Card>
-            <CardHead title="Embudo semanal · High Ticket" sub="Meta Ads → VSL/Landing (GHL) → Lead → Agenda → Cierre · semáforo vs benchmark" />
-            <FunnelTable rows={ht} />
-          </Card>
-        </div>
-      )}
-
-      {tab === "Ads LT" && lt && (
-        <div className="space-y-4">
-          <MetaLiveCard slugs={client.metaSlugs} color={client.color} />
-          <CampaignsCard clientId={id} tipo="LT" />
-          <Card>
-            <CardHead title="Embudo semanal · Low Ticket" sub="Meta Ads → VSL/Landing → Checkout → Compra" />
-            <FunnelTable rows={lt} />
-          </Card>
-        </div>
+      {tab === "Meta Ads" && (
+        <MetaLiveCard slugs={client.metaSlugs} color={client.color} />
       )}
 
       {tab === "Revisiones" && (
@@ -508,81 +483,8 @@ function MetaLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
         </table>
       </div>
       <p className="border-t border-line px-5 py-2.5 text-[11px] text-dim">
-        El embudo semanal de abajo sigue siendo tu análisis manual con benchmarks; esta tabla es la data cruda que llega de Meta.
+        Data cruda tal como llega de Meta Ads (tabla <span className="text-mute">campaign_metrics</span>). Sin números manuales ni inventados.
       </p>
-    </Card>
-  );
-}
-
-const ESTADO_OPTS = [
-  { value: "activa", label: "activa" },
-  { value: "aprendizaje", label: "aprendizaje" },
-  { value: "pausada", label: "pausada" },
-];
-
-function CampaignsCard({ clientId, tipo }: { clientId: string; tipo: "HT" | "LT" }) {
-  const { campaigns, update } = useData();
-  const rows = campaigns
-    .map((c, index) => ({ c, index }))
-    .filter(({ c }) => c.clientId === clientId && c.tipo === tipo);
-
-  const setCampaign = (index: number, patch: Partial<Campaign>) =>
-    update("campaigns", campaigns.map((c, i) => (i === index ? { ...c, ...patch } : c)));
-  const removeCampaign = (index: number) =>
-    update("campaigns", campaigns.filter((_, i) => i !== index));
-  const addCampaign = () =>
-    update("campaigns", [
-      ...campaigns,
-      { clientId, tipo, nombre: "Nueva campaña", estado: "aprendizaje" as const, inversion: 0, resultados: 0, costoPorResultado: 0, roas: null },
-    ]);
-
-  return (
-    <Card>
-      <CardHead title="Por campaña" sub="Editable — decisiones de escala, iteración o pausa por campaña" />
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[680px] border-collapse text-sm">
-          <thead>
-            <tr className="text-[11px] uppercase tracking-wide text-dim">
-              <th className="py-2 pl-5 pr-3 text-left font-medium">Campaña</th>
-              <th className="px-3 py-2 text-left font-medium">Estado</th>
-              <th className="px-3 py-2 text-right font-medium">Inversión</th>
-              <th className="px-3 py-2 text-right font-medium">{tipo === "HT" ? "Leads" : "Compras"}</th>
-              <th className="px-3 py-2 text-right font-medium">{tipo === "HT" ? "CPL" : "CPA"}</th>
-              <th className="py-2 pl-3 pr-5 text-right font-medium">ROAS</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map(({ c, index }) => (
-              <tr key={index} className="group/row border-t border-line/60 hover:bg-soft/30">
-                <td className="py-2.5 pl-5 pr-3">
-                  <div className="flex items-center gap-1.5">
-                    <EText value={c.nombre} onSave={(v) => setCampaign(index, { nombre: v })} className="text-sm" />
-                    <DeleteBtn onClick={() => removeCampaign(index)} />
-                  </div>
-                </td>
-                <td className="px-3 py-2.5">
-                  <ESelect value={c.estado} options={ESTADO_OPTS} onSave={(v) => setCampaign(index, { estado: v as Campaign["estado"] })} />
-                </td>
-                <td className="px-3 py-2.5 text-right text-mute">
-                  <ENum value={c.inversion} fmt="usd" onSave={(v) => setCampaign(index, { inversion: v ?? 0 })} />
-                </td>
-                <td className="px-3 py-2.5 text-right">
-                  <ENum value={c.resultados} onSave={(v) => setCampaign(index, { resultados: v ?? 0 })} />
-                </td>
-                <td className="px-3 py-2.5 text-right text-mute">
-                  <ENum value={c.costoPorResultado} fmt="usd" onSave={(v) => setCampaign(index, { costoPorResultado: v ?? 0 })} />
-                </td>
-                <td className={`py-2.5 pl-3 pr-5 text-right font-medium ${c.roas === null ? "text-dim" : c.roas >= 2 ? "text-ok" : "text-warn"}`}>
-                  <ENum value={c.roas} fmt="x" nullable onSave={(v) => setCampaign(index, { roas: v })} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="border-t border-line px-5 py-3">
-        <AddBtn onClick={addCampaign}>Campaña {tipo}</AddBtn>
-      </div>
     </Card>
   );
 }
