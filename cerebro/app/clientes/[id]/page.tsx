@@ -159,7 +159,7 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
                 <span className="text-mute">Piezas publicadas vs plan del ciclo (≥1 semana de antelación)</span>
                 <span className="tabular-nums text-ink">{org.piezasPublicadas}/{org.piezasPlan}</span>
               </div>
-              <Progress pct={(org.piezasPublicadas / org.piezasPlan) * 100} color={client.color} />
+              <Progress pct={org.piezasPlan ? (org.piezasPublicadas / org.piezasPlan) * 100 : 0} color={client.color} />
               <div className="mt-3 flex flex-wrap items-center gap-2">
                 <span className="text-xs text-dim">Estados en Notion del cliente:</span>
                 {NOTION_STATES.map((s) => (
