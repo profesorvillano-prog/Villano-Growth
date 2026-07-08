@@ -375,6 +375,7 @@ function ContentPlanEditor({ plan, onChange, color }: { plan: ContentPlan; onCha
 interface MetaRow {
   fecha: string; account_name: string | null; campaign_name: string | null;
   currency: string | null; spend: number; impressions: number; clicks: number;
+  ctr: number; cpc: number; reach: number;
   leads: number; purchases: number; purchase_value: number; roas_meta: number;
 }
 
@@ -387,10 +388,10 @@ function MetaLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
     (async () => {
       const { data } = await supabase
         .from("campaign_metrics")
-        .select("fecha, account_name, campaign_name, currency, spend, impressions, clicks, leads, purchases, purchase_value, roas_meta, synced_at")
+        .select("fecha, account_name, campaign_name, currency, spend, impressions, clicks, ctr, cpc, reach, leads, purchases, purchase_value, roas_meta, synced_at")
         .in("cliente", slugs)
         .order("fecha", { ascending: false })
-        .limit(200);
+        .limit(50);
       if (!active) return;
       setRows((data ?? []) as MetaRow[]);
       if (data && data.length) setSyncedAt((data[0] as any).synced_at);
@@ -410,49 +411,44 @@ function MetaLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
     );
   }
 
-  // Agrupa por campaña (o cuenta si no hay campaign_name)
-  const map = new Map<string, MetaRow & { dias: number }>();
-  for (const r of rows) {
-    const k = r.campaign_name || r.account_name || "Campaña";
-    const cur = map.get(k);
-    if (cur) {
-      cur.spend += Number(r.spend) || 0; cur.impressions += Number(r.impressions) || 0;
-      cur.clicks += Number(r.clicks) || 0; cur.leads += Number(r.leads) || 0;
-      cur.purchases += Number(r.purchases) || 0; cur.purchase_value += Number(r.purchase_value) || 0;
-      cur.dias += 1;
-    } else {
-      map.set(k, { ...r, spend: Number(r.spend) || 0, impressions: Number(r.impressions) || 0, clicks: Number(r.clicks) || 0, leads: Number(r.leads) || 0, purchases: Number(r.purchases) || 0, purchase_value: Number(r.purchase_value) || 0, dias: 1 });
-    }
-  }
-  const grouped = [...map.entries()];
-  const cur = rows[0].currency || "";
+  // Espejo de Meta: cada corrida guarda el total de "Últimos 30 días" de la
+  // cuenta (una fila por cuenta y fecha de sync). Mostramos SOLO el snapshot más
+  // reciente — el número es de Meta, no un recálculo — para que coincida 1:1.
+  const asOf = rows[0].fecha;
+  const latest = rows.filter((r) => r.fecha === asOf);
+  const num = (v: unknown) => Number(v) || 0;
+
+  const cur = latest[0].currency || "";
   const money = (n: number) => `${cur ? cur + " " : "$"}${Math.round(n).toLocaleString("es-CL")}`;
-  const totSpend = grouped.reduce((s, [, r]) => s + r.spend, 0);
-  const totImpr = grouped.reduce((s, [, r]) => s + r.impressions, 0);
+  const totSpend = latest.reduce((s, r) => s + num(r.spend), 0);
+  const totImpr = latest.reduce((s, r) => s + num(r.impressions), 0);
+  const totClicks = latest.reduce((s, r) => s + num(r.clicks), 0);
+  const totCtr = totImpr ? (totClicks / totImpr) * 100 : 0;
+  const asOfLabel = new Date(asOf + "T00:00:00").toLocaleDateString("es-CL", { day: "2-digit", month: "short" });
 
   return (
     <Card>
       <CardHead
-        title="Meta Ads · en vivo"
-        sub="Datos reales sincronizados desde Facebook (Supabase)"
+        title="Meta Ads · últimos 30 días"
+        sub="Espejo exacto de la cuenta en Meta Ads Manager (mismos números)"
         right={
           <span className="flex items-center gap-2 text-[11px] text-dim">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ok" />
-            {syncedAt ? `sync ${new Date(syncedAt).toLocaleDateString("es-CL")}` : "en vivo"}
+            al {asOfLabel}
           </span>
         }
       />
       <div className="grid grid-cols-2 gap-3 px-5 py-4 sm:grid-cols-4">
-        <Stat label="Inversión (período)" value={money(totSpend)} />
+        <Stat label="Inversión (30 días)" value={money(totSpend)} />
         <Stat label="Impresiones" value={totImpr.toLocaleString("es-CL")} />
-        <Stat label="Clics" value={grouped.reduce((s, [, r]) => s + r.clicks, 0).toLocaleString("es-CL")} />
-        <Stat label="CTR" value={totImpr ? ((grouped.reduce((s, [, r]) => s + r.clicks, 0) / totImpr) * 100).toFixed(2) + "%" : "—"} />
+        <Stat label="Clics" value={totClicks.toLocaleString("es-CL")} />
+        <Stat label="CTR" value={totImpr ? totCtr.toFixed(2) + "%" : "—"} />
       </div>
       <div className="overflow-x-auto border-t border-line">
         <table className="w-full min-w-[720px] border-collapse text-sm">
           <thead>
             <tr className="text-[11px] uppercase tracking-wide text-dim">
-              <th className="py-2 pl-5 pr-3 text-left font-medium">Campaña / cuenta</th>
+              <th className="py-2 pl-5 pr-3 text-left font-medium">Cuenta</th>
               <th className="px-3 py-2 text-right font-medium">Inversión</th>
               <th className="px-3 py-2 text-right font-medium">Impres.</th>
               <th className="px-3 py-2 text-right font-medium">Clics</th>
@@ -463,19 +459,20 @@ function MetaLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
             </tr>
           </thead>
           <tbody>
-            {grouped.map(([name, r]) => {
-              const ctr = r.impressions ? (r.clicks / r.impressions) * 100 : 0;
-              const cpc = r.clicks ? r.spend / r.clicks : 0;
+            {latest.map((r, i) => {
+              const name = r.account_name || r.campaign_name || "Cuenta";
+              const ctr = num(r.ctr) || (num(r.impressions) ? (num(r.clicks) / num(r.impressions)) * 100 : 0);
+              const cpc = num(r.cpc) || (num(r.clicks) ? num(r.spend) / num(r.clicks) : 0);
               return (
-                <tr key={name} className="border-t border-line/60 hover:bg-soft/25">
-                  <td className="py-2.5 pl-5 pr-3">{name} <span className="text-[10px] text-dim">· {r.dias}d</span></td>
-                  <td className="px-3 py-2.5 text-right tabular-nums">{money(r.spend)}</td>
-                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{r.impressions.toLocaleString("es-CL")}</td>
-                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{r.clicks}</td>
+                <tr key={name + i} className="border-t border-line/60 hover:bg-soft/25">
+                  <td className="py-2.5 pl-5 pr-3">{name} <span className="text-[10px] text-dim">· 30d</span></td>
+                  <td className="px-3 py-2.5 text-right tabular-nums">{money(num(r.spend))}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.impressions).toLocaleString("es-CL")}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.clicks).toLocaleString("es-CL")}</td>
                   <td className="px-3 py-2.5 text-right tabular-nums">{ctr.toFixed(2)}%</td>
                   <td className="px-3 py-2.5 text-right tabular-nums text-mute">{money(cpc)}</td>
-                  <td className="px-3 py-2.5 text-right tabular-nums">{r.leads}</td>
-                  <td className="py-2.5 pl-3 pr-5 text-right tabular-nums">{r.purchases}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums">{num(r.leads)}</td>
+                  <td className="py-2.5 pl-3 pr-5 text-right tabular-nums">{num(r.purchases)}</td>
                 </tr>
               );
             })}
@@ -483,7 +480,7 @@ function MetaLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
         </table>
       </div>
       <p className="border-t border-line px-5 py-2.5 text-[11px] text-dim">
-        Data cruda tal como llega de Meta Ads (tabla <span className="text-mute">campaign_metrics</span>). Sin números manuales ni inventados.
+        Espejo de la vista <span className="text-mute">Últimos 30 días</span> de Meta Ads (tabla <span className="text-mute">campaign_metrics</span>). El total lo calcula Meta, no la app — por eso coincide. Última sincronización: {syncedAt ? new Date(syncedAt).toLocaleString("es-CL") : "—"}.
       </p>
     </Card>
   );
