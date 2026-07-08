@@ -9,7 +9,7 @@ import { Card, CardHead, Progress, Stat, Avatar, AreaBadge } from "@/components/
 import { TrackerGrid } from "@/components/tracker";
 import {
   CLIENTS, ContentPlan, DAY_LABELS, HistoriasModo,
-  NOTION_STATES, ORGANIC, ORGANIC_WEEKS, PROCESS_STEPS, REVIEWS, SALES,
+  NOTION_STATES, ORGANIC, PROCESS_STEPS, REVIEWS, SALES,
   complianceFor, distributeDays, fmtVal,
 } from "@/lib/data";
 import { useStore } from "@/lib/store";
@@ -113,45 +113,7 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
 
       {tab === "Orgánico" && (
         <div className="space-y-4">
-          <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            <Card className="p-4"><Stat label="Alcance" value={org.alcance.toLocaleString("es-CL")} /></Card>
-            <Card className="p-4"><Stat label="Seguidores +" value={"+" + org.seguidores} /></Card>
-            <Card className="p-4"><Stat label="Interacción" value={org.interaccion + "%"} tone="ok" /></Card>
-            <Card className="p-4"><Stat label="Guardados" value={String(org.guardados)} /></Card>
-            <Card className="p-4"><Stat label="Mensajes" value={String(org.mensajes)} /></Card>
-            <Card className="p-4"><Stat label="Leads" value={String(org.leads)} tone="ok" /></Card>
-          </div>
-          <Card>
-            <CardHead title="Rendimiento semanal" sub="Las 4 métricas clave para vender orgánico en Instagram — revisión semanal de Patricio" />
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[560px] border-collapse text-sm">
-                <thead>
-                  <tr className="text-[11px] uppercase tracking-wide text-dim">
-                    <th className="py-2 pl-5 pr-3 text-left font-medium">Métrica</th>
-                    {["Sem 1", "Sem 2", "Sem 3", "Sem 4"].map((s) => (
-                      <th key={s} className="px-3 py-2 text-right font-medium">{s}</th>
-                    ))}
-                    <th className="py-2 pl-3 pr-5 text-right font-medium">Tendencia</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {(ORGANIC_WEEKS[id] ?? []).map((r, i) => {
-                    const vals = r.values.filter((v): v is number => v !== null);
-                    const up = vals.length >= 2 && vals[vals.length - 1] > vals[0];
-                    return (
-                      <tr key={i} className="border-t border-line/60 hover:bg-soft/30">
-                        <td className="py-2 pl-5 pr-3 text-mute">{r.label}</td>
-                        {r.values.map((v, j) => (
-                          <td key={j} className={`px-3 py-2 text-right tabular-nums ${v === null ? "text-dim" : ""}`}>{fmtVal(v, r.fmt)}</td>
-                        ))}
-                        <td className={`py-2 pl-3 pr-5 text-right text-xs font-medium ${up ? "text-ok" : "text-warn"}`}>{up ? "↗ subiendo" : "→ plana"}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </Card>
+          <OrganicLiveCard slugs={client.metaSlugs} color={client.color} />
           <Card>
             <CardHead title="Ejecución del plan de contenido" sub="La planificación y las métricas por pieza (reels, stories, carruseles, YouTube) viven en la base de Notion del cliente" />
             <div className="px-5 py-4">
@@ -483,6 +445,163 @@ function MetaLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
         Espejo de la vista <span className="text-mute">Últimos 30 días</span> de Meta Ads (tabla <span className="text-mute">campaign_metrics</span>). El total lo calcula Meta, no la app — por eso coincide. Última sincronización: {syncedAt ? new Date(syncedAt).toLocaleString("es-CL") : "—"}.
       </p>
     </Card>
+  );
+}
+
+// ---------- Orgánico en vivo (Instagram, por pieza — tabla organic_content) ----------
+
+interface OrgRow {
+  media_id: string; tipo: string | null; producto: string | null;
+  caption: string | null; permalink: string | null; publicado: string | null; fecha: string | null;
+  alcance: number; impresiones: number; reproducciones: number;
+  likes: number; comentarios: number; guardados: number; compartidos: number;
+  interacciones: number; respuestas: number; toques_adelante: number; toques_atras: number; salidas: number;
+}
+
+function esStory(r: OrgRow) {
+  const t = (r.producto || r.tipo || "").toLowerCase();
+  return t.includes("stor");
+}
+
+function OrganicLiveCard({ slugs, color: _color }: { slugs: string[]; color: string }) {
+  const [rows, setRows] = useState<OrgRow[] | null>(null);
+  const [syncedAt, setSyncedAt] = useState<string | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      const { data } = await supabase
+        .from("organic_content")
+        .select("media_id, tipo, producto, caption, permalink, publicado, fecha, alcance, impresiones, reproducciones, likes, comentarios, guardados, compartidos, interacciones, respuestas, toques_adelante, toques_atras, salidas, synced_at")
+        .in("cliente", slugs)
+        .order("publicado", { ascending: false, nullsFirst: false })
+        .limit(200);
+      if (!active) return;
+      setRows((data ?? []) as OrgRow[]);
+      if (data && data.length) setSyncedAt((data[0] as any).synced_at);
+    })();
+    return () => { active = false; };
+  }, [slugs.join(",")]);
+
+  if (rows === null) return <Card className="p-5 text-sm text-dim">Cargando orgánico…</Card>;
+  if (rows.length === 0) {
+    return (
+      <Card>
+        <CardHead title="Rendimiento orgánico · Instagram" sub="Reels, posts y stories sincronizados desde Instagram (Supabase)" right={<span className="rounded-full border border-line px-2 py-0.5 text-[11px] text-dim">sin datos aún</span>} />
+        <p className="px-5 py-6 text-sm text-dim">Todavía no llegan métricas de orgánico. En cuanto conectes Instagram en Make y la automatización cargue datos en <span className="text-mute">organic_content</span>, el rendimiento por reel y por story aparece acá automáticamente.</p>
+      </Card>
+    );
+  }
+
+  const num = (v: unknown) => Number(v) || 0;
+  const stories = rows.filter(esStory);
+  const pieces = rows.filter((r) => !esStory(r));
+
+  const totAlcance = rows.reduce((s, r) => s + num(r.alcance), 0);
+  const totRepro = pieces.reduce((s, r) => s + num(r.reproducciones), 0);
+  const totGuardComp = pieces.reduce((s, r) => s + num(r.guardados) + num(r.compartidos), 0);
+  const totInter = pieces.reduce((s, r) => s + (num(r.interacciones) || num(r.likes) + num(r.comentarios)), 0);
+
+  const fdate = (d: string | null) => (d ? new Date(d).toLocaleDateString("es-CL", { day: "2-digit", month: "short" }) : "—");
+  const short = (c: string | null) => (c ? (c.length > 42 ? c.slice(0, 42) + "…" : c) : "—");
+  const tipoLabel = (r: OrgRow) => {
+    const t = (r.producto || r.tipo || "").toLowerCase();
+    if (t.includes("reel")) return "Reel";
+    if (t.includes("carousel") || t.includes("album")) return "Carrusel";
+    if (t.includes("video") || t.includes("igtv")) return "Video";
+    return "Post";
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <Card className="p-4"><Stat label="Alcance (piezas)" value={totAlcance.toLocaleString("es-CL")} /></Card>
+        <Card className="p-4"><Stat label="Reproducciones" value={totRepro.toLocaleString("es-CL")} /></Card>
+        <Card className="p-4"><Stat label="Guardados + comp." value={totGuardComp.toLocaleString("es-CL")} tone="ok" /></Card>
+        <Card className="p-4"><Stat label="Interacciones" value={totInter.toLocaleString("es-CL")} /></Card>
+      </div>
+
+      <Card>
+        <CardHead
+          title="Reels y posts"
+          sub="Rendimiento por pieza (datos reales de Instagram)"
+          right={<span className="flex items-center gap-2 text-[11px] text-dim"><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ok" />{syncedAt ? `sync ${new Date(syncedAt).toLocaleDateString("es-CL")}` : "en vivo"}</span>}
+        />
+        {pieces.length === 0 ? (
+          <p className="px-5 py-6 text-sm text-dim">Sin reels/posts registrados todavía.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[760px] border-collapse text-sm">
+              <thead>
+                <tr className="text-[11px] uppercase tracking-wide text-dim">
+                  <th className="py-2 pl-5 pr-3 text-left font-medium">Pieza</th>
+                  <th className="px-3 py-2 text-right font-medium">Alcance</th>
+                  <th className="px-3 py-2 text-right font-medium">Reprod.</th>
+                  <th className="px-3 py-2 text-right font-medium">Likes</th>
+                  <th className="px-3 py-2 text-right font-medium">Coment.</th>
+                  <th className="px-3 py-2 text-right font-medium">Guard.</th>
+                  <th className="py-2 pl-3 pr-5 text-right font-medium">Comp.</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pieces.map((r) => (
+                  <tr key={r.media_id} className="border-t border-line/60 hover:bg-soft/25">
+                    <td className="py-2.5 pl-5 pr-3">
+                      {r.permalink ? <a href={r.permalink} target="_blank" rel="noreferrer" className="hover:underline">{short(r.caption)}</a> : short(r.caption)}
+                      <span className="text-[10px] text-dim"> · {tipoLabel(r)} · {fdate(r.publicado)}</span>
+                    </td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.alcance).toLocaleString("es-CL")}</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.reproducciones).toLocaleString("es-CL")}</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums">{num(r.likes).toLocaleString("es-CL")}</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.comentarios).toLocaleString("es-CL")}</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-ok">{num(r.guardados).toLocaleString("es-CL")}</td>
+                    <td className="py-2.5 pl-3 pr-5 text-right tabular-nums">{num(r.compartidos).toLocaleString("es-CL")}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Card>
+
+      <Card>
+        <CardHead title="Stories" sub="Rendimiento por story (datos reales de Instagram)" />
+        {stories.length === 0 ? (
+          <p className="px-5 py-6 text-sm text-dim">Sin stories registradas todavía.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[640px] border-collapse text-sm">
+              <thead>
+                <tr className="text-[11px] uppercase tracking-wide text-dim">
+                  <th className="py-2 pl-5 pr-3 text-left font-medium">Story</th>
+                  <th className="px-3 py-2 text-right font-medium">Alcance</th>
+                  <th className="px-3 py-2 text-right font-medium">Respuestas</th>
+                  <th className="px-3 py-2 text-right font-medium">Toques →</th>
+                  <th className="px-3 py-2 text-right font-medium">Toques ←</th>
+                  <th className="py-2 pl-3 pr-5 text-right font-medium">Salidas</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stories.map((r) => (
+                  <tr key={r.media_id} className="border-t border-line/60 hover:bg-soft/25">
+                    <td className="py-2.5 pl-5 pr-3">{short(r.caption) === "—" ? "Story" : short(r.caption)} <span className="text-[10px] text-dim">· {fdate(r.publicado)}</span></td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.alcance).toLocaleString("es-CL")}</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums">{num(r.respuestas).toLocaleString("es-CL")}</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.toques_adelante).toLocaleString("es-CL")}</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.toques_atras).toLocaleString("es-CL")}</td>
+                    <td className="py-2.5 pl-3 pr-5 text-right tabular-nums text-warn">{num(r.salidas).toLocaleString("es-CL")}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Card>
+
+      <p className="px-1 text-[11px] text-dim">
+        Data cruda tal como llega de Instagram (tabla <span className="text-mute">organic_content</span>). Sin números manuales ni inventados.
+      </p>
+    </div>
   );
 }
 
