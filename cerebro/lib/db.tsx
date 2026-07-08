@@ -6,7 +6,7 @@
 
 import { createContext, useContext, useEffect, useRef, useState, ReactNode } from "react";
 import {
-  ACTIONS, Action, CAMPAIGNS, Campaign, CLIENTS, CONTENT_PLANS, ContentPlan,
+  ACTIONS, Action, CLIENTS, CONTENT_PLANS, ContentPlan,
   FINANZAS, ClientFinance, GOALS, Goal, KPIS, KPI, genContentActions,
 } from "./data";
 import { supabase } from "./supabase";
@@ -21,7 +21,6 @@ export interface StrategyData {
 
 export interface DBShape {
   actions: Action[];
-  campaigns: Campaign[];
   goals: Goal[];
   kpis: KPI[];
   finanzas: ClientFinance[];
@@ -31,7 +30,6 @@ export interface DBShape {
 
 const SEED: DBShape = {
   actions: ACTIONS,
-  campaigns: CAMPAIGNS,
   goals: GOALS,
   kpis: KPIS,
   finanzas: FINANZAS,
