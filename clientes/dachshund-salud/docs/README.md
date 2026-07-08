@@ -21,6 +21,7 @@ productos.
 | [`Avatares-Grados-Conciencia.md`](./Avatares-Grados-Conciencia.md) | Escala de conciencia (N1–N5) → producto de entrada + 3 perfiles de comprador (ángulos) por cada producto. Todo copy declara avatar + nivel. |
 | [`Pack-Starter-Ebooks.md`](./Pack-Starter-Ebooks.md) | El Pack de eBooks: Serie Dachshund Salud (Paso 1 + Paso 2) + eBooks tácticos, uso por canal, promesas y límites de cada libro, copy base. |
 | [`Oferta-High-Ticket.md`](./Oferta-High-Ticket.md) | La oferta 1:1 ($497 / 3 meses y 6 meses personalizado): reglas, landings, flow de venta por audio de WhatsApp, guiones de calificación, objeciones y retargeting. |
+| [`INA-Setter-Productos.md`](./INA-Setter-Productos.md) | **Ficha para INA (setter/bot):** descripción del Pack de 2 eBooks (Serie Dachshund Salud, Paso 1 + Paso 2) y del High Ticket, con la diferencia clave libro-vs-acompañamiento, ruteo por caso, disparadores y checklist de reglas. |
 | [`Anuncios-Hablados-Pack-Starter.md`](./Anuncios-Hablados-Pack-Starter.md) | 4 guiones de anuncio hablado (Marcelo a cámara) para el Pack Starter, un ángulo de venta por pieza. |
 
 ## Conocimiento de nicho y material de apoyo (vigente)
