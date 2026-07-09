@@ -15,6 +15,7 @@ import {
 import { useStore } from "@/lib/store";
 import { StrategyData, useData } from "@/lib/db";
 import { supabase } from "@/lib/supabase";
+import { isoKey } from "@/lib/date";
 import { AddBtn, DeleteBtn, ENum, ESelect, EText } from "@/components/editable";
 
 const TABS = ["Resumen", "Acciones", "Orgánico", "Meta Ads", "Revisiones", "Estrategia"] as const;
@@ -332,60 +333,87 @@ function ContentPlanEditor({ plan, onChange, color }: { plan: ContentPlan; onCha
   );
 }
 
-// ---------- Meta Ads en vivo (datos reales desde Supabase campaign_metrics) ----------
+// ---------- Meta Ads (adaptativo: espejo de cuenta o drill-down por anuncio) ----------
 
 interface MetaRow {
-  fecha: string; account_name: string | null; campaign_name: string | null;
-  currency: string | null; spend: number; impressions: number; clicks: number;
-  ctr: number; cpc: number; reach: number;
-  leads: number; purchases: number; purchase_value: number; roas_meta: number;
+  fecha: string; account_name: string | null; currency: string | null;
+  campaign_id: string | null; campaign_name: string | null;
+  adset_id: string | null; adset_name: string | null;
+  ad_id: string | null; ad_name: string | null;
+  thumbnail_url: string | null; preview_url: string | null;
+  spend: number; impressions: number; clicks: number; ctr: number; cpc: number; reach: number;
+  leads: number; purchases: number; purchase_value: number; roas_meta: number; synced_at?: string;
 }
 
+const META_COLS = "fecha, account_name, currency, campaign_id, campaign_name, adset_id, adset_name, ad_id, ad_name, thumbnail_url, preview_url, spend, impressions, clicks, ctr, cpc, reach, leads, purchases, purchase_value, roas_meta, synced_at";
+const num = (v: unknown) => Number(v) || 0;
+
+const NIVELES = [
+  { idF: "campaign_id", nameF: "campaign_name", singular: "Campaña" },
+  { idF: "adset_id", nameF: "adset_name", singular: "Conjunto" },
+  { idF: "ad_id", nameF: "ad_name", singular: "Anuncio" },
+] as const;
+const PRESETS = [
+  { d: 7, label: "7 días" }, { d: 14, label: "14 días" }, { d: 30, label: "30 días" }, { d: 90, label: "90 días" },
+];
+type Agg = { spend: number; impressions: number; clicks: number; leads: number; purchases: number; purchase_value: number };
+const emptyAgg = (): Agg => ({ spend: 0, impressions: 0, clicks: 0, leads: 0, purchases: 0, purchase_value: 0 });
+const addRow = (a: Agg, r: MetaRow) => {
+  a.spend += num(r.spend); a.impressions += num(r.impressions); a.clicks += num(r.clicks);
+  a.leads += num(r.leads); a.purchases += num(r.purchases); a.purchase_value += num(r.purchase_value); return a;
+};
+
+// Selector: si hay datos granulares (por campaña/anuncio) → drill-down; si no → espejo
 function MetaLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
-  const [rows, setRows] = useState<MetaRow[] | null>(null);
-  const [syncedAt, setSyncedAt] = useState<string | null>(null);
+  const [mode, setMode] = useState<"loading" | "empty" | "mirror" | "drill">("loading");
 
   useEffect(() => {
     let active = true;
     (async () => {
-      const { data } = await supabase
-        .from("campaign_metrics")
-        .select("fecha, account_name, campaign_name, currency, spend, impressions, clicks, ctr, cpc, reach, leads, purchases, purchase_value, roas_meta, synced_at")
-        .in("cliente", slugs)
-        .order("fecha", { ascending: false })
-        .limit(50);
+      const gran = await supabase.from("campaign_metrics").select("id").in("cliente", slugs).not("campaign_id", "is", null).limit(1);
+      if (!active) return;
+      if (gran.data && gran.data.length) { setMode("drill"); return; }
+      const any = await supabase.from("campaign_metrics").select("id").in("cliente", slugs).limit(1);
+      if (!active) return;
+      setMode(any.data && any.data.length ? "mirror" : "empty");
+    })();
+    return () => { active = false; };
+  }, [slugs.join(",")]);
+
+  if (mode === "loading") return <Card className="p-5 text-sm text-dim">Cargando Meta Ads…</Card>;
+  if (mode === "empty") {
+    return (
+      <Card>
+        <CardHead title="Meta Ads" sub="Sincronizado desde Facebook a Supabase" right={<span className="rounded-full border border-line px-2 py-0.5 text-[11px] text-dim">sin datos aún</span>} />
+        <p className="px-5 py-6 text-sm text-dim">Todavía no llegan métricas de este cliente. En cuanto la automatización cargue datos en <span className="text-mute">campaign_metrics</span>, aparecen acá automáticamente.</p>
+      </Card>
+    );
+  }
+  return mode === "drill" ? <MetaDrilldown slugs={slugs} color={color} /> : <MetaMirror slugs={slugs} />;
+}
+
+// Espejo: muestra el snapshot más reciente (Meta ya lo calculó) — coincide 1:1
+function MetaMirror({ slugs }: { slugs: string[] }) {
+  const [rows, setRows] = useState<MetaRow[] | null>(null);
+  const [syncedAt, setSyncedAt] = useState<string | null>(null);
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      const { data } = await supabase.from("campaign_metrics").select(META_COLS).in("cliente", slugs).order("fecha", { ascending: false }).limit(50);
       if (!active) return;
       setRows((data ?? []) as MetaRow[]);
       if (data && data.length) setSyncedAt((data[0] as any).synced_at);
     })();
     return () => { active = false; };
   }, [slugs.join(",")]);
+  if (rows === null) return <Card className="p-5 text-sm text-dim">Cargando…</Card>;
 
-  if (rows === null) {
-    return <Card className="p-5 text-sm text-dim">Cargando Meta Ads…</Card>;
-  }
-  if (rows.length === 0) {
-    return (
-      <Card>
-        <CardHead title="Meta Ads · en vivo" sub="Sincronizado desde Facebook a Supabase" right={<span className="rounded-full border border-line px-2 py-0.5 text-[11px] text-dim">sin datos aún</span>} />
-        <p className="px-5 py-6 text-sm text-dim">Todavía no llegan métricas de este cliente. En cuanto la automatización cargue datos en <span className="text-mute">campaign_metrics</span>, aparecen acá automáticamente.</p>
-      </Card>
-    );
-  }
-
-  // Espejo de Meta: cada corrida guarda el total de "Últimos 30 días" de la
-  // cuenta (una fila por cuenta y fecha de sync). Mostramos SOLO el snapshot más
-  // reciente — el número es de Meta, no un recálculo — para que coincida 1:1.
   const asOf = rows[0].fecha;
   const latest = rows.filter((r) => r.fecha === asOf);
-  const num = (v: unknown) => Number(v) || 0;
-
   const cur = latest[0].currency || "";
   const money = (n: number) => `${cur ? cur + " " : "$"}${Math.round(n).toLocaleString("es-CL")}`;
-  const totSpend = latest.reduce((s, r) => s + num(r.spend), 0);
-  const totImpr = latest.reduce((s, r) => s + num(r.impressions), 0);
-  const totClicks = latest.reduce((s, r) => s + num(r.clicks), 0);
-  const totCtr = totImpr ? (totClicks / totImpr) * 100 : 0;
+  const tot = latest.reduce((a, r) => addRow(a, r), emptyAgg());
+  const ctr = tot.impressions ? (tot.clicks / tot.impressions) * 100 : 0;
   const asOfLabel = new Date(asOf + "T00:00:00").toLocaleDateString("es-CL", { day: "2-digit", month: "short" });
 
   return (
@@ -393,18 +421,13 @@ function MetaLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
       <CardHead
         title="Meta Ads · últimos 30 días"
         sub="Espejo exacto de la cuenta en Meta Ads Manager (mismos números)"
-        right={
-          <span className="flex items-center gap-2 text-[11px] text-dim">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ok" />
-            al {asOfLabel}
-          </span>
-        }
+        right={<span className="flex items-center gap-2 text-[11px] text-dim"><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ok" />al {asOfLabel}</span>}
       />
       <div className="grid grid-cols-2 gap-3 px-5 py-4 sm:grid-cols-4">
-        <Stat label="Inversión (30 días)" value={money(totSpend)} />
-        <Stat label="Impresiones" value={totImpr.toLocaleString("es-CL")} />
-        <Stat label="Clics" value={totClicks.toLocaleString("es-CL")} />
-        <Stat label="CTR" value={totImpr ? totCtr.toFixed(2) + "%" : "—"} />
+        <Stat label="Inversión (30 días)" value={money(tot.spend)} />
+        <Stat label="Impresiones" value={tot.impressions.toLocaleString("es-CL")} />
+        <Stat label="Clics" value={tot.clicks.toLocaleString("es-CL")} />
+        <Stat label="CTR" value={tot.impressions ? ctr.toFixed(2) + "%" : "—"} />
       </div>
       <div className="overflow-x-auto border-t border-line">
         <table className="w-full min-w-[720px] border-collapse text-sm">
@@ -422,17 +445,16 @@ function MetaLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
           </thead>
           <tbody>
             {latest.map((r, i) => {
-              const name = r.account_name || r.campaign_name || "Cuenta";
-              const ctr = num(r.ctr) || (num(r.impressions) ? (num(r.clicks) / num(r.impressions)) * 100 : 0);
-              const cpc = num(r.cpc) || (num(r.clicks) ? num(r.spend) / num(r.clicks) : 0);
+              const rc = num(r.ctr) || (num(r.impressions) ? (num(r.clicks) / num(r.impressions)) * 100 : 0);
+              const rcpc = num(r.cpc) || (num(r.clicks) ? num(r.spend) / num(r.clicks) : 0);
               return (
-                <tr key={name + i} className="border-t border-line/60 hover:bg-soft/25">
-                  <td className="py-2.5 pl-5 pr-3">{name} <span className="text-[10px] text-dim">· 30d</span></td>
+                <tr key={i} className="border-t border-line/60 hover:bg-soft/25">
+                  <td className="py-2.5 pl-5 pr-3">{r.account_name || "Cuenta"} <span className="text-[10px] text-dim">· 30d</span></td>
                   <td className="px-3 py-2.5 text-right tabular-nums">{money(num(r.spend))}</td>
                   <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.impressions).toLocaleString("es-CL")}</td>
                   <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.clicks).toLocaleString("es-CL")}</td>
-                  <td className="px-3 py-2.5 text-right tabular-nums">{ctr.toFixed(2)}%</td>
-                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{money(cpc)}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums">{rc.toFixed(2)}%</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{money(rcpc)}</td>
                   <td className="px-3 py-2.5 text-right tabular-nums">{num(r.leads)}</td>
                   <td className="py-2.5 pl-3 pr-5 text-right tabular-nums">{num(r.purchases)}</td>
                 </tr>
@@ -442,8 +464,149 @@ function MetaLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
         </table>
       </div>
       <p className="border-t border-line px-5 py-2.5 text-[11px] text-dim">
-        Espejo de la vista <span className="text-mute">Últimos 30 días</span> de Meta Ads (tabla <span className="text-mute">campaign_metrics</span>). El total lo calcula Meta, no la app — por eso coincide. Última sincronización: {syncedAt ? new Date(syncedAt).toLocaleString("es-CL") : "—"}.
+        Espejo de <span className="text-mute">Últimos 30 días</span> de Meta. El total lo calcula Meta, no la app. Para filtrar por fecha y bajar hasta cada anuncio con su preview, la automatización debe cargar los datos a nivel anuncio (columnas <span className="text-mute">ad_id, thumbnail_url</span>). Última sync: {syncedAt ? new Date(syncedAt).toLocaleString("es-CL") : "—"}.
       </p>
+    </Card>
+  );
+}
+
+// Drill-down por fecha: cuenta → campaña → conjunto → anuncio (con preview)
+function MetaDrilldown({ slugs, color }: { slugs: string[]; color: string }) {
+  const [rows, setRows] = useState<MetaRow[] | null>(null);
+  const [preset, setPreset] = useState(30);
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [path, setPath] = useState<{ id: string; name: string }[]>([]);
+
+  useEffect(() => {
+    const t = new Date(); const f = new Date(); f.setDate(f.getDate() - 30 + 1);
+    setTo(isoKey(t)); setFrom(isoKey(f));
+  }, []);
+  const applyPreset = (d: number) => {
+    const t = new Date(); const f = new Date(); f.setDate(f.getDate() - d + 1);
+    setPreset(d); setTo(isoKey(t)); setFrom(isoKey(f)); setPath([]);
+  };
+  useEffect(() => {
+    if (!from || !to) return;
+    let active = true;
+    (async () => {
+      const { data } = await supabase.from("campaign_metrics").select(META_COLS).in("cliente", slugs).gte("fecha", from).lte("fecha", to).limit(3000);
+      if (!active) return;
+      setRows((data ?? []) as MetaRow[]);
+    })();
+    return () => { active = false; };
+  }, [slugs.join(","), from, to]);
+
+  if (rows === null) return <Card className="p-5 text-sm text-dim">Cargando Meta Ads…</Card>;
+  const cur = rows[0]?.currency || "CLP";
+  const money = (n: number) => `${cur} ${Math.round(n).toLocaleString("es-CL")}`;
+
+  let filtered = rows;
+  path.forEach((step, i) => {
+    const f = NIVELES[i].idF as keyof MetaRow;
+    filtered = filtered.filter((r) => (r[f] ?? "") === step.id);
+  });
+  const depth = path.length;
+  const nivel = NIVELES[depth];
+  const totals = filtered.reduce((a, r) => addRow(a, r), emptyAgg());
+
+  type Grp = { id: string; name: string; thumb: string | null; preview: string | null; agg: Agg };
+  let groups: Grp[] = [];
+  if (nivel) {
+    const idF = nivel.idF as keyof MetaRow; const nameF = nivel.nameF as keyof MetaRow;
+    const map = new Map<string, Grp>();
+    for (const r of filtered) {
+      const id = (r[idF] as string) ?? "";
+      if (!id) continue;
+      const g = map.get(id) ?? { id, name: (r[nameF] as string) || id, thumb: r.thumbnail_url, preview: r.preview_url, agg: emptyAgg() };
+      addRow(g.agg, r);
+      if (!g.thumb && r.thumbnail_url) g.thumb = r.thumbnail_url;
+      map.set(id, g);
+    }
+    groups = [...map.values()].sort((a, b) => b.agg.spend - a.agg.spend);
+  }
+  const ctr = (a: Agg) => (a.impressions ? (a.clicks / a.impressions) * 100 : 0);
+  const cpc = (a: Agg) => (a.clicks ? a.spend / a.clicks : 0);
+  const esAnuncio = nivel?.singular === "Anuncio";
+
+  return (
+    <Card>
+      <CardHead title="Meta Ads" sub="Datos reales · filtrá por fecha y hacé clic para bajar el detalle" right={<span className="flex items-center gap-2 text-[11px] text-dim"><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ok" />en vivo</span>} />
+      <div className="flex flex-wrap items-center gap-2 border-b border-line px-5 py-3">
+        <div className="flex items-center gap-1 rounded-lg border border-line bg-panel p-1">
+          {PRESETS.map((p) => (
+            <button key={p.d} onClick={() => applyPreset(p.d)} className={`rounded-md px-2.5 py-1 text-xs transition-colors ${preset === p.d ? "bg-accent text-white" : "text-mute hover:text-ink"}`}>{p.label}</button>
+          ))}
+        </div>
+        <span className="text-[11px] text-dim">o rango:</span>
+        <input type="date" value={from} onChange={(e) => { setPreset(0); setFrom(e.target.value); setPath([]); }} className="rounded-lg border border-line bg-panel px-2 py-1 text-xs text-ink outline-none focus:border-accent/60" />
+        <span className="text-dim">→</span>
+        <input type="date" value={to} onChange={(e) => { setPreset(0); setTo(e.target.value); setPath([]); }} className="rounded-lg border border-line bg-panel px-2 py-1 text-xs text-ink outline-none focus:border-accent/60" />
+      </div>
+      <div className="flex flex-wrap items-center gap-1.5 px-5 py-2.5 text-xs">
+        <button onClick={() => setPath([])} className={`rounded px-1.5 py-0.5 ${depth === 0 ? "font-medium text-ink" : "text-accent2 hover:bg-soft"}`}>{rows[0]?.account_name || "Cuenta"}</button>
+        {path.map((step, i) => (
+          <span key={i} className="flex items-center gap-1.5">
+            <span className="text-dim">›</span>
+            <button onClick={() => setPath(path.slice(0, i + 1))} className={`rounded px-1.5 py-0.5 ${i === depth - 1 ? "font-medium text-ink" : "text-accent2 hover:bg-soft"}`}>{step.name}</button>
+          </span>
+        ))}
+      </div>
+      <div className="grid grid-cols-2 gap-3 px-5 pb-4 sm:grid-cols-5">
+        <Stat label="Inversión" value={money(totals.spend)} />
+        <Stat label="Impresiones" value={totals.impressions.toLocaleString("es-CL")} />
+        <Stat label="Clics" value={totals.clicks.toLocaleString("es-CL")} />
+        <Stat label="CTR" value={ctr(totals).toFixed(2) + "%"} />
+        <Stat label="Compras" value={String(totals.purchases)} tone={totals.purchases > 0 ? "ok" : undefined} />
+      </div>
+      {!nivel ? (
+        <p className="border-t border-line px-5 py-6 text-sm text-dim">Estás viendo el máximo detalle (anuncio).</p>
+      ) : groups.length === 0 ? (
+        <p className="border-t border-line px-5 py-6 text-sm text-dim">Sin desglose por {nivel.singular.toLowerCase()} en este período.</p>
+      ) : (
+        <div className="overflow-x-auto border-t border-line">
+          <table className="w-full min-w-[760px] border-collapse text-sm">
+            <thead>
+              <tr className="text-[11px] uppercase tracking-wide text-dim">
+                <th className="py-2 pl-5 pr-3 text-left font-medium">{nivel.singular}</th>
+                <th className="px-3 py-2 text-right font-medium">Inversión</th>
+                <th className="px-3 py-2 text-right font-medium">Impres.</th>
+                <th className="px-3 py-2 text-right font-medium">Clics</th>
+                <th className="px-3 py-2 text-right font-medium">CTR</th>
+                <th className="px-3 py-2 text-right font-medium">CPC</th>
+                <th className="px-3 py-2 text-right font-medium">Leads</th>
+                <th className="py-2 pl-3 pr-5 text-right font-medium">Compras</th>
+              </tr>
+            </thead>
+            <tbody>
+              {groups.map((g) => (
+                <tr key={g.id} onClick={() => !esAnuncio && setPath([...path, { id: g.id, name: g.name }])} className={`border-t border-line/60 ${esAnuncio ? "" : "cursor-pointer"} hover:bg-soft/30`}>
+                  <td className="py-2.5 pl-5 pr-3">
+                    <div className="flex items-center gap-2.5">
+                      {esAnuncio && (g.thumb
+                        ? <img src={g.thumb} alt="" className="h-10 w-10 shrink-0 rounded-md object-cover" onError={(e) => ((e.target as HTMLImageElement).style.display = "none")} />
+                        : <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-soft text-dim">🖼</span>)}
+                      <span className="flex items-center gap-1.5">
+                        {g.name}
+                        {!esAnuncio && <span className="text-accent2">›</span>}
+                        {esAnuncio && g.preview && <a href={g.preview} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="text-[10px] text-accent2 hover:underline">ver en Meta ↗</a>}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="px-3 py-2.5 text-right tabular-nums">{money(g.agg.spend)}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{g.agg.impressions.toLocaleString("es-CL")}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{g.agg.clicks.toLocaleString("es-CL")}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums">{ctr(g.agg).toFixed(2)}%</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{money(cpc(g.agg))}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums">{g.agg.leads}</td>
+                  <td className="py-2.5 pl-3 pr-5 text-right tabular-nums">{g.agg.purchases}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      <p className="border-t border-line px-5 py-2.5 text-[11px] text-dim">Espejo de <span className="text-mute">campaign_metrics</span> (lo que llega de Meta). Los totales se calculan sumando el rango elegido.</p>
     </Card>
   );
 }
