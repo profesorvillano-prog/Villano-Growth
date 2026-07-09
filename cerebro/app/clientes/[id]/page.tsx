@@ -29,6 +29,9 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
 
   if (!client) notFound();
 
+  // Cada negocio muestra solo sus pestañas: High Ticket solo si tiene embudo HT.
+  const tabs = TABS.filter((t) => t !== "High Ticket" || client.highTicket);
+
   const pct = complianceFor(db.actions.filter((a) => a.clientId === id), done);
   const reviews = REVIEWS.filter((r) => r.clientId === id);
   const goals = db.goals.filter((g) => g.clientId === id);
@@ -45,7 +48,7 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
       }
     >
       <nav className="mb-5 flex flex-wrap gap-1 rounded-xl border border-line bg-panel p-1">
-        {TABS.map((t) => (
+        {tabs.map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
@@ -72,7 +75,9 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
             <div className="mt-3 flex flex-wrap gap-2 text-xs">
               <button onClick={() => setTab("Meta Ads")} className="rounded-lg border border-line px-3 py-1.5 text-mute transition-colors hover:border-accent/50 hover:text-ink">Meta Ads →</button>
               <button onClick={() => setTab("Orgánico")} className="rounded-lg border border-line px-3 py-1.5 text-mute transition-colors hover:border-accent/50 hover:text-ink">Orgánico →</button>
-              <button onClick={() => setTab("High Ticket")} className="rounded-lg border border-line px-3 py-1.5 text-mute transition-colors hover:border-accent/50 hover:text-ink">High Ticket →</button>
+              {client.highTicket && (
+                <button onClick={() => setTab("High Ticket")} className="rounded-lg border border-line px-3 py-1.5 text-mute transition-colors hover:border-accent/50 hover:text-ink">High Ticket →</button>
+              )}
               <button onClick={() => setTab("Acciones")} className="rounded-lg border border-line px-3 py-1.5 text-mute transition-colors hover:border-accent/50 hover:text-ink">Acciones →</button>
             </div>
           </Card>
@@ -94,7 +99,7 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
         <MetaLiveCard slugs={client.metaSlugs} color={client.color} />
       )}
 
-      {tab === "High Ticket" && (
+      {tab === "High Ticket" && client.highTicket && (
         <HighTicketCard slugs={client.metaSlugs} color={client.color} />
       )}
 

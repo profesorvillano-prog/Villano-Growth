@@ -97,6 +97,7 @@ export interface Client {
   initials: string; // monograma profesional (reemplaza el emoji)
   color: string;
   metaSlugs: string[]; // posibles valores de campaign_metrics.cliente (Meta Ads)
+  highTicket: boolean; // muestra la pestaña Embudo High Ticket
   cicloAncla: string; // inicio del ciclo de 14 días vigente
   estrategia: {
     pilares: string;
@@ -115,6 +116,7 @@ export const CLIENTS: Client[] = [
     initials: "FE",
     color: "#34d399",
     metaSlugs: ["family_eaters", "family"],
+    highTicket: false,
     cicloAncla: "2026-06-29",
     estrategia: {
       pilares: "Nutrición (educación) · Atracción",
@@ -131,6 +133,7 @@ export const CLIENTS: Client[] = [
     initials: "MH",
     color: "#fbbf24",
     metaSlugs: ["marcelo", "dr_marcelo", "marcelo_hernan", "salchicha"],
+    highTicket: true,
     cicloAncla: "2026-06-22",
     estrategia: {
       pilares: "Nutrición y Salud · Atracción",
@@ -147,6 +150,7 @@ export const CLIENTS: Client[] = [
     initials: "EZ",
     color: "#a78bfa",
     metaSlugs: ["ezequiel", "sanando_autoinmune", "autoinmune"],
+    highTicket: true,
     cicloAncla: "2026-07-06",
     estrategia: {
       pilares: "50% Nutrición · 50% Atracción (dolor)",
