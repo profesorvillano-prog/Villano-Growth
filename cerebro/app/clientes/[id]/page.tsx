@@ -460,7 +460,15 @@ function MetaDrilldown({ slugs, color }: { slugs: string[]; color: string }) {
   const cur = rows[0]?.currency || "CLP";
   const money = (n: number) => `${cur} ${Math.round(n).toLocaleString("es-CL")}`;
 
-  let filtered = rows;
+  // Cada fila es el acumulado de 30d de un anuncio capturado en una fecha.
+  // Para no sumar snapshots repetidos, tomamos la fila más reciente por anuncio en el rango.
+  const latestByAd = new Map<string, MetaRow>();
+  for (const r of rows) {
+    const k = r.ad_id ?? r.adset_id ?? r.campaign_id ?? "";
+    const prev = latestByAd.get(k);
+    if (!prev || (r.fecha ?? "") > (prev.fecha ?? "")) latestByAd.set(k, r);
+  }
+  let filtered = [...latestByAd.values()];
   path.forEach((step, i) => {
     const f = NIVELES[i].idF as keyof MetaRow;
     filtered = filtered.filter((r) => (r[f] ?? "") === step.id);
