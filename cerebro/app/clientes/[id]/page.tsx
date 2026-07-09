@@ -697,20 +697,25 @@ function HighTicketCard({ slugs, color }: { slugs: string[]; color: string }) {
 interface OrgRow {
   media_id: string; tipo: string | null; producto: string | null;
   caption: string | null; permalink: string | null; publicado: string | null; fecha: string | null;
+  thumbnail_url: string | null; media_url: string | null;
   alcance: number; impresiones: number; reproducciones: number;
   likes: number; comentarios: number; guardados: number; compartidos: number;
   interacciones: number; respuestas: number; toques_adelante: number; toques_atras: number; salidas: number;
 }
 
-type OrgCat = "reel" | "post" | "story" | "otro";
+type OrgCat = "reel" | "carrusel" | "post" | "story" | "otro";
+// Usa media_type (tipo) y media_product_type (producto) de la API de Instagram
 function categoria(r: OrgRow): OrgCat {
-  const t = (r.producto || r.tipo || "").toLowerCase();
-  if (t.includes("stor")) return "story";
-  if (t.includes("reel") || t.includes("video") || t.includes("igtv")) return "reel";
-  if (t.includes("carousel") || t.includes("album") || t.includes("image") || t.includes("photo")) return "post";
+  const t = (r.tipo || "").toUpperCase();
+  const p = (r.producto || "").toUpperCase();
+  if (p.includes("STOR")) return "story";
+  if (p.includes("REEL") || t === "VIDEO") return "reel";
+  if (t === "CAROUSEL_ALBUM") return "carrusel";
+  if (t === "IMAGE" || p === "FEED") return "post";
   return "otro";
 }
-const CAT_LABEL: Record<OrgCat, string> = { reel: "Reel", post: "Post", story: "Story", otro: "Otro" };
+const CAT_LABEL: Record<OrgCat, string> = { reel: "Reel", carrusel: "Carrusel", post: "Post", story: "Story", otro: "Otro" };
+const CAT_ICON: Record<OrgCat, string> = { reel: "🎬", carrusel: "🖼", post: "📷", story: "📖", otro: "📄" };
 const ORG_FILTROS: { key: string; label: string }[] = [
   { key: "todo", label: "Todo (feed)" }, { key: "post", label: "Post" }, { key: "reel", label: "Reel" }, { key: "otro", label: "Otro" }, { key: "story", label: "Stories" },
 ];
@@ -731,7 +736,7 @@ function OrganicLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
     (async () => {
       const { data } = await supabase
         .from("organic_content")
-        .select("media_id, tipo, producto, caption, permalink, publicado, fecha, alcance, impresiones, reproducciones, likes, comentarios, guardados, compartidos, interacciones, respuestas, toques_adelante, toques_atras, salidas, synced_at")
+        .select("media_id, tipo, producto, caption, permalink, publicado, fecha, thumbnail_url, media_url, alcance, impresiones, reproducciones, likes, comentarios, guardados, compartidos, interacciones, respuestas, toques_adelante, toques_atras, salidas, synced_at")
         .in("cliente", slugs)
         .order("publicado", { ascending: false, nullsFirst: false })
         .limit(500);
@@ -770,10 +775,11 @@ function OrganicLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
     return (!from || d >= from) && (!to || d <= to);
   };
 
-  // Filtro de tipo
+  // Filtro de tipo (Post agrupa imagen + carrusel)
   const catFiltro = (r: OrgRow) => {
     const c = categoria(r);
     if (filtro === "todo") return c !== "story";
+    if (filtro === "post") return c === "post" || c === "carrusel";
     return c === filtro;
   };
   const shown = rows.filter((r) => inRange(r) && catFiltro(r));
@@ -852,15 +858,22 @@ function OrganicLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
             <tbody>
               {shown.map((r) => {
                 const cat = categoria(r);
+                const img = r.thumbnail_url || r.media_url;
+                const titulo = r.caption && r.caption.trim() ? short(r.caption) : `${CAT_LABEL[cat]} · ${fdate(rowDate(r))}`;
                 return (
                   <tr key={r.media_id} className="border-t border-line/60 hover:bg-soft/25">
                     <td className="py-2.5 pl-5 pr-3">
-                      <div className="flex items-start gap-2.5">
-                        <span className="mt-0.5 shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold" style={{ background: color + "22", color }}>{CAT_LABEL[cat]}</span>
+                      <div className="flex items-center gap-3">
+                        {img
+                          ? <img src={img} alt="" className="h-11 w-11 shrink-0 rounded-md object-cover" onError={(e) => ((e.target as HTMLImageElement).style.display = "none")} />
+                          : <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-lg" style={{ background: color + "1f" }}>{CAT_ICON[cat]}</span>}
                         <span className="min-w-0">
-                          {r.permalink
-                            ? <a href={r.permalink} target="_blank" rel="noreferrer" className="hover:underline">{short(r.caption)}</a>
-                            : short(r.caption)}
+                          <span className="flex items-center gap-1.5">
+                            <span className="rounded px-1.5 py-0.5 text-[10px] font-semibold" style={{ background: color + "22", color }}>{CAT_LABEL[cat]}</span>
+                            {r.permalink
+                              ? <a href={r.permalink} target="_blank" rel="noreferrer" className="truncate hover:underline">{titulo}</a>
+                              : <span className="truncate">{titulo}</span>}
+                          </span>
                           <span className="block text-[10px] text-dim">{fdate(rowDate(r))}{r.permalink ? " · ver en Instagram ↗" : ""}</span>
                         </span>
                       </div>
@@ -890,7 +903,7 @@ function OrganicLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
         </div>
       )}
       <p className="border-t border-line px-5 py-2.5 text-[11px] text-dim">
-        Datos reales de Instagram (tabla <span className="text-mute">organic_content</span>). El texto de cada fila es el inicio del caption; el enlace abre la publicación real.
+        Datos reales de Instagram. Si la pieza no tiene texto, se nombra por tipo y fecha. La miniatura aparece cuando la automatización cargue <span className="text-mute">thumbnail_url</span>/<span className="text-mute">media_url</span> desde la API de Instagram; mientras tanto se ve el ícono del tipo. El enlace abre la publicación real.
       </p>
     </Card>
   );
