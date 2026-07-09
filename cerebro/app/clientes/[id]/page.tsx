@@ -9,7 +9,7 @@ import { Card, CardHead, Progress, Stat, Avatar, AreaBadge } from "@/components/
 import { TrackerGrid } from "@/components/tracker";
 import {
   CLIENTS, ContentPlan, DAY_LABELS, HistoriasModo,
-  NOTION_STATES, ORGANIC, PROCESS_STEPS, REVIEWS, SALES,
+  NOTION_STATES, PROCESS_STEPS, REVIEWS,
   complianceFor, distributeDays, fmtVal,
 } from "@/lib/data";
 import { useStore } from "@/lib/store";
@@ -18,7 +18,7 @@ import { supabase } from "@/lib/supabase";
 import { isoKey } from "@/lib/date";
 import { AddBtn, DeleteBtn, ENum, ESelect, EText } from "@/components/editable";
 
-const TABS = ["Resumen", "Acciones", "Orgánico", "Meta Ads", "Revisiones", "Estrategia"] as const;
+const TABS = ["Resumen", "Acciones", "Orgánico", "Meta Ads", "High Ticket", "Revisiones", "Estrategia"] as const;
 
 export default function ClientPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -30,8 +30,6 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
   if (!client) notFound();
 
   const pct = complianceFor(db.actions.filter((a) => a.clientId === id), done);
-  const sales = SALES[id];
-  const org = ORGANIC[id];
   const reviews = REVIEWS.filter((r) => r.clientId === id);
   const goals = db.goals.filter((g) => g.clientId === id);
   const estrategia = db.strategies[id] ?? { ...client.estrategia, oferta: client.oferta };
@@ -63,45 +61,21 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
       {tab === "Resumen" && (
         <div className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <Card className="p-4"><Stat label="Facturación ciclo" value={fmtVal(sales.facturacionCiclo, "usd")} hint={`inversión ${fmtVal(sales.inversionCiclo, "usd")}`} /></Card>
-            <Card className="p-4"><Stat label="ROAS blended" value={sales.inversionCiclo ? fmtVal(sales.facturacionCiclo / sales.inversionCiclo, "x") : "—"} tone={sales.facturacionCiclo / Math.max(1, sales.inversionCiclo) >= 2 ? "ok" : "warn"} /></Card>
-            <Card className="p-4"><Stat label="Cumplimiento sem." value={pct + "%"} tone={pct >= 70 ? "ok" : pct >= 40 ? "warn" : "bad"} /></Card>
-            <Card className="p-4"><Stat label="Leads orgánicos" value={String(org.leads)} hint={`${org.mensajes} mensajes`} /></Card>
+            <Card className="p-4"><Stat label="Cumplimiento sem." value={pct + "%"} tone={pct >= 70 ? "ok" : pct >= 40 ? "warn" : "bad"} hint="acciones del tracker" /></Card>
+            <Card className="p-4"><Stat label="Plan de feed" value={`${db.plans[id]?.feedDias.length ?? 0}/sem`} hint={`historias ${db.plans[id]?.historiasModo === "diaria" ? "diarias" : db.plans[id]?.historiasModo === "lunvie" ? "L–V" : db.plans[id]?.historiasModo === "dias" ? "por días" : "no"}`} /></Card>
+            <Card className="p-4"><Stat label="Metas activas" value={String(goals.length)} hint="ver pestaña Metas" /></Card>
+            <Card className="p-4"><Stat label="Áreas activas" value="4" hint="orgánico · tráfico · embudos · ventas" /></Card>
           </div>
 
-          <div className="grid gap-4 lg:grid-cols-2">
-            <Card>
-              <CardHead title="Metas activas" />
-              <ul className="space-y-3 px-5 py-4">
-                {goals.length === 0 && <li className="text-sm text-dim">Sin metas definidas.</li>}
-                {goals.map((g, i) => {
-                  const p = Math.min(100, Math.round((g.actual / g.objetivo) * 100));
-                  return (
-                    <li key={i}>
-                      <div className="mb-1 flex items-center justify-between text-xs">
-                        <span className="flex items-center gap-2 text-mute">{g.nombre} <AreaBadge area={g.area} /></span>
-                        <span className="tabular-nums text-dim">{fmtVal(g.actual, g.fmt)} / {fmtVal(g.objetivo, g.fmt)} · {g.plazo}</span>
-                      </div>
-                      <Progress pct={p} h={5} color={client.color} />
-                    </li>
-                  );
-                })}
-              </ul>
-            </Card>
-
-            <Card>
-              <CardHead title="Última revisión" sub={reviews[0] ? `Ciclo ${reviews[0].ciclo}` : "Aún sin revisiones"} />
-              {reviews[0] ? (
-                <div className="space-y-3 px-5 py-4 text-sm">
-                  <p><span className="font-medium text-ok">Funcionó:</span> <span className="text-mute">{reviews[0].funciono[0]}</span></p>
-                  <p><span className="font-medium text-bad">No funcionó:</span> <span className="text-mute">{reviews[0].noFunciono[0]}</span></p>
-                  <p><span className="font-medium text-accent2">Decisión:</span> <span className="text-mute">{reviews[0].decisiones[0]}</span></p>
-                </div>
-              ) : (
-                <p className="px-5 py-4 text-sm text-dim">La primera revisión se genera al cerrar el ciclo de 14 días.</p>
-              )}
-            </Card>
-          </div>
+          <Card className="p-5">
+            <p className="text-sm text-mute">Las métricas de negocio de <span className="font-medium text-ink">{client.nombre}</span> se ven en sus pestañas con datos reales:</p>
+            <div className="mt-3 flex flex-wrap gap-2 text-xs">
+              <button onClick={() => setTab("Meta Ads")} className="rounded-lg border border-line px-3 py-1.5 text-mute transition-colors hover:border-accent/50 hover:text-ink">Meta Ads →</button>
+              <button onClick={() => setTab("Orgánico")} className="rounded-lg border border-line px-3 py-1.5 text-mute transition-colors hover:border-accent/50 hover:text-ink">Orgánico →</button>
+              <button onClick={() => setTab("High Ticket")} className="rounded-lg border border-line px-3 py-1.5 text-mute transition-colors hover:border-accent/50 hover:text-ink">High Ticket →</button>
+              <button onClick={() => setTab("Acciones")} className="rounded-lg border border-line px-3 py-1.5 text-mute transition-colors hover:border-accent/50 hover:text-ink">Acciones →</button>
+            </div>
+          </Card>
         </div>
       )}
 
@@ -113,30 +87,15 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
       )}
 
       {tab === "Orgánico" && (
-        <div className="space-y-4">
-          <OrganicLiveCard slugs={client.metaSlugs} color={client.color} />
-          <Card>
-            <CardHead title="Ejecución del plan de contenido" sub="La planificación y las métricas por pieza (reels, stories, carruseles, YouTube) viven en la base de Notion del cliente" />
-            <div className="px-5 py-4">
-              <div className="mb-1.5 flex items-center justify-between text-xs">
-                <span className="text-mute">Piezas publicadas vs plan del ciclo (≥1 semana de antelación)</span>
-                <span className="tabular-nums text-ink">{org.piezasPublicadas}/{org.piezasPlan}</span>
-              </div>
-              <Progress pct={org.piezasPlan ? (org.piezasPublicadas / org.piezasPlan) * 100 : 0} color={client.color} />
-              <div className="mt-3 flex flex-wrap items-center gap-2">
-                <span className="text-xs text-dim">Estados en Notion del cliente:</span>
-                {NOTION_STATES.map((s) => (
-                  <span key={s} className="rounded-full border border-line px-2 py-0.5 text-[11px] text-mute">{s}</span>
-                ))}
-              </div>
-              <p className="mt-3 text-xs text-dim">Plan vigente: Feed {(db.plans[id]?.feedDias.length ?? 0)}/sem · Historias {db.plans[id]?.historiasModo === "diaria" ? "diarias" : db.plans[id]?.historiasModo === "lunvie" ? "L–V" : db.plans[id]?.historiasModo === "dias" ? `${db.plans[id]?.historiasDias.length}/sem` : "no"} · <span className="text-mute">se edita en Estrategia</span></p>
-            </div>
-          </Card>
-        </div>
+        <OrganicLiveCard slugs={client.metaSlugs} color={client.color} />
       )}
 
       {tab === "Meta Ads" && (
         <MetaLiveCard slugs={client.metaSlugs} color={client.color} />
+      )}
+
+      {tab === "High Ticket" && (
+        <HighTicketCard slugs={client.metaSlugs} color={client.color} />
       )}
 
       {tab === "Revisiones" && (
@@ -611,6 +570,128 @@ function MetaDrilldown({ slugs, color }: { slugs: string[]; color: string }) {
   );
 }
 
+// ---------- Embudo High Ticket (desde los pipelines de GoHighLevel) ----------
+
+interface HtRow {
+  fecha: string; pipeline_name: string | null;
+  mensajes: number; respuestas: number; propuestas: number;
+  bookings: number; asistencias: number; ventas: number; facturacion: number; synced_at?: string;
+}
+
+function HighTicketCard({ slugs, color }: { slugs: string[]; color: string }) {
+  const [rows, setRows] = useState<HtRow[] | null>(null);
+  const [preset, setPreset] = useState(30);
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+
+  useEffect(() => {
+    const t = new Date(); const f = new Date(); f.setDate(f.getDate() - 30 + 1);
+    setTo(isoKey(t)); setFrom(isoKey(f));
+  }, []);
+  const applyPreset = (d: number) => {
+    const t = new Date(); const f = new Date(); f.setDate(f.getDate() - d + 1);
+    setPreset(d); setTo(isoKey(t)); setFrom(isoKey(f));
+  };
+  useEffect(() => {
+    if (!from || !to) return;
+    let active = true;
+    (async () => {
+      const { data } = await supabase
+        .from("ht_pipeline")
+        .select("fecha, pipeline_name, mensajes, respuestas, propuestas, bookings, asistencias, ventas, facturacion, synced_at")
+        .in("cliente", slugs).gte("fecha", from).lte("fecha", to).limit(1000);
+      if (!active) return;
+      setRows((data ?? []) as HtRow[]);
+    })();
+    return () => { active = false; };
+  }, [slugs.join(","), from, to]);
+
+  const FilterBar = (
+    <div className="flex flex-wrap items-center gap-2 border-b border-line px-5 py-3">
+      <div className="flex items-center gap-1 rounded-lg border border-line bg-panel p-1">
+        {PRESETS.map((p) => (
+          <button key={p.d} onClick={() => applyPreset(p.d)} className={`rounded-md px-2.5 py-1 text-xs transition-colors ${preset === p.d ? "bg-accent text-white" : "text-mute hover:text-ink"}`}>{p.label}</button>
+        ))}
+      </div>
+      <span className="text-[11px] text-dim">o rango:</span>
+      <input type="date" value={from} onChange={(e) => { setPreset(0); setFrom(e.target.value); }} className="rounded-lg border border-line bg-panel px-2 py-1 text-xs text-ink outline-none focus:border-accent/60" />
+      <span className="text-dim">→</span>
+      <input type="date" value={to} onChange={(e) => { setPreset(0); setTo(e.target.value); }} className="rounded-lg border border-line bg-panel px-2 py-1 text-xs text-ink outline-none focus:border-accent/60" />
+    </div>
+  );
+
+  if (rows === null) return <Card className="p-5 text-sm text-dim">Cargando High Ticket…</Card>;
+
+  const t = rows.reduce((a, r) => {
+    a.mensajes += num(r.mensajes); a.respuestas += num(r.respuestas); a.propuestas += num(r.propuestas);
+    a.bookings += num(r.bookings); a.asistencias += num(r.asistencias); a.ventas += num(r.ventas); a.facturacion += num(r.facturacion);
+    return a;
+  }, { mensajes: 0, respuestas: 0, propuestas: 0, bookings: 0, asistencias: 0, ventas: 0, facturacion: 0 });
+
+  const pct = (a: number, b: number) => (b ? (a / b) * 100 : 0);
+  // Etapas del embudo con su conversión respecto a la etapa anterior
+  const etapas = [
+    { label: "Mensajes recibidos", val: t.mensajes, conv: null as number | null, sub: "entradas al pipeline" },
+    { label: "Respuestas", val: t.respuestas, conv: pct(t.respuestas, t.mensajes), sub: "ratio de respuesta" },
+    { label: "Propuestas de agenda", val: t.propuestas, conv: pct(t.propuestas, t.respuestas), sub: "respuesta → propuesta" },
+    { label: "Agendados / bookings", val: t.bookings, conv: pct(t.bookings, t.propuestas), sub: "propuesta → agenda" },
+    { label: "Asistencias (show)", val: t.asistencias, conv: pct(t.asistencias, t.bookings), sub: "agenda → asistencia" },
+    { label: "Ventas (cierres)", val: t.ventas, conv: pct(t.ventas, t.asistencias), sub: "cierre sobre asistencias" },
+  ];
+  const maxVal = Math.max(1, ...etapas.map((e) => e.val));
+
+  return (
+    <Card>
+      <CardHead
+        title="Embudo High Ticket"
+        sub="Mensaje → respuesta → agenda → asistencia → venta · desde los pipelines de GoHighLevel"
+        right={<span className="flex items-center gap-2 text-[11px] text-dim"><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ok" />{rows.length ? "en vivo" : "sin datos"}</span>}
+      />
+      {FilterBar}
+
+      {rows.length === 0 ? (
+        <p className="px-5 py-6 text-sm text-dim">
+          Sin datos en este período. Cuando conectemos el pipeline de <span className="text-mute">GoHighLevel</span>, la app carga los conteos por stage en <span className="text-mute">ht_pipeline</span> y el embudo se llena solo.
+        </p>
+      ) : (
+        <>
+          {/* KPIs globales */}
+          <div className="grid grid-cols-2 gap-3 px-5 py-4 sm:grid-cols-4">
+            <Stat label="Mensajes → Booking" value={pct(t.bookings, t.mensajes).toFixed(1) + "%"} />
+            <Stat label="Show up rate" value={pct(t.asistencias, t.bookings).toFixed(1) + "%"} tone={pct(t.asistencias, t.bookings) >= 50 ? "ok" : "warn"} />
+            <Stat label="Cierre (venta/show)" value={pct(t.ventas, t.asistencias).toFixed(1) + "%"} tone={pct(t.ventas, t.asistencias) >= 25 ? "ok" : "warn"} />
+            <Stat label="Ventas" value={String(t.ventas)} tone={t.ventas > 0 ? "ok" : undefined} />
+          </div>
+
+          {/* Embudo visual */}
+          <div className="space-y-2 border-t border-line px-5 py-5">
+            {etapas.map((e, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <div className="w-40 shrink-0 text-sm text-mute">{e.label}</div>
+                <div className="relative h-9 flex-1 overflow-hidden rounded-lg bg-soft/40">
+                  <div className="flex h-full items-center rounded-lg px-3 text-sm font-semibold text-bg transition-all"
+                    style={{ width: `${Math.max(12, (e.val / maxVal) * 100)}%`, background: color }}>
+                    {e.val}
+                  </div>
+                </div>
+                <div className="w-32 shrink-0 text-right text-xs">
+                  {e.conv === null ? <span className="text-dim">—</span> : (
+                    <span className={e.conv >= 50 ? "text-ok" : e.conv >= 20 ? "text-warn" : "text-bad"}>{e.conv.toFixed(1)}%</span>
+                  )}
+                  <span className="block text-[10px] text-dim">{e.sub}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+      <p className="border-t border-line px-5 py-2.5 text-[11px] text-dim">
+        Réplica del análisis de high ticket que hoy llevás en planilla, pero automático: cada stage del pipeline de GHL (conversación → agendado → asistió → ganado) alimenta <span className="text-mute">ht_pipeline</span>.
+      </p>
+    </Card>
+  );
+}
+
 // ---------- Orgánico en vivo (Instagram, por pieza — tabla organic_content) ----------
 
 interface OrgRow {
@@ -621,14 +702,29 @@ interface OrgRow {
   interacciones: number; respuestas: number; toques_adelante: number; toques_atras: number; salidas: number;
 }
 
-function esStory(r: OrgRow) {
+type OrgCat = "reel" | "post" | "story" | "otro";
+function categoria(r: OrgRow): OrgCat {
   const t = (r.producto || r.tipo || "").toLowerCase();
-  return t.includes("stor");
+  if (t.includes("stor")) return "story";
+  if (t.includes("reel") || t.includes("video") || t.includes("igtv")) return "reel";
+  if (t.includes("carousel") || t.includes("album") || t.includes("image") || t.includes("photo")) return "post";
+  return "otro";
 }
+const CAT_LABEL: Record<OrgCat, string> = { reel: "Reel", post: "Post", story: "Story", otro: "Otro" };
+const ORG_FILTROS: { key: string; label: string }[] = [
+  { key: "todo", label: "Todo (feed)" }, { key: "post", label: "Post" }, { key: "reel", label: "Reel" }, { key: "otro", label: "Otro" }, { key: "story", label: "Stories" },
+];
+const ORG_FECHAS: { key: string; dias: number | null; label: string }[] = [
+  { key: "todo", dias: null, label: "Todo" }, { key: "30", dias: 30, label: "30 días" }, { key: "90", dias: 90, label: "90 días" }, { key: "365", dias: 365, label: "12 meses" },
+];
 
-function OrganicLiveCard({ slugs, color: _color }: { slugs: string[]; color: string }) {
+function OrganicLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
   const [rows, setRows] = useState<OrgRow[] | null>(null);
   const [syncedAt, setSyncedAt] = useState<string | null>(null);
+  const [filtro, setFiltro] = useState("todo");
+  const [rango, setRango] = useState("todo");
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
 
   useEffect(() => {
     let active = true;
@@ -638,7 +734,7 @@ function OrganicLiveCard({ slugs, color: _color }: { slugs: string[]; color: str
         .select("media_id, tipo, producto, caption, permalink, publicado, fecha, alcance, impresiones, reproducciones, likes, comentarios, guardados, compartidos, interacciones, respuestas, toques_adelante, toques_atras, salidas, synced_at")
         .in("cliente", slugs)
         .order("publicado", { ascending: false, nullsFirst: false })
-        .limit(200);
+        .limit(500);
       if (!active) return;
       setRows((data ?? []) as OrgRow[]);
       if (data && data.length) setSyncedAt((data[0] as any).synced_at);
@@ -650,121 +746,153 @@ function OrganicLiveCard({ slugs, color: _color }: { slugs: string[]; color: str
   if (rows.length === 0) {
     return (
       <Card>
-        <CardHead title="Rendimiento orgánico · Instagram" sub="Reels, posts y stories sincronizados desde Instagram (Supabase)" right={<span className="rounded-full border border-line px-2 py-0.5 text-[11px] text-dim">sin datos aún</span>} />
-        <p className="px-5 py-6 text-sm text-dim">Todavía no llegan métricas de orgánico. En cuanto conectes Instagram en Make y la automatización cargue datos en <span className="text-mute">organic_content</span>, el rendimiento por reel y por story aparece acá automáticamente.</p>
+        <CardHead title="Rendimiento orgánico · Instagram" right={<span className="rounded-full border border-line px-2 py-0.5 text-[11px] text-dim">sin datos aún</span>} />
+        <p className="px-5 py-6 text-sm text-dim">Este negocio todavía no tiene datos de Instagram sincronizados. Cuando la automatización cargue piezas en <span className="text-mute">organic_content</span>, aparecen acá.</p>
       </Card>
     );
   }
 
   const num = (v: unknown) => Number(v) || 0;
-  const stories = rows.filter(esStory);
-  const pieces = rows.filter((r) => !esStory(r));
+  const rowDate = (r: OrgRow) => (r.fecha || (r.publicado ? r.publicado.slice(0, 10) : ""));
+  const fdate = (d: string | null) => (d ? new Date((d.length === 10 ? d + "T00:00:00" : d)).toLocaleDateString("es-CL", { day: "2-digit", month: "short", year: "2-digit" }) : "—");
+  const short = (c: string | null) => (c ? (c.length > 60 ? c.slice(0, 60) + "…" : c) : "(sin texto)");
 
-  const totAlcance = rows.reduce((s, r) => s + num(r.alcance), 0);
-  const totRepro = pieces.reduce((s, r) => s + num(r.reproducciones), 0);
-  const totGuardComp = pieces.reduce((s, r) => s + num(r.guardados) + num(r.compartidos), 0);
-  const totInter = pieces.reduce((s, r) => s + (num(r.interacciones) || num(r.likes) + num(r.comentarios)), 0);
-
-  const fdate = (d: string | null) => (d ? new Date(d).toLocaleDateString("es-CL", { day: "2-digit", month: "short" }) : "—");
-  const short = (c: string | null) => (c ? (c.length > 42 ? c.slice(0, 42) + "…" : c) : "—");
-  const tipoLabel = (r: OrgRow) => {
-    const t = (r.producto || r.tipo || "").toLowerCase();
-    if (t.includes("reel")) return "Reel";
-    if (t.includes("carousel") || t.includes("album")) return "Carrusel";
-    if (t.includes("video") || t.includes("igtv")) return "Video";
-    return "Post";
+  // Filtro de fecha
+  const applyRango = (key: string) => {
+    setRango(key);
+    const p = ORG_FECHAS.find((x) => x.key === key);
+    if (p && p.dias) { const t = new Date(); const f = new Date(); f.setDate(f.getDate() - p.dias); setFrom(isoKey(f)); setTo(isoKey(t)); }
+    else { setFrom(""); setTo(""); }
+  };
+  const inRange = (r: OrgRow) => {
+    if (!from && !to) return true;
+    const d = rowDate(r);
+    return (!from || d >= from) && (!to || d <= to);
   };
 
+  // Filtro de tipo
+  const catFiltro = (r: OrgRow) => {
+    const c = categoria(r);
+    if (filtro === "todo") return c !== "story";
+    return c === filtro;
+  };
+  const shown = rows.filter((r) => inRange(r) && catFiltro(r));
+  const esStoryView = filtro === "story";
+
+  const tot = shown.reduce((a, r) => {
+    a.alcance += num(r.alcance); a.repro += num(r.reproducciones);
+    a.guardComp += num(r.guardados) + num(r.compartidos);
+    a.inter += num(r.interacciones) || num(r.likes) + num(r.comentarios);
+    a.resp += num(r.respuestas); a.salidas += num(r.salidas);
+    return a;
+  }, { alcance: 0, repro: 0, guardComp: 0, inter: 0, resp: 0, salidas: 0 });
+
   return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        <Card className="p-4"><Stat label="Alcance (piezas)" value={totAlcance.toLocaleString("es-CL")} /></Card>
-        <Card className="p-4"><Stat label="Reproducciones" value={totRepro.toLocaleString("es-CL")} /></Card>
-        <Card className="p-4"><Stat label="Guardados + comp." value={totGuardComp.toLocaleString("es-CL")} tone="ok" /></Card>
-        <Card className="p-4"><Stat label="Interacciones" value={totInter.toLocaleString("es-CL")} /></Card>
+    <Card>
+      <CardHead
+        title="Rendimiento orgánico · Instagram"
+        sub="Datos reales por pieza · filtrá por tipo y fecha, y abrí cada publicación"
+        right={<span className="flex items-center gap-2 text-[11px] text-dim"><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ok" />{syncedAt ? `sync ${new Date(syncedAt).toLocaleDateString("es-CL")}` : "en vivo"}</span>}
+      />
+      {/* Filtros */}
+      <div className="flex flex-wrap items-center gap-2 border-b border-line px-5 py-3">
+        <div className="flex items-center gap-1 rounded-lg border border-line bg-panel p-1">
+          {ORG_FILTROS.map((f) => (
+            <button key={f.key} onClick={() => setFiltro(f.key)} className={`rounded-md px-2.5 py-1 text-xs transition-colors ${filtro === f.key ? "bg-accent text-white" : "text-mute hover:text-ink"}`}>{f.label}</button>
+          ))}
+        </div>
+        <span className="ml-1 text-[11px] text-dim">fecha:</span>
+        <div className="flex items-center gap-1 rounded-lg border border-line bg-panel p-1">
+          {ORG_FECHAS.map((f) => (
+            <button key={f.key} onClick={() => applyRango(f.key)} className={`rounded-md px-2 py-1 text-xs transition-colors ${rango === f.key ? "bg-soft text-ink" : "text-mute hover:text-ink"}`}>{f.label}</button>
+          ))}
+        </div>
+        <input type="date" value={from} onChange={(e) => { setRango("custom"); setFrom(e.target.value); }} className="rounded-lg border border-line bg-panel px-2 py-1 text-xs text-ink outline-none focus:border-accent/60" />
+        <span className="text-dim">→</span>
+        <input type="date" value={to} onChange={(e) => { setRango("custom"); setTo(e.target.value); }} className="rounded-lg border border-line bg-panel px-2 py-1 text-xs text-ink outline-none focus:border-accent/60" />
       </div>
 
-      <Card>
-        <CardHead
-          title="Reels y posts"
-          sub="Rendimiento por pieza (datos reales de Instagram)"
-          right={<span className="flex items-center gap-2 text-[11px] text-dim"><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ok" />{syncedAt ? `sync ${new Date(syncedAt).toLocaleDateString("es-CL")}` : "en vivo"}</span>}
-        />
-        {pieces.length === 0 ? (
-          <p className="px-5 py-6 text-sm text-dim">Sin reels/posts registrados todavía.</p>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[760px] border-collapse text-sm">
-              <thead>
-                <tr className="text-[11px] uppercase tracking-wide text-dim">
-                  <th className="py-2 pl-5 pr-3 text-left font-medium">Pieza</th>
-                  <th className="px-3 py-2 text-right font-medium">Alcance</th>
-                  <th className="px-3 py-2 text-right font-medium">Reprod.</th>
-                  <th className="px-3 py-2 text-right font-medium">Likes</th>
-                  <th className="px-3 py-2 text-right font-medium">Coment.</th>
-                  <th className="px-3 py-2 text-right font-medium">Guard.</th>
-                  <th className="py-2 pl-3 pr-5 text-right font-medium">Comp.</th>
-                </tr>
-              </thead>
-              <tbody>
-                {pieces.map((r) => (
+      {/* KPIs del filtro */}
+      <div className="grid grid-cols-2 gap-3 px-5 py-4 sm:grid-cols-4">
+        <Stat label={esStoryView ? "Stories" : "Piezas"} value={String(shown.length)} />
+        <Stat label="Alcance" value={tot.alcance.toLocaleString("es-CL")} />
+        {esStoryView
+          ? <><Stat label="Respuestas" value={tot.resp.toLocaleString("es-CL")} tone="ok" /><Stat label="Salidas" value={tot.salidas.toLocaleString("es-CL")} tone="warn" /></>
+          : <><Stat label="Guardados + comp." value={tot.guardComp.toLocaleString("es-CL")} tone="ok" /><Stat label="Interacciones" value={tot.inter.toLocaleString("es-CL")} /></>}
+      </div>
+
+      {/* Tabla */}
+      {shown.length === 0 ? (
+        <p className="border-t border-line px-5 py-6 text-sm text-dim">Sin {esStoryView ? "stories" : "piezas"} en este filtro/período.</p>
+      ) : (
+        <div className="overflow-x-auto border-t border-line">
+          <table className="w-full min-w-[780px] border-collapse text-sm">
+            <thead>
+              <tr className="text-[11px] uppercase tracking-wide text-dim">
+                <th className="py-2 pl-5 pr-3 text-left font-medium">{esStoryView ? "Story" : "Publicación"}</th>
+                <th className="px-3 py-2 text-right font-medium">Alcance</th>
+                {esStoryView ? (
+                  <>
+                    <th className="px-3 py-2 text-right font-medium">Respuestas</th>
+                    <th className="px-3 py-2 text-right font-medium">Toques →</th>
+                    <th className="px-3 py-2 text-right font-medium">Toques ←</th>
+                    <th className="py-2 pl-3 pr-5 text-right font-medium">Salidas</th>
+                  </>
+                ) : (
+                  <>
+                    <th className="px-3 py-2 text-right font-medium">Reprod.</th>
+                    <th className="px-3 py-2 text-right font-medium">Likes</th>
+                    <th className="px-3 py-2 text-right font-medium">Coment.</th>
+                    <th className="px-3 py-2 text-right font-medium">Guard.</th>
+                    <th className="py-2 pl-3 pr-5 text-right font-medium">Comp.</th>
+                  </>
+                )}
+              </tr>
+            </thead>
+            <tbody>
+              {shown.map((r) => {
+                const cat = categoria(r);
+                return (
                   <tr key={r.media_id} className="border-t border-line/60 hover:bg-soft/25">
                     <td className="py-2.5 pl-5 pr-3">
-                      {r.permalink ? <a href={r.permalink} target="_blank" rel="noreferrer" className="hover:underline">{short(r.caption)}</a> : short(r.caption)}
-                      <span className="text-[10px] text-dim"> · {tipoLabel(r)} · {fdate(r.publicado)}</span>
+                      <div className="flex items-start gap-2.5">
+                        <span className="mt-0.5 shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold" style={{ background: color + "22", color }}>{CAT_LABEL[cat]}</span>
+                        <span className="min-w-0">
+                          {r.permalink
+                            ? <a href={r.permalink} target="_blank" rel="noreferrer" className="hover:underline">{short(r.caption)}</a>
+                            : short(r.caption)}
+                          <span className="block text-[10px] text-dim">{fdate(rowDate(r))}{r.permalink ? " · ver en Instagram ↗" : ""}</span>
+                        </span>
+                      </div>
                     </td>
                     <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.alcance).toLocaleString("es-CL")}</td>
-                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.reproducciones).toLocaleString("es-CL")}</td>
-                    <td className="px-3 py-2.5 text-right tabular-nums">{num(r.likes).toLocaleString("es-CL")}</td>
-                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.comentarios).toLocaleString("es-CL")}</td>
-                    <td className="px-3 py-2.5 text-right tabular-nums text-ok">{num(r.guardados).toLocaleString("es-CL")}</td>
-                    <td className="py-2.5 pl-3 pr-5 text-right tabular-nums">{num(r.compartidos).toLocaleString("es-CL")}</td>
+                    {esStoryView ? (
+                      <>
+                        <td className="px-3 py-2.5 text-right tabular-nums">{num(r.respuestas).toLocaleString("es-CL")}</td>
+                        <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.toques_adelante).toLocaleString("es-CL")}</td>
+                        <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.toques_atras).toLocaleString("es-CL")}</td>
+                        <td className="py-2.5 pl-3 pr-5 text-right tabular-nums text-warn">{num(r.salidas).toLocaleString("es-CL")}</td>
+                      </>
+                    ) : (
+                      <>
+                        <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.reproducciones).toLocaleString("es-CL")}</td>
+                        <td className="px-3 py-2.5 text-right tabular-nums">{num(r.likes).toLocaleString("es-CL")}</td>
+                        <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.comentarios).toLocaleString("es-CL")}</td>
+                        <td className="px-3 py-2.5 text-right tabular-nums text-ok">{num(r.guardados).toLocaleString("es-CL")}</td>
+                        <td className="py-2.5 pl-3 pr-5 text-right tabular-nums">{num(r.compartidos).toLocaleString("es-CL")}</td>
+                      </>
+                    )}
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </Card>
-
-      <Card>
-        <CardHead title="Stories" sub="Rendimiento por story (datos reales de Instagram)" />
-        {stories.length === 0 ? (
-          <p className="px-5 py-6 text-sm text-dim">Sin stories registradas todavía.</p>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[640px] border-collapse text-sm">
-              <thead>
-                <tr className="text-[11px] uppercase tracking-wide text-dim">
-                  <th className="py-2 pl-5 pr-3 text-left font-medium">Story</th>
-                  <th className="px-3 py-2 text-right font-medium">Alcance</th>
-                  <th className="px-3 py-2 text-right font-medium">Respuestas</th>
-                  <th className="px-3 py-2 text-right font-medium">Toques →</th>
-                  <th className="px-3 py-2 text-right font-medium">Toques ←</th>
-                  <th className="py-2 pl-3 pr-5 text-right font-medium">Salidas</th>
-                </tr>
-              </thead>
-              <tbody>
-                {stories.map((r) => (
-                  <tr key={r.media_id} className="border-t border-line/60 hover:bg-soft/25">
-                    <td className="py-2.5 pl-5 pr-3">{short(r.caption) === "—" ? "Story" : short(r.caption)} <span className="text-[10px] text-dim">· {fdate(r.publicado)}</span></td>
-                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.alcance).toLocaleString("es-CL")}</td>
-                    <td className="px-3 py-2.5 text-right tabular-nums">{num(r.respuestas).toLocaleString("es-CL")}</td>
-                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.toques_adelante).toLocaleString("es-CL")}</td>
-                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.toques_atras).toLocaleString("es-CL")}</td>
-                    <td className="py-2.5 pl-3 pr-5 text-right tabular-nums text-warn">{num(r.salidas).toLocaleString("es-CL")}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </Card>
-
-      <p className="px-1 text-[11px] text-dim">
-        Data cruda tal como llega de Instagram (tabla <span className="text-mute">organic_content</span>). Sin números manuales ni inventados.
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+      <p className="border-t border-line px-5 py-2.5 text-[11px] text-dim">
+        Datos reales de Instagram (tabla <span className="text-mute">organic_content</span>). El texto de cada fila es el inicio del caption; el enlace abre la publicación real.
       </p>
-    </div>
+    </Card>
   );
 }
 

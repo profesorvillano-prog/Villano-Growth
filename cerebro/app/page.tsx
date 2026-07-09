@@ -29,9 +29,8 @@ export default function Dashboard() {
       <div className="grid gap-4 lg:grid-cols-3">
         {CLIENTS.map((c) => {
           const pct = complianceFor(actions.filter((a) => a.clientId === c.id), done);
-          const sales = SALES[c.id];
-          const roas = sales.inversionCiclo > 0 ? sales.facturacionCiclo / sales.inversionCiclo : 0;
-          const estado = roas >= 2 && pct >= 30 ? "ok" : roas >= 1 || pct >= 30 ? "warn" : "bad";
+          const nGoals = goals.filter((g) => g.clientId === c.id).length;
+          const estado = pct >= 70 ? "ok" : pct >= 40 ? "warn" : "bad";
           return (
             <Link key={c.id} href={`/clientes/${c.id}`} className="group">
               <Card className="h-full p-5 transition-colors group-hover:border-accent/40">
@@ -47,9 +46,9 @@ export default function Dashboard() {
                 </div>
 
                 <div className="mt-5 grid grid-cols-3 gap-3">
-                  <Stat label="Facturación" value={fmtVal(sales.facturacionCiclo, "usd")} hint="ciclo actual" />
-                  <Stat label="ROAS" value={roas ? fmtVal(roas, "x") : "—"} tone={roas >= 2 ? "ok" : roas > 0 ? "warn" : undefined} hint="blended" />
-                  <Stat label="Cierres" value={String(sales.cierres)} hint={`${sales.agendasPend} agendas pend.`} />
+                  <Stat label="Plan feed" value={`${plans[c.id]?.feedDias.length ?? 0}/sem`} hint="por semana" />
+                  <Stat label="Metas" value={String(nGoals)} hint="activas" />
+                  <Stat label="Cumplim." value={pct + "%"} tone={pct >= 70 ? "ok" : pct >= 40 ? "warn" : undefined} hint="semanal" />
                 </div>
 
                 <div className="mt-4 flex items-center gap-1.5 text-[11px] text-dim">

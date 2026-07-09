@@ -77,11 +77,7 @@ export interface ClientFinance {
   margen: number;         // ingreso - costos operativos asignados
 }
 
-export const FINANZAS: ClientFinance[] = [
-  { clientId: "family", modelo: "Proyecto interno (100%)", feeMensual: 0, inversionAds: 800, facturacionCliente: 2670, ingresoAgencia: 2670, margen: 1490 },
-  { clientId: "marcelo", modelo: "Retainer + 35% rev share", feeMensual: 250, inversionAds: 850, facturacionCliente: 1142, ingresoAgencia: 650, margen: 310 },
-  { clientId: "ezequiel", modelo: "Setup $2k + retainer $500", feeMensual: 500, inversionAds: 120, facturacionCliente: 0, ingresoAgencia: 500, margen: 260 },
-];
+export const FINANZAS: ClientFinance[] = [];
 
 // ---------------- Rendimiento semanal de orgánico (3-4 métricas clave) ----------------
 
@@ -91,22 +87,7 @@ export interface OrganicWeekRow {
   fmt?: "pct" | "n";
 }
 
-export const ORGANIC_WEEKS: Record<string, OrganicWeekRow[]> = {
-  // Family Eaters — sin rendimiento semanal de orgánico cargado todavía.
-  family: [],
-  marcelo: [
-    { label: "Alcance", values: [6900, 7200, 8600, null], fmt: "n" },
-    { label: "Interacción", values: [3.4, 3.8, 4.2, null], fmt: "pct" },
-    { label: "Guardados + compartidos", values: [70, 85, 110, null], fmt: "n" },
-    { label: "Mensajes / DMs", values: [11, 12, 15, null], fmt: "n" },
-  ],
-  ezequiel: [
-    { label: "Alcance", values: [900, 1600, 2400, null], fmt: "n" },
-    { label: "Interacción", values: [5.8, 6.1, 6.6, null], fmt: "pct" },
-    { label: "Guardados + compartidos", values: [28, 41, 55, null], fmt: "n" },
-    { label: "Mensajes / DMs", values: [3, 5, 7, null], fmt: "n" },
-  ],
-};
+export const ORGANIC_WEEKS: Record<string, OrganicWeekRow[]> = {};
 
 export interface Client {
   id: string;
@@ -301,13 +282,7 @@ export interface OrganicSummary {
   piezasPublicadas: number;
 }
 
-export const ORGANIC: Record<string, OrganicSummary> = {
-  // Family Eaters — sin métricas de orgánico registradas todavía (el sync de
-  // GHL/Notion no está activo). Se muestran en 0 hasta que haya datos reales.
-  family: { alcance: 0, seguidores: 0, interaccion: 0, guardados: 0, mensajes: 0, leads: 0, piezasPlan: 0, piezasPublicadas: 0 },
-  marcelo: { alcance: 26100, seguidores: 148, interaccion: 3.9, guardados: 290, mensajes: 41, leads: 12, piezasPlan: 4, piezasPublicadas: 3 },
-  ezequiel: { alcance: 5400, seguidores: 89, interaccion: 6.2, guardados: 130, mensajes: 15, leads: 6, piezasPlan: 4, piezasPublicadas: 2 },
-};
+export const ORGANIC: Record<string, OrganicSummary> = {};
 
 // ---------------- Ventas / resumen por cliente ----------------
 
@@ -323,13 +298,7 @@ export interface SalesSummary {
 // Editar acá si cambia. La inversión real de Family sale de Meta Ads.
 export const TC_CLP_USD = 950;
 
-export const SALES: Record<string, SalesSummary> = {
-  // Family Eaters — datos REALES registrados (no demo):
-  // 3 ventas × $55 = $165 · inversión Meta 104.993 CLP ÷ 950 ≈ $111 · ROAS = 165/111 ≈ 1,5x
-  family: { facturacionCiclo: 165, inversionCiclo: 111, cierres: 3, agendasPend: 0, moneda: "USD" },
-  marcelo: { facturacionCiclo: 1142, inversionCiclo: 850, cierres: 1, agendasPend: 2, moneda: "USD" },
-  ezequiel: { facturacionCiclo: 0, inversionCiclo: 120, cierres: 0, agendasPend: 2, moneda: "USD" },
-};
+export const SALES: Record<string, SalesSummary> = {};
 
 // ---------------- Metas ----------------
 
@@ -343,14 +312,7 @@ export interface Goal {
   plazo: string;
 }
 
-export const GOALS: Goal[] = [
-  { clientId: "family", area: "ventas", nombre: "Facturación del mes", actual: 165, objetivo: 4000, fmt: "usd", plazo: "Julio" },
-  { clientId: "family", area: "trafico", nombre: "ROAS high ticket", actual: 1.5, objetivo: 3, fmt: "x", plazo: "Ciclo" },
-  { clientId: "marcelo", area: "ventas", nombre: "Ventas de ebooks", actual: 22, objetivo: 40, fmt: "n", plazo: "Julio" },
-  { clientId: "marcelo", area: "ventas", nombre: "Cierres HT con setter", actual: 1, objetivo: 4, fmt: "n", plazo: "Julio" },
-  { clientId: "ezequiel", area: "embudos", nombre: "Agendas calificadas", actual: 2, objetivo: 10, fmt: "n", plazo: "Julio" },
-  { clientId: "ezequiel", area: "organico", nombre: "Nuevos seguidores", actual: 89, objetivo: 500, fmt: "n", plazo: "Ago" },
-];
+export const GOALS: Goal[] = [];
 
 // ---------------- Revisiones (ciclo 14 días) ----------------
 
@@ -363,21 +325,7 @@ export interface Review {
   compromisos: { texto: string; R: Person; estado: "pendiente" | "hecho" }[];
 }
 
-export const REVIEWS: Review[] = [
-  {
-    clientId: "marcelo",
-    ciclo: "22 jun – 5 jul",
-    funciono: ["Ebooks despegando: 22 ventas, ROAS LT 3.1x en la semana 3", "Historias L–V sostenidas por primera vez"],
-    noFunciono: ["Cierre por chat: leads calificados quemados por exceso de mensajes (audio 4:30 + VSL + link de pago)", "CTR de ads HT bajo benchmark (1,3% vs >1,5%)"],
-    decisiones: ["Onboarding de Ina (setter) con 10% de comisión por venta de chat", "Feedback constructivo a Marcelo sobre proceso de venta", "Nuevos creativos con vestimenta veterinaria para autoridad"],
-    compromisos: [
-      { texto: "Reunión de presentación Ina ↔ Marcelo", R: "Rodrigo", estado: "pendiente" },
-      { texto: "Inducción de tareas diarias a Ina", R: "Rodrigo", estado: "pendiente" },
-      { texto: "Iterar creativos de ads HT (2 variantes)", R: "Rodrigo", estado: "pendiente" },
-    ],
-  },
-  // Family Eaters — sin revisiones de ciclo registradas todavía.
-];
+export const REVIEWS: Review[] = [];
 
 // ---------------- Alertas ----------------
 
@@ -387,11 +335,7 @@ export interface Alerta {
   clientId: string | null;
 }
 
-export const ALERTAS: Alerta[] = [
-  { tipo: "dato", texto: "Ezequiel: semana 4 de ads sin cargar (vence hoy)", clientId: "ezequiel" },
-  { tipo: "accion", texto: "Marcelo: 'Cliente: revisar Notion + grabar' vencida hace 2 días", clientId: "marcelo" },
-  { tipo: "revision", texto: "Ezequiel: primera revisión de ciclo agendada para el lunes", clientId: "ezequiel" },
-];
+export const ALERTAS: Alerta[] = [];
 
 // ---------------- Helpers ----------------
 
