@@ -9,13 +9,12 @@ import { Card, CardHead, Progress, Stat, Avatar, AreaBadge } from "@/components/
 import { TrackerGrid } from "@/components/tracker";
 import {
   CLIENTS, ContentPlan, DAY_LABELS, HistoriasModo,
-  NOTION_STATES, ORGANIC, ORGANIC_WEEKS, PROCESS_STEPS, REVIEWS, SALES,
+  NOTION_STATES, ORGANIC, PROCESS_STEPS, REVIEWS, SALES,
   complianceFor, distributeDays, fmtVal,
 } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { StrategyData, useData } from "@/lib/db";
 import { supabase } from "@/lib/supabase";
-import { isoKey } from "@/lib/date";
 import { AddBtn, DeleteBtn, ENum, ESelect, EText } from "@/components/editable";
 
 const TABS = ["Resumen", "Acciones", "Orgánico", "Meta Ads", "Revisiones", "Estrategia"] as const;
@@ -114,45 +113,7 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
 
       {tab === "Orgánico" && (
         <div className="space-y-4">
-          <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            <Card className="p-4"><Stat label="Alcance" value={org.alcance.toLocaleString("es-CL")} /></Card>
-            <Card className="p-4"><Stat label="Seguidores +" value={"+" + org.seguidores} /></Card>
-            <Card className="p-4"><Stat label="Interacción" value={org.interaccion + "%"} tone="ok" /></Card>
-            <Card className="p-4"><Stat label="Guardados" value={String(org.guardados)} /></Card>
-            <Card className="p-4"><Stat label="Mensajes" value={String(org.mensajes)} /></Card>
-            <Card className="p-4"><Stat label="Leads" value={String(org.leads)} tone="ok" /></Card>
-          </div>
-          <Card>
-            <CardHead title="Rendimiento semanal" sub="Las 4 métricas clave para vender orgánico en Instagram — revisión semanal de Patricio" />
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[560px] border-collapse text-sm">
-                <thead>
-                  <tr className="text-[11px] uppercase tracking-wide text-dim">
-                    <th className="py-2 pl-5 pr-3 text-left font-medium">Métrica</th>
-                    {["Sem 1", "Sem 2", "Sem 3", "Sem 4"].map((s) => (
-                      <th key={s} className="px-3 py-2 text-right font-medium">{s}</th>
-                    ))}
-                    <th className="py-2 pl-3 pr-5 text-right font-medium">Tendencia</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {(ORGANIC_WEEKS[id] ?? []).map((r, i) => {
-                    const vals = r.values.filter((v): v is number => v !== null);
-                    const up = vals.length >= 2 && vals[vals.length - 1] > vals[0];
-                    return (
-                      <tr key={i} className="border-t border-line/60 hover:bg-soft/30">
-                        <td className="py-2 pl-5 pr-3 text-mute">{r.label}</td>
-                        {r.values.map((v, j) => (
-                          <td key={j} className={`px-3 py-2 text-right tabular-nums ${v === null ? "text-dim" : ""}`}>{fmtVal(v, r.fmt)}</td>
-                        ))}
-                        <td className={`py-2 pl-3 pr-5 text-right text-xs font-medium ${up ? "text-ok" : "text-warn"}`}>{up ? "↗ subiendo" : "→ plana"}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </Card>
+          <OrganicLiveCard slugs={client.metaSlugs} color={client.color} />
           <Card>
             <CardHead title="Ejecución del plan de contenido" sub="La planificación y las métricas por pieza (reels, stories, carruseles, YouTube) viven en la base de Notion del cliente" />
             <div className="px-5 py-4">
@@ -160,7 +121,7 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
                 <span className="text-mute">Piezas publicadas vs plan del ciclo (≥1 semana de antelación)</span>
                 <span className="tabular-nums text-ink">{org.piezasPublicadas}/{org.piezasPlan}</span>
               </div>
-              <Progress pct={(org.piezasPublicadas / org.piezasPlan) * 100} color={client.color} />
+              <Progress pct={org.piezasPlan ? (org.piezasPublicadas / org.piezasPlan) * 100 : 0} color={client.color} />
               <div className="mt-3 flex flex-wrap items-center gap-2">
                 <span className="text-xs text-dim">Estados en Notion del cliente:</span>
                 {NOTION_STATES.map((s) => (
@@ -371,239 +332,276 @@ function ContentPlanEditor({ plan, onChange, color }: { plan: ContentPlan; onCha
   );
 }
 
-// ---------- Explorador de Meta Ads (datos reales · filtro de fecha · drill-down) ----------
+// ---------- Meta Ads en vivo (datos reales desde Supabase campaign_metrics) ----------
 
 interface MetaRow {
-  fecha: string; account_name: string | null; currency: string | null;
-  campaign_id: string | null; campaign_name: string | null;
-  adset_id: string | null; adset_name: string | null;
-  ad_id: string | null; ad_name: string | null;
-  thumbnail_url: string | null; preview_url: string | null;
-  spend: number; impressions: number; clicks: number;
-  leads: number; purchases: number; purchase_value: number; synced_at?: string;
-}
-
-const NIVELES = [
-  { key: "campaign", idF: "campaign_id", nameF: "campaign_name", label: "Campañas", singular: "Campaña" },
-  { key: "adset", idF: "adset_id", nameF: "adset_name", label: "Conjuntos", singular: "Conjunto" },
-  { key: "ad", idF: "ad_id", nameF: "ad_name", label: "Anuncios", singular: "Anuncio" },
-] as const;
-
-const PRESETS: { d: number; label: string }[] = [
-  { d: 7, label: "7 días" }, { d: 14, label: "14 días" }, { d: 30, label: "30 días" }, { d: 90, label: "90 días" },
-];
-
-type Agg = { spend: number; impressions: number; clicks: number; leads: number; purchases: number; purchase_value: number };
-const emptyAgg = (): Agg => ({ spend: 0, impressions: 0, clicks: 0, leads: 0, purchases: 0, purchase_value: 0 });
-function addRow(a: Agg, r: MetaRow) {
-  a.spend += Number(r.spend) || 0; a.impressions += Number(r.impressions) || 0;
-  a.clicks += Number(r.clicks) || 0; a.leads += Number(r.leads) || 0;
-  a.purchases += Number(r.purchases) || 0; a.purchase_value += Number(r.purchase_value) || 0;
-  return a;
+  fecha: string; account_name: string | null; campaign_name: string | null;
+  currency: string | null; spend: number; impressions: number; clicks: number;
+  ctr: number; cpc: number; reach: number;
+  leads: number; purchases: number; purchase_value: number; roas_meta: number;
 }
 
 function MetaLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
   const [rows, setRows] = useState<MetaRow[] | null>(null);
   const [syncedAt, setSyncedAt] = useState<string | null>(null);
-  const [preset, setPreset] = useState(30);
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
-  const [path, setPath] = useState<{ id: string; name: string }[]>([]);
-
-  // Inicializa el rango al montar (fecha real del navegador)
-  useEffect(() => {
-    const t = new Date();
-    const f = new Date(); f.setDate(f.getDate() - 30 + 1);
-    setTo(isoKey(t)); setFrom(isoKey(f));
-  }, []);
-
-  // Cambia el rango con un preset
-  const applyPreset = (d: number) => {
-    const t = new Date();
-    const f = new Date(); f.setDate(f.getDate() - d + 1);
-    setPreset(d); setTo(isoKey(t)); setFrom(isoKey(f)); setPath([]);
-  };
 
   useEffect(() => {
-    if (!from || !to) return;
     let active = true;
     (async () => {
       const { data } = await supabase
         .from("campaign_metrics")
-        .select("fecha, account_name, currency, campaign_id, campaign_name, adset_id, adset_name, ad_id, ad_name, thumbnail_url, preview_url, spend, impressions, clicks, leads, purchases, purchase_value, synced_at")
+        .select("fecha, account_name, campaign_name, currency, spend, impressions, clicks, ctr, cpc, reach, leads, purchases, purchase_value, roas_meta, synced_at")
         .in("cliente", slugs)
-        .gte("fecha", from)
-        .lte("fecha", to)
         .order("fecha", { ascending: false })
-        .limit(2000);
+        .limit(50);
       if (!active) return;
-      const rs = (data ?? []) as MetaRow[];
-      setRows(rs);
-      if (rs.length) setSyncedAt((rs[0] as any).synced_at ?? null);
+      setRows((data ?? []) as MetaRow[]);
+      if (data && data.length) setSyncedAt((data[0] as any).synced_at);
     })();
     return () => { active = false; };
-  }, [slugs.join(","), from, to]);
+  }, [slugs.join(",")]);
 
-  if (rows === null) return <Card className="p-6 text-sm text-dim">Cargando Meta Ads…</Card>;
-
-  const cur = rows[0]?.currency || "CLP";
-  const money = (n: number) => `${cur} ${Math.round(n).toLocaleString("es-CL")}`;
-
-  // Filtra por el camino de drill-down actual
-  let filtered = rows;
-  path.forEach((step, i) => {
-    const f = NIVELES[i].idF as keyof MetaRow;
-    filtered = filtered.filter((r) => (r[f] ?? "") === step.id);
-  });
-
-  const depth = path.length;
-  const nivel = NIVELES[depth]; // undefined si ya estamos en el máximo detalle
-  const totals = filtered.reduce((a, r) => addRow(a, r), emptyAgg());
-
-  // Agrupa por el nivel siguiente
-  type Grp = { id: string; name: string; thumb: string | null; preview: string | null; agg: Agg };
-  let groups: Grp[] = [];
-  if (nivel) {
-    const idF = nivel.idF as keyof MetaRow;
-    const nameF = nivel.nameF as keyof MetaRow;
-    const map = new Map<string, Grp>();
-    for (const r of filtered) {
-      const id = (r[idF] as string) ?? "";
-      if (!id) continue; // no hay datos a este nivel
-      const g = map.get(id) ?? { id, name: (r[nameF] as string) || id, thumb: r.thumbnail_url, preview: r.preview_url, agg: emptyAgg() };
-      addRow(g.agg, r);
-      if (!g.thumb && r.thumbnail_url) g.thumb = r.thumbnail_url;
-      map.set(id, g);
-    }
-    groups = [...map.values()].sort((a, b) => b.agg.spend - a.agg.spend);
+  if (rows === null) {
+    return <Card className="p-5 text-sm text-dim">Cargando Meta Ads…</Card>;
+  }
+  if (rows.length === 0) {
+    return (
+      <Card>
+        <CardHead title="Meta Ads · en vivo" sub="Sincronizado desde Facebook a Supabase" right={<span className="rounded-full border border-line px-2 py-0.5 text-[11px] text-dim">sin datos aún</span>} />
+        <p className="px-5 py-6 text-sm text-dim">Todavía no llegan métricas de este cliente. En cuanto la automatización cargue datos en <span className="text-mute">campaign_metrics</span>, aparecen acá automáticamente.</p>
+      </Card>
+    );
   }
 
-  const ctr = (a: Agg) => (a.impressions ? (a.clicks / a.impressions) * 100 : 0);
-  const cpc = (a: Agg) => (a.clicks ? a.spend / a.clicks : 0);
-  const esAnuncio = nivel?.key === "ad";
+  // Espejo de Meta: cada corrida guarda el total de "Últimos 30 días" de la
+  // cuenta (una fila por cuenta y fecha de sync). Mostramos SOLO el snapshot más
+  // reciente — el número es de Meta, no un recálculo — para que coincida 1:1.
+  const asOf = rows[0].fecha;
+  const latest = rows.filter((r) => r.fecha === asOf);
+  const num = (v: unknown) => Number(v) || 0;
+
+  const cur = latest[0].currency || "";
+  const money = (n: number) => `${cur ? cur + " " : "$"}${Math.round(n).toLocaleString("es-CL")}`;
+  const totSpend = latest.reduce((s, r) => s + num(r.spend), 0);
+  const totImpr = latest.reduce((s, r) => s + num(r.impressions), 0);
+  const totClicks = latest.reduce((s, r) => s + num(r.clicks), 0);
+  const totCtr = totImpr ? (totClicks / totImpr) * 100 : 0;
+  const asOfLabel = new Date(asOf + "T00:00:00").toLocaleDateString("es-CL", { day: "2-digit", month: "short" });
 
   return (
     <Card>
       <CardHead
-        title="Meta Ads"
-        sub="Datos reales de la cuenta · filtrá por fecha y hacé clic para ver el detalle"
+        title="Meta Ads · últimos 30 días"
+        sub="Espejo exacto de la cuenta en Meta Ads Manager (mismos números)"
         right={
           <span className="flex items-center gap-2 text-[11px] text-dim">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ok" />
-            {syncedAt ? `sync ${new Date(syncedAt).toLocaleDateString("es-CL")}` : "en vivo"}
+            al {asOfLabel}
           </span>
         }
       />
-
-      {/* Filtro de fecha */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-line px-5 py-3">
-        <div className="flex items-center gap-1 rounded-lg border border-line bg-panel p-1">
-          {PRESETS.map((p) => (
-            <button
-              key={p.d}
-              onClick={() => applyPreset(p.d)}
-              className={`rounded-md px-2.5 py-1 text-xs transition-colors ${preset === p.d ? "bg-accent text-white" : "text-mute hover:text-ink"}`}
-            >
-              {p.label}
-            </button>
-          ))}
-        </div>
-        <span className="text-[11px] text-dim">o rango:</span>
-        <input type="date" value={from} onChange={(e) => { setPreset(0); setFrom(e.target.value); setPath([]); }}
-          className="rounded-lg border border-line bg-panel px-2 py-1 text-xs text-ink outline-none focus:border-accent/60" />
-        <span className="text-dim">→</span>
-        <input type="date" value={to} onChange={(e) => { setPreset(0); setTo(e.target.value); setPath([]); }}
-          className="rounded-lg border border-line bg-panel px-2 py-1 text-xs text-ink outline-none focus:border-accent/60" />
+      <div className="grid grid-cols-2 gap-3 px-5 py-4 sm:grid-cols-4">
+        <Stat label="Inversión (30 días)" value={money(totSpend)} />
+        <Stat label="Impresiones" value={totImpr.toLocaleString("es-CL")} />
+        <Stat label="Clics" value={totClicks.toLocaleString("es-CL")} />
+        <Stat label="CTR" value={totImpr ? totCtr.toFixed(2) + "%" : "—"} />
       </div>
-
-      {/* Breadcrumb de drill-down */}
-      <div className="flex flex-wrap items-center gap-1.5 px-5 py-2.5 text-xs">
-        <button onClick={() => setPath([])} className={`rounded px-1.5 py-0.5 ${depth === 0 ? "font-medium text-ink" : "text-accent2 hover:bg-soft"}`}>
-          {rows[0]?.account_name || "Cuenta"}
-        </button>
-        {path.map((step, i) => (
-          <span key={i} className="flex items-center gap-1.5">
-            <span className="text-dim">›</span>
-            <button onClick={() => setPath(path.slice(0, i + 1))} className={`rounded px-1.5 py-0.5 ${i === depth - 1 ? "font-medium text-ink" : "text-accent2 hover:bg-soft"}`}>
-              {step.name}
-            </button>
-          </span>
-        ))}
-      </div>
-
-      {/* Totales del nivel actual */}
-      <div className="grid grid-cols-2 gap-3 px-5 pb-4 sm:grid-cols-5">
-        <Stat label="Inversión" value={money(totals.spend)} />
-        <Stat label="Impresiones" value={totals.impressions.toLocaleString("es-CL")} />
-        <Stat label="Clics" value={totals.clicks.toLocaleString("es-CL")} />
-        <Stat label="CTR" value={ctr(totals).toFixed(2) + "%"} />
-        <Stat label="Compras" value={String(totals.purchases)} tone={totals.purchases > 0 ? "ok" : undefined} />
-      </div>
-
-      {/* Tabla del nivel siguiente */}
-      {!nivel ? (
-        <p className="border-t border-line px-5 py-6 text-sm text-dim">Estás viendo el máximo detalle (anuncio).</p>
-      ) : groups.length === 0 ? (
-        <div className="border-t border-line px-5 py-6 text-sm text-dim">
-          Sin desglose por <span className="text-mute">{nivel.singular.toLowerCase()}</span> en este período.
-          <span className="block text-[11px]">Para el drill-down por campaña → conjunto → anuncio (con preview), la automatización debe cargar los datos a nivel anuncio en <span className="text-mute">campaign_metrics</span>.</span>
-        </div>
-      ) : (
-        <div className="overflow-x-auto border-t border-line">
-          <table className="w-full min-w-[760px] border-collapse text-sm">
-            <thead>
-              <tr className="text-[11px] uppercase tracking-wide text-dim">
-                <th className="py-2 pl-5 pr-3 text-left font-medium">{nivel.singular}</th>
-                <th className="px-3 py-2 text-right font-medium">Inversión</th>
-                <th className="px-3 py-2 text-right font-medium">Impres.</th>
-                <th className="px-3 py-2 text-right font-medium">Clics</th>
-                <th className="px-3 py-2 text-right font-medium">CTR</th>
-                <th className="px-3 py-2 text-right font-medium">CPC</th>
-                <th className="px-3 py-2 text-right font-medium">Leads</th>
-                <th className="py-2 pl-3 pr-5 text-right font-medium">Compras</th>
-              </tr>
-            </thead>
-            <tbody>
-              {groups.map((g) => (
-                <tr
-                  key={g.id}
-                  onClick={() => !esAnuncio && setPath([...path, { id: g.id, name: g.name }])}
-                  className={`border-t border-line/60 ${esAnuncio ? "" : "cursor-pointer"} hover:bg-soft/30`}
-                >
-                  <td className="py-2.5 pl-5 pr-3">
-                    <div className="flex items-center gap-2.5">
-                      {esAnuncio && (
-                        g.thumb
-                          ? <img src={g.thumb} alt="" className="h-10 w-10 shrink-0 rounded-md object-cover" onError={(e) => ((e.target as HTMLImageElement).style.display = "none")} />
-                          : <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-soft text-dim">🖼</span>
-                      )}
-                      <span className="flex items-center gap-1.5">
-                        {g.name}
-                        {!esAnuncio && <span className="text-accent2">›</span>}
-                        {esAnuncio && g.preview && (
-                          <a href={g.preview} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="text-[10px] text-accent2 hover:underline">ver en Meta ↗</a>
-                        )}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-3 py-2.5 text-right tabular-nums">{money(g.agg.spend)}</td>
-                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{g.agg.impressions.toLocaleString("es-CL")}</td>
-                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{g.agg.clicks.toLocaleString("es-CL")}</td>
-                  <td className="px-3 py-2.5 text-right tabular-nums">{ctr(g.agg).toFixed(2)}%</td>
-                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{money(cpc(g.agg))}</td>
-                  <td className="px-3 py-2.5 text-right tabular-nums">{g.agg.leads}</td>
-                  <td className="py-2.5 pl-3 pr-5 text-right tabular-nums">{g.agg.purchases}</td>
+      <div className="overflow-x-auto border-t border-line">
+        <table className="w-full min-w-[720px] border-collapse text-sm">
+          <thead>
+            <tr className="text-[11px] uppercase tracking-wide text-dim">
+              <th className="py-2 pl-5 pr-3 text-left font-medium">Cuenta</th>
+              <th className="px-3 py-2 text-right font-medium">Inversión</th>
+              <th className="px-3 py-2 text-right font-medium">Impres.</th>
+              <th className="px-3 py-2 text-right font-medium">Clics</th>
+              <th className="px-3 py-2 text-right font-medium">CTR</th>
+              <th className="px-3 py-2 text-right font-medium">CPC</th>
+              <th className="px-3 py-2 text-right font-medium">Leads</th>
+              <th className="py-2 pl-3 pr-5 text-right font-medium">Compras</th>
+            </tr>
+          </thead>
+          <tbody>
+            {latest.map((r, i) => {
+              const name = r.account_name || r.campaign_name || "Cuenta";
+              const ctr = num(r.ctr) || (num(r.impressions) ? (num(r.clicks) / num(r.impressions)) * 100 : 0);
+              const cpc = num(r.cpc) || (num(r.clicks) ? num(r.spend) / num(r.clicks) : 0);
+              return (
+                <tr key={name + i} className="border-t border-line/60 hover:bg-soft/25">
+                  <td className="py-2.5 pl-5 pr-3">{name} <span className="text-[10px] text-dim">· 30d</span></td>
+                  <td className="px-3 py-2.5 text-right tabular-nums">{money(num(r.spend))}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.impressions).toLocaleString("es-CL")}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.clicks).toLocaleString("es-CL")}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums">{ctr.toFixed(2)}%</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-mute">{money(cpc)}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums">{num(r.leads)}</td>
+                  <td className="py-2.5 pl-3 pr-5 text-right tabular-nums">{num(r.purchases)}</td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
       <p className="border-t border-line px-5 py-2.5 text-[11px] text-dim">
-        Espejo de <span className="text-mute">campaign_metrics</span> (lo que llega de Meta). El total lo calcula Meta, no la app — por eso coincide.
+        Espejo de la vista <span className="text-mute">Últimos 30 días</span> de Meta Ads (tabla <span className="text-mute">campaign_metrics</span>). El total lo calcula Meta, no la app — por eso coincide. Última sincronización: {syncedAt ? new Date(syncedAt).toLocaleString("es-CL") : "—"}.
       </p>
     </Card>
+  );
+}
+
+// ---------- Orgánico en vivo (Instagram, por pieza — tabla organic_content) ----------
+
+interface OrgRow {
+  media_id: string; tipo: string | null; producto: string | null;
+  caption: string | null; permalink: string | null; publicado: string | null; fecha: string | null;
+  alcance: number; impresiones: number; reproducciones: number;
+  likes: number; comentarios: number; guardados: number; compartidos: number;
+  interacciones: number; respuestas: number; toques_adelante: number; toques_atras: number; salidas: number;
+}
+
+function esStory(r: OrgRow) {
+  const t = (r.producto || r.tipo || "").toLowerCase();
+  return t.includes("stor");
+}
+
+function OrganicLiveCard({ slugs, color: _color }: { slugs: string[]; color: string }) {
+  const [rows, setRows] = useState<OrgRow[] | null>(null);
+  const [syncedAt, setSyncedAt] = useState<string | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      const { data } = await supabase
+        .from("organic_content")
+        .select("media_id, tipo, producto, caption, permalink, publicado, fecha, alcance, impresiones, reproducciones, likes, comentarios, guardados, compartidos, interacciones, respuestas, toques_adelante, toques_atras, salidas, synced_at")
+        .in("cliente", slugs)
+        .order("publicado", { ascending: false, nullsFirst: false })
+        .limit(200);
+      if (!active) return;
+      setRows((data ?? []) as OrgRow[]);
+      if (data && data.length) setSyncedAt((data[0] as any).synced_at);
+    })();
+    return () => { active = false; };
+  }, [slugs.join(",")]);
+
+  if (rows === null) return <Card className="p-5 text-sm text-dim">Cargando orgánico…</Card>;
+  if (rows.length === 0) {
+    return (
+      <Card>
+        <CardHead title="Rendimiento orgánico · Instagram" sub="Reels, posts y stories sincronizados desde Instagram (Supabase)" right={<span className="rounded-full border border-line px-2 py-0.5 text-[11px] text-dim">sin datos aún</span>} />
+        <p className="px-5 py-6 text-sm text-dim">Todavía no llegan métricas de orgánico. En cuanto conectes Instagram en Make y la automatización cargue datos en <span className="text-mute">organic_content</span>, el rendimiento por reel y por story aparece acá automáticamente.</p>
+      </Card>
+    );
+  }
+
+  const num = (v: unknown) => Number(v) || 0;
+  const stories = rows.filter(esStory);
+  const pieces = rows.filter((r) => !esStory(r));
+
+  const totAlcance = rows.reduce((s, r) => s + num(r.alcance), 0);
+  const totRepro = pieces.reduce((s, r) => s + num(r.reproducciones), 0);
+  const totGuardComp = pieces.reduce((s, r) => s + num(r.guardados) + num(r.compartidos), 0);
+  const totInter = pieces.reduce((s, r) => s + (num(r.interacciones) || num(r.likes) + num(r.comentarios)), 0);
+
+  const fdate = (d: string | null) => (d ? new Date(d).toLocaleDateString("es-CL", { day: "2-digit", month: "short" }) : "—");
+  const short = (c: string | null) => (c ? (c.length > 42 ? c.slice(0, 42) + "…" : c) : "—");
+  const tipoLabel = (r: OrgRow) => {
+    const t = (r.producto || r.tipo || "").toLowerCase();
+    if (t.includes("reel")) return "Reel";
+    if (t.includes("carousel") || t.includes("album")) return "Carrusel";
+    if (t.includes("video") || t.includes("igtv")) return "Video";
+    return "Post";
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <Card className="p-4"><Stat label="Alcance (piezas)" value={totAlcance.toLocaleString("es-CL")} /></Card>
+        <Card className="p-4"><Stat label="Reproducciones" value={totRepro.toLocaleString("es-CL")} /></Card>
+        <Card className="p-4"><Stat label="Guardados + comp." value={totGuardComp.toLocaleString("es-CL")} tone="ok" /></Card>
+        <Card className="p-4"><Stat label="Interacciones" value={totInter.toLocaleString("es-CL")} /></Card>
+      </div>
+
+      <Card>
+        <CardHead
+          title="Reels y posts"
+          sub="Rendimiento por pieza (datos reales de Instagram)"
+          right={<span className="flex items-center gap-2 text-[11px] text-dim"><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ok" />{syncedAt ? `sync ${new Date(syncedAt).toLocaleDateString("es-CL")}` : "en vivo"}</span>}
+        />
+        {pieces.length === 0 ? (
+          <p className="px-5 py-6 text-sm text-dim">Sin reels/posts registrados todavía.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[760px] border-collapse text-sm">
+              <thead>
+                <tr className="text-[11px] uppercase tracking-wide text-dim">
+                  <th className="py-2 pl-5 pr-3 text-left font-medium">Pieza</th>
+                  <th className="px-3 py-2 text-right font-medium">Alcance</th>
+                  <th className="px-3 py-2 text-right font-medium">Reprod.</th>
+                  <th className="px-3 py-2 text-right font-medium">Likes</th>
+                  <th className="px-3 py-2 text-right font-medium">Coment.</th>
+                  <th className="px-3 py-2 text-right font-medium">Guard.</th>
+                  <th className="py-2 pl-3 pr-5 text-right font-medium">Comp.</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pieces.map((r) => (
+                  <tr key={r.media_id} className="border-t border-line/60 hover:bg-soft/25">
+                    <td className="py-2.5 pl-5 pr-3">
+                      {r.permalink ? <a href={r.permalink} target="_blank" rel="noreferrer" className="hover:underline">{short(r.caption)}</a> : short(r.caption)}
+                      <span className="text-[10px] text-dim"> · {tipoLabel(r)} · {fdate(r.publicado)}</span>
+                    </td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.alcance).toLocaleString("es-CL")}</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.reproducciones).toLocaleString("es-CL")}</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums">{num(r.likes).toLocaleString("es-CL")}</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.comentarios).toLocaleString("es-CL")}</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-ok">{num(r.guardados).toLocaleString("es-CL")}</td>
+                    <td className="py-2.5 pl-3 pr-5 text-right tabular-nums">{num(r.compartidos).toLocaleString("es-CL")}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Card>
+
+      <Card>
+        <CardHead title="Stories" sub="Rendimiento por story (datos reales de Instagram)" />
+        {stories.length === 0 ? (
+          <p className="px-5 py-6 text-sm text-dim">Sin stories registradas todavía.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[640px] border-collapse text-sm">
+              <thead>
+                <tr className="text-[11px] uppercase tracking-wide text-dim">
+                  <th className="py-2 pl-5 pr-3 text-left font-medium">Story</th>
+                  <th className="px-3 py-2 text-right font-medium">Alcance</th>
+                  <th className="px-3 py-2 text-right font-medium">Respuestas</th>
+                  <th className="px-3 py-2 text-right font-medium">Toques →</th>
+                  <th className="px-3 py-2 text-right font-medium">Toques ←</th>
+                  <th className="py-2 pl-3 pr-5 text-right font-medium">Salidas</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stories.map((r) => (
+                  <tr key={r.media_id} className="border-t border-line/60 hover:bg-soft/25">
+                    <td className="py-2.5 pl-5 pr-3">{short(r.caption) === "—" ? "Story" : short(r.caption)} <span className="text-[10px] text-dim">· {fdate(r.publicado)}</span></td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.alcance).toLocaleString("es-CL")}</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums">{num(r.respuestas).toLocaleString("es-CL")}</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.toques_adelante).toLocaleString("es-CL")}</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-mute">{num(r.toques_atras).toLocaleString("es-CL")}</td>
+                    <td className="py-2.5 pl-3 pr-5 text-right tabular-nums text-warn">{num(r.salidas).toLocaleString("es-CL")}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Card>
+
+      <p className="px-1 text-[11px] text-dim">
+        Data cruda tal como llega de Instagram (tabla <span className="text-mute">organic_content</span>). Sin números manuales ni inventados.
+      </p>
+    </div>
   );
 }
 

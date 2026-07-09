@@ -92,12 +92,8 @@ export interface OrganicWeekRow {
 }
 
 export const ORGANIC_WEEKS: Record<string, OrganicWeekRow[]> = {
-  family: [
-    { label: "Alcance", values: [11200, 12800, 15400, null], fmt: "n" },
-    { label: "Interacción", values: [4.2, 4.6, 5.1, null], fmt: "pct" },
-    { label: "Guardados + compartidos", values: [180, 210, 250, null], fmt: "n" },
-    { label: "Mensajes / DMs", values: [14, 17, 21, null], fmt: "n" },
-  ],
+  // Family Eaters — sin rendimiento semanal de orgánico cargado todavía.
+  family: [],
   marcelo: [
     { label: "Alcance", values: [6900, 7200, 8600, null], fmt: "n" },
     { label: "Interacción", values: [3.4, 3.8, 4.2, null], fmt: "pct" },
@@ -306,7 +302,9 @@ export interface OrganicSummary {
 }
 
 export const ORGANIC: Record<string, OrganicSummary> = {
-  family: { alcance: 48200, seguidores: 312, interaccion: 4.8, guardados: 640, mensajes: 58, leads: 17, piezasPlan: 4, piezasPublicadas: 4 },
+  // Family Eaters — sin métricas de orgánico registradas todavía (el sync de
+  // GHL/Notion no está activo). Se muestran en 0 hasta que haya datos reales.
+  family: { alcance: 0, seguidores: 0, interaccion: 0, guardados: 0, mensajes: 0, leads: 0, piezasPlan: 0, piezasPublicadas: 0 },
   marcelo: { alcance: 26100, seguidores: 148, interaccion: 3.9, guardados: 290, mensajes: 41, leads: 12, piezasPlan: 4, piezasPublicadas: 3 },
   ezequiel: { alcance: 5400, seguidores: 89, interaccion: 6.2, guardados: 130, mensajes: 15, leads: 6, piezasPlan: 4, piezasPublicadas: 2 },
 };
@@ -321,8 +319,14 @@ export interface SalesSummary {
   moneda: "USD";
 }
 
+// Tipo de cambio usado para pasar la inversión de Meta (CLP) a USD.
+// Editar acá si cambia. La inversión real de Family sale de Meta Ads.
+export const TC_CLP_USD = 950;
+
 export const SALES: Record<string, SalesSummary> = {
-  family: { facturacionCiclo: 2670, inversionCiclo: 800, cierres: 3, agendasPend: 4, moneda: "USD" },
+  // Family Eaters — datos REALES registrados (no demo):
+  // 3 ventas × $55 = $165 · inversión Meta 104.993 CLP ÷ 950 ≈ $111 · ROAS = 165/111 ≈ 1,5x
+  family: { facturacionCiclo: 165, inversionCiclo: 111, cierres: 3, agendasPend: 0, moneda: "USD" },
   marcelo: { facturacionCiclo: 1142, inversionCiclo: 850, cierres: 1, agendasPend: 2, moneda: "USD" },
   ezequiel: { facturacionCiclo: 0, inversionCiclo: 120, cierres: 0, agendasPend: 2, moneda: "USD" },
 };
@@ -340,8 +344,8 @@ export interface Goal {
 }
 
 export const GOALS: Goal[] = [
-  { clientId: "family", area: "ventas", nombre: "Facturación del mes", actual: 2670, objetivo: 4000, fmt: "usd", plazo: "Julio" },
-  { clientId: "family", area: "trafico", nombre: "ROAS high ticket", actual: 3.3, objetivo: 3, fmt: "x", plazo: "Ciclo" },
+  { clientId: "family", area: "ventas", nombre: "Facturación del mes", actual: 165, objetivo: 4000, fmt: "usd", plazo: "Julio" },
+  { clientId: "family", area: "trafico", nombre: "ROAS high ticket", actual: 1.5, objetivo: 3, fmt: "x", plazo: "Ciclo" },
   { clientId: "marcelo", area: "ventas", nombre: "Ventas de ebooks", actual: 22, objetivo: 40, fmt: "n", plazo: "Julio" },
   { clientId: "marcelo", area: "ventas", nombre: "Cierres HT con setter", actual: 1, objetivo: 4, fmt: "n", plazo: "Julio" },
   { clientId: "ezequiel", area: "embudos", nombre: "Agendas calificadas", actual: 2, objetivo: 10, fmt: "n", plazo: "Julio" },
@@ -372,17 +376,7 @@ export const REVIEWS: Review[] = [
       { texto: "Iterar creativos de ads HT (2 variantes)", R: "Rodrigo", estado: "pendiente" },
     ],
   },
-  {
-    clientId: "family",
-    ciclo: "15 jun – 28 jun",
-    funciono: ["ROAS 3.6x en semana 1", "Tasa de interacción 4,8% sobre el promedio del nicho"],
-    noFunciono: ["Semana 2 sin cierres (show up 50%)"],
-    decisiones: ["Recordatorios SMS + email antes de la llamada", "Duplicar presupuesto del creativo ganador"],
-    compromisos: [
-      { texto: "Configurar workflow de recordatorios en GHL", R: "Sebastián", estado: "hecho" },
-      { texto: "Escalar campaña ganadora a $300/sem", R: "Rodrigo", estado: "hecho" },
-    ],
-  },
+  // Family Eaters — sin revisiones de ciclo registradas todavía.
 ];
 
 // ---------------- Alertas ----------------
