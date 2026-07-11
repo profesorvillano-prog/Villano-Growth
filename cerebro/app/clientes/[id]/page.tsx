@@ -18,7 +18,7 @@ import { supabase } from "@/lib/supabase";
 import { isoKey } from "@/lib/date";
 import { AddBtn, DeleteBtn, ENum, ESelect, EText } from "@/components/editable";
 
-const TABS = ["Resumen", "Acciones", "Orgánico", "Meta Ads", "High Ticket", "Revisiones", "Estrategia"] as const;
+const TABS = ["Resumen", "Acciones", "Orgánico", "Meta Ads", "High Ticket", "Ventas", "Revisiones", "Estrategia"] as const;
 
 export default function ClientPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -96,6 +96,10 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
 
       {tab === "High Ticket" && (
         <HighTicketCard slugs={client.metaSlugs} color={client.color} />
+      )}
+
+      {tab === "Ventas" && (
+        <VentasCard slugs={client.metaSlugs} color={client.color} />
       )}
 
       {tab === "Revisiones" && (
@@ -574,6 +578,99 @@ function MetaDrilldown({ slugs, color }: { slugs: string[]; color: string }) {
         </div>
       )}
       <p className="border-t border-line px-5 py-2.5 text-[11px] text-dim">Espejo de <span className="text-mute">campaign_metrics</span> (lo que llega de Meta). Los totales se calculan sumando el rango elegido.</p>
+    </Card>
+  );
+}
+
+// ---------- Ventas digitales (Hotmart / GHL — tabla ventas) ----------
+
+interface VentaRow {
+  fuente: string; producto: string | null;
+  comprador_nombre: string | null; comprador_email: string | null;
+  monto: number | null; moneda: string | null; estado: string | null; fecha: string | null;
+}
+const VENTA_OK = ["approved", "complete", "completed", "paid", "active", "won"];
+
+function VentasCard({ slugs, color: _color }: { slugs: string[]; color: string }) {
+  const [rows, setRows] = useState<VentaRow[] | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      const { data } = await supabase
+        .from("ventas")
+        .select("fuente, producto, comprador_nombre, comprador_email, monto, moneda, estado, fecha")
+        .in("cliente", slugs)
+        .order("fecha", { ascending: false, nullsFirst: false })
+        .limit(500);
+      if (!active) return;
+      setRows((data ?? []) as VentaRow[]);
+    })();
+    return () => { active = false; };
+  }, [slugs.join(",")]);
+
+  if (rows === null) return <Card className="p-5 text-sm text-dim">Cargando ventas…</Card>;
+  if (rows.length === 0) {
+    return (
+      <Card>
+        <CardHead title="Ventas · Hotmart / GoHighLevel" sub="Cada compra o pago entra por webhook a la tabla ventas" right={<span className="rounded-full border border-line px-2 py-0.5 text-[11px] text-dim">sin datos aún</span>} />
+        <p className="px-5 py-6 text-sm text-dim">Todavía no hay ventas registradas de este cliente. En cuanto entre una compra por <span className="text-mute">Hotmart</span> o un pago por <span className="text-mute">GoHighLevel</span>, aparece acá al instante.</p>
+      </Card>
+    );
+  }
+
+  const esOk = (e: string | null) => VENTA_OK.some((s) => (e || "").toLowerCase().includes(s));
+  const okRows = rows.filter((r) => esOk(r.estado));
+  const porMoneda = new Map<string, number>();
+  for (const r of okRows) {
+    const m = (r.moneda || "—").toUpperCase();
+    porMoneda.set(m, (porMoneda.get(m) || 0) + (Number(r.monto) || 0));
+  }
+  const fmtNum = (n: number) => Math.round(n).toLocaleString("es-CL");
+  const fdate = (d: string | null) => (d ? new Date(d).toLocaleDateString("es-CL", { day: "2-digit", month: "short", year: "2-digit" }) : "—");
+  const factLabel = [...porMoneda.entries()].map(([m, v]) => `${m} ${fmtNum(v)}`).join(" · ") || "—";
+
+  return (
+    <Card>
+      <CardHead
+        title="Ventas · Hotmart / GoHighLevel"
+        sub="Compras y pagos reales, evento por evento (tabla ventas)"
+        right={<span className="flex items-center gap-2 text-[11px] text-dim"><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ok" />en vivo</span>}
+      />
+      <div className="grid grid-cols-2 gap-3 px-5 py-4 sm:grid-cols-3">
+        <Stat label="Ventas aprobadas" value={String(okRows.length)} tone={okRows.length > 0 ? "ok" : undefined} />
+        <Stat label="Facturación" value={factLabel} hint="en la moneda de cobro" />
+        <Stat label="Registros totales" value={String(rows.length)} hint="incluye reembolsos/otros" />
+      </div>
+      <div className="overflow-x-auto border-t border-line">
+        <table className="w-full min-w-[720px] border-collapse text-sm">
+          <thead>
+            <tr className="text-[11px] uppercase tracking-wide text-dim">
+              <th className="py-2 pl-5 pr-3 text-left font-medium">Fecha</th>
+              <th className="px-3 py-2 text-left font-medium">Producto</th>
+              <th className="px-3 py-2 text-left font-medium">Comprador</th>
+              <th className="px-3 py-2 text-right font-medium">Monto</th>
+              <th className="px-3 py-2 text-left font-medium">Fuente</th>
+              <th className="py-2 pl-3 pr-5 text-left font-medium">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r, i) => (
+              <tr key={i} className="border-t border-line/60 hover:bg-soft/25">
+                <td className="py-2.5 pl-5 pr-3 tabular-nums text-mute">{fdate(r.fecha)}</td>
+                <td className="px-3 py-2.5">{r.producto || "—"}</td>
+                <td className="px-3 py-2.5 text-mute">{r.comprador_nombre || "—"}</td>
+                <td className="px-3 py-2.5 text-right tabular-nums">{r.monto != null ? `${(r.moneda || "").toUpperCase()} ${fmtNum(Number(r.monto))}` : "—"}</td>
+                <td className="px-3 py-2.5"><span className="rounded-full border border-line px-2 py-0.5 text-[11px] text-mute">{r.fuente}</span></td>
+                <td className={`py-2.5 pl-3 pr-5 text-[11px] ${esOk(r.estado) ? "text-ok" : "text-dim"}`}>{r.estado || "—"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="border-t border-line px-5 py-2.5 text-[11px] text-dim">
+        Data real por webhook (Hotmart Postback · GHL Workflow) en la tabla <span className="text-mute">ventas</span>. La facturación se muestra en su moneda de cobro; la conversión a USD va en el resumen financiero.
+      </p>
     </Card>
   );
 }
