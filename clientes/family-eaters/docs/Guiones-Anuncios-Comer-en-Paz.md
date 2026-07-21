@@ -121,7 +121,8 @@ reflejada en 2 segundos.
 **Ángulo:** la batalla en la mesa. Tensión + agotamiento emocional de toda la familia.
 
 **Gancho (0-3 s) — a cámara, tono bajo, honesto:**
-> "Tu hijo lleva 40 minutos frente al plato… y no ha comido **nada**."
+> "Tu hijo **no come**. Nada. Lleva 40 minutos frente al plato y no ha probado ni un
+> bocado."
 
 **Desarrollo del dolor (3-15 s):**
 > "El plato ya está frío. Tú ya probaste de todo: 'una cucharada más', el avión, el
@@ -141,7 +142,7 @@ reflejada en 2 segundos.
 > en el primer día en paz."
 
 **Texto en pantalla (rótulos):**
-- 0 s: `40 minutos. Cero bocados. 😔`
+- 0 s: `TU HIJO NO COME 😔`
 - 7 s: `¿La comida termina en pelea… y en la basura?`
 - 17 s: `La presión APAGA el hambre`
 - 28 s: `👉 Comer en Paz`
@@ -165,8 +166,8 @@ reflejada en 2 segundos.
 salud). Ataca el mito que la deja sola.
 
 **Gancho (0-3 s) — a cámara, tono firme:**
-> "'Ya va a comer cuando tenga hambre.' Te lo dijeron mil veces… pero pasan los
-> días y tu hijo **sigue sin comer**."
+> "Tu hijo **no come** y todos te dicen lo mismo: 'ya comerá cuando tenga hambre'.
+> Pero pasan los días… y sigue sin probar bocado."
 
 **Desarrollo del dolor (3-15 s):**
 > "Y tú lo miras y te preocupas. ¿Está creciendo bien? ¿Le faltan nutrientes? ¿Por
@@ -185,7 +186,7 @@ salud). Ataca el mito que la deja sola.
 > hacer, desde hoy. Toca el enlace."
 
 **Texto en pantalla (rótulos):**
-- 0 s: `"Ya comerá cuando tenga hambre" 🙄`
+- 0 s: `TU HIJO NO COME 🙄`
 - 8 s: `¿Y si eso no es verdad para TU hijo?`
 - 18 s: `El rechazo tiene una causa`
 - 28 s: `👉 Comer en Paz`
