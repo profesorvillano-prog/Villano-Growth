@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cool Drive — Escuela de Conductores · Aprender a manejar nunca fue tan Cool</title>
+<meta name="description" content="Escuela de conductores Clase B en Chile. Aprende a manejar con una escuela más cercana, práctica y a tu ritmo. 6 sedes, instructores certificados.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600;1,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --w:#ffffff;
+  --cream:#F4EEE4;        /* hero beige */
+  --cream2:#F7F2E9;
+  --sky:#D8ECF6;          /* light blue sections */
+  --sky2:#E7F2FA;
+  --red:#E8121B;          /* Cool Drive red */
+  --red-d:#C10E16;
+  --red-t:#FDECEC;
+  --yellow:#F5C518;       /* accent yellow */
+  --yellow-d:#B8890A;
+  --ink:#111114;          /* near-black text */
+  --mid:#3B3B42;
+  --mut:#77767F;
+  --dark:#140A0B;         /* dark footer bg */
+  --dark2:#1E1113;
+  --bdr:rgba(17,17,20,0.10);
+  --bds:rgba(17,17,20,0.20);
+  --dot:rgba(17,17,20,0.06);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--w);color:var(--ink);line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Archivo',sans-serif;letter-spacing:-.02em}
+img{max-width:100%;display:block}
+
+/* ─── DOT BACKDROP UTIL ─── */
+.dots{background-image:radial-gradient(var(--dot) 1.3px,transparent 1.3px);background-size:22px 22px}
+
+/* ─── NAV ─── */
+nav{position:sticky;top:0;z-index:200;background:rgba(244,238,228,0.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--bdr);height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 44px}
+.nb{display:flex;flex-direction:column;line-height:.86;text-decoration:none;color:var(--ink)}
+.nb b{font-family:'Archivo',sans-serif;font-weight:900;font-size:17px;letter-spacing:.5px}
+.nr{display:flex;align-items:center;gap:26px}
+.nk{font-size:15px;font-weight:500;color:var(--ink);text-decoration:none;transition:color .2s}
+.nk:hover{color:var(--red)}
+.nc{background:var(--red);color:#fff;padding:11px 22px;border-radius:40px;font-size:14px;font-weight:700;text-decoration:none;transition:transform .15s,background .2s;display:inline-flex;align-items:center;gap:7px}
+.nc:hover{background:var(--red-d);transform:translateY(-1px)}
+
+/* ─── SHARED SECTION ─── */
+section{padding:96px 44px}
+.ctr{max-width:1120px;margin:0 auto}
+.slabel{font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:14px;display:block}
+.slabel.mut{color:var(--mut)}
+h2{font-family:'Archivo',sans-serif;font-size:clamp(30px,4.4vw,50px);font-weight:800;line-height:1.02;margin-bottom:16px;color:var(--ink)}
+h2 .red{color:var(--red)}
+.lead{font-size:clamp(16px,1.8vw,19px);color:var(--mid);max-width:560px;font-weight:400}
+
+/* pill badge */
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--bds);border-radius:40px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--ink);background:var(--w)}
+.pill .dt{width:7px;height:7px;border-radius:50%;background:var(--red)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:9px;border-radius:40px;font-weight:700;font-size:15px;text-decoration:none;padding:15px 28px;transition:transform .15s,background .2s,border-color .2s;cursor:pointer;border:none;font-family:'DM Sans',sans-serif}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-d);transform:translateY(-2px)}
+.btn-out{background:transparent;border:1.6px solid var(--bds);color:var(--ink)}
+.btn-out:hover{border-color:var(--ink);transform:translateY(-2px)}
+.btn-ghost{background:transparent;border:1.6px solid var(--bds);color:var(--ink);font-weight:600}
+.btn-ghost:hover{border-color:var(--ink)}
+
+/* ─── HERO ─── */
+#hero{background:var(--cream);position:relative;overflow:hidden;padding:70px 44px 96px}
+.hero-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero-badge{margin-bottom:26px}
+#hero h1{font-family:'Archivo',sans-serif;font-size:clamp(40px,6.4vw,74px);font-weight:800;line-height:.98;letter-spacing:-.03em;margin-bottom:22px}
+#hero h1 .cool{color:var(--red);font-size:1.12em;display:inline-block}
+.hero-sub{font-size:clamp(16px,1.9vw,20px);color:var(--mid);max-width:440px;margin-bottom:30px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:30px}
+.hero-tags{display:flex;gap:10px;flex-wrap:wrap}
+.tag{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--mid)}
+.tag .em{font-size:15px}
+
+/* hero visual: story card */
+.hero-vis{position:relative;display:flex;justify-content:center}
+.story-card{position:relative;width:300px;aspect-ratio:9/15.5;border-radius:26px;overflow:hidden;box-shadow:0 30px 70px -24px rgba(17,17,20,.5);background:linear-gradient(160deg,#7d8b5a 0%,#5f6f47 55%,#3c452c 100%)}
+.story-card .sc-x{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--ink);z-index:3}
+.sc-logo{position:absolute;top:16px;left:16px;background:var(--red);color:#fff;font-family:'Archivo';font-weight:900;font-size:10px;letter-spacing:.5px;padding:6px 11px;border-radius:20px;z-index:3;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.sc-mid{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0 26px;text-align:center;z-index:2}
+.sc-mid b{font-family:'Archivo';font-weight:900;color:#fff;font-size:23px;line-height:1.05;text-shadow:0 2px 14px rgba(0,0,0,.4)}
+.sc-bot{position:absolute;left:0;right:0;bottom:0;padding:22px 20px;background:linear-gradient(transparent,rgba(0,0,0,.65));z-index:2}
+.sc-bot strong{display:block;font-family:'Archivo';font-weight:800;color:#fff;font-size:16px;line-height:1.1}
+.sc-bot span{display:block;font-family:'Archivo';font-weight:800;color:var(--red);font-size:16px;margin-top:2px}
+.sc-photo{position:absolute;inset:0;background:radial-gradient(120% 90% at 30% 25%,rgba(255,255,255,.12),transparent 60%);mix-blend-mode:screen}
+/* floating chips */
+.chip{position:absolute;background:#fff;border-radius:40px;padding:9px 15px;font-size:13px;font-weight:700;color:var(--ink);box-shadow:0 12px 30px -8px rgba(17,17,20,.28);display:flex;align-items:center;gap:7px;z-index:4}
+.chip .em{font-size:14px}
+.chip.c1{top:20%;right:-6px}
+.chip.c2{top:44%;right:-18px}
+.chip.c3{bottom:20%;right:2px}
+/* deco arcs */
+.arc{position:absolute;border-radius:50%;border:6px solid;z-index:0}
+.arc-y{width:90px;height:90px;border-color:var(--yellow) transparent transparent transparent;top:6%;right:8%;transform:rotate(30deg)}
+.arc-b{width:70px;height:70px;border-color:transparent transparent var(--sky) transparent;bottom:8%;left:4%;transform:rotate(-20deg)}
+
+/* ─── WHY / VIDEO ROW ─── */
+#why{background:var(--w)}
+.why-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:44px;align-items:center}
+.vgrid{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:auto auto;gap:16px}
+.vcard{position:relative;border-radius:18px;overflow:hidden;cursor:pointer;background:#1c1c22;min-height:150px;display:flex;align-items:flex-end;-webkit-tap-highlight-color:transparent}
+.vcard.tall{grid-row:span 2}
+.vcard .vbg{position:absolute;inset:0}
+.vcard .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.24);border:2px solid rgba(255,255,255,.7);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;z-index:2}
+.vcard:hover .play,.vcard:active .play{transform:translate(-50%,-50%) scale(1.1);background:var(--red)}
+.vcard .play svg{width:16px;height:16px;fill:#fff;margin-left:2px}
+.vcap{position:relative;z-index:2;margin:14px;background:#fff;border-radius:10px;padding:9px 13px;font-size:13px;font-weight:700;color:var(--ink);line-height:1.25;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+/* photo placeholder gradients */
+.ph{background-size:cover;background-position:center}
+.ph1{background:linear-gradient(150deg,#2f3a1f,#586b32 60%,#7d8b3f)}
+.ph2{background:linear-gradient(150deg,#7a2f2f,#c14a3a 70%,#e0725a)}
+.ph3{background:linear-gradient(150deg,#3a4a2c,#6a7c3e 70%,#98a85a)}
+.ph4{background:linear-gradient(150deg,#5a2f2f,#a34a3a 70%,#d0725a)}
+.ph5{background:linear-gradient(150deg,#4a5a3c,#7a8c4e 70%,#a8b86a)}
+.ph6{background:linear-gradient(150deg,#3c2c2c,#6b4a3e 70%,#98785a)}
+
+/* ─── STORY ─── */
+#story{background:var(--sky)}
+.story-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.note{background:var(--w);border-radius:16px;padding:16px 20px;font-size:14px;color:var(--red);font-weight:500;max-width:300px;box-shadow:0 8px 24px -12px rgba(17,17,20,.2)}
+.story-cols{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:20px;align-items:stretch}
+.scard{border-radius:20px;padding:30px;display:flex;flex-direction:column}
+.scard .tg{display:inline-block;align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:20px;margin-bottom:18px}
+.sc-idea{background:var(--w)}
+.sc-idea .tg{background:var(--yellow);color:var(--ink)}
+.sc-idea h3{font-family:'Archivo';font-size:26px;font-weight:800;line-height:1.05;margin-bottom:14px;color:var(--ink)}
+.sc-idea p{font-size:15px;color:var(--mid)}
+.sc-mid-img{border-radius:20px;overflow:hidden;position:relative;min-height:320px;display:flex;align-items:flex-end}
+.sc-mid-img .cap{position:relative;z-index:2;margin:16px;background:#fff;border-radius:12px;padding:11px 16px;font-size:13px;font-weight:700;color:var(--ink)}
+.sc-hoy{background:var(--red);color:#fff}
+.sc-hoy .tg{background:rgba(255,255,255,.2);color:#fff}
+.sc-hoy h3{font-family:'Archivo';font-size:26px;font-weight:800;line-height:1.05;margin-bottom:14px}
+.sc-hoy p{font-size:15px;color:rgba(255,255,255,.85)}
+
+/* ─── PRICING ─── */
+#pricing{background:var(--w)}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px}
+.pcard{border:1px solid var(--bdr);border-radius:22px;padding:34px;position:relative;overflow:hidden;background:var(--cream2)}
+.pcard.full{background:#fff;border:2px solid var(--red);box-shadow:0 30px 60px -30px rgba(232,18,27,.35)}
+.ptag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 13px;border-radius:20px;margin-bottom:18px}
+.ptag.dark{background:var(--ink);color:#fff}
+.ptag.red{background:var(--red);color:#fff}
+.pcard h3{font-family:'Archivo';font-size:38px;font-weight:800;line-height:.95;margin-bottom:12px;color:var(--ink)}
+.pclase{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--mut);border:1px solid var(--bdr);border-radius:20px;padding:5px 12px;margin-bottom:16px}
+.pcard>p.pdesc{font-size:15px;color:var(--mid);margin-bottom:20px;max-width:80%}
+.plist{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:24px}
+.plist li{font-size:15px;color:var(--ink);font-weight:500;padding-left:26px;position:relative}
+.plist li::before{content:'✓';position:absolute;left:0;top:-1px;color:var(--red);font-weight:900;font-size:15px}
+.promo{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--yellow-d);background:var(--yellow);display:inline-block;padding:4px 10px;border-radius:6px;margin-bottom:8px}
+.price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:22px}
+.price-old{font-size:15px;color:var(--mut);text-decoration:line-through}
+.price-now{font-family:'Archivo';font-size:40px;font-weight:900;color:var(--ink);line-height:1}
+.pcard .btn{width:100%;justify-content:center;margin-bottom:10px}
+
+/* ─── GALLERY ─── */
+#gallery{background:var(--cream);position:relative}
+.gwrap{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:180px;gap:16px}
+.bt{border-radius:20px;overflow:hidden;position:relative;display:flex;align-items:flex-end}
+.bt .cap{position:relative;z-index:2;margin:14px;background:#fff;border-radius:10px;padding:8px 13px;font-size:12px;font-weight:700;color:var(--ink);box-shadow:0 6px 16px rgba(0,0,0,.16)}
+.bt.tall{grid-row:span 2}
+.bt.txt{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:26px}
+.bt-red{background:var(--red);color:#fff}
+.bt-red b{font-family:'Archivo';font-weight:900;font-size:26px;line-height:1;letter-spacing:1px}
+.bt-red span{font-family:'Archivo';font-weight:900;font-size:34px;line-height:.95;display:block}
+.bt-yellow{background:var(--yellow);color:var(--ink)}
+.bt-yellow .em{font-size:24px;margin-bottom:12px}
+.bt-yellow b{font-family:'Archivo';font-weight:900;font-size:24px;line-height:1.05}
+
+/* ─── FAQ ─── */
+#faq{background:var(--sky)}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px}
+.fitem{background:var(--w);border-radius:14px;overflow:hidden;box-shadow:0 6px 20px -14px rgba(17,17,20,.3)}
+.fq{padding:20px 22px;font-size:16px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;color:var(--ink);user-select:none}
+.ftog{width:28px;height:28px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:transform .3s}
+.fitem.open .ftog{transform:rotate(45deg)}
+.fa{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;padding:0 22px;color:var(--mid);font-size:15px;line-height:1.7}
+.fitem.open .fa{max-height:300px;padding:0 22px 20px}
+
+/* ─── FINAL CTA / FOOTER ─── */
+#final{background:var(--dark);color:#fff;text-align:center;padding:96px 44px;position:relative;overflow:hidden}
+#final::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(232,18,27,.28),transparent 65%)}
+.final-mark{width:56px;height:56px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;margin:0 auto 26px;position:relative;z-index:1;box-shadow:0 10px 30px rgba(232,18,27,.5)}
+.final-mark svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:2}
+#final h2{color:#fff;position:relative;z-index:1;max-width:640px;margin:0 auto 32px}
+#final .btn{position:relative;z-index:1}
+.sedes-wrap{position:relative;z-index:1;margin-top:56px;text-align:left;max-width:1120px;margin-left:auto;margin-right:auto}
+.sedes-wrap h4{font-family:'Archivo';font-size:16px;font-weight:700;margin-bottom:16px;color:#fff}
+.sedes{display:flex;gap:10px;flex-wrap:wrap}
+.sede{border:1px solid rgba(255,255,255,.18);border-radius:40px;padding:9px 18px;font-size:13px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.03)}
+.fbar{position:relative;z-index:1;max-width:1120px;margin:56px auto 0;padding-top:28px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;text-align:left}
+.fbar .fl{font-size:13px;color:rgba(255,255,255,.55);line-height:1.9}
+.fbar .fl a{color:rgba(255,255,255,.75);text-decoration:none}
+.fbar .fr{display:flex;gap:18px;font-size:13px}
+.fbar .fr a{color:rgba(255,255,255,.6);text-decoration:none}
+.fbar .fr a:hover{color:#fff}
+.credit{font-size:12px;color:rgba(255,255,255,.3);margin-top:6px}
+
+/* ─── VIDEO MODAL ─── */
+.vmodal{display:none;position:fixed;inset:0;z-index:1000;background:rgba(10,6,7,.92);align-items:center;justify-content:center;padding:16px}
+.vmodal.open{display:flex}
+.vmodal-inner{background:#000;border-radius:16px;overflow:hidden;width:min(400px,100%);position:relative;aspect-ratio:9/16;max-height:88vh}
+.vmodal-close{position:absolute;top:12px;right:12px;z-index:10;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.vmodal-body{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:14px;padding:24px;text-align:center;background:linear-gradient(160deg,#2f3a1f,#3c452c)}
+
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:960px){
+  nav{padding:0 22px}
+  section{padding:72px 22px}
+  #hero{padding:48px 22px 72px}
+  .hero-grid{grid-template-columns:1fr;gap:52px}
+  .hero-sub{max-width:none}
+  .hero-vis{order:-1}
+  .why-grid{grid-template-columns:1fr;gap:32px}
+  .story-cols{grid-template-columns:1fr;gap:16px}
+  .sc-mid-img{min-height:240px}
+  .pgrid{grid-template-columns:1fr}
+  .bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
+  .faq-grid{grid-template-columns:1fr}
+  .pcard>p.pdesc{max-width:100%}
+}
+@media(max-width:520px){
+  nav{padding:0 16px;height:62px}
+  .nr{gap:12px}
+  .nr .nk{display:none}
+  section{padding:56px 16px}
+  #hero{padding:36px 16px 56px}
+  .hero-ctas .btn{width:100%;justify-content:center}
+  .story-card{width:260px}
+  .vgrid{grid-template-columns:1fr}
+  .vcard.tall{grid-row:span 1}
+  .bento{grid-template-columns:1fr;grid-auto-rows:160px}
+  .bt.tall{grid-row:span 1}
+  .fbar{flex-direction:column}
+  .price-now{font-size:34px}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#hero" class="nb"><b>COOL</b><b>DRIVE.</b></a>
+  <div class="nr">
+    <a href="#why" class="nk">Cursos</a>
+    <a href="#story" class="nk">Story</a>
+    <a href="#final" class="nk">Sucursales</a>
+    <a href="mailto:cooldrive.maipu@gmail.com?subject=Quiero%20hacerlo%20Cool" class="nc">Hazle Cool →</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero" class="dots">
+  <div class="hero-grid">
+    <div class="hero-txt">
+      <div class="hero-badge reveal"><span class="pill"><span class="dt"></span>Escuela de conductores</span></div>
+      <h1 class="reveal">Aprender a manejar nunca fue tan <span class="cool">COOL.</span></h1>
+      <p class="hero-sub reveal">Aprende a manejar con una escuela que enseña distinto: más cercana, práctica y a tu ritmo.</p>
+      <div class="hero-ctas reveal">
+        <a href="mailto:cooldrive.maipu@gmail.com?subject=Quiero%20hacerlo%20Cool" class="btn btn-red">Hazle Cool →</a>
+        <a href="#pricing" class="btn btn-out">Ver cursos ↓</a>
+      </div>
+      <div class="hero-tags reveal">
+        <span class="tag"><span class="em">📍</span>6 sedes</span>
+        <span class="tag"><span class="em">🚗</span>Clase B</span>
+        <span class="tag"><span class="em">🎓</span>Instructores certificados</span>
+      </div>
+    </div>
+    <div class="hero-vis reveal">
+      <span class="arc arc-y"></span>
+      <span class="arc arc-b"></span>
+      <div class="story-card">
+        <div class="sc-photo"></div>
+        <div class="sc-logo">COOL DRIVE</div>
+        <div class="sc-x">✕</div>
+        <div class="sc-mid"><b>EL PODER<br>DE ENSEÑARTE<br>A MANEJAR</b></div>
+        <div class="sc-bot"><strong>MANEJAR ES TUYO.</strong><span>HAZLO COOL.</span></div>
+      </div>
+      <div class="chip c1"><span class="em">❤️</span>Cool</div>
+      <div class="chip c2"><span class="em">🎓</span>Aprende</div>
+      <div class="chip c3"><span class="em">🚗</span>Maneja</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHY / VIDEOS ─── -->
+<section id="why">
+  <div class="ctr why-grid">
+    <div>
+      <span class="slabel reveal">Al volante</span>
+      <h2 class="reveal">¿Por qué todos hablan de Cool Drive?</h2>
+      <p class="lead reveal">Porque aquí aprender a manejar deja de dar miedo y empieza a sentirse natural.</p>
+    </div>
+    <div class="vgrid reveal">
+      <div class="vcard tall" onclick="openVideo('Ese momento en que dices: “Ya manejo.”')">
+        <div class="vbg ph ph1"></div>
+        <div class="play"><svg viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg></div>
+        <div class="vcap">Ese momento en que dices: “Ya manejo.”</div>
+      </div>
+      <div class="vcard" onclick="openVideo('Clases que sí dan ganas')">
+        <div class="vbg ph ph2"></div>
+        <div class="play"><svg viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg></div>
+        <div class="vcap">Clases que sí dan ganas</div>
+      </div>
+      <div class="vcard" onclick="openVideo('Aprender sin ponerse grave')">
+        <div class="vbg ph ph3"></div>
+        <div class="play"><svg viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg></div>
+        <div class="vcap">Aprender sin ponerse grave</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STORY ─── -->
+<section id="story" class="dots">
+  <div class="ctr">
+    <div class="story-top">
+      <div>
+        <span class="slabel mut reveal">Lo que nos mueve</span>
+        <h2 class="reveal">Nuestra Story</h2>
+      </div>
+      <div class="note reveal">Nacimos con una idea simple: que manejar deje de sentirse lejano y empiece a sentirse tuyo.</div>
+    </div>
+    <div class="story-cols">
+      <div class="scard sc-idea reveal">
+        <span class="tg">La idea</span>
+        <h3>“Enseñar con confianza cambia todo.”</h3>
+        <p>Aprender se trata de sentirse acompañado. Nosotros ponemos la experiencia; tú pones las ganas.</p>
+      </div>
+      <div class="sc-mid-img ph ph4 reveal">
+        <div class="cap">El primer giro siempre se recuerda.</div>
+      </div>
+      <div class="scard sc-hoy reveal">
+        <span class="tg">Hoy</span>
+        <h3>Miles de primeros viajes empiezan aquí.</h3>
+        <p>Cada alumno escribe su propia historia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRICING ─── -->
+<section id="pricing">
+  <div class="ctr">
+    <span class="slabel reveal">Comienza aquí</span>
+    <h2 class="reveal">Elige tu camino</h2>
+    <div class="pgrid">
+      <div class="pcard reveal">
+        <span class="ptag dark">Para empezar</span>
+        <h3>Curso Avanzado</h3>
+        <div class="pclase">🚗 Clase B · Automóviles</div>
+        <p class="pdesc">Ideal si quieres empezar desde cero y ganar seguridad en cada clase.</p>
+        <ul class="plist">
+          <li>8 clases de manejo</li>
+          <li>Instructor certificado</li>
+          <li>Preparación práctica</li>
+        </ul>
+        <span class="promo">Precio promocional</span>
+        <div class="price-row"><span class="price-old">Antes $150.000</span><span class="price-now">$100.000</span></div>
+        <a href="mailto:cooldrive.maipu@gmail.com?subject=Quiero%20el%20Curso%20Avanzado" class="btn btn-ghost">Quiero el Avanzado →</a>
+        <a href="mailto:cooldrive.maipu@gmail.com?subject=Consulta%20Curso%20Avanzado" class="btn btn-ghost">Consultar por correo</a>
+      </div>
+      <div class="pcard full reveal">
+        <span class="ptag red">Más completo</span>
+        <h3>Curso Full</h3>
+        <div class="pclase">🚗 Clase B · Automóviles</div>
+        <p class="pdesc">Más horas al volante para llegar mucho más preparado al examen y a la conducción real.</p>
+        <ul class="plist">
+          <li>12 clases de manejo</li>
+          <li>Más tiempo de práctica</li>
+          <li>Preparación más completa</li>
+        </ul>
+        <span class="promo">Precio promocional</span>
+        <div class="price-row"><span class="price-old">Antes $160.000</span><span class="price-now">$120.000</span></div>
+        <a href="mailto:cooldrive.maipu@gmail.com?subject=Quiero%20el%20Curso%20Full" class="btn btn-red">Quiero el Full →</a>
+        <a href="mailto:cooldrive.maipu@gmail.com?subject=Consulta%20Curso%20Full" class="btn btn-ghost">Consultar por correo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GALLERY ─── -->
+<section id="gallery" class="dots">
+  <div class="ctr">
+    <div class="gwrap">
+      <div>
+        <span class="slabel reveal">En movimiento</span>
+        <h2 class="reveal">Así se vive Cool Drive</h2>
+      </div>
+      <div class="note reveal">Práctica, nervios, risas y ese orgullo cuando todo empieza a fluir.</div>
+    </div>
+    <div class="bento">
+      <div class="bt tall ph ph5 reveal"><div class="cap">Camino a tu licencia</div></div>
+      <div class="bt txt bt-red reveal"><b>CONFÍA</b><span>EN TI.</span></div>
+      <div class="bt ph ph6 reveal"><div class="cap">En práctica</div></div>
+      <div class="bt txt bt-yellow reveal"><span class="em">🚦</span><b>Tu ritmo.<br>Tu camino.</b></div>
+      <div class="bt ph ph2 reveal"><div class="cap">Lo hiciste cool</div></div>
+      <div class="bt ph ph3 reveal"><div class="cap">Buena ruta</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section id="faq">
+  <div class="ctr">
+    <span class="slabel reveal">Sin vueltas</span>
+    <h2 class="reveal">Te respondemos de una.</h2>
+    <div class="faq-grid">
+      <div class="fitem reveal"><div class="fq" onclick="tFaq(this)">¿Necesito experiencia previa?<span class="ftog">+</span></div><div class="fa">No. La mayoría de nuestros alumnos parten desde cero. Empezamos por lo básico y avanzamos a tu ritmo, clase a clase, hasta que manejar se sienta natural.</div></div>
+      <div class="fitem reveal"><div class="fq" onclick="tFaq(this)">¿Puedo elegir auto automático o mecánico?<span class="ftog">+</span></div><div class="fa">Sí. Adaptamos las clases al tipo de auto con el que quieras aprender y rendir tu examen. Cuéntanos tu preferencia al reservar.</div></div>
+      <div class="fitem reveal"><div class="fq" onclick="tFaq(this)">¿Cuánto dura el curso?<span class="ftog">+</span></div><div class="fa">Depende del curso que elijas: el Avanzado incluye 8 clases de manejo y el Full 12. Coordinamos los horarios contigo para que avances sin apuros.</div></div>
+      <div class="fitem reveal"><div class="fq" onclick="tFaq(this)">¿Dónde se realizan las clases?<span class="ftog">+</span></div><div class="fa">Contamos con 6 sedes: Maipú, Cerrillos, El Bosque, Puente Alto, Rancagua y San Vicente de Tagua Tagua. Elige la que te quede más cómoda.</div></div>
+      <div class="fitem reveal"><div class="fq" onclick="tFaq(this)">¿Cómo reservo?<span class="ftog">+</span></div><div class="fa">Escríbenos a cooldrive.maipu@gmail.com o por Instagram de tu sede. Te confirmamos disponibilidad, curso y horario, y quedas listo para tu primera clase.</div></div>
+      <div class="fitem reveal"><div class="fq" onclick="tFaq(this)">¿Qué pasa si me da miedo manejar?<span class="ftog">+</span></div><div class="fa">Es más común de lo que crees. Nuestros instructores trabajan justamente eso: bajar los nervios, acompañarte con paciencia y darte confianza hasta que el miedo se transforme en seguridad.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FINAL CTA / FOOTER ─── -->
+<section id="final">
+  <div class="final-mark"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div>
+  <h2 class="reveal">Tu próxima historia puede empezar hoy.</h2>
+  <a href="mailto:cooldrive.maipu@gmail.com?subject=Quiero%20hacerlo%20Cool" class="btn btn-red reveal">Hazle Cool →</a>
+
+  <div class="sedes-wrap reveal">
+    <h4>Encuentra tu sede</h4>
+    <div class="sedes">
+      <span class="sede">Maipú</span>
+      <span class="sede">Cerrillos</span>
+      <span class="sede">El Bosque</span>
+      <span class="sede">Puente Alto</span>
+      <span class="sede">Rancagua</span>
+      <span class="sede">San Vicente de Tagua Tagua</span>
+    </div>
+  </div>
+
+  <div class="fbar">
+    <div class="fl">
+      © 2026 Cool Drive<br>
+      +56 9 5779 7476 · <a href="mailto:cooldrive.maipu@gmail.com">cooldrive.maipu@gmail.com</a>
+      <div class="credit">Diseño y desarrollo web por HeyRod</div>
+    </div>
+    <div class="fr">
+      <a href="#">Instagram por sede</a>
+      <a href="#">TikTok</a>
+      <a href="#">Políticas</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── VIDEO MODAL ─── -->
+<div class="vmodal" id="vmodal" onclick="closeVideoOnBg(event)">
+  <div class="vmodal-inner">
+    <button class="vmodal-close" onclick="closeVideo()">✕</button>
+    <div class="vmodal-body" id="vmodalBody">Video testimonial</div>
+  </div>
+</div>
+
+<script>
+/* ── FAQ accordion ── */
+function tFaq(el){
+  const item=el.parentElement;
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.fitem.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+
+/* ── Video modal (placeholder — swap for real <video src>) ── */
+function openVideo(label){
+  const modal=document.getElementById('vmodal');
+  document.getElementById('vmodalBody').textContent=label;
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeVideo(){
+  document.getElementById('vmodal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeVideoOnBg(e){
+  if(e.target===document.getElementById('vmodal'))closeVideo();
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVideo()});
+
+/* ── Scroll reveal ── */
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*45);obs.unobserve(e.target)}
+  });
+},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

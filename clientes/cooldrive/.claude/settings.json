@@ -1,0 +1,16 @@
+{
+  "extraKnownMarketplaces": {
+    "marketingskills": {
+      "source": {
+        "source": "github",
+        "repo": "profesorvillano-prog/Villano-Growth"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "impeccable@marketingskills": true,
+    "claude-ads@marketingskills": true,
+    "emil-design-eng@marketingskills": true,
+    "marketing-skills@marketingskills": true
+  }
+}
