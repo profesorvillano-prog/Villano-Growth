@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Nutrición Dachshund — 5 cambios simples para que tu salchicha viva sano</title>
 <meta name="description" content="El sistema del Dr. Marcelo Hernán: 5 cambios simples en el plato, uno por semana. Sin eliminar la croqueta de inmediato y sin estrés.">
 
@@ -199,7 +199,8 @@ section{padding:clamp(52px,7.5vw,86px) 0;position:relative}
 .mbar{display:none}
 .mspacer{display:none}
 @media(max-width:640px){
-  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--forest);padding:11px 16px calc(11px + env(safe-area-inset-bottom,0));box-shadow:0 -8px 26px -10px rgba(18,42,32,.5);align-items:center;justify-content:space-between;gap:12px}
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--forest);padding:11px 16px calc(11px + env(safe-area-inset-bottom,0));box-shadow:0 -8px 26px -10px rgba(18,42,32,.5);align-items:center;justify-content:space-between;gap:12px;transform:translateY(140%);transition:transform .34s cubic-bezier(.22,1,.36,1);will-change:transform}
+  .mbar.show{transform:none}
   .mbar .p{color:#fff;font-weight:700;font-size:14px}
   .mbar .p small{display:block;color:var(--on-dark-mut);font-size:10.5px;font-weight:500}
   .mbar a{background:var(--gold);color:var(--forest);font-weight:800;font-size:14px;padding:12px 18px;border-radius:var(--pill);white-space:nowrap;display:inline-flex;align-items:center;gap:7px}
@@ -441,6 +442,19 @@ document.querySelectorAll('.js-buy').forEach(function(a){
     },{threshold:.5});
     nums.forEach(function(n){no.observe(n);});
   } else { nums.forEach(run); }
+  // Barra CTA móvil: aparece al pasar el hero, se oculta cuando el CTA final está en pantalla
+  var mbar = document.querySelector('.mbar'),
+      head = document.querySelector('.head'),
+      last = document.querySelector('.final');
+  if(mbar){
+    if(!('IntersectionObserver' in window)){ mbar.classList.add('show'); }
+    else{
+      var pastHero = false, atEnd = false;
+      function syncBar(){ mbar.classList.toggle('show', pastHero && !atEnd); }
+      new IntersectionObserver(function(e){ pastHero = !e[0].isIntersecting; syncBar(); },{threshold:0}).observe(head);
+      if(last) new IntersectionObserver(function(e){ atEnd = e[0].isIntersecting; syncBar(); },{rootMargin:'0px 0px -20% 0px',threshold:0}).observe(last);
+    }
+  }
 })();
 </script>
 </body>
