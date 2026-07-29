@@ -58,6 +58,10 @@
 
   /* z-index scale */
   --z-float: 199;
+
+  /* Curvas de easing con carácter (ease-out fuerte, estilo Emil Kowalski) */
+  --e:      cubic-bezier(.22,1,.36,1);
+  --e-io:   cubic-bezier(.65,0,.35,1);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
@@ -135,10 +139,12 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
 .vid-facade:hover::after{background:linear-gradient(180deg,rgba(18,28,22,.04),rgba(18,28,22,.32));}
 .vid-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:70px;height:70px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(200,150,46,.45);transition:transform .2s,background .2s;}
 .vid-play svg{margin-left:3px;}
+.vid-play::before{content:'';position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 rgba(200,150,46,.45);animation:vidPulse 2.6s var(--e) infinite;pointer-events:none;}
+@keyframes vidPulse{to{box-shadow:0 0 0 20px rgba(200,150,46,0);}}
 .vid-facade:hover .vid-play{transform:translate(-50%,-50%) scale(1.07);background:#d8a338;}
 .vid-facade:active .vid-play{transform:translate(-50%,-50%) scale(.96);}
 .vid-dur{position:absolute;bottom:11px;right:11px;z-index:2;background:rgba(0,0,0,.62);color:#fff;font-size:12px;font-weight:600;padding:3px 9px;border-radius:6px;letter-spacing:.3px;}
-@media(prefers-reduced-motion:reduce){.vid-facade::after,.vid-play{transition:none;}}
+@media(prefers-reduced-motion:reduce){.vid-facade::after,.vid-play{transition:none;}.vid-play::before{animation:none;}}
 
 /* BOTONES */
 .btn{
@@ -150,10 +156,13 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
   text-decoration:none;border:none;cursor:pointer;
   letter-spacing:.2px;line-height:1.25;text-align:center;
   box-shadow:0 10px 30px rgba(200,150,46,.34);
-  transition:transform .15s,box-shadow .15s,background .2s;
+  transition:transform .2s var(--e),box-shadow .2s var(--e),background .2s var(--e);
   -webkit-tap-highlight-color:transparent;touch-action:manipulation;
 }
-.btn:hover{background:#d8a338;}
+@media(hover:hover) and (pointer:fine){
+  .btn:hover{background:#d8a338;transform:translateY(-2px);box-shadow:0 16px 38px rgba(200,150,46,.42);}
+  .btn-dark:hover{box-shadow:0 16px 38px rgba(45,74,62,.32);}
+}
 .btn:active{transform:scale(.975);box-shadow:0 4px 14px rgba(200,150,46,.2);}
 .btn svg{color:#fff;}
 .btn-dark{background:var(--gd);box-shadow:0 10px 30px rgba(45,74,62,.24);}
@@ -374,13 +383,37 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
 .float-cta .btn{max-width:460px;}
 
 /* REVEAL — progressive enhancement; visible by default without JS */
-.js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.2,.6,.2,1),transform .6s cubic-bezier(.2,.6,.2,1);}
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .6s var(--e),transform .6s var(--e);will-change:opacity,transform;}
 .js .rv.v{opacity:1;transform:none;}
+
+/* STAGGER — los hijos entran en cascada cuando el contenedor aparece */
+.js [data-stg]>*{opacity:0;transform:translateY(16px);transition:opacity .5s var(--e),transform .5s var(--e);}
+.js [data-stg].v>*{opacity:1;transform:none;}
+[data-stg].v>*:nth-child(1){transition-delay:.05s;}
+[data-stg].v>*:nth-child(2){transition-delay:.11s;}
+[data-stg].v>*:nth-child(3){transition-delay:.17s;}
+[data-stg].v>*:nth-child(4){transition-delay:.23s;}
+[data-stg].v>*:nth-child(5){transition-delay:.29s;}
+[data-stg].v>*:nth-child(6){transition-delay:.35s;}
+
+/* HOVER — profundidad sutil en tarjetas (solo dispositivos con puntero fino) */
+.inc-card{transition:transform .22s var(--e),box-shadow .22s var(--e),border-color .22s var(--e);}
+.testi-card{transition:transform .25s var(--e),box-shadow .25s var(--e);}
+.auth-photo{transition:transform .3s var(--e),box-shadow .3s var(--e);}
+@media(hover:hover) and (pointer:fine){
+  .inc-card:hover{transform:translateY(-3px);border-color:var(--golb)!important;box-shadow:0 12px 30px rgba(45,74,62,.10);}
+  .testi-card:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(45,74,62,.13);}
+  .auth-photo:hover{transform:translateY(-3px) scale(1.012);box-shadow:0 18px 40px rgba(45,74,62,.22);}
+  .faq-item:hover{border-color:var(--gp);}
+}
+
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
-  .js .rv{opacity:1!important;transform:none!important;transition:none;}
+  .js .rv,.js [data-stg]>*{opacity:1!important;transform:none!important;transition:none;}
+  [data-stg].v>*{transition-delay:0s!important;}
   .float-cta{transition:none;}
   .faq-tog{transition:none;}
+  .vid-play::before{animation:none;}
 }
 
 @media(min-width:620px){
@@ -477,7 +510,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
     Ya no tienes que buscar más. Esta es la respuesta que esperabas.
   </p>
   <div class="rv" style="max-width:460px;margin:0 auto;">
-    <a href="https://go.hotmart.com/O106928210B" target="_blank" rel="noopener" class="btn">
+    <a href="https://pay.hotmart.com/O106928210B" target="_blank" rel="noopener" class="btn">
       Quiero la salud total para mi salchicha — $197 USD
       <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
     </a>
@@ -525,8 +558,8 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
   <p class="kick rv">Todo lo que recibes</p>
   <h2 class="stitle rv">Lo que incluye</h2>
 
-  <div class="rv" style="margin-top:24px;">
-    <div style="display:flex;gap:14px;align-items:flex-start;background:var(--wh);border:1px solid var(--br);border-radius:12px;padding:16px;margin-bottom:11px;">
+  <div data-stg style="margin-top:24px;">
+    <div class="inc-card" style="display:flex;gap:14px;align-items:flex-start;background:var(--wh);border:1px solid var(--br);border-radius:12px;padding:16px;margin-bottom:11px;">
       <div class="tile tile-gld" style="width:44px;height:44px;"><svg class="i" aria-hidden="true"><use href="#video"/></svg></div>
       <div>
         <h4 style="font-family:var(--display);font-size:15px;font-weight:700;color:var(--t0);line-height:1.3;">Videollamada de diagnóstico y solución de 60 minutos <span style="color:var(--gold);white-space:nowrap;">— $97 USD</span></h4>
@@ -534,7 +567,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
       </div>
     </div>
 
-    <div style="display:flex;gap:14px;align-items:flex-start;background:var(--wh);border:1px solid var(--br);border-radius:12px;padding:16px;margin-bottom:11px;">
+    <div class="inc-card" style="display:flex;gap:14px;align-items:flex-start;background:var(--wh);border:1px solid var(--br);border-radius:12px;padding:16px;margin-bottom:11px;">
       <div class="tile tile-gld" style="width:44px;height:44px;"><svg class="i" aria-hidden="true"><use href="#meat"/></svg></div>
       <div>
         <h4 style="font-family:var(--display);font-size:15px;font-weight:700;color:var(--t0);line-height:1.3;">Plan nutricional personalizado de 60 días <span style="color:var(--gold);white-space:nowrap;">— $97 USD</span></h4>
@@ -542,7 +575,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
       </div>
     </div>
 
-    <div style="display:flex;gap:14px;align-items:flex-start;background:var(--wh);border:1px solid var(--br);border-radius:12px;padding:16px;margin-bottom:11px;">
+    <div class="inc-card" style="display:flex;gap:14px;align-items:flex-start;background:var(--wh);border:1px solid var(--br);border-radius:12px;padding:16px;margin-bottom:11px;">
       <div class="tile tile-gld" style="width:44px;height:44px;"><svg class="i" aria-hidden="true"><use href="#book"/></svg></div>
       <div>
         <h4 style="font-family:var(--display);font-size:15px;font-weight:700;color:var(--t0);line-height:1.3;">Libro Recomposición Dachshund <span style="color:var(--gold);white-space:nowrap;">— $47 USD</span></h4>
@@ -550,7 +583,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
       </div>
     </div>
 
-    <div style="display:flex;gap:14px;align-items:flex-start;background:var(--wh);border:1px solid var(--br);border-radius:12px;padding:16px;margin-bottom:11px;">
+    <div class="inc-card" style="display:flex;gap:14px;align-items:flex-start;background:var(--wh);border:1px solid var(--br);border-radius:12px;padding:16px;margin-bottom:11px;">
       <div class="tile tile-gld" style="width:44px;height:44px;"><svg class="i" aria-hidden="true"><use href="#flask"/></svg></div>
       <div>
         <h4 style="font-family:var(--display);font-size:15px;font-weight:700;color:var(--t0);line-height:1.3;">Guía de preguntas frecuentes sobre preparación de dieta natural <span style="color:var(--gold);white-space:nowrap;">— $27 USD</span></h4>
@@ -558,7 +591,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
       </div>
     </div>
 
-    <div style="display:flex;gap:14px;align-items:flex-start;background:var(--wh);border:1px solid var(--br);border-radius:12px;padding:16px;">
+    <div class="inc-card" style="display:flex;gap:14px;align-items:flex-start;background:var(--wh);border:1px solid var(--br);border-radius:12px;padding:16px;">
       <div class="tile tile-gld" style="width:44px;height:44px;"><svg class="i" aria-hidden="true"><use href="#leaf"/></svg></div>
       <div>
         <h4 style="font-family:var(--display);font-size:15px;font-weight:700;color:var(--t0);line-height:1.3;">Receta de antiparasitario natural para Dachshund <span style="color:var(--gold);white-space:nowrap;">— $17 USD</span></h4>
@@ -584,7 +617,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
       </span>
     </div>
     <div style="max-width:420px;margin:20px auto 0;">
-      <a href="https://go.hotmart.com/O106928210B" target="_blank" rel="noopener" class="btn">
+      <a href="https://pay.hotmart.com/O106928210B" target="_blank" rel="noopener" class="btn">
         Quiero la salud total para mi salchicha — $197 USD
         <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
       </a>
@@ -602,7 +635,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
   <p class="kick rv">Prueba social</p>
   <h2 class="stitle rv">Lo que dicen las Mamás y Papás Perrunos</h2>
 
-  <div class="testi-stack rv">
+  <div class="testi-stack" data-stg>
     <div class="testi-card">
       <img class="testi-img" width="1308" height="480"
            src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69dde37ee34cc263fb992ae9.png"
@@ -663,7 +696,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
     <p style="color:var(--golb);font-weight:700;font-size:13px;letter-spacing:.6px;text-transform:uppercase;">Ahorras un 31%</p>
 
     <div style="max-width:460px;margin:26px auto 0;">
-      <a href="https://go.hotmart.com/O106928210B" target="_blank" rel="noopener" class="btn">
+      <a href="https://pay.hotmart.com/O106928210B" target="_blank" rel="noopener" class="btn">
         Quiero la salud total para mi salchicha — $197 USD
         <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
       </a>
@@ -684,7 +717,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
   <h3 class="auth-name rv">Dr. Marcelo Hernán</h3>
   <p class="auth-role rv">Médico Veterinario Funcional</p>
 
-  <ul class="auth-creds rv" style="max-width:420px;margin-left:auto;margin-right:auto;">
+  <ul class="auth-creds" data-stg style="max-width:420px;margin-left:auto;margin-right:auto;">
     <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#stethoscope"/></svg></div>Más de 6 años dedicado exclusivamente al Dachshund</li>
     <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#globe"/></svg></div>Más de 3.000 familias acompañadas en 7 países</li>
     <li><div class="tile tile-grn cred-ico"><svg class="i i-sm" aria-hidden="true"><use href="#paw"/></svg></div>Fundador de Dachshund Salud · @marcelohernan.mv</li>
@@ -702,7 +735,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
     Tu salchicha lleva demasiado tiempo esperando esta respuesta. Hoy termina la espera.
   </p>
   <div class="rv" style="max-width:460px;margin:0 auto;">
-    <a href="https://go.hotmart.com/O106928210B" target="_blank" rel="noopener" class="btn">
+    <a href="https://pay.hotmart.com/O106928210B" target="_blank" rel="noopener" class="btn">
       Quiero la salud total para mi salchicha — $197 USD
       <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
     </a>
@@ -724,7 +757,7 @@ svg.i{display:block;fill:none;stroke:currentColor;stroke-width:1.7;
 
 <!-- FLOATING CTA -->
 <div class="float-cta" id="floatCta">
-  <a href="https://go.hotmart.com/O106928210B" target="_blank" rel="noopener" class="btn btn-sm">
+  <a href="https://pay.hotmart.com/O106928210B" target="_blank" rel="noopener" class="btn btn-sm">
     Quiero la Asesoría — $197 USD
     <svg class="i i-sm" aria-hidden="true"><use href="#arrow"/></svg>
   </a>
@@ -769,7 +802,7 @@ if(fc && hero && ag && 'IntersectionObserver' in window){
 
 // Reveal on scroll (progressive enhancement)
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const revealEls = document.querySelectorAll('.rv');
+const revealEls = document.querySelectorAll('.rv, [data-stg]');
 if(reduce || !('IntersectionObserver' in window)){
   revealEls.forEach(el => el.classList.add('v'));
 }else{
