@@ -79,6 +79,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 export const useAuth = () => useContext(Ctx);
 
+// Acceso libre por ahora: no se exige login. Poné REQUIRE_LOGIN = true para
+// volver a exigir sesión (el sistema de roles y el portal siguen intactos).
+export const REQUIRE_LOGIN = false;
+
 export function AuthGate({ children }: { children: ReactNode }) {
   const { session, ready } = useAuth();
   if (!ready) {
@@ -88,7 +92,7 @@ export function AuthGate({ children }: { children: ReactNode }) {
       </div>
     );
   }
-  if (!session) return <LoginScreen />;
+  if (REQUIRE_LOGIN && !session) return <LoginScreen />;
   return <>{children}</>;
 }
 

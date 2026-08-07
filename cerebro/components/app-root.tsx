@@ -11,9 +11,9 @@ import { StoreProvider } from "@/lib/store";
 import { ClientPortal } from "./portal";
 
 export function AppRoot({ children }: { children: ReactNode }) {
-  const { profile, isTeam } = useAuth();
+  const { ready, session, profile, isTeam } = useAuth();
 
-  if (!profile) {
+  if (!ready) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-bg text-dim">
         <span className="text-sm">Cargando…</span>
@@ -21,8 +21,10 @@ export function AppRoot({ children }: { children: ReactNode }) {
     );
   }
 
-  if (!isTeam) return <ClientPortal clientId={profile.client_id} />;
+  // Cliente con sesión → su portal.
+  if (session && profile && !isTeam) return <ClientPortal clientId={profile.client_id} />;
 
+  // Acceso libre (sin sesión) o equipo → panel de agencia con estado compartido.
   return (
     <DataProvider>
       <StoreProvider>{children}</StoreProvider>
