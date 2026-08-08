@@ -1,12 +1,50 @@
-# Cerebro Villano — Agency OS
+# Cerebro Villano — Ecosistema Villano Growth
 
-Mockup funcional del sistema operativo interno de Villano Growth (ver
-`../docs/prd-cerebro-villano.md`). Next.js 15 + Tailwind, tema oscuro SaaS.
+Sistema operativo de Villano Growth (ver `../docs/prd-cerebro-villano.md`).
+Next.js 15 + Tailwind + Supabase, tema oscuro SaaS. Dos caras del mismo
+ecosistema, según el rol con el que se entra:
 
-**Estado actual:** todos los módulos navegables con datos demo de los 3
-clientes (Family Eaters, Dr. Marcelo, Ezequiel). Los checks del tracker
-funcionan y persisten en `localStorage`. Supabase queda listo a nivel de
-esquema (`supabase/schema.sql`) para la fase 2.
+- **Panel de agencia** (equipo/admin): dashboard, tracker semanal, KPIs por
+  miembro, métricas y campañas por cliente, metas, y por cada cliente:
+  Planificador, Tareas, Calendario, Orgánico, Meta Ads, High Ticket, Ventas,
+  Accesos, Revisiones y Estrategia.
+- **Portal del cliente** (rol cliente): el cliente entra y ve **solo lo suyo**
+  — crea piezas y las marca como publicadas (Planificador), gestiona sus
+  Tareas, ve su Calendario, y visualiza en solo-lectura Instagram orgánico,
+  Meta Ads, el embudo de GoHighLevel, sus ventas, sus Accesos y su Estrategia.
+
+**Clientes:** Family Eaters, Dr. Marcelo (Salchicha Pro), Ezequiel (Raíz
+Autoinmune) y Fixus (kinesiología). Las estrategias reales (embudo, oferta,
+canales, métricas) están cargadas en `lib/data.ts` (`STRATEGY_DETAIL`).
+
+**Datos en vivo:** Meta Ads (`campaign_metrics`), Instagram (`organic_content`),
+embudo GHL (`ht_pipeline`) y ventas (`ventas`) llegan por automatizaciones
+(Make / Meta / GHL / Hotmart). El planificador, las tareas y los accesos se
+guardan en Supabase (`content_pieces`, `tasks`, `accesos`) y se ven en vivo.
+
+## Roles y acceso (Supabase Auth + RLS)
+
+- El rol vive en la tabla `profiles` (`admin` | `equipo` | `cliente`) con un
+  `client_id` (slug: `family`, `marcelo`, `ezequiel`, `fixus`).
+- Al registrarse, un trigger crea el perfil: `profesorvillano@gmail.com` entra
+  como `admin`; el resto entra como `cliente` sin cliente asignado (no ve nada
+  hasta que el equipo lo vincule).
+- **Dar de alta el login de un cliente:** el cliente crea su cuenta en la
+  pantalla de login, y luego el equipo corre:
+  ```sql
+  update profiles set rol = 'cliente', client_id = 'fixus'
+  where email = 'natalia@fixus.cl';
+  ```
+- Sumar a alguien del equipo: `update profiles set rol = 'equipo' where email = '...';`
+- El equipo puede previsualizar el portal de cualquier cliente en
+  `/portal/<cliente>` (ej. `/portal/marcelo`).
+
+## Base de datos
+
+- Esquema base: `supabase/schema.sql`.
+- Portal del cliente: `supabase/migrations/002_client_portal.sql`
+  (profiles + content_pieces + tasks + accesos + RLS por cliente).
+  Ya aplicado al proyecto **Villano OS** (`bkyufepwfwzjzrriptmc`).
 
 ## Correr local
 

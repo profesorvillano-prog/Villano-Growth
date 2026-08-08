@@ -196,3 +196,10 @@ create table if not exists campaign_metrics (
 
 -- RLS: todas restringidas a usuarios autenticados (el equipo).
 -- (políticas equivalentes creadas vía migración villano_os_state_and_checks)
+
+-- ============================================================================
+-- FASE 3 · Portal del cliente + colecciones editables
+-- Ver migración: supabase/migrations/002_client_portal.sql
+--   · profiles (rol admin|equipo|cliente + client_id)
+--   · content_pieces (planificador), tasks, accesos — con RLS por cliente
+-- ============================================================================

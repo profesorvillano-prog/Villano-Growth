@@ -1,41 +1,91 @@
 "use client";
 
+// Autenticación real (Supabase Auth) + rol.
+//  · equipo/admin → panel de agencia completo
+//  · cliente      → portal del cliente (solo su cliente)
+// El rol se lee de la tabla `profiles`. Si la tabla/fila todavía no existe
+// (migración sin correr), cae a un allowlist local para no bloquear al equipo.
+
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "./supabase";
 
+// Allowlist de fallback: emails del equipo (mientras no exista la fila en profiles).
+const TEAM_EMAILS = ["profesorvillano@gmail.com"];
+
+export type Rol = "admin" | "equipo" | "cliente";
+export interface Profile { id: string; email: string | null; rol: Rol; client_id: string | null }
+
 interface AuthCtx {
   session: Session | null;
   email: string | null;
+  profile: Profile | null;
+  isTeam: boolean;
+  clientId: string | null;
   ready: boolean;
   signOut: () => Promise<void>;
 }
 
-const Ctx = createContext<AuthCtx>({ session: null, email: null, ready: false, signOut: async () => {} });
+const Ctx = createContext<AuthCtx>({
+  session: null, email: null, profile: null, isTeam: false, clientId: null, ready: false, signOut: async () => {},
+});
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
+    let active = true;
+
+    const loadProfile = async (s: Session | null) => {
+      if (!s) {
+        // Acceso libre: sin sesión se entra como admin (panel de agencia completo).
+        setProfile({ id: "libre", email: null, rol: "admin", client_id: null });
+        return;
+      }
+      const email = s.user.email ?? null;
+      const { data } = await supabase.from("profiles").select("id, email, rol, client_id").eq("id", s.user.id).maybeSingle();
+      if (!active) return;
+      if (data) {
+        setProfile(data as Profile);
+      } else {
+        // Fallback: sin fila en profiles → equipo si está en el allowlist, si no cliente sin asignar.
+        const isTeam = !!email && TEAM_EMAILS.includes(email.toLowerCase());
+        setProfile({ id: s.user.id, email, rol: isTeam ? "admin" : "cliente", client_id: null });
+      }
+    };
+
+    supabase.auth.getSession().then(async ({ data }) => {
+      if (!active) return;
       setSession(data.session);
-      setReady(true);
+      await loadProfile(data.session);
+      if (active) setReady(true);
     });
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
-    return () => sub.subscription.unsubscribe();
+
+    const { data: sub } = supabase.auth.onAuthStateChange(async (_e, s) => {
+      setSession(s);
+      await loadProfile(s);
+    });
+    return () => { active = false; sub.subscription.unsubscribe(); };
   }, []);
 
-  const signOut = async () => { await supabase.auth.signOut(); };
+  const signOut = async () => { await supabase.auth.signOut(); setProfile(null); };
+
+  const isTeam = profile?.rol === "admin" || profile?.rol === "equipo";
 
   return (
-    <Ctx.Provider value={{ session, email: session?.user.email ?? null, ready, signOut }}>
+    <Ctx.Provider value={{ session, email: session?.user.email ?? null, profile, isTeam, clientId: profile?.client_id ?? null, ready, signOut }}>
       {children}
     </Ctx.Provider>
   );
 }
 
 export const useAuth = () => useContext(Ctx);
+
+// Acceso libre por ahora: no se exige login. Poné REQUIRE_LOGIN = true para
+// volver a exigir sesión (el sistema de roles y el portal siguen intactos).
+export const REQUIRE_LOGIN = false;
 
 export function AuthGate({ children }: { children: ReactNode }) {
   const { session, ready } = useAuth();
@@ -46,7 +96,7 @@ export function AuthGate({ children }: { children: ReactNode }) {
       </div>
     );
   }
-  if (!session) return <LoginScreen />;
+  if (REQUIRE_LOGIN && !session) return <LoginScreen />;
   return <>{children}</>;
 }
 
@@ -84,11 +134,11 @@ function LoginScreen() {
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-base font-bold text-white shadow-[0_0_18px_rgba(139,92,246,0.45)]">V</span>
           <div>
             <p className="text-sm font-semibold leading-none text-ink">Villano OS</p>
-            <p className="mt-1 text-[10px] uppercase tracking-widest text-dim">Panel de agencia</p>
+            <p className="mt-1 text-[10px] uppercase tracking-widest text-dim">Cerebro Villano</p>
           </div>
         </div>
         <h1 className="mb-1 text-lg font-semibold text-ink">{mode === "in" ? "Iniciar sesión" : "Crear cuenta"}</h1>
-        <p className="mb-5 text-xs text-mute">Acceso solo para el equipo de Villano Growth.</p>
+        <p className="mb-5 text-xs text-mute">Acceso del equipo y de los clientes de Villano Growth.</p>
         <form onSubmit={submit} className="space-y-3">
           <input
             type="email" required placeholder="tu@email.com" value={email}

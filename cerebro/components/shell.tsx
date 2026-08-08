@@ -4,17 +4,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import { CLIENTS } from "@/lib/data";
-import { Avatar } from "./ui";
+import { useAuth } from "@/lib/auth";
 
 function UserFooter() {
+  const { email, signOut } = useAuth();
   return (
     <div className="border-t border-line px-4 py-3.5">
       <div className="flex items-center gap-2.5">
         <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent/20 text-[11px] font-semibold text-accent2">VG</span>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-xs font-medium">Villano Growth</p>
+          <p className="truncate text-xs font-medium">{email ?? "Villano Growth"}</p>
           <p className="truncate text-[10px] text-dim">Panel del equipo</p>
         </div>
+        <button onClick={signOut} title="Cerrar sesión" className="rounded-md px-1.5 py-1 text-[10px] text-dim transition-colors hover:text-ink">Salir</button>
       </div>
     </div>
   );
