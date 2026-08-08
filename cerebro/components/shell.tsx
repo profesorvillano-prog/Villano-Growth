@@ -22,17 +22,24 @@ function UserFooter() {
   );
 }
 
-const NAV = [
+const OPERACION = [
   { href: "/", label: "Dashboard", icon: "◧" },
   { href: "/semana", label: "Semana", icon: "☑" },
   { href: "/equipo", label: "Equipo · KPIs", icon: "▥" },
+];
+const AGENCIA: { href: string; label: string; icon: string; admin?: boolean }[] = [
   { href: "/metas", label: "Metas", icon: "◎" },
+  { href: "/acciones", label: "Acciones (tracker)", icon: "▦", admin: true },
+  { href: "/kpis", label: "KPIs del equipo", icon: "◇", admin: true },
   { href: "/config", label: "Configuración", icon: "⚙" },
 ];
 
 
 export function Shell({ children, title, sub, right }: { children: ReactNode; title: string; sub?: string; right?: ReactNode }) {
   const path = usePathname();
+  const { profile } = useAuth();
+  const isAdmin = profile?.rol === "admin";
+  const agencia = AGENCIA.filter((n) => !n.admin || isAdmin);
 
   return (
     <div className="flex min-h-screen bg-bg text-ink">
@@ -48,7 +55,7 @@ export function Shell({ children, title, sub, right }: { children: ReactNode; ti
         <nav className="mt-2 flex-1 space-y-6 overflow-y-auto px-3 pb-6">
           <div>
             <p className="px-2 pb-2 text-[10px] font-semibold uppercase tracking-widest text-dim">Operación</p>
-            {NAV.slice(0, 3).map((n) => <NavItem key={n.href} {...n} active={path === n.href} />)}
+            {OPERACION.map((n) => <NavItem key={n.href} {...n} active={path === n.href} />)}
           </div>
           <div>
             <p className="px-2 pb-2 text-[10px] font-semibold uppercase tracking-widest text-dim">Clientes</p>
@@ -67,7 +74,7 @@ export function Shell({ children, title, sub, right }: { children: ReactNode; ti
           </div>
           <div>
             <p className="px-2 pb-2 text-[10px] font-semibold uppercase tracking-widest text-dim">Agencia</p>
-            {NAV.slice(3).map((n) => <NavItem key={n.href} {...n} active={path === n.href} />)}
+            {agencia.map((n) => <NavItem key={n.href} {...n} active={path === n.href} />)}
           </div>
         </nav>
 

@@ -9,6 +9,7 @@ import { Card, CardHead, Progress, Semaforo, Stat, Avatar, ClientMark } from "@/
 import { ALERTAS, Action, CLIENTS, SALES, actionAppliesOn, clientById, complianceFor, fmtVal } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { useData } from "@/lib/db";
+import { useAuth } from "@/lib/auth";
 import { isBiweeklyWeek, isoKey, todayLongLabel, weekRangeLabel } from "@/lib/date";
 
 export default function Dashboard() {
@@ -114,6 +115,8 @@ export default function Dashboard() {
 function MiSemana() {
   const { actions } = useData();
   const { done, toggle } = useStore();
+  const { profile } = useAuth();
+  const isAdmin = profile?.rol === "admin";
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
@@ -148,9 +151,10 @@ function MiSemana() {
         return (
           <li key={key} className="flex items-center gap-3 px-5 py-3">
             <button
-              onClick={() => toggle(key)}
-              title={isDone ? "Marcado" : "Marcar hecho"}
-              className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border text-[10px] transition-colors ${isDone ? "border-accent bg-accent text-white" : "border-line bg-soft/50 hover:border-accent/50"}`}
+              onClick={() => isAdmin && toggle(key)}
+              disabled={!isAdmin}
+              title={isAdmin ? (isDone ? "Marcado" : "Marcar hecho") : "Solo la agencia marca"}
+              className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border text-[10px] transition-colors ${isDone ? "border-accent bg-accent text-white" : "border-line bg-soft/50"} ${isAdmin ? "hover:border-accent/50" : "cursor-default"}`}
             >
               {isDone ? "✓" : ""}
             </button>
