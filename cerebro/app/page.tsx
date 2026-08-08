@@ -6,10 +6,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Shell } from "@/components/shell";
 import { Card, CardHead, Progress, Semaforo, Stat, Avatar, ClientMark } from "@/components/ui";
-import { ALERTAS, CLIENTS, SALES, complianceFor, fmtVal } from "@/lib/data";
+import { ALERTAS, Action, CLIENTS, SALES, actionAppliesOn, clientById, complianceFor, fmtVal } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { useData } from "@/lib/db";
-import { todayLongLabel, weekRangeLabel } from "@/lib/date";
+import { isBiweeklyWeek, isoKey, todayLongLabel, weekRangeLabel } from "@/lib/date";
 
 export default function Dashboard() {
   const { done } = useStore();
@@ -70,24 +70,8 @@ export default function Dashboard() {
 
       <div className="mt-4 grid gap-4 lg:grid-cols-5">
         <Card className="lg:col-span-3">
-          <CardHead title="Mi semana" sub="Acciones que vencen hoy y mañana, por responsable" right={<Link href="/semana" className="text-xs font-medium text-accent2 hover:underline">Ver tracker completo →</Link>} />
-          <ul className="divide-y divide-line/60">
-            {[
-              { txt: "Historias del día — Family Eaters", R: "Francisco", when: "Hoy", done: false },
-              { txt: "Cargar métricas de ads (semana) — 3 clientes", R: "Javier", when: "Hoy", done: false },
-              { txt: "Revisar conversión del funnel — Family", R: "Sebastián", when: "Hoy", done: false },
-              { txt: "Setter: gestionar chats y agendas — Marcelo", R: "Setter", when: "Hoy", done: true },
-              { txt: "Historias (L·X·V) — Ezequiel", R: "Francisco", when: "Mañana", done: false },
-              { txt: "Cierre financiero semanal — Agencia", R: "Javier", when: "Mañana", done: false },
-            ].map((t, i) => (
-              <li key={i} className="flex items-center gap-3 px-5 py-3">
-                <span className={`flex h-5 w-5 items-center justify-center rounded-md border text-[10px] ${t.done ? "border-accent bg-accent text-white" : "border-line bg-soft/50"}`}>{t.done ? "✓" : ""}</span>
-                <span className={`flex-1 text-sm ${t.done ? "text-dim line-through" : ""}`}>{t.txt}</span>
-                <Avatar name={t.R} size={22} />
-                <span className={`w-16 text-right text-xs ${t.when === "Hoy" ? "font-medium text-warn" : "text-dim"}`}>{t.when}</span>
-              </li>
-            ))}
-          </ul>
+          <CardHead title="Mi semana" sub="Acciones reales que vencen hoy y mañana, por responsable" right={<Link href="/semana" className="text-xs font-medium text-accent2 hover:underline">Ver tracker completo →</Link>} />
+          <MiSemana />
         </Card>
 
         <div className="space-y-4 lg:col-span-2">
@@ -123,6 +107,60 @@ export default function Dashboard() {
         </div>
       </div>
     </Shell>
+  );
+}
+
+// "Mi semana" real: acciones del tracker que aplican hoy y mañana, con su check.
+function MiSemana() {
+  const { actions } = useData();
+  const { done, toggle } = useStore();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return <div className="px-5 py-8 text-center text-sm text-dim">Cargando…</div>;
+
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+  const info = (d: Date) => ({ iso: isoKey(d), idx: (d.getDay() + 6) % 7, bi: isBiweeklyWeek(0, d) });
+  const T = info(today);
+  const M = info(tomorrow);
+  const appliesOn = (a: Action, idx: number, bi: boolean) => (a.cadencia !== "14d" || bi) && actionAppliesOn(a, idx);
+
+  type Item = { a: Action; when: "Hoy" | "Mañana"; iso: string };
+  const items: Item[] = [];
+  for (const a of actions) {
+    if (appliesOn(a, T.idx, T.bi)) items.push({ a, when: "Hoy", iso: T.iso });
+    else if (appliesOn(a, M.idx, M.bi)) items.push({ a, when: "Mañana", iso: M.iso });
+  }
+  items.sort((x, y) => (x.when === y.when ? 0 : x.when === "Hoy" ? -1 : 1));
+
+  if (items.length === 0) return <p className="px-5 py-8 text-center text-sm text-dim">Nada para hoy ni mañana 🎉</p>;
+
+  return (
+    <ul className="divide-y divide-line/60">
+      {items.map(({ a, when, iso }) => {
+        const key = `${a.id}|${iso}`;
+        const isDone = done.has(key);
+        const c = clientById(a.clientId);
+        const suffix = c ? ` — ${c.nombre}` : a.clientId === null ? " — Agencia" : "";
+        return (
+          <li key={key} className="flex items-center gap-3 px-5 py-3">
+            <button
+              onClick={() => toggle(key)}
+              title={isDone ? "Marcado" : "Marcar hecho"}
+              className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border text-[10px] transition-colors ${isDone ? "border-accent bg-accent text-white" : "border-line bg-soft/50 hover:border-accent/50"}`}
+            >
+              {isDone ? "✓" : ""}
+            </button>
+            <span className={`flex-1 text-sm ${isDone ? "text-dim line-through" : ""}`}>{a.nombre}<span className="text-mute">{suffix}</span></span>
+            <Avatar name={a.R} size={22} />
+            <span className={`w-16 text-right text-xs ${when === "Hoy" ? "font-medium text-warn" : "text-dim"}`}>{when}</span>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
