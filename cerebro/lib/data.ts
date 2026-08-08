@@ -37,32 +37,38 @@ export const NOTION_STATES = ["Planificado", "Revisado", "Grabado", "Publicado"]
 // ---------------- KPI → KRI por miembro ----------------
 // KPI = acción semanal literal · KRI = resultado que esa acción influye
 
+export type KpiCadencia = "semanal" | "mensual";
+
 export interface KPI {
+  id: string;
   person: Person;
   accion: string;
-  meta: number;
-  actual: number;
+  meta: number;              // objetivo de veces por período
+  cadencia: KpiCadencia;     // semanal | mensual — el conteo se reinicia cada período
   kri: string;
 }
 
+// El progreso (cuántas veces se realizó en el período actual) NO vive acá:
+// se guarda por período en Supabase (lib/kpi.tsx), así se reinicia solo cada
+// semana/mes y queda histórico. Acá solo va la definición del KPI.
 export const KPIS: KPI[] = [
   // Francisco — orgánico
-  { person: "Francisco", accion: "Revisión semanal de rendimiento por cuenta", meta: 3, actual: 2, kri: "Leads orgánicos · interacción" },
-  { person: "Francisco", accion: "Piezas publicadas con ≥1 semana de antelación", meta: 6, actual: 5, kri: "Constancia → alcance" },
-  { person: "Francisco", accion: "Métricas por pieza cargadas en Notion DB", meta: 6, actual: 3, kri: "Ideas ganadoras detectadas" },
-  { person: "Francisco", accion: "Ajuste de planificación en Notion post-análisis", meta: 3, actual: 2, kri: "Tasa de guardados/compartidos" },
+  { id: "k-fr-1", person: "Francisco", accion: "Revisión de rendimiento por cuenta", meta: 3, cadencia: "semanal", kri: "Leads orgánicos · interacción" },
+  { id: "k-fr-2", person: "Francisco", accion: "Piezas publicadas con ≥1 semana de antelación", meta: 6, cadencia: "semanal", kri: "Constancia → alcance" },
+  { id: "k-fr-3", person: "Francisco", accion: "Métricas por pieza cargadas en Notion DB", meta: 6, cadencia: "semanal", kri: "Ideas ganadoras detectadas" },
+  { id: "k-fr-4", person: "Francisco", accion: "Ajuste de planificación en Notion post-análisis", meta: 3, cadencia: "semanal", kri: "Tasa de guardados/compartidos" },
   // Rodrigo — ongoing + Meta
-  { person: "Rodrigo", accion: "WhatsApps de clientes con última respuesta nuestra", meta: 100, actual: 92, kri: "Retención de clientes" },
-  { person: "Rodrigo", accion: "Reuniones de la semana confirmadas", meta: 4, actual: 4, kri: "Show-up de reuniones" },
-  { person: "Rodrigo", accion: "Revisión de campañas Meta (con Sebastián)", meta: 3, actual: 2, kri: "CPL · fatiga de anuncios" },
+  { id: "k-ro-1", person: "Rodrigo", accion: "WhatsApps de clientes con última respuesta nuestra", meta: 100, cadencia: "semanal", kri: "Retención de clientes" },
+  { id: "k-ro-2", person: "Rodrigo", accion: "Reuniones de la semana confirmadas", meta: 4, cadencia: "semanal", kri: "Show-up de reuniones" },
+  { id: "k-ro-3", person: "Rodrigo", accion: "Revisión de campañas Meta (con Sebastián)", meta: 3, cadencia: "semanal", kri: "CPL · fatiga de anuncios" },
   // Sebastián — funnels + campañas
-  { person: "Sebastián", accion: "Iteraciones de creativos / campañas", meta: 2, actual: 2, kri: "ROAS · costo por agenda" },
-  { person: "Sebastián", accion: "QA de funnels (LP → lead → agenda)", meta: 3, actual: 3, kri: "CVR del embudo" },
-  { person: "Sebastián", accion: "Automatizaciones nuevas o corregidas", meta: 1, actual: 1, kri: "Show-up · velocidad de respuesta" },
+  { id: "k-se-1", person: "Sebastián", accion: "Iteraciones de creativos / campañas", meta: 2, cadencia: "semanal", kri: "ROAS · costo por agenda" },
+  { id: "k-se-2", person: "Sebastián", accion: "QA de funnels (LP → lead → agenda)", meta: 3, cadencia: "semanal", kri: "CVR del embudo" },
+  { id: "k-se-3", person: "Sebastián", accion: "Automatizaciones nuevas o corregidas", meta: 1, cadencia: "semanal", kri: "Show-up · velocidad de respuesta" },
   // Javier — gestión
-  { person: "Javier", accion: "Auditoría de avance del equipo (panel)", meta: 1, actual: 1, kri: "% SOP cumplido" },
-  { person: "Javier", accion: "Cierre financiero por cliente", meta: 1, actual: 1, kri: "Margen por cliente" },
-  { person: "Javier", accion: "Avance de automatizaciones documentado", meta: 1, actual: 0, kri: "Horas ahorradas / procesos" },
+  { id: "k-ja-1", person: "Javier", accion: "Auditoría de avance del equipo (panel)", meta: 1, cadencia: "semanal", kri: "% SOP cumplido" },
+  { id: "k-ja-2", person: "Javier", accion: "Cierre financiero por cliente", meta: 1, cadencia: "mensual", kri: "Margen por cliente" },
+  { id: "k-ja-3", person: "Javier", accion: "Avance de automatizaciones documentado", meta: 1, cadencia: "mensual", kri: "Horas ahorradas / procesos" },
 ];
 
 // ---------------- Finanzas por cliente (vista de Javier) ----------------
