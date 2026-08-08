@@ -18,7 +18,7 @@ import { Avatar, AreaBadge, ClientMark } from "./ui";
 import { AddBtn, DeleteBtn, ESelect, EText } from "./editable";
 
 const AREA_ORDER: Area[] = ["organico", "trafico", "embudos", "ventas", "agencia"];
-const PEOPLE_OPTS = (["Sebastián", "Rodrigo", "Patricio", "Javier", "Cliente", "Setter"] as Person[])
+const PEOPLE_OPTS = (["Sebastián", "Rodrigo", "Francisco", "Javier", "Cliente", "Setter"] as Person[])
   .map((p) => ({ value: p, label: p }));
 const CAD_OPTS: { value: Cadence; label: string }[] = [
   { value: "diaria", label: "diaria" },
@@ -27,7 +27,7 @@ const CAD_OPTS: { value: Cadence; label: string }[] = [
   { value: "14d", label: "quincenal (15 días)" },
 ];
 const INITIALS: Record<string, string> = {
-  Sebastián: "SE", Rodrigo: "RO", Patricio: "PA", Javier: "JA", Cliente: "CL", Setter: "IN",
+  Sebastián: "SE", Rodrigo: "RO", Francisco: "FR", Javier: "JA", Cliente: "CL", Setter: "IN",
 };
 
 type Row = { a: Action; index: number };
@@ -77,7 +77,7 @@ export function TrackerGrid({
         nombre: "Nueva acción",
         cadencia: "semanal" as Cadence,
         dias: [0],
-        R: "Patricio" as Person,
+        R: "Francisco" as Person,
         A: "Rodrigo" as Person,
       },
     ]);

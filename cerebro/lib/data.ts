@@ -11,12 +11,12 @@ export const AREAS: Record<Area, { label: string; color: string }> = {
   agencia: { label: "Agencia", color: "#8f8f9d" },
 };
 
-export type Person = "Sebastián" | "Rodrigo" | "Patricio" | "Javier" | "Cliente" | "Setter";
+export type Person = "Sebastián" | "Rodrigo" | "Francisco" | "Javier" | "Cliente" | "Setter";
 
 export const TEAM: { name: Person; role: string; initials: string }[] = [
   { name: "Javier", role: "Gestión del panel · SOPs · Automatizaciones · Finanzas por cliente", initials: "JA" },
   { name: "Rodrigo", role: "Ongoing cercano · WhatsApp 1ª línea · Reuniones · Meta Ads", initials: "RO" },
-  { name: "Patricio", role: "Contenido orgánico · Planificación Notion · Métricas por pieza", initials: "PA" },
+  { name: "Francisco", role: "Contenido orgánico · Planificación Notion · Métricas por pieza", initials: "FR" },
   { name: "Sebastián", role: "Funnels · Optimización de campañas · Creativos · Automatizaciones", initials: "SE" },
 ];
 
@@ -46,11 +46,11 @@ export interface KPI {
 }
 
 export const KPIS: KPI[] = [
-  // Patricio — orgánico
-  { person: "Patricio", accion: "Revisión semanal de rendimiento por cuenta", meta: 3, actual: 2, kri: "Leads orgánicos · interacción" },
-  { person: "Patricio", accion: "Piezas publicadas con ≥1 semana de antelación", meta: 6, actual: 5, kri: "Constancia → alcance" },
-  { person: "Patricio", accion: "Métricas por pieza cargadas en Notion DB", meta: 6, actual: 3, kri: "Ideas ganadoras detectadas" },
-  { person: "Patricio", accion: "Ajuste de planificación en Notion post-análisis", meta: 3, actual: 2, kri: "Tasa de guardados/compartidos" },
+  // Francisco — orgánico
+  { person: "Francisco", accion: "Revisión semanal de rendimiento por cuenta", meta: 3, actual: 2, kri: "Leads orgánicos · interacción" },
+  { person: "Francisco", accion: "Piezas publicadas con ≥1 semana de antelación", meta: 6, actual: 5, kri: "Constancia → alcance" },
+  { person: "Francisco", accion: "Métricas por pieza cargadas en Notion DB", meta: 6, actual: 3, kri: "Ideas ganadoras detectadas" },
+  { person: "Francisco", accion: "Ajuste de planificación en Notion post-análisis", meta: 3, actual: 2, kri: "Tasa de guardados/compartidos" },
   // Rodrigo — ongoing + Meta
   { person: "Rodrigo", accion: "WhatsApps de clientes con última respuesta nuestra", meta: 100, actual: 92, kri: "Retención de clientes" },
   { person: "Rodrigo", accion: "Reuniones de la semana confirmadas", meta: 4, actual: 4, kri: "Show-up de reuniones" },
@@ -353,7 +353,7 @@ export function genContentActions(clientId: string, plan: ContentPlan): Action[]
       id: `gen-${clientId}-feed-${day}`,
       clientId, area: "organico",
       nombre: `Publicar feed · ${plan.feedTipo}${plan.feedDias.length > 1 ? ` (${i + 1}/${plan.feedDias.length})` : ""}`,
-      cadencia: "dias", dias: [day], R: "Patricio", A: "Rodrigo",
+      cadencia: "dias", dias: [day], R: "Francisco", A: "Rodrigo",
     });
   });
   if (plan.historiasModo !== "no") {
@@ -363,7 +363,7 @@ export function genContentActions(clientId: string, plan: ContentPlan): Action[]
       clientId, area: "organico",
       nombre: plan.historiasModo === "diaria" ? "Publicar historia (diaria)" : "Publicar historia",
       cadencia: plan.historiasModo === "diaria" ? "diaria" : "dias",
-      dias, R: "Patricio", A: "Rodrigo",
+      dias, R: "Francisco", A: "Rodrigo",
     });
   }
   return acts;
@@ -372,25 +372,25 @@ export function genContentActions(clientId: string, plan: ContentPlan): Action[]
 // Acciones fijas (no generadas por el plan de contenido)
 const MANUAL_ACTIONS: Action[] = [
   // Family
-  { id: "f-plan", clientId: "family", area: "organico", nombre: "Planificar contenido del ciclo", cadencia: "14d", dias: [0], R: "Patricio", A: "Sebastián" },
+  { id: "f-plan", clientId: "family", area: "organico", nombre: "Planificar contenido del ciclo", cadencia: "14d", dias: [0], R: "Francisco", A: "Sebastián" },
   { id: "f-ads", clientId: "family", area: "trafico", nombre: "Cargar métricas de ads (semana)", cadencia: "semanal", dias: [4], R: "Javier", A: "Rodrigo" },
   { id: "f-camp", clientId: "family", area: "trafico", nombre: "Revisar campañas · fatiga · CPL", cadencia: "semanal", dias: [2], R: "Rodrigo", A: "Sebastián" },
   { id: "f-fun", clientId: "family", area: "embudos", nombre: "Revisar conversión del funnel", cadencia: "semanal", dias: [4], R: "Sebastián", A: "Sebastián" },
   { id: "f-rev", clientId: "family", area: "agencia", nombre: "Revisión de métricas (personal)", cadencia: "semanal", dias: [4], R: "Rodrigo", A: "Sebastián" },
   // Marcelo
-  { id: "m-plan", clientId: "marcelo", area: "organico", nombre: "Planificar contenido del ciclo", cadencia: "14d", dias: [0], R: "Patricio", A: "Sebastián" },
+  { id: "m-plan", clientId: "marcelo", area: "organico", nombre: "Planificar contenido del ciclo", cadencia: "14d", dias: [0], R: "Francisco", A: "Sebastián" },
   { id: "m-graba", clientId: "marcelo", area: "organico", nombre: "Cliente: revisar Notion + grabar", cadencia: "14d", dias: [1], R: "Cliente", A: "Rodrigo" },
   { id: "m-setter", clientId: "marcelo", area: "ventas", nombre: "Setter: gestionar chats y agendas", cadencia: "diaria", R: "Setter", A: "Rodrigo" },
   { id: "m-ads", clientId: "marcelo", area: "trafico", nombre: "Cargar métricas de ads (semana)", cadencia: "semanal", dias: [4], R: "Javier", A: "Rodrigo" },
   { id: "m-rev", clientId: "marcelo", area: "agencia", nombre: "Revisión de métricas (personal)", cadencia: "semanal", dias: [4], R: "Rodrigo", A: "Sebastián" },
   // Ezequiel
-  { id: "e-plan", clientId: "ezequiel", area: "organico", nombre: "Planificar contenido del ciclo", cadencia: "14d", dias: [0], R: "Patricio", A: "Sebastián" },
+  { id: "e-plan", clientId: "ezequiel", area: "organico", nombre: "Planificar contenido del ciclo", cadencia: "14d", dias: [0], R: "Francisco", A: "Sebastián" },
   { id: "e-graba", clientId: "ezequiel", area: "organico", nombre: "Cliente: grabar VSL + material", cadencia: "14d", dias: [1], R: "Cliente", A: "Rodrigo" },
   { id: "e-fun", clientId: "ezequiel", area: "embudos", nombre: "QA funnel HT (form → agenda)", cadencia: "semanal", dias: [2], R: "Sebastián", A: "Sebastián" },
   { id: "e-ads", clientId: "ezequiel", area: "trafico", nombre: "Cargar métricas de ads (semana)", cadencia: "semanal", dias: [4], R: "Javier", A: "Rodrigo" },
   { id: "e-rev", clientId: "ezequiel", area: "agencia", nombre: "Revisión de métricas (personal)", cadencia: "semanal", dias: [4], R: "Rodrigo", A: "Sebastián" },
   // Fixus
-  { id: "x-plan", clientId: "fixus", area: "organico", nombre: "Planificar contenido del ciclo", cadencia: "14d", dias: [0], R: "Patricio", A: "Sebastián" },
+  { id: "x-plan", clientId: "fixus", area: "organico", nombre: "Planificar contenido del ciclo", cadencia: "14d", dias: [0], R: "Francisco", A: "Sebastián" },
   { id: "x-ads-3a1", clientId: "fixus", area: "trafico", nombre: "Revisar pauta 3 a 1 (landing dedicada)", cadencia: "semanal", dias: [2], R: "Rodrigo", A: "Sebastián" },
   { id: "x-ads-kine", clientId: "fixus", area: "trafico", nombre: "Revisar pauta Kinesiología (landing dedicada)", cadencia: "semanal", dias: [2], R: "Rodrigo", A: "Sebastián" },
   { id: "x-recordatorios", clientId: "fixus", area: "embudos", nombre: "QA automatizaciones de asistencia (recordatorios)", cadencia: "semanal", dias: [1], R: "Sebastián", A: "Sebastián" },
@@ -460,10 +460,12 @@ export interface Goal {
   clientId: string;
   area: Area;
   nombre: string;
-  actual: number;
+  actual: number;             // usado solo cuando metrica es "manual"/vacío
   objetivo: number;
   fmt: "usd" | "pct" | "x" | "n";
   plazo: string;
+  metrica?: string;           // clave de métrica viva (ver lib/goal-metrics). Vacío/"manual" = carga manual
+  periodo?: string;           // semana | ciclo | mes | total
 }
 
 export const GOALS: Goal[] = [];

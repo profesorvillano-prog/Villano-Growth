@@ -73,11 +73,11 @@ export default function Dashboard() {
           <CardHead title="Mi semana" sub="Acciones que vencen hoy y mañana, por responsable" right={<Link href="/semana" className="text-xs font-medium text-accent2 hover:underline">Ver tracker completo →</Link>} />
           <ul className="divide-y divide-line/60">
             {[
-              { txt: "Historias del día — Family Eaters", R: "Patricio", when: "Hoy", done: false },
+              { txt: "Historias del día — Family Eaters", R: "Francisco", when: "Hoy", done: false },
               { txt: "Cargar métricas de ads (semana) — 3 clientes", R: "Javier", when: "Hoy", done: false },
               { txt: "Revisar conversión del funnel — Family", R: "Sebastián", when: "Hoy", done: false },
               { txt: "Setter: gestionar chats y agendas — Marcelo", R: "Setter", when: "Hoy", done: true },
-              { txt: "Historias (L·X·V) — Ezequiel", R: "Patricio", when: "Mañana", done: false },
+              { txt: "Historias (L·X·V) — Ezequiel", R: "Francisco", when: "Mañana", done: false },
               { txt: "Cierre financiero semanal — Agencia", R: "Javier", when: "Mañana", done: false },
             ].map((t, i) => (
               <li key={i} className="flex items-center gap-3 px-5 py-3">
