@@ -39,7 +39,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     let active = true;
 
     const loadProfile = async (s: Session | null) => {
-      if (!s) { setProfile(null); return; }
+      if (!s) {
+        // Acceso libre: sin sesión se entra como admin (panel de agencia completo).
+        setProfile({ id: "libre", email: null, rol: "admin", client_id: null });
+        return;
+      }
       const email = s.user.email ?? null;
       const { data } = await supabase.from("profiles").select("id, email, rol, client_id").eq("id", s.user.id).maybeSingle();
       if (!active) return;
