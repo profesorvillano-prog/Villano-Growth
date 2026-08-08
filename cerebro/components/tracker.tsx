@@ -51,9 +51,12 @@ function buildGroups(rows: Row[], person: Person | null): Group[] {
 const cellKey = (id: string, iso: string) => `${id}|${iso}`;
 
 export function TrackerGrid({
-  filter, showClient = false, addClientId = null, person = null,
-}: { filter: (a: Action) => boolean; showClient?: boolean; addClientId?: string | null; person?: Person | null }) {
+  filter, showClient = false, addClientId = null, person = null, manage = false, canMark = true,
+}: { filter: (a: Action) => boolean; showClient?: boolean; addClientId?: string | null; person?: Person | null; manage?: boolean; canMark?: boolean }) {
   const { done, reviewed, toggle, toggleReviewed } = useStore();
+  // En operación (solo lectura) las marcas no se pueden cambiar.
+  const gToggle = canMark ? toggle : () => {};
+  const gToggleReviewed = canMark ? toggleReviewed : () => {};
   const { actions, update } = useData();
   const [editing, setEditing] = useState(false);
   const [mode, setMode] = useState<"hoy" | "semana">("hoy");
@@ -145,7 +148,7 @@ export function TrackerGrid({
               </>
             )}
           </p>
-          {mode === "semana" && (
+          {manage && mode === "semana" && (
             <div className="flex items-center gap-2">
               {editing && <AddBtn onClick={addAction}>Acción</AddBtn>}
               <button
@@ -163,7 +166,7 @@ export function TrackerGrid({
 
       {mode === "hoy" ? (
         <TodayView groups={todayGroups} person={person} showClient={showClient} tIdx={tIdx} tIso={tIso}
-          done={done} reviewed={reviewed} toggle={toggle} toggleReviewed={toggleReviewed} />
+          done={done} reviewed={reviewed} toggle={gToggle} toggleReviewed={gToggleReviewed} />
       ) : (
         <WeekView
           groups={weekGroups}
@@ -174,8 +177,8 @@ export function TrackerGrid({
           tIso={tIso}
           done={done}
           reviewed={reviewed}
-          toggle={toggle}
-          toggleReviewed={toggleReviewed}
+          toggle={gToggle}
+          toggleReviewed={gToggleReviewed}
           setAction={setAction}
           removeAction={removeAction}
           toggleDay={toggleDay}
