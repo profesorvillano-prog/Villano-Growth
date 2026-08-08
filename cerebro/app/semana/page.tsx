@@ -11,7 +11,7 @@ import { useStore } from "@/lib/store";
 import { useData } from "@/lib/db";
 import { weekRangeLabel } from "@/lib/date";
 
-const PEOPLE: (Person | "Todos")[] = ["Todos", "Sebastián", "Rodrigo", "Patricio", "Javier"];
+const PEOPLE: (Person | "Todos")[] = ["Todos", "Sebastián", "Rodrigo", "Francisco", "Javier"];
 
 export default function SemanaPage() {
   const [who, setWho] = useState<(typeof PEOPLE)[number]>("Todos");

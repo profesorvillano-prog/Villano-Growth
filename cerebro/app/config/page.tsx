@@ -48,7 +48,7 @@ export default function ConfigPage() {
           <CardHead title="Principios del sistema" sub="Configuración que NO se toca por cliente" />
           <ul className="grid gap-3 px-5 py-4 text-sm text-mute sm:grid-cols-2">
             <li className="flex gap-2"><span className="text-accent2">·</span>Proceso de contenido fijo (SOP, 8 pasos): Investigación (dummy account) → Planificación → Guión → Revisión → Grabación → Edición → Programación → Análisis.</li>
-            <li className="flex gap-2"><span className="text-accent2">·</span>El cliente solo ve 4 estados en su Notion: Planificado → Revisado → Grabado → Publicado. El resto es SOP interno de Patricio.</li>
+            <li className="flex gap-2"><span className="text-accent2">·</span>El cliente solo ve 4 estados en su Notion: Planificado → Revisado → Grabado → Publicado. El resto es SOP interno de Francisco.</li>
             <li className="flex gap-2"><span className="text-accent2">·</span>Cada miembro tiene KPIs semanales literales que influyen sus KRIs. Si un KRI se desvía, se revisan los KPIs primero.</li>
             <li className="flex gap-2"><span className="text-accent2">·</span>Análisis rápido semanal por área (orgánico y Meta Ads) · análisis en equipo y entrega al cliente cada 14 días.</li>
             <li className="flex gap-2"><span className="text-accent2">·</span>WhatsApp de clientes: siempre queda un mensaje o respuesta nuestra al final (Rodrigo, 1ª línea).</li>

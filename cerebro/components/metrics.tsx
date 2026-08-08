@@ -529,6 +529,44 @@ const ORG_FECHAS: { key: string; dias: number | null; label: string }[] = [
   { key: "todo", dias: null, label: "Todo" }, { key: "30", dias: 30, label: "30 días" }, { key: "90", dias: 90, label: "90 días" }, { key: "365", dias: 365, label: "12 meses" },
 ];
 
+// Deriva una imagen de preview desde el permalink de Instagram cuando la
+// automatización todavía no cargó thumbnail_url/media_url. El endpoint /media/
+// de Instagram devuelve la portada de la publicación (posts y reels públicos).
+function igMediaPreview(permalink: string | null): string | null {
+  if (!permalink) return null;
+  const base = permalink.split("?")[0].replace(/\/+$/, "");
+  if (!/instagram\.com\/(p|reel|tv)\//i.test(base)) return null;
+  return `${base}/media/?size=l`;
+}
+
+// Miniatura visual con fallback en cadena: thumbnail_url → media_url →
+// preview del permalink → ícono del tipo. Si una imagen falla, prueba la siguiente.
+function Thumb({ r, cat, color }: { r: OrgRow; cat: OrgCat; color: string }) {
+  const candidates = [r.thumbnail_url, r.media_url, igMediaPreview(r.permalink)].filter(Boolean) as string[];
+  const [idx, setIdx] = useState(0);
+  const src = candidates[idx];
+  if (!src) {
+    return <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md text-lg" style={{ background: color + "1f" }}>{CAT_ICON[cat]}</span>;
+  }
+  return (
+    <span className="relative block h-12 w-12 shrink-0 overflow-hidden rounded-md" style={{ background: color + "1f" }}>
+      <img
+        src={src}
+        alt=""
+        loading="lazy"
+        referrerPolicy="no-referrer"
+        className="h-full w-full object-cover"
+        onError={() => setIdx((i) => i + 1)}
+      />
+      {cat === "reel" && (
+        <span className="absolute inset-0 flex items-center justify-center">
+          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-black/45 text-[9px] text-white">▶</span>
+        </span>
+      )}
+    </span>
+  );
+}
+
 export function OrganicLiveCard({ slugs, color }: { slugs: string[]; color: string }) {
   const [rows, setRows] = useState<OrgRow[] | null>(null);
   const [syncedAt, setSyncedAt] = useState<string | null>(null);
@@ -655,15 +693,12 @@ export function OrganicLiveCard({ slugs, color }: { slugs: string[]; color: stri
             <tbody>
               {shown.map((r) => {
                 const cat = categoria(r);
-                const img = r.thumbnail_url || r.media_url;
                 const titulo = r.caption && r.caption.trim() ? short(r.caption) : `${CAT_LABEL[cat]} · ${fdate(rowDate(r))}`;
                 return (
                   <tr key={r.media_id} className="border-t border-line/60 hover:bg-soft/25">
                     <td className="py-2.5 pl-5 pr-3">
                       <div className="flex items-center gap-3">
-                        {img
-                          ? <img src={img} alt="" className="h-11 w-11 shrink-0 rounded-md object-cover" onError={(e) => ((e.target as HTMLImageElement).style.display = "none")} />
-                          : <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-lg" style={{ background: color + "1f" }}>{CAT_ICON[cat]}</span>}
+                        <Thumb r={r} cat={cat} color={color} />
                         <span className="min-w-0">
                           <span className="flex items-center gap-1.5">
                             <span className="rounded px-1.5 py-0.5 text-[10px] font-semibold" style={{ background: color + "22", color }}>{CAT_LABEL[cat]}</span>

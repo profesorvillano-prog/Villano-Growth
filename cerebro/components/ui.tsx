@@ -53,7 +53,7 @@ export function Avatar({ name, size = 24 }: { name: string; size?: number }) {
     Setter: ["IN", "#f472b6"], // Ina
     Cliente: ["CL", "#fb7185"],
   };
-  const hues: Record<string, string> = { Se: "#8b5cf6", Ro: "#60a5fa", Pa: "#34d399", Ja: "#fbbf24" };
+  const hues: Record<string, string> = { Se: "#8b5cf6", Ro: "#60a5fa", Fr: "#34d399", Ja: "#fbbf24" };
   const initials = special[name]?.[0] ?? name.slice(0, 2).toUpperCase();
   const bg = special[name]?.[1] ?? hues[name.slice(0, 2)] ?? "#5d5d6b";
   return (
