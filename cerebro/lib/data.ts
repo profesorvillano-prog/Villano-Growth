@@ -46,6 +46,7 @@ export interface KPI {
   meta: number;              // objetivo de veces por período
   cadencia: KpiCadencia;     // semanal | mensual — el conteo se reinicia cada período
   kri: string;
+  semanaMes?: number;        // solo mensual: 1–4 = semana del mes en que toca · 0/undefined = cualquiera
 }
 
 // El progreso (cuántas veces se realizó en el período actual) NO vive acá:

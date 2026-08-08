@@ -12,7 +12,7 @@ import { ENum, EText } from "@/components/editable";
 import { KPI, KpiCadencia, TEAM, clientById, fmtVal } from "@/lib/data";
 import { useData } from "@/lib/db";
 import { useAuth } from "@/lib/auth";
-import { currentPeriodKey, periodList, useKpiProgress } from "@/lib/kpi";
+import { currentPeriodKey, periodList, useKpiProgress, weekOfMonth } from "@/lib/kpi";
 
 const CAD_LABEL: Record<KpiCadencia, string> = { semanal: "sem", mensual: "mes" };
 
@@ -34,10 +34,10 @@ export default function EquipoPage() {
   return (
     <Shell
       title="Equipo · KPIs"
-      sub={isAdmin ? "Marcá el avance de la semana/mes; las definiciones se editan en Agencia · KPIs" : "Visualización — el avance lo marca la agencia"}
+      sub="Marcá el avance de la semana/mes · las definiciones se crean en Agencia · KPIs"
       right={isAdmin
         ? <Link href="/kpis" className="rounded-full border border-line bg-panel px-3 py-1.5 text-xs text-mute transition-colors hover:border-accent/50 hover:text-ink">Gestionar KPIs ↗</Link>
-        : <span className="rounded-full border border-line bg-panel px-3 py-1.5 text-xs text-mute">Solo lectura</span>}
+        : <span className="rounded-full border border-line bg-panel px-3 py-1.5 text-xs text-mute">Solo marcar</span>}
     >
       <div className="grid gap-4 lg:grid-cols-2">
         {TEAM.map((member) => {
@@ -61,7 +61,7 @@ export default function EquipoPage() {
               />
               <ul className="divide-y divide-line/60">
                 {memberKpis.map(({ k, index }) => (
-                  <KpiRow key={kidOf(k, index)} k={k} kid={kidOf(k, index)} canMark={isAdmin} ready={mounted && ready} get={get} setValor={setValor} />
+                  <KpiRow key={kidOf(k, index)} k={k} kid={kidOf(k, index)} canMark ready={mounted && ready} get={get} setValor={setValor} />
                 ))}
                 {memberKpis.length === 0 && (
                   <li className="px-5 py-4 text-xs text-dim">
@@ -156,7 +156,10 @@ function KpiRow({
     <li className="px-5 py-3">
       <div className="mb-2 flex items-start justify-between gap-3 text-sm">
         <span className="text-sm text-mute">{k.accion}</span>
-        <span className="shrink-0 rounded-full border border-line px-1.5 py-0.5 text-[10px] text-dim">{k.meta}×/{CAD_LABEL[cad]}</span>
+        <div className="flex shrink-0 items-center gap-1.5">
+          {cad === "mensual" && k.semanaMes ? <SemanaMesBadge target={k.semanaMes} ready={ready} /> : null}
+          <span className="rounded-full border border-line px-1.5 py-0.5 text-[10px] text-dim">{k.meta}×/{CAD_LABEL[cad]}</span>
+        </div>
       </div>
 
       <KpiTracker actual={actual} meta={k.meta} met={met} editable={canMark && ready} cad={cad} onSetActual={(v) => setValor(kid, periodKey, v)} />
@@ -189,6 +192,22 @@ function KpiRow({
 
       <p className="mt-1.5 text-[11px] text-dim">KRI → <span className="text-mute">{k.kri}</span></p>
     </li>
+  );
+}
+
+function SemanaMesBadge({ target, ready }: { target: number; ready: boolean }) {
+  const wom = ready ? weekOfMonth() : 0;
+  const toca = wom === target;
+  return (
+    <span
+      title={toca ? "Toca esta semana del mes" : `Programado para la semana ${target} del mes`}
+      className="rounded-full border px-1.5 py-0.5 text-[10px] font-medium"
+      style={toca
+        ? { borderColor: "#34d399", color: "#34d399", background: "#34d39914" }
+        : { borderColor: "#26262e", color: "#5d5d6b" }}
+    >
+      {toca ? "toca esta semana" : `sem ${target} del mes`}
+    </span>
   );
 }
 

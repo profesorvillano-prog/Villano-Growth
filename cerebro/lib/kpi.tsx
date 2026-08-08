@@ -35,6 +35,19 @@ export function periodList(cad: KpiCadencia, n: number, now: Date = new Date()):
   return out;
 }
 
+// Semana del mes (1–4) de una fecha. Los días 29–31 se agrupan en la semana 4.
+export function weekOfMonth(now: Date = new Date()): number {
+  return Math.min(4, Math.ceil(now.getDate() / 7));
+}
+
+export const SEMANA_MES_OPTS = [
+  { value: 0, label: "Cualquier semana" },
+  { value: 1, label: "Semana 1" },
+  { value: 2, label: "Semana 2" },
+  { value: 3, label: "Semana 3" },
+  { value: 4, label: "Semana 4 / última" },
+];
+
 const mkKey = (kpiId: string, periodo: string) => `${kpiId}|${periodo}`;
 
 export function useKpiProgress() {
