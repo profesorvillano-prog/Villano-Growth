@@ -9,7 +9,6 @@ import { TrackerGrid, AreaLegend } from "@/components/tracker";
 import { Action, CLIENTS, Person, complianceFor } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { useData } from "@/lib/db";
-import { useAuth } from "@/lib/auth";
 import { weekRangeLabel } from "@/lib/date";
 
 const PEOPLE: (Person | "Todos")[] = ["Todos", "Sebastián", "Rodrigo", "Francisco", "Javier"];
@@ -19,8 +18,6 @@ export default function SemanaPage() {
   const [client, setClient] = useState<string>("todos");
   const { done } = useStore();
   const { actions } = useData();
-  const { profile } = useAuth();
-  const isAdmin = profile?.rol === "admin";
   const [range, setRange] = useState("");
   useEffect(() => setRange(weekRangeLabel()), []);
 
@@ -38,7 +35,7 @@ export default function SemanaPage() {
       <Card>
         <CardHead
           title="Action Tracker"
-          sub={isAdmin ? "Clic para marcar · hoy resaltado · gestioná las acciones en Agencia · Acciones" : "Visualización · hoy resaltado (las acciones se gestionan desde Agencia)"}
+          sub="Clic para marcar · hoy resaltado · las acciones se crean/editan en Agencia · Acciones"
           right={<AreaLegend />}
         />
         <div className="flex flex-wrap items-center gap-2 border-b border-line px-5 py-3">
@@ -68,7 +65,7 @@ export default function SemanaPage() {
           showClient
           person={who === "Todos" ? null : who}
           manage={false}
-          canMark={isAdmin}
+          canMark
         />
       </Card>
 

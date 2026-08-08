@@ -13,6 +13,7 @@ import { KPI, KpiCadencia, TEAM } from "@/lib/data";
 import { useData } from "@/lib/db";
 import { useAuth } from "@/lib/auth";
 import { AdminOnly } from "@/components/admin-only";
+import { SEMANA_MES_OPTS } from "@/lib/kpi";
 
 export default function KpisPage() {
   const { kpis, update } = useData();
@@ -47,6 +48,9 @@ export default function KpisPage() {
                       <div className="mt-2 flex flex-wrap items-center gap-3">
                         <CadToggle value={k.cadencia ?? "semanal"} onChange={(c) => setKpi(index, { cadencia: c })} />
                         <MetaStepper value={k.meta} onChange={(v) => setKpi(index, { meta: Math.max(1, v) })} />
+                        {(k.cadencia ?? "semanal") === "mensual" && (
+                          <SemanaMesSelect value={k.semanaMes ?? 0} onChange={(v) => setKpi(index, { semanaMes: v })} />
+                        )}
                       </div>
                       <p className="mt-2 text-[11px] text-dim">
                         KRI → <EText value={k.kri} onSave={(v) => setKpi(index, { kri: v })} className="text-[11px] text-mute" />
@@ -80,6 +84,21 @@ function CadToggle({ value, onChange }: { value: KpiCadencia; onChange: (c: KpiC
   );
 }
 
+function SemanaMesSelect({ value, onChange }: { value: number; onChange: (v: number) => void }) {
+  return (
+    <label className="flex items-center gap-1.5 text-xs text-mute">
+      <span>Aparece en:</span>
+      <select
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className="cursor-pointer rounded-lg border border-line bg-panel px-2 py-1 text-xs text-ink outline-none focus:border-accent/60"
+      >
+        {SEMANA_MES_OPTS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+      </select>
+    </label>
+  );
+}
+
 function MetaStepper({ value, onChange }: { value: number; onChange: (v: number) => void }) {
   return (
     <div className="flex items-center gap-1">
@@ -97,11 +116,17 @@ function AddKpiForm({ person, onAdd }: { person: KPI["person"]; onAdd: (k: KPI) 
   const [cadencia, setCadencia] = useState<KpiCadencia>("semanal");
   const [meta, setMeta] = useState(3);
   const [kri, setKri] = useState("");
+  const [semanaMes, setSemanaMes] = useState(0);
 
   const save = () => {
     if (!accion.trim()) return;
-    onAdd({ id: `k-${Math.random().toString(36).slice(2, 9)}`, person, accion: accion.trim(), cadencia, meta: Math.max(1, meta), kri: kri.trim() || "KRI que influye" });
-    setAccion(""); setKri(""); setMeta(3); setCadencia("semanal"); setOpen(false);
+    onAdd({
+      id: `k-${Math.random().toString(36).slice(2, 9)}`,
+      person, accion: accion.trim(), cadencia, meta: Math.max(1, meta),
+      kri: kri.trim() || "KRI que influye",
+      ...(cadencia === "mensual" && semanaMes ? { semanaMes } : {}),
+    });
+    setAccion(""); setKri(""); setMeta(3); setCadencia("semanal"); setSemanaMes(0); setOpen(false);
   };
 
   if (!open) return <AddBtn onClick={() => setOpen(true)}>KPI</AddBtn>;
@@ -112,6 +137,7 @@ function AddKpiForm({ person, onAdd }: { person: KPI["person"]; onAdd: (k: KPI) 
       <div className="mb-2 flex flex-wrap items-center gap-3">
         <CadToggle value={cadencia} onChange={setCadencia} />
         <MetaStepper value={meta} onChange={(v) => setMeta(Math.max(1, v))} />
+        {cadencia === "mensual" && <SemanaMesSelect value={semanaMes} onChange={setSemanaMes} />}
       </div>
       <input value={kri} onChange={(e) => setKri(e.target.value)} onKeyDown={(e) => e.key === "Enter" && save()} placeholder="KRI que influye (ej. CPL · retención)" className="mb-3 w-full rounded-lg border border-line bg-panel px-2.5 py-1.5 text-sm text-ink outline-none placeholder:text-dim focus:border-accent/60" />
       <div className="flex items-center gap-2">
