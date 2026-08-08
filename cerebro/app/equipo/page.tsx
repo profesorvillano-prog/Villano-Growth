@@ -1,20 +1,27 @@
 "use client";
 
 // Panel de gestión (Javier): KPI → KRI por miembro + análisis financiero por cliente.
-// Agencia (admin) define y marca los KPIs; operación solo los ve. Cada KPI es
-// accionable: se marca "realizado X de Y" y se refleja en el panel de cada usuario.
+// Cada KPI tiene cadencia (X veces por semana o por mes). El conteo se marca por
+// período y se reinicia solo al empezar el siguiente; queda histórico de lo hecho.
+// Agencia (admin) define y marca; operación solo ve.
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Shell } from "@/components/shell";
 import { Card, CardHead, Progress, Avatar } from "@/components/ui";
 import { AddBtn, DeleteBtn, ENum, EText } from "@/components/editable";
-import { KPI, TEAM, clientById, fmtVal } from "@/lib/data";
+import { KPI, KpiCadencia, TEAM, clientById, fmtVal } from "@/lib/data";
 import { useData } from "@/lib/db";
 import { useAuth } from "@/lib/auth";
+import { currentPeriodKey, periodList, useKpiProgress } from "@/lib/kpi";
+
+const CAD_LABEL: Record<KpiCadencia, string> = { semanal: "sem", mensual: "mes" };
 
 export default function EquipoPage() {
   const { kpis, finanzas, update } = useData();
   const { profile } = useAuth();
+  const { get, setValor, ready } = useKpiProgress();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const canEdit = profile?.rol === "admin"; // agencia edita · operación solo ve
 
   const setKpi = (index: number, patch: Partial<KPI>) =>
@@ -28,10 +35,12 @@ export default function EquipoPage() {
   const totalIngreso = finanzas.reduce((s, f) => s + f.ingresoAgencia, 0);
   const totalMargen = finanzas.reduce((s, f) => s + f.margen, 0);
 
+  const kidOf = (k: KPI, index: number) => k.id ?? `legacy-${index}`;
+
   return (
     <Shell
       title="Equipo · KPIs"
-      sub={canEdit ? "Agencia — definí y marcá los KPIs semanales; se reflejan en el panel de cada persona" : "Vista de operación — la agencia define y marca los KPIs"}
+      sub={canEdit ? "Agencia — definí, marcá y seguí los KPIs; se reinician solos cada período" : "Vista de operación — la agencia define y marca los KPIs"}
       right={
         <span className="rounded-full border border-line bg-panel px-3 py-1.5 text-xs text-mute">
           {canEdit ? <>Editás como <span className="font-medium text-ink">agencia</span></> : <>Solo lectura</>}
@@ -43,7 +52,9 @@ export default function EquipoPage() {
           const memberKpis = kpis
             .map((k, index) => ({ k, index }))
             .filter(({ k }) => k.person === member.name);
-          const cumplidos = memberKpis.filter(({ k }) => k.actual >= k.meta).length;
+          const cumplidos = mounted
+            ? memberKpis.filter(({ k, index }) => get(kidOf(k, index), currentPeriodKey(k.cadencia ?? "semanal")) >= k.meta).length
+            : 0;
           return (
             <Card key={member.name}>
               <CardHead
@@ -60,7 +71,17 @@ export default function EquipoPage() {
               />
               <ul className="divide-y divide-line/60">
                 {memberKpis.map(({ k, index }) => (
-                  <KpiRow key={index} k={k} canEdit={canEdit} onChange={(patch) => setKpi(index, patch)} onRemove={() => removeKpi(index)} />
+                  <KpiRow
+                    key={kidOf(k, index)}
+                    k={k}
+                    kid={kidOf(k, index)}
+                    canEdit={canEdit}
+                    ready={mounted && ready}
+                    get={get}
+                    setValor={setValor}
+                    onChange={(patch) => setKpi(index, patch)}
+                    onRemove={() => removeKpi(index)}
+                  />
                 ))}
                 {memberKpis.length === 0 && !canEdit && (
                   <li className="px-5 py-4 text-xs text-dim">Sin KPIs cargados todavía.</li>
@@ -128,37 +149,95 @@ export default function EquipoPage() {
       </Card>
 
       <p className="mt-4 text-xs text-dim">
-        KPI = acción semanal literal · KRI = resultado que influye. La <span className="text-mute">agencia</span> (admin) define y marca los KPIs;
-        en <span className="text-mute">operación</span> se ven en solo lectura. Los cambios se guardan en Supabase y se reflejan en vivo en cada panel.
+        KPI = acción con cadencia (X veces por <span className="text-mute">semana</span> o <span className="text-mute">mes</span>). El conteo se reinicia solo al
+        empezar el período y queda el histórico. La <span className="text-mute">agencia</span> define y marca; en <span className="text-mute">operación</span> se ve en solo lectura.
       </p>
     </Shell>
   );
 }
 
-// ---------- Fila de KPI con control "realizado X de Y" ----------
+// ---------- Fila de KPI: marca del período actual + histórico ----------
 
-function KpiRow({ k, canEdit, onChange, onRemove }: { k: KPI; canEdit: boolean; onChange: (patch: Partial<KPI>) => void; onRemove: () => void }) {
-  const pct = k.meta ? Math.min(100, Math.round((k.actual / k.meta) * 100)) : 0;
-  const met = k.actual >= k.meta && k.meta > 0;
+function KpiRow({
+  k, kid, canEdit, ready, get, setValor, onChange, onRemove,
+}: {
+  k: KPI;
+  kid: string;
+  canEdit: boolean;
+  ready: boolean;
+  get: (kpiId: string, periodo: string) => number;
+  setValor: (kpiId: string, periodo: string, valor: number) => void;
+  onChange: (patch: Partial<KPI>) => void;
+  onRemove: () => void;
+}) {
+  const cad: KpiCadencia = k.cadencia ?? "semanal";
+  const periodKey = currentPeriodKey(cad);
+  const actual = ready ? get(kid, periodKey) : 0;
+  const pct = k.meta ? Math.min(100, Math.round((actual / k.meta) * 100)) : 0;
+  const met = actual >= k.meta && k.meta > 0;
+  const historial = ready ? periodList(cad, 8) : [];
+
   return (
     <li className="group/row px-5 py-3">
       <div className="mb-2 flex items-start justify-between gap-3 text-sm">
-        {canEdit ? (
-          <EText value={k.accion} onSave={(v) => onChange({ accion: v })} className="text-sm text-mute" />
-        ) : (
-          <span className="text-sm text-mute">{k.accion}</span>
-        )}
+        <div className="flex items-center gap-2">
+          {canEdit ? (
+            <EText value={k.accion} onSave={(v) => onChange({ accion: v })} className="text-sm text-mute" />
+          ) : (
+            <span className="text-sm text-mute">{k.accion}</span>
+          )}
+          {canEdit ? (
+            <button
+              onClick={() => onChange({ cadencia: cad === "semanal" ? "mensual" : "semanal" })}
+              title="Cambiar cadencia"
+              className="shrink-0 rounded-full border border-line px-1.5 py-0.5 text-[10px] text-dim transition-colors hover:text-ink"
+            >
+              {k.meta}×/{CAD_LABEL[cad]}
+            </button>
+          ) : (
+            <span className="shrink-0 rounded-full border border-line px-1.5 py-0.5 text-[10px] text-dim">{k.meta}×/{CAD_LABEL[cad]}</span>
+          )}
+        </div>
         {canEdit && <DeleteBtn onClick={onRemove} />}
       </div>
+
       <KpiTracker
-        actual={k.actual}
+        actual={actual}
         meta={k.meta}
         met={met}
-        editable={canEdit}
-        onSetActual={(v) => onChange({ actual: v })}
+        editable={canEdit && ready}
+        onSetActual={(v) => setValor(kid, periodKey, v)}
         onSetMeta={(v) => onChange({ meta: Math.max(1, v) })}
+        cad={cad}
       />
       <Progress pct={pct} h={4} color={met ? "#34d399" : "#8b5cf6"} />
+
+      {/* Histórico por período */}
+      {historial.length > 0 && (
+        <div className="mt-2 flex items-center gap-2">
+          <span className="text-[10px] text-dim">histórico:</span>
+          <div className="flex items-center gap-1">
+            {historial.map((p, i) => {
+              const v = get(kid, p.key);
+              const done = v >= k.meta && k.meta > 0;
+              const partial = v > 0 && !done;
+              const isCurrent = i === historial.length - 1;
+              return (
+                <span
+                  key={p.key}
+                  title={`${p.label}: ${v}/${k.meta}`}
+                  className="h-3 w-3 rounded-[3px] border"
+                  style={{
+                    background: done ? "#34d399" : partial ? "#fbbf2455" : "transparent",
+                    borderColor: isCurrent ? "#8b5cf6" : done ? "#34d399" : "#26262e",
+                  }}
+                />
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       <p className="mt-1.5 text-[11px] text-dim">
         KRI → {canEdit ? <EText value={k.kri} onSave={(v) => onChange({ kri: v })} className="text-[11px] text-mute" /> : <span className="text-mute">{k.kri}</span>}
       </p>
@@ -166,15 +245,16 @@ function KpiRow({ k, canEdit, onChange, onRemove }: { k: KPI; canEdit: boolean; 
   );
 }
 
-// Control accionable: segmentos clicables si la meta es chica, +/− si es grande.
+// Control accionable del período actual: segmentos si la meta es chica, +/− si es grande.
 function KpiTracker({
-  actual, meta, met, editable, onSetActual, onSetMeta,
+  actual, meta, met, editable, onSetActual, onSetMeta, cad,
 }: {
   actual: number; meta: number; met: boolean; editable: boolean;
-  onSetActual: (v: number) => void; onSetMeta: (v: number) => void;
+  onSetActual: (v: number) => void; onSetMeta: (v: number) => void; cad: KpiCadencia;
 }) {
   const clamp = (v: number) => Math.max(0, Math.min(meta, v));
   const color = met ? "#34d399" : "#8b5cf6";
+  const periodoLabel = cad === "semanal" ? "esta semana" : "este mes";
 
   return (
     <div className="mb-1.5 flex items-center justify-between gap-3">
@@ -182,13 +262,13 @@ function KpiTracker({
         <div className="flex items-center gap-1">
           {Array.from({ length: meta }).map((_, i) => {
             const filled = i < actual;
-            const next = actual === i + 1 ? i : i + 1; // clic en el actual → desmarca
+            const next = actual === i + 1 ? i : i + 1;
             return (
               <button
                 key={i}
                 disabled={!editable}
                 onClick={() => editable && onSetActual(next)}
-                title={editable ? `Marcar ${i + 1} de ${meta}` : `${actual} de ${meta}`}
+                title={editable ? `Marcar ${i + 1} de ${meta} (${periodoLabel})` : `${actual} de ${meta}`}
                 className={`h-6 min-w-6 rounded-md border text-[10px] font-semibold transition-all ${editable ? "cursor-pointer hover:brightness-110" : "cursor-default"}`}
                 style={filled
                   ? { background: color, borderColor: color, color: "#0b0b0e" }
@@ -227,21 +307,25 @@ function KpiTracker({
   );
 }
 
-// ---------- Alta de KPI (agencia) ----------
+// ---------- Alta de KPI (agencia) con cadencia ----------
 
 function AddKpiForm({ person, onAdd }: { person: KPI["person"]; onAdd: (k: KPI) => void }) {
   const [open, setOpen] = useState(false);
   const [accion, setAccion] = useState("");
+  const [cadencia, setCadencia] = useState<KpiCadencia>("semanal");
   const [meta, setMeta] = useState(3);
   const [kri, setKri] = useState("");
 
   const save = () => {
     if (!accion.trim()) return;
-    onAdd({ person, accion: accion.trim(), meta: Math.max(1, meta), actual: 0, kri: kri.trim() || "KRI que influye" });
-    setAccion(""); setKri(""); setMeta(3); setOpen(false);
+    onAdd({
+      id: `k-${Math.random().toString(36).slice(2, 9)}`,
+      person, accion: accion.trim(), cadencia, meta: Math.max(1, meta), kri: kri.trim() || "KRI que influye",
+    });
+    setAccion(""); setKri(""); setMeta(3); setCadencia("semanal"); setOpen(false);
   };
 
-  if (!open) return <AddBtn onClick={() => setOpen(true)}>KPI semanal</AddBtn>;
+  if (!open) return <AddBtn onClick={() => setOpen(true)}>KPI</AddBtn>;
 
   return (
     <div className="rounded-xl border border-line bg-panel/50 p-3">
@@ -250,17 +334,27 @@ function AddKpiForm({ person, onAdd }: { person: KPI["person"]; onAdd: (k: KPI) 
         value={accion}
         onChange={(e) => setAccion(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && save()}
-        placeholder="Acción semanal (ej. Revisar campañas 3x)"
+        placeholder="Acción (ej. Revisar campañas)"
         className="mb-2 w-full rounded-lg border border-line bg-panel px-2.5 py-1.5 text-sm text-ink outline-none placeholder:text-dim focus:border-accent/60"
       />
-      <div className="mb-2 flex flex-wrap items-center gap-2">
-        <span className="text-xs text-mute">Objetivo por semana:</span>
+      <div className="mb-2 flex flex-wrap items-center gap-3">
+        <div className="flex items-center gap-1 rounded-lg border border-line bg-panel p-1">
+          {(["semanal", "mensual"] as KpiCadencia[]).map((c) => (
+            <button
+              key={c}
+              onClick={() => setCadencia(c)}
+              className={`rounded-md px-2.5 py-1 text-xs transition-colors ${cadencia === c ? "bg-accent text-white" : "text-mute hover:text-ink"}`}
+            >
+              {c === "semanal" ? "Por semana" : "Por mes"}
+            </button>
+          ))}
+        </div>
         <div className="flex items-center gap-1">
+          <span className="text-xs text-mute">Veces:</span>
           <button onClick={() => setMeta(Math.max(1, meta - 1))} className="flex h-6 w-6 items-center justify-center rounded-md border border-line text-mute hover:text-ink">−</button>
           <span className="min-w-8 text-center text-sm font-semibold tabular-nums">{meta}</span>
           <button onClick={() => setMeta(meta + 1)} className="flex h-6 w-6 items-center justify-center rounded-md border border-line text-mute hover:text-ink">＋</button>
         </div>
-        <span className="text-[11px] text-dim">veces</span>
       </div>
       <input
         value={kri}
