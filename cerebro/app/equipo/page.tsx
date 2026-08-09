@@ -9,10 +9,11 @@ import Link from "next/link";
 import { Shell } from "@/components/shell";
 import { Card, CardHead, Progress, Avatar } from "@/components/ui";
 import { ENum, EText } from "@/components/editable";
-import { KPI, KpiCadencia, TEAM, clientById, fmtVal } from "@/lib/data";
+import { KPI, KpiCadencia, Person, TEAM, clientById, fmtVal } from "@/lib/data";
 import { useData } from "@/lib/db";
 import { useAuth } from "@/lib/auth";
 import { currentPeriodKey, periodList, useKpiProgress, weekOfMonth } from "@/lib/kpi";
+import { PersonTabs } from "@/components/person-tabs";
 
 const CAD_LABEL: Record<KpiCadencia, string> = { semanal: "sem", mensual: "mes" };
 
@@ -22,6 +23,7 @@ export default function EquipoPage() {
   const isAdmin = profile?.rol === "admin";
   const { get, setValor, ready } = useKpiProgress();
   const [mounted, setMounted] = useState(false);
+  const [who, setWho] = useState<Person>(TEAM[0].name);
   useEffect(() => setMounted(true), []);
 
   const setFin = (index: number, patch: Partial<(typeof finanzas)[number]>) =>
@@ -31,48 +33,46 @@ export default function EquipoPage() {
   const totalMargen = finanzas.reduce((s, f) => s + f.margen, 0);
   const kidOf = (k: KPI, index: number) => k.id ?? `legacy-${index}`;
 
+  const member = TEAM.find((m) => m.name === who) ?? TEAM[0];
+  const memberKpis = kpis.map((k, index) => ({ k, index })).filter(({ k }) => k.person === who);
+  const cumplidos = mounted
+    ? memberKpis.filter(({ k, index }) => get(kidOf(k, index), currentPeriodKey(k.cadencia ?? "semanal")) >= k.meta).length
+    : 0;
+
   return (
     <Shell
       title="Equipo · KPIs"
-      sub="Marcá el avance de la semana/mes · las definiciones se crean en Agencia · KPIs"
+      sub="Elegí la persona y marcá su avance · las definiciones se crean en Agencia · KPIs"
       right={isAdmin
         ? <Link href="/kpis" className="rounded-full border border-line bg-panel px-3 py-1.5 text-xs text-mute transition-colors hover:border-accent/50 hover:text-ink">Gestionar KPIs ↗</Link>
         : <span className="rounded-full border border-line bg-panel px-3 py-1.5 text-xs text-mute">Solo marcar</span>}
     >
-      <div className="grid gap-4 lg:grid-cols-2">
-        {TEAM.map((member) => {
-          const memberKpis = kpis.map((k, index) => ({ k, index })).filter(({ k }) => k.person === member.name);
-          const cumplidos = mounted
-            ? memberKpis.filter(({ k, index }) => get(kidOf(k, index), currentPeriodKey(k.cadencia ?? "semanal")) >= k.meta).length
-            : 0;
-          return (
-            <Card key={member.name}>
-              <CardHead
-                title={member.name}
-                sub={member.role}
-                right={
-                  <div className="flex items-center gap-2">
-                    <span className={`text-xs font-semibold tabular-nums ${cumplidos === memberKpis.length && memberKpis.length > 0 ? "text-ok" : "text-warn"}`}>
-                      {cumplidos}/{memberKpis.length} KPIs
-                    </span>
-                    <Avatar name={member.name} size={28} />
-                  </div>
-                }
-              />
-              <ul className="divide-y divide-line/60">
-                {memberKpis.map(({ k, index }) => (
-                  <KpiRow key={kidOf(k, index)} k={k} kid={kidOf(k, index)} canMark ready={mounted && ready} get={get} setValor={setValor} />
-                ))}
-                {memberKpis.length === 0 && (
-                  <li className="px-5 py-4 text-xs text-dim">
-                    Sin KPIs todavía. {isAdmin && <Link href="/kpis" className="text-accent2 hover:underline">Cargalos en Agencia · KPIs →</Link>}
-                  </li>
-                )}
-              </ul>
-            </Card>
-          );
-        })}
-      </div>
+      <PersonTabs who={who} onChange={setWho} count={(name) => kpis.filter((k) => k.person === name).length} />
+
+      <Card className="mt-4">
+        <CardHead
+          title={member.name}
+          sub={member.role}
+          right={
+            <div className="flex items-center gap-2">
+              <span className={`text-xs font-semibold tabular-nums ${cumplidos === memberKpis.length && memberKpis.length > 0 ? "text-ok" : "text-warn"}`}>
+                {cumplidos}/{memberKpis.length} KPIs
+              </span>
+              <Avatar name={member.name} size={28} />
+            </div>
+          }
+        />
+        <ul className="divide-y divide-line/60">
+          {memberKpis.map(({ k, index }) => (
+            <KpiRow key={kidOf(k, index)} k={k} kid={kidOf(k, index)} canMark ready={mounted && ready} get={get} setValor={setValor} />
+          ))}
+          {memberKpis.length === 0 && (
+            <li className="px-5 py-6 text-sm text-dim">
+              {member.name} no tiene KPIs todavía. {isAdmin && <Link href="/kpis" className="text-accent2 hover:underline">Cargalos en Agencia · KPIs →</Link>}
+            </li>
+          )}
+        </ul>
+      </Card>
 
       <Card className="mt-4">
         <CardHead
