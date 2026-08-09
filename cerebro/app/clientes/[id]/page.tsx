@@ -19,17 +19,23 @@ import { EText } from "@/components/editable";
 import { MetaLiveCard, OrganicLiveCard, HighTicketCard, VentasCard } from "@/components/metrics";
 import { PlannerCard, TasksCard, CalendarCard, AccesosCard, StrategyDetailCard } from "@/components/collections";
 
-const TABS = [
-  "Resumen", "Planificador", "Tareas", "Calendario", "Acciones",
-  "Orgánico", "Meta Ads", "High Ticket", "Ventas", "Accesos", "Revisiones", "Estrategia",
-] as const;
+type Tab =
+  | "Resumen" | "Orgánico" | "Meta Ads" | "High Ticket" | "Ventas" | "Acciones" | "Revisiones"
+  | "Planificador" | "Tareas" | "Calendario" | "Accesos" | "Estrategia";
+
+const GROUPS = [
+  { key: "agencia" as const, label: "Métricas · Agencia", tabs: ["Resumen", "Orgánico", "Meta Ads", "High Ticket", "Ventas", "Acciones", "Revisiones"] as Tab[] },
+  { key: "cliente" as const, label: "Cliente", tabs: ["Planificador", "Tareas", "Calendario", "Accesos", "Estrategia"] as Tab[] },
+];
 
 export default function ClientPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const client = CLIENTS.find((c) => c.id === id);
-  const [tab, setTab] = useState<(typeof TABS)[number]>("Resumen");
+  const [group, setGroup] = useState<"agencia" | "cliente">("agencia");
+  const [tab, setTab] = useState<Tab>("Resumen");
   const { done } = useStore();
   const db = useData();
+  const activeGroup = GROUPS.find((g) => g.key === group)!;
 
   if (!client) notFound();
 
@@ -52,19 +58,37 @@ export default function ClientPage({ params }: { params: Promise<{ id: string }>
         </a>
       }
     >
-      <nav className="mb-5 flex flex-wrap gap-1 rounded-xl border border-line bg-panel p-1">
-        {TABS.map((t) => (
-          <button
-            key={t}
-            onClick={() => setTab(t)}
-            className={`rounded-lg px-3.5 py-1.5 text-sm transition-colors ${
-              tab === t ? "bg-accent text-white" : "text-mute hover:text-ink"
-            }`}
-          >
-            {t}
-          </button>
-        ))}
-      </nav>
+      <div className="mb-5 space-y-2">
+        <div className="flex flex-wrap gap-1.5">
+          {GROUPS.map((g) => {
+            const on = group === g.key;
+            return (
+              <button
+                key={g.key}
+                onClick={() => { setGroup(g.key); setTab(g.tabs[0]); }}
+                className={`rounded-lg border px-3.5 py-1.5 text-sm font-medium transition-colors ${
+                  on ? "border-accent/50 bg-accent/12 text-accent2" : "border-line bg-panel/50 text-mute hover:border-accent/40 hover:text-ink"
+                }`}
+              >
+                {g.label}
+              </button>
+            );
+          })}
+        </div>
+        <nav className="flex flex-wrap gap-1 rounded-xl border border-line bg-panel/70 p-1">
+          {activeGroup.tabs.map((t) => (
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              className={`rounded-lg px-3.5 py-1.5 text-sm transition-all ${
+                tab === t ? "bg-accent text-white shadow-[0_2px_10px_-3px_rgb(139_92_246/0.6)]" : "text-mute hover:bg-soft/40 hover:text-ink"
+              }`}
+            >
+              {t}
+            </button>
+          ))}
+        </nav>
+      </div>
 
       {tab === "Resumen" && (
         <div className="space-y-4">
