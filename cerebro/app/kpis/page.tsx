@@ -1,71 +1,73 @@
 "use client";
 
 // Agencia · Gestión de KPIs del equipo.
-// Acá se crean y editan las definiciones de KPI: acción, cadencia (X veces por
-// semana o por mes), objetivo y KRI, por persona. El marcado de "realizado" y el
-// histórico se ven en Operación · Equipo · KPIs.
+// Se elige la persona con los chips de arriba y se editan SOLO sus KPIs (acción,
+// cadencia semanal/mensual + semana del mes, objetivo y KRI). Así la pantalla no
+// se satura con las 4 casillas ni se extiende de más al agregar.
 
 import { useState } from "react";
 import { Shell } from "@/components/shell";
 import { Card, CardHead, Avatar } from "@/components/ui";
 import { AddBtn, DeleteBtn, EText } from "@/components/editable";
-import { KPI, KpiCadencia, TEAM } from "@/lib/data";
+import { KPI, KpiCadencia, Person, TEAM } from "@/lib/data";
 import { useData } from "@/lib/db";
 import { useAuth } from "@/lib/auth";
 import { AdminOnly } from "@/components/admin-only";
 import { SEMANA_MES_OPTS } from "@/lib/kpi";
+import { PersonTabs } from "@/components/person-tabs";
 
 export default function KpisPage() {
   const { kpis, update } = useData();
   const { profile } = useAuth();
   const isAdmin = profile?.rol === "admin";
+  const [who, setWho] = useState<Person>(TEAM[0].name);
 
   const setKpi = (index: number, patch: Partial<KPI>) =>
     update("kpis", kpis.map((k, i) => (i === index ? { ...k, ...patch } : k)));
   const removeKpi = (index: number) => update("kpis", kpis.filter((_, i) => i !== index));
   const addKpi = (kpi: KPI) => update("kpis", [...kpis, kpi]);
 
+  const member = TEAM.find((m) => m.name === who) ?? TEAM[0];
+  const memberKpis = kpis.map((k, index) => ({ k, index })).filter(({ k }) => k.person === who);
+
   return (
-    <Shell title="KPIs del equipo · Gestión" sub="Definí las acciones semanales/mensuales por persona; se ven y se marcan en Equipo · KPIs">
+    <Shell title="KPIs del equipo · Gestión" sub="Elegí la persona y definí sus KPIs; se ven y se marcan en Equipo · KPIs">
       <AdminOnly isAdmin={isAdmin} area="los KPIs del equipo">
-        <div className="grid gap-4 lg:grid-cols-2">
-          {TEAM.map((member) => {
-            const memberKpis = kpis.map((k, index) => ({ k, index })).filter(({ k }) => k.person === member.name);
-            return (
-              <Card key={member.name}>
-                <CardHead
-                  title={member.name}
-                  sub={member.role}
-                  right={<div className="flex items-center gap-2"><span className="text-xs text-dim">{memberKpis.length} KPIs</span><Avatar name={member.name} size={28} /></div>}
-                />
-                <ul className="divide-y divide-line/60">
-                  {memberKpis.map(({ k, index }) => (
-                    <li key={k.id ?? index} className="group/row px-5 py-3">
-                      <div className="flex items-start justify-between gap-3">
-                        <EText value={k.accion} onSave={(v) => setKpi(index, { accion: v })} className="text-sm text-ink" />
-                        <DeleteBtn onClick={() => removeKpi(index)} />
-                      </div>
-                      <div className="mt-2 flex flex-wrap items-center gap-3">
-                        <CadToggle value={k.cadencia ?? "semanal"} onChange={(c) => setKpi(index, { cadencia: c })} />
-                        <MetaStepper value={k.meta} onChange={(v) => setKpi(index, { meta: Math.max(1, v) })} />
-                        {(k.cadencia ?? "semanal") === "mensual" && (
-                          <SemanaMesSelect value={k.semanaMes ?? 0} onChange={(v) => setKpi(index, { semanaMes: v })} />
-                        )}
-                      </div>
-                      <p className="mt-2 text-[11px] text-dim">
-                        KRI → <EText value={k.kri} onSave={(v) => setKpi(index, { kri: v })} className="text-[11px] text-mute" />
-                      </p>
-                    </li>
-                  ))}
-                  <li className="px-5 py-3"><AddKpiForm person={member.name} onAdd={addKpi} /></li>
-                </ul>
-              </Card>
-            );
-          })}
-        </div>
+        <PersonTabs who={who} onChange={setWho} count={(name) => kpis.filter((k) => k.person === name).length} />
+
+        <Card className="mt-4">
+          <CardHead
+            title={member.name}
+            sub={member.role}
+            right={<div className="flex items-center gap-2"><span className="text-xs text-dim">{memberKpis.length} KPIs</span><Avatar name={member.name} size={28} /></div>}
+          />
+          <ul className="divide-y divide-line/60">
+            {memberKpis.map(({ k, index }) => (
+              <li key={k.id ?? index} className="group/row px-5 py-3.5">
+                <div className="flex items-start justify-between gap-3">
+                  <EText value={k.accion} onSave={(v) => setKpi(index, { accion: v })} className="text-sm text-ink" />
+                  <DeleteBtn onClick={() => removeKpi(index)} />
+                </div>
+                <div className="mt-2 flex flex-wrap items-center gap-3">
+                  <CadToggle value={k.cadencia ?? "semanal"} onChange={(c) => setKpi(index, { cadencia: c })} />
+                  <MetaStepper value={k.meta} onChange={(v) => setKpi(index, { meta: Math.max(1, v) })} />
+                  {(k.cadencia ?? "semanal") === "mensual" && (
+                    <SemanaMesSelect value={k.semanaMes ?? 0} onChange={(v) => setKpi(index, { semanaMes: v })} />
+                  )}
+                </div>
+                <p className="mt-2 text-[11px] text-dim">
+                  KRI → <EText value={k.kri} onSave={(v) => setKpi(index, { kri: v })} className="text-[11px] text-mute" />
+                </p>
+              </li>
+            ))}
+            {memberKpis.length === 0 && <li className="px-5 py-6 text-sm text-dim">{member.name} todavía no tiene KPIs. Agregá el primero abajo.</li>}
+            <li className="px-5 py-3.5"><AddKpiForm person={who} onAdd={addKpi} /></li>
+          </ul>
+        </Card>
+
         <p className="mt-4 text-xs text-dim">
-          Cadencia: <span className="text-mute">X veces por semana</span> o <span className="text-mute">por mes</span>. El progreso se reinicia solo cada período
-          y queda histórico — se marca y se ve en <span className="text-mute">Operación · Equipo · KPIs</span>.
+          Cadencia: <span className="text-mute">X veces por semana</span> o <span className="text-mute">por mes</span> (con la semana del mes en que aparece).
+          El progreso se marca y se ve en <span className="text-mute">Operación · Equipo · KPIs</span>.
         </p>
       </AdminOnly>
     </Shell>
