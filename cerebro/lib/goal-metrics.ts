@@ -49,6 +49,54 @@ export const GOAL_METRICS: GoalMetric[] = [
 export const metricDef = (key?: string) => GOAL_METRICS.find((m) => m.value === key);
 export const isAutoMetric = (key?: string) => !!key && key !== "manual";
 
+// ---------------- Objetivos genéricos (lenguaje de negocio) ----------------
+// El usuario elige un objetivo simple y el software mapea a la métrica técnica,
+// período y formato. Así no hay que entender de qué tabla sale cada número.
+
+export interface GoalObjetivo {
+  key: string;
+  label: string;      // en lenguaje de negocio
+  emoji: string;
+  metrica: string;    // métrica técnica a la que mapea
+  periodo: GoalPeriodo;
+  sugerido: number;   // objetivo sugerido por defecto
+  hint: string;       // de dónde sale
+}
+
+export const GOAL_OBJETIVOS: GoalObjetivo[] = [
+  { key: "ventas", label: "Ventas / cierres", emoji: "💰", metrica: "ghl_ventas", periodo: "mes", sugerido: 5, hint: "cierres del embudo (GHL)" },
+  { key: "facturacion", label: "Facturación", emoji: "💵", metrica: "ventas_facturacion", periodo: "mes", sugerido: 5000, hint: "compras/pagos reales" },
+  { key: "leads", label: "Leads / interesados", emoji: "🎯", metrica: "meta_leads", periodo: "mes", sugerido: 50, hint: "leads de Meta Ads" },
+  { key: "agendas", label: "Agendas / reuniones", emoji: "📅", metrica: "ghl_agendas", periodo: "mes", sugerido: 20, hint: "agendas del embudo (GHL)" },
+  { key: "alcance", label: "Alcance en Instagram", emoji: "📣", metrica: "ig_alcance", periodo: "mes", sugerido: 20000, hint: "alcance orgánico (IG)" },
+  { key: "interaccion", label: "Interacción (guardados/comp.)", emoji: "💬", metrica: "ig_guardados", periodo: "mes", sugerido: 200, hint: "guardados + compartidos (IG)" },
+  { key: "roas", label: "ROAS (retorno de ads)", emoji: "📈", metrica: "meta_roas", periodo: "mes", sugerido: 3, hint: "retorno de Meta Ads" },
+  { key: "inversion", label: "Inversión en ads", emoji: "🪙", metrica: "meta_spend", periodo: "mes", sugerido: 1000, hint: "gasto en Meta Ads" },
+  { key: "contenido", label: "Piezas publicadas", emoji: "🎬", metrica: "piezas_publicadas", periodo: "mes", sugerido: 8, hint: "piezas marcadas publicadas" },
+  { key: "manual", label: "Otra (la cargo yo)", emoji: "✏️", metrica: "manual", periodo: "semana", sugerido: 100, hint: "sin fuente automática" },
+];
+
+export const objetivoByKey = (key: string) => GOAL_OBJETIVOS.find((o) => o.key === key);
+// Dado el metrica técnico guardado, encontrar el objetivo genérico para mostrar.
+export const objetivoForMetric = (metrica?: string): GoalObjetivo =>
+  GOAL_OBJETIVOS.find((o) => o.metrica === metrica) ?? GOAL_OBJETIVOS[GOAL_OBJETIVOS.length - 1];
+
+// Autodetección: adivina el objetivo desde el nombre de la meta.
+export function inferObjetivo(nombre: string): GoalObjetivo | null {
+  const t = (nombre || "").toLowerCase();
+  const has = (...ws: string[]) => ws.some((w) => t.includes(w));
+  if (has("factur", "ingres", "revenue", "usd", "$")) return objetivoByKey("facturacion")!;
+  if (has("roas", "retorno")) return objetivoByKey("roas")!;
+  if (has("invers", "gasto", "spend", "presupuesto", "pauta")) return objetivoByKey("inversion")!;
+  if (has("venta", "cierre", "vender", "compra")) return objetivoByKey("ventas")!;
+  if (has("lead", "interesad", "contacto")) return objetivoByKey("leads")!;
+  if (has("agenda", "reunion", "reunión", "booking", "cita", "llamada")) return objetivoByKey("agendas")!;
+  if (has("guardad", "compart", "interacc", "engagement")) return objetivoByKey("interaccion")!;
+  if (has("alcance", "reach", "impresion", "seguidor")) return objetivoByKey("alcance")!;
+  if (has("pieza", "publicad", "reel", "contenido", "post", "carrusel", "historia")) return objetivoByKey("contenido")!;
+  return null;
+}
+
 const num = (v: unknown) => Number(v) || 0;
 
 function rangeStart(periodo?: string): string | null {
