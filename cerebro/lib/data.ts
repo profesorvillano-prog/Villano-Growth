@@ -132,10 +132,10 @@ export const CLIENTS: Client[] = [
   },
   {
     id: "marcelo",
-    nombre: "Dr. Marcelo Hernán",
+    nombre: "Marcelo Dachshund",
     nicho: "Nutrición natural · perros salchicha",
     oferta: "Asesoría online + ebooks (HT + LT)",
-    initials: "MH",
+    initials: "MD",
     color: "#fbbf24",
     metaSlugs: ["marcelo", "dr_marcelo", "marcelo_hernan", "salchicha"],
     cicloAncla: "2026-06-22",
@@ -148,7 +148,7 @@ export const CLIENTS: Client[] = [
   },
   {
     id: "ezequiel",
-    nombre: "Ezequiel · Raíz Autoinmune",
+    nombre: "Ezequiel Racca",
     nicho: "Autoinmunes (Crohn, colitis) · salud metabólica",
     oferta: "Consulta pagada USD 60 → Programa autoinmune (high ticket)",
     initials: "EZ",
