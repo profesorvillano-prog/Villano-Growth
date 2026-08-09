@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { Shell } from "@/components/shell";
 import { Card, CardHead, Stat, AreaBadge } from "@/components/ui";
 import { ActionManager } from "@/components/action-manager";
-import { Action, Area, CLIENTS, Person, actionAppliesOn } from "@/lib/data";
+import { AREAS, Action, Area, CLIENTS, Person, actionAppliesOn } from "@/lib/data";
 import { useAuth } from "@/lib/auth";
 import { useData } from "@/lib/db";
 import { useStore } from "@/lib/store";
@@ -18,13 +18,17 @@ import { AdminOnly } from "@/components/admin-only";
 
 const PERSONS: Person[] = ["Sebastián", "Rodrigo", "Francisco", "Javier"];
 
+const AREA_KEYS = Object.keys(AREAS) as Area[];
+
 export default function AccionesPage() {
+  const [area, setArea] = useState<Area | "todas">("todas");
   const [client, setClient] = useState<string>("todos");
   const [who, setWho] = useState<Person | "todos">("todos");
   const { profile } = useAuth();
   const isAdmin = profile?.rol === "admin";
 
   const pred = (a: Action) =>
+    (area === "todas" || a.area === area) &&
     (client === "todos" || (client === "agencia" ? a.clientId === null : a.clientId === client)) &&
     (who === "todos" || a.R === who || a.A === who);
 
@@ -36,8 +40,31 @@ export default function AccionesPage() {
         <Rendimiento filter={pred} />
 
         <Card className="mt-4">
-          <CardHead title="Acciones recurrentes" sub="Editá en línea nombre, área, responsables, cadencia y días. Se refleja en Semana." />
-          <div className="flex flex-wrap items-center gap-2 border-b border-line px-5 py-3">
+          <CardHead title="Acciones recurrentes" sub="Elegí la categoría arriba y editá en línea. Se refleja en Semana." />
+          {/* Selector de categoría (área) — principal */}
+          <div className="flex flex-wrap items-center gap-1.5 border-b border-line px-5 py-3">
+            <button
+              onClick={() => setArea("todas")}
+              className={`rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${area === "todas" ? "border-accent/50 bg-accent/12 text-accent2" : "border-line bg-panel/50 text-mute hover:border-accent/40 hover:text-ink"}`}
+            >
+              Todas
+            </button>
+            {AREA_KEYS.map((k) => {
+              const on = area === k;
+              return (
+                <button
+                  key={k}
+                  onClick={() => setArea(k)}
+                  className={`inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${on ? "border-accent/50 bg-accent/12 text-ink" : "border-line bg-panel/50 text-mute hover:border-accent/40 hover:text-ink"}`}
+                >
+                  <span className="h-1.5 w-1.5 rounded-full" style={{ background: AREAS[k].color, boxShadow: on ? `0 0 6px ${AREAS[k].color}` : undefined }} />
+                  {AREAS[k].label}
+                </button>
+              );
+            })}
+          </div>
+          {/* Filtros secundarios: cliente y persona */}
+          <div className="flex flex-wrap items-center gap-2 border-b border-line px-5 py-2.5">
             <div className="flex flex-wrap items-center gap-1 rounded-lg border border-line bg-panel/70 p-1">
               <FilterBtn active={client === "todos"} onClick={() => setClient("todos")}>Todos</FilterBtn>
               <FilterBtn active={client === "agencia"} onClick={() => setClient("agencia")}>Agencia</FilterBtn>
