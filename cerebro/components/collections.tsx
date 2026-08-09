@@ -287,7 +287,7 @@ export function CalendarCard({ clientId, color }: { clientId: string; color: str
     const evs: Ev[] = [];
     (pieces ?? []).forEach((p) => {
       if (p.fecha_pub === key) evs.push({ label: p.titulo, tone: PIECE_STATE_COLOR.Publicado, kind: "pub" });
-      else if (p.fecha_plan === key) evs.push({ label: p.titulo, tone: color, kind: "plan" });
+      else if (p.fecha_plan === key) evs.push({ label: p.titulo, tone: PIECE_STATE_COLOR.Planificado, kind: "plan" });
     });
     (tasks ?? []).forEach((t) => { if (t.fecha === key) evs.push({ label: t.titulo, tone: t.estado === "hecho" ? "#34d399" : "#fbbf24", kind: "task" }); });
     return evs;
@@ -341,7 +341,7 @@ export function CalendarCard({ clientId, color }: { clientId: string; color: str
         })}
       </div>
       <div className="flex flex-wrap items-center gap-3 px-5 py-2.5 text-[10px] text-dim">
-        <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm" style={{ background: color }} /> Planificada</span>
+        <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm" style={{ background: PIECE_STATE_COLOR.Planificado }} /> Planificada</span>
         <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-ok" /> Publicada</span>
         <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-warn" /> Tarea</span>
       </div>
