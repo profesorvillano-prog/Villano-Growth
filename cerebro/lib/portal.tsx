@@ -54,7 +54,7 @@ export type PieceState = "Idea" | "Planificado" | "Revisado" | "Grabado" | "Publ
 export const PIECE_STATES: PieceState[] = ["Idea", "Planificado", "Revisado", "Grabado", "Publicado"];
 export const PIECE_STATE_COLOR: Record<PieceState, string> = {
   Idea: "#8f8f9d",
-  Planificado: "#60a5fa",
+  Planificado: "#ef4444", // rojo
   Revisado: "#a78bfa",
   Grabado: "#fbbf24",
   Publicado: "#34d399",
