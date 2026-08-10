@@ -11,12 +11,15 @@ Cada tablero lee una tabla de Supabase; Make es quien la llena.
 
 ## 0. El mapa (qué escenario alimenta qué)
 
-| Tablero del panel | Tabla Supabase | Fuente de datos | Frecuencia sugerida |
+| Tablero del panel | Tabla Supabase | Fuente de datos | Frecuencia |
 |---|---|---|---|
-| Meta Ads | `campaign_metrics` | Meta / Facebook Ads (Insights) | cada 6–12 h |
-| Orgánico · Instagram | `organic_content` | Instagram Graph API | 1–2 veces/día |
-| Embudo High Ticket | `ht_pipeline` | GoHighLevel (pipeline) | 1 vez/día |
-| Ventas | `ventas` | Hotmart + GHL (webhooks) | en tiempo real |
+| Meta Ads | `campaign_metrics` | Meta / Facebook Ads (Insights) | **1 vez/día** |
+| Orgánico · Instagram | `organic_content` | Instagram Graph API | **3 veces/semana** (lun · mié · vie) |
+| Embudo High Ticket | `ht_pipeline` | GoHighLevel (pipeline) | **3 veces/semana** (lun · mié · vie) |
+| Ventas | `ventas` | Hotmart + GHL (webhooks) | **tiempo real** (webhook) · o poll diario |
+
+> Cadencia pensada para una **revisión semanal por cliente** (una llamada/semana),
+> no para mirar todo el día. Las estrategias no cambian con esto.
 
 > Planificador, Tareas, Accesos y KPIs **NO** los toca Make — los maneja la app
 > directamente (los edita el equipo/cliente y se guardan en Supabase).
@@ -76,7 +79,7 @@ el escenario muchas veces sin duplicar.
 **Nivel:** anuncio (`level = ad`). Un escenario por cuenta publicitaria (fijás `cliente`).
 
 **Flujo:**
-1. **Schedule** cada 6–12 h.
+1. **Schedule** 1 vez/día.
 2. **Facebook Ads → Get Insights** con:
    - `level = ad`
    - `date_preset = last_30d` (o el rango que quieras ver)
@@ -108,7 +111,7 @@ el escenario muchas veces sin duplicar.
 
 > **Cómo lo lee el panel:** cada fila es la "foto" del anuncio en su ventana,
 > capturada en `fecha`. El drill-down toma la **captura más reciente por anuncio**
-> dentro del rango elegido. Por eso corré 1 vez al día como mínimo.
+> dentro del rango elegido. Con 1 corrida/día siempre tenés la foto del día.
 
 ---
 
@@ -118,10 +121,14 @@ el escenario muchas veces sin duplicar.
 Una fila por publicación; se actualiza en cada corrida con las métricas frescas.
 
 **Flujo:**
-1. **Schedule** 1–2 veces/día.
+1. **Schedule** 3 veces/semana (ej. lunes, miércoles, viernes).
 2. **Instagram Graph API** — listar `media` de la cuenta (últimos N) y, por cada
    media, pedir `insights`.
 3. **Supabase Upsert / HTTP POST** por cada pieza.
+
+> El upsert es por `media_id`: cada corrida refresca las métricas de cada pieza
+> (no importa cuántas veces corras, no duplica). 3×/semana alcanza para la
+> revisión semanal.
 
 **Mapeo (columna ← Instagram):**
 
@@ -160,20 +167,27 @@ Una fila por publicación; se actualiza en cada corrida con las métricas fresca
 ## 4. Escenario C — Embudo High Ticket (GHL) → `ht_pipeline`
 
 **Clave única (upsert):** `on_conflict=cliente,fecha,pipeline_name`
-Una fila **por día** con los **conteos de ese día** (no acumulados — el panel
-suma el rango).
+Una fila **por corrida**, con los **conteos de la ventana desde la corrida
+anterior** (no acumulados — el panel **suma** las filas del rango).
+
+> ⚠️ Importante con 3×/semana: como el panel **suma por fecha**, cada corrida
+> tiene que contar solo lo **nuevo desde la corrida anterior** (ventanas que no
+> se solapan). Ej. la corrida del miércoles cuenta mar+mié; la del viernes cuenta
+> jue+vie. Así la semana suma el total real. (Si corrieras a diario, la ventana
+> es 1 día.) Filtrá las oportunidades por su fecha de creación/cambio de stage
+> dentro de esa ventana.
 
 **Flujo:**
-1. **Schedule** 1 vez/día (al cierre del día, zona Chile).
-2. **GoHighLevel** — leer el pipeline / oportunidades y contar lo del día:
-   - `mensajes`: conversaciones/oportunidades nuevas del día
+1. **Schedule** 3 veces/semana (ej. lunes, miércoles, viernes).
+2. **GoHighLevel** — leer el pipeline / oportunidades y contar lo de la ventana:
+   - `mensajes`: conversaciones/oportunidades nuevas en la ventana
    - `respuestas`: que respondieron
    - `propuestas`: a las que se les ofreció agenda
    - `bookings`: agendas creadas
    - `asistencias`: que asistieron (show)
    - `ventas`: cierres ganados
-   - `facturacion`: monto ganado del día
-3. **Supabase Upsert / HTTP POST** una fila (`fecha` = hoy, `pipeline_name` = nombre del pipeline).
+   - `facturacion`: monto ganado en la ventana
+3. **Supabase Upsert / HTTP POST** una fila (`fecha` = fecha de la corrida, `pipeline_name` = nombre del pipeline).
 
 | Columna | Origen |
 |---|---|
@@ -193,7 +207,11 @@ suma el rango).
 ## 5. Escenario D — Ventas (Hotmart + GHL) → `ventas`
 
 **Clave única (upsert):** `on_conflict=fuente,transaction_id`
-Una fila por transacción. En tiempo real vía **webhooks**.
+Una fila por transacción. En tiempo real vía **webhooks** (recomendado: no se
+pierde ninguna venta).
+
+> Alternativa: si preferís no usar webhooks, un **poll diario** que traiga las
+> transacciones del día hace lo mismo (mismo mapeo, mismo upsert).
 
 ### Hotmart
 1. **Webhooks → Custom webhook** en Make (te da una URL).
