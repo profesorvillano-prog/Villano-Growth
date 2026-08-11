@@ -127,6 +127,18 @@ export function PlannerCard({ clientId, color, canManage = true }: { clientId: s
                     {(p.pilar || p.gancho) && (
                       <p className="mt-0.5 text-[11px] text-dim">{[p.pilar, p.gancho].filter(Boolean).join(" · ")}</p>
                     )}
+                    <div className="mt-1 flex flex-wrap items-center gap-2.5 text-[11px]">
+                      {p.link ? (
+                        <a href={p.link} target="_blank" rel="noreferrer" className="text-accent2 hover:underline">🔗 video en Drive ↗</a>
+                      ) : canManage ? (
+                        <button onClick={() => { const v = window.prompt("Pegá el link del video (Drive):", ""); if (v !== null) update(p.id, { link: v.trim() || null }); }} className="text-dim transition-colors hover:text-accent2">+ link</button>
+                      ) : null}
+                      {p.guion ? (
+                        <button onClick={() => canManage && (() => { const v = window.prompt("Guión / idea:", p.guion || ""); if (v !== null) update(p.id, { guion: v.trim() || null }); })()} className="text-mute hover:text-ink" title={p.guion || undefined}>📝 guión</button>
+                      ) : canManage ? (
+                        <button onClick={() => { const v = window.prompt("Guión / idea:", ""); if (v !== null) update(p.id, { guion: v.trim() || null }); }} className="text-dim transition-colors hover:text-accent2">+ guión</button>
+                      ) : null}
+                    </div>
                   </td>
                   <td className="px-3 py-2.5">
                     {canManage ? (
@@ -150,12 +162,9 @@ export function PlannerCard({ clientId, color, canManage = true }: { clientId: s
                     ) : <span className="text-dim">—</span>}
                   </td>
                   <td className="py-2.5 pl-3 pr-5 text-right">
-                    <div className="flex items-center justify-end gap-2">
-                      {p.link && <a href={p.link} target="_blank" rel="noreferrer" className="text-[11px] text-accent2 hover:underline">ver ↗</a>}
-                      {canManage && (
-                        <button onClick={() => remove(p.id)} title="Eliminar" className="text-dim opacity-0 transition-opacity hover:text-bad group-hover:opacity-100">×</button>
-                      )}
-                    </div>
+                    {canManage && (
+                      <button onClick={() => remove(p.id)} title="Eliminar" className="text-dim opacity-0 transition-opacity hover:text-bad group-hover:opacity-100">×</button>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -172,8 +181,10 @@ function NewPieceForm({ color, onSave, onCancel }: { color: string; onSave: (row
   const [formato, setFormato] = useState(PIECE_FORMATS[0]);
   const [pilar, setPilar] = useState("");
   const [gancho, setGancho] = useState("");
+  const [guion, setGuion] = useState("");
+  const [link, setLink] = useState("");
   const [fecha, setFecha] = useState("");
-  const save = () => { if (!titulo.trim()) return; onSave({ titulo: titulo.trim(), formato, pilar: pilar || null, gancho: gancho || null, fecha_plan: fecha || null, estado: "Planificado" }); };
+  const save = () => { if (!titulo.trim()) return; onSave({ titulo: titulo.trim(), formato, pilar: pilar || null, gancho: gancho || null, guion: guion || null, link: link || null, fecha_plan: fecha || null, estado: "Planificado" }); };
   return (
     <div className="border-b border-line bg-panel/50 px-5 py-4">
       <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
@@ -182,6 +193,8 @@ function NewPieceForm({ color, onSave, onCancel }: { color: string; onSave: (row
         <TextInput placeholder="Pilar (opcional)" value={pilar} onChange={(e) => setPilar(e.target.value)} />
         <TextInput placeholder="Gancho / tema (opcional)" value={gancho} onChange={(e) => setGancho(e.target.value)} />
         <TextInput type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} />
+        <TextInput placeholder="Guión / idea (opcional)" value={guion} onChange={(e) => setGuion(e.target.value)} className="lg:col-span-2" />
+        <TextInput placeholder="Link del video en Drive (opcional)" value={link} onChange={(e) => setLink(e.target.value)} />
       </div>
       <div className="mt-3 flex items-center gap-2">
         <button onClick={save} className="rounded-lg px-3 py-1.5 text-xs font-medium text-white" style={{ background: color }}>Agregar pieza</button>

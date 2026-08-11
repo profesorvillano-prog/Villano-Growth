@@ -19,7 +19,8 @@ export interface ContentPiece {
   estado: PieceState;
   fecha_plan: string | null;  // YYYY-MM-DD
   fecha_pub: string | null;   // YYYY-MM-DD
-  link: string | null;
+  guion: string | null;       // guión / idea desarrollada
+  link: string | null;        // link del video en Drive
   notas: string | null;
   created_by: string | null;
   created_at?: string;

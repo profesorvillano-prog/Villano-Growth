@@ -7,7 +7,7 @@
 import { createContext, useContext, useEffect, useRef, useState, ReactNode } from "react";
 import {
   ACTIONS, Action, CLIENTS, CONTENT_PLANS, ContentPlan,
-  FINANZAS, ClientFinance, GOALS, Goal, KPIS, KPI, genContentActions,
+  FINANZAS, ClientFinance, GOALS, Goal, KPIS, KPI, WeekObjective, genContentActions,
 } from "./data";
 import { supabase } from "./supabase";
 
@@ -26,6 +26,7 @@ export interface DBShape {
   finanzas: ClientFinance[];
   strategies: Record<string, StrategyData>;
   plans: Record<string, ContentPlan>;
+  objetivos: WeekObjective[];
 }
 
 const SEED: DBShape = {
@@ -35,6 +36,7 @@ const SEED: DBShape = {
   finanzas: FINANZAS,
   strategies: Object.fromEntries(CLIENTS.map((c) => [c.id, { ...c.estrategia, oferta: c.oferta }])),
   plans: JSON.parse(JSON.stringify(CONTENT_PLANS)),
+  objetivos: [],
 };
 
 const DOC_ID = "main";
@@ -43,10 +45,11 @@ interface DBCtx extends DBShape {
   update: <K extends keyof DBShape>(key: K, value: DBShape[K]) => void;
   setContentPlan: (clientId: string, plan: ContentPlan) => void;
   reset: () => void;
+  restore: (data: Partial<DBShape>) => void;
   synced: boolean;
 }
 
-const Ctx = createContext<DBCtx>({ ...SEED, update: () => {}, setContentPlan: () => {}, reset: () => {}, synced: false });
+const Ctx = createContext<DBCtx>({ ...SEED, update: () => {}, setContentPlan: () => {}, reset: () => {}, restore: () => {}, synced: false });
 
 export function DataProvider({ children }: { children: ReactNode }) {
   const [db, setDb] = useState<DBShape>(SEED);
@@ -100,9 +103,10 @@ export function DataProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const reset = () => setDb((prev) => save(SEED));
+  const reset = () => setDb(() => save(SEED));
+  const restore = (data: Partial<DBShape>) => setDb(() => save({ ...SEED, ...data }));
 
-  return <Ctx.Provider value={{ ...db, update, setContentPlan, reset, synced }}>{children}</Ctx.Provider>;
+  return <Ctx.Provider value={{ ...db, update, setContentPlan, reset, restore, synced }}>{children}</Ctx.Provider>;
 }
 
 export const useData = () => useContext(Ctx);

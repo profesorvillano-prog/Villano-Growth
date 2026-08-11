@@ -9,26 +9,29 @@ import { useEffect, useState } from "react";
 import { Shell } from "@/components/shell";
 import { Card, CardHead } from "@/components/ui";
 import { TrackerGrid, AreaLegend } from "@/components/tracker";
-import { Action, CLIENTS, Person, complianceFor } from "@/lib/data";
+import { AREAS, Action, Area, CLIENTS, Person, complianceFor } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { useData } from "@/lib/db";
 import { weekRangeLabel } from "@/lib/date";
 
 const PERSONS: Person[] = ["Sebastián", "Rodrigo", "Francisco", "Javier"];
+const AREA_KEYS = Object.keys(AREAS) as Area[];
 
 export default function SemanaPage() {
   const [mode, setMode] = useState<"agencia" | "personal">("agencia");
   const [who, setWho] = useState<Person>("Sebastián");
   const [client, setClient] = useState<string>("todos");
+  const [area, setArea] = useState<Area | "todas">("todas");
   const { done } = useStore();
   const { actions } = useData();
   const [range, setRange] = useState("");
   useEffect(() => setRange(weekRangeLabel()), []);
 
   const pred = (a: Action) =>
-    mode === "agencia"
+    (area === "todas" || a.area === area) &&
+    (mode === "agencia"
       ? client === "todos" || (client === "agencia" ? a.clientId === null : a.clientId === client)
-      : a.R === who || a.A === who;
+      : a.R === who || a.A === who);
 
   const pct = complianceFor(actions.filter(pred), done);
 
@@ -82,6 +85,30 @@ export default function SemanaPage() {
               </div>
             </>
           )}
+        </div>
+
+        {/* Filtro por categoría (área) para no ver todo en un chorro */}
+        <div className="flex flex-wrap items-center gap-1.5 border-b border-line px-5 py-2.5">
+          <span className="mr-1 text-[11px] text-dim">Área:</span>
+          <button
+            onClick={() => setArea("todas")}
+            className={`rounded-md border px-2.5 py-1 text-xs font-medium transition-colors ${area === "todas" ? "border-accent/50 bg-accent/12 text-accent2" : "border-line bg-panel/50 text-mute hover:text-ink"}`}
+          >
+            Todas
+          </button>
+          {AREA_KEYS.map((k) => {
+            const on = area === k;
+            return (
+              <button
+                key={k}
+                onClick={() => setArea(k)}
+                className={`inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-colors ${on ? "border-accent/50 bg-accent/12 text-ink" : "border-line bg-panel/50 text-mute hover:text-ink"}`}
+              >
+                <span className="h-1.5 w-1.5 rounded-full" style={{ background: AREAS[k].color }} />
+                {AREAS[k].label}
+              </button>
+            );
+          })}
         </div>
 
         <TrackerGrid

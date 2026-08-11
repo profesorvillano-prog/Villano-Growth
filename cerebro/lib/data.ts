@@ -463,6 +463,13 @@ export const SALES: Record<string, SalesSummary> = {};
 
 // ---------------- Metas ----------------
 
+// Objetivos de la semana (se definen el lunes, se ven en el Dashboard).
+export interface WeekObjective {
+  id: string;
+  texto: string;
+  hecho: boolean;
+}
+
 export interface Goal {
   clientId: string;
   area: Area;

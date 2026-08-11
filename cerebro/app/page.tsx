@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Shell } from "@/components/shell";
 import { Card, CardHead, Progress, Semaforo, Stat, Avatar, ClientMark } from "@/components/ui";
-import { ALERTAS, Action, CLIENTS, SALES, actionAppliesOn, clientById, complianceFor, fmtVal } from "@/lib/data";
+import { Action, CLIENTS, actionAppliesOn, clientById, complianceFor, fmtVal } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { useData } from "@/lib/db";
 import { isBiweeklyWeek, isoKey, todayLongLabel, weekRangeLabel } from "@/lib/date";
@@ -75,17 +75,7 @@ export default function Dashboard() {
         </Card>
 
         <div className="space-y-4 lg:col-span-2">
-          <Card>
-            <CardHead title="Alertas" sub="Lo que necesita atención" />
-            <ul className="divide-y divide-line/60">
-              {ALERTAS.map((a, i) => (
-                <li key={i} className="flex items-start gap-3 px-5 py-3 text-sm">
-                  <span className={`mt-1 h-2 w-2 shrink-0 rounded-full ${a.tipo === "dato" ? "bg-warn" : a.tipo === "accion" ? "bg-bad" : "bg-accent"}`} />
-                  <span className="text-mute">{a.texto}</span>
-                </li>
-              ))}
-            </ul>
-          </Card>
+          <ObjetivosSemana />
 
           <Card>
             <CardHead title="Metas del mes" right={<Link href="/metas" className="text-xs font-medium text-accent2 hover:underline">Todas →</Link>} />
@@ -107,6 +97,50 @@ export default function Dashboard() {
         </div>
       </div>
     </Shell>
+  );
+}
+
+// Objetivos de la semana: se definen el lunes, foco de la semana.
+function ObjetivosSemana() {
+  const { objetivos, update } = useData();
+  const [nuevo, setNuevo] = useState("");
+  const add = () => {
+    if (!nuevo.trim()) return;
+    update("objetivos", [...objetivos, { id: `o-${Math.random().toString(36).slice(2, 7)}`, texto: nuevo.trim(), hecho: false }]);
+    setNuevo("");
+  };
+  const toggle = (id: string) => update("objetivos", objetivos.map((o) => (o.id === id ? { ...o, hecho: !o.hecho } : o)));
+  const remove = (id: string) => update("objetivos", objetivos.filter((o) => o.id !== id));
+
+  return (
+    <Card>
+      <CardHead title="Objetivos de la semana" sub="Se definen el lunes · el foco de la semana" right={<span className="text-[11px] text-dim">{objetivos.filter((o) => o.hecho).length}/{objetivos.length}</span>} />
+      <ul className="divide-y divide-line/60">
+        {objetivos.length === 0 && <li className="px-5 py-4 text-xs text-dim">Sin objetivos esta semana. Definí los 3 focos abajo.</li>}
+        {objetivos.map((o) => (
+          <li key={o.id} className="group flex items-center gap-3 px-5 py-2.5">
+            <button
+              onClick={() => toggle(o.id)}
+              className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border text-[10px] transition-colors ${o.hecho ? "border-ok bg-ok text-bg" : "border-line bg-soft/50 hover:border-accent/50"}`}
+            >
+              {o.hecho ? "✓" : ""}
+            </button>
+            <span className={`flex-1 text-sm ${o.hecho ? "text-dim line-through" : "text-ink"}`}>{o.texto}</span>
+            <button onClick={() => remove(o.id)} className="text-dim opacity-0 transition-opacity hover:text-bad group-hover:opacity-100">×</button>
+          </li>
+        ))}
+      </ul>
+      <div className="flex gap-2 border-t border-line px-5 py-3">
+        <input
+          value={nuevo}
+          onChange={(e) => setNuevo(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && add()}
+          placeholder="Nuevo objetivo de la semana…"
+          className="min-w-0 flex-1 rounded-lg border border-line bg-panel px-2.5 py-1.5 text-sm text-ink outline-none placeholder:text-dim focus:border-accent/60"
+        />
+        <button onClick={add} className="rounded-lg bg-accent px-3 py-1.5 text-xs font-medium text-white">Agregar</button>
+      </div>
+    </Card>
   );
 }
 
