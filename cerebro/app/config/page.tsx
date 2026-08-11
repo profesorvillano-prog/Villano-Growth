@@ -1,12 +1,45 @@
 "use client";
 
+import { useRef } from "react";
 import { Shell } from "@/components/shell";
 import { Card, CardHead, Avatar, ClientMark } from "@/components/ui";
 import { CLIENTS, TEAM } from "@/lib/data";
 import { useData } from "@/lib/db";
 
 export default function ConfigPage() {
-  const { reset } = useData();
+  const db = useData();
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const descargarBackup = () => {
+    const { actions, goals, kpis, finanzas, strategies, plans, objetivos } = db;
+    const payload = { _app: "villano-os", _ts: new Date().toISOString(), actions, goals, kpis, finanzas, strategies, plans, objetivos };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `villano-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const restaurarBackup = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(String(reader.result));
+        if (confirm("¿Restaurar este backup? Reemplaza el estado actual del panel (acciones, metas, KPIs, estrategias, planes y objetivos).")) {
+          db.restore(data);
+          alert("Backup restaurado ✓");
+        }
+      } catch {
+        alert("Archivo inválido: no es un backup JSON del panel.");
+      }
+      if (fileRef.current) fileRef.current.value = "";
+    };
+    reader.readAsText(file);
+  };
   return (
     <Shell title="Configuración" sub="Equipo, clientes y plantillas de acciones">
       <div className="grid gap-4 lg:grid-cols-2">
@@ -57,18 +90,28 @@ export default function ConfigPage() {
         </Card>
       </div>
 
-      <div className="mt-4 flex items-center justify-between rounded-xl border border-line bg-card px-5 py-4">
-        <div>
-          <p className="text-sm font-medium">Datos de este navegador</p>
-          <p className="mt-0.5 text-xs text-mute">Las ediciones (metas, KPIs, campañas, estrategia, finanzas) se guardan localmente en modo demo.</p>
+      <Card className="mt-4">
+        <CardHead title="Backup y seguridad" sub="Descargá una copia del estado del panel; si algo se borra, la volvés a subir." />
+        <div className="flex flex-wrap items-center gap-3 px-5 py-4">
+          <button onClick={descargarBackup} className="rounded-lg bg-accent px-3.5 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90">
+            ⬇ Descargar backup JSON
+          </button>
+          <button onClick={() => fileRef.current?.click()} className="rounded-lg border border-line px-3.5 py-2 text-sm text-mute transition-colors hover:border-accent/50 hover:text-ink">
+            ⬆ Restaurar desde JSON
+          </button>
+          <input ref={fileRef} type="file" accept="application/json,.json" onChange={restaurarBackup} className="hidden" />
+          <button
+            onClick={() => { if (confirm("¿Restablecer todos los datos al inicial? (bajá un backup antes por las dudas)")) db.reset(); }}
+            className="ml-auto rounded-lg border border-line px-3 py-2 text-xs text-dim transition-colors hover:border-bad/50 hover:text-bad"
+          >
+            Restablecer
+          </button>
         </div>
-        <button
-          onClick={() => { if (confirm("¿Restablecer todos los datos al demo original?")) reset(); }}
-          className="rounded-lg border border-line px-3 py-1.5 text-xs text-mute transition-colors hover:border-bad/50 hover:text-bad"
-        >
-          Restablecer demo
-        </button>
-      </div>
+        <p className="border-t border-line px-5 py-3 text-[11px] text-dim">
+          El backup guarda el estado compartido del panel (acciones, metas, KPIs, estrategias, planes, objetivos y finanzas).
+          Las métricas en vivo (Meta/IG/GHL/Ventas) las alimenta Make y viven aparte. Recomendado: bajar un backup 1 vez por semana.
+        </p>
+      </Card>
     </Shell>
   );
 }
