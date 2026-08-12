@@ -1,11 +1,22 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="no-js">
 <head>
 <meta charset="UTF-8">
+<script>document.documentElement.classList.remove('no-js')</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ÉxiTO en Alimentación Infantil — Certificación Internacional para TOs Pediátricas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://assets.cdn.filesafe.space">
+<link rel="dns-prefetch" href="https://fast.wistia.com">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<meta name="description" content="Certificación Internacional en alimentación infantil para Terapeutas Ocupacionales pediátricas. En 90 días, un método clínico claro para evaluar, intervenir y guiar a las familias.">
+<meta name="theme-color" content="#26215C">
+<meta property="og:title" content="ÉxiTO en Alimentación Infantil — Certificación para TOs Pediátricas">
+<meta property="og:description" content="En 90 días, deja de improvisar: un método clínico para tratar la selectividad, el TEA y el rechazo de alimentos, con avances reales en casa.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://assets.cdn.filesafe.space/kdmmFxEbJjSpgMtbaZ6F/media/6912b99c96d06aa3375e2140.jpeg">
+<meta name="twitter:card" content="summary_large_image">
 <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
 <style>
 :root{
@@ -30,7 +41,14 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--w);color:var(--ink);line-height:1.65;font-size:17px}
+body{font-family:'DM Sans',sans-serif;background:var(--w);color:var(--ink);line-height:1.65;font-size:17px;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{max-width:100%}
+:focus-visible{outline:2px solid var(--p600);outline-offset:3px;border-radius:4px}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
+  .reveal{opacity:1 !important;transform:none !important}
+}
 h1,h2,h3,h4{font-family:'Libre Baskerville',serif}
 p,li,span,a,button,label{font-family:'DM Sans',sans-serif}
 
@@ -188,10 +206,10 @@ h2 em{font-style:italic;color:var(--p600)}
 .car-hdr{max-width:900px;margin:0 auto 36px;padding:0 24px}
 .car-hdr h2{color:#fff;font-size:clamp(28px,5vw,46px)}
 .car-hdr h2 em{color:var(--p200)}
-.car-track-wrap{overflow:hidden;position:relative;touch-action:pan-y}
+.car-track-wrap{overflow:hidden;position:relative;touch-action:pan-y;overflow-anchor:none}
 .car-track{display:flex;gap:0;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
-.car-slide{flex-shrink:0;width:100%;display:flex;justify-content:center;align-items:center;padding:0 24px;box-sizing:border-box}
-.car-slide img{display:block;max-width:min(420px,88vw);width:auto;height:auto;max-height:74vh;object-fit:contain;border-radius:18px;background:transparent}
+.car-slide{flex-shrink:0;width:100%;height:min(64vh,560px);display:flex;justify-content:center;align-items:center;padding:0 24px;box-sizing:border-box}
+.car-slide img{display:block;max-width:min(420px,88vw);width:auto;height:auto;max-height:100%;object-fit:contain;border-radius:18px;background:transparent}
 .car-nav{display:flex;align-items:center;gap:20px;justify-content:center;margin-top:28px;padding:0 24px}
 .car-btn{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.09);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;-webkit-tap-highlight-color:transparent}
 .car-btn:hover,.car-btn:active{background:rgba(255,255,255,.2)}
@@ -268,8 +286,25 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:44px 56px;text-a
 .fdisc{max-width:680px;margin:16px auto 0;font-size:11px;color:rgba(255,255,255,.18);line-height:1.7}
 
 /* ─── REVEAL ─── */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
+/* Fail-safe: if JS never runs (no-JS, crawlers, headless), never hide content */
+.no-js .reveal{opacity:1;transform:none}
+
+/* ─── NAV SCROLL STATE ─── */
+nav{transition:box-shadow .25s ease,background .25s ease}
+nav.scrolled{box-shadow:0 6px 30px -12px rgba(38,33,92,.28)}
+
+/* ─── PREMIUM DEPTH (CTAs + testimonial cards) ─── */
+.btn-p,.btn-pur{box-shadow:0 2px 10px -3px rgba(83,74,183,.4)}
+.btn-p:hover,.btn-pur:hover{box-shadow:0 10px 26px -8px rgba(83,74,183,.55)}
+.vtcard{transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease}
+.vtcard:hover{transform:translateY(-3px);box-shadow:0 16px 36px -16px rgba(38,33,92,.42)}
+
+/* ─── CROSS-BROWSER MEDIA ─── */
+.hero-vsl{isolation:isolate}
+/* Keep carousel images crisp while contained */
+.car-slide img{will-change:auto}
 
 /* ─── ICON SYSTEM (line icons, currentColor) ─── */
 .pitem-emoji svg,.iico svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
@@ -828,10 +863,13 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVideo()});
     document.querySelectorAll('.car-dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
   }
 
+  const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function startTimer(){
     clearInterval(timer);
-    timer=setInterval(()=>go(cur+1),4200);
+    if(reduceMotion)return;              /* respect reduced-motion: no autoplay */
+    timer=setInterval(()=>{if(!document.hidden)go(cur+1)},4200);
   }
+  document.addEventListener('visibilitychange',()=>{document.hidden?clearInterval(timer):startTimer()});
 
   document.getElementById('carPrev').addEventListener('click',()=>{go(cur-1);startTimer()});
   document.getElementById('carNext').addEventListener('click',()=>{go(cur+1);startTimer()});
@@ -856,6 +894,23 @@ const obs=new IntersectionObserver((entries)=>{
   });
 },{threshold:.08,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── NAV SHADOW ON SCROLL ── */
+const navEl=document.querySelector('nav');
+let navTick=false;
+window.addEventListener('scroll',()=>{
+  if(navTick)return;navTick=true;
+  requestAnimationFrame(()=>{navEl.classList.toggle('scrolled',window.scrollY>10);navTick=false});
+},{passive:true});
+
+/* ── KEYBOARD ACCESS for clickable divs (FAQ rows + video cards) ── */
+document.querySelectorAll('.fq,.vtcard').forEach(el=>{
+  el.setAttribute('tabindex','0');
+  el.setAttribute('role','button');
+  el.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}
+  });
+});
 </script>
 </body>
 </html>
