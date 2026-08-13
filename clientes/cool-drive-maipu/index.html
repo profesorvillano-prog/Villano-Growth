@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cool Drive Maipú | Escuela de Conductores · Licencia Clase B</title>
+<meta name="description" content="Escuela de conductores en Maipú, Sergio Silva Acuña 464. Sacas tu Licencia Clase B desde cero, con instructores pacientes, instructora mujer disponible y clases 100% prácticas en las calles donde vas a rendir. Escríbenos por WhatsApp.">
+<meta name="theme-color" content="#F31F2B">
+<meta property="og:title" content="Cool Drive Maipú | Escuela de Conductores">
+<meta property="og:description" content="Ya llegó el momento de sacar tu licencia. Cursos Clase B en Maipú, desde cero y sin apuros. Aprender a manejar nunca fue tan cool.">
+<meta property="og:locale" content="es_CL">
+<meta property="og:type" content="website">
+</head>
+<body style="margin:0">
+
+<!-- ============================================================
+  COOL DRIVE MAIPÚ — LANDING SCROLL HORIZONTAL
+  Archivo autónomo: HTML + CSS + JS vanilla (sin dependencias).
+  PARA GO HIGH LEVEL: copiar desde CD:START hasta CD:END dentro
+  de un elemento "Custom Code / HTML" en una página en blanco.
+  Configuración editable en el bloque CD_CONFIG del <script>.
+============================================================ -->
+<!-- CD:START -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+
+<style>
+/* ============ RESET LOCAL (scoped a la landing) ============ */
+#cd-root, #cd-root *, #cd-root *::before, #cd-root *::after { box-sizing:border-box; }
+#cd-root { position:relative; width:100%; background:#fff; color:#0D0D0F; font-family:'Barlow',system-ui,sans-serif; overflow-x:clip; }
+#cd-root img { max-width:100%; display:block; }
+#cd-root a { color:#D4111C; text-decoration:none; }
+#cd-root a:hover { color:#a80d15; }
+#cd-root ::selection { background:#F31F2B; color:#fff; }
+/* Neutraliza márgenes/padding del contenedor host (GHL) */
+html, body { margin:0 !important; padding:0 !important; max-width:none !important; }
+/* Nota: no usar overflow-x:hidden en html/body — convierte al body en contenedor
+   de scroll y rompe el position:sticky del motor. El recorte lo hace #cd-root
+   con overflow-x:clip, que no crea contenedor de scroll. */
+#cd-root { display:block; }
+/* Respaldo en CSS por si el JS de full-bleed no alcanza a correr */
+#cd-root.cd-bleed { width:100%; margin-left:0; margin-right:0; }
+
+/* ============ KEYFRAMES ============ */
+@keyframes cd-pulse { 0%,84%,100% { transform:scale(1); box-shadow:0 10px 30px rgba(0,0,0,.28) } 88% { transform:scale(1.09); box-shadow:0 0 0 14px rgba(37,211,102,.16) } 92% { transform:scale(1); box-shadow:0 0 0 26px rgba(37,211,102,0) } }
+@keyframes cd-badge { 0%,100% { transform:scale(1) } 50% { transform:scale(1.06) } }
+@keyframes cd-flag { 0%,100% { transform:rotate(-2deg) } 50% { transform:rotate(2deg) } }
+@keyframes cd-hint { 0%,100% { transform:translateX(0) } 50% { transform:translateX(8px) } }
+@media (prefers-reduced-motion: reduce) {
+  #cd-root .cd-wa-float, #cd-root .cd-badge-promo, #cd-root .cd-flag, #cd-root .cd-hint-arrow { animation:none !important; }
+}
+
+/* ============ TIPOGRAFÍA UTILITARIA ============ */
+#cd-root .cd-disp { font-family:'Barlow Condensed',sans-serif; }
+#cd-root .cd-mono { font-family:'IBM Plex Mono',monospace; }
+#cd-root .cd-kicker { margin:0 0 12px; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:#D4111C; }
+
+/* ============ NAVBAR ============ */
+.cd-nav { position:fixed; top:0; left:0; right:0; z-index:60; padding:12px 0; transition:background .3s ease, box-shadow .3s ease; background:transparent; }
+.cd-nav.scrolled { background:rgba(255,255,255,.92); backdrop-filter:saturate(150%) blur(14px); -webkit-backdrop-filter:saturate(150%) blur(14px); box-shadow:0 8px 30px rgba(13,13,15,.10); }
+.cd-nav-inner { max-width:1600px; margin:0 auto; padding:0 clamp(16px,3.5vw,44px); display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.cd-logo { display:flex; align-items:center; gap:10px; color:#0D0D0F !important; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:22px; letter-spacing:.02em; line-height:1; }
+.cd-logomark { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; background:#F31F2B; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:15px; overflow:hidden; flex:0 0 auto; }
+.cd-logomark img { width:100%; height:100%; object-fit:cover; }
+.cd-navlinks { display:flex; align-items:center; gap:26px; }
+.cd-navlink { background:none; border:0; padding:8px 0; cursor:pointer; color:#0D0D0F; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:16px; letter-spacing:.08em; text-transform:uppercase; }
+.cd-navlink:hover { color:#D4111C; }
+.cd-nav-right { display:flex; align-items:center; gap:10px; }
+.cd-btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; border-radius:999px; font-family:'Barlow Condensed',sans-serif; text-transform:uppercase; letter-spacing:.06em; cursor:pointer; transition:transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease; }
+.cd-btn-nav { min-height:44px; padding:0 18px; background:#F31F2B; color:#fff !important; font-weight:800; font-size:16px; }
+.cd-btn-nav:hover { background:#ff3b46; transform:translateY(-2px); }
+.cd-btn-nav { white-space:nowrap; }
+/* El CTA del navbar es largo: en pantallas angostas se compacta y el logo
+   queda solo con el isotipo para que la barra nunca desborde. */
+@media (max-width:1060px) { .cd-btn-nav { padding:0 15px; font-size:15px; } }
+@media (max-width:700px) {
+  .cd-logo span:last-child { display:none; }
+  .cd-btn-nav { padding:0 13px; font-size:14px; }
+}
+.cd-burger { display:none; width:46px; height:46px; align-items:center; justify-content:center; border:1px solid #d8d8e0; border-radius:12px; background:#fff; cursor:pointer; padding:0; }
+.cd-burger span { display:block; width:20px; }
+.cd-burger b { display:block; height:2px; background:#0D0D0F; margin:4px 0; transition:transform .3s ease, opacity .2s ease; }
+.cd-nav.menu-open .cd-burger b:nth-child(1) { transform:translateY(6px) rotate(45deg); }
+.cd-nav.menu-open .cd-burger b:nth-child(2) { opacity:0; }
+.cd-nav.menu-open .cd-burger b:nth-child(3) { transform:translateY(-6px) rotate(-45deg); }
+.cd-menuwrap { max-width:1600px; margin:0 auto; padding:0 clamp(16px,3.5vw,44px); overflow:hidden; display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s cubic-bezier(.2,.8,.2,1); }
+.cd-nav.menu-open .cd-menuwrap { grid-template-rows:1fr; }
+.cd-menuwrap > div { min-height:0; overflow:hidden; }
+.cd-mobilemenu { display:flex; flex-direction:column; gap:2px; margin-top:10px; padding:10px; border-radius:18px; background:#fff; border:1px solid #e4e4ea; box-shadow:0 18px 40px rgba(13,13,15,.12); }
+.cd-mobilemenu .cd-navlink { display:flex; align-items:center; min-height:48px; padding:0 14px; border-radius:12px; font-size:19px; letter-spacing:.06em; text-align:left; }
+@media (max-width:979px) {
+  .cd-navlinks { display:none; }
+  .cd-burger { display:inline-flex; }
+}
+
+/* ============ MOTOR DE SCROLL HORIZONTAL ============ */
+.cd-outer { position:relative; width:100%; background:#F5F5F7; }
+.cd-sticky { position:sticky; top:0; height:100svh; overflow:hidden; background:#fff; }
+.cd-track { position:absolute; top:0; left:0; height:100%; display:flex; align-items:stretch; width:max-content; will-change:transform; }
+.cd-roadsvg { position:absolute; top:0; left:0; height:100%; z-index:8; pointer-events:none; overflow:visible; }
+.cd-car { position:absolute; top:0; left:0; z-index:9; pointer-events:none; will-change:transform;
+  opacity:0; transition:opacity .45s ease; }
+.cd-car.cd-ready { opacity:1; }
+.cd-car-inner { transform-origin:0 0; }
+.cd-progress { position:absolute; left:0; right:0; bottom:0; height:4px; background:rgba(13,13,15,.08); z-index:20; }
+.cd-progress > div { height:100%; width:100%; transform-origin:left center; transform:scaleX(0); background:#F31F2B; }
+
+/* ============ PANELES ============ */
+.cd-panel { position:relative; z-index:5; flex:0 0 auto; width:var(--cd-vw, 100vw); min-width:var(--cd-vw, 100vw); max-width:var(--cd-vw, 100vw); overflow-x:clip; height:100svh; display:flex; align-items:safe center; gap:clamp(24px,4vw,64px); padding:clamp(88px,11vh,110px) clamp(16px,3.2vw,56px) clamp(130px,22vh,220px); background:#fff; }
+.cd-panel .cd-stop { position:absolute; inset:0; pointer-events:none; }
+.cd-panel-col { flex-direction:column; justify-content:safe center; align-items:stretch; }
+
+/* Reveal (estado inicial lo aplica JS; sin JS todo es visible) */
+
+/* ============ HERO ============ */
+.cd-hero-copy { flex:1 1 auto; max-width:min(56ch,58vw); transform-origin:left center; }
+.cd-h1 { margin:0; max-width:14ch; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:min(clamp(34px,8.4vw,104px),7.8vh); line-height:.9; letter-spacing:-.015em; text-transform:uppercase; }
+.cd-h1 span { display:inline-block; }
+.cd-h1 .it { font-style:italic; color:#F31F2B; }
+.cd-lead { margin:clamp(8px,1.8vh,20px) 0 0; max-width:48ch; font-size:min(clamp(15px,3.4vw,19px),3.2vh); line-height:1.5; color:#4a4a52; }
+.cd-hero-ctas { display:flex; flex-wrap:wrap; gap:12px; margin-top:clamp(14px,3vh,26px); max-width:640px; }
+.cd-btn-primary { flex:1 1 240px; min-height:clamp(48px,9vh,56px); padding:0 28px; background:#F31F2B; color:#fff !important; font-weight:900; font-size:clamp(18px,4vw,22px); }
+.cd-btn-primary:hover { background:#ff3b46; transform:translateY(-3px); }
+.cd-btn-ghost { flex:1 1 200px; min-height:clamp(48px,9vh,56px); padding:0 28px; background:transparent; border:2px solid #0D0D0F; color:#0D0D0F; font-weight:800; font-size:clamp(17px,3.8vw,21px); }
+.cd-btn-ghost:hover { border-color:#F31F2B; color:#F31F2B; transform:translateY(-3px); }
+.cd-chips { display:flex; flex-wrap:wrap; gap:10px; list-style:none; margin:clamp(12px,2.6vh,24px) 0 0; padding:0; }
+.cd-chips li { padding:9px 15px; border-radius:999px; background:#F5F5F7; border:1px solid #e4e4ea; font-size:14px; font-weight:600; color:#2b2b33; }
+.cd-hero-hint { display:flex; align-items:center; gap:12px; margin-top:clamp(14px,2.6vh,24px); }
+.cd-lights { display:flex; flex-direction:column; gap:5px; padding:8px 9px; border-radius:12px; background:#0D0D0F; border:2px solid #FFC72C; }
+.cd-lights span { width:11px; height:11px; border-radius:50%; }
+.cd-lights [data-lamp="r"] { background:#F31F2B; }
+.cd-lights [data-lamp="y"] { background:#FFC72C; opacity:.2; }
+.cd-lights [data-lamp="g"] { background:#3ddc84; opacity:.2; }
+.cd-hint-label { font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#6b6b74; }
+.cd-hint-arrow { display:inline-block; animation:cd-hint 1.6s ease-in-out infinite; }
+
+/* ============ CIFRAS ============ */
+.cd-panel.bg-red { background:linear-gradient(155deg,#F31F2B 0%,#DE141F 52%,#A80D16 100%); color:#fff; overflow:hidden; }
+.cd-signs { position:absolute; inset:0; pointer-events:none; z-index:0; }
+.cd-signs svg { width:100%; height:100%; display:block; }
+/* Velo que oscurece el centro para garantizar contraste del texto */
+.cd-red-scrim { position:absolute; inset:0; pointer-events:none; z-index:1;
+  background:radial-gradient(125% 58% at 46% 50%, rgba(126,7,13,.80) 0%, rgba(126,7,13,.46) 52%, rgba(126,7,13,0) 78%); }
+.cd-red-inner { position:relative; z-index:2; transform-origin:left center; }
+.cd-red-h2 { margin:10px 0 0; max-width:17ch; font-size:min(clamp(32px,6.4vw,82px),9.4vh); }
+.cd-red-lead { margin:clamp(10px,2vh,18px) 0 0; max-width:42ch; font-size:min(clamp(15px,3vw,19px),3.2vh); line-height:1.5; color:rgba(255,255,255,.9); }
+.cd-star { color:#FFC72C; margin-left:.06em; }
+/* Contraste del kicker sobre el panel rojo: el selector con #cd-root gana en
+   especificidad al color rojo base y lo pinta amarillo (antes se veía rojo
+   sobre rojo y no se leía). */
+#cd-root .cd-panel.bg-red .cd-kicker { color:#FFC72C; }
+.cd-stats { display:grid; grid-template-columns:repeat(4, minmax(0,1fr));
+  margin:clamp(16px,3.4vh,38px) 0 0; border-top:1px solid rgba(255,255,255,.32); }
+.cd-stat { padding:clamp(10px,2vh,20px) clamp(10px,1.5vw,26px);
+  border-left:1px solid rgba(255,255,255,.22); }
+.cd-stat:first-child { border-left:0; padding-left:0; }
+.cd-stat-n { margin:0; font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:min(clamp(38px,6.2vw,74px),8vh); line-height:.95; letter-spacing:-.01em; }
+.cd-stat-l { margin:6px 0 0; font-family:'IBM Plex Mono',monospace; font-size:clamp(10px,1.1vw,12px);
+  letter-spacing:.13em; text-transform:uppercase; line-height:1.4; color:#fff; }
+.cd-stat-l span { display:block; margin-top:4px; font-family:'Barlow',sans-serif; font-size:clamp(12px,1.1vw,13.5px);
+  letter-spacing:0; text-transform:none; line-height:1.35; color:rgba(255,255,255,.78); }
+@media (max-width:759px) {
+  .cd-stats { grid-template-columns:repeat(2, minmax(0,1fr)); }
+  .cd-stat:nth-child(odd) { border-left:0; padding-left:0; }
+  .cd-stat:nth-child(n+3) { border-top:1px solid rgba(255,255,255,.22); }
+}
+
+/* ============ BENEFICIOS ============ */
+.cd-sign { display:inline-flex; align-self:flex-start; align-items:center; gap:10px; padding:8px 14px; border-radius:8px; background:#FFC72C; border:2px solid #0D0D0F; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:14px; letter-spacing:.14em; text-transform:uppercase; }
+.cd-h2 { margin:0; font-family:'Barlow Condensed',sans-serif; font-weight:900; line-height:.94; text-transform:uppercase; }
+.cd-h2 .it { font-style:italic; }
+.cd-h2 .it.red { color:#F31F2B; }
+.cd-card { display:flex; flex-direction:column; width:clamp(196px,20vw,270px); padding:clamp(14px,2.6vh,22px) clamp(14px,1.6vw,20px); border-radius:20px; background:#F5F5F7; border:2px solid transparent; transition:transform .35s ease, border-color .35s ease, background .35s ease; }
+.cd-card:hover { transform:translateY(-6px); border-color:#F31F2B; background:#fff; }
+.cd-card-num { display:inline-flex; align-items:center; justify-content:center; width:clamp(34px,6vh,42px); height:clamp(34px,6vh,42px); border-radius:12px; background:#0D0D0F; color:#FFC72C; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:18px; }
+.cd-card h3 { margin:clamp(8px,1.6vh,14px) 0 6px; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:min(clamp(19px,2.4vw,26px),4.4vh); line-height:1.05; text-transform:uppercase; }
+.cd-card p { margin:0; font-size:15px; line-height:1.5; color:#4a4a52; }
+
+/* ============ STORY ============ */
+.cd-panel.bg-gray { background:#F5F5F7; }
+
+/* ============ CURSOS ============ */
+.cd-cursos-head { display:flex; flex-direction:column; justify-content:center; flex:0 0 auto; max-width:min(24ch,22vw); }
+.cd-cursos-head .cd-h2 { font-size:min(clamp(30px,6.6vw,78px),9vh); }
+.cd-courses { display:flex; gap:16px; align-items:stretch; transform-origin:left center; }
+.cd-course { position:relative; display:flex; flex-direction:column; width:clamp(270px,26vw,360px); padding:clamp(14px,2.4vh,26px) clamp(16px,1.8vw,24px) clamp(18px,2.8vh,28px); border-radius:24px; transition:transform .35s ease, border-color .35s ease; }
+.cd-course:hover { transform:translateY(-8px); }
+.cd-course-dark { background:#0D0D0F; color:#fff; border:2px solid #F31F2B; box-shadow:0 22px 50px rgba(243,31,43,.2); }
+.cd-course-light { background:#F5F5F7; border:2px solid transparent; }
+.cd-course-light:hover { border-color:#0D0D0F; }
+.cd-course-badge { position:absolute; top:-14px; left:24px; display:inline-flex; padding:6px 13px; border-radius:999px; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:13px; letter-spacing:.14em; text-transform:uppercase; }
+.cd-badge-promo { background:#FFC72C; color:#0D0D0F; animation:cd-badge 2.6s ease-in-out infinite; }
+.cd-badge-dark { background:#0D0D0F; color:#fff; }
+.cd-course-cat { margin:8px 0 0; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; }
+.cd-course-dark .cd-course-cat { color:rgba(245,245,247,.6); }
+.cd-course-light .cd-course-cat { color:#6b6b74; }
+.cd-course h3 { margin:4px 0 0; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:min(clamp(26px,4vw,46px),5.6vh); line-height:1; text-transform:uppercase; }
+.cd-course ul { list-style:none; margin:clamp(8px,1.8vh,16px) 0 0; padding:0; display:flex; flex-direction:column; gap:clamp(4px,1vh,8px); }
+.cd-course li { display:flex; gap:10px; font-size:15px; }
+.cd-course-dark li { color:#F5F5F7; } .cd-course-dark li b { color:#FFC72C; font-weight:400; }
+.cd-course-light li { color:#2b2b33; } .cd-course-light li b { color:#D4111C; font-weight:400; }
+.cd-price { display:flex; align-items:baseline; gap:12px; margin-top:auto; padding-top:clamp(8px,2vh,20px); }
+.cd-price-old { font-size:18px; text-decoration:line-through; }
+.cd-course-dark .cd-price-old { color:rgba(245,245,247,.5); }
+.cd-course-light .cd-price-old { color:#6b6b74; }
+.cd-price-now { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:min(clamp(30px,4.4vw,52px),6vh); line-height:1; }
+#cd-root.no-promo .cd-price-old { display:none; }
+.cd-btn-course { display:flex; min-height:clamp(46px,8vh,54px); margin-top:clamp(10px,2vh,18px); font-weight:900; font-size:clamp(18px,2.2vw,21px); }
+.cd-btn-course.red { background:#F31F2B; color:#fff !important; }
+.cd-btn-course.red:hover { background:#ff3b46; transform:translateY(-3px); }
+.cd-btn-course.dark { background:#0D0D0F; color:#fff !important; }
+.cd-btn-course.dark:hover { background:#26262e; transform:translateY(-3px); }
+.cd-orienta { align-self:center; max-width:22ch; padding-left:8px; }
+.cd-orienta p { margin:0; font-size:clamp(15px,3vw,18px); line-height:1.55; color:#4a4a52; }
+.cd-orienta a { font-weight:700; border-bottom:2px solid #F31F2B; }
+
+@media (min-width:900px) {
+  #cd-root #cursos { justify-content:center; }
+  #cd-root #cursos .cd-courses { justify-content:center; }
+}
+
+/* ============ GALERÍA ============ */
+
+/* ============ CTA FINAL ============ */
+.cd-panel.bg-dark { background:#0D0D0F; color:#fff; overflow:hidden; }
+.cd-checker { position:absolute; inset:0; opacity:.08; background-image:conic-gradient(#fff 90deg, transparent 90deg 180deg, #fff 180deg 270deg, transparent 270deg); background-size:44px 44px; }
+.cd-final-inner { display:flex; flex-direction:column; align-items:center; transform-origin:top center; position:relative; }
+.cd-license { position:relative; display:inline-flex; align-items:center; gap:14px; padding:10px 16px; border-radius:16px; background:rgba(245,245,247,.06); border:1px solid rgba(245,245,247,.16); }
+.cd-flag { display:inline-block; width:38px; height:26px; border-radius:5px; background-image:conic-gradient(#fff 90deg, #0D0D0F 90deg 180deg, #fff 180deg 270deg, #0D0D0F 270deg); background-size:9px 9px; animation:cd-flag 2.4s ease-in-out infinite; }
+.cd-license-card { display:inline-flex; flex-direction:column; align-items:flex-start; padding:6px 12px; border-radius:8px; background:#F5F5F7; color:#0D0D0F; text-align:left; }
+.cd-license-card small { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.18em; }
+.cd-license-card strong { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:17px; line-height:1; }
+.cd-final-h2 { position:relative; margin:clamp(14px,3vh,24px) 0 0; max-width:19ch; font-size:min(clamp(34px,7.4vw,96px),10vh); text-align:center; }
+.cd-final-lead { position:relative; margin:clamp(10px,2vh,18px) auto 0; max-width:56ch;
+  font-size:min(clamp(15px,3vw,19px),3.2vh); line-height:1.5; color:rgba(245,245,247,.86); }
+.cd-btn-final { position:relative; min-width:min(460px,86vw); margin:clamp(16px,3vh,26px) 0 0; min-height:clamp(52px,10vh,64px); padding:0 32px; background:#F31F2B; color:#fff !important; font-weight:900; font-size:clamp(21px,4.4vw,28px); }
+.cd-btn-final:hover { background:#ff3b46; transform:translateY(-3px); }
+
+/* ============ FOOTER / SEDES ============ */
+.cd-btn-map:hover { background:#26262e; transform:translateY(-2px); }
+
+/* ============ WHATSAPP FLOTANTE ============ */
+.cd-wa-float { position:fixed; right:16px; bottom:18px; z-index:70; display:inline-flex; align-items:center; gap:10px; height:56px; padding:0 20px 0 16px; border-radius:999px; background:#25D366; color:#0D0D0F !important; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:18px; letter-spacing:.06em; text-transform:uppercase; box-shadow:0 10px 30px rgba(0,0,0,.28); animation:cd-pulse 9s ease-in-out infinite; }
+.cd-wa-float:hover { background:#2bea72; color:#0D0D0F !important; }
+
+
+/* ============================================================
+   v4 — cabeceras a lo ancho, grillas 2x2 / 3 columnas,
+   hero a sangre, story con señales, footer centrado
+   ============================================================ */
+
+.cd-sprite { position:absolute; width:0; height:0; overflow:hidden; }
+.cd-sec-inner { width:100%; transform-origin:top center; }
+
+/* Cabecera de sección a todo el ancho */
+.cd-head-full { width:100%; max-width:1500px; margin:0 auto; text-align:center; }
+.cd-head-full .cd-kicker { margin-bottom:6px; }
+.cd-head-full .cd-sign { align-self:center; margin:0 auto 12px; }
+.cd-head-full .cd-h2 { max-width:26ch; margin:0 auto; font-size:min(clamp(32px,6.4vw,84px),9.6vh); }
+.cd-head-lead { margin:clamp(8px,1.8vh,16px) auto 0; max-width:66ch; font-size:min(clamp(15px,3vw,19px),3.2vh); line-height:1.5; color:#4a4a52; }
+.cd-head-lead strong { color:#0D0D0F; }
+
+/* --- Sección 1: hero centrado, titular amplio --- */
+.cd-panel.cd-hero { justify-content:center; text-align:center; }
+.cd-hero .cd-hero-copy { flex:1 1 auto; width:100%; max-width:min(1240px,100%); margin:0 auto;
+  transform-origin:top center; }
+.cd-hero .cd-h1 { max-width:23ch; margin:0 auto; font-size:min(clamp(30px,6.8vw,94px),9.8vh); }
+.cd-hero .cd-lead { max-width:68ch; margin-left:auto; margin-right:auto; }
+.cd-hero .cd-hero-ctas { justify-content:center; margin-left:auto; margin-right:auto; }
+.cd-hero .cd-chips { justify-content:center; }
+.cd-hero .cd-hero-hint { justify-content:center; }
+
+/* --- Sección 2: bloque centrado --- */
+.cd-red-inner.cd-centered { text-align:center; transform-origin:top center; }
+.cd-red-inner.cd-centered .cd-red-h2 { max-width:30ch; margin:10px auto 0; font-size:min(clamp(32px,6.6vw,86px),9.6vh); }
+.cd-red-inner.cd-centered .cd-red-lead { max-width:60ch; margin-left:auto; margin-right:auto; }
+.cd-red-inner.cd-centered .cd-stats { width:100%; max-width:1500px; margin-left:auto; margin-right:auto; text-align:left; }
+
+/* --- Sección 3: beneficios 2x2 --- */
+.cd-cards2 { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:clamp(10px,1.4vw,18px);
+  width:min(1180px,100%); margin:clamp(14px,2.6vh,30px) auto 0; }
+.cd-cards2 .cd-card { width:auto; flex-direction:row; align-items:flex-start; gap:clamp(10px,1.2vw,16px); }
+.cd-cards2 .cd-card > div { flex:1 1 auto; }
+.cd-cards2 .cd-card h3 { margin:0 0 5px; min-height:0; }
+.cd-cards2 .cd-card-num { flex:0 0 auto; }
+@media (max-width:759px) {
+  .cd-cards2 { gap:8px; }
+  .cd-cards2 .cd-card { flex-direction:column; padding:12px; }
+}
+
+/* --- Sección 4: story con señales --- */
+#story .cd-head-full .cd-h2 { max-width:20ch; font-size:min(clamp(30px,5.2vw,66px),8vh); }
+#story .cd-head-lead { max-width:58ch; margin-top:clamp(6px,1.4vh,12px); }
+.cd-story-grid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:clamp(12px,1.4vw,19px); width:min(1180px,100%); margin:clamp(10px,1.8vh,20px) auto 0;
+  align-items:stretch; transform-origin:top center; }
+.cd-pillar { display:flex; flex-direction:column; padding:clamp(13px,2.2vh,19px) clamp(14px,1.4vw,19px);
+  border-radius:19px; background:#fff; border:2px solid transparent; transition:transform .35s ease, border-color .35s ease; }
+.cd-pillar:hover { transform:translateY(-6px); border-color:#F31F2B; }
+.cd-signicon { width:clamp(41px,5vh,55px); height:clamp(41px,5vh,55px); display:block; }
+.cd-pillar h3 { margin:clamp(7px,1.4vh,12px) 0 5px; font-family:'Barlow Condensed',sans-serif; font-weight:800;
+  font-size:min(clamp(20px,2.3vw,25px),4.1vh); line-height:1.05; text-transform:uppercase; }
+.cd-pillar p { margin:0; font-size:16.8px; line-height:1.45; color:#4a4a52; }
+.cd-quote-line { margin:clamp(8px,1.6vh,16px) auto 0; text-align:center; }
+.cd-quote-line p { margin:0; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-style:italic;
+  font-size:min(clamp(21px,3.1vw,33px),4.5vh); line-height:1.1; text-transform:uppercase; color:#0D0D0F; }
+@media (max-width:899px) {
+  .cd-story-grid { grid-template-columns:1fr; }
+}
+
+/* --- Sección 5: dato determinante --- */
+.cd-cursos-head { max-width:min(24ch,19vw); }
+.cd-cursos-sub { margin:12px 0 0; font-size:clamp(15px,3vw,18px); line-height:1.45; color:#4a4a52; }
+.cd-course-dark .cd-course-key { border-color:rgba(255,255,255,.22); }
+.cd-course-key { display:flex; align-items:center; gap:12px; margin:clamp(10px,2vh,16px) 0 0;
+  padding:clamp(8px,1.6vh,14px) 0; border-top:1px solid rgba(13,13,15,.14); border-bottom:1px solid rgba(13,13,15,.14); }
+.cd-course-light .cd-course-key { border-color:rgba(13,13,15,.14); }
+.cd-course-key-n { font-family:'Barlow Condensed',sans-serif; font-weight:900; line-height:.86;
+  font-size:min(clamp(48px,7vw,84px),9vh); }
+.cd-course-dark .cd-course-key-n { color:#FFC72C; }
+.cd-course-light .cd-course-key-n { color:#F31F2B; }
+.cd-course-key-l { font-family:'IBM Plex Mono',monospace; font-size:clamp(11px,1.1vw,13px);
+  letter-spacing:.14em; text-transform:uppercase; line-height:1.35; }
+.cd-course-dark .cd-course-key-l { color:rgba(245,245,247,.75); }
+.cd-course-light .cd-course-key-l { color:#6b6b74; }
+
+/* --- Sección 8: señaléticas dispersas sobre fondo oscuro --- */
+.cd-signs-dark { opacity:.58; }
+.cd-dark-scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:radial-gradient(120% 62% at 50% 50%, rgba(13,13,15,.94) 0%, rgba(13,13,15,.74) 46%, rgba(13,13,15,.34) 78%, rgba(13,13,15,.12) 100%); }
+.cd-panel.bg-dark .cd-final-inner { z-index:3; }
+.cd-panel.bg-dark .cd-checker { z-index:0; }
+
+/* --- Última sección: 3 columnas de información --- */
+.cd-panel.cd-footer { align-items:center; justify-content:safe center; }
+.cd-foot-inner { display:block; width:min(1180px,100%); margin:0 auto; text-align:left; transform-origin:top center; }
+.cd-foot-top { display:flex; flex-wrap:wrap; align-items:center; gap:10px clamp(16px,2.4vw,32px);
+  padding-bottom:clamp(12px,2.2vh,20px); border-bottom:1px solid #dcdce4; }
+.cd-foot-logo { display:flex; align-items:center; gap:12px; }
+.cd-foot-logo .cd-logomark { width:46px; height:46px; font-size:18px; }
+.cd-foot-logo strong { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:23px; text-transform:uppercase; }
+.cd-foot-claim { margin:0; flex:1 1 320px; font-size:clamp(15px,1.5vw,17px); line-height:1.45; color:#4a4a52; }
+.cd-foot-claim strong { color:#0D0D0F; }
+.cd-foot-cols { display:grid; grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:clamp(32px,6.5vw,130px); margin-top:clamp(14px,2.6vh,26px); align-items:start; }
+.cd-foot-col { min-width:0; }
+.cd-foot-h3 { margin:0 0 12px; font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:17px; letter-spacing:.14em; text-transform:uppercase; color:#0D0D0F; }
+.cd-foot-facts { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:clamp(6px,1.2vh,12px); }
+.cd-foot-facts li { display:flex; flex-direction:column; }
+.cd-foot-facts b { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; font-weight:500; color:#6b6b74; }
+.cd-foot-facts span { font-size:15px; line-height:1.4; color:#2b2b33; }
+.cd-foot-facts strong { color:#D4111C; }
+.cd-foot-addr { margin:0; font-size:16px; line-height:1.5; font-weight:600; color:#2b2b33; }
+.cd-foot-plus { margin:8px 0 0; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.1em; color:#6b6b74; }
+.cd-foot-note { margin:10px 0 0; font-size:14px; line-height:1.45; color:#6b6b74; }
+.cd-btn-map { min-height:46px; margin-top:14px; padding:0 20px; background:#0D0D0F; color:#fff !important; font-weight:900; font-size:17px; }
+.cd-btn-map:hover { background:#26262e; transform:translateY(-2px); }
+.cd-foot-stack { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+.cd-foot-stack a { display:flex; align-items:center; min-height:42px; font-size:15px; color:#2b2b33; }
+.cd-foot-stack a:hover { color:#D4111C; }
+.cd-foot-stack a.hl { font-weight:700; color:#D4111C; }
+.cd-foot-rating { margin:10px 0 0; font-size:14px; font-weight:600; color:#4a4a52; }
+.cd-foot-inner .cd-copy { margin:clamp(14px,2.4vh,24px) 0 0; padding-top:clamp(10px,1.8vh,16px);
+  border-top:1px solid #dcdce4; font-size:13px; color:#6b6b74; }
+@media (max-width:899px) {
+  .cd-foot-cols { grid-template-columns:repeat(2, minmax(0,1fr)); gap:20px clamp(28px,6vw,64px); }
+  .cd-foot-col:first-child { grid-column:1 / -1; }
+}
+@media (max-width:559px) { .cd-foot-cols { grid-template-columns:1fr; } }
+
+/* ============ WHATSAPP FLOTANTE ============ */
+
+
+
+
+
+/* ================================================================
+   ===============  VERSIÓN MOBILE (≤899px)  ======================
+   En celular la página deja de desplazarse en horizontal y se apila
+   verticalmente: así SIEMPRE se ve toda la información. Se elimina
+   el auto y se conserva el camino con su animación de avance como
+   barra fija inferior. Nada de esto afecta a la versión de escritorio.
+   ================================================================ */
+@media (max-width:899px) {
+  /* --- Motor: de scroll horizontal a apilado vertical --- */
+  #cd-root .cd-outer { height:auto !important; }
+  #cd-root .cd-sticky { position:static; height:auto; overflow:visible; }
+  #cd-root .cd-track { position:static; display:block; width:100%; transform:none !important; }
+  #cd-root .cd-panel { width:100%; min-width:0; max-width:none; height:auto; min-height:0;
+    display:block; padding:clamp(48px,7vh,64px) 20px clamp(48px,7vh,64px); }
+  #cd-root .cd-panel:first-of-type { padding-top:96px; }
+  #cd-root .cd-panel:last-of-type { padding-bottom:104px; }
+  #cd-root [data-fit] { transform:none !important; }
+  #cd-root .cd-sec-inner, #cd-root .cd-red-inner, #cd-root .cd-hero-copy,
+  #cd-root .cd-final-inner, #cd-root .cd-foot-inner { width:100%; max-width:none; }
+
+  /* --- Fuera el auto y el camino horizontal --- */
+  #cd-root .cd-car, #cd-root .cd-roadsvg { display:none !important; }
+
+  /* --- El camino queda como barra fija inferior que avanza al scrollear --- */
+  #cd-root .cd-progress { position:fixed; left:0; right:0; bottom:0; height:14px;
+    background:#3a3b42; z-index:65; }
+  #cd-root .cd-progress > div { background:#F31F2B; }
+  #cd-root .cd-progress::after { content:''; position:absolute; left:0; right:0; top:6px; height:2px;
+    background:repeating-linear-gradient(90deg,#FFC72C 0 16px, transparent 16px 34px); }
+  #cd-root .cd-wa-float { bottom:26px; }
+
+  /* --- Sección 1: Hero --- */
+  #cd-root .cd-hero .cd-h1 { max-width:none; font-size:clamp(32px,8.4vw,42px); }
+  #cd-root .cd-hero .cd-lead { max-width:none; font-size:16px; }
+  #cd-root .cd-hero-ctas { flex-direction:column; }
+  #cd-root .cd-btn-primary, #cd-root .cd-btn-ghost { flex:1 1 auto; width:100%; font-size:18px; }
+  #cd-root .cd-chips { justify-content:center; }
+  #cd-root .cd-chips li { font-size:13px; }
+  #cd-root .cd-hero-hint { display:none; }
+
+  /* --- Sección 2: cifras. Las señales bajan de intensidad para no tapar el texto --- */
+  #cd-root .cd-signs { opacity:.16; }
+  #cd-root .cd-red-scrim { background:radial-gradient(150% 70% at 50% 45%,
+    rgba(126,7,13,.90) 0%, rgba(126,7,13,.72) 55%, rgba(126,7,13,.34) 100%); }
+  #cd-root .cd-red-inner.cd-centered .cd-red-h2 { max-width:none; font-size:clamp(27px,7vw,36px); }
+  #cd-root .cd-red-inner.cd-centered .cd-red-lead { max-width:none; font-size:15px; }
+  #cd-root .cd-stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  #cd-root .cd-stat:nth-child(odd) { border-left:0; padding-left:0; }
+  #cd-root .cd-stat:nth-child(n+3) { border-top:1px solid rgba(255,255,255,.22); }
+  #cd-root .cd-stat-n { font-size:clamp(34px,9vw,44px); }
+
+  /* --- Cabeceras de sección --- */
+  #cd-root .cd-head-full .cd-h2, #cd-root #story .cd-head-full .cd-h2 {
+    max-width:none; font-size:clamp(27px,7vw,36px); }
+  #cd-root .cd-head-lead, #cd-root #story .cd-head-lead { max-width:none; font-size:15.5px; }
+
+  /* --- Sección 3: beneficios, una card por fila --- */
+  #cd-root .cd-cards2 { grid-template-columns:1fr; width:100%; gap:10px; }
+  #cd-root .cd-cards2 .cd-card { flex-direction:row; padding:16px; }
+  #cd-root .cd-cards2 .cd-card h3 { font-size:20px; }
+  #cd-root .cd-cards2 .cd-card p { font-size:15px; }
+
+  /* --- Sección 4: story --- */
+  #cd-root .cd-story-grid { grid-template-columns:1fr; width:100%; gap:10px; }
+  #cd-root .cd-pillar { padding:16px; }
+  #cd-root .cd-pillar h3 { font-size:20px; }
+  #cd-root .cd-pillar p { font-size:15px; }
+  #cd-root .cd-quote-line p { font-size:clamp(19px,5.4vw,25px); }
+
+  /* --- Sección 5: cursos apilados, layout propio de mobile --- */
+  #cd-root #cursos .cd-cursos-head { max-width:none; text-align:center; margin-bottom:18px; }
+  #cd-root #cursos .cd-cursos-head .cd-kicker { margin-bottom:6px; }
+  #cd-root #cursos .cd-cursos-head .cd-h2 { font-size:clamp(30px,8vw,40px); }
+  #cd-root #cursos .cd-cursos-sub { font-size:15.5px; }
+  #cd-root .cd-courses { flex-direction:column; gap:26px; transform-origin:top center; }
+  #cd-root .cd-course { width:100%; padding:22px 20px 24px; }
+  #cd-root .cd-course h3 { font-size:30px; }
+  #cd-root .cd-course-key-n { font-size:44px; }
+  #cd-root .cd-course li { font-size:15px; }
+  #cd-root .cd-price-now { font-size:34px; }
+  #cd-root .cd-btn-course { font-size:19px; }
+  #cd-root .cd-orienta { align-self:stretch; max-width:none; padding-left:0; text-align:center; }
+
+  /* --- Sección 6: CTA final --- */
+  #cd-root .cd-final-h2 { max-width:none; font-size:clamp(29px,7.6vw,38px); }
+  #cd-root .cd-final-lead { max-width:none; font-size:15.5px; }
+  #cd-root .cd-btn-final { min-width:0; width:100%; font-size:19px; }
+  #cd-root .cd-signs-dark { opacity:.42; }
+
+  /* --- Sección 7: información en una columna --- */
+  #cd-root .cd-foot-cols { grid-template-columns:1fr; gap:22px; }
+  #cd-root .cd-foot-top { flex-direction:column; align-items:flex-start; }
+  #cd-root .cd-btn-map { width:100%; }
+}
+@media (max-width:899px) and (prefers-reduced-motion: reduce) {
+  #cd-root [data-reveal] { opacity:1 !important; transform:none !important; }
+}
+
+/* ============ NOSCRIPT ============ */
+.cd-noscript { padding:40px 20px; text-align:center; font-family:'Barlow',sans-serif; }
+</style>
+
+<div id="cd-root">
+
+  <!-- Sprite de señaléticas: definiciones reutilizadas por las secciones 2, 4 y 8 -->
+  <svg class="cd-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+      <g id="cd_sPare">
+        <path d="M-22 -52 L22 -52 L52 -22 L52 22 L22 52 L-22 52 L-52 22 L-52 -22 Z" fill="#FFFFFF"/>
+        <path d="M-19 -45 L19 -45 L45 -19 L45 19 L19 45 L-19 45 L-45 19 L-45 -19 Z" fill="#D8232A"/>
+        <path d="M-16 -38 L16 -38 L38 -16 L38 16 L16 38 L-16 38 L-38 16 L-38 -16 Z" fill="none" stroke="#FFFFFF" stroke-width="3.4"/>
+        <text x="0" y="11" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="800" font-size="27" text-anchor="middle" fill="#FFFFFF">PARE</text>
+      </g>
+      <g id="cd_sCeda">
+        <path d="M-56 -46 L56 -46 L0 52 Z" fill="#FFFFFF"/>
+        <path d="M-44 -37 L44 -37 L0 39 Z" fill="none" stroke="#D8232A" stroke-width="10"/>
+      </g>
+      <g id="cd_sVel60">
+        <circle r="52" fill="#FFFFFF"/><circle r="44" fill="none" stroke="#D8232A" stroke-width="11"/>
+        <text x="0" y="16" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="800" font-size="50" text-anchor="middle" fill="#1A1A1A">60</text>
+      </g>
+      <g id="cd_sVel50">
+        <circle r="52" fill="#FFFFFF"/><circle r="44" fill="none" stroke="#D8232A" stroke-width="11"/>
+        <text x="0" y="16" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="800" font-size="50" text-anchor="middle" fill="#1A1A1A">50</text>
+      </g>
+      <g id="cd_sNoEntrar">
+        <circle r="52" fill="#FFFFFF"/><circle r="46" fill="#D8232A"/>
+        <rect x="-29" y="-7.5" width="58" height="15" rx="2" fill="#FFFFFF"/>
+      </g>
+      <g id="cd_sNoEstacionar">
+        <circle r="52" fill="#FFFFFF"/><circle r="44" fill="none" stroke="#D8232A" stroke-width="10"/>
+        <text x="0" y="18" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="800" font-size="54" text-anchor="middle" fill="#1A1A1A">E</text>
+        <path d="M-31 -31 L31 31" stroke="#D8232A" stroke-width="10" stroke-linecap="round"/>
+      </g>
+      <g id="cd_sCurva">
+        <path d="M0 -58 L58 0 L0 58 L-58 0 Z" fill="#FFFFFF"/>
+        <path d="M0 -50 L50 0 L0 50 L-50 0 Z" fill="#FFC72C"/>
+        <path d="M0 -44 L44 0 L0 44 L-44 0 Z" fill="none" stroke="#1A1A1A" stroke-width="3"/>
+        <path d="M-11 29 L-11 3 Q-11 -13 5 -13 L17 -13" fill="none" stroke="#1A1A1A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 -25 L24 -13 L9 -1" fill="none" stroke="#1A1A1A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <g id="cd_sPeaton">
+        <path d="M0 -58 L58 0 L0 58 L-58 0 Z" fill="#FFFFFF"/>
+        <path d="M0 -50 L50 0 L0 50 L-50 0 Z" fill="#FFC72C"/>
+        <path d="M0 -44 L44 0 L0 44 L-44 0 Z" fill="none" stroke="#1A1A1A" stroke-width="3"/>
+        <circle cx="1" cy="-22" r="6.5" fill="#1A1A1A"/>
+        <path d="M1 -14 L1 8 M1 8 L-9 28 M1 8 L11 28 M-11 -6 L13 -6" stroke="#1A1A1A" stroke-width="6" fill="none" stroke-linecap="round"/>
+      </g>
+      <g id="cd_sSemaforo">
+        <path d="M0 -58 L58 0 L0 58 L-58 0 Z" fill="#FFFFFF"/>
+        <path d="M0 -50 L50 0 L0 50 L-50 0 Z" fill="#FFC72C"/>
+        <path d="M0 -44 L44 0 L0 44 L-44 0 Z" fill="none" stroke="#1A1A1A" stroke-width="3"/>
+        <rect x="-13" y="-31" width="26" height="62" rx="6" fill="#1A1A1A"/>
+        <circle cx="0" cy="-17" r="6.4" fill="#D8232A"/><circle cx="0" cy="0" r="6.4" fill="#FFC72C"/><circle cx="0" cy="17" r="6.4" fill="#2FBF5B"/>
+      </g>
+      <g id="cd_sNinos">
+        <path d="M0 -58 L58 0 L0 58 L-58 0 Z" fill="#FFFFFF"/>
+        <path d="M0 -50 L50 0 L0 50 L-50 0 Z" fill="#FFC72C"/>
+        <path d="M0 -44 L44 0 L0 44 L-44 0 Z" fill="none" stroke="#1A1A1A" stroke-width="3"/>
+        <circle cx="-15" cy="-19" r="6" fill="#1A1A1A"/>
+        <path d="M-15 -12 L-15 8 M-15 8 L-23 27 M-15 8 L-7 27 M-24 -3 L-5 -3" stroke="#1A1A1A" stroke-width="5.6" fill="none" stroke-linecap="round"/>
+        <circle cx="15" cy="-14" r="5.4" fill="#1A1A1A"/>
+        <path d="M15 -8 L15 9 M15 9 L9 26 M15 9 L22 26 M7 0 L23 0" stroke="#1A1A1A" stroke-width="5.2" fill="none" stroke-linecap="round"/>
+      </g>
+      <g id="cd_sRotonda">
+        <circle r="52" fill="#FFFFFF"/><circle r="46" fill="#0B5FA5"/>
+        <path d="M-17 8 A 21 21 0 1 1 8 22" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+        <path d="M-3 29 L11 22 L4 9" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <g id="cd_sFlecha">
+        <circle r="52" fill="#FFFFFF"/><circle r="46" fill="#0B5FA5"/>
+        <path d="M0 28 L0 -20" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"/>
+        <path d="M-17 -8 L0 -28 L17 -8" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <g id="cd_sCruce">
+        <path d="M0 -58 L58 0 L0 58 L-58 0 Z" fill="#FFFFFF"/>
+        <path d="M0 -50 L50 0 L0 50 L-50 0 Z" fill="#FFC72C"/>
+        <path d="M0 -44 L44 0 L0 44 L-44 0 Z" fill="none" stroke="#1A1A1A" stroke-width="3"/>
+        <path d="M0 -30 L0 30 M-30 0 L30 0" stroke="#1A1A1A" stroke-width="9" stroke-linecap="round"/>
+      </g>
+    </defs>
+  </svg>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="cd-nav" id="cdNav">
+    <div class="cd-nav-inner">
+      <a href="#top" class="cd-logo" data-goto="top" aria-label="Cool Drive, inicio">
+        <span class="cd-logomark" data-logo>CD</span>
+        <span>COOLDRIVE<span style="color:#F31F2B">·</span></span>
+      </a>
+      <nav class="cd-navlinks" aria-label="Principal">
+        <button type="button" class="cd-navlink" data-goto="#cursos">Cursos</button>
+        <button type="button" class="cd-navlink" data-goto="#story">Nuestra Story</button>
+        <button type="button" class="cd-navlink" data-goto="#contacto">Dónde estamos</button>
+      </nav>
+      <div class="cd-nav-right">
+        <a class="cd-btn cd-btn-nav" data-wa="general" data-track="nav" href="#" target="_blank" rel="noopener">Quiero mi licencia →</a>
+        <button type="button" class="cd-burger" id="cdBurger" aria-label="Abrir menú" aria-expanded="false" aria-controls="cdMobileMenu">
+          <span><b></b><b></b><b></b></span>
+        </button>
+      </div>
+    </div>
+    <div class="cd-menuwrap">
+      <div>
+        <nav class="cd-mobilemenu" id="cdMobileMenu" aria-label="Menú móvil">
+          <button type="button" class="cd-navlink" data-goto="#cursos">Cursos</button>
+          <button type="button" class="cd-navlink" data-goto="#story">Nuestra Story</button>
+          <button type="button" class="cd-navlink" data-goto="#contacto">Dónde estamos</button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MOTOR DE SCROLL ================= -->
+  <div class="cd-outer" id="cdOuter">
+    <div class="cd-sticky">
+      <div class="cd-track" id="cdTrack">
+
+        <!-- Camino SVG (3 capas: base gris, progreso rojo, guía amarilla) -->
+        <svg class="cd-roadsvg" id="cdRoadSvg" aria-hidden="true">
+          <path id="cdPathBase" d="" fill="none" stroke="#9a9aa4" stroke-opacity="0.5" stroke-width="14" stroke-linecap="round"></path>
+          <path id="cdPathRed" d="" fill="none" stroke="#F31F2B" stroke-width="14" stroke-linecap="round"></path>
+          <path id="cdPathDash" d="" fill="none" stroke="#FFC72C" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="16 22"></path>
+        </svg>
+
+        <!-- Auto -->
+        <div class="cd-car" id="cdCar" aria-hidden="true">
+          <div class="cd-car-inner" id="cdCarInner" style="transform:translate(-107px,-95px)">
+            <div id="cdCarArt">
+            <svg id="cdCarSvg" style="display:block; filter:drop-shadow(0 5px 6px rgba(13,13,15,.24))" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="214" height="98" viewBox="0 0 214 98">
+              <defs>
+                <linearGradient id="cdCarBody" x1="0" y1="0" x2="0.08" y2="1">
+                  <stop offset="0" stop-color="#FF565E"/>
+                  <stop offset="0.28" stop-color="#F31F2B"/>
+                  <stop offset="0.66" stop-color="#D91420"/>
+                  <stop offset="1" stop-color="#A00C15"/>
+                </linearGradient>
+                <linearGradient id="cdCarGlass" x1="0.1" y1="0" x2="0.4" y2="1">
+                  <stop offset="0" stop-color="#3E4650"/>
+                  <stop offset="1" stop-color="#14181E"/>
+                </linearGradient>
+                <linearGradient id="cdCarRim" x1="0" y1="0" x2="0.6" y2="1">
+                  <stop offset="0" stop-color="#F7F8FB"/>
+                  <stop offset="1" stop-color="#9B9DA7"/>
+                </linearGradient>
+              </defs>
+
+              <ellipse cx="107" cy="94" rx="94" ry="3.4" fill="#0D0D0F" opacity=".16"/>
+
+              <!-- carrocería -->
+              <path d="M12 84 L8 62 L7 40 L9 33 L21 11 Q24 6 32 6 L136 6 Q142 6 145 9 L164 30 L198 34 Q207 35 209 44 L210 68 L204 84 Z" fill="url(#cdCarBody)"/>
+
+              <!-- spoiler y antena -->
+              <path d="M20 12 Q24 6 32 6 L44 6 L44 9 L22 11 Z" fill="#1B1C21"/>
+              <path d="M48 7 L39 0" stroke="#1B1C21" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+
+              <!-- vidrios -->
+              <path d="M32 10 L86 10 L86 33 L26 33 Z" fill="url(#cdCarGlass)"/>
+              <path d="M92 10 L140 10 L152 33 L92 33 Z" fill="url(#cdCarGlass)"/>
+              <path d="M86 10 L92 10 L92 33 L86 33 Z" fill="#131418"/>
+
+              <!-- brillo del techo -->
+              <path d="M22.6 11 Q25.4 7.4 32 7.4 L136 7.4 Q141 7.4 143.6 10 L141 11.4 Q138.6 9.6 134 9.6 L33 9.6 Q27 9.6 24.6 12.6 Z" fill="#FFFFFF" opacity=".32"/>
+
+              <!-- líneas de carácter -->
+              <path d="M11 39 Q100 36.5 202 41" stroke="#FFFFFF" stroke-opacity=".16" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+              <path d="M10 54 Q100 51.5 206 56" stroke="#0D0D0F" stroke-opacity=".09" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+              <!-- cortes de puertas -->
+              <path d="M28 35 L28 63" stroke="#0D0D0F" stroke-opacity=".22" stroke-width="1.3" fill="none"/>
+              <path d="M89 35 L89 63" stroke="#0D0D0F" stroke-opacity=".22" stroke-width="1.3" fill="none"/>
+              <path d="M150 34 L150 60" stroke="#0D0D0F" stroke-opacity=".22" stroke-width="1.3" fill="none"/>
+
+              <!-- manillas -->
+              <rect x="68" y="41" width="15" height="4.4" rx="2.2" fill="#0D0D0F" opacity=".34"/>
+              <rect x="128" y="40" width="15" height="4.4" rx="2.2" fill="#0D0D0F" opacity=".34"/>
+
+              <!-- moldura plateada -->
+              <path d="M46 62 L170 59.4 L170 65 L46 67.6 Z" fill="#E6EAF0"/>
+              <path d="M46 62 L170 59.4 L170 61 L46 63.6 Z" fill="#FFFFFF" opacity=".75"/>
+
+              <!-- faldón inferior negro continuo -->
+              <path d="M10 67 L206 64.6 L204 84 L12 84 Z" fill="#2A2B31"/>
+
+              <!-- parachoques trasero -->
+              <path d="M7 56 L22 56 L22 84 L12 84 Q7.6 70 7 60 Z" fill="#26272C"/>
+              <path d="M9 72 L20 72 L20 76 L9.4 76 Z" fill="#15161A"/>
+
+              <!-- parachoques delantero -->
+              <path d="M192 54 L209 56 L210 68 L204 84 L192 84 Z" fill="#26272C"/>
+              <path d="M195 61 L208 62 L208 67 L195 66 Z" fill="#15161A"/>
+              <path d="M193 73 L206 73 L204.4 77.4 L193 77.4 Z" fill="#15161A"/>
+
+              <!-- pasos de rueda -->
+              <path d="M11 84 L11 76 A 29 29 0 0 1 69 76 L69 84 L58.5 84 L58.5 76 A 18.5 18.5 0 0 0 21.5 76 L21.5 84 Z" fill="#1F2025"/>
+              <path d="M148 84 L148 76 A 29 29 0 0 1 206 76 L206 84 L195.5 84 L195.5 76 A 18.5 18.5 0 0 0 158.5 76 L158.5 84 Z" fill="#1F2025"/>
+
+              <!-- óptica trasera -->
+              <path d="M7 36 L18 36.6 L18 53 L7.4 53 Q6.6 44 7 38 Z" fill="#232429"/>
+              <path d="M8.2 37.6 L16.6 38.2 L16.6 47.4 L8.2 47.4 Z" fill="#DA2730"/>
+              <path d="M8.2 48.8 L16.6 48.8 L16.6 51.6 L8.2 51.6 Z" fill="#F2F5F8" opacity=".75"/>
+
+              <!-- óptica delantera -->
+              <path d="M195 36 Q207 38 209 45 L209.4 52 L192 51 Q191.4 42 189.6 37.4 Z" fill="#1E242C"/>
+              <path d="M195.6 37.4 Q205.6 39.6 207.6 46 L206 46 Q203.4 41 194.4 38.6 Z" fill="#DCE2E9"/>
+              <path d="M196.6 41 Q204 43 205.6 47.6 L198.6 47.2 Q197.4 43.8 195 42.4 Z" fill="#FFFFFF" opacity=".85"/>
+
+              <!-- espejo -->
+              <path d="M152 31 Q163 28.5 168 33.5 L168 39.5 L155 38.5 Z" fill="#1B1C21"/>
+
+              <!-- rueda trasera -->
+              <circle cx="40" cy="76" r="19" fill="#101115"/>
+              <circle cx="40" cy="76" r="17.8" fill="none" stroke="#2E2F35" stroke-width="1.5"/>
+              <circle cx="40" cy="76" r="11.6" fill="#191A1F"/>
+              <circle cx="40" cy="76" r="11.6" fill="none" stroke="url(#cdCarRim)" stroke-width="1.8"/>
+              <g fill="url(#cdCarRim)">
+                <path d="M38.5 74.4 L37.7 67.2 L39.1 67 L39.7 74.4 Z M40.4 74.4 L41 67 L42.4 67.2 L41.4 74.4 Z"/>
+                <path d="M38.5 74.4 L37.7 67.2 L39.1 67 L39.7 74.4 Z M40.4 74.4 L41 67 L42.4 67.2 L41.4 74.4 Z" transform="rotate(72 40 76)"/>
+                <path d="M38.5 74.4 L37.7 67.2 L39.1 67 L39.7 74.4 Z M40.4 74.4 L41 67 L42.4 67.2 L41.4 74.4 Z" transform="rotate(144 40 76)"/>
+                <path d="M38.5 74.4 L37.7 67.2 L39.1 67 L39.7 74.4 Z M40.4 74.4 L41 67 L42.4 67.2 L41.4 74.4 Z" transform="rotate(216 40 76)"/>
+                <path d="M38.5 74.4 L37.7 67.2 L39.1 67 L39.7 74.4 Z M40.4 74.4 L41 67 L42.4 67.2 L41.4 74.4 Z" transform="rotate(288 40 76)"/>
+              </g>
+              <circle cx="40" cy="76" r="3" fill="#C8C9D0"/>
+
+              <!-- rueda delantera -->
+              <circle cx="177" cy="76" r="19" fill="#101115"/>
+              <circle cx="177" cy="76" r="17.8" fill="none" stroke="#2E2F35" stroke-width="1.5"/>
+              <circle cx="177" cy="76" r="11.6" fill="#191A1F"/>
+              <circle cx="177" cy="76" r="11.6" fill="none" stroke="url(#cdCarRim)" stroke-width="1.8"/>
+              <g fill="url(#cdCarRim)">
+                <path d="M175.5 74.4 L174.7 67.2 L176.1 67 L176.7 74.4 Z M177.4 74.4 L178 67 L179.4 67.2 L178.4 74.4 Z"/>
+                <path d="M175.5 74.4 L174.7 67.2 L176.1 67 L176.7 74.4 Z M177.4 74.4 L178 67 L179.4 67.2 L178.4 74.4 Z" transform="rotate(72 177 76)"/>
+                <path d="M175.5 74.4 L174.7 67.2 L176.1 67 L176.7 74.4 Z M177.4 74.4 L178 67 L179.4 67.2 L178.4 74.4 Z" transform="rotate(144 177 76)"/>
+                <path d="M175.5 74.4 L174.7 67.2 L176.1 67 L176.7 74.4 Z M177.4 74.4 L178 67 L179.4 67.2 L178.4 74.4 Z" transform="rotate(216 177 76)"/>
+                <path d="M175.5 74.4 L174.7 67.2 L176.1 67 L176.7 74.4 Z M177.4 74.4 L178 67 L179.4 67.2 L178.4 74.4 Z" transform="rotate(288 177 76)"/>
+              </g>
+              <circle cx="177" cy="76" r="3" fill="#C8C9D0"/>
+            </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ PANEL 1: HERO ============ -->
+        <section class="cd-panel cd-hero" id="top-panel" data-screen-label="Hero">
+          <div class="cd-stop" data-stop data-y="0.4"></div>
+          <div class="cd-hero-copy" data-fit>
+            <p class="cd-kicker" data-reveal style="margin-bottom:clamp(8px,1.8vh,14px); font-size:clamp(11px,2.4vw,13px)">Escuela de conductores · Maipú</p>
+            <h1 class="cd-h1" data-words>
+              <span>Ya</span> <span>llegó</span> <span>el</span> <span>momento</span> <span>de</span> <span>sacar</span> <span>tu</span> <span>licencia.</span> <span class="it">Aquí partes de cero.</span>
+            </h1>
+            <p class="cd-lead" data-reveal>Te llevamos de cero al volante hasta el día de tu examen, paso a paso. Y si te da miedo reprobar, tranqui: aprendes en las mismas calles de Maipú donde vas a rendir, con instructores cercanos que no te apuran. Un plan con principio y fin, no un proceso eterno.</p>
+            <div class="cd-hero-ctas" data-reveal>
+              <a class="cd-btn cd-btn-primary" data-wa="general" data-track="hero" href="#" target="_blank" rel="noopener">Quiero mi licencia →</a>
+              <button type="button" class="cd-btn cd-btn-ghost" data-goto="#cursos">Ver cursos y precios →</button>
+            </div>
+            <ul class="cd-chips" data-reveal>
+              <li>📍 Somos de Maipú, como tú</li>
+              <li>🚦 Practicas donde das el examen</li>
+              <li>👩‍🏫 Instructora mujer disponible</li>
+            </ul>
+            <div class="cd-hero-hint" data-compact-hide>
+              <div class="cd-lights"><span data-lamp="r"></span><span data-lamp="y"></span><span data-lamp="g"></span></div>
+              <span class="cd-hint-label">Scroll para avanzar <span class="cd-hint-arrow">→</span></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ PANEL 2: CIFRAS ============ -->
+        <section class="cd-panel cd-panel-col bg-red" data-screen-label="Cifras">
+          <div class="cd-stop" data-stop data-y="0.12"></div>
+          <div class="cd-signs" aria-hidden="true">
+            <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                <use href="#cd_sPare" xlink:href="#cd_sPare" transform="translate(60,42) rotate(-8) scale(0.78)"/>
+                <use href="#cd_sSemaforo" xlink:href="#cd_sSemaforo" transform="translate(205,42) rotate(7) scale(0.72)"/>
+                <use href="#cd_sCruce" xlink:href="#cd_sCruce" transform="translate(350,42) rotate(-5) scale(0.76)"/>
+                <use href="#cd_sVel60" xlink:href="#cd_sVel60" transform="translate(495,42) rotate(8) scale(0.70)"/>
+                <use href="#cd_sNinos" xlink:href="#cd_sNinos" transform="translate(640,42) rotate(-7) scale(0.74)"/>
+                <use href="#cd_sNoEstacionar" xlink:href="#cd_sNoEstacionar" transform="translate(785,42) rotate(6) scale(0.72)"/>
+                <use href="#cd_sNoEntrar" xlink:href="#cd_sNoEntrar" transform="translate(930,42) rotate(-6) scale(0.78)"/>
+                <use href="#cd_sRotonda" xlink:href="#cd_sRotonda" transform="translate(1075,42) rotate(8) scale(0.70)"/>
+                <use href="#cd_sCurva" xlink:href="#cd_sCurva" transform="translate(1190,42) rotate(-7) scale(0.74)"/>
+                <use href="#cd_sPeaton" xlink:href="#cd_sPeaton" transform="translate(130,140) rotate(6) scale(0.50)"/>
+                <use href="#cd_sVel50" xlink:href="#cd_sVel50" transform="translate(285,140) rotate(-5) scale(0.55)"/>
+                <use href="#cd_sPare" xlink:href="#cd_sPare" transform="translate(440,140) rotate(7) scale(0.48)"/>
+                <use href="#cd_sSemaforo" xlink:href="#cd_sSemaforo" transform="translate(595,140) rotate(-8) scale(0.53)"/>
+                <use href="#cd_sCruce" xlink:href="#cd_sCruce" transform="translate(750,140) rotate(7) scale(0.50)"/>
+                <use href="#cd_sVel60" xlink:href="#cd_sVel60" transform="translate(905,140) rotate(-5) scale(0.56)"/>
+                <use href="#cd_sNinos" xlink:href="#cd_sNinos" transform="translate(1060,140) rotate(8) scale(0.49)"/>
+                <use href="#cd_sNoEstacionar" xlink:href="#cd_sNoEstacionar" transform="translate(1185,140) rotate(-7) scale(0.52)"/>
+                <use href="#cd_sNinos" xlink:href="#cd_sNinos" transform="translate(70,582) rotate(6) scale(0.52)"/>
+                <use href="#cd_sNoEstacionar" xlink:href="#cd_sNoEstacionar" transform="translate(225,582) rotate(-6) scale(0.48)"/>
+                <use href="#cd_sNoEntrar" xlink:href="#cd_sNoEntrar" transform="translate(380,582) rotate(8) scale(0.55)"/>
+                <use href="#cd_sRotonda" xlink:href="#cd_sRotonda" transform="translate(535,582) rotate(-7) scale(0.50)"/>
+                <use href="#cd_sCurva" xlink:href="#cd_sCurva" transform="translate(690,582) rotate(6) scale(0.53)"/>
+                <use href="#cd_sCeda" xlink:href="#cd_sCeda" transform="translate(845,582) rotate(-5) scale(0.49)"/>
+                <use href="#cd_sFlecha" xlink:href="#cd_sFlecha" transform="translate(1000,582) rotate(7) scale(0.54)"/>
+                <use href="#cd_sPeaton" xlink:href="#cd_sPeaton" transform="translate(1150,582) rotate(-8) scale(0.50)"/>
+                <use href="#cd_sFlecha" xlink:href="#cd_sFlecha" transform="translate(55,674) rotate(7) scale(0.74)"/>
+                <use href="#cd_sPeaton" xlink:href="#cd_sPeaton" transform="translate(200,674) rotate(-5) scale(0.78)"/>
+                <use href="#cd_sVel50" xlink:href="#cd_sVel50" transform="translate(345,674) rotate(8) scale(0.70)"/>
+                <use href="#cd_sPare" xlink:href="#cd_sPare" transform="translate(490,674) rotate(-7) scale(0.76)"/>
+                <use href="#cd_sSemaforo" xlink:href="#cd_sSemaforo" transform="translate(635,674) rotate(6) scale(0.72)"/>
+                <use href="#cd_sCruce" xlink:href="#cd_sCruce" transform="translate(780,674) rotate(-6) scale(0.78)"/>
+                <use href="#cd_sVel60" xlink:href="#cd_sVel60" transform="translate(925,674) rotate(8) scale(0.70)"/>
+                <use href="#cd_sNinos" xlink:href="#cd_sNinos" transform="translate(1070,674) rotate(-7) scale(0.75)"/>
+                <use href="#cd_sNoEstacionar" xlink:href="#cd_sNoEstacionar" transform="translate(1190,674) rotate(6) scale(0.72)"/>
+            </svg>
+          </div>
+          <div class="cd-red-scrim" aria-hidden="true"></div>
+          <div class="cd-red-inner cd-centered" data-fit>
+            <p class="cd-kicker" data-reveal>Cuando llegue el examen</p>
+            <h2 class="cd-h2 cd-red-h2" data-reveal>Tranqui con el examen: no va a ser tu primera vez <span class="it">en esas calles.</span></h2>
+            <p class="cd-red-lead" data-reveal data-compact-hide>Practicamos contigo los recorridos reales de Maipú, no en un estacionamiento vacío ni memorizando un manual de memoria.</p>
+            <div class="cd-stats">
+              <div class="cd-stat" data-reveal>
+                <p class="cd-stat-n">4,3<span class="cd-star">★</span></p>
+                <p class="cd-stat-l">En Google<span>28 reseñas de alumnos reales</span></p>
+              </div>
+              <div class="cd-stat" data-reveal>
+                <p class="cd-stat-n">+<span data-count="2500">2500</span></p>
+                <p class="cd-stat-l">Alumnos al volante<span>que partieron igual que tú</span></p>
+              </div>
+              <div class="cd-stat" data-reveal>
+                <p class="cd-stat-n">8 de 10</p>
+                <p class="cd-stat-l">Aprueban en la muni<span>la mayoría lo logra sin dramas</span></p>
+              </div>
+              <div class="cd-stat" data-reveal>
+                <p class="cd-stat-n">24/7</p>
+                <p class="cd-stat-l">Respuesta por WhatsApp<span>escríbenos a la hora que sea</span></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ PANEL 3: BENEFICIOS ============ -->
+        <section class="cd-panel cd-panel-col" data-screen-label="Beneficios">
+          <div class="cd-stop" data-stop data-y="0.72"></div>
+          <div class="cd-sec-inner" data-fit>
+            <div class="cd-head-full">
+            <div class="cd-sign" data-reveal>↷ Curva: aprende</div>
+            <h2 class="cd-h2" data-reveal>¿Por qué los que ya tienen su licencia <span class="it red">nos recomiendan?</span></h2>
+          </div>
+          <div class="cd-cards2">
+            <article class="cd-card" data-reveal>
+              <span class="cd-card-num">01</span>
+              <div>
+                <h3>Partimos de cero (de verdad)</h3>
+                <p data-compact-hide="benef-desc">¿Nunca te has subido a manejar? Así llega la mayoría de nuestros alumnos. Da lo mismo si nunca agarraste un volante: armamos cada clase según cómo llegas tú, no según lo que “deberías” saber.</p>
+              </div>
+            </article>
+            <article class="cd-card" data-reveal>
+              <span class="cd-card-num">02</span>
+              <div>
+                <h3>Dile adiós al miedo</h3>
+                <p data-compact-hide="benef-desc">Acá nadie te grita ni te apura, y si te equivocas, tranqui: no hay drama, es parte de aprender. Instructores pacientes —e instructora mujer si la prefieres— que te acompañan paso a paso.</p>
+              </div>
+            </article>
+            <article class="cd-card" data-reveal>
+              <span class="cd-card-num">03</span>
+              <div>
+                <h3>Aprendes a manejar, no solo a aprobar</h3>
+                <p data-compact-hide="benef-desc">No te preparamos únicamente para pasar el examen: te preparamos para manejar el resto de tu vida. La licencia llega sola cuando ya sabes andar tranquilo.</p>
+              </div>
+            </article>
+            <article class="cd-card" data-reveal>
+              <span class="cd-card-num">04</span>
+              <div>
+                <h3>Somos de Maipú, como tú</h3>
+                <p data-compact-hide="benef-desc">Conocemos la comuna, sus calles y los recorridos del examen práctico. Cuando llegue el día, vas a manejar por calles que ya recorriste con nosotros en clases.</p>
+              </div>
+            </article>
+          </div>
+          </div>
+        </section>
+
+        <!-- ============ PANEL 4: STORY ============ -->
+        <section class="cd-panel cd-panel-col bg-gray" id="story" data-screen-label="Story">
+          <div class="cd-stop" data-stop data-y="0.78"></div>
+          <div class="cd-sec-inner" data-fit>
+            <div class="cd-head-full">
+            <p class="cd-kicker" data-reveal>Lo que nos mueve</p>
+            <h2 class="cd-h2" data-reveal>Nuestra <span class="it red">Story</span></h2>
+            <p class="cd-head-lead" data-reveal data-compact-hide="story-lead">Nacimos con una idea simple: que sacar la licencia deje de sentirse como un trámite que da miedo y se convierta en <strong>el día en que ganaste tu independencia</strong>, para manejar hacia donde tú quieras. Nosotros ponemos la experiencia; tú pones las ganas.</p>
+          </div>
+          <div class="cd-story-grid">
+            <article class="cd-pillar" data-reveal>
+              <svg class="cd-signicon" viewBox="-58 -58 116 116" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><use href="#cd_sPare" xlink:href="#cd_sPare"></use></svg>
+              <h3>Frenamos el miedo</h3>
+              <p data-compact-hide="pillar-desc">Nadie te grita, nadie te reta. Cada clase parte desde donde estás tú y avanza a tu ritmo.</p>
+            </article>
+            <article class="cd-pillar" data-reveal>
+              <svg class="cd-signicon" viewBox="-58 -58 116 116" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><use href="#cd_sNinos" xlink:href="#cd_sNinos"></use></svg>
+              <h3>Anticipamos la calle</h3>
+              <p data-compact-hide="pillar-desc">Te enseñamos a leer lo que viene: peatones, micros, rotondas. Manejar es tomar decisiones, no memorizar un manual.</p>
+            </article>
+            <article class="cd-pillar" data-reveal>
+              <svg class="cd-signicon" viewBox="-58 -58 116 116" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><use href="#cd_sFlecha" xlink:href="#cd_sFlecha"></use></svg>
+              <h3>Seguimos contigo</h3>
+              <p data-compact-hide="pillar-desc">Nada de mandarte la teoría y desaparecer. Plataforma con módulos, seguimiento y WhatsApp abierto, desde tu primera clase hasta que sales con la licencia en la mano.</p>
+            </article>
+          </div>
+          <blockquote class="cd-quote-line" data-reveal data-compact-hide="story-quote"><p>“Nadie nace sabiendo manejar. Todos pueden aprender.”</p></blockquote>
+          </div>
+        </section>
+
+        <!-- ============ PANEL 5: CURSOS ============ -->
+        <section class="cd-panel" id="cursos" data-screen-label="Cursos" style="gap:clamp(20px,3vw,44px)">
+          <div class="cd-stop" data-stop data-y="0.26"></div>
+          <div class="cd-cursos-head">
+            <p class="cd-kicker" data-reveal style="margin-bottom:8px">Comienza aquí · zona de cursos</p>
+            <h2 class="cd-h2" data-reveal>Elige tu <span class="it red">camino</span></h2>
+            <p class="cd-cursos-sub" data-reveal data-compact-hide="cursos-sub">Los dos cursos incluyen la misma teoría, pruebas y práctica en auto mecánico con instructor certificado. La única diferencia es cuántas clases al volante necesitas para sentirte seguro. Y te agendamos todas tus clases desde el día uno.</p>
+          </div>
+          <div class="cd-courses" data-fit>
+            <article class="cd-course cd-course-dark" data-reveal>
+              <span class="cd-course-badge cd-badge-promo">Más elegido</span>
+              <p class="cd-course-cat" data-compact-hide="curso-kicker">Clase B · Automóviles</p>
+              <h3>Curso Full</h3>
+              <div class="cd-course-key">
+                <span class="cd-course-key-n">12</span>
+                <span class="cd-course-key-l">clases<br>prácticas</span>
+              </div>
+              <ul>
+                <li><b>✓</b> Ideal si nunca has manejado o partes con nervios</li>
+                <li><b>✓</b> 4 clases al volante más que el Avanzado</li>
+                <li><b>✓</b> Misma teoría, pruebas y práctica en auto mecánico</li>
+                <li><b>✓</b> Para llegar al examen sobrado, no justo</li>
+              </ul>
+              <div class="cd-price">
+                <span class="cd-price-old" data-price="full-old"></span>
+                <span class="cd-price-now" data-price="full">$140.000</span>
+              </div>
+              <a class="cd-btn cd-btn-course red" data-wa="full" data-track="curso_full" href="#" target="_blank" rel="noopener">Quiero el Full →</a>
+            </article>
+            <article class="cd-course cd-course-light" data-reveal>
+              <span class="cd-course-badge cd-badge-dark">Si ya manejaste algo</span>
+              <p class="cd-course-cat" data-compact-hide="curso-kicker">Clase B · Automóviles</p>
+              <h3>Curso Avanzado</h3>
+              <div class="cd-course-key">
+                <span class="cd-course-key-n">8</span>
+                <span class="cd-course-key-l">clases<br>prácticas</span>
+              </div>
+              <ul>
+                <li><b>✓</b> Ideal si ya manejaste antes y quieres pulir tu técnica</li>
+                <li><b>✓</b> Misma teoría, pruebas y práctica en auto mecánico</li>
+                <li><b>✓</b> Enfocado en preparar tu examen práctico y teórico</li>
+                <li><b>✓</b> Lo justo y necesario para rendir con confianza</li>
+              </ul>
+              <div class="cd-price">
+                <span class="cd-price-old" data-price="avanzado-old"></span>
+                <span class="cd-price-now" data-price="avanzado" style="color:#0D0D0F">$110.000</span>
+              </div>
+              <a class="cd-btn cd-btn-course dark" data-wa="avanzado" data-track="curso_avanzado" href="#" target="_blank" rel="noopener">Quiero el Avanzado →</a>
+            </article>
+            <div class="cd-orienta" data-reveal>
+              <p>¿No sabes cuál te conviene? <a data-wa="orienta" data-track="orientacion" href="#" target="_blank" rel="noopener">Escríbenos por WhatsApp y te orientamos. Sin compromiso →</a></p>
+            </div>
+          </div>
+        </section>
+
+
+
+        <!-- ============ PANEL 8: CTA FINAL (META) ============ -->
+        <section class="cd-panel bg-dark" data-screen-label="CTA final" style="flex-direction:column; justify-content:center; align-items:center; text-align:center">
+          <div class="cd-stop" data-stop data-y="0.6"></div>
+          <div class="cd-checker" aria-hidden="true"></div>
+          <div class="cd-signs cd-signs-dark" aria-hidden="true">
+            <svg viewBox="0 0 1320 760" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <use href="#cd_sPare" xlink:href="#cd_sPare" transform="translate(79,85) rotate(5) scale(0.70)"></use>
+              <use href="#cd_sSemaforo" xlink:href="#cd_sSemaforo" transform="translate(277,50) rotate(-6) scale(0.70)"></use>
+              <use href="#cd_sCruce" xlink:href="#cd_sCruce" transform="translate(442,49) rotate(-9) scale(0.64)"></use>
+              <use href="#cd_sVel60" xlink:href="#cd_sVel60" transform="translate(600,44) rotate(-9) scale(0.70)"></use>
+              <use href="#cd_sNinos" xlink:href="#cd_sNinos" transform="translate(747,76) rotate(5) scale(0.70)"></use>
+              <use href="#cd_sNoEstacionar" xlink:href="#cd_sNoEstacionar" transform="translate(942,27) rotate(-4) scale(0.46)"></use>
+              <use href="#cd_sNoEntrar" xlink:href="#cd_sNoEntrar" transform="translate(1109,30) rotate(-6) scale(0.52)"></use>
+              <use href="#cd_sRotonda" xlink:href="#cd_sRotonda" transform="translate(98,174) rotate(5) scale(0.58)"></use>
+              <use href="#cd_sCurva" xlink:href="#cd_sCurva" transform="translate(258,196) rotate(-4) scale(0.52)"></use>
+              <use href="#cd_sCeda" xlink:href="#cd_sCeda" transform="translate(419,234) rotate(-9) scale(0.46)"></use>
+              <use href="#cd_sFlecha" xlink:href="#cd_sFlecha" transform="translate(620,206) rotate(5) scale(0.70)"></use>
+              <use href="#cd_sPeaton" xlink:href="#cd_sPeaton" transform="translate(752,203) rotate(7) scale(0.52)"></use>
+              <use href="#cd_sVel50" xlink:href="#cd_sVel50" transform="translate(987,207) rotate(-9) scale(0.46)"></use>
+              <use href="#cd_sPare" xlink:href="#cd_sPare" transform="translate(1174,184) rotate(5) scale(0.46)"></use>
+              <use href="#cd_sSemaforo" xlink:href="#cd_sSemaforo" transform="translate(59,365) rotate(-9) scale(0.46)"></use>
+              <use href="#cd_sCruce" xlink:href="#cd_sCruce" transform="translate(202,343) rotate(-6) scale(0.46)"></use>
+              <use href="#cd_sVel60" xlink:href="#cd_sVel60" transform="translate(442,364) rotate(8) scale(0.64)"></use>
+              <use href="#cd_sNinos" xlink:href="#cd_sNinos" transform="translate(615,325) rotate(-4) scale(0.52)"></use>
+              <use href="#cd_sNoEstacionar" xlink:href="#cd_sNoEstacionar" transform="translate(776,359) rotate(-9) scale(0.58)"></use>
+              <use href="#cd_sNoEntrar" xlink:href="#cd_sNoEntrar" transform="translate(964,317) rotate(5) scale(0.46)"></use>
+              <use href="#cd_sRotonda" xlink:href="#cd_sRotonda" transform="translate(1119,347) rotate(8) scale(0.46)"></use>
+              <use href="#cd_sCurva" xlink:href="#cd_sCurva" transform="translate(23,468) rotate(5) scale(0.64)"></use>
+              <use href="#cd_sCeda" xlink:href="#cd_sCeda" transform="translate(224,485) rotate(5) scale(0.70)"></use>
+              <use href="#cd_sFlecha" xlink:href="#cd_sFlecha" transform="translate(406,477) rotate(5) scale(0.64)"></use>
+              <use href="#cd_sPeaton" xlink:href="#cd_sPeaton" transform="translate(576,511) rotate(5) scale(0.52)"></use>
+              <use href="#cd_sVel50" xlink:href="#cd_sVel50" transform="translate(742,495) rotate(-4) scale(0.58)"></use>
+              <use href="#cd_sPare" xlink:href="#cd_sPare" transform="translate(924,487) rotate(-6) scale(0.64)"></use>
+              <use href="#cd_sSemaforo" xlink:href="#cd_sSemaforo" transform="translate(1175,473) rotate(-9) scale(0.52)"></use>
+              <use href="#cd_sCruce" xlink:href="#cd_sCruce" transform="translate(49,662) rotate(7) scale(0.46)"></use>
+              <use href="#cd_sVel60" xlink:href="#cd_sVel60" transform="translate(244,643) rotate(5) scale(0.46)"></use>
+              <use href="#cd_sNinos" xlink:href="#cd_sNinos" transform="translate(391,617) rotate(-6) scale(0.70)"></use>
+              <use href="#cd_sNoEstacionar" xlink:href="#cd_sNoEstacionar" transform="translate(593,607) rotate(-4) scale(0.58)"></use>
+              <use href="#cd_sNoEntrar" xlink:href="#cd_sNoEntrar" transform="translate(789,664) rotate(-6) scale(0.70)"></use>
+              <use href="#cd_sRotonda" xlink:href="#cd_sRotonda" transform="translate(983,623) rotate(5) scale(0.52)"></use>
+              <use href="#cd_sCurva" xlink:href="#cd_sCurva" transform="translate(1121,645) rotate(-6) scale(0.70)"></use>
+            </svg>
+          </div>
+          <div class="cd-dark-scrim" aria-hidden="true"></div>
+          <div class="cd-final-inner" data-fit>
+            <div class="cd-license" data-reveal>
+              <span class="cd-flag"></span>
+              <span class="cd-license-card"><small>LICENCIA CLASE B</small><strong>TU NOMBRE AQUÍ</strong></span>
+            </div>
+            <h2 class="cd-h2 cd-final-h2" data-reveal>¿Hasta cuándo vas a andar pidiendo que te <span class="it red">lleven?</span></h2>
+            <p class="cd-final-lead" data-reveal data-compact-hide="final-lead">Tu Licencia Clase B está más cerca de lo que crees. Escríbenos por WhatsApp y agendamos tu primera clase en menos de 5 minutos.</p>
+            <a class="cd-btn cd-btn-final" data-reveal data-wa="general" data-track="cta_final" href="#" target="_blank" rel="noopener">Quiero mi licencia →</a>
+          </div>
+        </section>
+
+        <!-- ============ PANEL 9: FOOTER / SEDES ============ -->
+        <section class="cd-panel cd-panel-col bg-gray cd-footer" id="contacto" data-screen-label="Footer">
+          <div class="cd-stop" data-stop data-y="0.5"></div>
+          <div class="cd-foot-inner" data-fit>
+            <div class="cd-foot-top" data-reveal>
+              <div class="cd-foot-logo">
+                <span class="cd-logomark" data-logo>CD</span>
+                <strong>COOLDRIVE<span style="color:#F31F2B">·</span></strong>
+              </div>
+              <p class="cd-foot-claim" data-compact-hide="foot-claim">No se trata solo de sacar tu licencia. Se trata de aprender a manejar <strong>con confianza</strong>.</p>
+            </div>
+            <div class="cd-foot-cols">
+              <div class="cd-foot-col" data-reveal>
+                <h3 class="cd-foot-h3">Nuestros cursos</h3>
+                <ul class="cd-foot-facts">
+                  <li><b>Curso Full</b><span>12 clases prácticas · <strong data-price="full">$140.000</strong></span></li>
+                  <li><b>Curso Avanzado</b><span>8 clases prácticas · <strong data-price="avanzado">$110.000</strong></span></li>
+                  <li><b>Modalidad</b><span>Teoría, pruebas y práctica en auto mecánico</span></li>
+                  <li><b>Licencia</b><span>Clase B · Partimos de cero, no necesitas experiencia</span></li>
+                </ul>
+              </div>
+              <div class="cd-foot-col" data-reveal>
+                <h3 class="cd-foot-h3">Dónde estamos</h3>
+                <p class="cd-foot-addr">Sergio Silva Acuña 464<br>Maipú, Región Metropolitana</p>
+                <p class="cd-foot-plus" data-compact-hide="foot-plus">Plus Code · F68F+FC Maipú</p>
+                <p class="cd-foot-note" data-compact-hide="foot-note">Las clases parten desde la sede y practicamos en las calles donde vas a rendir tu examen.</p>
+                <a class="cd-btn cd-btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=Escuela%20de%20conductores%20Maip%C3%BA%20Cool%20Drive%2C%20Sergio%20Silva%20Acu%C3%B1a%20464%2C%20Maip%C3%BA" target="_blank" rel="noopener" data-track="mapa">Cómo llegar →</a>
+              </div>
+              <div class="cd-foot-col" data-reveal>
+                <h3 class="cd-foot-h3">Contacto</h3>
+                <ul class="cd-foot-stack">
+                  <li><a class="hl" data-wa="general" data-track="footer" href="#" target="_blank" rel="noopener">WhatsApp +56 9 5779 7476 · Respondemos 24/7</a></li>
+                  <li><a href="mailto:cooldrive.maipu@gmail.com">cooldrive.maipu@gmail.com</a></li>
+                  <li><a href="https://www.instagram.com/escuelacooldrive_maipu/" target="_blank" rel="noopener">Instagram</a></li>
+                  <li><a href="https://www.tiktok.com/@escuela_cooldrive" target="_blank" rel="noopener">TikTok</a></li>
+                </ul>
+                <p class="cd-foot-rating" data-compact-hide="foot-rating">4,3 <span class="cd-star">★</span> en Google · 28 reseñas</p>
+              </div>
+            </div>
+            <p class="cd-copy" data-reveal data-compact-hide="foot-copy">© 2026 Cool Drive Maipú · Escuela de conductores</p>
+          </div>
+        </section>
+
+      </div><!-- /cd-track -->
+
+      <div class="cd-progress" aria-hidden="true"><div id="cdBar"></div></div>
+    </div><!-- /cd-sticky -->
+  </div><!-- /cd-outer -->
+
+  <!-- WhatsApp flotante -->
+  <a class="cd-wa-float" data-wa="general" data-track="float" href="#" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="#0D0D0F" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.1c-.24.68-1.4 1.3-1.94 1.35-.5.05-.98.23-3.3-.69-2.78-1.1-4.55-3.94-4.69-4.13-.14-.19-1.12-1.49-1.12-2.84 0-1.35.71-2.02.96-2.29.25-.28.55-.35.73-.35.18 0 .37 0 .53.01.17.01.4-.06.62.48.24.57.8 1.98.87 2.12.07.14.12.3.02.49-.1.19-.15.3-.29.47-.14.16-.3.36-.43.49-.14.14-.29.29-.12.57.16.28.73 1.2 1.56 1.95 1.07.95 1.97 1.25 2.25 1.39.28.14.44.12.6-.07.17-.19.7-.81.88-1.09.19-.28.37-.23.63-.14.25.09 1.65.78 1.93.92.28.14.47.21.53.32.07.11.07.64-.17 1.32Z"></path></svg>
+    Escríbenos
+  </a>
+
+  <noscript>
+    <div class="cd-noscript">
+      <h1>Cool Drive Maipú — Escuela de Conductores</h1>
+      <p>Cursos Clase B en Maipú. Escríbenos por WhatsApp: <a href="https://wa.me/56957797476">+56 9 5779 7476</a></p>
+    </div>
+  </noscript>
+
+</div><!-- /cd-root -->
+
+<script>
+/* ==================================================================
+   COOL DRIVE — MOTOR DE LA LANDING (JS vanilla, sin dependencias)
+   ================================================================== */
+(function () {
+  'use strict';
+
+  /* ================== CONFIGURACIÓN EDITABLE ==================
+     Todo lo que el equipo puede cambiar sin tocar el motor. */
+  var CD_CONFIG = {
+    // Número de WhatsApp (solo dígitos, con código país)
+    whatsapp: '56957797476',
+
+    // Mensajes pre-cargados por tipo de botón
+    messages: {
+      general:  '¡Hola! Vi la web de Cool Drive y quiero info para sacar mi licencia 🚗',
+      full:     '¡Hola! Me interesa el Curso Full (Clase B) de Cool Drive. ¿Me cuentan?',
+      avanzado: '¡Hola! Me interesa el Curso Avanzado (Clase B) de Cool Drive. ¿Me cuentan?',
+      orienta:  '¡Hola! No sé cuál curso me conviene, ¿me orientan?'
+    },
+
+    // Precios de los cursos.
+    // Para lanzar una promoción: poner showPromoPrice en true y escribir el
+    // precio anterior REAL en fullOld / avanzadoOld (aparece tachado al lado).
+    showPromoPrice: false,
+    prices: {
+      full: '$140.000',      fullOld: '',
+      avanzado: '$110.000',  avanzadoOld: ''
+    },
+
+    // URLs de imágenes (subir a la librería de medios de GHL y pegar aquí).
+    // Si queda vacío se muestra el placeholder rayado.
+    images: {
+      logo:   '',   // ej: 'https://assets.gohighlevel.com/.../logo.png'
+      // car: reemplaza la ilustración vectorial del auto por una imagen
+      // propia (opcional). Requisitos: PNG/WebP con fondo transparente,
+      // auto mirando hacia la DERECHA, ruedas tocando el borde inferior,
+      // proporción ~2.18:1 (ej: 856x392).
+      car:    ''
+    },
+
+    // Suavizado del auto (0.08 = flota mucho, 0.45 = pegado al scroll)
+    smoothness: 0.2,
+
+    // Pantalla completa: elimina el padding/ancho máximo que el contenedor
+    // de la página (Go High Level, un tema, etc.) le imponga a la landing,
+    // para que las secciones lleguen de borde a borde.
+    // Poner en false solo si la landing debe convivir con otro contenido.
+    fullBleed: true
+  };
+  /* ============================================================ */
+
+  var root = document.getElementById('cd-root');
+  if (!root) return;
+
+  var $ = function (s, c) { return (c || root).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || root).querySelectorAll(s)); };
+
+  var els = {
+    nav: $('#cdNav'), burger: $('#cdBurger'),
+    outer: $('#cdOuter'), track: $('#cdTrack'), sticky: $('.cd-sticky'),
+    svg: $('#cdRoadSvg'),
+    base: $('#cdPathBase'), red: $('#cdPathRed'), dash: $('#cdPathDash'),
+    car: $('#cdCar'), carInner: $('#cdCarInner'), bar: $('#cdBar')
+  };
+
+  var CAR_H = 95; // punto de contacto del neumático con el camino (SVG 214x98)
+
+  var st = {
+    reduced: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    dist: 1, curX: 0, len: 0, lut: [], vw: 0, vh: 0,
+    pending: [], counters: [], lamps: null, raf: 0
+  };
+
+  /* ---------- 1) Aplicar configuración ---------- */
+  function applyConfig() {
+    // Links de WhatsApp
+    $$('[data-wa]').forEach(function (a) {
+      var key = a.getAttribute('data-wa');
+      var msg = CD_CONFIG.messages[key] || CD_CONFIG.messages.general;
+      a.href = 'https://wa.me/' + CD_CONFIG.whatsapp + '?text=' + encodeURIComponent(msg);
+    });
+    // Precios
+    var map = { 'full': CD_CONFIG.prices.full, 'full-old': CD_CONFIG.prices.fullOld,
+                'avanzado': CD_CONFIG.prices.avanzado, 'avanzado-old': CD_CONFIG.prices.avanzadoOld };
+    $$('[data-price]').forEach(function (el) {
+      var v = map[el.getAttribute('data-price')];
+      if (v) el.textContent = v;
+    });
+    if (!CD_CONFIG.showPromoPrice) root.classList.add('no-promo');
+    // Imágenes
+    Object.keys(CD_CONFIG.images).forEach(function (key) {
+      var url = CD_CONFIG.images[key];
+      if (!url) return;
+      if (key === 'car') {
+        var art = document.getElementById('cdCarArt');
+        if (art) art.innerHTML = '<img src="' + url + '" alt="" width="214" height="98" ' +
+          'style="display:block; width:214px; height:98px; object-fit:contain; object-position:bottom">';
+        return;
+      }
+      if (key === 'logo') {
+        $$('[data-logo]').forEach(function (mark) {
+          mark.textContent = '';
+          var img = document.createElement('img');
+          img.src = url; img.alt = 'Logo Cool Drive';
+          mark.appendChild(img);
+        });
+        return;
+      }
+      var slot = $('[data-slot="' + key + '"]');
+      if (!slot) return;
+      var em = slot.querySelector('em');
+      if (em) em.style.display = 'none';
+      var img = document.createElement('img');
+      img.src = url; img.alt = '';
+      img.loading = key === 'hero' ? 'eager' : 'lazy';
+      slot.appendChild(img);
+    });
+  }
+
+  /* ---------- 1b) Pantalla completa: liberar contenedores del host ---------- */
+  function fullBleed() {
+    if (CD_CONFIG.fullBleed === false) return;
+    root.classList.add('cd-bleed');
+    var el = root.parentElement;
+    var guard = 0;
+    while (el && el !== document.documentElement && guard++ < 30) {
+      var cs = getComputedStyle(el);
+      if (parseFloat(cs.paddingLeft) || parseFloat(cs.paddingRight)) {
+        el.style.paddingLeft = '0px'; el.style.paddingRight = '0px';
+      }
+      if (parseFloat(cs.marginLeft) || parseFloat(cs.marginRight)) {
+        el.style.marginLeft = '0px'; el.style.marginRight = '0px';
+      }
+      if (cs.maxWidth && cs.maxWidth !== 'none') el.style.maxWidth = 'none';
+      if (cs.width !== '100%') el.style.width = '100%';
+      el = el.parentElement;
+    }
+  }
+
+  /* ---------- 2) Navbar + menú móvil + anclas ---------- */
+  function applyNav(scrolled) {
+    els.nav.classList.toggle('scrolled', scrolled);
+  }
+  function closeMenu() {
+    els.nav.classList.remove('menu-open');
+    els.burger.setAttribute('aria-expanded', 'false');
+  }
+  els.burger.addEventListener('click', function () {
+    var open = els.nav.classList.toggle('menu-open');
+    els.burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  function scrollToPanel(sel) {
+    if (sel === 'top') { window.scrollTo({ top: 0, behavior: 'smooth' }); closeMenu(); return; }
+    var el = $(sel, els.track);
+    if (!el) return;
+    if (st.mobile) {
+      var top = el.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      closeMenu();
+      return;
+    }
+    var left = el.getBoundingClientRect().left - els.track.getBoundingClientRect().left;
+    window.scrollTo({ top: Math.min(st.dist, Math.max(0, left)), behavior: 'smooth' });
+    closeMenu();
+  }
+  root.addEventListener('click', function (e) {
+    var go = e.target.closest('[data-goto]');
+    if (go) { e.preventDefault(); scrollToPanel(go.getAttribute('data-goto')); return; }
+  });
+
+  /* ---------- 3) Tracking de conversión (WhatsApp) ---------- */
+  root.addEventListener('click', function (e) {
+    var a = e.target.closest('a[data-wa]');
+    if (!a) return;
+    var label = a.getAttribute('data-track') || 'whatsapp';
+    try { if (typeof gtag === 'function') gtag('event', 'whatsapp_click', { event_category: 'conversion', event_label: label }); } catch (err) {}
+    try { if (typeof fbq === 'function') fbq('trackCustom', 'WhatsAppClick', { placement: label }); } catch (err) {}
+    try { window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'whatsapp_click', placement: label }); } catch (err) {}
+  });
+
+  /* ---------- 4) Geometría del camino ---------- */
+  function smoothPath(pts) {
+    if (pts.length < 2) return '';
+    var d = 'M ' + pts[0].x.toFixed(1) + ' ' + pts[0].y.toFixed(1);
+    for (var i = 0; i < pts.length - 1; i++) {
+      var p1 = pts[i], p2 = pts[i + 1];
+      var dx = p2.x - p1.x, dy = Math.abs(p2.y - p1.y);
+      var k = Math.max(40, Math.min(dx * 0.5, dy * 0.9 + dx * 0.2));
+      d += ' C ' + (p1.x + k).toFixed(1) + ' ' + p1.y.toFixed(1) + ', ' + (p2.x - k).toFixed(1) + ' ' + p2.y.toFixed(1) + ', ' + p2.x.toFixed(1) + ' ' + p2.y.toFixed(1);
+    }
+    return d;
+  }
+
+  function fit(vh, reserve) {
+    $$('[data-compact-hide]', els.track).forEach(function (el) { el.style.display = ''; });
+    $$('[data-fit]', els.track).forEach(function (el) {
+      el.style.transform = 'none';
+      var sec = el.closest('section');
+      if (!sec) return;
+      var scs = getComputedStyle(sec);
+      var padTop = parseFloat(scs.paddingTop) || 0;
+      var secTop = sec.getBoundingClientRect().top;
+      var row = scs.flexDirection === 'row';
+      var measure = function () {
+        var r = el.getBoundingClientRect();
+        var offset = row ? padTop : Math.max(padTop, r.top - secTop);
+        return { h: r.height, avail: (vh - reserve + 6) - offset };
+      };
+      var m = measure();
+      if (m.h > m.avail) {
+        var nodes = $$('[data-compact-hide]', el);
+        var groups = [];
+        nodes.forEach(function (n) {
+          var key = n.getAttribute('data-compact-hide') || null;
+          var g = null;
+          if (key) { for (var j = 0; j < groups.length; j++) { if (groups[j].key === key) { g = groups[j]; break; } } }
+          if (g) g.nodes.push(n); else groups.push({ key: key, nodes: [n] });
+        });
+        for (var i = 0; i < groups.length && m.h > m.avail; i++) {
+          groups[i].nodes.forEach(function (n) { n.style.display = 'none'; });
+          m = measure();
+        }
+      }
+      if (m.h > m.avail && m.h > 0) {
+        var s = Math.max(0.96, m.avail / m.h);
+        if (s < 0.975) el.style.transform = 'scale(' + s.toFixed(3) + ')';
+      }
+    });
+  }
+
+  function layout(force) {
+    if (!els.track || !els.outer || !els.svg) return;
+    var vw = document.documentElement.clientWidth || window.innerWidth;
+    var vh = window.innerHeight;
+    root.style.setProperty('--cd-vw', vw + 'px');
+
+    // Evita recalcular el camino cuando nada cambió: al cargar, layout()
+    // se llama varias veces (fuentes, load, timers) y cada recálculo
+    // muestrea el trazado completo. Sin esta guarda, eso se nota como lag.
+    var fontState = (document.fonts && document.fonts.status) || 'na';
+    var sig = vw + 'x' + vh + 'x' + fontState;
+    if (!force && sig === st.sig) return;
+    st.sig = sig;
+
+    // MOBILE: la página se apila en vertical. Se limpian los estilos que
+    // dejó el motor horizontal y se muestra todo el contenido.
+    st.mobile = vw < 900;
+    if (st.mobile) { mobileLayout(); return; }
+
+    var W = els.track.scrollWidth;
+    st.vw = vw; st.vh = vh;
+    st.dist = Math.max(1, W - vw);
+    els.outer.style.height = (st.dist + (els.sticky ? els.sticky.offsetHeight : vh)) + 'px';
+
+    els.svg.setAttribute('viewBox', '0 0 ' + W + ' ' + vh);
+    els.svg.setAttribute('width', W);
+    els.svg.setAttribute('height', vh);
+
+    var mobile = vw < 760;
+    var reserve = Math.max(130, Math.min(220, vh * 0.22));
+    var scale = mobile ? 0.62 : Math.max(0.72, Math.min(1.1, vw / 1440));
+    var carUp = CAR_H * scale, carDown = 3 * scale;
+    var top = vh - reserve + carUp + 8;
+    var bot = Math.max(top + 10, vh - carDown - 18);
+    var band = [top / vh, bot / vh];
+
+    fit(vh, reserve);
+
+    var trackLeft = els.track.getBoundingClientRect().left;
+    var pts = [];
+    $$('[data-stop]', els.track).forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      var fy = parseFloat(el.getAttribute('data-y'));
+      pts.push({ x: r.left - trackLeft + r.width / 2, y: vh * (band[0] + (isNaN(fy) ? 0.5 : fy) * (band[1] - band[0])) });
+    });
+    pts.sort(function (a, b) { return a.x - b.x; });
+    if (pts.length) {
+      pts.unshift({ x: 0, y: pts[0].y });
+      pts.push({ x: W, y: pts[pts.length - 1].y });
+    }
+    var d = smoothPath(pts);
+    [els.base, els.red, els.dash].forEach(function (p) { if (p) p.setAttribute('d', d); });
+
+    els.carInner.style.transformOrigin = '0 0';
+    els.carInner.style.transform = 'translate(' + (-107 * scale) + 'px,' + (-CAR_H * scale) + 'px) scale(' + scale + ')';
+    var sw = mobile ? 9 : 14;
+    els.base.setAttribute('stroke-width', sw);
+    els.red.setAttribute('stroke-width', sw);
+
+    if (els.red && d) {
+      st.len = els.red.getTotalLength();
+      els.red.style.strokeDasharray = st.len;
+      st.lut = [];
+      var step = Math.max(12, st.len / 400);
+      var maxX = -Infinity;
+      for (var l = 0; l <= st.len; l += step) {
+        var pt = els.red.getPointAtLength(l);
+        if (pt.x > maxX) { maxX = pt.x; st.lut.push({ x: pt.x, l: l }); }
+      }
+      var end = els.red.getPointAtLength(st.len);
+      st.lut.push({ x: Math.max(maxX + 1, end.x), l: st.len });
+      if (st.reduced) els.red.style.strokeDashoffset = 0;
+    }
+    place(st.curX || window.scrollY + vw * 0.34);
+  }
+
+  function mobileLayout() {
+    els.outer.style.height = 'auto';
+    els.track.style.transform = 'none';
+    if (els.car) els.car.style.transform = 'none';
+    // Deshacer el auto-ajuste del modo horizontal: sin escalados y sin
+    // textos ocultos, porque en vertical hay espacio para todo.
+    $$('[data-fit]', els.track).forEach(function (el) { el.style.transform = 'none'; });
+    $$('[data-compact-hide]', els.track).forEach(function (el) { el.style.display = ''; });
+    if (els.red) { els.red.style.strokeDasharray = ''; els.red.style.strokeDashoffset = ''; }
+  }
+
+  function lengthAtX(x) {
+    var t = st.lut;
+    if (!t || !t.length) return 0;
+    if (x <= t[0].x) return 0;
+    if (x >= t[t.length - 1].x) return st.len;
+    var lo = 0, hi = t.length - 1;
+    while (hi - lo > 1) { var m = (lo + hi) >> 1; if (t[m].x <= x) lo = m; else hi = m; }
+    var a = t[lo], b = t[hi];
+    var k = b.x === a.x ? 0 : (x - a.x) / (b.x - a.x);
+    return a.l + (b.l - a.l) * k;
+  }
+
+  function place(x) {
+    if (!els.red || !els.car || !st.len) return;
+    var l = Math.max(0, Math.min(st.len, lengthAtX(x)));
+    var a = els.red.getPointAtLength(l);
+    var b = els.red.getPointAtLength(Math.min(st.len, l + 8));
+    var ang = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
+    els.car.style.transform = 'translate3d(' + a.x + 'px,' + a.y + 'px,0) rotate(' + ang + 'deg)';
+    if (!st.carReady) { st.carReady = true; els.car.classList.add('cd-ready'); }
+    if (!st.reduced) els.red.style.strokeDashoffset = st.len - l;
+  }
+
+  /* ---------- 5) Reveals, contadores, semáforo, hero ---------- */
+  function prepReveals() {
+    st.pending = $$('[data-reveal]');
+    if (st.reduced) { st.pending = []; }
+    st.pending.forEach(function (el) {
+      el.style.opacity = '0';
+      el.style.transform = st.mobile ? 'translate3d(0,24px,0)' : 'translate3d(34px,0,0)';
+      el.style.transition = 'opacity .6s cubic-bezier(.2,.8,.2,1), transform .6s cubic-bezier(.2,.8,.2,1)';
+    });
+    st.counters = $$('[data-count]');
+  }
+
+  function reveal() {
+    var vw = st.vw || document.documentElement.clientWidth;
+    var vhh = window.innerHeight;
+    var inView = st.mobile
+      ? function (r) { return r.top < vhh * 0.92 && r.bottom > 0; }
+      : function (r) { return r.left < vw * 0.94 && r.right > -40; };
+    if (st.pending.length) {
+      var still = [];
+      st.pending.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (inView(r)) {
+          el.style.opacity = '1';
+          el.style.transform = 'translate3d(0,0,0)';
+        } else still.push(el);
+      });
+      st.pending = still;
+    }
+    if (st.counters.length) {
+      var still2 = [];
+      st.counters.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (inView(r)) countUp(el); else still2.push(el);
+      });
+      st.counters = still2;
+    }
+  }
+
+  function countUp(el) {
+    var to = parseInt(el.getAttribute('data-count'), 10) || 0;
+    var t0 = performance.now(), dur = 1300;
+    var step = function (now) {
+      var k = Math.min(1, (now - t0) / dur);
+      el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3)));
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  function lights(p) {
+    if (!st.lamps) st.lamps = $$('[data-lamp]');
+    var stage = p < 0.02 ? 0 : p < 0.05 ? 1 : 2;
+    st.lamps.forEach(function (el) {
+      var k = el.getAttribute('data-lamp');
+      var on = (k === 'r' && stage === 0) || (k === 'y' && stage === 1) || (k === 'g' && stage === 2);
+      el.style.opacity = on ? '1' : '0.2';
+      el.style.boxShadow = on ? '0 0 12px currentColor' : 'none';
+    });
+  }
+
+  function animateHero() {
+    if (st.reduced) return;
+    var h1 = $('[data-words]');
+    if (!h1) return;
+    var words = Array.prototype.slice.call(h1.children);
+    words.forEach(function (w, i) {
+      w.style.opacity = '0';
+      w.style.transform = 'translate3d(26px,0,0)';
+      w.style.transition = 'opacity .6s cubic-bezier(.2,.8,.2,1) ' + (0.1 + i * 0.07) + 's, transform .6s cubic-bezier(.2,.8,.2,1) ' + (0.1 + i * 0.07) + 's';
+    });
+    requestAnimationFrame(function () {
+      words.forEach(function (w) { w.style.opacity = '1'; w.style.transform = 'translate3d(0,0,0)'; });
+    });
+  }
+
+  /* ---------- 6) Loop principal ---------- */
+  function tick() {
+    if (st.mobile) {
+      var max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      var mp = Math.max(0, Math.min(1, window.scrollY / max));
+      if (els.bar) els.bar.style.transform = 'scaleX(' + mp + ')';
+      lights(mp);
+      reveal();
+      applyNav(window.scrollY > 30);
+      st.raf = requestAnimationFrame(tick);
+      return;
+    }
+    var p = Math.max(0, Math.min(1, window.scrollY / st.dist));
+    var offset = p * st.dist;
+    els.track.style.transform = 'translate3d(' + (-offset) + 'px,0,0)';
+    if (els.bar) els.bar.style.transform = 'scaleX(' + p + ')';
+
+    var vwNow = st.vw || document.documentElement.clientWidth;
+    var targetX = Math.min(offset + vwNow * 0.34, st.dist + vwNow * 0.34);
+    if (!st.curX) st.curX = targetX;
+    var ease = Math.max(0.05, Math.min(0.5, CD_CONFIG.smoothness || 0.2));
+    var diff = targetX - st.curX;
+    st.curX += diff * (Math.abs(diff) > (st.vw || 1000) * 0.5 ? Math.min(0.5, ease * 2.4) : ease);
+    if (Math.abs(diff) < 0.3) st.curX = targetX;
+    place(st.reduced ? targetX : st.curX);
+
+    lights(p);
+    reveal();
+    applyNav(window.scrollY > 30);
+    st.raf = requestAnimationFrame(tick);
+  }
+
+  /* ---------- 7) Init ---------- */
+  function init() {
+    applyConfig();
+    fullBleed();
+    var narrow = window.innerWidth < 980;
+    var resizeRaf = 0;
+    window.addEventListener('resize', function () {
+      var n = window.innerWidth < 980;
+      if (n !== narrow) { narrow = n; closeMenu(); }
+      if (resizeRaf) return;
+      resizeRaf = requestAnimationFrame(function () { resizeRaf = 0; layout(); });
+    }, { passive: true });
+
+    layout();
+    setTimeout(layout, 120);
+    setTimeout(layout, 500);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
+    window.addEventListener('load', function () { fullBleed(); layout(true); });
+
+    prepReveals();
+    animateHero();
+    if (st.reduced && els.red) els.red.style.strokeDashoffset = 0;
+    st.raf = requestAnimationFrame(tick);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+<!-- CD:END -->
+
+</body>
+</html>
