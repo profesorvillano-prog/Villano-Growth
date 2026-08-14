@@ -37,11 +37,15 @@ Cercana, honesta y directa. Chilena, joven, para gente de Maipú — **ni formal
 vulgar**. Tono "cool": aprender a manejar sin miedo. Es obvio que necesitan la
 licencia: no se lo preguntamos, los acompañamos ("Ya llegó el momento").
 
-- **Reemplazos:** "autoestudio en un Drive" → "plataforma de estudio con módulos y
-  seguimiento" · "desfase de agenda" → "te agendamos todas tus clases desde el día
-  uno" · "curso" → "te acompañamos hasta que apruebas en la municipalidad".
+- **Reemplazos:** "curso" → "te acompañamos hasta que apruebas en la
+  municipalidad".
 - **Freno a romper (objeción #1 en Maps):** "te mandan la teoría y te abandonan" →
-  mostrar plataforma, seguimiento y acompañamiento de principio a fin.
+  mostrar seguimiento y acompañamiento real de principio a fin (WhatsApp,
+  instructor pendiente). **No prometer la plataforma con módulos: todavía no
+  está lista.** Cuando esté, se reincorpora al copy.
+- **Ojo con los tiempos:** las clases NO parten el primer día — se agendan a las
+  ~2 semanas o más (desfase real de 3 semanas a 1 mes; el curso dura 1½–2 meses).
+  No usar "agendamos desde el día uno" ni "tu primera clase en 5 minutos".
 - **Paleta:** rojo `#F31F2B`, acento amarillo `#FFC72C`, negro `#0D0D0F`.
 
 ## Contacto

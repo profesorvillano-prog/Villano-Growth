@@ -169,6 +169,25 @@ html, body { margin:0 !important; padding:0 !important; max-width:none !importan
   .cd-stat:nth-child(n+3) { border-top:1px solid rgba(255,255,255,.22); }
 }
 
+/* ============ IDENTIFICACIÓN DE AVATAR (¿cuál eres tú?) ============ */
+.cd-picker { display:grid; grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:clamp(12px,1.4vw,19px); width:min(1180px,100%); margin:clamp(12px,2vh,26px) auto 0;
+  align-items:stretch; transform-origin:top center; }
+.cd-pick { display:flex; flex-direction:column; padding:clamp(15px,2.4vh,24px) clamp(15px,1.5vw,22px);
+  border-radius:20px; background:#F5F5F7; border:2px solid transparent; color:#0D0D0F !important;
+  transition:transform .35s ease, border-color .35s ease, background .35s ease; }
+.cd-pick:hover { transform:translateY(-6px); border-color:#F31F2B; background:#fff; }
+.cd-pick-tag { margin:0 0 8px; font-family:'IBM Plex Mono',monospace; font-size:11px;
+  letter-spacing:.18em; text-transform:uppercase; color:#D4111C; }
+.cd-pick h3 { margin:0 0 8px; font-family:'Barlow Condensed',sans-serif; font-weight:900;
+  font-size:min(clamp(20px,2.5vw,28px),4.3vh); line-height:1.02; text-transform:uppercase; }
+.cd-pick p { margin:0; font-size:15.5px; line-height:1.45; color:#4a4a52; }
+.cd-pick-go { margin-top:auto; padding-top:clamp(10px,1.8vh,16px); display:inline-flex; align-items:center; gap:6px;
+  font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:17px; letter-spacing:.04em;
+  text-transform:uppercase; color:#D4111C; }
+.cd-pick:hover .cd-pick-go { color:#F31F2B; }
+@media (max-width:899px) { .cd-picker { grid-template-columns:1fr; width:100%; gap:10px; } }
+
 /* ============ BENEFICIOS ============ */
 .cd-sign { display:inline-flex; align-self:flex-start; align-items:center; gap:10px; padding:8px 14px; border-radius:8px; background:#FFC72C; border:2px solid #0D0D0F; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:14px; letter-spacing:.14em; text-transform:uppercase; }
 .cd-h2 { margin:0; font-family:'Barlow Condensed',sans-serif; font-weight:900; line-height:.94; text-transform:uppercase; }
@@ -747,6 +766,38 @@ html, body { margin:0 !important; padding:0 !important; max-width:none !importan
           </div>
         </section>
 
+        <!-- ============ PANEL 1B: ¿CUÁL ERES TÚ? (identificación de avatar) ============ -->
+        <section class="cd-panel cd-panel-col" data-screen-label="¿Cuál eres tú?">
+          <div class="cd-stop" data-stop data-y="0.55"></div>
+          <div class="cd-sec-inner" data-fit>
+            <div class="cd-head-full">
+              <p class="cd-kicker" data-reveal>Dinos cuál es tu caso</p>
+              <h2 class="cd-h2" data-reveal>¿Con cuál <span class="it red">te identificas?</span></h2>
+              <p class="cd-head-lead" data-reveal data-compact-hide="pick-lead">Toca el que suene a ti y sigue directo por WhatsApp. Te respondemos al toque, sin vueltas.</p>
+            </div>
+            <div class="cd-picker">
+              <a class="cd-pick" data-wa="joven" data-track="avatar_joven" href="#" target="_blank" rel="noopener" data-reveal>
+                <p class="cd-pick-tag">Tu primera licencia</p>
+                <h3>Tengo 18 y quiero manejar por mi cuenta</h3>
+                <p data-compact-hide="pick-desc">Aprovecha que ahora tienes tiempo. Partes de cero y te llevamos hasta aprobar en la muni.</p>
+                <span class="cd-pick-go">Esta es mi historia →</span>
+              </a>
+              <a class="cd-pick" data-wa="adulto" data-track="avatar_adulto" href="#" target="_blank" rel="noopener" data-reveal>
+                <p class="cd-pick-tag">Se te acabó la canción</p>
+                <h3>Llevo años diciendo “después la saco”</h3>
+                <p data-compact-hide="pick-desc">Cansado de andar pidiendo que te lleven. Nunca es tarde: clases después del trabajo y a tu ritmo.</p>
+                <span class="cd-pick-go">Esta es mi historia →</span>
+              </a>
+              <a class="cd-pick" data-wa="papa" data-track="avatar_papa" href="#" target="_blank" rel="noopener" data-reveal>
+                <p class="cd-pick-tag">Decides tú, maneja tu hijo/a</p>
+                <h3>Quiero que mi hijo o hija aprenda seguro</h3>
+                <p data-compact-hide="pick-desc">Escuela seria, de confianza y con instructora mujer. Tú eliges dónde aprende; nosotros lo llevamos hasta la licencia.</p>
+                <span class="cd-pick-go">Quiero inscribirlo/a →</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
         <!-- ============ PANEL 2: CIFRAS ============ -->
         <section class="cd-panel cd-panel-col bg-red" data-screen-label="Cifras">
           <div class="cd-stop" data-stop data-y="0.12"></div>
@@ -879,7 +930,7 @@ html, body { margin:0 !important; padding:0 !important; max-width:none !importan
             <article class="cd-pillar" data-reveal>
               <svg class="cd-signicon" viewBox="-58 -58 116 116" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><use href="#cd_sFlecha" xlink:href="#cd_sFlecha"></use></svg>
               <h3>Seguimos contigo</h3>
-              <p data-compact-hide="pillar-desc">Nada de mandarte la teoría y desaparecer. Plataforma con módulos, seguimiento y WhatsApp abierto, desde tu primera clase hasta que sales con la licencia en la mano.</p>
+              <p data-compact-hide="pillar-desc">Nada de mandarte la teoría y desaparecer. Te acompañamos de verdad: dudas por WhatsApp, seguimiento y un instructor pendiente de ti, desde tu primera clase hasta que sales con la licencia en la mano.</p>
             </article>
           </div>
           <blockquote class="cd-quote-line" data-reveal data-compact-hide="story-quote"><p>“Nadie nace sabiendo manejar. Todos pueden aprender.”</p></blockquote>
@@ -892,7 +943,7 @@ html, body { margin:0 !important; padding:0 !important; max-width:none !importan
           <div class="cd-cursos-head">
             <p class="cd-kicker" data-reveal style="margin-bottom:8px">Comienza aquí · zona de cursos</p>
             <h2 class="cd-h2" data-reveal>Elige tu <span class="it red">camino</span></h2>
-            <p class="cd-cursos-sub" data-reveal data-compact-hide="cursos-sub">Los dos cursos incluyen la misma teoría, pruebas y práctica en auto mecánico con instructor certificado. La única diferencia es cuántas clases al volante necesitas para sentirte seguro. Y te agendamos todas tus clases desde el día uno.</p>
+            <p class="cd-cursos-sub" data-reveal data-compact-hide="cursos-sub">Los dos cursos incluyen la misma teoría, pruebas y práctica en auto mecánico con instructor certificado. La única diferencia es cuántas clases al volante necesitas para sentirte seguro.</p>
           </div>
           <div class="cd-courses" data-fit>
             <article class="cd-course cd-course-dark" data-reveal>
@@ -993,7 +1044,7 @@ html, body { margin:0 !important; padding:0 !important; max-width:none !importan
               <span class="cd-license-card"><small>LICENCIA CLASE B</small><strong>TU NOMBRE AQUÍ</strong></span>
             </div>
             <h2 class="cd-h2 cd-final-h2" data-reveal>¿Hasta cuándo vas a andar pidiendo que te <span class="it red">lleven?</span></h2>
-            <p class="cd-final-lead" data-reveal data-compact-hide="final-lead">Tu Licencia Clase B está más cerca de lo que crees. Escríbenos por WhatsApp y agendamos tu primera clase en menos de 5 minutos.</p>
+            <p class="cd-final-lead" data-reveal data-compact-hide="final-lead">Tu Licencia Clase B está más cerca de lo que crees. Escríbenos por WhatsApp: te respondemos al toque y te contamos cómo empezar.</p>
             <a class="cd-btn cd-btn-final" data-reveal data-wa="general" data-track="cta_final" href="#" target="_blank" rel="noopener">Quiero mi licencia →</a>
           </div>
         </section>
@@ -1075,12 +1126,17 @@ html, body { margin:0 !important; padding:0 !important; max-width:none !importan
     // Número de WhatsApp (solo dígitos, con código país)
     whatsapp: '56957797476',
 
-    // Mensajes pre-cargados por tipo de botón
+    // Mensajes pre-cargados por tipo de botón.
+    // joven / adulto / papa: identifican al avatar según qué tarjeta tocó la
+    // persona, para que el lead llegue ya segmentado a WhatsApp.
     messages: {
       general:  '¡Hola! Vi la web de Cool Drive y quiero info para sacar mi licencia 🚗',
       full:     '¡Hola! Me interesa el Curso Full (Clase B) de Cool Drive. ¿Me cuentan?',
       avanzado: '¡Hola! Me interesa el Curso Avanzado (Clase B) de Cool Drive. ¿Me cuentan?',
-      orienta:  '¡Hola! No sé cuál curso me conviene, ¿me orientan?'
+      orienta:  '¡Hola! No sé cuál curso me conviene, ¿me orientan?',
+      joven:    '¡Hola! Quiero sacar mi primera licencia Clase B con Cool Drive. ¿Cómo parto?',
+      adulto:   '¡Hola! Llevo tiempo postergándolo y quiero sacar por fin mi licencia Clase B. ¿Cómo funciona?',
+      papa:     '¡Hola! Quiero info para que mi hijo/a saque la licencia Clase B en Cool Drive.'
     },
 
     // Precios de los cursos.
