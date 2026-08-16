@@ -65,6 +65,24 @@ no se les tira un precio de $497 en el segundo email.
 desde arriba. Si no le ves cintura, sigue viendo esto."* → los 3 pasos del examen
 físico → *"Deja la palabra GUÍA en los comentarios y te mando la escala completa."*
 
+### 2.2.1 Respuestas automáticas al comentario (ManyChat)
+
+Palabra clave: **GUÍA**, con variantes `guia` · `Guia` · `GUIA` · `guía`.
+Cargar las 5 respuestas para que roten al azar y no parezca bot. Activar también
+"marcar los comentarios como Me gusta" (solo aplica en Facebook; en Instagram no
+es compatible, pero no interfiere).
+
+| # | Respuesta pública |
+|---|---|
+| 1 | Listo 🐾 Te la mandé por privado. Anda directo a la Parte 2 y hazle el examen de 2 minutos. |
+| 2 | Ya te llegó al mensaje directo ✅ Adentro está la escala del 1 al 5 que usamos en consulta. |
+| 3 | Enviada 🐾 Si no la ves, revisa la carpeta de solicitudes de mensajes. |
+| 4 | Te la dejé en tus mensajes. Cuando sepas de qué color le salió el semáforo, escríbeme y te digo qué haría yo con él. |
+| 5 | Listo, revisa tu privado 🙌 Son 2 minutos: lo miras desde arriba, le palpas las costillas y lo miras de perfil. |
+
+> El comentario público nunca lleva link ni precio: solo confirma el envío y
+> repite la instrucción del examen. El link a la landing va en el DM.
+
 ### 2.3 Landing de opt-in
 
 **URL sugerida:** `salchichapro.com/guia-alimento`
