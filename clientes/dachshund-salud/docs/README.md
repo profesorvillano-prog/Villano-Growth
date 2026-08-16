@@ -21,6 +21,8 @@ productos.
 | [`Avatares-Grados-Conciencia.md`](./Avatares-Grados-Conciencia.md) | Escala de conciencia (N1–N5) → producto de entrada + 3 perfiles de comprador (ángulos) por cada producto. Todo copy declara avatar + nivel. |
 | [`Pack-Starter-Ebooks.md`](./Pack-Starter-Ebooks.md) | El Pack de eBooks: Serie Dachshund Salud (Paso 1 + Paso 2) + eBooks tácticos, uso por canal, promesas y límites de cada libro, copy base. |
 | [`Oferta-High-Ticket.md`](./Oferta-High-Ticket.md) | La oferta 1:1 ($497 / 3 meses y 6 meses personalizado): reglas, landings, flow de venta por audio de WhatsApp, guiones de calificación, objeciones y retargeting. |
+| [`Lead-Magnet-Guia-Alimento.md`](./Lead-Magnet-Guia-Alimento.md) | El imán "¿Qué alimento elegiría tu perro salchicha?": ficha del activo, argumento anti-croqueta (ICBG), escala de condición corporal 1–5, Semáforo de Vitalidad, los 3 niveles del camino y el ruteo color → oferta. |
+| [`Workflow-Lead-Magnet-Guia-Alimento.md`](./Workflow-Lead-Magnet-Guia-Alimento.md) | El embudo de ese imán punta a punta: ads y ángulos, landing de opt-in, segmentación por semáforo, tags, secuencias de email por color, ruteo a WhatsApp, workflows de GHL, métricas y checklist. |
 | [`Anuncios-Hablados-Pack-Starter.md`](./Anuncios-Hablados-Pack-Starter.md) | 4 guiones de anuncio hablado (Marcelo a cámara) para el Pack Starter, un ángulo de venta por pieza. |
 
 ## Conocimiento de nicho y material de apoyo (vigente)

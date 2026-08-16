@@ -3,7 +3,7 @@
 > **Qué es este documento:** fuente de verdad sobre el experto (Dr. Marcelo Hernán) y el catálogo completo de productos.
 > **Para qué sirve:** contexto persistente para Claude Code / repos del proyecto. Cuando se genere copy, landings, guiones o automatizaciones, este archivo define quién es Marcelo, qué vende, a qué precio y bajo qué reglas.
 > **Regla de precedencia:** si hay conflicto con otros docs del proyecto, mandan las Instrucciones del Proyecto → luego este archivo → luego los materiales fuente (ebooks, KB).
-> **Última actualización:** Julio 2026 · ⚠️ **CAMBIO ESTRUCTURAL:** se elimina el Club Dachshund Saludable (Skool). El ecosistema queda en dos productos: **Pack de eBooks + High-Ticket**.
+> **Última actualización:** Agosto 2026 (precios confirmados + Asesoría $197 + nuevo lead magnet, fuente: guía "¿Qué alimento elegiría tu perro salchicha?") · Julio 2026 · ⚠️ **CAMBIO ESTRUCTURAL:** se elimina el Club Dachshund Saludable (Skool). El ecosistema queda en dos productos: **Pack de eBooks + High-Ticket**.
 
 ---
 
@@ -112,6 +112,7 @@ Flujo de valor: **lead magnet gratis → Pack de eBooks (low ticket) → high-ti
 
 | Recurso | Qué es | Función |
 |---|---|---|
+| **Guía "¿Qué alimento elegiría tu perro salchicha?"** | PDF de 17 páginas (Ago 2026): ICBG y daño de la croqueta, escala de condición corporal 1–5, Semáforo de Vitalidad y los 3 niveles del camino. | Imán principal de tráfico frío. El lead **se autoclasifica por color** y ese color rutea toda la secuencia. Ver [`Lead-Magnet-Guia-Alimento.md`](./Lead-Magnet-Guia-Alimento.md) y [`Workflow-Lead-Magnet-Guia-Alimento.md`](./Workflow-Lead-Magnet-Guia-Alimento.md). |
 | **Scanner de Vitalidad Dachshund** | Quiz HTML de 6 categorías (nutrición, condición corporal, dermatología, vitalidad/movilidad, digestión, filtro hepático). Entrega % de riesgo por factor. | Califica leads y los rutea a WhatsApp (Gold/Silver) o a nurture del Pack (Bronze/Out). `[PLACEHOLDER — re-rutear: antes apuntaba a la página del Club]` |
 | **Sabores Seguros** (versión free) | Guía de alimentos permitidos y prohibidos. | Imán de entrada de tráfico frío → grupo WhatsApp. |
 
@@ -166,6 +167,7 @@ Cada eBook ataca **un dolor específico** y funciona como puerta de entrada. Aut
 
 | Programa | Precio | Público |
 |---|---|---|
+| **Asesoría Nutricional Dachshund** | $197 USD | Sesión única de 60 min + plan personalizado de 60 días. Puerta de entrada al 1:1 para semáforo 🔴 y ⚪ (fuente: guía Ago 2026) |
 | Acompañamiento 3 meses | $497 USD | **Oferta principal** — tráfico frío externo |
 | Acompañamiento 6 meses | Precio personalizado | Clientes previos / compradores del Pack `[PLACEHOLDER — redefinir condiciones sin membresía]` |
 
@@ -180,10 +182,12 @@ Cada eBook ataca **un dolor específico** y funciona como puerta de entrada. Aut
 
 | Producto | Nivel | Precio | Canal de venta | Pilar |
 |---|---|---|---|---|
+| Guía "¿Qué alimento elegiría tu perro salchicha?" | 0 | Gratis | Ads frío → email + WhatsApp | 2 → 1 |
 | Scanner de Vitalidad | 0 | Gratis | Orgánico / ads → WhatsApp | 1–3 |
 | Sabores Seguros | 0 / 1 | Gratis / en Pack | Lead magnet + Pack | 1 |
-| Nutrición Dachshund (Paso 1) | 1 | Low ticket | Ads frío / WhatsApp | 1 |
-| Recomposición Dachshund (Paso 2) | 1 | Low ticket | Bump / upsell del Paso 1 | 1 |
+| Nutrición Dachshund (Paso 1) | 1 | $27 | Ads frío / WhatsApp | 1 |
+| Recomposición Dachshund (Paso 2) | 1 | $47 | Bump / upsell del Paso 1 | 1 |
+| Asesoría Nutricional Dachshund | 2 | $197 | WhatsApp (semáforo 🔴 / ⚪) | Todos |
 | Dieta Salchicha Pro | 1 | Low ticket | En Pack | 1 |
 | Apetito Salchicha | 1 | Low ticket | En Pack | 1 |
 | Brillo Total | 1 | Low ticket | En Pack | 3 |
@@ -205,7 +209,10 @@ Cada eBook ataca **un dolor específico** y funciona como puerta de entrada. Aut
 
 **Pricing:**
 - NUNCA bajar precios, solo subirlos.
-- `[PLACEHOLDER — pricing del Pack Starter, bumps y ancla psicológica por definir]`
+- Precios publicados por Marcelo en la guía gratuita (Ago 2026), vigentes para todo copy:
+  **Nutrición Dachshund $27 · Recomposición Dachshund $47 · Asesoría Nutricional $197 ·
+  Método Recomposición Dachshund (90 días) $497.**
+- `[PLACEHOLDER — pricing del Pack Starter completo (biblioteca), bumps y ancla psicológica por definir]`
 
 **High-ticket:**
 - Nunca aparece en contenido orgánico.
@@ -238,6 +245,8 @@ Cada eBook ataca **un dolor específico** y funciona como puerta de entrada. Aut
 
 ## 10. Placeholders pendientes
 
-- `[PLACEHOLDER — precio low-ticket de cada eBook]` (no confirmado en fuente).
+- `[PLACEHOLDER — precio de los eBooks tácticos y del Pack completo]` (la guía Ago 2026 solo confirma la Serie: $27 y $47).
+- `[PLACEHOLDER — nombre único del high-ticket: la guía lo llama "Método Recomposición Dachshund", este doc "Acompañamiento 3 meses"]`.
+- `[PLACEHOLDER — años de especialización: la guía dice "+6 años", el estándar de marca dice "+5 años" (ver 2.1 y 2.2)]`.
 - `[PLACEHOLDER — testimonios/casos reales verificados por Marcelo]`.
 - `[PLACEHOLDER — edición final de Sabores Seguros: ultra-procesados al inicio]`.

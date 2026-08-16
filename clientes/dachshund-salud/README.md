@@ -25,6 +25,8 @@ web, embudos y archivos.
 | [`docs/Pack-Starter-Ebooks.md`](./docs/Pack-Starter-Ebooks.md) | El Pack: Serie Dachshund Salud (Paso 1 y 2) + eBooks tácticos, promesas y copy base. |
 | [`docs/Oferta-High-Ticket.md`](./docs/Oferta-High-Ticket.md) | Acompañamiento 1:1 ($497 / 3 meses): landings, flow de venta por audio de WhatsApp, objeciones, retargeting. |
 | [`docs/Anuncios-Hablados-Pack-Starter.md`](./docs/Anuncios-Hablados-Pack-Starter.md) | 4 guiones de anuncio hablado para el Pack Starter (un ángulo por pieza). |
+| [`docs/Lead-Magnet-Guia-Alimento.md`](./docs/Lead-Magnet-Guia-Alimento.md) | La guía gratuita "¿Qué alimento elegiría tu perro salchicha?": contenido estructurado, escala de condición corporal y Semáforo de Vitalidad. |
+| [`docs/Workflow-Lead-Magnet-Guia-Alimento.md`](./docs/Workflow-Lead-Magnet-Guia-Alimento.md) | **Workflow del lead magnet:** captación, opt-in, segmentación por semáforo, secuencias por color, workflows de GHL, métricas y checklist. |
 
 ### `docs/` — conocimiento de nicho y apoyo
 
