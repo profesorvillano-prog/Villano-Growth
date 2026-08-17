@@ -89,11 +89,14 @@ la primera pantalla; en móvil se apilan.
 3. Guarda y revisa en móvil: el bloque no debe empujar el calendario fuera de la
    primera pantalla en desktop.
 
-**Qué dice, en orden:** es una entrevista de admisión (no una llamada
-informativa) → reservas 45 minutos de agenda a tu nombre → confirmamos por
-WhatsApp → puedes reprogramar una vez avisando con 24 h → cancelar o no
-presentarte cierra la postulación 6 meses → si no puedes comprometerte, no
-agendes.
+**Qué dice (versión corta, 6 líneas):** entrevista de admisión a una formación
+profesional con certificación internacional → reservas 45 minutos de agenda a tu
+nombre → confirmamos por WhatsApp → reprogramas una vez con 24 h de aviso →
+cancelar o no presentarte cierra la postulación por un semestre.
+
+El bloque es deliberadamente breve: arriba del calendario nadie lee párrafos.
+El desarrollo completo de las condiciones vive en la descripción del calendario
+(sección 3) y en el formulario (sección 1), donde sí hay contexto para leerlas.
 
 ### Variante opcional: calendario bloqueado hasta aceptar
 
