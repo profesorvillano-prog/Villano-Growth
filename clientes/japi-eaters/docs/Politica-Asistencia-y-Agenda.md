@@ -11,9 +11,9 @@
 | Situación | Consecuencia |
 |---|---|
 | **Reprograma una vez**, con más de 24 h de aviso | Sin penalización. Mueve su hora desde el link de confirmación. |
-| **Cancela** su entrevista (en cualquier momento) | Postulación cerrada **6 meses** (un semestre). |
-| **No se presenta** (no-show) | Postulación cerrada **6 meses** (un semestre). |
-| No responde la confirmación por WhatsApp | Liberamos el cupo antes de la hora; **no** cuenta como no-show porque la baja la damos nosotros. |
+| **Confirmó y después cancela** (en cualquier momento) | Postulación inhabilitada **6 meses** (un semestre). |
+| **Confirmó y no se presenta** (no-show) | Postulación inhabilitada **6 meses** (un semestre). |
+| No responde la confirmación por WhatsApp | Liberamos el cupo antes de la hora; **sin bloqueo**, porque la baja la damos nosotros. |
 | Segunda reprogramación | Se cierra el cupo y se invita a postular en la próxima convocatoria. |
 
 **La distinción que sostiene todo:** *reprogramar* no es *cancelar*. Mover la
@@ -40,9 +40,15 @@ pregunta queda de una sola línea y las opciones dan una salida digna.
 **Descripción (arriba de la pregunta):**
 
 > Te contactaremos por WhatsApp para confirmar tu entrevista. **Si no
-> confirmas, el cupo se libera para otra terapeuta.** Y si **cancelas o no te
-> presentas, tu postulación queda cerrada por un semestre completo.** Lo hacemos
-> porque esto es una formación profesional y la agenda es limitada.
+> confirmas, el cupo se libera para otra terapeuta.** Y si confirmas y luego
+> cancelas o no te presentas, **tu postulación quedará inhabilitada por un
+> semestre completo.** Lo hacemos porque esto es una formación profesional y la
+> agenda es limitada.
+
+> Las dos consecuencias son distintas y por eso van separadas: **no confirmar
+> solo te hace perder el cupo**; **confirmar y después fallar te deja fuera un
+> semestre**. Si se mezclan en una sola frase, se lee como si no responder el
+> WhatsApp también inhabilitara, y eso asusta a quien sí iba a asistir.
 
 **Pregunta:**
 
@@ -92,7 +98,8 @@ la primera pantalla; en móvil se apilan.
 **Qué dice (versión mínima, 2 reglas):** entrevista de admisión a una formación
 profesional con certificación internacional → reservas 45 minutos de agenda a tu
 nombre → (1) confirmamos por WhatsApp, si no respondes liberamos el cupo →
-(2) cancelar o no presentarte cierra la postulación por un semestre.
+(2) confirmar y después cancelar o no presentarte inhabilita la postulación por
+un semestre.
 
 El bloque es deliberadamente breve: arriba del calendario nadie lee párrafos.
 La opción de **reprogramar** no se menciona aquí a propósito — en el momento de
@@ -113,8 +120,8 @@ o clase real del contenedor del embed en tu página).
   background:#F2F0F9;border:1px solid rgba(83,74,183,.18);cursor:pointer;
   font:500 15px/1.5 'DM Sans',system-ui,sans-serif;color:#26215C;">
   <input type="checkbox" id="jeAdmOk" style="margin-top:3px;width:18px;height:18px;">
-  <span>Leí y acepto las condiciones: si cancelo o no me presento, no podré
-  postular durante un semestre completo.</span>
+  <span>Leí y acepto las condiciones: si confirmo mi asistencia y luego cancelo
+  o no me presento, no podré postular durante un semestre completo.</span>
 </label>
 <script>
 (function(){
@@ -153,9 +160,9 @@ que nadie desplace. Por eso la advertencia va arriba, no al final.
 > videollamada de **45 minutos** con una terapeuta del equipo de Josefina Pizarro.
 >
 > **Cupos limitados por convocatoria.** Al agendar bloqueas 45 minutos de agenda a
-> tu nombre: si cancelas o no te presentas, tu postulación queda cerrada por un
-> semestre completo. Si te surge un imprevisto puedes reprogramar una sola vez,
-> avisando con más de 24 horas.
+> tu nombre. Si confirmas tu asistencia y luego cancelas o no te presentas, tu
+> postulación quedará inhabilitada por un semestre completo. Si te surge un
+> imprevisto puedes reprogramar una sola vez, avisando con más de 24 horas.
 >
 > **Qué haremos:** revisamos tu perfil profesional y tu realidad clínica actual, te
 > presentamos el programa completo con precios, métodos y opciones de pago, y
@@ -171,7 +178,8 @@ que nadie desplace. Por eso la advertencia va arriba, no al final.
 > **Condiciones de tu postulación:**
 > • Confirmamos por WhatsApp. Si no respondes, liberamos el cupo.
 > • Puedes reprogramar **una sola vez**, avisando con más de 24 horas.
-> • Cancelar o no presentarte cierra tu postulación por **6 meses**.
+> • Confirmar y después cancelar o no presentarte inhabilita tu postulación
+> durante **6 meses**.
 >
 > Al agendar, aceptas estas condiciones.
 
@@ -183,9 +191,9 @@ que nadie desplace. Por eso la advertencia va arriba, no al final.
 > dudas.
 >
 > **Cupos limitados.** Confirmamos por WhatsApp; puedes reprogramar una vez con
-> 24 h de aviso. Si cancelas o no te presentas, tu postulación queda cerrada por
-> un semestre completo. Conéctate desde un computador, con audio y 45 minutos
-> libres.
+> 24 h de aviso. Si confirmas y luego cancelas o no te presentas, tu postulación
+> queda inhabilitada por un semestre completo. Conéctate desde un computador, con
+> audio y 45 minutos libres.
 
 ---
 
@@ -207,8 +215,8 @@ explícita (responder = compromiso).
 > [Nombre], mañana **[día] a las [hora]** es tu entrevista de admisión.
 > Recordatorio de las condiciones que aceptaste al postular: si necesitas mover
 > la hora, este es el momento (se puede una sola vez, y este es el link:
-> [link reprogramar]). Cancelar o no presentarte cierra tu postulación por un
-> semestre completo.
+> [link reprogramar]). Habiendo confirmado, cancelar o no presentarte inhabilita
+> tu postulación por un semestre completo.
 > ¿Sigue en pie? Respóndeme **SÍ** 🥕
 
 **T-1 h**
