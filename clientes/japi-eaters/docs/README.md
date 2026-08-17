@@ -19,6 +19,7 @@ emails y nuevos productos.
 | [`FAQ.md`](./FAQ.md) | Preguntas frecuentes reales con respuestas en la voz de la marca. Ideal para web y bot/setter. |
 | [`Voz-y-Marca.md`](./Voz-y-Marca.md) | Tono, frases marca registrada, palabras prohibidas, paleta de color, historia y autoridad de Josefina. |
 | [`Operaciones-y-Embudo.md`](./Operaciones-y-Embudo.md) | Funnel, onboarding, plataforma Skool (niveles), mentorías, equipo, stack tecnológico, modelo 2026 y datos de audiencias. |
+| [`Politica-Asistencia-y-Agenda.md`](./Politica-Asistencia-y-Agenda.md) | Política de admisión para subir la tasa de asistencia: bloqueo de 6 meses por no-show, copy del formulario, bloque HTML para la página de agenda ([`assets/agenda-aviso.html`](../assets/agenda-aviso.html)), secuencia de WhatsApp, operativa en CRM y métricas. |
 
 ## Fuentes
 
