@@ -81,11 +81,24 @@ y agrega una línea de descripción:
 ## 2. Bloque para la página de agenda (arriba del calendario)
 
 Código listo en [`../assets/agenda-aviso.html`](../assets/agenda-aviso.html).
-Es autocontenido (sin fuentes ni scripts externos) y usa la paleta de la landing:
-púrpura `#26215C`/`#3C3489` con acento dorado `#C9A84C`. Va **al mismo ancho que
-el widget del calendario** (1170 px, ajustable con la variable `--je-w`) y las
-tres reglas van en 3 columnas en desktop para no empujar el calendario fuera de
-la primera pantalla; en móvil se apilan.
+Es autocontenido (sin fuentes ni scripts externos) y va **al mismo ancho que el
+widget del calendario** (1170 px, ajustable con la variable `--je-w`).
+
+**Cómo está construido visualmente:** tarjeta clara sobre fondo blanco (no un
+bloque morado completo) con filete púrpura arriba, chips de contexto en el
+encabezado —*Proceso de admisión · Formación profesional · Certificación
+internacional · 45 minutos*— y **cada mensaje en su propia forma**, con color
+según su función:
+
+| Forma | Color | Qué comunica |
+|---|---|---|
+| Chips del encabezado | Púrpura sólido + contorno | Marco institucional, se lee de un vistazo |
+| Tarjeta 1 · "Confirmación" | Púrpura `#534AB7` sobre lavanda `#F7F6FC` | Paso operativo: qué va a pasar |
+| Tarjeta 2 · "Política de admisión" | Dorado `#C9A84C` sobre ámbar `#FDF8EC` | Advertencia: la consecuencia |
+
+Separar advertencia (ámbar) de instrucción (púrpura) hace que la consecuencia no
+se lea como un párrafo más. En desktop las dos tarjetas van lado a lado; en
+móvil se apilan.
 
 **Instalación en Go High Level:**
 

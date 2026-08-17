@@ -3,105 +3,153 @@
   Pegar en un elemento "Custom HTML / Código personalizado" de Go High Level,
   justo encima del embed del calendario.
   Autocontenido: no carga fuentes ni scripts externos.
-  Ancho alineado al widget del calendario (1170px). Para hacerlo más angosto
-  cambia --je-w en la primera regla del <style>.
+  Ancho alineado al widget del calendario (1170px): cambia --je-w si lo
+  quieres más angosto.
 ============================================================ -->
 <div class="je-adm">
-  <p class="je-adm-eyebrow">Proceso de admisión · Formación profesional</p>
+  <div class="je-adm-head">
+    <div class="je-adm-chips">
+      <span class="je-adm-chip je-adm-chip--solid">Proceso de admisión</span>
+      <span class="je-adm-chip">Formación profesional</span>
+      <span class="je-adm-chip">Certificación internacional</span>
+      <span class="je-adm-chip">45 minutos</span>
+    </div>
+    <h2 class="je-adm-title">Antes de agendar, lee esto</h2>
+    <p class="je-adm-lead">
+      No es una llamada informativa: es la <strong>entrevista de admisión</strong> al programa.
+      Al elegir un horario reservas <strong>45 minutos de agenda a tu nombre</strong>.
+    </p>
+  </div>
 
-  <h2 class="je-adm-title">Antes de agendar, lee esto</h2>
+  <div class="je-adm-cards">
+    <div class="je-adm-card je-adm-card--step">
+      <div class="je-adm-card-top">
+        <span class="je-adm-badge">1</span>
+        <span class="je-adm-label">Confirmación</span>
+      </div>
+      <p class="je-adm-card-text">
+        Te escribimos por <strong>WhatsApp</strong> para confirmar tu entrevista.
+        Si no respondes, liberamos tu cupo para la siguiente postulante.
+      </p>
+    </div>
 
-  <p class="je-adm-lead">
-    Es la <strong>entrevista de admisión</strong> a una formación profesional con
-    certificación internacional. Reservas <strong>45 minutos</strong> de agenda a tu nombre.
-  </p>
-
-  <ol class="je-adm-rules">
-    <li>
-      <span class="je-adm-num">1</span>
-      <p><strong>Confirmamos por WhatsApp.</strong> Si no respondes, liberamos tu cupo.</p>
-    </li>
-    <li>
-      <span class="je-adm-num">2</span>
-      <p><strong>Si confirmas y luego cancelas o no te presentas, no podrás postular por un
-      semestre.</strong></p>
-    </li>
-  </ol>
+    <div class="je-adm-card je-adm-card--warn">
+      <div class="je-adm-card-top">
+        <span class="je-adm-badge je-adm-badge--warn">2</span>
+        <span class="je-adm-label je-adm-label--warn">Política de admisión</span>
+      </div>
+      <p class="je-adm-card-text">
+        Si confirmas y luego <strong>cancelas o no te presentas</strong>, tu postulación queda
+        <strong>inhabilitada por un semestre completo</strong>.
+      </p>
+    </div>
+  </div>
 </div>
 
 <style>
 .je-adm{
   --je-w:1170px;
+  --je-ink:#18162E;
+  --je-mid:#403B66;
+  --je-purple:#534AB7;
+  --je-amber:#8A6A28;
   box-sizing:border-box;
   width:100%;
   max-width:var(--je-w);
-  margin:0 auto 20px;
-  padding:24px 30px 20px;
+  margin:0 auto 22px;
+  padding:24px 26px 26px;
+  border:1px solid #E4E0F3;
+  border-top:4px solid var(--je-purple);
   border-radius:16px;
-  background:linear-gradient(160deg,#26215C 0%,#3C3489 100%);
-  border:1px solid rgba(201,168,76,.35);
-  color:#EEEDFE;
+  background:#fff;
+  box-shadow:0 2px 14px rgba(38,33,92,.06);
+  color:var(--je-mid);
   font-family:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
   text-align:left;
   line-height:1.5;
 }
 .je-adm *{box-sizing:border-box;}
-.je-adm p{margin:0;color:#EEEDFE;font-size:15px;}
-.je-adm strong{color:#fff;font-weight:600;}
-.je-adm-eyebrow{
-  margin:0 0 6px;
+.je-adm p{margin:0;font-size:15px;color:var(--je-mid);}
+.je-adm strong{color:var(--je-ink);font-weight:600;}
+
+.je-adm-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px;}
+.je-adm-chip{
+  display:inline-block;
+  padding:4px 11px;
+  border:1px solid #D9D4EF;
+  border-radius:999px;
+  background:#F7F6FC;
+  color:#5B5490;
   font-size:11px;
   font-weight:600;
-  letter-spacing:.16em;
+  letter-spacing:.06em;
   text-transform:uppercase;
-  color:#E7CD86;
+  line-height:1.5;
+}
+.je-adm-chip--solid{
+  background:var(--je-purple);
+  border-color:var(--je-purple);
+  color:#fff;
 }
 .je-adm-title{
   margin:0 0 8px;
   font-family:"Libre Baskerville",Georgia,"Times New Roman",serif;
-  font-size:23px;
+  font-size:24px;
   line-height:1.25;
   font-weight:700;
-  color:#fff;
+  color:var(--je-ink);
 }
-.je-adm-lead{max-width:860px;}
-.je-adm-rules{
+.je-adm-lead{max-width:900px;}
+
+.je-adm-cards{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:14px 32px;
-  list-style:none;
-  margin:16px 0 0;
-  padding:16px 0 0;
-  border-top:1px solid rgba(238,237,254,.16);
+  gap:14px;
+  margin-top:18px;
 }
-.je-adm-rules li{
-  display:flex;
-  gap:10px;
-  align-items:flex-start;
-  margin:0;
-  padding:0;
-  list-style:none;
+.je-adm-card{
+  padding:14px 16px;
+  border:1px solid #E4E0F3;
+  border-left:4px solid var(--je-purple);
+  border-radius:10px;
+  background:#F7F6FC;
 }
-.je-adm-rules li p{font-size:14.5px;}
-.je-adm-num{
-  flex:0 0 24px;
-  width:24px;
-  height:24px;
-  border-radius:50%;
-  background:rgba(201,168,76,.16);
-  border:1px solid rgba(201,168,76,.5);
-  color:#E7CD86;
-  font-size:12.5px;
-  font-weight:600;
+.je-adm-card--warn{
+  border-color:#EFE0BC;
+  border-left-color:#C9A84C;
+  background:#FDF8EC;
+}
+.je-adm-card-top{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+.je-adm-badge{
+  flex:0 0 22px;
+  width:22px;
+  height:22px;
+  border-radius:6px;
+  background:var(--je-purple);
+  color:#fff;
+  font-size:12px;
+  font-weight:700;
   line-height:22px;
   text-align:center;
 }
+.je-adm-badge--warn{background:#C9A84C;color:#3D2E08;}
+.je-adm-label{
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--je-purple);
+}
+.je-adm-label--warn{color:var(--je-amber);}
+.je-adm-card-text{font-size:14.5px;}
+
 @media (max-width:820px){
-  .je-adm-rules{grid-template-columns:1fr;gap:11px;}
+  .je-adm-cards{grid-template-columns:1fr;gap:11px;}
 }
 @media (max-width:600px){
-  .je-adm{padding:20px 18px 18px;border-radius:14px;}
-  .je-adm-title{font-size:20px;}
+  .je-adm{padding:20px 17px 20px;border-radius:14px;}
+  .je-adm-title{font-size:21px;}
   .je-adm p{font-size:14.5px;}
+  .je-adm-chip{font-size:10.5px;padding:3px 9px;}
 }
 </style>
