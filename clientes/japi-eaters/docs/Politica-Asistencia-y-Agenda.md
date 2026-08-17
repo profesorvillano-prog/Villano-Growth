@@ -68,20 +68,23 @@ y agrega una línea de descripción:
 
 Código listo en [`../assets/agenda-aviso.html`](../assets/agenda-aviso.html).
 Es autocontenido (sin fuentes ni scripts externos) y usa la paleta de la landing:
-púrpura `#26215C`/`#3C3489` con acento dorado `#C9A84C`.
+púrpura `#26215C`/`#3C3489` con acento dorado `#C9A84C`. Va **al mismo ancho que
+el widget del calendario** (1170 px, ajustable con la variable `--je-w`) y las
+tres reglas van en 3 columnas en desktop para no empujar el calendario fuera de
+la primera pantalla; en móvil se apilan.
 
 **Instalación en Go High Level:**
 
 1. Edita la página de agenda → añade un elemento **Custom HTML / Código
-   personalizado** justo **arriba** del embed de Calendly.
+   personalizado** justo **arriba** del embed del calendario.
 2. Pega el contenido completo del archivo (incluye su bloque `<style>`).
 3. Guarda y revisa en móvil: el bloque no debe empujar el calendario fuera de la
    primera pantalla en desktop.
 
-**Qué dice, en orden:** es una entrevista de admisión (no una llamada de venta) →
-el cupo queda a tu nombre → confirmamos por WhatsApp → faltar cierra la
-postulación 6 meses → puedes reprogramar una vez sin costo → si no puedes
-comprometerte, no agendes.
+**Qué dice, en orden:** es una entrevista de admisión (no una llamada
+informativa) → reservas 45 minutos de agenda a tu nombre → confirmamos por
+WhatsApp → puedes reprogramar una vez avisando con 24 h → faltar o cancelar
+tarde cierra la postulación 6 meses → si no puedes comprometerte, no agendes.
 
 ### Variante opcional: calendario bloqueado hasta aceptar
 
@@ -91,7 +94,7 @@ o clase real del contenedor del embed en tu página).
 
 ```html
 <label class="je-adm-ok" style="display:flex;gap:10px;align-items:flex-start;
-  max-width:720px;margin:0 auto 18px;padding:14px 16px;border-radius:12px;
+  max-width:1170px;margin:0 auto 18px;padding:14px 16px;border-radius:12px;
   background:#F2F0F9;border:1px solid rgba(83,74,183,.18);cursor:pointer;
   font:500 15px/1.5 'DM Sans',system-ui,sans-serif;color:#26215C;">
   <input type="checkbox" id="jeAdmOk" style="margin-top:3px;width:18px;height:18px;">
@@ -116,7 +119,61 @@ o clase real del contenedor del embed en tu página).
 
 ---
 
-## 3. Secuencia de WhatsApp (la que sostiene la asistencia)
+## 3. Descripción del calendario (panel izquierdo del widget)
+
+Ese panel es angosto y **hace scroll**: solo se leen las primeras 4-5 líneas sin
+que nadie desplace. Por eso la advertencia va arriba, no al final.
+
+**Nombre del evento** (hoy dice "[A] Programa Éxito en Alimentación Infantil"):
+
+> Entrevista de admisión · Programa ÉxiTO en Alimentación Infantil
+
+> Dos correcciones: el prefijo interno **"[A]"** no debería verlo la postulante
+> (déjalo solo en el nombre interno del calendario) y la marca se escribe
+> **ÉxiTO**, no "Éxito".
+
+**Descripción:**
+
+> **Entrevista de admisión** al Programa **ÉxiTO en Alimentación Infantil** —
+> videollamada de **45 minutos** con una terapeuta del equipo de Josefina Pizarro.
+>
+> **Cupos limitados por convocatoria.** Al agendar bloqueas 45 minutos de agenda a
+> tu nombre: si no asistes, o cancelas con menos de 24 horas de aviso, tu
+> postulación queda cerrada por un semestre completo.
+>
+> **Qué haremos:** revisamos tu perfil profesional y tu realidad clínica actual, te
+> presentamos el programa completo con precios, métodos y opciones de pago, y
+> resolvemos todas tus dudas. Al terminar sabrás con claridad si ÉxiTO es la
+> formación correcta para ti.
+>
+> **Cómo prepararte:**
+> • Conéctate desde un computador, con audio y buena conexión.
+> • Reserva los 45 minutos completos, en un lugar tranquilo y sin interrupciones.
+> • Si la decisión no es solo tuya, elige un horario en que esa persona pueda
+> acompañarte.
+>
+> **Condiciones de tu postulación:**
+> • Confirmamos por WhatsApp. Si no respondes, liberamos el cupo.
+> • Puedes reprogramar **una sola vez**, avisando con más de 24 horas.
+> • No asistir o cancelar sobre la hora cierra tu postulación por **6 meses**.
+>
+> Al agendar, aceptas estas condiciones.
+
+**Versión corta** (si el campo se ve muy apretado en móvil):
+
+> **Entrevista de admisión** al Programa **ÉxiTO en Alimentación Infantil** —
+> videollamada de 45 min con una terapeuta del equipo. Revisamos tu perfil, te
+> mostramos el programa completo con precios y opciones de pago, y resolvemos tus
+> dudas.
+>
+> **Cupos limitados.** Confirmamos por WhatsApp; puedes reprogramar una vez con
+> 24 h de aviso. Si no asistes o cancelas sobre la hora, tu postulación queda
+> cerrada por un semestre. Conéctate desde un computador, con audio y 45 minutos
+> libres.
+
+---
+
+## 4. Secuencia de WhatsApp (la que sostiene la asistencia)
 
 Tres toques. Cortos, con tono de institución, siempre pidiendo una respuesta
 explícita (responder = compromiso).
@@ -141,7 +198,7 @@ explícita (responder = compromiso).
 **T-1 h**
 
 > [Nombre], en 1 hora nos vemos. Este es el link: [link]
-> Conéctate desde un lugar tranquilo, con audio y unos 40 minutos libres —
+> Conéctate desde un lugar tranquilo, con audio y 45 minutos libres —
 > revisamos tu caso y te muestro el programa completo con precios y opciones de
 > pago. Te espero puntual.
 
@@ -159,7 +216,7 @@ explícita (responder = compromiso).
 
 ---
 
-## 4. Cómo operar el bloqueo (CRM / Go High Level)
+## 5. Cómo operar el bloqueo (CRM / Go High Level)
 
 1. **Etiquetas de contacto:** `admision-confirmada`, `admision-reprogramada`,
    `no-show`, `cancelacion-tardia`, `bloqueado-hasta-AAAA-MM` (una sola vigente).
@@ -176,7 +233,7 @@ explícita (responder = compromiso).
 
 ---
 
-## 5. Qué medir (semanal)
+## 6. Qué medir (semanal)
 
 | Métrica | Cómo se calcula | Meta inicial |
 |---|---|---|
