@@ -10,11 +10,16 @@
 
 | Situación | Consecuencia |
 |---|---|
-| Reprograma **una vez**, con más de 24 h de aviso | Sin penalización. Se le ofrece nuevo horario. |
-| Cancela con **menos de 24 h** de aviso | Postulación cerrada **6 meses** (un semestre). |
-| **No asiste** (no-show) sin aviso | Postulación cerrada **6 meses** (un semestre). |
-| No responde la confirmación por WhatsApp | Se cancela el cupo antes de la hora; **no** cuenta como no-show si avisamos la cancelación. |
+| **Reprograma una vez**, con más de 24 h de aviso | Sin penalización. Mueve su hora desde el link de confirmación. |
+| **Cancela** su entrevista (en cualquier momento) | Postulación cerrada **6 meses** (un semestre). |
+| **No se presenta** (no-show) | Postulación cerrada **6 meses** (un semestre). |
+| No responde la confirmación por WhatsApp | Liberamos el cupo antes de la hora; **no** cuenta como no-show porque la baja la damos nosotros. |
 | Segunda reprogramación | Se cierra el cupo y se invita a postular en la próxima convocatoria. |
+
+**La distinción que sostiene todo:** *reprogramar* no es *cancelar*. Mover la
+hora una vez, avisando antes, está permitido y no penaliza. Cancelar o no
+aparecer, sí. Así la política es dura sin ser injusta: siempre hubo una salida
+limpia y ella eligió no tomarla.
 
 **Por qué funciona:** el costo de faltar deja de ser cero. La escasez es real
 (la agenda de la entrevistadora se bloquea) y la consecuencia es concreta y
@@ -35,10 +40,9 @@ pregunta queda de una sola línea y las opciones dan una salida digna.
 **Descripción (arriba de la pregunta):**
 
 > Te contactaremos por WhatsApp para confirmar tu entrevista. **Si no
-> confirmas, el cupo se libera para otra terapeuta.** Y si cancelas con menos de
-> 24 horas o no te presentas, tu postulación queda cerrada por un semestre
-> completo. Lo hacemos porque esto es una formación profesional y la agenda es
-> limitada.
+> confirmas, el cupo se libera para otra terapeuta.** Y si **cancelas o no te
+> presentas, tu postulación queda cerrada por un semestre completo.** Lo hacemos
+> porque esto es una formación profesional y la agenda es limitada.
 
 **Pregunta:**
 
@@ -48,6 +52,10 @@ pregunta queda de una sola línea y las opciones dan una salida digna.
 
 - ✅ Sí. Respondo el WhatsApp y me conecto puntual el día y la hora que elija.
 - ❌ Prefiero no comprometerme ahora. Postularé en la próxima convocatoria.
+
+> Si necesitas mover tu hora, puedes **reprogramar una sola vez** desde el correo
+> de confirmación, avisando con más de 24 horas. Reprogramar a tiempo no
+> penaliza tu postulación.
 
 > Nota: quien marque la segunda opción **no debe** llegar al calendario. Envíala
 > a una página de "próxima convocatoria" con captura de correo. Un no-show menos
@@ -83,8 +91,9 @@ la primera pantalla; en móvil se apilan.
 
 **Qué dice, en orden:** es una entrevista de admisión (no una llamada
 informativa) → reservas 45 minutos de agenda a tu nombre → confirmamos por
-WhatsApp → puedes reprogramar una vez avisando con 24 h → faltar o cancelar
-tarde cierra la postulación 6 meses → si no puedes comprometerte, no agendes.
+WhatsApp → puedes reprogramar una vez avisando con 24 h → cancelar o no
+presentarte cierra la postulación 6 meses → si no puedes comprometerte, no
+agendes.
 
 ### Variante opcional: calendario bloqueado hasta aceptar
 
@@ -98,8 +107,8 @@ o clase real del contenedor del embed en tu página).
   background:#F2F0F9;border:1px solid rgba(83,74,183,.18);cursor:pointer;
   font:500 15px/1.5 'DM Sans',system-ui,sans-serif;color:#26215C;">
   <input type="checkbox" id="jeAdmOk" style="margin-top:3px;width:18px;height:18px;">
-  <span>Leí y acepto las condiciones: si falto o cancelo con menos de 24 horas,
-  no podré postular durante un semestre.</span>
+  <span>Leí y acepto las condiciones: si cancelo o no me presento, no podré
+  postular durante un semestre completo.</span>
 </label>
 <script>
 (function(){
@@ -138,8 +147,9 @@ que nadie desplace. Por eso la advertencia va arriba, no al final.
 > videollamada de **45 minutos** con una terapeuta del equipo de Josefina Pizarro.
 >
 > **Cupos limitados por convocatoria.** Al agendar bloqueas 45 minutos de agenda a
-> tu nombre: si no asistes, o cancelas con menos de 24 horas de aviso, tu
-> postulación queda cerrada por un semestre completo.
+> tu nombre: si cancelas o no te presentas, tu postulación queda cerrada por un
+> semestre completo. Si te surge un imprevisto puedes reprogramar una sola vez,
+> avisando con más de 24 horas.
 >
 > **Qué haremos:** revisamos tu perfil profesional y tu realidad clínica actual, te
 > presentamos el programa completo con precios, métodos y opciones de pago, y
@@ -155,7 +165,7 @@ que nadie desplace. Por eso la advertencia va arriba, no al final.
 > **Condiciones de tu postulación:**
 > • Confirmamos por WhatsApp. Si no respondes, liberamos el cupo.
 > • Puedes reprogramar **una sola vez**, avisando con más de 24 horas.
-> • No asistir o cancelar sobre la hora cierra tu postulación por **6 meses**.
+> • Cancelar o no presentarte cierra tu postulación por **6 meses**.
 >
 > Al agendar, aceptas estas condiciones.
 
@@ -167,8 +177,8 @@ que nadie desplace. Por eso la advertencia va arriba, no al final.
 > dudas.
 >
 > **Cupos limitados.** Confirmamos por WhatsApp; puedes reprogramar una vez con
-> 24 h de aviso. Si no asistes o cancelas sobre la hora, tu postulación queda
-> cerrada por un semestre. Conéctate desde un computador, con audio y 45 minutos
+> 24 h de aviso. Si cancelas o no te presentas, tu postulación queda cerrada por
+> un semestre completo. Conéctate desde un computador, con audio y 45 minutos
 > libres.
 
 ---
@@ -191,8 +201,8 @@ explícita (responder = compromiso).
 > [Nombre], mañana **[día] a las [hora]** es tu entrevista de admisión.
 > Recordatorio de las condiciones que aceptaste al postular: si necesitas mover
 > la hora, este es el momento (se puede una sola vez, y este es el link:
-> [link reprogramar]). Después de esta hora, cancelar o no asistir cierra tu
-> postulación por un semestre.
+> [link reprogramar]). Cancelar o no presentarte cierra tu postulación por un
+> semestre completo.
 > ¿Sigue en pie? Respóndeme **SÍ** 🥕
 
 **T-1 h**
