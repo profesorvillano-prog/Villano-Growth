@@ -89,14 +89,17 @@ la primera pantalla; en móvil se apilan.
 3. Guarda y revisa en móvil: el bloque no debe empujar el calendario fuera de la
    primera pantalla en desktop.
 
-**Qué dice (versión corta, 6 líneas):** entrevista de admisión a una formación
+**Qué dice (versión mínima, 2 reglas):** entrevista de admisión a una formación
 profesional con certificación internacional → reservas 45 minutos de agenda a tu
-nombre → confirmamos por WhatsApp → reprogramas una vez con 24 h de aviso →
-cancelar o no presentarte cierra la postulación por un semestre.
+nombre → (1) confirmamos por WhatsApp, si no respondes liberamos el cupo →
+(2) cancelar o no presentarte cierra la postulación por un semestre.
 
 El bloque es deliberadamente breve: arriba del calendario nadie lee párrafos.
-El desarrollo completo de las condiciones vive en la descripción del calendario
-(sección 3) y en el formulario (sección 1), donde sí hay contexto para leerlas.
+La opción de **reprogramar** no se menciona aquí a propósito — en el momento de
+agendar solo debe pesar el compromiso. La salida por reprogramación se comunica
+donde corresponde: en la descripción del calendario (sección 3), en el
+formulario (sección 1) y en el recordatorio de WhatsApp de T-24 h, que es el
+momento real en que alguien necesita mover su hora.
 
 ### Variante opcional: calendario bloqueado hasta aceptar
 
