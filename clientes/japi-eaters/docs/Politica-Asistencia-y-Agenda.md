@@ -94,10 +94,11 @@ según su función:
 |---|---|---|
 | Chips del encabezado | Púrpura sólido + contorno | Marco institucional, se lee de un vistazo |
 | Tarjeta 1 · "Confirmación" | Púrpura `#534AB7` sobre lavanda `#F7F6FC` | Paso operativo: qué va a pasar |
-| Tarjeta 2 · "Política de admisión" | Dorado `#C9A84C` sobre ámbar `#FDF8EC` | Advertencia: la consecuencia |
+| Tarjeta 2 · "Política de admisión" | Rojo `#C0392B` sobre rosa `#FDF3F1` | Advertencia: la consecuencia |
 
-Separar advertencia (ámbar) de instrucción (púrpura) hace que la consecuencia no
-se lea como un párrafo más. En desktop las dos tarjetas van lado a lado; en
+Separar advertencia (rojo) de instrucción (púrpura) hace que la consecuencia no
+se lea como un párrafo más. El rojo es apagado a propósito (`#C0392B`, no rojo
+puro): señala sin gritar, que es el registro de una institución. En desktop las dos tarjetas van lado a lado; en
 móvil se apilan.
 
 **Instalación en Go High Level:**
