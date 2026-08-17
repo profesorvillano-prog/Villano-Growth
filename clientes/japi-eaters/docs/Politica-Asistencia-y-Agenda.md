@@ -85,16 +85,20 @@ Es autocontenido (sin fuentes ni scripts externos) y va **al mismo ancho que el
 widget del calendario** (1170 px, ajustable con la variable `--je-w`).
 
 **Cómo está construido visualmente:** tarjeta clara sobre fondo blanco (no un
-bloque morado completo) con filete púrpura arriba, chips de contexto en el
-encabezado —*Proceso de admisión · Formación profesional · Certificación
-internacional · 45 minutos*— y **cada mensaje en su propia forma**, con color
-según su función:
+bloque morado completo), con filete púrpura arriba, una línea de encabezado
+—*Proceso de admisión · Formación profesional*— y **cada mensaje en su propia
+forma**, con color según su función:
 
 | Forma | Color | Qué comunica |
 |---|---|---|
-| Chips del encabezado | Púrpura sólido + contorno | Marco institucional, se lee de un vistazo |
+| Línea de encabezado | Púrpura `#534AB7` | Marco institucional en una sola línea |
 | Tarjeta 1 · "Confirmación" | Púrpura `#534AB7` sobre lavanda `#F7F6FC` | Paso operativo: qué va a pasar |
 | Tarjeta 2 · "Política de admisión" | Rojo `#C0392B` sobre rosa `#FDF3F1` | Advertencia: la consecuencia |
+
+**Escala compacta, pensada para móvil:** título 20 px (17 px en móvil), texto de
+tarjeta 13,5 px (12,5 px), paddings de 16/13 px. Los `!important` puntuales
+existen porque los temas de GHL inyectan tamaños y márgenes propios a los `p`
+del contenido.
 
 Separar advertencia (rojo) de instrucción (púrpura) hace que la consecuencia no
 se lea como un párrafo más. El rojo es apagado a propósito (`#C0392B`, no rojo
