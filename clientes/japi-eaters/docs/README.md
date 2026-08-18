@@ -18,6 +18,7 @@ emails y nuevos productos.
 | [`Casos-de-Exito.md`](./Casos-de-Exito.md) | Transformaciones reales de alumnas, testimonios en video y números de respaldo. Prueba social. |
 | [`FAQ.md`](./FAQ.md) | Preguntas frecuentes reales con respuestas en la voz de la marca. Ideal para web y bot/setter. |
 | [`Voz-y-Marca.md`](./Voz-y-Marca.md) | Tono, frases marca registrada, palabras prohibidas, paleta de color, historia y autoridad de Josefina. |
+| [`Automatizacion-ManyChat-Saludo.md`](./Automatizacion-ManyChat-Saludo.md) | Flujo de bienvenida a nuevos seguidores de Instagram en ManyChat: saludo humano sin botones, copy de apertura y de cada rama (TO / mamá / ambiguo / sin respuesta), montaje paso a paso, etiquetas, reglas de plataforma y métricas. |
 | [`Operaciones-y-Embudo.md`](./Operaciones-y-Embudo.md) | Funnel, onboarding, plataforma Skool (niveles), mentorías, equipo, stack tecnológico, modelo 2026 y datos de audiencias. |
 
 ## Fuentes
