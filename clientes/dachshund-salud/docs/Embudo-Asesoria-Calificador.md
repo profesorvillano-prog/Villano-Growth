@@ -66,8 +66,9 @@ gastando en veterinario. La urgencia va de la mano con la compra. Es una decisi�
 
 ## 3. El formulario calificador (`calificador-asesoria.html`)
 
-Corto a propósito: **5 preguntas + nombre y correo**. El teléfono no se pide — llega solo
-cuando el lead abre el Walink.
+Corto a propósito: **5 preguntas + nombre y correo**. Abre **directo en la pregunta 1**
+(sin portada ni botón de "empezar": cero fricción desde el DM). El teléfono no se pide —
+llega solo cuando el lead abre el Walink.
 
 | # | Pregunta | Por qué está |
 |---|---|---|
