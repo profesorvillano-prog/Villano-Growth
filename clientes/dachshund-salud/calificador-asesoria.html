@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chequeo Express — ¿Tu salchicha va por buen camino?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --v:#2D4A3E; --v2:#3B5E50; --vc:#EEF7F1;
+      --g:#C8962E; --gb:#E0A830;
+      --cr:#FAFAF7; --bl:#FFFFFF;
+      --tm:#1C2B22; --ts:#3D5445; --tf:#5C7266;
+      --br:#D8E8DD; --err:#C0392B;
+    }
+    html { scroll-behavior:smooth; }
+    body { background:var(--cr); font-family:'Outfit',sans-serif; color:var(--tm); min-height:100vh; overflow-x:hidden; }
+
+    .topbar { background:var(--v); padding:12px 20px; display:flex; align-items:center; justify-content:center; gap:8px; }
+    .topbar-logo { font-family:'Fraunces',serif; font-weight:900; font-size:14px; color:var(--cr); }
+    .topbar-dot { width:4px; height:4px; border-radius:50%; background:var(--g); }
+    .topbar-sub { font-size:11px; color:rgba(250,250,247,0.55); letter-spacing:0.03em; }
+
+    .hero { background:var(--v); padding:38px 24px 46px; text-align:center; position:relative; overflow:hidden; }
+    .hero::after { content:''; position:absolute; width:300px; height:300px; border-radius:50%; background:var(--g); opacity:0.06; top:-120px; right:-70px; pointer-events:none; }
+    .hero-tag { font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--gb); margin-bottom:14px; }
+    .hero-title { font-family:'Fraunces',serif; font-weight:900; font-size:clamp(28px,7.5vw,40px); line-height:1.08; color:#fff; letter-spacing:-0.01em; }
+    .hero-title em { font-style:italic; color:var(--gb); }
+    .hero-sub { margin-top:14px; font-size:15px; line-height:1.65; color:rgba(255,255,255,0.82); max-width:400px; margin-inline:auto; }
+    .hero-sub strong { color:#fff; font-weight:700; }
+    .hero-meta { margin-top:20px; font-size:12px; color:rgba(255,255,255,0.55); }
+    .btn-start { background:var(--g); color:var(--v); border:none; font-family:'Outfit',sans-serif; font-size:15px; font-weight:800; padding:16px 34px; border-radius:12px; cursor:pointer; margin-top:22px; display:inline-flex; align-items:center; gap:8px; box-shadow:0 6px 24px rgba(200,150,46,0.3); transition:transform .18s; }
+    .btn-start:hover { transform:translateY(-2px); }
+    .wave { background:var(--v); margin-bottom:-2px; }
+    .wave svg { display:block; width:100%; }
+
+    .main { padding:0 18px 70px; }
+    .container { max-width:540px; margin:0 auto; }
+
+    .step-ind { padding:22px 0 0; }
+    .step-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+    .step-pill { font-size:11px; font-weight:800; letter-spacing:0.07em; text-transform:uppercase; padding:6px 12px; border-radius:20px; background:var(--vc); color:var(--v); }
+    .step-count { font-size:12px; font-weight:600; color:var(--tf); }
+    .step-bar { height:5px; background:var(--br); border-radius:4px; overflow:hidden; }
+    .step-fill { height:100%; background:var(--g); border-radius:4px; transition:width .35s ease; width:0%; }
+
+    .card { background:var(--bl); border:1.5px solid var(--br); border-radius:18px; padding:22px 18px; margin-top:12px; box-shadow:0 4px 20px rgba(44,74,62,0.06); }
+    .q-meta { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+    .q-num { width:26px; height:26px; border-radius:8px; background:var(--v); color:var(--cr); font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .q-area { font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--tf); }
+    .q-text { font-size:15px; font-weight:600; line-height:1.45; margin-bottom:6px; }
+    .q-hint { font-size:12px; color:var(--tf); line-height:1.5; margin-bottom:14px; }
+
+    .opt-list { display:flex; flex-direction:column; gap:8px; }
+    .opt-row { display:flex; align-items:center; gap:11px; padding:13px 14px; border:1.5px solid var(--br); border-radius:12px; background:var(--cr); cursor:pointer; transition:border-color .15s, background .15s; user-select:none; }
+    .opt-row:hover { border-color:var(--v2); background:var(--vc); }
+    .opt-row.sel { border-color:var(--v); background:var(--vc); box-shadow:0 0 0 3px rgba(45,74,62,0.1); }
+    .opt-radio { width:19px; height:19px; border-radius:50%; border:2px solid var(--br); flex-shrink:0; position:relative; transition:border-color .15s; }
+    .opt-row.sel .opt-radio { border-color:var(--v); }
+    .opt-row.sel .opt-radio::after { content:''; position:absolute; inset:3px; border-radius:50%; background:var(--v); }
+    .opt-txt { font-size:14px; font-weight:500; line-height:1.4; }
+
+    .photo-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:7px; }
+    @media(max-width:500px){ .photo-grid { grid-template-columns:repeat(3,1fr); } }
+    .photo-opt { display:flex; flex-direction:column; align-items:center; gap:5px; padding:8px 4px 9px; border-radius:12px; border:2px solid var(--br); background:var(--cr); cursor:pointer; transition:border-color .15s, background .15s, transform .15s; user-select:none; position:relative; }
+    .photo-opt:hover { border-color:var(--v2); background:var(--vc); transform:translateY(-2px); }
+    .photo-opt.sel { border-color:var(--v); background:var(--vc); box-shadow:0 0 0 3px rgba(45,74,62,0.1); transform:translateY(-2px); }
+    .photo-opt.sel::after { content:'✓'; position:absolute; top:-8px; right:-8px; width:20px; height:20px; background:var(--v); color:#fff; border-radius:50%; font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; line-height:1; }
+    .photo-wrap-sq { width:100%; border-radius:8px; overflow:hidden; aspect-ratio:1/1; background:#f0f0f0; }
+    .photo-wrap-sq img { width:100%; height:100%; object-fit:cover; display:block; }
+    .vis-label { font-size:10px; font-weight:700; text-align:center; color:var(--v); line-height:1.25; }
+    .vis-sub { font-size:9px; font-weight:500; text-align:center; color:var(--tf); line-height:1.25; }
+
+    .field { margin-bottom:14px; }
+    .field-label { display:block; font-size:13px; font-weight:600; color:var(--ts); margin-bottom:6px; }
+    .field-label span { color:var(--g); }
+    .field-input { width:100%; padding:14px 15px; border:1.5px solid var(--br); border-radius:11px; background:var(--cr); font-family:'Outfit',sans-serif; font-size:15px; color:var(--tm); transition:border-color .15s, box-shadow .15s; }
+    .field-input:focus { outline:none; border-color:var(--v); box-shadow:0 0 0 3px rgba(45,74,62,0.1); background:#fff; }
+    .field-input.err { border-color:var(--err); }
+    .err-msg { display:none; font-size:12px; color:var(--err); margin-top:5px; }
+    .err-msg.show { display:block; }
+
+    .nav-row { display:flex; gap:10px; margin-top:20px; }
+    .btn-nav { flex:1; padding:15px 18px; border-radius:12px; font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; cursor:pointer; transition:all .18s; display:flex; align-items:center; justify-content:center; gap:8px; border:none; }
+    .btn-back { background:transparent; color:var(--tf); border:1.5px solid var(--br); flex:0 0 96px; }
+    .btn-back:hover { border-color:var(--v); color:var(--v); }
+    .btn-next { background:var(--g); color:var(--v); font-weight:800; box-shadow:0 6px 20px rgba(200,150,46,0.25); }
+    .btn-next:hover:not(:disabled) { transform:translateY(-2px); }
+    .btn-next:disabled { opacity:0.4; cursor:not-allowed; box-shadow:none; }
+
+    .loading-screen { text-align:center; padding:80px 24px; }
+    .spinner { width:44px; height:44px; border:3px solid var(--br); border-top-color:var(--v); border-radius:50%; animation:spin .8s linear infinite; margin:0 auto 18px; }
+    .loading-label { font-family:'Fraunces',serif; font-size:19px; font-weight:700; margin-bottom:6px; }
+    .loading-sub { font-size:14px; color:var(--tf); line-height:1.6; }
+
+    .result-intro { text-align:center; padding:30px 16px 18px; }
+    .result-intro-tag { font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--g); margin-bottom:8px; }
+    .result-intro-title { font-family:'Fraunces',serif; font-size:clamp(24px,6.5vw,32px); font-weight:900; color:var(--v); line-height:1.12; }
+    .risk-card { border-radius:18px; padding:26px 20px; text-align:center; color:#fff; }
+    .risk-card-tag { font-size:10px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; opacity:0.7; margin-bottom:6px; }
+    .risk-pct { font-family:'Fraunces',serif; font-size:56px; font-weight:900; line-height:1; }
+    .risk-pct-lbl { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; opacity:0.75; margin:6px 0 14px; }
+    .risk-level { font-size:12px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; padding:6px 14px; border-radius:20px; background:rgba(255,255,255,0.18); display:inline-block; }
+    .msg-card { background:var(--bl); border:1.5px solid var(--br); border-radius:16px; padding:18px; margin-top:12px; }
+    .msg-card-tag { font-size:10px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:var(--tf); margin-bottom:8px; }
+    .msg-card-txt { font-size:14px; color:var(--ts); line-height:1.6; }
+    .msg-card-txt strong { color:var(--v); }
+    .flags { list-style:none; margin-top:10px; display:flex; flex-direction:column; gap:7px; }
+    .flags li { font-size:13.5px; color:var(--ts); line-height:1.45; display:flex; gap:8px; }
+    .flags li::before { content:'•'; color:var(--g); font-weight:900; }
+
+    .wa-cta-card { background:linear-gradient(135deg,var(--v) 0%,#1E3528 100%); border-radius:18px; padding:24px 20px; text-align:center; margin-top:16px; }
+    .wa-cta-tag { font-size:11px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--g); margin-bottom:8px; }
+    .wa-cta-title { font-family:'Fraunces',serif; font-size:21px; font-weight:800; color:var(--cr); line-height:1.2; margin-bottom:9px; }
+    .wa-cta-desc { font-size:13px; color:rgba(250,250,247,0.75); line-height:1.6; margin-bottom:18px; }
+    .btn-wa { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:17px 22px; border-radius:13px; background:#25D366; color:#fff; text-decoration:none; font-family:'Outfit',sans-serif; font-size:15px; font-weight:800; border:none; cursor:pointer; box-shadow:0 4px 20px rgba(37,211,102,0.32); transition:transform .18s; }
+    .btn-wa:hover { transform:translateY(-2px); }
+    .fine { text-align:center; margin-top:10px; font-size:12px; color:rgba(250,250,247,0.5); line-height:1.5; }
+    .consent-note { font-size:11.5px; color:var(--tf); line-height:1.5; margin-top:2px; }
+    .footer { text-align:center; padding:26px 0 0; font-size:12px; color:var(--tf); line-height:1.7; }
+    .footer strong { color:var(--v); font-family:'Fraunces',serif; font-size:13px; }
+
+    .screen { display:none; }
+    .screen.active { display:block; animation:fadeUp .3s ease both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes spin { to { transform:rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <span class="topbar-logo">Dachshund Salud</span>
+    <div class="topbar-dot"></div>
+    <span class="topbar-sub">Dr. Marcelo Hernán</span>
+  </div>
+
+  <!-- HERO -->
+  <div class="screen active" id="screen-hero">
+    <section class="hero">
+      <p class="hero-tag">🐾 Gratis · Solo dueños de salchicha</p>
+      <h1 class="hero-title">¿Tu salchicha va<br>por <em>buen camino</em>?</h1>
+      <p class="hero-sub">5 preguntas para saber si lo que le estás dando hoy la está <strong>protegiendo o enfermando</strong>. Al final te digo qué necesita.</p>
+      <button class="btn-start" onclick="goToScreen('test')">
+        Empezar
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <p class="hero-meta">⏱ 60 segundos · Lo revisa el Dr. Marcelo</p>
+    </section>
+    <div class="wave">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 50" preserveAspectRatio="none">
+        <path d="M0,0 C360,50 1080,50 1440,0 L1440,50 L0,50 Z" fill="#FAFAF7"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- TEST -->
+  <div class="screen" id="screen-test">
+    <div class="main">
+      <div class="container">
+        <div class="step-ind">
+          <div class="step-row">
+            <span class="step-pill">Chequeo express</span>
+            <span class="step-count" id="q-count">0 de 5</span>
+          </div>
+          <div class="step-bar"><div class="step-fill" id="q-fill"></div></div>
+        </div>
+
+        <!-- Q1 · PESO (foto) -->
+        <div class="card">
+          <div class="q-meta"><div class="q-num">1</div><div class="q-area">Peso · visto desde arriba</div></div>
+          <div class="q-text">¿Cuál de estas salchichas se parece más a la tuya?</div>
+          <div class="q-hint">Míralo parado, desde arriba. Elige el más honesto.</div>
+          <div class="photo-grid" data-q="peso">
+            <div class="photo-opt" data-pts="2" data-txt="Muy delgado — costillas muy visibles" onclick="pick(this,'peso')">
+              <div class="photo-wrap-sq"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69e7e5bcda11eeea68ef38af.png" alt="Muy delgado" loading="lazy" /></div>
+              <div class="vis-label">Muy<br>delgado</div>
+              <div class="vis-sub">Costillas<br>muy visibles</div>
+            </div>
+            <div class="photo-opt" data-pts="1" data-txt="Bajo peso" onclick="pick(this,'peso')">
+              <div class="photo-wrap-sq"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69e7e5bc6fc69286f3b287d9.png" alt="Bajo peso" loading="lazy" /></div>
+              <div class="vis-label">Bajo<br>peso</div>
+              <div class="vis-sub">Bajo el<br>peso ideal</div>
+            </div>
+            <div class="photo-opt" data-pts="0" data-txt="Peso ideal — cintura marcada" onclick="pick(this,'peso')">
+              <div class="photo-wrap-sq"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69e7e5bc6fc69286f3b287d8.png" alt="Peso ideal" loading="lazy" /></div>
+              <div class="vis-label">Cintura<br>marcada</div>
+              <div class="vis-sub">Peso<br>ideal</div>
+            </div>
+            <div class="photo-opt" data-pts="2" data-txt="Sobrepeso — sin cintura definida" onclick="pick(this,'peso')">
+              <div class="photo-wrap-sq"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69e7e5bc03c24196d24d1679.png" alt="Sobrepeso" loading="lazy" /></div>
+              <div class="vis-label">Sobrepeso</div>
+              <div class="vis-sub">Sin cintura<br>definida</div>
+            </div>
+            <div class="photo-opt" data-pts="3" data-txt="Obesidad — riesgo crítico de columna" onclick="pick(this,'peso')">
+              <div class="photo-wrap-sq"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69e7e5bc5e482c379bc1c32e.png" alt="Obesidad" loading="lazy" /></div>
+              <div class="vis-label">Obesidad</div>
+              <div class="vis-sub">Riesgo<br>crítico IVDD</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 · COMIDA (foto) -->
+        <div class="card">
+          <div class="q-meta"><div class="q-num">2</div><div class="q-area">Qué come hoy</div></div>
+          <div class="q-text">¿Cuál de estos platos se parece más al que le das?</div>
+          <div class="photo-grid" data-q="comida">
+            <div class="photo-opt" data-pts="3" data-txt="100% croqueta o pellet" onclick="pick(this,'comida')">
+              <div class="photo-wrap-sq"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69e7b2a6da11eeea68e1ad76.png" alt="100% croqueta" loading="lazy" /></div>
+              <div class="vis-label">100%<br>croqueta</div>
+              <div class="vis-sub">Pellet premium<br>o supermercado</div>
+            </div>
+            <div class="photo-opt" data-pts="2" data-txt="Croqueta + toppings naturales" onclick="pick(this,'comida')">
+              <div class="photo-wrap-sq"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69e7b2a68381f926787f4371.png" alt="Croqueta con toppings" loading="lazy" /></div>
+              <div class="vis-label">Croqueta +<br>toppings</div>
+              <div class="vis-sub">Pollo o verdura<br>sobre el pellet</div>
+            </div>
+            <div class="photo-opt" data-pts="2" data-txt="Dieta mixta (natural + croqueta)" onclick="pick(this,'comida')">
+              <div class="photo-wrap-sq"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69e7b2a6b0e5e2bb7f8a2320.png" alt="Dieta mixta" loading="lazy" /></div>
+              <div class="vis-label">Dieta<br>mixta</div>
+              <div class="vis-sub">Carne natural<br>+ croqueta</div>
+            </div>
+            <div class="photo-opt" data-pts="1" data-txt="Casero cocido" onclick="pick(this,'comida')">
+              <div class="photo-wrap-sq"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69e7b2a6b0e5e2bb7f8a2321.png" alt="Casero cocido" loading="lazy" /></div>
+              <div class="vis-label">Casero<br>cocido</div>
+              <div class="vis-sub">Pollo, verduras,<br>arroz</div>
+            </div>
+            <div class="photo-opt" data-pts="0" data-txt="100% natural crudo (BARF)" onclick="pick(this,'comida')">
+              <div class="photo-wrap-sq"><img src="https://assets.cdn.filesafe.space/TzjuywpjnaS5aZn5RTs8/media/69e7b2a6a691ce6ea099eb05.png" alt="Natural crudo" loading="lazy" /></div>
+              <div class="vis-label">Natural<br>crudo</div>
+              <div class="vis-sub">Carne, hueso,<br>vísceras</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 · ENFERMEDAD -->
+        <div class="card">
+          <div class="q-meta"><div class="q-num">3</div><div class="q-area">Salud actual</div></div>
+          <div class="q-text">¿Tiene alguna enfermedad, síntoma o tratamiento hoy?</div>
+          <div class="q-hint">Elige lo más grave que aplique.</div>
+          <div class="opt-list" data-q="salud">
+            <div class="opt-row" data-pts="0" data-txt="Sano — sin síntomas" onclick="pick(this,'salud')"><div class="opt-radio"></div><div class="opt-txt">Está sano, sin síntomas</div></div>
+            <div class="opt-row" data-pts="1" data-txt="Señales leves: caspa, gases, pelo opaco, algo de sobrepeso" onclick="pick(this,'salud')"><div class="opt-radio"></div><div class="opt-txt">Señales leves: caspa, gases, pelo opaco, algo de sobrepeso</div></div>
+            <div class="opt-row" data-pts="2" data-txt="Problema que va y vuelve: picazón, diarrea, vómitos, caída de pelo, otitis" onclick="pick(this,'salud')"><div class="opt-radio"></div><div class="opt-txt">Algo que va y vuelve: picazón, diarrea, vómitos, caída de pelo, otitis</div></div>
+            <div class="opt-row" data-pts="3" data-txt="Crónico o grave: dermatitis crónica, dolor de espalda/IVDD, obesidad, diabetes, Cushing, pancreatitis, hígado o riñón" onclick="pick(this,'salud')"><div class="opt-radio"></div><div class="opt-txt">Crónico o grave: dermatitis crónica, dolor de espalda/IVDD, obesidad, diabetes, Cushing, pancreatitis, hígado o riñón</div></div>
+          </div>
+        </div>
+
+        <!-- Q4 · INVERSIÓN ACTUAL EN VETERINARIO -->
+        <div class="card">
+          <div class="q-meta"><div class="q-num">4</div><div class="q-area">Gasto veterinario</div></div>
+          <div class="q-text">En los últimos 6 meses, ¿cuánto llevas gastado en veterinario, exámenes, remedios o alimento medicado?</div>
+          <div class="q-hint">Aproximado, en dólares. Sirve para saber si lo que estás pagando está resolviendo el problema… o solo tapándolo.</div>
+          <div class="opt-list" data-q="gasto">
+            <div class="opt-row" data-pts="0" data-txt="Nada / solo la bolsa de alimento" onclick="pick(this,'gasto')"><div class="opt-radio"></div><div class="opt-txt">Nada o casi nada — solo la bolsa de alimento</div></div>
+            <div class="opt-row" data-pts="1" data-txt="Menos de USD $100" onclick="pick(this,'gasto')"><div class="opt-radio"></div><div class="opt-txt">Menos de USD $100 (vacunas y algún control)</div></div>
+            <div class="opt-row" data-pts="2" data-txt="Entre USD $100 y $300" onclick="pick(this,'gasto')"><div class="opt-radio"></div><div class="opt-txt">Entre USD $100 y $300 (consultas, exámenes, remedios)</div></div>
+            <div class="opt-row" data-pts="3" data-txt="Más de USD $300 — tratamientos recurrentes" onclick="pick(this,'gasto')"><div class="opt-radio"></div><div class="opt-txt">Más de USD $300 — vivo en el veterinario y no se soluciona</div></div>
+          </div>
+        </div>
+
+        <!-- Q5 · ÚNICA DEL DUEÑO -->
+        <div class="card">
+          <div class="q-meta"><div class="q-num">5</div><div class="q-area">Tu decisión</div></div>
+          <div class="q-text">Si el Dr. Marcelo te arma el plan exacto para tu salchicha, ¿cuándo empezarías?</div>
+          <div class="opt-list" data-q="decision">
+            <div class="opt-row" data-pts="3" data-txt="Ahora mismo — es prioridad" onclick="pick(this,'decision')"><div class="opt-radio"></div><div class="opt-txt">Ahora mismo — es mi prioridad</div></div>
+            <div class="opt-row" data-pts="2" data-txt="Este mes" onclick="pick(this,'decision')"><div class="opt-radio"></div><div class="opt-txt">Este mes, si veo que le sirve</div></div>
+            <div class="opt-row" data-pts="1" data-txt="Más adelante" onclick="pick(this,'decision')"><div class="opt-radio"></div><div class="opt-txt">Más adelante, ahora no puedo</div></div>
+            <div class="opt-row" data-pts="0" data-txt="Solo busco información gratis" onclick="pick(this,'decision')"><div class="opt-radio"></div><div class="opt-txt">Solo estoy buscando información gratis</div></div>
+          </div>
+        </div>
+
+        <!-- DATOS -->
+        <div class="card">
+          <div class="q-meta"><div class="q-num">✓</div><div class="q-area">Para enviarte el resultado</div></div>
+          <div class="q-text">¿A nombre de quién va el resultado?</div>
+          <div class="q-hint">Solo nombre y correo. El detalle te lo paso por WhatsApp.</div>
+          <div class="field">
+            <label class="field-label" for="f-nombre">Tu nombre <span>*</span></label>
+            <input class="field-input" type="text" id="f-nombre" placeholder="Tu nombre" autocomplete="given-name" />
+            <p class="err-msg" id="err-nombre">Escribe tu nombre.</p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="f-email">Correo electrónico <span>*</span></label>
+            <input class="field-input" type="email" id="f-email" placeholder="tucorreo@ejemplo.com" autocomplete="email" inputmode="email" />
+            <p class="err-msg" id="err-email">Escribe un correo válido.</p>
+          </div>
+          <p class="consent-note">Al continuar aceptas recibir tu resultado y comunicaciones de Dachshund Salud. Nada de spam.</p>
+        </div>
+
+        <div class="nav-row">
+          <button class="btn-nav btn-back" onclick="goToScreen('hero')">← Volver</button>
+          <button class="btn-nav btn-next" id="btn-ver" onclick="finalizar()" disabled>Ver mi resultado →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="screen" id="screen-loading">
+    <div class="main">
+      <div class="container">
+        <div class="loading-screen">
+          <div class="spinner"></div>
+          <div class="loading-label">Revisando tus respuestas…</div>
+          <div class="loading-sub">Cruzando peso, alimentación y síntomas<br>con el protocolo del Dr. Marcelo Hernán</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTADO -->
+  <div class="screen" id="screen-result">
+    <div class="main">
+      <div class="container">
+        <div class="result-intro">
+          <div class="result-intro-tag">Tu resultado</div>
+          <div class="result-intro-title" id="result-title">Así está tu salchicha hoy</div>
+        </div>
+
+        <div class="risk-card" id="risk-card">
+          <div class="risk-card-tag">🐾 Riesgo para su salud</div>
+          <div class="risk-pct" id="pct-perro">—</div>
+          <div class="risk-pct-lbl">Según lo que marcaste</div>
+          <div class="risk-level" id="lvl-perro">—</div>
+        </div>
+
+        <div class="msg-card">
+          <div class="msg-card-tag">🔎 Qué vemos en tu caso</div>
+          <div class="msg-card-txt" id="msg-perro">—</div>
+          <ul class="flags" id="flags"></ul>
+        </div>
+
+        <div class="wa-cta-card">
+          <div class="wa-cta-tag">✅ Siguiente paso</div>
+          <div class="wa-cta-title" id="wa-title">Mándame el resultado<br>por WhatsApp</div>
+          <div class="wa-cta-desc" id="wa-desc">Ahí me mandas <strong style="color:var(--gb)">una foto de tu salchicha parada, vista desde arriba</strong> y te respondo con un audio diciéndote exactamente qué necesita.</div>
+          <button onclick="irWhatsApp()" class="btn-wa">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Abrir WhatsApp con mi resultado
+          </button>
+          <p class="fine">Respuesta en audio · normalmente el mismo día</p>
+        </div>
+
+        <div class="footer">
+          <strong>Dachshund Salud</strong><br>
+          Dr. Marcelo Hernán · Médico Veterinario · Nutrición natural para Dachshund
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── Config (revisar antes de publicar) ──
+    var WHATSAPP_NUM = '56936447104'; // número que atiende el setter (formato internacional, sin +)
+    var WEBHOOK      = 'https://services.leadconnectorhq.com/hooks/TzjuywpjnaS5aZn5RTs8/webhook-trigger/7522b4c1-8e23-47d4-b88c-5650a30daa6d';
+
+    var QKEYS = ['peso','comida','salud','gasto','decision'];
+    var answers = { peso:null, comida:null, salud:null, gasto:null, decision:null };
+    var answersTxt = {};
+    var out = { riesgo:0, zona:'', tier:'', score:0, ref:'' };
+
+    var params = new URLSearchParams(location.search);
+    var origen = {
+      utm_source:   params.get('utm_source')   || '',
+      utm_medium:   params.get('utm_medium')   || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      fuente:       params.get('fuente') || params.get('source') || ''
+    };
+
+    var ZONAS = {
+      verde:    { name:'Zona verde',    bg:'linear-gradient(135deg,#0F4028 0%,#0a2c1c 100%)' },
+      amarillo: { name:'Zona amarilla', bg:'linear-gradient(135deg,#5C3A0D 0%,#3A2206 100%)' },
+      naranja:  { name:'Zona naranja',  bg:'linear-gradient(135deg,#4A1E0A 0%,#2E1205 100%)' },
+      rojo:     { name:'Zona roja',     bg:'linear-gradient(135deg,#5C0A0A 0%,#380606 100%)' }
+    };
+
+    var MSG = {
+      verde:    'Tu salchicha viene <strong>bien encaminada</strong>. No bajes la guardia: esta raza acumula daño en silencio y lo que hagas este año define los próximos diez.',
+      amarillo: 'Todavía no hay enfermedad, pero <strong>ya hay señales</strong>. En esta raza esas señales se convierten en dermatitis, sobrepeso o problemas de columna si nadie corrige la alimentación.',
+      naranja:  'Tu salchicha <strong>ya está pagando el precio</strong> de lo que come. Se puede revertir, pero tiene que ser ahora y con un plan hecho para su caso.',
+      rojo:     'Tu salchicha está en <strong>zona crítica</strong>. Con este cuadro no sirve una receta genérica de internet: necesita un protocolo individual y seguimiento.'
+    };
+
+    function goToScreen(id) {
+      document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+      var t = document.getElementById('screen-' + id);
+      if (t) { t.classList.add('active'); window.scrollTo({ top:0, behavior:'smooth' }); }
+    }
+
+    function pick(el, key) {
+      var group = el.closest('[data-q]');
+      group.querySelectorAll('.opt-row, .photo-opt').forEach(function(o){ o.classList.remove('sel'); });
+      el.classList.add('sel');
+      answers[key] = parseInt(el.dataset.pts, 10);
+      answersTxt[key] = el.dataset.txt || '';
+      updateProgress();
+    }
+
+    function val(id) { var e = document.getElementById(id); return e ? e.value.trim() : ''; }
+
+    function updateProgress() {
+      var done = QKEYS.filter(function(k){ return answers[k] !== null; }).length;
+      document.getElementById('q-count').textContent = done + ' de 5';
+      document.getElementById('q-fill').style.width = Math.round((done/5)*100) + '%';
+      var datosOk = val('f-nombre') !== '' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('f-email'));
+      document.getElementById('btn-ver').disabled = !(done === 5 && datosOk);
+    }
+
+    // Riesgo del perro: peso + comida + salud (0-9)
+    function calcRiesgo() {
+      var t = answers.peso + answers.comida + answers.salud;
+      return Math.round((t/9)*100);
+    }
+    function zonaDe(pct) {
+      if (pct <= 25) return 'verde';
+      if (pct <= 50) return 'amarillo';
+      if (pct <= 75) return 'naranja';
+      return 'rojo';
+    }
+    // Capacidad/intención de compra: gasto veterinario + decisión (0-6)
+    function calcTier(riesgo, cap) {
+      if (answers.decision === 0 && cap <= 1) return 'Frio';
+      if (riesgo >= 56 && cap >= 4) return 'Caliente';
+      if (riesgo >= 56 || cap >= 4) return 'Tibio';
+      return 'Frio';
+    }
+
+    function banderas() {
+      var f = [];
+      if (answers.peso >= 2)     f.push('El peso que marcaste ya es carga extra sobre su columna — el disco de un Dachshund no perdona kilos de más.');
+      if (answers.comida >= 2)   f.push('Lo que está comiendo hoy es la causa más probable de lo que ves por fuera (piel, pelo, digestión, peso).');
+      if (answers.salud >= 2)    f.push('Los síntomas que marcaste son crónicos: vuelven porque la causa nunca se corrigió, solo se tapó.');
+      if (answers.gasto >= 2)    f.push('Ya estás invirtiendo en veterinario todos los meses. El problema no es cuánto gastas, es en qué.');
+      if (answers.decision >= 2) f.push('Estás listo/a para empezar — eso es la mitad del camino en esta raza.');
+      if (f.length === 0)        f.push('Vas bien: mantén el control de peso y la alimentación, y revisa cada 6 meses.');
+      return f;
+    }
+
+    function finalizar() {
+      var faltan = QKEYS.filter(function(k){ return answers[k] === null; });
+      if (faltan.length) { alert('Te falta responder ' + faltan.length + ' pregunta(s).'); return; }
+
+      var nombre = val('f-nombre'), email = val('f-email'), ok = true;
+      if (!nombre) { showErr('err-nombre','f-nombre'); ok = false; } else { hideErr('err-nombre','f-nombre'); }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('err-email','f-email'); ok = false; } else { hideErr('err-email','f-email'); }
+      if (!ok) return;
+
+      var riesgo = calcRiesgo();
+      var zona   = zonaDe(riesgo);
+      var cap    = answers.gasto + answers.decision;
+      var tier   = calcTier(riesgo, cap);
+      var score  = Math.round(riesgo*0.5 + (cap/6)*100*0.5);
+      var ref    = 'DS-' + tier.charAt(0).toUpperCase() + score;
+
+      out = { riesgo:riesgo, zona:zona, tier:tier, score:score, ref:ref };
+
+      var payload = {
+        firstName: nombre,
+        email: email,
+        formulario: 'Chequeo Express Asesoria',
+        'Lead Score': score,
+        'Tier': tier,
+        ref: ref,
+        riesgo_perro: riesgo + '%',
+        zona: ZONAS[zona].name,
+        p_peso: answersTxt.peso || '',
+        p_alimentacion: answersTxt.comida || '',
+        p_salud: answersTxt.salud || '',
+        d_gasto_veterinario: answersTxt.gasto || '',
+        d_decision: answersTxt.decision || '',
+        utm_source: origen.utm_source,
+        utm_medium: origen.utm_medium,
+        utm_campaign: origen.utm_campaign,
+        fuente: origen.fuente
+      };
+      fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) }).catch(function(){});
+
+      document.getElementById('pct-perro').textContent = riesgo + '%';
+      document.getElementById('lvl-perro').textContent = ZONAS[zona].name;
+      document.getElementById('risk-card').style.background = ZONAS[zona].bg;
+      document.getElementById('msg-perro').innerHTML = MSG[zona];
+      document.getElementById('result-title').textContent = nombre + ', así está tu salchicha hoy';
+      var ul = document.getElementById('flags');
+      ul.innerHTML = '';
+      banderas().forEach(function(t){ var li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+
+      goToScreen('loading');
+      setTimeout(function(){ goToScreen('result'); }, 1600);
+    }
+
+    function irWhatsApp() {
+      var lineas = [
+        'Hola Marcelo! Soy ' + val('f-nombre') + '.',
+        'Hice el chequeo express y me salió *' + out.riesgo + '% de riesgo* (' + ZONAS[out.zona].name + ').',
+        '',
+        '• Peso: ' + (answersTxt.peso || '—'),
+        '• Come hoy: ' + (answersTxt.comida || '—'),
+        '• Salud: ' + (answersTxt.salud || '—'),
+        '• Gasto veterinario 6 meses: ' + (answersTxt.gasto || '—'),
+        '• Cuándo empezaría: ' + (answersTxt.decision || '—'),
+        '',
+        'Ref: ' + out.ref,
+        '',
+        'Te mando la foto de mi salchicha 🐾'
+      ];
+      window.open('https://wa.me/' + WHATSAPP_NUM + '?text=' + encodeURIComponent(lineas.join('\n')), '_blank');
+    }
+
+    function showErr(e,i){ document.getElementById(e).classList.add('show'); document.getElementById(i).classList.add('err'); }
+    function hideErr(e,i){ document.getElementById(e).classList.remove('show'); document.getElementById(i).classList.remove('err'); }
+
+    ['f-nombre','f-email'].forEach(function(id){
+      var e = document.getElementById(id);
+      if (e) e.addEventListener('input', updateProgress);
+    });
+
+    document.querySelectorAll('.opt-row, .photo-opt').forEach(function(o){
+      o.setAttribute('role','button');
+      o.setAttribute('tabindex','0');
+      o.addEventListener('keydown', function(ev){
+        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); o.click(); }
+      });
+    });
+  </script>
+</body>
+</html>

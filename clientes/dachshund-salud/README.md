@@ -11,6 +11,11 @@ web, embudos y archivos.
 ## Contenido
 
 - **`index.html`** — landing / VSL del Método Recomposición Dachshund (90 días).
+- **`calificador-asesoria.html`** — formulario calificador corto (5 preguntas +
+  nombre y correo) que deriva leads calificados a WhatsApp. Ver
+  [`docs/Embudo-Asesoria-Calificador.md`](./docs/Embudo-Asesoria-Calificador.md).
+- **`escaner-vitalidad.html`** — escáner largo (12 preguntas + inversión), versión
+  extendida del test.
 - **`docs/`** — base de conocimiento del cliente (fuente de verdad). Ver
   [`docs/README.md`](./docs/README.md) para el índice completo y la jerarquía
   de precedencia.
@@ -24,6 +29,7 @@ web, embudos y archivos.
 | [`docs/Avatares-Grados-Conciencia.md`](./docs/Avatares-Grados-Conciencia.md) | Escala N1–N5 → producto + 3 perfiles de comprador por producto. |
 | [`docs/Pack-Starter-Ebooks.md`](./docs/Pack-Starter-Ebooks.md) | El Pack: Serie Dachshund Salud (Paso 1 y 2) + eBooks tácticos, promesas y copy base. |
 | [`docs/Oferta-High-Ticket.md`](./docs/Oferta-High-Ticket.md) | Acompañamiento 1:1 ($497 / 3 meses): landings, flow de venta por audio de WhatsApp, objeciones, retargeting. |
+| [`docs/Embudo-Asesoria-Calificador.md`](./docs/Embudo-Asesoria-Calificador.md) | Embudo de asesoría nuevo: formulario calificador → WhatsApp, tiers, pipeline GHL y reglas $197 vs $497. |
 | [`docs/Anuncios-Hablados-Pack-Starter.md`](./docs/Anuncios-Hablados-Pack-Starter.md) | 4 guiones de anuncio hablado para el Pack Starter (un ángulo por pieza). |
 
 ### `docs/` — conocimiento de nicho y apoyo

@@ -22,6 +22,7 @@ productos.
 | [`Pack-Starter-Ebooks.md`](./Pack-Starter-Ebooks.md) | El Pack de eBooks: Serie Dachshund Salud (Paso 1 + Paso 2) + eBooks tácticos, uso por canal, promesas y límites de cada libro, copy base. |
 | [`Oferta-High-Ticket.md`](./Oferta-High-Ticket.md) | La oferta 1:1 ($497 / 3 meses y 6 meses personalizado): reglas, landings, flow de venta por audio de WhatsApp, guiones de calificación, objeciones y retargeting. |
 | [`Anuncios-Hablados-Pack-Starter.md`](./Anuncios-Hablados-Pack-Starter.md) | 4 guiones de anuncio hablado (Marcelo a cámara) para el Pack Starter, un ángulo de venta por pieza. |
+| [`Embudo-Asesoria-Calificador.md`](./Embudo-Asesoria-Calificador.md) | **Embudo de asesoría (ago 2026):** foco 100% high ticket, cierre por chat, formulario calificador corto (`../calificador-asesoria.html`), scoring y tiers, pipeline GHL, reglas $197 vs $497 y métricas semanales del setter. |
 
 ## Conocimiento de nicho y material de apoyo (vigente)
 
