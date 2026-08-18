@@ -65,6 +65,15 @@
     .vis-label { font-size:10px; font-weight:700; text-align:center; color:var(--v); line-height:1.25; }
     .vis-sub { font-size:9px; font-weight:500; text-align:center; color:var(--tf); line-height:1.25; }
 
+    .dx-wrap { display:none; margin-top:12px; padding:14px; border:1.5px dashed var(--br); border-radius:12px; background:var(--vc); }
+    .dx-wrap.show { display:block; animation:fadeUp .25s ease both; }
+    .dx-title { font-size:13px; font-weight:700; color:var(--v); margin-bottom:10px; }
+    .dx-title span { display:block; font-size:11.5px; font-weight:500; color:var(--tf); margin-top:2px; }
+    .dx-chips { display:flex; flex-wrap:wrap; gap:7px; }
+    .dx-chip { font-family:'Outfit',sans-serif; font-size:12.5px; font-weight:600; color:var(--ts); background:#fff; border:1.5px solid var(--br); border-radius:20px; padding:8px 13px; cursor:pointer; transition:all .15s; }
+    .dx-chip:hover { border-color:var(--v2); }
+    .dx-chip.sel { background:var(--v); border-color:var(--v); color:#fff; }
+
     .field { margin-bottom:14px; }
     .field-label { display:block; font-size:13px; font-weight:600; color:var(--ts); margin-bottom:6px; }
     .field-label span { color:var(--g); }
@@ -218,20 +227,35 @@
             <div class="opt-row" data-pts="0" data-txt="Sano — sin síntomas" onclick="pick(this,'salud')"><div class="opt-radio"></div><div class="opt-txt">Está sano, sin síntomas</div></div>
             <div class="opt-row" data-pts="1" data-txt="Señales leves: caspa, gases, pelo opaco, algo de sobrepeso" onclick="pick(this,'salud')"><div class="opt-radio"></div><div class="opt-txt">Señales leves: caspa, gases, pelo opaco, algo de sobrepeso</div></div>
             <div class="opt-row" data-pts="2" data-txt="Problema que va y vuelve: picazón, diarrea, vómitos, caída de pelo, otitis" onclick="pick(this,'salud')"><div class="opt-radio"></div><div class="opt-txt">Algo que va y vuelve: picazón, diarrea, vómitos, caída de pelo, otitis</div></div>
-            <div class="opt-row" data-pts="3" data-txt="Crónico o grave: dermatitis crónica, dolor de espalda/IVDD, obesidad, diabetes, Cushing, pancreatitis, hígado o riñón" onclick="pick(this,'salud')"><div class="opt-radio"></div><div class="opt-txt">Crónico o grave: dermatitis crónica, dolor de espalda/IVDD, obesidad, diabetes, Cushing, pancreatitis, hígado o riñón</div></div>
+            <div class="opt-row" data-pts="3" data-txt="Está enfermo — con diagnóstico" onclick="pick(this,'salud')"><div class="opt-radio"></div><div class="opt-txt">Está enfermo — tiene un diagnóstico</div></div>
+          </div>
+
+          <div class="dx-wrap" id="dx-wrap">
+            <p class="dx-title">¿De qué está enfermo? <span>Marca todas las que apliquen</span></p>
+            <div class="dx-chips" id="dx-chips">
+              <button type="button" class="dx-chip" onclick="toggleDx(this)">Dermatitis / alergia en la piel</button>
+              <button type="button" class="dx-chip" onclick="toggleDx(this)">Dolor de espalda o IVDD</button>
+              <button type="button" class="dx-chip" onclick="toggleDx(this)">Obesidad</button>
+              <button type="button" class="dx-chip" onclick="toggleDx(this)">Caída de pelo severa</button>
+              <button type="button" class="dx-chip" onclick="toggleDx(this)">Diabetes</button>
+              <button type="button" class="dx-chip" onclick="toggleDx(this)">Cushing</button>
+              <button type="button" class="dx-chip" onclick="toggleDx(this)">Pancreatitis o gastritis crónica</button>
+              <button type="button" class="dx-chip" onclick="toggleDx(this)">Hígado o riñón</button>
+              <button type="button" class="dx-chip" onclick="toggleDx(this)">Otra</button>
+            </div>
           </div>
         </div>
 
-        <!-- Q4 · INVERSIÓN ACTUAL EN VETERINARIO -->
+        <!-- Q4 · EN QUÉ VIENE GASTANDO -->
         <div class="card">
-          <div class="q-meta"><div class="q-num">4</div><div class="q-area">Gasto veterinario</div></div>
-          <div class="q-text">En los últimos 6 meses, ¿cuánto llevas gastado en veterinario, exámenes, remedios o alimento medicado?</div>
-          <div class="q-hint">Aproximado, en dólares. Sirve para saber si lo que estás pagando está resolviendo el problema… o solo tapándolo.</div>
+          <div class="q-meta"><div class="q-num">4</div><div class="q-area">Veterinario y tratamientos</div></div>
+          <div class="q-text">¿En qué vienes gastando por tu salchicha estos últimos meses?</div>
+          <div class="q-hint">Consultas, exámenes, remedios, alimento medicado, suplementos.</div>
           <div class="opt-list" data-q="gasto">
-            <div class="opt-row" data-pts="0" data-txt="Nada / solo la bolsa de alimento" onclick="pick(this,'gasto')"><div class="opt-radio"></div><div class="opt-txt">Nada o casi nada — solo la bolsa de alimento</div></div>
-            <div class="opt-row" data-pts="1" data-txt="Menos de USD $100" onclick="pick(this,'gasto')"><div class="opt-radio"></div><div class="opt-txt">Menos de USD $100 (vacunas y algún control)</div></div>
-            <div class="opt-row" data-pts="2" data-txt="Entre USD $100 y $300" onclick="pick(this,'gasto')"><div class="opt-radio"></div><div class="opt-txt">Entre USD $100 y $300 (consultas, exámenes, remedios)</div></div>
-            <div class="opt-row" data-pts="3" data-txt="Más de USD $300 — tratamientos recurrentes" onclick="pick(this,'gasto')"><div class="opt-radio"></div><div class="opt-txt">Más de USD $300 — vivo en el veterinario y no se soluciona</div></div>
+            <div class="opt-row" data-pts="0" data-txt="Solo la bolsa de alimento" onclick="pick(this,'gasto')"><div class="opt-radio"></div><div class="opt-txt">Solo en su bolsa de alimento, nada más</div></div>
+            <div class="opt-row" data-pts="1" data-txt="Lo justo: vacunas y algún control" onclick="pick(this,'gasto')"><div class="opt-radio"></div><div class="opt-txt">Lo justo: vacunas y algún control al año</div></div>
+            <div class="opt-row" data-pts="2" data-txt="Consultas seguidas, remedios o alimento medicado" onclick="pick(this,'gasto')"><div class="opt-radio"></div><div class="opt-txt">Consultas seguidas, remedios o alimento medicado</div></div>
+            <div class="opt-row" data-pts="3" data-txt="Vive en el veterinario: exámenes, especialistas, tratamientos que no terminan" onclick="pick(this,'gasto')"><div class="opt-radio"></div><div class="opt-txt">Vivo en el veterinario: exámenes, especialistas y tratamientos que no terminan</div></div>
           </div>
         </div>
 
@@ -301,12 +325,6 @@
           <div class="risk-level" id="lvl-perro">—</div>
         </div>
 
-        <div class="msg-card">
-          <div class="msg-card-tag">🔎 Qué vemos en tu caso</div>
-          <div class="msg-card-txt" id="msg-perro">—</div>
-          <ul class="flags" id="flags"></ul>
-        </div>
-
         <div class="wa-cta-card">
           <div class="wa-cta-tag">✅ Siguiente paso</div>
           <div class="wa-cta-title" id="wa-title">Mándame el resultado<br>por WhatsApp</div>
@@ -316,6 +334,12 @@
             Abrir WhatsApp con mi resultado
           </button>
           <p class="fine">Respuesta en audio · normalmente el mismo día</p>
+        </div>
+
+        <div class="msg-card">
+          <div class="msg-card-tag">🔎 Qué vemos en tu caso</div>
+          <div class="msg-card-txt" id="msg-perro">—</div>
+          <ul class="flags" id="flags"></ul>
         </div>
 
         <div class="footer">
@@ -334,6 +358,7 @@
     var QKEYS = ['peso','comida','salud','gasto','decision'];
     var answers = { peso:null, comida:null, salud:null, gasto:null, decision:null };
     var answersTxt = {};
+    var dx = [];   // enfermedades marcadas cuando el perro está enfermo
     var out = { riesgo:0, zona:'', tier:'', score:0, ref:'' };
 
     var params = new URLSearchParams(location.search);
@@ -370,7 +395,30 @@
       el.classList.add('sel');
       answers[key] = parseInt(el.dataset.pts, 10);
       answersTxt[key] = el.dataset.txt || '';
+      if (key === 'salud') toggleDxWrap(answers.salud === 3);
       updateProgress();
+    }
+
+    // Listado de enfermedades: solo aparece si marcó "está enfermo"
+    function toggleDxWrap(show) {
+      var w = document.getElementById('dx-wrap');
+      w.classList.toggle('show', show);
+      if (!show) {
+        dx = [];
+        w.querySelectorAll('.dx-chip').forEach(function(c){ c.classList.remove('sel'); });
+      }
+    }
+
+    function toggleDx(el) {
+      el.classList.toggle('sel');
+      var t = el.textContent.trim();
+      var i = dx.indexOf(t);
+      if (i === -1) { dx.push(t); } else { dx.splice(i, 1); }
+    }
+
+    function textoSalud() {
+      if (answers.salud !== 3) return answersTxt.salud || '';
+      return dx.length ? ('Está enfermo de ' + dx.join(', ')) : 'Está enfermo (sin especificar)';
     }
 
     function val(id) { var e = document.getElementById(id); return e ? e.value.trim() : ''; }
@@ -407,7 +455,7 @@
       if (answers.peso >= 2)     f.push('El peso que marcaste ya es carga extra sobre su columna — el disco de un Dachshund no perdona kilos de más.');
       if (answers.comida >= 2)   f.push('Lo que está comiendo hoy es la causa más probable de lo que ves por fuera (piel, pelo, digestión, peso).');
       if (answers.salud >= 2)    f.push('Los síntomas que marcaste son crónicos: vuelven porque la causa nunca se corrigió, solo se tapó.');
-      if (answers.gasto >= 2)    f.push('Ya estás invirtiendo en veterinario todos los meses. El problema no es cuánto gastas, es en qué.');
+      if (answers.gasto >= 2)    f.push('Ya estás gastando en veterinario y tratamientos. El problema no es cuánto gastas, es en qué.');
       if (answers.decision >= 2) f.push('Estás listo/a para empezar — eso es la mitad del camino en esta raza.');
       if (f.length === 0)        f.push('Vas bien: mantén el control de peso y la alimentación, y revisa cada 6 meses.');
       return f;
@@ -442,7 +490,8 @@
         zona: ZONAS[zona].name,
         p_peso: answersTxt.peso || '',
         p_alimentacion: answersTxt.comida || '',
-        p_salud: answersTxt.salud || '',
+        p_salud: textoSalud(),
+        p_diagnosticos: dx.join(', '),
         d_gasto_veterinario: answersTxt.gasto || '',
         d_decision: answersTxt.decision || '',
         utm_source: origen.utm_source,
@@ -472,8 +521,8 @@
         '',
         '• Peso: ' + (answersTxt.peso || '—'),
         '• Come hoy: ' + (answersTxt.comida || '—'),
-        '• Salud: ' + (answersTxt.salud || '—'),
-        '• Gasto veterinario 6 meses: ' + (answersTxt.gasto || '—'),
+        '• Salud: ' + (textoSalud() || '—'),
+        '• En qué viene gastando: ' + (answersTxt.gasto || '—'),
         '• Cuándo empezaría: ' + (answersTxt.decision || '—'),
         '',
         'Ref: ' + out.ref,

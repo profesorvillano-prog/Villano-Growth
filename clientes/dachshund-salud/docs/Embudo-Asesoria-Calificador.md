@@ -74,8 +74,8 @@ llega solo cuando el lead abre el Walink.
 |---|---|---|
 | 1 | **Peso** (foto, vista desde arriba, 5 opciones) | Señal visual dura. Sobrepeso = riesgo de columna = urgencia |
 | 2 | **Qué come hoy** (foto del plato, 5 opciones) | Causa raíz. Define el discurso completo del setter |
-| 3 | **Enfermedad / síntomas hoy** (4 niveles, hasta crónico-grave) | Filtro crónico: es quien compra asesoría |
-| 4 | **Gasto veterinario últimos 6 meses** (USD, 4 rangos) | Capacidad y disposición real de inversión |
+| 3 | **Enfermedad / síntomas hoy** (4 niveles; si marca "está enfermo" se abre el listado de enfermedades: dermatitis, IVDD, obesidad, diabetes, Cushing, pancreatitis, hígado/riñón…) | Filtro crónico: es quien compra asesoría. El diagnóstico exacto le llega al setter y a Marcelo |
+| 4 | **En qué viene gastando** (de "solo la bolsa de alimento" a "vivo en el veterinario") | Capacidad y disposición real de inversión, sin preguntar montos |
 | 5 | **¿Cuándo empezarías?** (única del dueño) | Intención de compra. Separa curioso de comprador |
 
 Al final: **nombre + correo** (obligatorios) y el botón a WhatsApp.
@@ -84,7 +84,7 @@ Al final: **nombre + correo** (obligatorios) y el botón a WhatsApp.
 
 - **Riesgo del perro (0–100%)** = peso + comida + salud (0–9 pts) → % → zona
   `verde ≤25 · amarillo ≤50 · naranja ≤75 · rojo >75`
-- **Capacidad (0–6)** = gasto veterinario + decisión
+- **Capacidad (0–6)** = gasto en veterinario/tratamientos + decisión
 - **Tier:**
 
 | Tier | Regla | Qué hace el setter |
@@ -100,7 +100,7 @@ Al final: **nombre + correo** (obligatorios) y el botón a WhatsApp.
 ### Qué llega a GHL (webhook)
 
 `firstName`, `email`, `formulario`, `Lead Score`, `Tier`, `ref`, `riesgo_perro`, `zona`,
-`p_peso`, `p_alimentacion`, `p_salud`, `d_gasto_veterinario`, `d_decision`,
+`p_peso`, `p_alimentacion`, `p_salud`, `p_diagnosticos`, `d_gasto_veterinario`, `d_decision`,
 `utm_source`, `utm_medium`, `utm_campaign`, `fuente`.
 
 > El webhook es el mismo de `escaner-vitalidad.html`. **Antes de publicar:** confirmar
@@ -109,8 +109,10 @@ Al final: **nombre + correo** (obligatorios) y el botón a WhatsApp.
 
 ### Qué llega a WhatsApp
 
-Mensaje prellenado con: nombre, % de riesgo, zona, las 5 respuestas en texto, el `Ref`
-y la promesa de mandar la foto. El setter abre el chat y ya tiene el caso completo —
+Mensaje prellenado con: nombre, % de riesgo, zona, las 5 respuestas en texto (con las
+enfermedades marcadas), el `Ref` y la promesa de mandar la foto. En la pantalla de
+resultado el botón de WhatsApp va **inmediatamente debajo del % de riesgo**, antes de la
+lectura del caso. El setter abre el chat y ya tiene el caso completo —
 sin repreguntar nada.
 
 ---
