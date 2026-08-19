@@ -1,265 +1,210 @@
-# Automatización ManyChat — Saludo humano a nuevos seguidores (Instagram)
+# ManyChat — Mensaje de levantamiento para que Valen setee
 
-> Flujo de bienvenida para `@japieaters` **sin botones, sin pitch y sin link en el
-> primer DM**. Sustituye a la automatización template "Saludá a tus nuevos
-> seguidores" (hoy detenida). Copy listo para pegar + montaje paso a paso.
-> Voz y reglas de lenguaje: ver [`Voz-y-Marca.md`](./Voz-y-Marca.md).
+> Automatización de Instagram para `@japieaters`. **El bot solo abre el DM; Valen
+> hace todo el setteo manual.** Decidido en la reunión del 18/08 (Josefina, Seba,
+> Valen, Anaís). Voz y reglas de lenguaje: [`Voz-y-Marca.md`](./Voz-y-Marca.md).
+> Calificación y funnel: [`Operaciones-y-Embudo.md`](./Operaciones-y-Embudo.md).
 
-## 1. Qué falla en el saludo actual
+## 1. El problema que resuelve
 
-El DM de apertura vigente (el de la captura) dice, en resumen: *"Hola holaa / vi
-que comenzaste a seguirme / gracias por el apoyo / ¿te gustaría saber por qué
-esta cuenta se llama Japi Eaters?"* + **botón**.
+Valen abre las conversaciones a mano desde las notificaciones de Instagram. Cuando
+entran muchos seguidores nuevos, **la lista de notificaciones se satura**: baja,
+escribe uno, vuelve, se le refresca el feed y ya no puede seguir bajando. Se están
+perdiendo bienvenidas.
 
-| Problema | Por qué importa |
-|---|---|
-| **Botón** debajo del mensaje | Es la señal más obvia de "esto es un bot". Nadie escribe DMs con botones. |
-| La pregunta es **sobre la marca**, no sobre la persona | Responde a la curiosidad de Josefina, no al dolor de quien llega. No segmenta. |
-| El segundo mensaje es un **monólogo de presentación** | Habla de la cuenta y del objetivo de la marca antes de saber con quién habla. |
-| **No califica** | No distingue TO / profesional (avatar high ticket) de mamá (7% de la audiencia, comunicación distinta). |
-| La conversación **muere** después del botón | El clic no es una respuesta real: no abre conversación ni deja información útil. |
+**Decisión de la reunión:** que ManyChat mande **un solo mensaje genérico y corto**
+que deje el DM abierto, y que Valen continúe desde ahí de forma 100% manual.
 
-## 2. Los 7 principios del saludo humano
+> *"Un mensaje genérico, pero que deje la conversación abierta para que yo la siga."*
+> — Valen
+>
+> *"Que al menos el primer mensaje se mande automático, pero que sea algo piola.
+> Y ya el resto 100% manual, para que no se vea que es una automatización y se
+> genere cercanía."* — Seba
 
-1. **Una pregunta abierta y fácil**, sobre *ella*, no sobre la marca. El objetivo
-   único del primer DM es **que responda con texto**.
-2. **Sin botones, sin "escribe YO"**, sin menús. Todo se resuelve leyendo texto libre.
-3. **Burbujas cortas** (2-3 mensajes de 1-3 líneas), como escribe una persona real,
-   con retardo de escritura entre cada una.
-4. **Sin link en el primer DM.** El link aparece recién cuando ya hubo respuesta.
-5. **Cero pitch de ÉxiTO** en el saludo. Primero conocer, después aportar, después ofrecer.
-6. **Delay de 10-15 minutos** desde el follow. Instantáneo = robot.
-7. **Humano ≠ mentir.** No escribir "te escribo yo ahora mismo" en un mensaje
-   automático. Si preguntan si es un bot, hay respuesta honesta preparada (§6).
+## 2. Las 6 reglas del mensaje de levantamiento
 
-## 3. Arquitectura del flujo
+1. **Genérico de verdad.** No pregunta nada comprometedor, no vende, no explica la
+   marca. Su único trabajo es que el DM quede abierto.
+2. **Sin botón.** Hay que borrar el quick reply "Siii, estoy curios@" del nodo de
+   mensaje. Un botón delata al bot y además no abre conversación real.
+3. **Sin link.** Josefina ya decidió que a quien se interesa en la formación se le
+   habla directo, no con automatización.
+4. **Con retraso.** 10 min para seguidores nuevos, 5-10 min para comentarios.
+   Instantáneo = robot.
+5. **Una sola pregunta, fácil.** La que Valen ya usa de entrada: el país. Así el
+   bot le ahorra el primer paso y ella arranca en el segundo, sin repetir nada.
+6. **Seguro para cualquier destinatario.** También le va a llegar a exalumnas,
+   amigas y familia de Josefina (las "naranjitas"). Un "hola, bienvenida" no
+   incomoda a nadie; el mensaje actual ("¿te gustaría saber por qué esta cuenta se
+   llama Japi Eaters?") sí queda raro con una exalumna.
 
-```
-Disparador: nuevo seguidor de IG
-        ↓ (esperar 10-15 min)
-¿Ya tiene etiqueta "saludo_enviado"? ── sí ──▶ salir
-        ↓ no
-DM de apertura (3 burbujas, sin botón)  → etiqueta "saludo_enviado"
-        ↓
-Esperar respuesta de texto libre  →  campo "respuesta_saludo"
-        ↓
-Enrutar por IA o por palabras clave
-   ├─ Profesional / TO   → rama A → etiqueta "perfil_to"    → valor → link → aviso al equipo
-   ├─ Mamá / familia     → rama B → etiqueta "perfil_mama"  → valor, sin pitch
-   ├─ Ambiguo / otro     → rama C → repregunta → si sigue ambiguo, notificar humano
-   └─ Sin respuesta 24 h → etiqueta "sin_respuesta_saludo"  → SIN nuevo DM, solo audiencia
-```
+## 3. Copy — Seguidores nuevos *(el que hay que pegar)*
 
-## 4. Copy — DM de apertura (elegir una, rotar A/B)
-
-> Cada `▸` es una **burbuja separada** dentro del mismo nodo de mensaje.
-> Sin botón, sin link, sin adjuntos.
-
-### Versión A — Cálida directa *(recomendada para arrancar)*
+### ✅ Recomendado
 
 ```
-▸ Hola, holaaa 👋🥕
+Hola, holaa 👋🥕
 
-▸ Gracias por seguirme 💛 Acá comparto todo sobre alimentación infantil
-  responsiva: cómo lograr primero paz en la mesa y por qué el avance real
-  ocurre en la mesa de la casa, no en la sesión.
+Vi que empezaste a seguirme y quería darte la bienvenida 💛
 
-▸ Cuéntame para conocerte mejor 👀 ¿llegaste por tu trabajo con niños y niñas
-  (terapeuta, fono, nutri...) o estás buscando ayuda para la alimentación en
-  tu propia casa?
+Cuéntame, ¿de qué país me lees?
 ```
 
-### Versión B — Curiosidad *(conserva el gancho del nombre, pero al final)*
+### Variante B — más Josefina
 
 ```
-▸ Hola, holaaa 👋
+Holaaa 👋🍓 qué linda que llegaste por acá
 
-▸ Soy Josefina 💛 Vi que empezaste a seguirme y quería darte la bienvenida
-  de verdad.
+Bienvenida a Japi Eaters 💛 gracias de verdad por seguirme.
 
-▸ Después te cuento por qué esta cuenta se llama Japi Eaters (spoiler: tiene
-  que ver con mi nombre 😅), pero primero cuéntame tú: ¿trabajas con niños y
-  niñas que no comen, o estás buscando ayuda para la alimentación en casa?
+Cuéntame, ¿de qué país me lees?
 ```
 
-### Versión C — Ultra corta *(la que más respuestas suele generar)*
+### Variante C — la más corta ("piola")
 
 ```
-▸ Holaa! 👋 gracias por seguirme 🥕
+Hola, holaa 👋🥦 bienvenida 💛
 
-▸ Cuéntame algo para conocerte: ¿eres terapeuta o estás buscando ayuda para
-  la alimentación de tu hijo o hija?
+¿De qué país me lees?
 ```
 
-## 5. Copy — Ramas según la respuesta
+> **Sobre el nombre:** mejor **no usarlo** en el mensaje automático. El campo de
+> nombre de Instagram a veces trae el usuario en vez del nombre real y queda
+> "rarísimo" (le pasó a Josefina). El nombre lo pone Valen a mano en el segundo
+> mensaje, que es donde de verdad suma. Si igual quieren probarlo, insertar el
+> campo de nombre **con valor por defecto "bella"** y revisar cómo sale.
 
-### Rama A · Profesional / Terapeuta Ocupacional *(avatar high ticket)*
+## 4. Copy — Quien comenta "ÉXITO" o "IA" en un post
 
-```
-▸ Uy, entonces estás en el lugar correcto 🙌
-
-▸ Te cuento en corto: soy TO y llevo +6 años dedicada solo a alimentación
-  infantil. Acá comparto sobre todo cómo evaluar y priorizar cada caso, y
-  cómo guiar a la familia para que el avance se sostenga en casa (porque en
-  sesión el niño o niña avanza... y en casa no cambia nada 😅).
-
-▸ ¿Y a ti qué es lo que más te cuesta hoy? ¿Selectividad, rechazo total,
-  casos dentro del espectro, o que la familia no acompaña?
-```
-
-**Cuando responde el dolor** (recién acá aparece el link):
+Mismo criterio, pero acá la persona ya mostró interés: el mensaje lo reconoce y
+pide contexto, **sin mandar el link** (decisión de Josefina: a estas se les habla
+personalizado).
 
 ```
-▸ Te entiendo perfecto, es literalmente lo que más me escriben 💛
+Hola, holaa 👋🥕 perdón la demora, tengo hartos mensajes 🙈
 
-▸ No te faltan juegos ni actividades: te falta un orden para saber qué
-  evaluar primero, qué priorizar y cómo bajar la presión en la mesa. Eso se
-  puede aprender paso a paso, no se improvisa.
+Vi que comentaste en el post — me alegra un montón que te interese 💛
 
-▸ Tengo una clase donde explico justo ese orden. ¿Te la mando por acá?
+Cuéntame, ¿en qué estás trabajando ahora?
 ```
 
-→ Ante cualquier confirmación: enviar el link + etiqueta `interes_alto` +
-**notificar al equipo** (Rafa/setter) para seguimiento humano.
+Retraso: **5-10 minutos**. La disculpa por la demora es lo que hace que se lea
+humano (Josefina ya la usa y Valen la notó natural en una conversación real).
 
-### Rama B · Mamá / familia
+> **Ojo:** hoy conviven varias publicaciones con automatización de "IA" y de
+> "ÉxiTO". Si a alguien no le llega el DM, suele ser la automatización del post que
+> falló, no este flujo. Revisar post por post cuál tiene automatización activa.
 
-```
-▸ Gracias por contarme 💛
+## 5. Montaje en ManyChat
 
-▸ Lo primero: si en tu casa la hora de comer está tensa, no es tu culpa.
-  Casi nadie recibió información clara sobre esto, y la presión (aunque sea
-  con la mejor intención) suele hacer que coman menos, no más.
+El disparador **"El usuario sigue tu cuenta"** sí existe en el Flow Builder, pero
+**no aparece en el selector de "Inicia automatización cuando..."** al crear una
+automatización nueva. Se llega abriendo la automatización **"Saludá a tus nuevos
+seguidores"** que ya existe (carpeta SETE) y editando su flujo.
 
-▸ Lo que sí funciona es empezar por la paz en la mesa antes que por la
-  variedad. ¿Qué es lo que más te complica hoy: que come muy poquito, que
-  come siempre lo mismo, o que la comida se volvió una pelea?
-```
+1. Abrir esa automatización → el flujo muestra `El usuario sigue tu cuenta` →
+   `Send Message`.
+2. En el nodo de mensaje: **borrar el botón** "Siii, estoy curios@" y pegar el copy
+   de la §3.
+3. **Retraso: 10 minutos** (la opción "añade un corto retraso para que resulte más
+   natural y humano").
+4. **Acción → etiqueta `levantado_seguidor`.** Esta etiqueta es lo que después le
+   permite a Valen filtrar (§6).
+5. **No agregar nada más**: ni segundo mensaje, ni pregunta automática, ni link.
+   El flujo termina ahí.
+6. Duplicar la lógica en la automatización de comentarios con el copy de la §4 y la
+   etiqueta `levantado_comentario`.
 
-→ Etiqueta `perfil_mama`. **Nunca ofrecer ÉxiTO acá** (es formación para
-profesionales). Se nutre con contenido y, si existe, con el material para familias.
+**Prueba antes de encender** (con otra cuenta): seguir la cuenta → ¿llega a los 10
+min?, ¿llega sin botón?, ¿queda etiquetada?, ¿aparece filtrable en el chat en vivo?
 
-### Rama C · Ambiguo / otra respuesta
+## 6. Cómo trabaja Valen después (esto es lo que arregla el problema)
 
-```
-▸ Ay, cuéntame un poquito más 👀 ¿es por tu trabajo con niños y niñas o por
-  algo que están viviendo en tu casa?
-```
+**Dejar de trabajar desde las notificaciones de Instagram.** Trabajar desde el
+**chat en vivo de ManyChat**, filtrando por etiqueta:
 
-→ Si la segunda respuesta sigue siendo ambigua: etiqueta `revisar_humano` y
-notificación al equipo. No insistir con un tercer mensaje automático.
-
-### Rama D · Sin respuesta a las 24 h
-
-**No se envía ningún DM.** Solo etiqueta `sin_respuesta_saludo` para usarla como
-audiencia de contenido/remarketing. Encadenar un segundo DM a quien nunca
-respondió es lo que más rápido quema la cuenta.
-
-### Micro-respuestas útiles (guardar como fragmentos)
-
-| Si escribe... | Responder |
-|---|---|
-| "¿esto es un bot?" | `Este primer mensaje sí es automático 🙈 pero acá atrás estamos leyendo todo. Cuéntame y te respondo yo.` |
-| Solo un emoji / "hola" | `Holaa 👋 cuéntame, ¿trabajas con niños y niñas que no comen o estás buscando ayuda en casa?` |
-| "¿cuánto vale?" | Etiqueta `interes_alto` + notificar humano. No dar precio por bot. |
-
-## 6. Montaje en ManyChat (paso a paso)
-
-1. **Automatización nueva** (no editar el template "Saludá a tus nuevos seguidores":
-   ese formato obliga a la estructura DM de apertura + botón).
-   Disparador: **nuevo seguidor de Instagram**.
-2. **Retardo inicial: 10-15 min** (el "Después de 10 minutos" actual está bien).
-3. **Condición:** ¿tiene la etiqueta `saludo_enviado`? → **Sí: terminar el flujo.**
-   Evita re-saludar a quien te siguió, dejó de seguir y volvió.
-4. **Nodo de mensaje** con las 3 burbujas de la §4.
-   - Activar el **retardo de escritura** de cada burbuja (1-3 s), o poner un
-     *Smart Delay* de 3-8 s entre burbujas.
-   - **Sin botón** (dejar el campo de etiqueta de botón vacío), sin link, sin quick replies.
-5. **Acciones:** aplicar etiqueta `saludo_enviado` + guardar fecha en el campo
-   `fecha_saludo`.
-6. **Nodo de pregunta / entrada de usuario** (tipo **texto libre**, sin validación,
-   sin botones) → guardar en el campo personalizado `respuesta_saludo` + aplicar
-   etiqueta `respondio_saludo`.
-7. **Enrutamiento** (dos opciones):
-   - **Recomendado (plan Pro): paso de IA / intención**, con tres intenciones —
-     `profesional`, `familia`, `otro` — descritas en español y con ejemplos reales.
-     Aguanta variantes, faltas de ortografía y respuestas largas.
-   - **Alternativa sin IA: condición por palabras clave** sobre `respuesta_saludo`
-     con el operador *contiene*:
-     - **Profesional:** `terapeuta`, `t.o`, `soy to`, `fono`, `nutri`, `psico`,
-       `kine`, `educadora`, `profesional`, `atiendo`, `mis usuarios`, `consulta`,
-       `centro`, `estudiante`, `trabajo con niñ`.
-     - **Familia:** `mamá`, `mama`, `mami`, `hijo`, `hija`, `mi peque`, `en casa`,
-       `papá`, `abuela`, `nieto`.
-     - ⚠️ No usar `to` suelto como palabra clave: aparece dentro de decenas de
-       palabras. Usar siempre `soy to`, `t.o`, `terapeuta ocupacional`.
-     - Todo lo que no matchee → **Rama C**.
-8. **Rama sin respuesta:** desde el nodo de mensaje, en paralelo, *Smart Delay 24 h*
-   → condición "¿tiene `respondio_saludo`?" → si **no**, aplicar
-   `sin_respuesta_saludo`. **Sin envío de DM.**
-9. **Rotación A/B:** usar el nodo de división aleatoria para repartir 50/50 entre dos
-   versiones del saludo (§4). Además de medir, evita que el texto idéntico se repita
-   miles de veces.
-10. **Respuesta por defecto (Default Reply):** revisar que no pise este flujo. Quien
-    responde el saludo debe caer en el enrutamiento, no en el mensaje genérico.
-
-### Etiquetas y campos a crear
-
-| Tipo | Nombre | Para qué |
+| Filtro | Qué es | Prioridad |
 |---|---|---|
-| Etiqueta | `saludo_enviado` | Anti-duplicado |
-| Etiqueta | `respondio_saludo` | Base de la tasa de respuesta |
-| Etiqueta | `perfil_to` / `perfil_mama` | Segmentación de todo el ecosistema |
-| Etiqueta | `interes_alto` | Pide precio / acepta la clase → seguimiento humano |
-| Etiqueta | `sin_respuesta_saludo` | Audiencia de remarketing |
-| Etiqueta | `revisar_humano` | Cola de atención manual |
-| Campo | `respuesta_saludo` | Texto literal de la primera respuesta (oro para copy) |
-| Campo | `fecha_saludo` | Control y limpieza |
+| `levantado_comentario` + no leídos | Comentaron ÉxiTO/IA: ya mostraron interés | 🔴 Primero |
+| `levantado_seguidor` + no leídos | Respondieron el saludo de bienvenida | 🟠 Segundo |
+| `levantado_seguidor` sin respuesta | No contestaron | ⚪ No insistir |
 
-## 7. Reglas de plataforma a respetar
+La lista de ManyChat no se refresca ni se reordena como el feed de notificaciones:
+se puede ir una por una sin perder el hilo. Y las que respondieron aparecen como no
+leídas, que es exactamente la señal de "acá tengo que seguir yo".
 
-- **Ventana de 24 h de Instagram:** se puede conversar libremente mientras la persona
-  siga respondiendo. Si no responde, **no encadenar DMs**: se cierra la ventana y la
-  cuenta acumula señales negativas.
-- **Link en el primer DM:** evitarlo. Va del segundo o tercer mensaje en adelante,
-  siempre después de una respuesta real.
-- **Nada de "responde X para recibir Y"** en el saludo: convierte la bienvenida en
-  una transacción y contradice el objetivo de este flujo.
-- **Un solo saludo por persona.** Lo garantiza el paso 3.
-- Antes de encender, **desactivar la automatización template actual** para que nadie
-  reciba los dos saludos.
+**A quien no responde el saludo no se le manda un segundo DM.** Se deja ahí.
 
-## 8. Qué medir (revisar a los 14 días)
+## 7. Guion manual de Valen (después del mensaje automático)
 
-| Métrica | Cómo se calcula | Uso |
+El bot ya preguntó el país. Valen arranca en el paso 2.
+
+| # | Objetivo | Ejemplo |
 |---|---|---|
-| **Tasa de respuesta** | `respondio_saludo` ÷ `saludo_enviado` | KPI principal. Establecer baseline las 2 primeras semanas y optimizar contra ella. |
-| Mix de audiencia | `perfil_to` vs `perfil_mama` | Valida si el contenido está atrayendo al avatar correcto. |
-| Conversaciones con link enviado | Rama A completa | Puente real hacia el funnel. |
-| `interes_alto` por semana | Etiqueta | Volumen que se pasa a seguimiento humano. |
-| Ganador A/B | Split del paso 9 | Se queda la versión ganadora y se testea una nueva. |
+| 1 | *(automático)* Abrir el DM + país | §3 |
+| 2 | Calidez + profesión | `Ay, qué lindo 💛 [comentario real sobre el país] Cuéntame, ¿tú eres terapeuta ocupacional o llegaste por otro motivo?` |
+| 3 | ¿Trabaja con niños y niñas? | `¿Y estás trabajando con niños y niñas ahora?` |
+| 4 | Caso concreto *(acá se engancha)* | `¿Y te están llegando casos de alimentación? Selectividad, rechazo, niños dentro del espectro...` |
+| 5 | Profundizar el razonamiento | `Uf, te entiendo. ¿Y qué has probado hasta ahora con ese caso?` |
+| 6 | Formulario | Solo si califica (§8) |
 
-Además: leer una vez por semana el campo `respuesta_saludo` de los últimos
-contactos. Es la fuente más barata de lenguaje literal del avatar para ads y copy.
+> **Insight de Valen, muy valioso:** las TO se enganchan muchísimo más cuando el
+> contenido o la pregunta plantea **un caso clínico concreto**, porque quieren
+> explicar su razonamiento. No buscan un listado de actividades: buscan entender
+> **por qué** pasa lo que pasa en sus casos. El paso 4 es el que abre de verdad la
+> conversación — y coincide con lo que más se repite: *"en sesión funciona, pero en
+> la casa se corta"*.
+
+### Reglas de estilo (voz de Josefina)
+
+- **"Hola, holaa"**, alargar palabras, tono de amiga cercana.
+- **Emojis de alimentación**: 🥕🍓🥦🍉 — es la firma de la marca.
+- **Signos de pregunta completos: ¿...?** (Josefina lo pidió expresamente; en Chile
+  se estila solo el de cierre, pero acá se usan los dos).
+- **Nombre acortado y cariñoso**: si es Catalina → "Cata". Si no aparece el nombre:
+  `hola bella`, `hola reina`, `hola colega`, o directamente
+  `Hola, ¿cómo estás? No encontré tu nombre, ¿cómo te llamas?`
+- **Las preguntas salen de la respuesta anterior**, no de una lista fija. Si repite
+  una pregunta ya contestada, la persona siente que no la leyeron.
+- Nunca "paciente" (→ usuario / niño o niña), nunca solo "niño" (→ "niño y niña" /
+  "niñ@"), nunca "papás" (→ familia / mamá).
+
+## 8. Reglas de calificación (definidas por Josefina en la reunión)
+
+| Perfil | Qué hacer |
+|---|---|
+| **Profesional del área de la salud QUE trabaja con niños y niñas** | ✅ **Al formulario.** Ahí se hace la calificación. |
+| **Prime:** terapeutas ocupacionales, nutricionistas, fonoaudiólogas | ✅ Máxima prioridad |
+| **Mamás, papás o quien busca algo para su propio hijo o hija** | ❌ No califica → **etiqueta azul** (enviado / no califica). Josefina las contacta y las deriva a su otro Instagram con el curso para familias. |
+| **No profesional del área de la salud** | ❌ No califica → etiqueta azul |
+| **Marca naranja** (exalumnas, amigas y familia de Josefina) | 🚫 **Omitir.** Se las deja a Josefina — el ticket para exalumnas está en construcción. |
+
+> **Si aparece una profesión que no conoces** (pasa seguido, son muchos países): no
+> googlear, preguntar. `¿Y en qué consiste tu trabajo con niños y niñas?` La
+> respuesta califica sola y además hace avanzar la conversación.
 
 ## 9. Qué NO hacer
 
-- Botones, menús o quick replies en el saludo.
-- Bloques de texto largos (el mensaje actual de "Y entonces, recibirán" es un ejemplo).
-- Presentar la marca antes de preguntar por la persona.
-- Ofrecer ÉxiTO en el primer o segundo mensaje.
-- Escribir "te escribo yo personalmente" en un mensaje automático.
-- Ofrecer la formación a alguien etiquetado como `perfil_mama`.
-- Romper las reglas de lenguaje de marca: nunca "paciente" (→ usuario / niño o niña),
-  nunca solo "niño" (→ "niño y niña" / "niñ@"), nunca "papás" (→ familia / mamá).
+- Botones, menús o "responde X para recibir Y" en el mensaje automático.
+- Mandar el link de la formación desde el bot.
+- Encadenar un segundo DM automático a quien no respondió.
+- Que el bot pregunte algo que Valen va a volver a preguntar.
+- Explicar la marca ("Japi Eaters viene de Happy Eaters...") antes de saber con
+  quién se está hablando.
+- Ofrecer ÉxiTO a alguien marcado como no califica.
+- Escribir en el mensaje automático algo que afirme que lo está tipeando alguien en
+  ese momento.
 
-## 10. Pendientes a confirmar con el cliente
+## 10. Pendientes a confirmar
 
-1. **Link de la clase/webinar** que se envía en la rama A (¿webinar EmpoderaTO,
-   VSL o clase grabada?). Hoy el flujo llega hasta la pregunta "¿te la mando?".
-2. **Material para la rama mamá/familia** (¿hay guía o contenido gratuito propio, o
-   solo se nutre con contenido de feed?).
-3. **A quién notificar** cuando aparece `interes_alto` (¿Rafa directamente en
-   ManyChat, o pasa a CLINT?).
-4. **Cuenta y plan:** confirmar disponibilidad del paso de IA para el enrutamiento
-   sin palabras clave.
+1. **Acompañante terapéutico:** en la reunión quedó ambiguo si califica. Regla
+   general: área de la salud + trabaja con niños y niñas. **Confirmar con Josefina.**
+2. **Lista de profesiones que califican** — Josefina ofreció armarla; sirve como
+   referencia rápida para Valen.
+3. **CRM:** Seba va a enseñarle el CRM a Valen. Hasta entonces, registro manual de a
+   quién se le mandó el formulario.
+4. **Marcajes de Instagram:** Anaís tiene que explicarle a Valen el sistema de
+   marcas (naranja / azul / etc.) para que no se pisen con lo ya marcado.
+5. **Sesión 1:1 Josefina + Valen** para revisar juntas una conversación real (quedó
+   pendiente la de Rocío).
