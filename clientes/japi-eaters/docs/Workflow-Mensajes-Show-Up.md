@@ -1,405 +1,393 @@
 # Workflow de Mensajes — Show Up & Compromiso a la Llamada
 
-> Secuencia completa de WhatsApp desde que la terapeuta agenda hasta que entra a
-> la llamada con Rafa. Complementa la plantilla SDR del mentor, adaptada a la voz
-> de Japi Eaters y al hecho de que **el closer no es terapeuta**.
-> Fuente: reuniones del 19 y 20 de agosto (Seba, Josefina, Anaís) + doc
-> "Workflow Mensajes Japi Eaters" + plantilla "SDR Daily Workflow".
-> Ver `Voz-y-Marca.md` para tono y `Avatar.md` para dolores.
+> Secuencia completa de WhatsApp desde que la terapeuta postula hasta que entra a
+> la llamada con Rafa. **Basado en la plantilla definitiva** (`Workflow Mensajes —
+> Japi Eaters`, v3) + plantilla SDR del mentor + reuniones del 19 y 20 de agosto.
+> Ver `Voz-y-Marca.md` (tono y palabras prohibidas) y `Avatar.md` (dolores).
 
----
+## Los dos números
 
-## 1. Los dos números y quién habla en cada uno
-
-| Número | Quién firma | Qué manda | Naturaleza |
+| | Número | Quién firma | Rol |
 |---|---|---|---|
-| **Número AUTO** (el actual) | **Josefina** (fundadora) | Confirmación de agenda, video de indicaciones, handoff, recordatorios | 100% automático |
-| **Número SETTER** (nuevo) | **Rafa** | Conversación real, preguntas, video personalizado del día 2, link del meet | Automático los 3 primeros + manual desde el #4 |
+| 🟩 **VERDE** | **+52** (WhatsApp Business, el actual) | **Josefina** | Sistema. Confirmación de agenda, video de indicaciones, recordatorios. Nadie lo contesta a mano. |
+| ⬜ **BLANCO** | **+569** (nuevo) | **Rafa** (lo operan Anaís y Rafa) | Conversación real. Preguntas, video personalizado, entrada a la llamada. |
 
-**Reglas de identidad**
-- Todo lo que se firme desde el número nuevo va **a nombre de Rafa**, aunque lo
-  escriba Anaís. Anaís conserva su WhatsApp propio **solo para alumnas ya
-  inscritas** (Sesión de Claridad, mentorías) para no duplicar identidades.
-- Josefina **solo** habla en el número AUTO, y su último mensaje ahí anuncia el
-  traspaso. Después de eso, Josefina "reaparece" únicamente a través de Rafa
-  (video personalizado del día 2). Eso es lo que produce el efecto de que *la
-  fundadora se metió personalmente en su caso*.
-- Rafa y Anaís deben tener **ambos acceso** al número setter (cancelaciones de
-  último minuto, agendas del mismo día, coordinación de horarios).
+**Regla de identidad:** todo lo que sale del +569 se firma **Rafa**, aunque lo
+escriba Anaís. Anaís conserva su WhatsApp propio solo para alumnas ya inscritas
+(Sesión de Claridad, mentorías), para no duplicar identidades.
 
-## 2. Principios de redacción (aplican a todos los mensajes)
+---
 
-1. **Máximo 4 líneas por mensaje.** WhatsApp corta con "leer más" y ahí se pierde
-   todo. Si el mensaje es largo, se parte en dos con desfase de 2-5 segundos.
+## 1. El orden nuevo, de una mirada
+
+Numeración corrida de principio a fin (antes había un salto del #8 al #10 y
+tres momentos sin mensaje). Los `A#` son del +52; los `M#` del +569.
+
+| # | Nº | Modo | Cuándo se dispara | Qué es | Estado |
+|---|---|---|---|---|---|
+| **G1** | ⬜ +569 | Auto | Postuló y NO eligió horario · +10 min | Ghosting de agenda | 🆕 |
+| **G2** | ⬜ +569 | Auto | +3 h sin respuesta | Ghosting · link | 🆕 |
+| **G3** | ⬜ +569 | Manual | Día siguiente | Ghosting · cierre | 🆕 |
+| **A1** | 🟩 +52 | Auto | **Al agendar** | Josefina + botón "Ver vídeo" | ✅ |
+| **A2** | 🟩 +52 | Auto | +2 min sin clic | Recuperación del clic | 🆕 |
+| **A3** | 🟩 +52 | Auto | **Al poner "Ver vídeo"** | Vídeo NUEVO + "Confirmar" / "Cancelar" | ✅ |
+| **A4** | 🟩 +52 | Auto | Al poner **"Cancelar"** | Reagendar o cerrar | 🆕 |
+| **A5** | 🟩 +52 | Auto | Al poner **"Confirmar"** → activa +569 | Handoff al equipo | ✅ |
+| **M1** | ⬜ +569 | Auto | Dentro de 5 min | Saludo de Rafa | ✅ |
+| **M2** | ⬜ +569 | Auto | +5 seg | Confirmación de fecha | ✅ |
+| **M3** | ⬜ +569 | Manual | Al responder que sí | Pre-encuadre: "una última pregunta" | ✅ |
+| **M4** | ⬜ +569 | Manual · **3 rutas** | +5 seg del M3 | **La pregunta** según formulario | ✏️ |
+| **M5** | ⬜ +569 | Manual | Al responder | Profundización (la 1.2) | ✏️ |
+| **M6** | ⬜ +569 | Manual | Al responder | Cierre + espejo del dolor | ✏️ |
+| **M7** | ⬜ +569 | Manual | **Día pre-llamada** | Handoff + vídeo personalizado de Josefina | ✅ |
+| **M8** | 🟩 +52 | Auto | Noche del día pre-llamada | Recordatorio seco | ✏️ |
+| **M9** | ⬜ +569 | Auto | **Día llamada**, mañana | Buen día + instrucciones | ✅ |
+| **M10** | ⬜ +569 | Auto | 15 min antes | Link del meet | ✏️ |
+| **M11** | ⬜ +569 | Manual | A la hora | "Te espero adentro" | ✅ |
+| **N1** | ⬜ +569 | Manual | +10 min de la hora | No-show · te espero | 🆕 |
+| **N2** | ⬜ +569 | Manual | +45 min | No-show · ¿qué pasó? | 🆕 |
+| **N3** | ⬜ +569 | Manual | Día siguiente | No-show · última reagenda | 🆕 |
+
+✅ ya estaba en la plantilla · ✏️ ajuste propuesto · 🆕 nuevo
+
+### Equivalencia con la plantilla anterior
+
+`AUTO #1→A1` · `AUTO #2→A3` · `AUTO #3→A5` · `#1→M1` · `#2→M2` · `#3→M3` ·
+`#4→M4+M5` · `#5→M6` · `#6→M7` · `#7→M8` · `#8→M9` · `#10→M10` · `#11→M11`.
+Nuevos: G1-G3, A2, A4, N1-N3.
+
+### Los 4 cambios de orden y por qué
+
+1. **A2 (recuperación del clic).** Sin esto, la que no aprieta "Ver vídeo" nunca
+   entra al flujo y nadie se entera. Era el hoyo más grande de la plantilla.
+2. **A4 (qué pasa al Cancelar).** El botón existía pero no había mensaje detrás.
+   Hoy la que cancela cae al vacío en vez de reagendar.
+3. **M8 se mueve a la noche.** En la plantilla, el recordatorio automático del +52
+   cae justo después del vídeo personal de Josefina y le quita el efecto. Con
+   varias horas de por medio, el vídeo respira.
+4. **M10 (link del meet) pasa del 🟩+52 al ⬜+569.** Es el único mensaje que exige
+   una acción inmediata; tiene que llegar donde ella viene conversando, no desde
+   un número que nunca le habló. **Criterio general: el +52 manda recordatorios
+   que no piden nada; todo lo que exige un clic sale del +569.**
+
+---
+
+## 2. Reglas de redacción
+
+1. **Máximo 4 líneas.** WhatsApp corta con "leer más" y ahí se pierde el mensaje.
+   Si es largo, se parte en dos con 2-5 segundos de desfase.
 2. **Un mensaje = una idea = una acción.** Nunca dos preguntas juntas.
-3. **Botones con nombre humano**, no genéricos: "Sí, confirmo" / "Quiero ver el
-   video" / "Necesito cambiar la hora". Nunca dos botones que digan "Confirmar".
-4. **Tono colega-amiga**: cercano, chileno, con emojis de fruta/verdura 🥕🍓🥦,
-   sin infantilizar ni culpar a la terapeuta.
-5. **Palabras prohibidas**: "paciente" → *usuario* o *niño y niña*; "papás" →
-   *familia* o *mamá*. Evitar "fácil", "rápido", "garantizado", "trucos".
-6. **Nunca decir "para preparar tu llamada" ni "para personalizar tu llamada".**
-   El closer no es terapeuta y no puede sostener esa promesa. El encuadre correcto
-   es: *"para que el equipo vea bien tu caso"*.
-7. **El video personalizado del día 2 es sorpresa.** No se anuncia en ningún
-   mensaje previo.
-8. Todos los mensajes se escriben **con nombre** (`{{nombre}}`), nunca en frío.
+3. **Botones con nombre humano**, nunca dos que digan "Confirmar".
+4. **Palabras prohibidas:** "paciente" → *usuario* / *niño y niña*; "papás" →
+   *familia* / *mamá*. Evitar "fácil", "rápido", "garantizado", "trucos".
+5. **Nunca "para preparar tu llamada" ni "para personalizar tu llamada".** Rafa no
+   es terapeuta y no puede sostener esa promesa.
+6. **El vídeo del día 2 no se anuncia antes.** Su fuerza es que ella no lo pidió.
+7. Siempre con nombre (`{{1}}` / `[Nombre]`), nunca en frío.
 
 ---
 
-## 3. Mapa del flujo
+## 3. FASE 0 — Postuló pero no agendó ⬜ +569
 
-```
-FORMULARIO ──► ¿Eligió horario?
-                 │
-                 ├── NO ──► GHOSTING DE AGENDA (número SETTER, auto, firma Rafa)
-                 │
-                 └── SÍ ──► AUTO #1  (Josefina · botón "Quiero ver el video")
-                              │
-                              ├─ no hace clic en 2 min ──► AUTO #4 (recordatorio)
-                              │
-                              └─ hace clic ──► AUTO #2 (video nuevo + 2 botones)
-                                                 │
-                                                 ├─ "Necesito cambiar la hora" ──► AUTO #5
-                                                 │
-                                                 └─ "Sí, confirmo" ──► AUTO #3 (handoff)
-                                                                        │
-                                                                        ▼
-                                              ══ SE ACTIVA NÚMERO SETTER (Rafa) ══
-                                                 DÍA DE AGENDA:  #1 · #2 · #3 · #4 · #5
-                                                 DÍA PRE-LLAMADA: #6 (video personalizado) · #7
-                                                 DÍA DE LLAMADA: #8 · #9 · #10 · #11
-```
+Va desde el +569 y no desde el +52, porque acá empieza una conversación real y
+quien la sigue es Rafa/Anaís.
+
+### G1 · Auto · +10 min 🆕
+
+> Hola [Nombre]! Soy Rafa, del equipo de Japi Eaters 🙌
+> Vi que completaste tu postulación a ÉxiTO pero no alcanzaste a elegir tu horario.
+>
+> ¿Pasó algo o simplemente se te cerró la página?
+
+### G2 · Auto · +3 h sin respuesta 🆕
+
+> [Nombre], te dejo el link por si se te perdió 👉 {{link_agenda}}
+>
+> Hay pocos horarios esta semana, si ves uno que te sirva tómalo altiro.
+
+### G3 · Manual · día siguiente 🆕
+
+> [Nombre], última que te escribo por acá para no molestarte 🙈
+> Si este no es tu momento lo entiendo perfecto, dime "ahora no" y cierro tu
+> postulación.
+>
+> Y si sí quieres, es un clic: {{link_agenda}}
+
+> Si agenda después del ghosting, Rafa le avisa que empezarán a llegarle
+> confirmaciones desde **otro número**, para que no se confunda con el +52.
 
 ---
 
-## 4. Bloque A — Al agendar (número AUTO, voz Josefina)
+## 4. FASE 1 — Al agendar 🟩 +52 · voz Josefina
 
-### Wsp AUTO #1 — Al agendar (inmediato)
+### A1 · Auto · al agendar ✅ *(tal como está en la plantilla)*
 
-> Holaaa {{nombre}}! 🍓
-> Soy Josefina, fundadora de Japi Eaters.
+> Holaaa {{1}}! 👋 Soy Josefina, Fundadora de Japi Eaters 🥕
 >
 > Antes de tu reunión te voy a mandar 3 indicaciones muy importantes para tu
 > proceso de postulación.
 >
-> Haz clic en **"Quiero ver el video"** y te las envío 👇
+> Haz click en **"Ver vídeo"** para enviártelas 🙌
 
-**Botón:** `Quiero ver el video`
+**Botón:** `Ver vídeo`
 
-*Nota: el botón NO dice "Confirmar" a propósito. Confirmar sin haber visto nada
-es una confirmación vacía; queremos que primero vea el video y recién ahí decida.*
+*El botón no dice "Confirmar" a propósito: confirmar sin haber visto nada es una
+confirmación vacía. Primero ve, después confirma.*
 
-### Wsp AUTO #4 — No hizo clic (2 minutos después)
+### A2 · Auto · +2 min sin clic 🆕
 
-> {{nombre}}, ojo 👀
-> Si no haces clic en **"Quiero ver el video"**, tu hora queda sin confirmar y se
-> libera automáticamente.
+> {{1}}, ojo 👀
+> Si no haces click en **"Ver vídeo"**, tu hora queda sin confirmar y se libera
+> automáticamente.
 >
 > Son 15 segundos 🙌
 
-*Se dispara solo si no hubo clic. Justificación (reunión 19/08): quien agenda está
-con el teléfono en la mano; si no responde en minutos, no responde nunca.*
+*Quien agenda está con el teléfono en la mano. Si no responde en minutos, no
+responde nunca (reunión 19/08).*
 
-### Wsp AUTO #2 — Al poner "Quiero ver el video"
+### A3 · Auto · al poner "Ver vídeo" ✅
 
-**Se envía el VIDEO NUEVO de Josefina** (guion en §8) y a continuación:
+**Se envía el VÍDEO NUEVO de Josefina** (guion en §9) y a continuación:
 
-> Eso es todo {{nombre}} 🥦
+> Eso es todo {{1}} 🥦
 > Esta es tu **única** postulación de este semestre, así que quiero que llegues
 > con todo.
 >
 > ¿Me confirmas que vas a estar?
 
-**Botones:** `Sí, confirmo` · `Necesito cambiar la hora`
+**Botones:** `Sí, confirmo` · `Cancelar`
 
-*El segundo botón existe a propósito: preferimos que cancele ahora, después de
-haber visto el video, y no que llene un cupo y no aparezca. La advertencia de la
-única postulación por semestre va DENTRO del video, no en el texto (ahí se
-escucha como cuidado, en texto se lee como amenaza).*
+*La advertencia del semestre va **dentro del vídeo**, no en el texto: hablada se
+escucha como cuidado, escrita se lee como amenaza. Y sí dejamos cancelar: mejor
+que filtre ahora, después de ver el vídeo, y no que ocupe un cupo y no llegue.*
 
-### Wsp AUTO #5 — Eligió "Necesito cambiar la hora"
+### A4 · Auto · al poner "Cancelar" 🆕
 
-> Sin problema {{nombre}} 🙌
-> Acá puedes elegir la hora que de verdad te acomode: {{link_agenda}}
+> Sin problema {{1}} 🙌
+> Si fue el horario, acá puedes elegir uno que te acomode de verdad:
+> {{link_agenda}}
 >
-> Prefiero que llegues tranquila y no a medias 💜
+> Y si prefieres dejarlo para más adelante, también está bien 💜
 
-### Wsp AUTO #3 — Eligió "Sí, confirmo" → **se activa el número SETTER**
+*Un solo mensaje que abre la reagenda sin insistir. Si no reagenda en 24 h, se
+cierra la postulación.*
 
-> Supeer {{nombre}}! 🥕
-> Este es el último mensaje que te escribo yo por acá: de ahora en adelante te va
-> a estar contactando mi equipo desde otro número, y por aquí solo te llegarán los
-> recordatorios para que no se te pase la reunión.
->
-> Nos vemos pronto 💜
+### A5 · Auto · al poner "Confirmar" → **se activa el +569** ✅
+
+> Supeer {{1}}! Ahora te va a escribir mi equipo y desde ahora en adelante por
+> aquí sólo te llegarán mensajes automáticos para que no olvides la reunión 💜
 
 ---
 
-## 5. Bloque B — Ghosting de agenda (número SETTER, automático, firma Rafa)
+## 5. FASE 2 — Día del agendamiento ⬜ +569 · firma Rafa
 
-Se dispara cuando completó el formulario pero **no eligió horario**. Va desde el
-número setter (no desde el AUTO) porque acá empieza una conversación real y quien
-la va a seguir es Rafa/Anaís.
+> ⏱️ **M1 sale dentro de los primeros 5 minutos** de la confirmación.
 
-### Ghosting #1 — a los 10 minutos
+### M1 · Auto ✅
 
-> Hola {{nombre}}! Soy Rafa, del equipo de Japi Eaters 🙌
-> Vi que completaste tu postulación a ÉxiTO en Alimentación pero no alcanzaste a
-> elegir tu horario.
->
-> ¿Pasó algo o simplemente se te cerró la página?
+> Holaa [Nombre], soy Rafa del equipo Japi Eaters. ¿Cómo estás? 😊
 
-### Ghosting #2 — a las 3 horas si no responde
+### M2 · Auto · +5 seg ✅
 
-> {{nombre}}, te dejo el link por si se te perdió 👉 {{link_agenda}}
->
-> Hay pocos horarios esta semana, así que si ves uno que te sirva, tómalo altiro.
+> Agendaste una reunión para **[fecha y hora]**, ¿es correcto?
 
-### Ghosting #3 — al día siguiente si no responde
+### M3 · Manual · al responder que sí ✅
 
-> {{nombre}}, última que te escribo por acá para no molestarte 🙈
-> Si este no es tu momento lo entiendo perfecto, solo dime "ahora no" y cierro tu
-> postulación.
->
-> Y si sí quieres, es un clic: {{link_agenda}}
+> Perfectoo, sólo te tengo una última pregunta para dejar todo listo [Nombre]…
 
-*Si agenda después del ghosting: Rafa le avisa que empezarán a llegarle
-confirmaciones desde otro número, para que no se confunda con el número AUTO.*
+*Este pre-encuadre es de la plantilla y funciona: "una última" baja la guardia y
+compromete a responder. Se manda solo, sin la pregunta pegada.*
 
 ---
 
-## 6. Bloque C — Día de agenda (número SETTER, firma Rafa)
+### M4 · Manual con opciones · **3 rutas** ✏️
 
-Los mensajes **#1, #2 y #3 son automáticos**. El **#4 es automático pero con 3
-variantes** según la respuesta del formulario. Del **#5 en adelante es manual**
-(Anaís/Rafa escribiendo de verdad).
+**El mensaje más importante del workflow.** Su único objetivo es que ella suelte
+su situación real en sus palabras, para que Josefina pueda grabarle el vídeo del
+día siguiente.
 
-> ⏱️ **Regla de oro:** el #1 sale dentro de los primeros 5 minutos post-confirmación.
+**Encuadre:** la formación trabaja muchos frentes — evaluación, sensorial,
+compromiso familiar, estructura de sesión — y necesitamos saber en cuál está ella.
+Quien lee esa respuesta es el **equipo**, no el closer.
 
-### WhatsApp Message #1 (auto)
+Cada ruta viene de una alternativa de **"¿Con qué situación te identificas más
+hoy?"** del formulario. Va **una** pregunta; la segunda es el M5.
 
-> Holaa {{nombre}}, soy Rafa del equipo Japi Eaters 🙌
-> ¿Cómo estás?
+#### 🅐 "Me llegan casos y termino derivándolos"
 
-### WhatsApp Message #2 (auto · 5 segundos después)
+**A1 — recomendada** *(de la plantilla, con la cifra que da material concreto)*
+> Vi que terminas derivando casos de alimentación 👀
+> ¿Cuántos has tenido que derivar este año?
 
-> Agendaste una reunión para **{{fecha}} a las {{hora}}**, ¿es así? 👀
+**A2 — emocional** *(para quien ya escribió harto en el formulario)*
+> Me quedé pensando en algo que pusiste: que te llegan casos de alimentación y los
+> terminas derivando.
+>
+> ¿Cómo te sientes cuando tienes que hacer eso?
 
-### WhatsApp Message #3 (auto · al responder que sí)
+#### 🅑 "Tengo casos pero no sé qué hacer, he intentado de todo y aún no logro que coman en casa" ⭐
 
-> Perfectoo {{nombre}}, entonces nos vemos ese día 🙌
+*La de más volumen y el dolor más caro. Por eso lleva tres.*
 
-### WhatsApp Message #4 (auto · **3 rutas según formulario**)
+**B1 — recomendada** *(de la plantilla)*
+> Vi que has intentado de todo pero aún no logras los resultados que quieres 😔
+>
+> ¿Cuál es tu desafío hoy con estos peques?
 
-**Este es el mensaje más importante de todo el workflow.** Su único objetivo es
-que ella **suelte su situación real en sus propias palabras**, para que Josefina
-pueda grabarle el video personalizado del día siguiente.
+**B2 — casa vs. sesión** *(va al dolor exacto de la alternativa)*
+> Vi que aún no logras que coman en casa 👀
+>
+> ¿Qué pasa cuando el niño o niña llega a la mesa del hogar?
 
-**Encuadre obligatorio** (por qué NO decimos "para preparar tu llamada"):
+**B3 — caso concreto** *(la que da mejor material para el vídeo)*
+> [Nombre], cuéntame del caso que más te tiene dando vueltas hoy 👀
+>
+> ¿Qué edad tiene y qué es lo que come?
 
-> La formación trabaja muchos frentes distintos — evaluación, sensorial,
-> compromiso familiar, estructura de sesión — así que necesitamos saber en cuál
-> estás tú para mostrarte lo que de verdad te sirve. Quien lee esa respuesta es el
-> **equipo clínico**, no el closer.
+#### 🅒 "No tengo casos aún, quiero prepararme"
 
-Fórmula de los tres: **reconocimiento del formulario → pregunta abierta de
-situación → pregunta de causa**. Nunca dos preguntas en el mismo mensaje: la
-segunda se manda como #4b, 2-5 segundos después.
+**C1 — recomendada** *(de la plantilla)*
+> Vi que aún no has tenido casos de alimentación 🙌
+>
+> ¿Qué crees que te falta para sentirte 100% lista para tomar un caso nuevo?
+
+**C2 — anticipación** *(saca el miedo real: que llegue el caso y no sepa qué hacer)*
+> Vi que quieres prepararte antes de que te lleguen los casos 🥦
+>
+> ¿Qué te imaginas que va a pasar cuando te llegue el primero?
+
+#### 🅧 Fallback — sin respuesta de formulario o ambigua
+> ¿Cuántos casos de alimentación tienes hoy y qué es lo que más te cuesta con ellos?
 
 ---
 
-#### 🅐 Ruta A — "Me llegan casos y termino derivándolos"
+### M5 · Manual · profundización ✏️ *(la 1.2 de la plantilla, para las 3 rutas)*
 
-**Variante A1** *(la recomendada — la derivación duele en la identidad profesional)*
+Solo si respondió con interés. Una sola pregunta, la que abre la causa.
 
-> Antes de la reunión quiero pasarle tu caso al equipo, así que cuéntame un poco 👀
+| Ruta | Pregunta |
+|---|---|
+| 🅐 | ¿Y por qué has tenido que derivarlos? / ¿Qué sientes que necesitas para dejar de derivarlos? |
+| 🅑 | ¿Y qué es lo que ya has intentado con ellos? Cuéntame lo que se te venga, aunque sea desordenado / ¿Y la familia cómo está reaccionando a eso? |
+| 🅒 | ¿Y qué te hizo decir "quiero prepararme en esto ahora"? / ¿Dónde estás trabajando hoy? |
+
+### M6 · Manual · cierre ✏️
+
+La plantilla cierra con *"Excelente, muchas gracias por tu respuesta. Todo claro
+entonces."* — correcto pero plano: no deja registro del dolor y no prepara el
+vídeo. La versión propuesta agrega **una línea de espejo** y mantiene el largo:
+
+> Excelente [Nombre], gracias por contarme 💜
+> Entonces, para resumir: **[su dolor, en SUS palabras]**.
 >
-> Vi que te llegan casos de alimentación y terminas derivándolos. ¿Cuántos has
-> tenido que derivar este año, más o menos?
+> Cualquier cosa quedo atento por acá.
 
-*(#4b, a los 5 segundos)*
+**Variantes según lo que soltó**
+- *Contó mucho:* "Uf, se nota que le has puesto harto 🙌 Voy a dejar esto anotado tal cual me lo contaste."
+- *Contestó corto:* "Te leo 🙌 Una última y te dejo tranquila: **[la pregunta que faltó]**"
+- *Preguntó precio:* "Esa te la responde Rafa en la reunión con calma, porque depende de tu caso 💜 Cuéntame mejor **[pregunta de dolor]**"
 
-> Y cuando los derivas… ¿es porque sientes que te falta el paso a paso, o porque
-> prefieres no arriesgarte con ese caso? 💜
-
-**Variante A2** *(más emocional, para leads que ya escribieron harto en el formulario)*
-
-> Cuéntame algo antes de la reunión, así el equipo llega sabiendo de ti 🙌
->
-> Me quedé pensando en que te llegan casos de alimentación y los terminas
-> derivando. ¿Cómo te sientes cuando tienes que hacer eso?
-
-*(#4b)*
-
-> ¿Y qué crees que te haría falta para quedarte tú con ese caso? 👀
+> 🚫 **No prometer el vídeo acá.** Nada de "te voy a mandar algo".
 
 ---
 
-#### 🅑 Ruta B — "Tengo casos pero no sé qué hacer, he intentado de todo y aún no logro que coman en casa" ⭐
+## 6. FASE 3 — Día pre-llamada
 
-*Esta es la ruta con más volumen y el dolor más caro (avance nulo + familia que
-pierde la confianza). Por eso lleva **tres** variantes.*
+### M7 · ⬜ +569 · Manual · el handoff a Josefina ✅ *(el momento clave)*
 
-**Variante B1** *(la recomendada — va directo al "en sesión sí, en casa no")*
+Se manda **en tres partes**, con 5-10 segundos entre medio.
 
-> Antes de la reunión quiero pasarle tu caso al equipo, cuéntame un poco 👀
->
-> Vi que tienes casos pero que aún no logras que coman en casa. ¿Cuántos casos
-> así tienes hoy?
+**M7a — texto**
+> Holaaa [Nombre]! Ya tengo todo preparado para nuestra reunión 👀
+> Le conté tu caso a Josefina y me pidió que te mandara esto…
 
-*(#4b)*
+**M7b — vídeo personalizado de Josefina** (60-90 s, guion en §9)
 
-> ¿Y qué es lo que ya has intentado con ellos? Cuéntame lo que se te venga a la
-> cabeza, aunque sea desordenado 🙌
+**M7c**
+> Nos vemos [fecha y hora] 💜
 
-**Variante B2** *(centrada en la familia — el 80% del método)*
+*Por qué funciona: no lo pidió, no se lo prometimos, y viene de la fundadora y no
+del vendedor. Es la diferencia entre "me están vendiendo" y "se están haciendo
+cargo de mi caso".*
 
-> Cuéntame algo antes de la reunión así el equipo ve bien tu caso 🥕
->
-> Dijiste que has intentado de todo y aún no logras que coman en casa. ¿Qué pasa
-> cuando el niño o niña llega a la mesa del hogar?
+### M8 · 🟩 +52 · Auto · esa noche ✏️
 
-*(#4b)*
+> Recuerda que nos vemos **[fecha y hora]** 🙌
 
-> ¿Y la familia cómo está reaccionando a eso? 👀
-
-**Variante B3** *(la del caso concreto — la que da mejor material para el video)*
-
-> {{nombre}}, cuéntame de un caso puntual antes de la reunión 👀
->
-> El que más te tiene dando vueltas hoy: ¿qué edad tiene y qué es lo que come?
-
-*(#4b)*
-
-> ¿Y qué es lo que más te está costando con ese caso? 💜
+*En la plantilla este mensaje cae inmediatamente después del vídeo, desde el
+número que nadie contesta, y le apaga el efecto. Moverlo a la noche cuesta cero y
+deja el vídeo respirar.*
 
 ---
 
-#### 🅒 Ruta C — "No tengo casos aún, quiero prepararme"
+## 7. FASE 4 — Día de la llamada
 
-**Variante C1** *(la recomendada — valida la anticipación, no la castiga)*
+### M9 · ⬜ +569 · Auto · en la mañana ✅
 
-> Antes de la reunión quiero que el equipo sepa de ti, cuéntame 🙌
+> Hola [Nombre], buen día! Hoy es nuestra llamada a las **[hora]**.
+> Recuerda ingresar desde el computador y estar en un lugar tranquilo.
 >
-> Vi que todavía no tienes casos de alimentación y quieres prepararte. ¿Estás
-> atendiendo niños y niñas hoy en otra área, o estás partiendo?
+> Nos vemos! 🙌
 
-*(#4b)*
+### M10 · ⬜ +569 · Auto · 15 min antes ✏️ *(movido del +52)*
 
-> ¿Y qué te hizo decir "quiero prepararme en esto ahora"? 👀
+> Hola [Nombre], acá el link del meet: **{{link_meet}}**
+> Nos vemos en breve! 🙌
 
-**Variante C2** *(orientada al miedo real: que le llegue el caso y no sepa qué hacer)*
+### M11 · ⬜ +569 · Manual · a la hora ✅
 
-> Cuéntame un poco antes de la reunión, así el equipo llega sabiendo de ti 🥦
->
-> ¿Qué te imaginas que va a pasar cuando te llegue el primer caso de alimentación?
-
-*(#4b)*
-
-> ¿Y hoy dónde estás trabajando? 🙌
+> Ya estoy por aquí! Te espero adentro 👉 {{link_meet}}
 
 ---
 
-#### 🅧 Ruta fallback — sin respuesta de formulario o respuesta ambigua
+## 8. FASE 5 — No-show y reagenda 🆕 ⬜ +569
 
-> Antes de la reunión quiero pasarle tu caso al equipo, así que cuéntame 👀
+### N1 · +10 min de la hora
+> [Nombre], te estoy esperando en el meet 👀
+> {{link_meet}}
+
+### N2 · +45 min
+> [Nombre], no alcanzamos a juntarnos hoy 🙈
+> ¿Se te cruzó algo o prefieres que lo dejemos hasta acá?
+
+### N3 · día siguiente
+> [Nombre], Josefina se dio el tiempo de grabarte ese vídeo, así que antes de
+> cerrar tu postulación te pregunto una vez más 💜
 >
-> ¿Cuántos casos de alimentación tienes hoy y qué es lo que más te cuesta con
-> ellos?
+> ¿Quieres que te dé una última hora esta semana?
+
+> **Una sola reagenda.** Si tampoco llega, se cierra hasta el próximo semestre — y
+> se cumple, porque es lo que prometió el vídeo de A3.
 
 ---
 
-### WhatsApp Message #5 (manual · Anaís/Rafa)
+## 9. Los dos vídeos de Josefina
 
-Espeja el dolor **con sus propias palabras** y cierra sin prometer nada. Este
-mensaje es el que deja la puerta abierta para la sorpresa del día siguiente.
+### Vídeo A — "3 indicaciones" (A3) · estándar · se graba una vez · 60-90 s
 
-> Excelente {{nombre}}, gracias por contarme 💜
-> Entonces, para resumir: **[punto de dolor en sus palabras]**.
->
-> ¿Hay algo en específico que quieras que veamos sí o sí?
-
-**Variantes de cierre según lo que soltó:**
-
-- Si contó mucho →
-  > Uf, se nota que le has puesto harto 🙌 Voy a dejar esto anotado tal cual me lo
-  > contaste. ¿Algo más que quieras que sepamos?
-- Si contestó corto →
-  > Te leo 🙌 Una última y te dejo tranquila: **[la pregunta que faltó]**
-- Si preguntó por precio →
-  > Esa te la responde Rafa en la reunión con calma, porque depende de tu caso 💜
-  > Cuéntame mejor **[pregunta de dolor]**
-
-> 🚫 **No prometer el video acá.** Nada de "te voy a mandar algo". La sorpresa del
-> día 2 se pierde si se anuncia.
-
----
-
-## 7. Bloque D — Día pre-llamada (número SETTER, firma Rafa)
-
-### WhatsApp Message #6 — El handoff a Josefina (el momento clave)
-
-Se manda **en dos partes**, con 5-10 segundos entre medio.
-
-**#6a (texto)**
-
-> {{nombre}}! Le conté tu caso a Josefina 👀
-> Le llamó la atención lo de **[dolor específico en sus palabras]** y me pidió que
-> te mandara esto…
-
-**#6b (video personalizado de Josefina, 60-90 s)** — guion en §8.
-
-**#6c (5 segundos después del video)**
-
-> Nos vemos {{fecha}} a las {{hora}} 💜
-
-*Por qué funciona: la lead no pidió esto, no se lo prometimos y viene de la
-fundadora, no del vendedor. Es la diferencia entre "me están vendiendo" y "se
-están haciendo cargo de mi caso".*
-
-### WhatsApp Message #7 — Al responder al video
-
-> Buenísimo {{nombre}} 🙌 Nos vemos **{{fecha}} a las {{hora}}**.
-> Cualquier cosa me escribes por acá.
-
----
-
-## 8. Los dos videos de Josefina
-
-### Video A — "3 indicaciones" (AUTO #2) · estándar · 60-90 s
-
-Se graba **una sola vez**. Estructura:
-
-1. **Saludo y validación** (10 s) — "Hola, soy Josefina. Primero, quiero
-   felicitarte por postular…"
-2. **Indicación 1 — Esto es un proceso de admisión, no una llamada de venta**
-   (15 s) — no todas quedan; hay una conversación real de por medio.
-3. **Indicación 2 — Vas a hablar con Rafa, de mi equipo** (15 s) — él conoce el
-   programa por dentro; lo que tú le cuentes lo veo yo.
-4. **Indicación 3 — Reserva 45 minutos reales** (15 s) — lugar tranquilo, sin
-   niños, con papel y lápiz. Si no puedes, cambia la hora ahora.
-5. **Cierre con la advertencia** (15 s) — "Si cancelas a última hora o no llegas,
-   no vas a poder volver a postular este semestre. No es para asustarte: es
-   porque cada hora que abrimos se la estamos quitando a otra terapeuta."
+1. **Saludo y validación** (10 s) — "Hola, soy Josefina. Primero quiero felicitarte por postular…"
+2. **Indicación 1 — Es un proceso de admisión, no una llamada de venta** (15 s) — no todas quedan.
+3. **Indicación 2 — Vas a hablar con Rafa, de mi equipo** (15 s) — él conoce el programa por dentro; lo que le cuentes lo veo yo.
+4. **Indicación 3 — Reserva 45 minutos reales** (15 s) — desde el computador, lugar tranquilo, papel y lápiz. Si no puedes, cambia la hora ahora.
+5. **Cierre con la advertencia** (15 s) — "Si cancelas a última hora o no llegas, no vas a poder volver a postular este semestre. No es para asustarte: cada hora que abrimos se la estamos quitando a otra terapeuta."
 6. **CTA** (5 s) — "Dale a 'Sí, confirmo' y nos vemos 💜"
 
-### Video B — Personalizado (Message #6b) · uno por lead · 60-90 s
+### Vídeo B — Personalizado (M7b) · uno por lead · 60-90 s
 
-Se graban **en tanda**, agrupando las agendas del día anterior. Guion:
+Se graban **en tanda**, juntando las agendas del día anterior.
 
-1. **Nombre + de dónde viene** (10 s) — "Hola {{nombre}}, Rafa me estuvo contando
-   de tu caso…"
-2. **Devolverle su dolor textual** (15 s) — "…que tienes X casos y que en sesión
-   avanzan pero en la casa no pasa nada."
-3. **Nombrar la causa clínica** (20 s) — el porqué real de lo que le pasa, en
-   lenguaje de colega. *No dar la solución completa: dar el nombre del problema.*
-4. **Puente a la formación** (20 s) — "Eso es exactamente lo que trabajamos en
-   [módulo / mentoría 1:1 / compromiso familiar]…"
-5. **Cierre humano** (10 s) — "Nos vemos en la reunión con Rafa, y ahí lo vemos en
-   detalle. Un abrazo 💜"
+1. **Nombre + de dónde viene** (10 s) — "Hola [Nombre], Rafa me estuvo contando de tu caso…"
+2. **Devolverle su dolor textual** (15 s) — "…que tienes X casos y que en sesión avanzan pero en la casa no pasa nada."
+3. **Nombrar la causa clínica** (20 s) — el porqué real, en lenguaje de colega. *Dar el nombre del problema, no la solución completa.*
+4. **Puente a la formación** (20 s) — "Eso es exactamente lo que trabajamos en [módulo / mentoría 1:1 / compromiso familiar]…"
+5. **Cierre humano** (10 s) — "Nos vemos en la reunión con Rafa y ahí lo vemos en detalle. Un abrazo 💜"
 
-**Lo que Rafa/Anaís le deben pasar a Josefina** (formato fijo, por Slack):
+**Grado de personalización (la duda anotada en la plantilla):** los puntos 1 y 2
+son 100% personalizados (nombre + su frase textual). El 3 y el 4 salen de un banco
+de 6-8 bloques ya grabados mentalmente por ruta. Así se graban 8 vídeos en ~25
+minutos sin que ninguno suene genérico.
+
+**Resumen que Rafa/Anaís le pasan a Josefina** (formato fijo, por Slack):
 
 ```
 NOMBRE · PAÍS
@@ -407,101 +395,61 @@ Ruta del formulario: A / B / C
 Casos hoy: ___
 Frase textual del dolor: "___"
 Qué ya intentó: ___
-Reunión: {{fecha}} {{hora}}
+Reunión: [fecha] [hora]
 ```
 
-> Este mismo resumen debe llegarle **también a Rafa antes de la llamada**, para que
-> la llamada continúe lo que dijo el video y no lo repita. (Problema levantado por
-> Anaís: hoy la lead cuenta lo mismo 4 veces — Instagram, formulario, setter,
-> closer.)
+> El mismo resumen le llega **también a Rafa antes de la llamada**, para que la
+> llamada continúe el vídeo en vez de repetirlo. (Problema levantado por Anaís:
+> hoy la lead cuenta lo mismo cuatro veces — Instagram, formulario, setter, closer.)
 
 ---
 
-## 9. Bloque E — Día de la llamada (número SETTER, firma Rafa)
-
-### WhatsApp Message #8 — En la mañana
-
-> Hola {{nombre}}, buen día! 🙌
-> Nos vemos hoy a las **{{hora}}**. Procura estar en un lugar tranquilo y con
-> tiempo, así podemos ver en profundidad cómo ayudarte.
-
-### WhatsApp Message #9 — Al responder
-
-> Buenísimo! Una hora antes te paso el link del meet por acá. Nos vemos 💜
-
-### WhatsApp Message #10 — 1 hora antes
-
-> Hola {{nombre}}, acá el link del meet: {{link_meet}}
-> Nos vemos en un rato! 🙌
-
-### WhatsApp Message #11 — A la hora exacta
-
-> Ya estoy por acá! Te espero adentro 👉 {{link_meet}}
-
----
-
-## 10. Bloque F — No-show y reagenda
-
-### No-show #1 — 10 minutos después de la hora
-
-> {{nombre}}, te estoy esperando en el meet 👀
-> {{link_meet}}
-
-### No-show #2 — 45 minutos después
-
-> {{nombre}}, no alcanzamos a juntarnos hoy 🙈
-> ¿Se te cruzó algo o prefieres que lo dejemos hasta acá?
-
-### No-show #3 — al día siguiente
-
-> {{nombre}}, Josefina se dio el tiempo de grabarte ese video, así que antes de
-> cerrar tu postulación te pregunto una vez más 💜
->
-> ¿Quieres que te dé una última hora esta semana?
-
-*Regla: **una sola** reagenda. Si tampoco llega, se cierra la postulación hasta el
-próximo semestre — y eso se cumple, porque es lo que prometió el Video A.*
-
----
-
-## 11. Reglas técnicas y de calendario
+## 10. Reglas técnicas
 
 | Regla | Definición |
 |---|---|
-| Ventana de agenda | **4 días** hacia adelante. Con 6 días se llenaba de ghosting; con menos, no alcanzan a entrar. Revisar cada jueves. |
+| Ventana de agenda | **4 días** hacia adelante. Con 6 se llenaba de ghosting; con menos no alcanzan a entrar. Revisar cada jueves. |
 | Contacto post-confirmación | Primeros **5 minutos** |
-| Desfase entre mensajes de un mismo bloque | 2-5 segundos |
-| Wait tras respuesta de la lead | 2-3 minutos antes del siguiente automático (deja que mande 2-3 mensajes seguidos) |
+| Desfase dentro de un mismo bloque | 2-5 segundos |
+| Wait tras respuesta de la lead | 2-3 min antes del siguiente automático (que alcance a mandar 2-3 mensajes seguidos) |
 | Origen del lead | Marcar orgánico vs. ads **antes** de mandar la agenda (Go High Level / Slack) |
-| Si la lead escribe entremedio de un automático | Anaís responde **encima**, retomando lo que ella dijo. No dejar el automático colgado. |
-| Respuestas rápidas | Las 3 variantes del #4 y las de cierre del #5 quedan guardadas en WhatsApp Business, aunque se automaticen |
+| Lead escribe entremedio de un automático | Anaís responde **encima**, retomando lo que ella dijo. No dejar el automático colgado. |
+| Respuestas rápidas | Las variantes de M4, M5 y M6 guardadas en WhatsApp Business aunque después se automaticen |
 | Notificación a Slack | Debe llegar la **frase textual del dolor**, no solo "respondió" |
 
-## 12. Checklist de implementación
+## 11. Checklist de implementación
 
-- [ ] Configurar el número setter nuevo y dar acceso a Rafa **y** a Anaís
-- [ ] Grabar **Video A** (3 indicaciones) — Josefina
-- [ ] Ajustar ventana del calendario a **4 días**
-- [ ] Cargar AUTO #1 a #5 con los botones renombrados ("Quiero ver el video",
-      "Sí, confirmo", "Necesito cambiar la hora")
-- [ ] Cargar bloque de ghosting en el número setter, firma Rafa
-- [ ] Cargar Message #1, #2, #3 automáticos + **#4 con las 3 rutas** condicionadas
-      a la respuesta del formulario
-- [ ] Dejar #5 en adelante en manual, con respuestas rápidas guardadas
-- [ ] Definir el formato del resumen Rafa/Anaís → Josefina (§8) y publicarlo en Slack
-- [ ] Reunión Rafa + Josefina: alinear guion del Video B con la apertura de la llamada
-- [ ] Medir a 2 semanas: **% que hace clic en "Quiero ver el video"**, **% que
-      confirma**, **% que responde el #4**, **show up rate**, **cierre**
+- [ ] Habilitar el **+569** y dar acceso a Rafa **y** a Anaís
+- [ ] Grabar **Vídeo A** (3 indicaciones) — Josefina
+- [ ] Ajustar la ventana del calendario a **4 días**
+- [ ] Cargar A1-A5 en el +52, con los botones `Ver vídeo` / `Sí, confirmo` / `Cancelar`
+- [ ] Cargar G1-G3 en el +569, firma Rafa
+- [ ] Cargar M1, M2, M9, M10 como automáticos del +569
+- [ ] Dejar M3-M7 y M11 manuales, con las variantes guardadas como respuestas rápidas
+- [ ] Definir el banco de bloques 3 y 4 del Vídeo B por ruta (A / B / C)
+- [ ] Publicar en Slack el formato de resumen setter → Josefina
+- [ ] Reunión Rafa + Josefina: alinear el Vídeo B con la apertura de la llamada
+- [ ] Medir a 2 semanas: **% clic en "Ver vídeo"** · **% que confirma** · **% que
+      responde M4** · **show up rate** · **cierre**
 
-## 13. Decisiones tomadas (para no re-discutirlas)
+## 12. Decisiones ya tomadas (para no re-discutirlas)
 
-- El botón inicial **no** dice "Confirmar": primero ve el video, después confirma.
-- **Sí** se ofrece cancelar/cambiar hora. Preferimos filtrar antes que tener
-  agendas fantasma.
+- El botón inicial **no** dice "Confirmar": primero ve el vídeo, después confirma.
+- **Sí** se ofrece cancelar. Preferimos filtrar antes que tener agendas fantasma.
 - El primer mensaje lo firma **Josefina** (recomendación del mentor), pero corto,
   para no morir en el "leer más".
-- El día 2 lleva video personalizado **de sorpresa**; el video de preparación
-  estándar de la web se deja de contar como parte del flujo.
-- La pregunta del #4 se construye sobre **"¿Con qué situación te identificas más
+- El día pre-llamada lleva vídeo personalizado; el vídeo de preparación estándar
+  de la web deja de contarse como parte del flujo.
+- La pregunta del M4 se construye sobre **"¿Con qué situación te identificas más
   hoy?"** y no sobre "¿qué buscas lograr?": la situación actual es más objetiva,
   responde más gente y el dolor presente es lo que mueve la decisión.
+
+## 13. Puntos abiertos
+
+1. **M1, M2, M9 y M10 están en blanco (+569) pero marcados automáticos.** Es
+   compatible: el +569 puede automatizar si va conectado a la herramienta no-API
+   que está probando Seba. Si el +569 va a ser 100% a mano, hay que decidir si
+   estos cuatro se mueven al +52 o los escribe Anaís.
+2. **Qué pasa si cancela y no reagenda en 24 h.** Propuesto: se cierra la
+   postulación (queda alineado con la promesa del Vídeo A).
+3. **Banco de bloques del Vídeo B** — pendiente de la reunión Rafa + Josefina.
