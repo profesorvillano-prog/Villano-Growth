@@ -18,6 +18,7 @@ emails y nuevos productos.
 | [`Casos-de-Exito.md`](./Casos-de-Exito.md) | Transformaciones reales de alumnas, testimonios en video y números de respaldo. Prueba social. |
 | [`FAQ.md`](./FAQ.md) | Preguntas frecuentes reales con respuestas en la voz de la marca. Ideal para web y bot/setter. |
 | [`Voz-y-Marca.md`](./Voz-y-Marca.md) | Tono, frases marca registrada, palabras prohibidas, paleta de color, historia y autoridad de Josefina. |
+| [`Workflow-Mensajes-Show-Up.md`](./Workflow-Mensajes-Show-Up.md) | Secuencia completa de WhatsApp desde que la lead agenda hasta que entra a la llamada: dos números (AUTO/Josefina y setter/Rafa), ghosting de agenda, las 3 rutas de la pregunta de apertura según el formulario, guion de los dos videos de Josefina, no-show y reglas de calendario. |
 | [`Operaciones-y-Embudo.md`](./Operaciones-y-Embudo.md) | Funnel, onboarding, plataforma Skool (niveles), mentorías, equipo, stack tecnológico, modelo 2026 y datos de audiencias. |
 
 ## Fuentes
