@@ -5,24 +5,64 @@
       "id": 1,
       "module": "datastore:SearchRecord",
       "version": 1,
-      "parameters": { "datastore": 168449 },
+      "parameters": {
+        "datastore": 168449
+      },
       "mapper": {
         "filter": [
           [
-            { "a": "pausado", "b": "false", "o": "text:equal" },
-            { "a": "estado", "b": "pagado", "o": "text:notequal" },
-            { "a": "estado", "b": "agendado", "o": "text:notequal" },
-            { "a": "estado", "b": "derivado_clinico", "o": "text:notequal" },
-            { "a": "estado", "b": "frio", "o": "text:notequal" },
-            { "a": "estado", "b": "handoff_humano", "o": "text:notequal" },
-            { "a": "fu_count", "b": "4", "o": "number:less" }
+            {
+              "a": "pausado",
+              "b": "false",
+              "o": "text:equal"
+            },
+            {
+              "a": "estado",
+              "b": "pagado",
+              "o": "text:notequal"
+            },
+            {
+              "a": "estado",
+              "b": "agendado",
+              "o": "text:notequal"
+            },
+            {
+              "a": "estado",
+              "b": "derivado_clinico",
+              "o": "text:notequal"
+            },
+            {
+              "a": "estado",
+              "b": "frio",
+              "o": "text:notequal"
+            },
+            {
+              "a": "estado",
+              "b": "handoff_humano",
+              "o": "text:notequal"
+            },
+            {
+              "a": "fu_count",
+              "b": "4",
+              "o": "number:less"
+            }
           ]
         ],
         "limit": 50
       },
       "metadata": {
-        "designer": { "x": 0, "y": 0, "name": "Leads sin cerrar" },
-        "restore": { "parameters": { "datastore": { "label": "setter_marcelo" } } }
+        "designer": {
+          "x": 0,
+          "y": 0,
+          "name": "Leads sin cerrar"
+        },
+        "restore": {
+          "parameters": {
+            "datastore": {
+              "label": "setter_marcelo"
+            }
+          }
+        }
       }
     },
     {
@@ -30,7 +70,13 @@
       "module": "builtin:BasicRouter",
       "version": 1,
       "mapper": null,
-      "metadata": { "designer": { "x": 300, "y": 0, "name": "Que seguimiento toca" } },
+      "metadata": {
+        "designer": {
+          "x": 300,
+          "y": 0,
+          "name": "Que seguimiento toca"
+        }
+      },
       "routes": [
         {
           "flow": [
@@ -38,13 +84,24 @@
               "id": 3,
               "module": "http:ActionSendData",
               "version": 3,
-              "parameters": { "handleErrors": true, "useNewZLibDeCompress": true },
+              "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+              },
               "filter": {
-                "name": "FU1 · 2 horas",
+                "name": "FU1 - 2 horas · retomar la pregunta",
                 "conditions": [
                   [
-                    { "a": "{{1.fu_count}}", "b": "0", "o": "number:equal" },
-                    { "a": "{{dateDifference(now; parseDate(1.ultimo_mensaje_at); \"hours\")}}", "b": "2", "o": "number:greaterorequal" }
+                    {
+                      "a": "{{1.fu_count}}",
+                      "b": "0",
+                      "o": "number:equal"
+                    },
+                    {
+                      "a": "{{dateDifference(now; parseDate(1.ultimo_mensaje_at); \"hours\")}}",
+                      "b": "2",
+                      "o": "number:greaterorequal"
+                    }
                   ]
                 ]
               },
@@ -52,27 +109,58 @@
                 "url": "https://services.leadconnectorhq.com/conversations/messages",
                 "method": "post",
                 "headers": [
-                  { "name": "Authorization", "value": "Bearer PEGAR_GHL_TOKEN" },
-                  { "name": "Version", "value": "2021-04-15" },
-                  { "name": "Content-Type", "value": "application/json" }
+                  {
+                    "name": "Authorization",
+                    "value": "Bearer PEGAR_GHL_TOKEN"
+                  },
+                  {
+                    "name": "Version",
+                    "value": "2021-04-15"
+                  },
+                  {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
                 ],
                 "qs": [],
                 "bodyType": "raw",
                 "contentType": "application/json",
-                "data": "{\"type\":\"{{1.canal}}\",\"contactId\":\"{{1.key}}\",\"message\":\"Quede con la duda de lo que me contabas. Que es lo que mas te preocupa hoy?\"}",
+                "data": "{\"type\":\"{{1.canal}}\",\"contactId\":\"{{1.key}}\",\"message\":\"Quede pensando en lo que me contabas. Cuentame una cosa mas: hace cuanto que esta asi?\"}",
                 "parseResponse": true
               },
-              "metadata": { "designer": { "x": 600, "y": -450, "name": "FU1" } }
+              "metadata": {
+                "designer": {
+                  "x": 600,
+                  "y": -450,
+                  "name": "FU1"
+                }
+              }
             },
             {
               "id": 4,
               "module": "datastore:UpdateRecord",
               "version": 1,
-              "parameters": { "datastore": 168449 },
-              "mapper": { "key": "{{1.key}}", "fu_count": 1, "ultimo_fu_at": "{{now}}" },
+              "parameters": {
+                "datastore": 168449
+              },
+              "mapper": {
+                "key": "{{1.key}}",
+                "fu_count": 1,
+                "ultimo_fu_at": "{{now}}"
+              },
               "metadata": {
-                "designer": { "x": 900, "y": -450, "name": "fu_count = 1" },
-                "restore": { "parameters": { "datastore": { "label": "setter_marcelo" } } }
+                "designer": {
+                  "x": 900,
+                  "y": -450,
+                  "name": "fu_count = 1"
+                },
+                "restore": {
+                  "parameters": {
+                    "datastore": {
+                      "label": "setter_marcelo"
+                    }
+                  }
+                }
               }
             }
           ]
@@ -83,13 +171,24 @@
               "id": 5,
               "module": "http:ActionSendData",
               "version": 3,
-              "parameters": { "handleErrors": true, "useNewZLibDeCompress": true },
+              "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+              },
               "filter": {
-                "name": "FU2 · 24 horas",
+                "name": "FU2 - 24 horas · caso parecido",
                 "conditions": [
                   [
-                    { "a": "{{1.fu_count}}", "b": "1", "o": "number:equal" },
-                    { "a": "{{dateDifference(now; parseDate(1.ultimo_fu_at); \"hours\")}}", "b": "22", "o": "number:greaterorequal" }
+                    {
+                      "a": "{{1.fu_count}}",
+                      "b": "1",
+                      "o": "number:equal"
+                    },
+                    {
+                      "a": "{{dateDifference(now; parseDate(1.ultimo_fu_at); \"hours\")}}",
+                      "b": "22",
+                      "o": "number:greaterorequal"
+                    }
                   ]
                 ]
               },
@@ -97,9 +196,18 @@
                 "url": "https://services.leadconnectorhq.com/conversations/messages",
                 "method": "post",
                 "headers": [
-                  { "name": "Authorization", "value": "Bearer PEGAR_GHL_TOKEN" },
-                  { "name": "Version", "value": "2021-04-15" },
-                  { "name": "Content-Type", "value": "application/json" }
+                  {
+                    "name": "Authorization",
+                    "value": "Bearer PEGAR_GHL_TOKEN"
+                  },
+                  {
+                    "name": "Version",
+                    "value": "2021-04-15"
+                  },
+                  {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
                 ],
                 "qs": [],
                 "bodyType": "raw",
@@ -107,17 +215,39 @@
                 "data": "{\"type\":\"{{1.canal}}\",\"contactId\":\"{{1.key}}\",\"message\":\"Te cuento un caso parecido: Max, salchicha de 7 anos con dermatitis cronica, ya habia pasado por dermatologos, corticoides y Apoquel. Con el cambio de alimentacion la piel se le recupero en 35 dias.\\nCada caso es distinto, pero el patron se repite mucho. Seguimos?\"}",
                 "parseResponse": true
               },
-              "metadata": { "designer": { "x": 600, "y": -150, "name": "FU2" } }
+              "metadata": {
+                "designer": {
+                  "x": 600,
+                  "y": -150,
+                  "name": "FU2"
+                }
+              }
             },
             {
               "id": 6,
               "module": "datastore:UpdateRecord",
               "version": 1,
-              "parameters": { "datastore": 168449 },
-              "mapper": { "key": "{{1.key}}", "fu_count": 2, "ultimo_fu_at": "{{now}}" },
+              "parameters": {
+                "datastore": 168449
+              },
+              "mapper": {
+                "key": "{{1.key}}",
+                "fu_count": 2,
+                "ultimo_fu_at": "{{now}}"
+              },
               "metadata": {
-                "designer": { "x": 900, "y": -150, "name": "fu_count = 2" },
-                "restore": { "parameters": { "datastore": { "label": "setter_marcelo" } } }
+                "designer": {
+                  "x": 900,
+                  "y": -150,
+                  "name": "fu_count = 2"
+                },
+                "restore": {
+                  "parameters": {
+                    "datastore": {
+                      "label": "setter_marcelo"
+                    }
+                  }
+                }
               }
             }
           ]
@@ -128,37 +258,75 @@
               "id": 7,
               "module": "http:ActionSendData",
               "version": 3,
-              "parameters": { "handleErrors": true, "useNewZLibDeCompress": true },
+              "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+              },
               "filter": {
-                "name": "FU3 · 72 horas (plantilla GHL)",
+                "name": "FU3 - 72 horas · plantilla GHL",
                 "conditions": [
                   [
-                    { "a": "{{1.fu_count}}", "b": "2", "o": "number:equal" },
-                    { "a": "{{dateDifference(now; parseDate(1.ultimo_fu_at); \"hours\")}}", "b": "48", "o": "number:greaterorequal" }
+                    {
+                      "a": "{{1.fu_count}}",
+                      "b": "2",
+                      "o": "number:equal"
+                    },
+                    {
+                      "a": "{{dateDifference(now; parseDate(1.ultimo_fu_at); \"hours\")}}",
+                      "b": "48",
+                      "o": "number:greaterorequal"
+                    }
                   ]
                 ]
               },
               "mapper": {
                 "url": "PEGAR_WEBHOOK_GHL_PLANTILLA_FU3",
                 "method": "post",
-                "headers": [ { "name": "Content-Type", "value": "application/json" } ],
+                "headers": [
+                  {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
                 "qs": [],
                 "bodyType": "raw",
                 "contentType": "application/json",
-                "data": "{\"contactId\":\"{{1.key}}\",\"canal\":\"{{1.canal}}\",\"plantilla\":\"fu3_camino_a_o_b\"}",
+                "data": "{\"contactId\":\"{{1.key}}\",\"canal\":\"{{1.canal}}\",\"plantilla\":\"fu3_consulta_diagnostico\",\"perro\":\"{{1.datos}}\"}",
                 "parseResponse": true
               },
-              "metadata": { "designer": { "x": 600, "y": 150, "name": "FU3 via GHL" } }
+              "metadata": {
+                "designer": {
+                  "x": 600,
+                  "y": 150,
+                  "name": "FU3 via GHL"
+                }
+              }
             },
             {
               "id": 8,
               "module": "datastore:UpdateRecord",
               "version": 1,
-              "parameters": { "datastore": 168449 },
-              "mapper": { "key": "{{1.key}}", "fu_count": 3, "ultimo_fu_at": "{{now}}" },
+              "parameters": {
+                "datastore": 168449
+              },
+              "mapper": {
+                "key": "{{1.key}}",
+                "fu_count": 3,
+                "ultimo_fu_at": "{{now}}"
+              },
               "metadata": {
-                "designer": { "x": 900, "y": 150, "name": "fu_count = 3" },
-                "restore": { "parameters": { "datastore": { "label": "setter_marcelo" } } }
+                "designer": {
+                  "x": 900,
+                  "y": 150,
+                  "name": "fu_count = 3"
+                },
+                "restore": {
+                  "parameters": {
+                    "datastore": {
+                      "label": "setter_marcelo"
+                    }
+                  }
+                }
               }
             }
           ]
@@ -169,37 +337,76 @@
               "id": 9,
               "module": "http:ActionSendData",
               "version": 3,
-              "parameters": { "handleErrors": true, "useNewZLibDeCompress": true },
+              "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+              },
               "filter": {
-                "name": "FU4 · 7 dias (plantilla GHL, ultima)",
+                "name": "FU4 - 7 dias · ultima, cambia de oferta",
                 "conditions": [
                   [
-                    { "a": "{{1.fu_count}}", "b": "3", "o": "number:equal" },
-                    { "a": "{{dateDifference(now; parseDate(1.ultimo_fu_at); \"hours\")}}", "b": "96", "o": "number:greaterorequal" }
+                    {
+                      "a": "{{1.fu_count}}",
+                      "b": "3",
+                      "o": "number:equal"
+                    },
+                    {
+                      "a": "{{dateDifference(now; parseDate(1.ultimo_fu_at); \"hours\")}}",
+                      "b": "96",
+                      "o": "number:greaterorequal"
+                    }
                   ]
                 ]
               },
               "mapper": {
                 "url": "PEGAR_WEBHOOK_GHL_PLANTILLA_FU4",
                 "method": "post",
-                "headers": [ { "name": "Content-Type", "value": "application/json" } ],
+                "headers": [
+                  {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
                 "qs": [],
                 "bodyType": "raw",
                 "contentType": "application/json",
-                "data": "{\"contactId\":\"{{1.key}}\",\"canal\":\"{{1.canal}}\",\"plantilla\":\"fu4_pack\"}",
+                "data": "{\"contactId\":\"{{1.key}}\",\"canal\":\"{{1.canal}}\",\"plantilla\":\"fu4_libro\"}",
                 "parseResponse": true
               },
-              "metadata": { "designer": { "x": 600, "y": 450, "name": "FU4 via GHL" } }
+              "metadata": {
+                "designer": {
+                  "x": 600,
+                  "y": 450,
+                  "name": "FU4 via GHL"
+                }
+              }
             },
             {
               "id": 10,
               "module": "datastore:UpdateRecord",
               "version": 1,
-              "parameters": { "datastore": 168449 },
-              "mapper": { "key": "{{1.key}}", "fu_count": 4, "estado": "frio", "ultimo_fu_at": "{{now}}" },
+              "parameters": {
+                "datastore": 168449
+              },
+              "mapper": {
+                "key": "{{1.key}}",
+                "fu_count": 4,
+                "estado": "frio",
+                "ultimo_fu_at": "{{now}}"
+              },
               "metadata": {
-                "designer": { "x": 900, "y": 450, "name": "Marcar frio" },
-                "restore": { "parameters": { "datastore": { "label": "setter_marcelo" } } }
+                "designer": {
+                  "x": 900,
+                  "y": 450,
+                  "name": "Marcar frio"
+                },
+                "restore": {
+                  "parameters": {
+                    "datastore": {
+                      "label": "setter_marcelo"
+                    }
+                  }
+                }
               }
             }
           ]
@@ -222,9 +429,14 @@
       "dlq": false,
       "freshVariables": false
     },
-    "designer": { "orphans": [] },
+    "designer": {
+      "orphans": []
+    },
     "zone": "eu1.make.com",
-    "scheduling": { "type": "indefinitely", "interval": 28800 },
+    "scheduling": {
+      "type": "indefinitely",
+      "interval": 28800
+    },
     "notes": []
   }
 }

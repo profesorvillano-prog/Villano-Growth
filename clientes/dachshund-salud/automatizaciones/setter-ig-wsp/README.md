@@ -48,7 +48,7 @@ existen en la cuenta **Villano Growth** (org `8286748`, team `2094866`).
 
 | Recurso | Nombre en Make | ID |
 |---|---|---|
-| Escenario 1 | `[SETTER] Marcelo - IG+WSP -> Consulta` | `7035201` |
+| Escenario 1 | `[SETTER] Marcelo - Consulta de Diagnóstico` | `7035201` |
 | Escenario 2 | `[SETTER] Marcelo - Seguimientos` | `7035204` |
 | Data store | `setter_marcelo` | `168449` |
 | Estructura del data store | `setter_marcelo_estructura` | `541589` |
@@ -65,14 +65,34 @@ abajo y no se pueden encender antes de las pruebas del doc 06.
 
 ### Lo que falta rellenar dentro de los escenarios
 
-| Placeholder | Dónde | Qué va |
+Todo lo estructural (esquema de salida, filtros del router, cuerpos de mensaje,
+mapeos al data store y al contacto) **ya está cargado en Make**. Queda esto:
+
+| # | Qué | Dónde |
 |---|---|---|
-| `PEGAR_ANTHROPIC_API_KEY` | Esc. 1, módulo 3, header `x-api-key` | API key de Anthropic |
-| todo el body del módulo 3 | Esc. 1, módulo 3, **Request content** | Pegar `cerebro/salida/cuerpo-modulo3.json` entero (lo genera `cerebro/build.py`) |
-| `PEGAR_GHL_TOKEN` | Todos los módulos HTTP de GHL (ambos escenarios) | Private Integration token |
-| `PEGAR_WEBHOOK_AVISO_MARCELO` | Esc. 1, módulos 12 y 14 | Webhook de GHL que le avisa a Marcelo |
-| `PEGAR_WEBHOOK_GHL_PLANTILLA_FU3` / `FU4` | Esc. 2, módulos 7 y 9 | Workflows de GHL con plantilla aprobada |
-| `[LINK_PAGO]` `[LINK_PACK]` `[PRECIO_CONSULTA]` | Esc. 1, módulos 6 y 9 | Los links y el precio reales |
+| 1 | **El cerebro.** Correr `python3 build.py` en `cerebro/` y pegar el contenido completo de `cerebro/salida/cuerpo-modulo3.json` en el campo **Request content**, reemplazando todo el body que hay | Esc. 1, módulo 3 |
+| 2 | `PEGAR_ANTHROPIC_API_KEY` | Esc. 1, módulo 3, header `x-api-key` |
+| 3 | `PEGAR_GHL_TOKEN` | Todos los HTTP de GHL, en los dos escenarios |
+| 4 | `PEGAR_WEBHOOK_AVISO_MARCELO` | Esc. 1, módulos 12 y 14 |
+| 5 | `PEGAR_WEBHOOK_GHL_PLANTILLA_FU3` / `FU4` | Esc. 2, módulos 7 y 9 |
+| 6 | `[LINK_CONSULTA_197]` y `[LINK_LIBRO]` | Esc. 1, módulos 6 y 9 |
+
+> **El punto 1 se pega, no se transcribe.** El cerebro son 27 KB de texto clínico
+> con la voz de Marcelo. Copiarlo a mano (o dictárselo a un modelo) arriesga
+> alterar una palabra sin que nadie lo note, que es justo el fallo que describe el
+> doc 08. El archivo generado es byte-perfecto y además trae ya puestos el
+> esquema, el caché de 1 hora y el contexto. Pegarlo entero es la forma correcta,
+> y es la misma operación que vas a repetir cada vez que ajustes el prompt.
+
+### Las rutas del router, como quedaron
+
+| Ruta | Se activa cuando | Qué manda |
+|---|---|---|
+| **A · Consulta $197** | `accion` = `ofrecer_producto` **y** `producto` = `asesoria_197` **y** `riesgo` = `ninguno` | Mensaje + link de la consulta |
+| **B · Libro** | `accion` = `ofrecer_producto` **y** `producto` ≠ `asesoria_197` **y** `riesgo` = `ninguno` | Mensaje + link del libro |
+| **C · Clínico** | `accion` = `derivar_clinico` **o** `riesgo` = `urgencia` | Derivación + aviso |
+| **D · Freno de mano** | `accion` = `handoff_humano` **o** `riesgo` = `medico` **o** `riesgo` = `fuera_de_alcance` | No envía nada al lead. Avisa con el texto frenado y pausa el bot |
+| **E · Conversar** | (`accion` = `responder` **o** `pedir_fotos`) **y** `riesgo` = `ninguno` | Solo el mensaje |
 
 El Escenario 2 quedó programado cada 8 horas (3 corridas al día), que es la
 cadencia del doc 02 §3.
