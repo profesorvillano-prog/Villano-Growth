@@ -44,9 +44,6 @@ tres momentos sin mensaje). Los `A#` son del +52; los `M#` del +569.
 | **M9** | ⬜ +569 | Auto | **Día llamada**, mañana | Buen día + instrucciones | ✅ |
 | **M10** | ⬜ +569 | Auto | 15 min antes | Link del meet | ✏️ |
 | **M11** | ⬜ +569 | Manual | A la hora | "Te espero adentro" | ✅ |
-| **N1** | ⬜ +569 | Manual | +10 min de la hora | No-show · te espero | 🆕 |
-| **N2** | ⬜ +569 | Manual | +45 min | No-show · ¿qué pasó? | 🆕 |
-| **N3** | ⬜ +569 | Manual | Día siguiente | No-show · última reagenda | 🆕 |
 
 ✅ ya estaba en la plantilla · ✏️ ajuste propuesto · 🆕 nuevo
 
@@ -110,7 +107,7 @@ responde nunca (reunión 19/08).*
 
 ### A3 · Auto · al poner "Ver vídeo" ✅
 
-**Se envía el VÍDEO NUEVO de Josefina** (guion en §8) y a continuación:
+**Se envía el VÍDEO NUEVO de Josefina** (guion en §7) y a continuación:
 
 > Eso era todo {{1}} 🥦
 > Ahora ya sabes cómo va a ser la reunión y qué tener a mano.
@@ -265,7 +262,7 @@ Se manda **en tres partes**, con 5-10 segundos entre medio.
 > Holaaa [Nombre]! Ya tengo todo preparado para nuestra reunión 👀
 > Le conté tu caso a Josefina y me pidió que te mandara esto…
 
-**M7b — vídeo personalizado de Josefina** (60-90 s, guion en §8)
+**M7b — vídeo personalizado de Josefina** (60-90 s, guion en §7)
 
 **M7c**
 > Nos vemos [fecha y hora] 💜
@@ -304,28 +301,7 @@ deja el vídeo respirar.*
 
 ---
 
-## 7. FASE 5 — No-show y reagenda 🆕 ⬜ +569
-
-### N1 · +10 min de la hora
-> [Nombre], te estoy esperando en el meet 👀
-> {{link_meet}}
-
-### N2 · +45 min
-> [Nombre], no alcanzamos a juntarnos hoy 🙈
-> ¿Se te cruzó algo o prefieres que lo dejemos hasta acá?
-
-### N3 · día siguiente
-> [Nombre], Josefina se dio el tiempo de grabarte ese vídeo, así que antes de
-> cerrar tu postulación te pregunto una vez más 💜
->
-> ¿Quieres que te dé una última hora esta semana?
-
-> **Una sola reagenda.** Si tampoco llega, se cierra hasta el próximo semestre — y
-> se cumple, porque es lo que prometió el vídeo de A3.
-
----
-
-## 8. Los dos vídeos de Josefina
+## 7. Los dos vídeos de Josefina
 
 ### Vídeo A — "3 indicaciones" (A3) · estándar · se graba una vez · 60-90 s
 
@@ -368,7 +344,35 @@ Reunión: [fecha] [hora]
 
 ---
 
-## 9. Reglas técnicas
+---
+
+## Anexo — Operación interna
+
+> **No va en el PDF** que se comparte con el equipo. Se mantiene acá porque son
+> los acuerdos y pendientes que salieron de las reuniones del 19 y 20 de agosto.
+
+### No-show y reagenda ⬜ +569
+
+### N1 · +10 min de la hora
+> [Nombre], te estoy esperando en el meet 👀
+> {{link_meet}}
+
+### N2 · +45 min
+> [Nombre], no alcanzamos a juntarnos hoy 🙈
+> ¿Se te cruzó algo o prefieres que lo dejemos hasta acá?
+
+### N3 · día siguiente
+> [Nombre], Josefina se dio el tiempo de grabarte ese vídeo, así que antes de
+> cerrar tu postulación te pregunto una vez más 💜
+>
+> ¿Quieres que te dé una última hora esta semana?
+
+> **Una sola reagenda.** Si tampoco llega, se cierra hasta el próximo semestre — y
+> se cumple, porque es lo que prometió el vídeo de A3.
+
+---
+
+### Reglas técnicas
 
 | Regla | Definición |
 |---|---|
@@ -381,7 +385,7 @@ Reunión: [fecha] [hora]
 | Respuestas rápidas | Las variantes de M4, M5 y M6 guardadas en WhatsApp Business aunque después se automaticen |
 | Notificación a Slack | Debe llegar la **frase textual del dolor**, no solo "respondió" |
 
-## 10. Checklist de implementación
+### Checklist de implementación
 
 - [ ] Habilitar el **+569** y dar acceso a Rafa **y** a Anaís
 - [ ] Grabar **Vídeo A** (3 indicaciones) — Josefina
@@ -396,7 +400,7 @@ Reunión: [fecha] [hora]
 - [ ] Medir a 2 semanas: **% clic en "Ver vídeo"** · **% que confirma** · **% que
       responde M4** · **show up rate** · **cierre**
 
-## 11. Decisiones ya tomadas (para no re-discutirlas)
+### Decisiones ya tomadas (para no re-discutirlas)
 
 - El botón inicial **no** dice "Confirmar": primero ve el vídeo, después confirma.
 - **Sí** se ofrece cancelar. Preferimos filtrar antes que tener agendas fantasma.
@@ -408,7 +412,7 @@ Reunión: [fecha] [hora]
   hoy?"** y no sobre "¿qué buscas lograr?": la situación actual es más objetiva,
   responde más gente y el dolor presente es lo que mueve la decisión.
 
-## 12. Puntos abiertos
+### Puntos abiertos
 
 1. **M1, M2, M9 y M10 están en blanco (+569) pero marcados automáticos.** Es
    compatible: el +569 puede automatizar si va conectado a la herramienta no-API

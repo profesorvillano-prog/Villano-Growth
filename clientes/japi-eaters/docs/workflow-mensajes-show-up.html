@@ -171,9 +171,6 @@ mensaje. Los <code>A#</code> salen del +52; los <code>M#</code> del +569.</p>
 <tr class="w-row"><td>M9</td><td><span class="chip c-569">+569</span></td><td><span class="chip c-auto">AUTO</span></td><td><b>Día llamada</b>, mañana</td><td>Buen día + instrucciones</td><td><span class="chip c-ok">PLANTILLA</span></td></tr>
 <tr class="w-row"><td>M10</td><td><span class="chip c-569">+569</span></td><td><span class="chip c-auto">AUTO</span></td><td>15 min antes</td><td>Link del meet</td><td><span class="chip c-fix">AJUSTE</span></td></tr>
 <tr class="w-row"><td>M11</td><td><span class="chip c-569">+569</span></td><td><span class="chip c-man">MANUAL</span></td><td>A la hora</td><td>“Te espero adentro”</td><td><span class="chip c-ok">PLANTILLA</span></td></tr>
-<tr class="w-row"><td>N1</td><td><span class="chip c-569">+569</span></td><td><span class="chip c-man">MANUAL</span></td><td>+10 min de la hora</td><td>No-show · te espero</td><td><span class="chip c-new">NUEVO</span></td></tr>
-<tr class="w-row"><td>N2</td><td><span class="chip c-569">+569</span></td><td><span class="chip c-man">MANUAL</span></td><td>+45 min</td><td>No-show · ¿qué pasó?</td><td><span class="chip c-new">NUEVO</span></td></tr>
-<tr class="w-row"><td>N3</td><td><span class="chip c-569">+569</span></td><td><span class="chip c-man">MANUAL</span></td><td>Día siguiente</td><td>No-show · última reagenda</td><td><span class="chip c-new">NUEVO</span></td></tr>
 </tbody></table>
 
 <div class="phase"><div class="p1">Fase 0 · ⬜ +569 · firma Rafa</div><div class="p2">Postuló pero no agendó</div></div>
@@ -357,24 +354,6 @@ pregunta, la que abre la causa.</p>
   <div class="bubble">Ya estoy por aquí! Te espero adentro 👉 {{link_meet}}</div>
 </div>
 
-<div class="phase"><div class="p1">Fase 5 · ⬜ +569 · todos nuevos</div><div class="p2">No-show y reagenda</div></div>
-
-<div class="msg">
-  <div class="hd"><span class="code">N1</span><span class="chip c-569">+569</span><span class="chip c-man">MANUAL</span><span class="chip c-new">NUEVO</span><span class="when">+10 min de la hora</span></div>
-  <div class="bubble">[Nombre], te estoy esperando en el meet 👀<span class="sep"></span>{{link_meet}}</div>
-</div>
-<div class="msg">
-  <div class="hd"><span class="code">N2</span><span class="chip c-569">+569</span><span class="chip c-man">MANUAL</span><span class="chip c-new">NUEVO</span><span class="when">+45 min</span></div>
-  <div class="bubble">[Nombre], no alcanzamos a juntarnos hoy 🙈<span class="sep"></span>¿Se te cruzó algo o prefieres que lo dejemos hasta acá?</div>
-</div>
-<div class="msg">
-  <div class="hd"><span class="code">N3</span><span class="chip c-569">+569</span><span class="chip c-man">MANUAL</span><span class="chip c-new">NUEVO</span><span class="when">Día siguiente</span></div>
-  <div class="bubble">[Nombre], Josefina se dio el tiempo de grabarte ese vídeo, así que antes de cerrar tu postulación te pregunto una vez más 💜<span class="sep"></span>¿Quieres que te dé una última hora esta semana?</div>
-</div>
-<div class="warn"><b>Una sola reagenda.</b> Si tampoco llega, se cierra hasta el próximo semestre — y se
-cumple, porque es lo que prometió el vídeo de A3.</div>
-
-
 <h2><span class="n">2</span>Los dos vídeos de Josefina</h2>
 
 <h3>Vídeo A — “3 indicaciones” (A3) · estándar · se graba una vez · 60-90 s</h3>
@@ -418,55 +397,6 @@ Reunión: [fecha] [hora]</div>
 <div class="warn">El mismo resumen le llega <b>también a Rafa antes de la llamada</b>, para que la
 llamada continúe el vídeo en vez de repetirlo. <i>(Problema levantado por Anaís: hoy la lead cuenta lo
 mismo cuatro veces — Instagram, formulario, setter, closer.)</i></div>
-
-<h2><span class="n">3</span>Reglas técnicas</h2>
-<table>
-<thead><tr><th style="width:32%">Regla</th><th>Definición</th></tr></thead>
-<tbody>
-<tr><td><b>Ventana de agenda</b></td><td><b>4 días</b> hacia adelante. Con 6 se llenaba de ghosting; con menos no alcanzan a entrar. Revisar cada jueves.</td></tr>
-<tr><td><b>Contacto post-confirmación</b></td><td>Primeros <b>5 minutos</b></td></tr>
-<tr><td><b>Desfase dentro de un bloque</b></td><td>2-5 segundos</td></tr>
-<tr><td><b>Wait tras respuesta de la lead</b></td><td>2-3 min antes del siguiente automático (que alcance a mandar 2-3 mensajes seguidos)</td></tr>
-<tr><td><b>Origen del lead</b></td><td>Marcar orgánico vs. ads <b>antes</b> de mandar la agenda (Go High Level / Slack)</td></tr>
-<tr><td><b>Escribe entremedio de un automático</b></td><td>Anaís responde <b>encima</b>, retomando lo que ella dijo. No dejar el automático colgado.</td></tr>
-<tr><td><b>Respuestas rápidas</b></td><td>Las variantes de M4, M5 y M6 guardadas en WhatsApp Business aunque después se automaticen</td></tr>
-<tr><td><b>Notificación a Slack</b></td><td>Debe llegar la <b>frase textual del dolor</b>, no solo “respondió”</td></tr>
-</tbody></table>
-
-<h2><span class="n">4</span>Checklist de implementación</h2>
-<ul class="chk">
-<li>Habilitar el <b>+569</b> y dar acceso a Rafa <b>y</b> a Anaís</li>
-<li>Grabar <b>Vídeo A</b> (3 indicaciones) — Josefina</li>
-<li>Ajustar la ventana del calendario a <b>4 días</b></li>
-<li>Cargar A1-A5 en el +52, con los botones <code>Ver vídeo</code> / <code>Sí, confirmo</code> / <code>Cancelar</code></li>
-<li>Cargar G1-G3 en el +569, firma Rafa</li>
-<li>Cargar M1, M2, M9, M10 como automáticos del +569</li>
-<li>Dejar M3-M7 y M11 manuales, con las variantes guardadas como respuestas rápidas</li>
-<li>Definir el banco de bloques 3 y 4 del Vídeo B por ruta (A / B / C)</li>
-<li>Publicar en Slack el formato de resumen setter → Josefina</li>
-<li>Reunión Rafa + Josefina: alinear el Vídeo B con la apertura de la llamada</li>
-<li>Medir a 2 semanas: <b>% clic en “Ver vídeo”</b> · <b>% que confirma</b> · <b>% que responde M4</b> · <b>show up rate</b> · <b>cierre</b></li>
-</ul>
-
-<h2><span class="n">5</span>Decisiones ya tomadas</h2>
-<p style="font-size:8.4pt;color:#7A8194;margin-top:-4px"><i>Para no re-discutirlas.</i></p>
-<ul>
-<li>El botón inicial <b>no</b> dice “Confirmar”: primero ve el vídeo, después confirma.</li>
-<li><b>Sí</b> se ofrece cancelar. Preferimos filtrar antes que tener agendas fantasma.</li>
-<li>El primer mensaje lo firma <b>Josefina</b> (recomendación del mentor), pero corto, para no morir en el “leer más”.</li>
-<li>El día pre-llamada lleva vídeo personalizado; el vídeo de preparación estándar de la web deja de contarse como parte del flujo.</li>
-<li>La pregunta del M4 se construye sobre <b>“¿Con qué situación te identificas más hoy?”</b> y no sobre “¿qué buscas lograr?”: la situación actual es más objetiva, responde más gente y el dolor presente es lo que mueve la decisión.</li>
-</ul>
-
-<h2><span class="n">6</span>Puntos abiertos</h2>
-<ol>
-<li><b>M1, M2, M9 y M10 están en blanco (+569) pero marcados automáticos.</b> Es compatible: el +569
-puede automatizar si va conectado a la herramienta no-API que está probando Seba. Si el +569 va a ser
-100% a mano, hay que decidir si estos cuatro se mueven al +52 o los escribe Anaís.</li>
-<li><b>Qué pasa si cancela y no reagenda en 24 h.</b> Propuesto: se cierra la postulación, alineado
-con la promesa del Vídeo A.</li>
-<li><b>Banco de bloques del Vídeo B</b> — pendiente de la reunión Rafa + Josefina.</li>
-</ol>
 
 <div class="foot">Japi Eaters · ÉxiTO en Alimentación Infantil — Workflow de Mensajes v4 ·
 Documento vivo: la fuente es <code>Workflow-Mensajes-Show-Up.md</code></div>
