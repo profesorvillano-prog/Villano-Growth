@@ -36,30 +36,53 @@ El archivo ya viene con el JSON escapado, el esquema de salida estructurada y el
 
 ---
 
-## Núcleo o completo: los números reales
+## Por qué el tamaño del cerebro cuesta plata
 
-`build.py` los calcula. Con Claude Opus 5 y una estimación de 1.600 mensajes al mes:
+Esto es lo que hay que entender antes de elegir.
 
-| Modo | Palabras | Tokens | Coste mensual |
-|---|---|---|---|
-| **Núcleo** | 3.875 | ~5.800 | **~$47** |
-| Completo | 37.005 | ~55.500 | **~$444** |
+**El modelo no tiene memoria.** Cada vez que alguien escribe un mensaje, Make le
+manda a la IA **el cerebro entero otra vez**, más toda la conversación hasta ese
+punto. No existe "cargar el conocimiento una vez y ya". Se reenvía siempre.
 
-Con Claude Haiku 4.5 se divide por cinco: núcleo ~$9, completo ~$89.
+Entonces no pagás por *guardar* el conocimiento. Pagás por *transportarlo* en cada
+mensaje. Un cerebro diez veces más grande cuesta diez veces más en **cada uno** de
+los mensajes de **cada una** de las conversaciones.
 
-> El cálculo asume el peor caso de caché: una escritura por hora, porque los DM
-> llegan espaciados. Si el volumen sube y los mensajes se acercan, el coste real
-> baja bastante. Verificalo mirando `usage.cache_read_input_tokens` en Make: si
-> viene en 0 siempre, el caché no está funcionando.
+El caché de Anthropic amortigua bastante: la primera vez que se manda un prompt se
+guarda durante una hora, y las siguientes lecturas cuestan el 10%. Por eso el
+cerebro tiene que quedar **congelado** (nada de fechas ni nombres adentro): si
+cambia un solo carácter, el caché se cae y se paga completo de nuevo.
 
-**Recomendación: núcleo.** No por el dinero, sino porque el bot no necesita poder
-recitar el libro. Necesita entender el caso y llevarlo al producto correcto. Si el
-bot puede explicar el protocolo completo con cantidades, el papá perruno ya no
-tiene motivo para pagar los $197. El conocimiento fino es el producto, no el
-argumento de venta.
+### Los números
 
-El modo completo tiene sentido en un **segundo bot**, el de soporte a quienes ya
-compraron: ahí responder con la cita exacta del libro es entregar lo que pagaron.
+`build.py` los imprime cada vez que lo corrés.
+
+| | Núcleo | Completo |
+|---|---|---|
+| Tamaño | 5.812 tokens | 55.507 tokens |
+| **Opus 5** · por conversación | $0,12 | $0,79 |
+| **Opus 5** · 200 conv/mes | **~$24** | **~$158** |
+| **Sonnet 5** · 200 conv/mes | ~$14 | ~$95 |
+| **Haiku 4.5** · 200 conv/mes | ~$5 | ~$32 |
+
+Supuestos: 8 mensajes por conversación y una escritura de caché por conversación
+(el peor caso realista). Verificar los precios vigentes antes de presupuestar.
+
+### Qué decidir
+
+**El dinero no es el argumento.** Ni siquiera $158 al mes es un problema contra
+ventas de $197. Los dos argumentos reales son otros:
+
+1. **Si el bot puede recitar el protocolo con cantidades exactas, el papá perruno
+   ya no necesita pagar los $197.** El conocimiento fino es el producto. El bot
+   está para entender el caso y llevarlo al producto correcto, no para resolverlo
+   gratis por chat.
+2. **Un prompt de 55.000 tokens es más lento.** En un chat de WhatsApp, unos
+   segundos de más por mensaje se notan.
+
+**Recomendación: núcleo.** El modo completo tiene sentido en un **segundo bot**,
+el de soporte a quienes ya compraron: ahí responder con la cita exacta del libro
+es entregar lo que pagaron, no regalarlo.
 
 ---
 

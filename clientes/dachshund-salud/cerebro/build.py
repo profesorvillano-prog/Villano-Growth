@@ -87,13 +87,31 @@ with open(os.path.join(BASE, "salida", "system.txt"), "w", encoding="utf-8") as 
 
 palabras = len(system.split())
 tokens = int(palabras * 1.5)          # español: ~1,5 tokens por palabra
-lectura_cache = tokens / 1_000_000 * 5 * 0.1   # Opus 5: $5/MTok de entrada, lectura de cache 0,1x
-escritura_cache = tokens / 1_000_000 * 5 * 2   # TTL de 1 hora: 2x
 
-print(f"modo:            {MODO}")
-print(f"palabras:        {palabras:,}")
-print(f"tokens aprox:    {tokens:,}")
-print(f"por mensaje con cache leido:   ${lectura_cache:.4f}")
-print(f"por escritura de cache (1h):   ${escritura_cache:.4f}")
-print(f"1.600 mensajes/mes (aprox):    ${lectura_cache*1600 + escritura_cache*720:.2f}")
-print("\nsalida/cuerpo-modulo3.json listo para pegar en Make (modulo 3, Request content)")
+# Precios Anthropic por millón de tokens (verificar los vigentes antes de presupuestar)
+MODELOS = {"claude-opus-5": (5.0, 25.0), "claude-sonnet-5": (3.0, 15.0),
+           "claude-haiku-4-5": (1.0, 5.0)}
+
+# Modelo de coste por CONVERSACION, que es como se factura de verdad:
+# el prompt entero se reenvia en cada mensaje, pero el cache lo cobra al 10%.
+MSG_POR_CONV = 8      # mensajes del bot en una conversacion tipica
+SALIDA_TOK = 200      # tokens que escribe el bot por mensaje
+
+print(f"modo:         {MODO}")
+print(f"palabras:     {palabras:,}")
+print(f"tokens:       {tokens:,}\n")
+print(f"{'modelo':18} {'x conversación':>15} {'x 200 conv/mes':>16}")
+print("-" * 52)
+for m, (pin, pout) in MODELOS.items():
+    escritura = tokens / 1e6 * pin * 2                       # 1 escritura de cache (TTL 1h)
+    lecturas  = (MSG_POR_CONV - 1) * tokens / 1e6 * pin * 0.1  # el resto lee del cache
+    salida    = MSG_POR_CONV * SALIDA_TOK / 1e6 * pout
+    conv = escritura + lecturas + salida
+    print(f"{m:18} {'$' + format(conv, '.3f'):>15} {'$' + format(conv * 200, '.0f'):>16}")
+
+print("""
+Supuestos: 8 mensajes por conversacion, una escritura de cache por conversacion
+(el peor caso realista) y el resto leyendo del cache. Si dos conversaciones caen
+dentro de la misma hora, comparten la escritura y sale mas barato.
+
+salida/cuerpo-modulo3.json listo para pegar en Make (modulo 3, Request content)""")
