@@ -14,6 +14,9 @@ web, embudos y archivos.
 - **`docs/`** — base de conocimiento del cliente (fuente de verdad). Ver
   [`docs/README.md`](./docs/README.md) para el índice completo y la jerarquía
   de precedencia.
+- **`automatizaciones/`** — sistemas automatizados del cliente. Hoy:
+  [`setter-ig-wsp/`](./automatizaciones/setter-ig-wsp/), el bot setter de
+  Instagram y WhatsApp que califica y vende la Consulta de Evaluación (Make + GHL).
 
 ### `docs/` — fuente de verdad 2026
 
