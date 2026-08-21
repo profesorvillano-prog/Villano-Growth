@@ -4,6 +4,10 @@
 > la llamada con Rafa. **Basado en la plantilla definitiva** (`Workflow Mensajes —
 > Japi Eaters`, v3) + plantilla SDR del mentor + reuniones del 19 y 20 de agosto.
 > Ver `Voz-y-Marca.md` (tono y palabras prohibidas) y `Avatar.md` (dolores).
+>
+> **El PDF que se comparte con el equipo (`Workflow-Mensajes-Japi-Eaters.pdf`)
+> lleva solo los mensajes en orden.** Este archivo es la versión de trabajo:
+> mantiene además el porqué de cada decisión y el anexo de operación interna.
 
 ## Los dos números
 
