@@ -176,62 +176,6 @@ mensaje. Los <code>A#</code> salen del +52; los <code>M#</code> del +569.</p>
 <tr class="w-row"><td>N3</td><td><span class="chip c-569">+569</span></td><td><span class="chip c-man">MANUAL</span></td><td>Día siguiente</td><td>No-show · última reagenda</td><td><span class="chip c-new">NUEVO</span></td></tr>
 </tbody></table>
 
-<h4>Equivalencia con la plantilla anterior</h4>
-<p><code>AUTO #1→A1</code> · <code>AUTO #2→A3</code> · <code>AUTO #3→A5</code> · <code>#1→M1</code> ·
-<code>#2→M2</code> · <code>#3→M3</code> · <code>#4→M4+M5</code> · <code>#5→M6</code> ·
-<code>#6→M7</code> · <code>#7→M8</code> · <code>#8→M9</code> · <code>#10→M10</code> ·
-<code>#11→M11</code>. &nbsp;Nuevos: G1-G3, A2, A4, N1-N3.</p>
-
-<h4>Los 4 cambios de orden y por qué</h4>
-<ol>
-<li><b>A2 — recuperación del clic.</b> Sin esto, la que no aprieta “Ver vídeo” nunca entra al flujo y
-nadie se entera. Era el hoyo más grande de la plantilla.</li>
-<li><b>A4 — qué pasa al Cancelar.</b> El botón existía pero no había mensaje detrás: hoy la que
-cancela cae al vacío en vez de reagendar.</li>
-<li><b>M8 se mueve a la noche.</b> En la plantilla el recordatorio automático del +52 cae justo
-después del vídeo personal de Josefina y le quita el efecto. Con horas de por medio, el vídeo respira.</li>
-<li><b>M10 (link del meet) pasa del +52 al +569.</b> Es el único mensaje que exige acción inmediata:
-tiene que llegar donde ella viene conversando. <b>Criterio general: el +52 manda recordatorios que no
-piden nada; todo lo que exige un clic sale del +569.</b></li>
-</ol>
-
-<h2><span class="n">2</span>El flujo completo</h2>
-<div class="flow">FORMULARIO ──► ¿Eligió horario?
-                 │
-                 ├── NO ──►  G1 · G2 · G3          (ghosting · +569 · firma Rafa)
-                 │
-                 └── SÍ ──►  A1  Josefina + botón "Ver vídeo"        (+52)
-                              │
-                              ├─ sin clic en 2 min ──► A2  recuperación
-                              │
-                              └─ clic ──► A3  vídeo NUEVO + 2 botones
-                                            │
-                                            ├─ "Cancelar"  ──► A4  reagendar o cerrar
-                                            │
-                                            └─ "Confirmar" ──► A5  handoff
-                                                                 │
-                                       ══════ SE ACTIVA EL +569 (Rafa) ══════
-                                                                 │
-                            DÍA DEL AGENDAMIENTO   M1 · M2 · M3 · M4 · M5 · M6
-                            DÍA PRE-LLAMADA        M7 (vídeo personalizado) · M8
-                            DÍA DE LA LLAMADA      M9 · M10 · M11
-                            SI NO LLEGA            N1 · N2 · N3</div>
-
-<h2><span class="n">3</span>Reglas de redacción</h2>
-<ol>
-<li><b>Máximo 4 líneas.</b> WhatsApp corta con “leer más” y ahí se pierde el mensaje. Si es largo, se
-parte en dos con 2-5 segundos de desfase.</li>
-<li><b>Un mensaje = una idea = una acción.</b> Nunca dos preguntas juntas.</li>
-<li><b>Botones con nombre humano</b>, nunca dos que digan “Confirmar”.</li>
-<li><b>Palabras prohibidas:</b> “paciente” → <i>usuario</i> / <i>niño y niña</i>; “papás” →
-<i>familia</i> / <i>mamá</i>. Evitar “fácil”, “rápido”, “garantizado”, “trucos”.</li>
-<li><b>Nunca “para preparar tu llamada” ni “para personalizar tu llamada”.</b> Rafa no es terapeuta y
-no puede sostener esa promesa.</li>
-<li><b>El vídeo del día 2 no se anuncia antes.</b> Su fuerza es que ella no lo pidió.</li>
-<li>Siempre con nombre (<code>{{1}}</code> / <code>[Nombre]</code>), nunca en frío.</li>
-</ol>
-
-
 <div class="phase"><div class="p1">Fase 0 · ⬜ +569 · firma Rafa</div><div class="p2">Postuló pero no agendó</div></div>
 <p>Va desde el +569 y no desde el +52, porque acá empieza una conversación real y quien la sigue es
 Rafa/Anaís.</p>
@@ -269,10 +213,10 @@ Rafa/Anaís.</p>
 
 <div class="msg g">
   <div class="hd"><span class="code">A3</span><span class="chip c-52">+52</span><span class="chip c-auto">AUTO</span><span class="chip c-ok">PLANTILLA</span><span class="when">Al poner “Ver vídeo”</span></div>
-  <p style="font-size:8.4pt;color:#7A8194;margin:0 0 5px"><b>Se envía el VÍDEO NUEVO de Josefina</b> (guion en §9) y a continuación:</p>
-  <div class="bubble">Eso es todo {{1}} 🥦<span class="sep"></span>Esta es tu <b>única</b> postulación de este semestre, así que quiero que llegues con todo.<span class="sep"></span>¿Me confirmas que vas a estar?</div>
+  <p style="font-size:8.4pt;color:#7A8194;margin:0 0 5px"><b>Se envía el VÍDEO NUEVO de Josefina</b> (guion en §2) y a continuación:</p>
+  <div class="bubble">Eso era todo {{1}} 🥦<span class="sep"></span>Ahora ya sabes cómo va a ser la reunión y qué tener a mano.<span class="sep"></span>¿Te dejo confirmada tu hora del <b>[fecha y hora]</b>?</div>
   <div class="btns"><span class="btn">Sí, confirmo</span><span class="btn">Cancelar</span></div>
-  <div class="note">La advertencia del semestre va <b>dentro del vídeo</b>, no en el texto: hablada se escucha como cuidado, escrita se lee como amenaza. Y sí dejamos cancelar: mejor que filtre ahora, después de ver el vídeo, y no que ocupe un cupo y no llegue.</div>
+  <div class="note">El texto solo valida que vio el vídeo y cierra repitiendo <b>fecha y hora</b> — repetir la hora sube el show up. La advertencia de la única postulación del semestre va <b>dentro del vídeo</b>, no acá: hablada se escucha como cuidado, escrita se lee como amenaza. Y sí dejamos cancelar: mejor que filtre ahora, después de ver el vídeo, y no que ocupe un cupo y no llegue.</div>
 </div>
 
 <div class="msg g">
@@ -385,7 +329,7 @@ pregunta, la que abre la causa.</p>
   <div class="hd"><span class="code">M7</span><span class="chip c-569">+569</span><span class="chip c-man">MANUAL</span><span class="chip c-ok">PLANTILLA</span><span class="when">El momento clave</span></div>
   <p style="font-size:8.4pt;color:#7A8194;margin:0 0 5px">Se manda en <b>tres partes</b>, con 5-10 segundos entre medio.</p>
   <div class="bubble"><b>M7a</b> · Holaaa [Nombre]! Ya tengo todo preparado para nuestra reunión 👀<span class="sep"></span>Le conté tu caso a Josefina y me pidió que te mandara esto…</div>
-  <div class="bubble"><b>M7b</b> · <i>vídeo personalizado de Josefina (60-90 s, guion en §9)</i></div>
+  <div class="bubble"><b>M7b</b> · <i>vídeo personalizado de Josefina (60-90 s, guion en §2)</i></div>
   <div class="bubble"><b>M7c</b> · Nos vemos [fecha y hora] 💜</div>
   <div class="note">Por qué funciona: no lo pidió, no se lo prometimos, y viene de la fundadora y no del vendedor. Es la diferencia entre “me están vendiendo” y “se están haciendo cargo de mi caso”.</div>
 </div>
@@ -431,7 +375,7 @@ pregunta, la que abre la causa.</p>
 cumple, porque es lo que prometió el vídeo de A3.</div>
 
 
-<h2><span class="n">9</span>Los dos vídeos de Josefina</h2>
+<h2><span class="n">2</span>Los dos vídeos de Josefina</h2>
 
 <h3>Vídeo A — “3 indicaciones” (A3) · estándar · se graba una vez · 60-90 s</h3>
 <table>
@@ -475,7 +419,7 @@ Reunión: [fecha] [hora]</div>
 llamada continúe el vídeo en vez de repetirlo. <i>(Problema levantado por Anaís: hoy la lead cuenta lo
 mismo cuatro veces — Instagram, formulario, setter, closer.)</i></div>
 
-<h2><span class="n">10</span>Reglas técnicas</h2>
+<h2><span class="n">3</span>Reglas técnicas</h2>
 <table>
 <thead><tr><th style="width:32%">Regla</th><th>Definición</th></tr></thead>
 <tbody>
@@ -489,7 +433,7 @@ mismo cuatro veces — Instagram, formulario, setter, closer.)</i></div>
 <tr><td><b>Notificación a Slack</b></td><td>Debe llegar la <b>frase textual del dolor</b>, no solo “respondió”</td></tr>
 </tbody></table>
 
-<h2><span class="n">11</span>Checklist de implementación</h2>
+<h2><span class="n">4</span>Checklist de implementación</h2>
 <ul class="chk">
 <li>Habilitar el <b>+569</b> y dar acceso a Rafa <b>y</b> a Anaís</li>
 <li>Grabar <b>Vídeo A</b> (3 indicaciones) — Josefina</li>
@@ -504,7 +448,7 @@ mismo cuatro veces — Instagram, formulario, setter, closer.)</i></div>
 <li>Medir a 2 semanas: <b>% clic en “Ver vídeo”</b> · <b>% que confirma</b> · <b>% que responde M4</b> · <b>show up rate</b> · <b>cierre</b></li>
 </ul>
 
-<h2><span class="n">12</span>Decisiones ya tomadas</h2>
+<h2><span class="n">5</span>Decisiones ya tomadas</h2>
 <p style="font-size:8.4pt;color:#7A8194;margin-top:-4px"><i>Para no re-discutirlas.</i></p>
 <ul>
 <li>El botón inicial <b>no</b> dice “Confirmar”: primero ve el vídeo, después confirma.</li>
@@ -514,7 +458,7 @@ mismo cuatro veces — Instagram, formulario, setter, closer.)</i></div>
 <li>La pregunta del M4 se construye sobre <b>“¿Con qué situación te identificas más hoy?”</b> y no sobre “¿qué buscas lograr?”: la situación actual es más objetiva, responde más gente y el dolor presente es lo que mueve la decisión.</li>
 </ul>
 
-<h2><span class="n">13</span>Puntos abiertos</h2>
+<h2><span class="n">6</span>Puntos abiertos</h2>
 <ol>
 <li><b>M1, M2, M9 y M10 están en blanco (+569) pero marcados automáticos.</b> Es compatible: el +569
 puede automatizar si va conectado a la herramienta no-API que está probando Seba. Si el +569 va a ser

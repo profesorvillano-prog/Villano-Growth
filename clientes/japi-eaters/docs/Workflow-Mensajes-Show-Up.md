@@ -50,44 +50,7 @@ tres momentos sin mensaje). Los `A#` son del +52; los `M#` del +569.
 
 ✅ ya estaba en la plantilla · ✏️ ajuste propuesto · 🆕 nuevo
 
-### Equivalencia con la plantilla anterior
-
-`AUTO #1→A1` · `AUTO #2→A3` · `AUTO #3→A5` · `#1→M1` · `#2→M2` · `#3→M3` ·
-`#4→M4+M5` · `#5→M6` · `#6→M7` · `#7→M8` · `#8→M9` · `#10→M10` · `#11→M11`.
-Nuevos: G1-G3, A2, A4, N1-N3.
-
-### Los 4 cambios de orden y por qué
-
-1. **A2 (recuperación del clic).** Sin esto, la que no aprieta "Ver vídeo" nunca
-   entra al flujo y nadie se entera. Era el hoyo más grande de la plantilla.
-2. **A4 (qué pasa al Cancelar).** El botón existía pero no había mensaje detrás.
-   Hoy la que cancela cae al vacío en vez de reagendar.
-3. **M8 se mueve a la noche.** En la plantilla, el recordatorio automático del +52
-   cae justo después del vídeo personal de Josefina y le quita el efecto. Con
-   varias horas de por medio, el vídeo respira.
-4. **M10 (link del meet) pasa del 🟩+52 al ⬜+569.** Es el único mensaje que exige
-   una acción inmediata; tiene que llegar donde ella viene conversando, no desde
-   un número que nunca le habló. **Criterio general: el +52 manda recordatorios
-   que no piden nada; todo lo que exige un clic sale del +569.**
-
----
-
-## 2. Reglas de redacción
-
-1. **Máximo 4 líneas.** WhatsApp corta con "leer más" y ahí se pierde el mensaje.
-   Si es largo, se parte en dos con 2-5 segundos de desfase.
-2. **Un mensaje = una idea = una acción.** Nunca dos preguntas juntas.
-3. **Botones con nombre humano**, nunca dos que digan "Confirmar".
-4. **Palabras prohibidas:** "paciente" → *usuario* / *niño y niña*; "papás" →
-   *familia* / *mamá*. Evitar "fácil", "rápido", "garantizado", "trucos".
-5. **Nunca "para preparar tu llamada" ni "para personalizar tu llamada".** Rafa no
-   es terapeuta y no puede sostener esa promesa.
-6. **El vídeo del día 2 no se anuncia antes.** Su fuerza es que ella no lo pidió.
-7. Siempre con nombre (`{{1}}` / `[Nombre]`), nunca en frío.
-
----
-
-## 3. FASE 0 — Postuló pero no agendó ⬜ +569
+## 2. FASE 0 — Postuló pero no agendó ⬜ +569
 
 Va desde el +569 y no desde el +52, porque acá empieza una conversación real y
 quien la sigue es Rafa/Anaís.
@@ -118,7 +81,7 @@ quien la sigue es Rafa/Anaís.
 
 ---
 
-## 4. FASE 1 — Al agendar 🟩 +52 · voz Josefina
+## 3. FASE 1 — Al agendar 🟩 +52 · voz Josefina
 
 ### A1 · Auto · al agendar ✅ *(tal como está en la plantilla)*
 
@@ -147,19 +110,20 @@ responde nunca (reunión 19/08).*
 
 ### A3 · Auto · al poner "Ver vídeo" ✅
 
-**Se envía el VÍDEO NUEVO de Josefina** (guion en §9) y a continuación:
+**Se envía el VÍDEO NUEVO de Josefina** (guion en §8) y a continuación:
 
-> Eso es todo {{1}} 🥦
-> Esta es tu **única** postulación de este semestre, así que quiero que llegues
-> con todo.
+> Eso era todo {{1}} 🥦
+> Ahora ya sabes cómo va a ser la reunión y qué tener a mano.
 >
-> ¿Me confirmas que vas a estar?
+> ¿Te dejo confirmada tu hora del **[fecha y hora]**?
 
 **Botones:** `Sí, confirmo` · `Cancelar`
 
-*La advertencia del semestre va **dentro del vídeo**, no en el texto: hablada se
-escucha como cuidado, escrita se lee como amenaza. Y sí dejamos cancelar: mejor
-que filtre ahora, después de ver el vídeo, y no que ocupe un cupo y no llegue.*
+*El texto solo valida que vio el vídeo y cierra repitiendo **fecha y hora** —
+repetir la hora sube el show up. La advertencia de la única postulación del
+semestre va **dentro del vídeo**, no acá: hablada se escucha como cuidado,
+escrita se lee como amenaza. Y sí dejamos cancelar: mejor que filtre ahora,
+después de ver el vídeo, y no que ocupe un cupo y no llegue.*
 
 ### A4 · Auto · al poner "Cancelar" 🆕
 
@@ -179,7 +143,7 @@ cierra la postulación.*
 
 ---
 
-## 5. FASE 2 — Día del agendamiento ⬜ +569 · firma Rafa
+## 4. FASE 2 — Día del agendamiento ⬜ +569 · firma Rafa
 
 > ⏱️ **M1 sale dentro de los primeros 5 minutos** de la confirmación.
 
@@ -291,7 +255,7 @@ vídeo. La versión propuesta agrega **una línea de espejo** y mantiene el larg
 
 ---
 
-## 6. FASE 3 — Día pre-llamada
+## 5. FASE 3 — Día pre-llamada
 
 ### M7 · ⬜ +569 · Manual · el handoff a Josefina ✅ *(el momento clave)*
 
@@ -301,7 +265,7 @@ Se manda **en tres partes**, con 5-10 segundos entre medio.
 > Holaaa [Nombre]! Ya tengo todo preparado para nuestra reunión 👀
 > Le conté tu caso a Josefina y me pidió que te mandara esto…
 
-**M7b — vídeo personalizado de Josefina** (60-90 s, guion en §9)
+**M7b — vídeo personalizado de Josefina** (60-90 s, guion en §8)
 
 **M7c**
 > Nos vemos [fecha y hora] 💜
@@ -320,7 +284,7 @@ deja el vídeo respirar.*
 
 ---
 
-## 7. FASE 4 — Día de la llamada
+## 6. FASE 4 — Día de la llamada
 
 ### M9 · ⬜ +569 · Auto · en la mañana ✅
 
@@ -340,7 +304,7 @@ deja el vídeo respirar.*
 
 ---
 
-## 8. FASE 5 — No-show y reagenda 🆕 ⬜ +569
+## 7. FASE 5 — No-show y reagenda 🆕 ⬜ +569
 
 ### N1 · +10 min de la hora
 > [Nombre], te estoy esperando en el meet 👀
@@ -361,7 +325,7 @@ deja el vídeo respirar.*
 
 ---
 
-## 9. Los dos vídeos de Josefina
+## 8. Los dos vídeos de Josefina
 
 ### Vídeo A — "3 indicaciones" (A3) · estándar · se graba una vez · 60-90 s
 
@@ -404,7 +368,7 @@ Reunión: [fecha] [hora]
 
 ---
 
-## 10. Reglas técnicas
+## 9. Reglas técnicas
 
 | Regla | Definición |
 |---|---|
@@ -417,7 +381,7 @@ Reunión: [fecha] [hora]
 | Respuestas rápidas | Las variantes de M4, M5 y M6 guardadas en WhatsApp Business aunque después se automaticen |
 | Notificación a Slack | Debe llegar la **frase textual del dolor**, no solo "respondió" |
 
-## 11. Checklist de implementación
+## 10. Checklist de implementación
 
 - [ ] Habilitar el **+569** y dar acceso a Rafa **y** a Anaís
 - [ ] Grabar **Vídeo A** (3 indicaciones) — Josefina
@@ -432,7 +396,7 @@ Reunión: [fecha] [hora]
 - [ ] Medir a 2 semanas: **% clic en "Ver vídeo"** · **% que confirma** · **% que
       responde M4** · **show up rate** · **cierre**
 
-## 12. Decisiones ya tomadas (para no re-discutirlas)
+## 11. Decisiones ya tomadas (para no re-discutirlas)
 
 - El botón inicial **no** dice "Confirmar": primero ve el vídeo, después confirma.
 - **Sí** se ofrece cancelar. Preferimos filtrar antes que tener agendas fantasma.
@@ -444,7 +408,7 @@ Reunión: [fecha] [hora]
   hoy?"** y no sobre "¿qué buscas lograr?": la situación actual es más objetiva,
   responde más gente y el dolor presente es lo que mueve la decisión.
 
-## 13. Puntos abiertos
+## 12. Puntos abiertos
 
 1. **M1, M2, M9 y M10 están en blanco (+569) pero marcados automáticos.** Es
    compatible: el +569 puede automatizar si va conectado a la herramienta no-API
