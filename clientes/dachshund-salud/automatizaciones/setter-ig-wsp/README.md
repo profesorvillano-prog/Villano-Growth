@@ -32,26 +32,58 @@ Esa es toda la razón por la que esto se puede automatizar.
 
 ---
 
-## Cómo importar los blueprints
+## Ya está creado en Make
 
-1. Make → **Create a new scenario** → menú `···` → **Import Blueprint**
-2. Subir `blueprints/01-setter-cerebro.blueprint.json`
-3. Al importar, Make va a pedir tres cosas que el archivo no puede traer hechas:
-   - **Webhook:** crear uno nuevo llamado `SETTER Marcelo IG-WSP` y copiar su URL
-   - **Data store:** seleccionar `setter_marcelo` (crearlo antes, estructura en el doc 02 §4)
-   - **Data structure del JSON:** seleccionar `setter_respuesta_ia` (doc 02 §5)
-4. Reemplazar los placeholders que quedaron a la vista en los módulos:
+No hace falta importar nada: los dos escenarios, el data store y el webhook ya
+existen en la cuenta **Villano Growth** (org `8286748`, team `2094866`).
+
+| Recurso | Nombre en Make | ID |
+|---|---|---|
+| Escenario 1 | `[SETTER] Marcelo - IG+WSP -> Consulta` | `7035201` |
+| Escenario 2 | `[SETTER] Marcelo - Seguimientos` | `7035204` |
+| Data store | `setter_marcelo` | `168449` |
+| Estructura del data store | `setter_marcelo_estructura` | `541589` |
+| Estructura de la respuesta IA | `setter_respuesta_ia` | `541591` |
+| Estructura del webhook | `setter_webhook_ghl` | `541592` |
+| Webhook | `SETTER Marcelo IG-WSP` | `3583173` |
+
+Los dos escenarios están **apagados** a propósito: les faltan las credenciales de
+abajo y no se pueden encender antes de las pruebas del doc 06.
+
+> La URL del webhook no se guarda en este repo (es un endpoint sin autenticación:
+> cualquiera con la URL puede inyectar mensajes falsos). Está en Make, dentro del
+> módulo 1 del Escenario 1. De ahí se copia y se pega en el Workflow A de GHL.
+
+### Lo que falta rellenar dentro de los escenarios
 
 | Placeholder | Dónde | Qué va |
 |---|---|---|
-| `PEGAR_ANTHROPIC_API_KEY` | Módulo 3, header `x-api-key` | API key de Anthropic |
-| `PEGAR_AQUI_EL_PROMPT_COMPLETO_DEL_DOC_03` | Módulo 3, body, campo `system` | El prompt del doc 03 |
-| `PEGAR_GHL_TOKEN` | Todos los módulos HTTP de GHL | Private Integration token |
-| `PEGAR_WEBHOOK_AVISO_MARCELO` | Módulos 12 y 14 | Webhook de GHL que le avisa a Marcelo |
-| `[LINK_PAGO]` `[LINK_PACK]` `[PRECIO_CONSULTA]` | Módulos 6 y 9 | Los links y el precio reales |
+| `PEGAR_ANTHROPIC_API_KEY` | Esc. 1, módulo 3, header `x-api-key` | API key de Anthropic |
+| `PEGAR_AQUI_EL_PROMPT_COMPLETO_DEL_DOC_03` | Esc. 1, módulo 3, body, campo `system` | El prompt del doc 03 |
+| `PEGAR_GHL_TOKEN` | Todos los módulos HTTP de GHL (ambos escenarios) | Private Integration token |
+| `PEGAR_WEBHOOK_AVISO_MARCELO` | Esc. 1, módulos 12 y 14 | Webhook de GHL que le avisa a Marcelo |
+| `PEGAR_WEBHOOK_GHL_PLANTILLA_FU3` / `FU4` | Esc. 2, módulos 7 y 9 | Workflows de GHL con plantilla aprobada |
+| `[LINK_PAGO]` `[LINK_PACK]` `[PRECIO_CONSULTA]` | Esc. 1, módulos 6 y 9 | Los links y el precio reales |
 
+El Escenario 2 quedó programado cada 8 horas (3 corridas al día), que es la
+cadencia del doc 02 §3.
+
+---
+
+## Los blueprints del repo
+
+Los archivos de [`blueprints/`](./blueprints/) son la copia versionada de lo que
+hay en Make. Sirven para revisar cambios en git y para reconstruir todo si algo se
+rompe. Para volver a importarlos:
+
+1. Make → **Create a new scenario** → menú `···` → **Import Blueprint**
+2. Subir `blueprints/01-setter-cerebro.blueprint.json`
+3. Rellenar los placeholders de la tabla de arriba
 5. Repetir con `blueprints/02-seguimientos.blueprint.json` y programarlo
    **3 veces al día** (09:00, 14:00 y 20:00 hora de Chile), no cada 15 minutos.
+
+> Los IDs de data store, estructuras y webhook ya vienen escritos en los
+> archivos, así que una reimportación en esta misma cuenta se conecta sola.
 
 > El campo `system` del módulo 3 es largo. Conviene pegarlo desde el editor
 > expandido de Make, no en el campo chico.
@@ -60,7 +92,9 @@ Esa es toda la razón por la que esto se puede automatizar.
 
 ## Estado del proyecto
 
-**Listo:** arquitectura, prompt, guion completo, blueprints, setup de GHL, plan de pruebas.
+**Hecho:** arquitectura, prompt, guion completo, setup de GHL documentado, plan
+de pruebas, y **los dos escenarios ya creados en Make** junto con el data store,
+las 3 estructuras de datos y el webhook.
 
 **Bloqueado, necesita a Marcelo:**
 

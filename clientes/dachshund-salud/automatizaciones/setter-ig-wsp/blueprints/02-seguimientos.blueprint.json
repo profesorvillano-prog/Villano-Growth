@@ -5,7 +5,7 @@
       "id": 1,
       "module": "datastore:SearchRecord",
       "version": 1,
-      "parameters": { "datastore": null },
+      "parameters": { "datastore": 168449 },
       "mapper": {
         "filter": [
           [
@@ -68,7 +68,7 @@
               "id": 4,
               "module": "datastore:UpdateRecord",
               "version": 1,
-              "parameters": { "datastore": null },
+              "parameters": { "datastore": 168449 },
               "mapper": { "key": "{{1.key}}", "fu_count": 1, "ultimo_fu_at": "{{now}}" },
               "metadata": {
                 "designer": { "x": 900, "y": -450, "name": "fu_count = 1" },
@@ -113,7 +113,7 @@
               "id": 6,
               "module": "datastore:UpdateRecord",
               "version": 1,
-              "parameters": { "datastore": null },
+              "parameters": { "datastore": 168449 },
               "mapper": { "key": "{{1.key}}", "fu_count": 2, "ultimo_fu_at": "{{now}}" },
               "metadata": {
                 "designer": { "x": 900, "y": -150, "name": "fu_count = 2" },
@@ -154,7 +154,7 @@
               "id": 8,
               "module": "datastore:UpdateRecord",
               "version": 1,
-              "parameters": { "datastore": null },
+              "parameters": { "datastore": 168449 },
               "mapper": { "key": "{{1.key}}", "fu_count": 3, "ultimo_fu_at": "{{now}}" },
               "metadata": {
                 "designer": { "x": 900, "y": 150, "name": "fu_count = 3" },
@@ -195,7 +195,7 @@
               "id": 10,
               "module": "datastore:UpdateRecord",
               "version": 1,
-              "parameters": { "datastore": null },
+              "parameters": { "datastore": 168449 },
               "mapper": { "key": "{{1.key}}", "fu_count": 4, "estado": "frio", "ultimo_fu_at": "{{now}}" },
               "metadata": {
                 "designer": { "x": 900, "y": 450, "name": "Marcar frio" },

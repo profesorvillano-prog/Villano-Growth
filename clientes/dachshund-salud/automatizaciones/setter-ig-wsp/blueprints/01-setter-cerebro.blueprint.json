@@ -5,7 +5,7 @@
       "id": 1,
       "module": "gateway:CustomWebHook",
       "version": 1,
-      "parameters": { "hook": null, "maxResults": 1 },
+      "parameters": { "hook": 3583173, "maxResults": 1 },
       "mapper": {},
       "metadata": {
         "designer": { "x": 0, "y": 0, "name": "Mensaje entrante (GHL)" },
@@ -16,7 +16,7 @@
       "id": 2,
       "module": "datastore:GetRecord",
       "version": 1,
-      "parameters": { "datastore": null },
+      "parameters": { "datastore": 168449 },
       "filter": {
         "name": "Solo entrantes con texto",
         "conditions": [
@@ -63,7 +63,7 @@
       "id": 4,
       "module": "json:ParseJSON",
       "version": 1,
-      "parameters": { "type": null },
+      "parameters": { "type": 541591 },
       "mapper": { "json": "{{ \"{\" + 3.data.content[1].text }}" },
       "metadata": {
         "designer": { "x": 900, "y": 0, "name": "Leer decision de la IA" },
@@ -108,7 +108,7 @@
               "id": 7,
               "module": "datastore:AddRecord",
               "version": 1,
-              "parameters": { "datastore": null },
+              "parameters": { "datastore": 168449 },
               "mapper": {
                 "key": "{{1.contactId}}",
                 "overwrite": true,
@@ -181,7 +181,7 @@
               "id": 10,
               "module": "datastore:AddRecord",
               "version": 1,
-              "parameters": { "datastore": null },
+              "parameters": { "datastore": 168449 },
               "mapper": {
                 "key": "{{1.contactId}}",
                 "overwrite": true,
@@ -250,7 +250,7 @@
               "id": 13,
               "module": "datastore:AddRecord",
               "version": 1,
-              "parameters": { "datastore": null },
+              "parameters": { "datastore": 168449 },
               "mapper": {
                 "key": "{{1.contactId}}",
                 "overwrite": true,
@@ -298,7 +298,7 @@
               "id": 15,
               "module": "datastore:AddRecord",
               "version": 1,
-              "parameters": { "datastore": null },
+              "parameters": { "datastore": 168449 },
               "mapper": {
                 "key": "{{1.contactId}}",
                 "overwrite": true,
@@ -357,7 +357,7 @@
               "id": 17,
               "module": "datastore:AddRecord",
               "version": 1,
-              "parameters": { "datastore": null },
+              "parameters": { "datastore": 168449 },
               "mapper": {
                 "key": "{{1.contactId}}",
                 "overwrite": true,
