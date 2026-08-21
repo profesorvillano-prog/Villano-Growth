@@ -1,9 +1,8 @@
 # Setter Bot IG + WhatsApp → Consulta (Marcelo Dachshund)
 
-> Reemplazo automatizado de los setters humanos. Un bot con IA atiende los DM de
-> Instagram y los WhatsApp que llegan a GHL, califica el caso y vende **una
-> Consulta de Evaluación pagada** con el Dr. Marcelo. El acompañamiento de $497 lo
-> sigue vendiendo Marcelo, pero ahora solo frente a gente que ya pagó.
+> Reemplazo automatizado de los setters humanos. Un bot que **es el Dr. Marcelo**
+> atiende los DM de Instagram y los WhatsApp que llegan a GHL, califica el caso y
+> lo lleva al producto correcto de la escalera ($27 / $47 / $97 / $197 / $497).
 > **Todo el cerebro vive en Make.** GHL es el buzón y el CRM.
 
 ---
@@ -18,7 +17,8 @@
 ## El cambio en una línea
 
 **Antes:** el setter tenía que cerrar $497 por chat.
-**Ahora:** el bot tiene que cerrar $47. Marcelo cierra los $497 en la consulta.
+**Ahora:** el bot lleva a la Asesoría de $197, que ya incluye la videollamada de
+diagnóstico. El $497 queda para los casos que necesitan 90 días de supervisión.
 
 Esa es toda la razón por la que esto se puede automatizar.
 
@@ -68,7 +68,7 @@ abajo y no se pueden encender antes de las pruebas del doc 06.
 | Placeholder | Dónde | Qué va |
 |---|---|---|
 | `PEGAR_ANTHROPIC_API_KEY` | Esc. 1, módulo 3, header `x-api-key` | API key de Anthropic |
-| `PEGAR_AQUI_EL_PROMPT_COMPLETO_DEL_DOC_03` | Esc. 1, módulo 3, body, campo `system` | El prompt del doc 03 |
+| todo el body del módulo 3 | Esc. 1, módulo 3, **Request content** | Pegar `cerebro/salida/cuerpo-modulo3.json` entero (lo genera `cerebro/build.py`) |
 | `PEGAR_GHL_TOKEN` | Todos los módulos HTTP de GHL (ambos escenarios) | Private Integration token |
 | `PEGAR_WEBHOOK_AVISO_MARCELO` | Esc. 1, módulos 12 y 14 | Webhook de GHL que le avisa a Marcelo |
 | `PEGAR_WEBHOOK_GHL_PLANTILLA_FU3` / `FU4` | Esc. 2, módulos 7 y 9 | Workflows de GHL con plantilla aprobada |
@@ -143,8 +143,9 @@ hacer bien la semana de modo sombra antes de encender.
 
 Vienen de `docs/Marcelo-y-Ecosistema-Productos.md` §8 y de `docs/Oferta-High-Ticket.md`:
 
-- El bot **nunca** se hace pasar por Marcelo. Es la asistente del equipo.
-- El bot **nunca** menciona el acompañamiento de $497 ni su precio.
+- El bot **es** Marcelo y escribe en primera persona (decisión de agosto 2026,
+  reemplaza la regla anterior de "nunca hacerse pasar por Marcelo").
+- El bot **nunca** da el precio de un producto antes de entender el caso.
 - El bot **nunca** diagnostica, receta, da dosis ni promete curación.
 - El bot **nunca** inventa testimonios ni cifras. Solo usa los casos verificados
   de `docs/Casos-de-Exito.md`.
