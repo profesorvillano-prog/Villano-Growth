@@ -27,6 +27,8 @@ Esa es toda la razón por la que esto se puede automatizar.
 | 04 | [Guion, objeciones y seguimientos](./04-Guion-Objeciones-y-Seguimientos.md) | Todos los mensajes fijos: oferta, pack, derivación, 4 seguimientos, post-pago |
 | 05 | [Setup en GHL](./05-Setup-GHL.md) | Custom fields, tags, pipeline, 4 workflows, producto, calendario, token |
 | 06 | [Checklist y pruebas](./06-Checklist-y-Pruebas.md) | 18 casos de prueba obligatorios y el encendido gradual en 4 semanas |
+| 07 | [Voz y conocimiento](./07-Voz-y-Conocimiento.md) | Cómo hacer que hable como Marcelo (ficha de voz + few-shot) y qué conocimiento sí y no le entra, con los costes |
+| 08 | [Control de calidad](./08-Control-de-Calidad.md) | Las 3 capas para que no meta la pata: prompt, validador determinista en Make, y revisión humana |
 
 **Blueprints importables:** [`blueprints/`](./blueprints/)
 

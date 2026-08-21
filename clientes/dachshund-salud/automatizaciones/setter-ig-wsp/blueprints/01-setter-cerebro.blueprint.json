@@ -5,69 +5,141 @@
       "id": 1,
       "module": "gateway:CustomWebHook",
       "version": 1,
-      "parameters": { "hook": 3583173, "maxResults": 1 },
+      "parameters": {
+        "hook": 3583173,
+        "maxResults": 1
+      },
       "mapper": {},
       "metadata": {
-        "designer": { "x": 0, "y": 0, "name": "Mensaje entrante (GHL)" },
-        "restore": { "parameters": { "hook": { "label": "SETTER Marcelo IG-WSP" } } }
+        "designer": {
+          "x": 0,
+          "y": 0,
+          "name": "Mensaje entrante (GHL)"
+        },
+        "restore": {
+          "parameters": {
+            "hook": {
+              "label": "SETTER Marcelo IG-WSP"
+            }
+          }
+        }
       }
     },
     {
       "id": 2,
       "module": "datastore:GetRecord",
       "version": 1,
-      "parameters": { "datastore": 168449 },
+      "parameters": {
+        "datastore": 168449
+      },
       "filter": {
         "name": "Solo entrantes con texto",
         "conditions": [
           [
-            { "a": "{{1.direccion}}", "b": "inbound", "o": "text:equal" },
-            { "a": "{{1.mensaje}}", "o": "exist" }
+            {
+              "a": "{{1.direccion}}",
+              "b": "inbound",
+              "o": "text:equal"
+            },
+            {
+              "a": "{{1.mensaje}}",
+              "o": "exist"
+            }
           ]
         ]
       },
-      "mapper": { "key": "{{1.contactId}}" },
+      "mapper": {
+        "key": "{{1.contactId}}"
+      },
       "metadata": {
-        "designer": { "x": 300, "y": 0, "name": "Estado del lead" },
-        "restore": { "parameters": { "datastore": { "label": "setter_marcelo" } } }
+        "designer": {
+          "x": 300,
+          "y": 0,
+          "name": "Estado del lead"
+        },
+        "restore": {
+          "parameters": {
+            "datastore": {
+              "label": "setter_marcelo"
+            }
+          }
+        }
       }
     },
     {
       "id": 3,
       "module": "http:ActionSendData",
       "version": 3,
-      "parameters": { "handleErrors": true, "useNewZLibDeCompress": true },
+      "parameters": {
+        "handleErrors": true,
+        "useNewZLibDeCompress": true
+      },
       "filter": {
         "name": "No pausado por humano",
         "conditions": [
-          [ { "a": "{{2.pausado}}", "b": "true", "o": "text:notequal" } ]
+          [
+            {
+              "a": "{{2.pausado}}",
+              "b": "true",
+              "o": "text:notequal"
+            }
+          ]
         ]
       },
       "mapper": {
         "url": "https://api.anthropic.com/v1/messages",
         "method": "post",
         "headers": [
-          { "name": "x-api-key", "value": "PEGAR_ANTHROPIC_API_KEY" },
-          { "name": "anthropic-version", "value": "2023-06-01" },
-          { "name": "content-type", "value": "application/json" }
+          {
+            "name": "x-api-key",
+            "value": "PEGAR_ANTHROPIC_API_KEY"
+          },
+          {
+            "name": "anthropic-version",
+            "value": "2023-06-01"
+          },
+          {
+            "name": "content-type",
+            "value": "application/json"
+          }
         ],
         "qs": [],
         "bodyType": "raw",
         "contentType": "application/json",
-        "data": "{\"model\":\"claude-haiku-4-5-20251001\",\"max_tokens\":700,\"temperature\":0.6,\"system\":\"PEGAR_AQUI_EL_PROMPT_COMPLETO_DEL_DOC_03\",\"messages\":[{\"role\":\"user\",\"content\":\"ESTADO ACTUAL: {{2.estado}}\\nDATOS YA CAPTURADOS: {{2.datos}}\\nCANAL: {{1.canal}}\\nNOMBRE EN EL PERFIL: {{1.nombre}}\\nSEGUIMIENTOS ENVIADOS: {{2.fu_count}}\\n\\nHISTORIAL:\\n{{2.historial}}\\n\\nMENSAJE NUEVO DEL LEAD:\\n{{1.mensaje}}\"},{\"role\":\"assistant\",\"content\":\"{\"}]}",
+        "data": "{\"model\": \"claude-opus-5\", \"max_tokens\": 900, \"output_config\": {\"effort\": \"low\", \"format\": {\"type\": \"json_schema\", \"schema\": {\"type\": \"object\", \"additionalProperties\": false, \"required\": [\"respuesta\", \"estado\", \"accion\", \"temperatura\", \"riesgo\", \"datos\", \"datos_completos\", \"nota_para_marcelo\"], \"properties\": {\"respuesta\": {\"type\": \"string\"}, \"estado\": {\"type\": \"string\", \"enum\": [\"nuevo\", \"saludado\", \"calificando\", \"espejo\", \"oferta_consulta\", \"objecion\", \"link_enviado\", \"nurture_pack\", \"derivado_clinico\", \"handoff_humano\"]}, \"accion\": {\"type\": \"string\", \"enum\": [\"responder\", \"ofrecer_consulta\", \"ofrecer_pack\", \"derivar_clinico\", \"handoff_humano\"]}, \"temperatura\": {\"type\": \"string\", \"enum\": [\"gold\", \"silver\", \"bronze\", \"out\"]}, \"riesgo\": {\"type\": \"string\", \"enum\": [\"ninguno\", \"medico\", \"urgencia\", \"fuera_de_alcance\"]}, \"datos\": {\"type\": \"object\", \"additionalProperties\": false, \"required\": [\"nombre_dueno\", \"nombre_perro\", \"edad_perro\", \"sintoma\", \"hace_cuanto\", \"come_hoy\", \"ya_intento\", \"pais\"], \"properties\": {\"nombre_dueno\": {\"type\": \"string\"}, \"nombre_perro\": {\"type\": \"string\"}, \"edad_perro\": {\"type\": \"string\"}, \"sintoma\": {\"type\": \"string\"}, \"hace_cuanto\": {\"type\": \"string\"}, \"come_hoy\": {\"type\": \"string\"}, \"ya_intento\": {\"type\": \"string\"}, \"pais\": {\"type\": \"string\"}}}, \"datos_completos\": {\"type\": \"boolean\"}, \"nota_para_marcelo\": {\"type\": \"string\"}}}}}, \"system\": [{\"type\": \"text\", \"text\": \"PEGAR_AQUI_EL_NUCLEO_DEL_DOC_03_Y_07\", \"cache_control\": {\"type\": \"ephemeral\", \"ttl\": \"1h\"}}], \"messages\": [{\"role\": \"user\", \"content\": \"ESTADO ACTUAL: {{2.estado}}\\nDATOS YA CAPTURADOS: {{2.datos}}\\nCANAL: {{1.canal}}\\nNOMBRE EN EL PERFIL: {{1.nombre}}\\nSEGUIMIENTOS ENVIADOS: {{2.fu_count}}\\n\\nHISTORIAL:\\n{{2.historial}}\\n\\nMENSAJE NUEVO DEL LEAD:\\n{{1.mensaje}}\"}]}",
         "parseResponse": true
       },
-      "metadata": { "designer": { "x": 600, "y": 0, "name": "Cerebro (Anthropic)" } }
+      "metadata": {
+        "designer": {
+          "x": 600,
+          "y": 0,
+          "name": "Cerebro (Claude Opus 5)"
+        }
+      }
     },
     {
       "id": 4,
       "module": "json:ParseJSON",
       "version": 1,
-      "parameters": { "type": 541591 },
-      "mapper": { "json": "{{ \"{\" + 3.data.content[1].text }}" },
+      "parameters": {
+        "type": 541591
+      },
+      "mapper": {
+        "json": "{{ last(map(3.data.content; \"text\")) }}"
+      },
       "metadata": {
-        "designer": { "x": 900, "y": 0, "name": "Leer decision de la IA" },
-        "restore": { "parameters": { "type": { "label": "setter_respuesta_ia" } } }
+        "designer": {
+          "x": 900,
+          "y": 0,
+          "name": "Leer decision de la IA"
+        },
+        "restore": {
+          "parameters": {
+            "type": {
+              "label": "setter_respuesta_ia"
+            }
+          }
+        }
       }
     },
     {
@@ -75,7 +147,13 @@
       "module": "builtin:BasicRouter",
       "version": 1,
       "mapper": null,
-      "metadata": { "designer": { "x": 1200, "y": 0, "name": "Ruta segun accion" } },
+      "metadata": {
+        "designer": {
+          "x": 1200,
+          "y": 0,
+          "name": "Ruta segun accion"
+        }
+      },
       "routes": [
         {
           "flow": [
@@ -83,18 +161,43 @@
               "id": 6,
               "module": "http:ActionSendData",
               "version": 3,
-              "parameters": { "handleErrors": true, "useNewZLibDeCompress": true },
+              "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+              },
               "filter": {
                 "name": "A · Ofrecer consulta",
-                "conditions": [ [ { "a": "{{4.accion}}", "b": "ofrecer_consulta", "o": "text:equal" } ] ]
+                "conditions": [
+                  [
+                    {
+                      "a": "{{4.accion}}",
+                      "b": "ofrecer_consulta",
+                      "o": "text:equal"
+                    },
+                    {
+                      "a": "{{4.riesgo}}",
+                      "b": "ninguno",
+                      "o": "text:equal"
+                    }
+                  ]
+                ]
               },
               "mapper": {
                 "url": "https://services.leadconnectorhq.com/conversations/messages",
                 "method": "post",
                 "headers": [
-                  { "name": "Authorization", "value": "Bearer PEGAR_GHL_TOKEN" },
-                  { "name": "Version", "value": "2021-04-15" },
-                  { "name": "Content-Type", "value": "application/json" }
+                  {
+                    "name": "Authorization",
+                    "value": "Bearer PEGAR_GHL_TOKEN"
+                  },
+                  {
+                    "name": "Version",
+                    "value": "2021-04-15"
+                  },
+                  {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
                 ],
                 "qs": [],
                 "bodyType": "raw",
@@ -102,13 +205,21 @@
                 "data": "{\"type\":\"{{1.canal}}\",\"contactId\":\"{{1.contactId}}\",\"message\":\"{{replace(4.respuesta; newline; \"\\n\")}}\\n\\nAca va el link para reservar tu Consulta de Evaluacion con Marcelo:\\n[LINK_PAGO]\\n\\nSon [PRECIO_CONSULTA] y dura entre 45 y 60 minutos por videollamada. Apenas se confirma el pago te llega el link para elegir dia y hora.\"}",
                 "parseResponse": true
               },
-              "metadata": { "designer": { "x": 1500, "y": -600, "name": "Enviar oferta + link de pago" } }
+              "metadata": {
+                "designer": {
+                  "x": 1500,
+                  "y": -600,
+                  "name": "Enviar oferta + link de pago"
+                }
+              }
             },
             {
               "id": 7,
               "module": "datastore:AddRecord",
               "version": 1,
-              "parameters": { "datastore": 168449 },
+              "parameters": {
+                "datastore": 168449
+              },
               "mapper": {
                 "key": "{{1.contactId}}",
                 "overwrite": true,
@@ -123,22 +234,44 @@
                 "ultimo_mensaje_at": "{{now}}"
               },
               "metadata": {
-                "designer": { "x": 1800, "y": -600, "name": "Guardar estado" },
-                "restore": { "parameters": { "datastore": { "label": "setter_marcelo" } } }
+                "designer": {
+                  "x": 1800,
+                  "y": -600,
+                  "name": "Guardar estado"
+                },
+                "restore": {
+                  "parameters": {
+                    "datastore": {
+                      "label": "setter_marcelo"
+                    }
+                  }
+                }
               }
             },
             {
               "id": 8,
               "module": "http:ActionSendData",
               "version": 3,
-              "parameters": { "handleErrors": true, "useNewZLibDeCompress": true },
+              "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+              },
               "mapper": {
                 "url": "https://services.leadconnectorhq.com/contacts/{{1.contactId}}",
                 "method": "put",
                 "headers": [
-                  { "name": "Authorization", "value": "Bearer PEGAR_GHL_TOKEN" },
-                  { "name": "Version", "value": "2021-07-28" },
-                  { "name": "Content-Type", "value": "application/json" }
+                  {
+                    "name": "Authorization",
+                    "value": "Bearer PEGAR_GHL_TOKEN"
+                  },
+                  {
+                    "name": "Version",
+                    "value": "2021-07-28"
+                  },
+                  {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
                 ],
                 "qs": [],
                 "bodyType": "raw",
@@ -146,7 +279,13 @@
                 "data": "{\"tags\":[\"setter-activo\",\"setter-calificado\",\"setter-consulta-ofrecida\"],\"customFields\":[{\"key\":\"setter_nombre_perro\",\"field_value\":\"{{4.datos.nombre_perro}}\"},{\"key\":\"setter_edad_perro\",\"field_value\":\"{{4.datos.edad_perro}}\"},{\"key\":\"setter_sintoma\",\"field_value\":\"{{4.datos.sintoma}}\"},{\"key\":\"setter_hace_cuanto\",\"field_value\":\"{{4.datos.hace_cuanto}}\"},{\"key\":\"setter_come_hoy\",\"field_value\":\"{{4.datos.come_hoy}}\"},{\"key\":\"setter_ya_intento\",\"field_value\":\"{{4.datos.ya_intento}}\"},{\"key\":\"setter_pais\",\"field_value\":\"{{4.datos.pais}}\"},{\"key\":\"setter_temperatura\",\"field_value\":\"{{4.temperatura}}\"},{\"key\":\"setter_estado\",\"field_value\":\"link_enviado\"}]}",
                 "parseResponse": true
               },
-              "metadata": { "designer": { "x": 2100, "y": -600, "name": "Actualizar contacto GHL" } }
+              "metadata": {
+                "designer": {
+                  "x": 2100,
+                  "y": -600,
+                  "name": "Actualizar contacto GHL"
+                }
+              }
             }
           ]
         },
@@ -156,18 +295,43 @@
               "id": 9,
               "module": "http:ActionSendData",
               "version": 3,
-              "parameters": { "handleErrors": true, "useNewZLibDeCompress": true },
+              "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+              },
               "filter": {
                 "name": "B · Ofrecer Pack",
-                "conditions": [ [ { "a": "{{4.accion}}", "b": "ofrecer_pack", "o": "text:equal" } ] ]
+                "conditions": [
+                  [
+                    {
+                      "a": "{{4.accion}}",
+                      "b": "ofrecer_pack",
+                      "o": "text:equal"
+                    },
+                    {
+                      "a": "{{4.riesgo}}",
+                      "b": "ninguno",
+                      "o": "text:equal"
+                    }
+                  ]
+                ]
               },
               "mapper": {
                 "url": "https://services.leadconnectorhq.com/conversations/messages",
                 "method": "post",
                 "headers": [
-                  { "name": "Authorization", "value": "Bearer PEGAR_GHL_TOKEN" },
-                  { "name": "Version", "value": "2021-04-15" },
-                  { "name": "Content-Type", "value": "application/json" }
+                  {
+                    "name": "Authorization",
+                    "value": "Bearer PEGAR_GHL_TOKEN"
+                  },
+                  {
+                    "name": "Version",
+                    "value": "2021-04-15"
+                  },
+                  {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
                 ],
                 "qs": [],
                 "bodyType": "raw",
@@ -175,13 +339,21 @@
                 "data": "{\"type\":\"{{1.canal}}\",\"contactId\":\"{{1.contactId}}\",\"message\":\"{{replace(4.respuesta; newline; \"\\n\")}}\\n\\n[LINK_PACK]\"}",
                 "parseResponse": true
               },
-              "metadata": { "designer": { "x": 1500, "y": -300, "name": "Enviar Pack" } }
+              "metadata": {
+                "designer": {
+                  "x": 1500,
+                  "y": -300,
+                  "name": "Enviar Pack"
+                }
+              }
             },
             {
               "id": 10,
               "module": "datastore:AddRecord",
               "version": 1,
-              "parameters": { "datastore": 168449 },
+              "parameters": {
+                "datastore": 168449
+              },
               "mapper": {
                 "key": "{{1.contactId}}",
                 "overwrite": true,
@@ -196,8 +368,18 @@
                 "ultimo_mensaje_at": "{{now}}"
               },
               "metadata": {
-                "designer": { "x": 1800, "y": -300, "name": "Guardar estado" },
-                "restore": { "parameters": { "datastore": { "label": "setter_marcelo" } } }
+                "designer": {
+                  "x": 1800,
+                  "y": -300,
+                  "name": "Guardar estado"
+                },
+                "restore": {
+                  "parameters": {
+                    "datastore": {
+                      "label": "setter_marcelo"
+                    }
+                  }
+                }
               }
             }
           ]
@@ -208,18 +390,45 @@
               "id": 11,
               "module": "http:ActionSendData",
               "version": 3,
-              "parameters": { "handleErrors": true, "useNewZLibDeCompress": true },
+              "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+              },
               "filter": {
                 "name": "C · Derivar a clinica",
-                "conditions": [ [ { "a": "{{4.accion}}", "b": "derivar_clinico", "o": "text:equal" } ] ]
+                "conditions": [
+                  [
+                    {
+                      "a": "{{4.accion}}",
+                      "b": "derivar_clinico",
+                      "o": "text:equal"
+                    }
+                  ],
+                  [
+                    {
+                      "a": "{{4.riesgo}}",
+                      "b": "urgencia",
+                      "o": "text:equal"
+                    }
+                  ]
+                ]
               },
               "mapper": {
                 "url": "https://services.leadconnectorhq.com/conversations/messages",
                 "method": "post",
                 "headers": [
-                  { "name": "Authorization", "value": "Bearer PEGAR_GHL_TOKEN" },
-                  { "name": "Version", "value": "2021-04-15" },
-                  { "name": "Content-Type", "value": "application/json" }
+                  {
+                    "name": "Authorization",
+                    "value": "Bearer PEGAR_GHL_TOKEN"
+                  },
+                  {
+                    "name": "Version",
+                    "value": "2021-04-15"
+                  },
+                  {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
                 ],
                 "qs": [],
                 "bodyType": "raw",
@@ -227,30 +436,52 @@
                 "data": "{\"type\":\"{{1.canal}}\",\"contactId\":\"{{1.contactId}}\",\"message\":\"{{replace(4.respuesta; newline; \"\\n\")}}\"}",
                 "parseResponse": true
               },
-              "metadata": { "designer": { "x": 1500, "y": 0, "name": "Enviar derivacion" } }
+              "metadata": {
+                "designer": {
+                  "x": 1500,
+                  "y": 0,
+                  "name": "Enviar derivacion"
+                }
+              }
             },
             {
               "id": 12,
               "module": "http:ActionSendData",
               "version": 3,
-              "parameters": { "handleErrors": true, "useNewZLibDeCompress": true },
+              "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+              },
               "mapper": {
                 "url": "PEGAR_WEBHOOK_AVISO_MARCELO",
                 "method": "post",
-                "headers": [ { "name": "Content-Type", "value": "application/json" } ],
+                "headers": [
+                  {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
                 "qs": [],
                 "bodyType": "raw",
                 "contentType": "application/json",
-                "data": "{\"tipo\":\"DERIVACION CLINICA\",\"contactId\":\"{{1.contactId}}\",\"nombre\":\"{{4.datos.nombre_dueno}}\",\"perro\":\"{{4.datos.nombre_perro}}\",\"sintoma\":\"{{4.datos.sintoma}}\",\"nota\":\"{{replace(4.nota_para_marcelo; newline; \" \")}}\"}",
+                "data": "{\"tipo\":\"DERIVACION CLINICA\",\"contactId\":\"{{1.contactId}}\",\"nombre\":\"{{4.datos.nombre_dueno}}\",\"perro\":\"{{4.datos.nombre_perro}}\",\"sintoma\":\"{{4.datos.sintoma}}\",\"riesgo\":\"{{4.riesgo}}\",\"nota\":\"{{replace(4.nota_para_marcelo; newline; \" \")}}\"}",
                 "parseResponse": true
               },
-              "metadata": { "designer": { "x": 1800, "y": 0, "name": "Avisar a Marcelo" } }
+              "metadata": {
+                "designer": {
+                  "x": 1800,
+                  "y": 0,
+                  "name": "Avisar a Marcelo"
+                }
+              }
             },
             {
               "id": 13,
               "module": "datastore:AddRecord",
               "version": 1,
-              "parameters": { "datastore": 168449 },
+              "parameters": {
+                "datastore": 168449
+              },
               "mapper": {
                 "key": "{{1.contactId}}",
                 "overwrite": true,
@@ -265,8 +496,18 @@
                 "ultimo_mensaje_at": "{{now}}"
               },
               "metadata": {
-                "designer": { "x": 2100, "y": 0, "name": "Guardar estado" },
-                "restore": { "parameters": { "datastore": { "label": "setter_marcelo" } } }
+                "designer": {
+                  "x": 2100,
+                  "y": 0,
+                  "name": "Guardar estado"
+                },
+                "restore": {
+                  "parameters": {
+                    "datastore": {
+                      "label": "setter_marcelo"
+                    }
+                  }
+                }
               }
             }
           ]
@@ -277,28 +518,66 @@
               "id": 14,
               "module": "http:ActionSendData",
               "version": 3,
-              "parameters": { "handleErrors": true, "useNewZLibDeCompress": true },
+              "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+              },
               "filter": {
                 "name": "D · Handoff a Marcelo",
-                "conditions": [ [ { "a": "{{4.accion}}", "b": "handoff_humano", "o": "text:equal" } ] ]
+                "conditions": [
+                  [
+                    {
+                      "a": "{{4.accion}}",
+                      "b": "handoff_humano",
+                      "o": "text:equal"
+                    }
+                  ],
+                  [
+                    {
+                      "a": "{{4.riesgo}}",
+                      "b": "medico",
+                      "o": "text:equal"
+                    }
+                  ],
+                  [
+                    {
+                      "a": "{{4.riesgo}}",
+                      "b": "fuera_de_alcance",
+                      "o": "text:equal"
+                    }
+                  ]
+                ]
               },
               "mapper": {
                 "url": "PEGAR_WEBHOOK_AVISO_MARCELO",
                 "method": "post",
-                "headers": [ { "name": "Content-Type", "value": "application/json" } ],
+                "headers": [
+                  {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
                 "qs": [],
                 "bodyType": "raw",
                 "contentType": "application/json",
-                "data": "{\"tipo\":\"HANDOFF\",\"contactId\":\"{{1.contactId}}\",\"nombre\":\"{{4.datos.nombre_dueno}}\",\"perro\":\"{{4.datos.nombre_perro}}\",\"mensaje\":\"{{replace(1.mensaje; newline; \" \")}}\",\"nota\":\"{{replace(4.nota_para_marcelo; newline; \" \")}}\"}",
+                "data": "{\"tipo\":\"HANDOFF\",\"contactId\":\"{{1.contactId}}\",\"nombre\":\"{{4.datos.nombre_dueno}}\",\"perro\":\"{{4.datos.nombre_perro}}\",\"riesgo\":\"{{4.riesgo}}\",\"respuesta_frenada\":\"{{replace(4.respuesta; newline; \" \")}}\",\"mensaje\":\"{{replace(1.mensaje; newline; \" \")}}\",\"nota\":\"{{replace(4.nota_para_marcelo; newline; \" \")}}\"}",
                 "parseResponse": true
               },
-              "metadata": { "designer": { "x": 1500, "y": 300, "name": "Avisar a Marcelo" } }
+              "metadata": {
+                "designer": {
+                  "x": 1500,
+                  "y": 300,
+                  "name": "Avisar a Marcelo"
+                }
+              }
             },
             {
               "id": 15,
               "module": "datastore:AddRecord",
               "version": 1,
-              "parameters": { "datastore": 168449 },
+              "parameters": {
+                "datastore": 168449
+              },
               "mapper": {
                 "key": "{{1.contactId}}",
                 "overwrite": true,
@@ -313,8 +592,18 @@
                 "ultimo_mensaje_at": "{{now}}"
               },
               "metadata": {
-                "designer": { "x": 1800, "y": 300, "name": "Pausar bot" },
-                "restore": { "parameters": { "datastore": { "label": "setter_marcelo" } } }
+                "designer": {
+                  "x": 1800,
+                  "y": 300,
+                  "name": "Pausar bot"
+                },
+                "restore": {
+                  "parameters": {
+                    "datastore": {
+                      "label": "setter_marcelo"
+                    }
+                  }
+                }
               }
             }
           ]
@@ -325,15 +614,24 @@
               "id": 16,
               "module": "http:ActionSendData",
               "version": 3,
-              "parameters": { "handleErrors": true, "useNewZLibDeCompress": true },
+              "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+              },
               "filter": {
-                "name": "E · Conversar (fallback)",
+                "name": "E · Conversar",
                 "conditions": [
                   [
-                    { "a": "{{4.accion}}", "b": "ofrecer_consulta", "o": "text:notequal" },
-                    { "a": "{{4.accion}}", "b": "ofrecer_pack", "o": "text:notequal" },
-                    { "a": "{{4.accion}}", "b": "derivar_clinico", "o": "text:notequal" },
-                    { "a": "{{4.accion}}", "b": "handoff_humano", "o": "text:notequal" }
+                    {
+                      "a": "{{4.accion}}",
+                      "b": "responder",
+                      "o": "text:equal"
+                    },
+                    {
+                      "a": "{{4.riesgo}}",
+                      "b": "ninguno",
+                      "o": "text:equal"
+                    }
                   ]
                 ]
               },
@@ -341,9 +639,18 @@
                 "url": "https://services.leadconnectorhq.com/conversations/messages",
                 "method": "post",
                 "headers": [
-                  { "name": "Authorization", "value": "Bearer PEGAR_GHL_TOKEN" },
-                  { "name": "Version", "value": "2021-04-15" },
-                  { "name": "Content-Type", "value": "application/json" }
+                  {
+                    "name": "Authorization",
+                    "value": "Bearer PEGAR_GHL_TOKEN"
+                  },
+                  {
+                    "name": "Version",
+                    "value": "2021-04-15"
+                  },
+                  {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
                 ],
                 "qs": [],
                 "bodyType": "raw",
@@ -351,13 +658,21 @@
                 "data": "{\"type\":\"{{1.canal}}\",\"contactId\":\"{{1.contactId}}\",\"message\":\"{{replace(4.respuesta; newline; \"\\n\")}}\"}",
                 "parseResponse": true
               },
-              "metadata": { "designer": { "x": 1500, "y": 600, "name": "Responder" } }
+              "metadata": {
+                "designer": {
+                  "x": 1500,
+                  "y": 600,
+                  "name": "Responder"
+                }
+              }
             },
             {
               "id": 17,
               "module": "datastore:AddRecord",
               "version": 1,
-              "parameters": { "datastore": 168449 },
+              "parameters": {
+                "datastore": 168449
+              },
               "mapper": {
                 "key": "{{1.contactId}}",
                 "overwrite": true,
@@ -372,8 +687,18 @@
                 "ultimo_mensaje_at": "{{now}}"
               },
               "metadata": {
-                "designer": { "x": 1800, "y": 600, "name": "Guardar estado" },
-                "restore": { "parameters": { "datastore": { "label": "setter_marcelo" } } }
+                "designer": {
+                  "x": 1800,
+                  "y": 600,
+                  "name": "Guardar estado"
+                },
+                "restore": {
+                  "parameters": {
+                    "datastore": {
+                      "label": "setter_marcelo"
+                    }
+                  }
+                }
               }
             }
           ]
@@ -396,7 +721,9 @@
       "dlq": false,
       "freshVariables": false
     },
-    "designer": { "orphans": [] },
+    "designer": {
+      "orphans": []
+    },
     "zone": "eu1.make.com",
     "notes": []
   }

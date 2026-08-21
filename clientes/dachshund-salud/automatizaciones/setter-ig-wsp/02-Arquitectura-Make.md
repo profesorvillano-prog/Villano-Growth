@@ -113,59 +113,101 @@ AND  mensaje  Does not contain  [BOT]
 - Método: `POST`
 - URL: `https://api.anthropic.com/v1/messages`
 - Headers:
-  - `x-api-key` = `{{ANTHROPIC_API_KEY}}` (guardar en una variable de escenario o en el vault del equipo, nunca en el repo)
+  - `x-api-key` = la API key de Anthropic (en el vault del equipo, nunca en el repo)
   - `anthropic-version` = `2023-06-01`
   - `content-type` = `application/json`
 - Body type: `Raw` · Content type: `JSON (application/json)`
 - Parse response: **sí**
 
+El body tiene tres piezas que importan:
+
+**1. Salida estructurada.** El JSON no se pide por prompt: se impone por API.
+
 ```json
-{
-  "model": "claude-haiku-4-5-20251001",
-  "max_tokens": 700,
-  "temperature": 0.6,
-  "system": "<<< PEGAR AQUÍ EL PROMPT DE 03-Prompt-Setter-IA.md >>>",
-  "messages": [
-    {
-      "role": "user",
-      "content": "ESTADO ACTUAL: {{2.estado}}\nDATOS YA CAPTURADOS: {{2.datos}}\nCANAL: {{1.canal}}\nNOMBRE EN EL PERFIL: {{1.nombre}}\nSEGUIMIENTOS ENVIADOS: {{2.fu_count}}\n\nHISTORIAL:\n{{2.historial}}\n\nMENSAJE NUEVO DEL LEAD:\n{{1.mensaje}}"
-    },
-    { "role": "assistant", "content": "{" }
-  ]
+"output_config": {
+  "effort": "low",
+  "format": { "type": "json_schema", "schema": { ...el esquema del §5... } }
 }
 ```
 
-**El truco del `{` final:** la última línea precarga la respuesta del modelo con
-una llave de apertura. Eso lo obliga a devolver JSON puro, sin preámbulo del tipo
-"Claro, aquí tienes". Hay que volver a agregarle la llave al parsear (módulo 4).
+Con esto el modelo **no puede** devolver algo que no cumpla el esquema, y `accion`,
+`estado`, `temperatura` y `riesgo` solo pueden tomar los valores de su lista. Se
+acabaron los errores de parseo y los reintentos.
 
-**Modelo:** `claude-haiku-4-5-20251001` es el punto dulce para esto (rápido,
-barato, buen español LATAM). Si en las pruebas se nota plano o se salta reglas,
-subir a `claude-sonnet-5` solo en la rama de manejo de objeciones.
+> ⚠️ La versión anterior de este escenario forzaba el JSON con un *prefill* (una
+> respuesta del asistente que arrancaba con `{`). Eso **devuelve error 400** en
+> Opus 5, Sonnet 5 y la familia 4.6-4.8. Ya está corregido. Si ves ese patrón en
+> algún tutorial viejo, está desactualizado.
 
-**Alternativa sin API key propia:** el módulo **AI Agents / Make AI** usa la
-conexión `Make's AI Provider (default)` que ya está en el equipo. Es más simple
-de conectar pero consume créditos de IA de Make (caros y limitados en el plan
-Free). Recomendación: API key propia de Anthropic.
+**2. Caché de prompt.** El bloque `system` lleva `cache_control` con TTL de 1 hora:
+
+```json
+"system": [{
+  "type": "text",
+  "text": "<el núcleo de conocimiento, ver doc 07>",
+  "cache_control": {"type": "ephemeral", "ttl": "1h"}
+}]
+```
+
+Una lectura de caché cuesta ~0,1× el precio de entrada; la escritura, 2× con TTL
+de 1 hora. Como los DMs llegan espaciados, el TTL de 5 minutos no sirve: casi todo
+serían escrituras. Detalle y números en el doc 07.
+
+**El caché es un match de prefijo exacto:** si cambia un solo byte del `system`,
+se invalida entero. Por eso ahí no va nada dinámico (ni la fecha, ni el nombre del
+lead, ni el estado). Todo lo variable va en `messages`.
+
+**3. El contexto de la conversación**, en el turno de usuario:
+
+```
+ESTADO ACTUAL: {{2.estado}}
+DATOS YA CAPTURADOS: {{2.datos}}
+CANAL: {{1.canal}}
+NOMBRE EN EL PERFIL: {{1.nombre}}
+SEGUIMIENTOS ENVIADOS: {{2.fu_count}}
+
+HISTORIAL:
+{{2.historial}}
+
+MENSAJE NUEVO DEL LEAD:
+{{1.mensaje}}
+```
+
+**Modelo:** `claude-opus-5` con `effort: "low"`. Opus 5 es el que mejor sostiene la
+voz y las reglas duras, que es justo lo que este bot necesita. Las palancas de
+coste, si hace falta bajarlo, son `claude-sonnet-5` y `claude-haiku-4-5`
+(comparativa en el doc 07). Ojo: **el ID del modelo no lleva sufijo de fecha.**
+
+**Alternativa sin API key propia:** el módulo AI de Make usa la conexión
+`Make's AI Provider (default)` que ya existe en el equipo. Más simple de conectar,
+pero consume créditos de IA de Make y no deja controlar caché ni esquema.
 
 ### 2.4 Módulo 4 · JSON › Parse JSON
 
 - Data structure: `setter_respuesta_ia` (§5)
-- JSON string: `{{ "{" + 3.data.content[1].text }}`
+- JSON string: `{{ last(map(3.data.content; "text")) }}`
+
+> Se toma el **último** bloque de texto de la respuesta, no el primero: cuando el
+> modelo razona, el array `content` puede traer un bloque de pensamiento adelante
+> y `content[1]` dejaría de ser el JSON.
 
 ### 2.5 Módulo 5 · Router — las 5 rutas
 
+Las rutas son **mutuamente excluyentes**: cada mensaje entra en una y solo una. El
+enum de la salida estructurada garantiza que `accion` y `riesgo` solo tomen los
+valores de la tabla, así que no hace falta ruta de respaldo.
+
 | Ruta | Filtro | Qué manda |
 |---|---|---|
-| **A · Conversación** | `accion` = `responder` | Solo el mensaje de la IA |
-| **B · Consulta** | `accion` = `ofrecer_consulta` | Mensaje + link de pago |
-| **C · Pack** | `accion` = `ofrecer_pack` | Mensaje + link del Pack |
-| **D · Clínico** | `accion` = `derivar_clinico` | Mensaje de derivación + aviso a Marcelo |
-| **E · Handoff** | `accion` = `handoff_humano` | Aviso a Marcelo + marca `pausado = true` |
+| **A · Consulta** | `accion` = `ofrecer_consulta` **y** `riesgo` = `ninguno` | Mensaje + link de pago |
+| **B · Pack** | `accion` = `ofrecer_pack` **y** `riesgo` = `ninguno` | Mensaje + link del Pack |
+| **C · Clínico** | `accion` = `derivar_clinico` **o** `riesgo` = `urgencia` | Derivación + aviso a Marcelo |
+| **D · Handoff** | `accion` = `handoff_humano` **o** `riesgo` = `medico` **o** `riesgo` = `fuera_de_alcance` | Aviso a Marcelo + `pausado = true` |
+| **E · Conversar** | `accion` = `responder` **y** `riesgo` = `ninguno` | Solo el mensaje de la IA |
 
-> Ordenar las rutas de más específica a menos, y dejar **A como fallback**
-> (Router → "Fallback route") para que ningún mensaje quede sin respuesta si la
-> IA devuelve una acción inesperada.
+> **El campo `riesgo` manda sobre `accion`.** Si el modelo marca `urgencia` o
+> `medico`, no importa qué acción haya elegido: el mensaje no sale y el caso va a
+> Marcelo. Es la segunda red de seguridad del doc 08.
 
 ### 2.6 Módulos 6-9 · HTTP → GHL (enviar el mensaje)
 
@@ -277,6 +319,7 @@ falla, así que conviene marcar todos los campos como no obligatorios menos
 | `temperatura` | Text | `gold` · `silver` · `bronze` · `out` |
 | `datos` | Collection | `nombre_dueno`, `nombre_perro`, `edad_perro`, `sintoma`, `hace_cuanto`, `come_hoy`, `ya_intento`, `pais` |
 | `datos_completos` | Boolean | `true` cuando están los 5 datos |
+| `riesgo` | Text | `ninguno` · `medico` · `urgencia` · `fuera_de_alcance` (ver doc 08) |
 | `nota_para_marcelo` | Text | Resumen del caso, solo en handoff y en pago |
 
 ---
