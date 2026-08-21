@@ -8,6 +8,13 @@
 
 ---
 
+> ⚠️ **Agosto 2026: el bot ahora es Marcelo, no una asistente.** El prompt vive en
+> [`../../cerebro/`](../../cerebro/) y reemplaza al doc 03. Al leer el Drive de
+> Marcelo aparecieron precios, vocabulario prohibido y una operación de setter en
+> GHL que contradicen partes de estos documentos: está todo detallado en
+> [`cerebro/HALLAZGOS-DRIVE.md`](../../cerebro/HALLAZGOS-DRIVE.md), incluida la
+> lista de qué quedó desactualizado.
+
 ## El cambio en una línea
 
 **Antes:** el setter tenía que cerrar $497 por chat.
