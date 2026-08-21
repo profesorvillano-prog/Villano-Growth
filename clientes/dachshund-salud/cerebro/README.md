@@ -20,9 +20,15 @@
 ## Cómo se carga en Make
 
 ```bash
-python3 build.py            # núcleo (recomendado)
-python3 build.py completo   # núcleo + todas las fuentes crudas
+python3 build.py                          # núcleo + Opus 5 (recomendado)
+python3 build.py completo                 # núcleo + fuentes crudas
+python3 build.py nucleo claude-haiku-4-5  # núcleo + Haiku (5 veces más barato)
+python3 build.py nucleo claude-sonnet-5   # núcleo + Sonnet
 ```
+
+> El script sabe que **`effort` da error en Haiku 4.5** y lo omite solo. Por eso
+> el modelo se cambia acá y no editando el body a mano en Make: cambiarlo a mano
+> deja el `effort` puesto y el escenario devuelve error 400.
 
 Después:
 

@@ -4,8 +4,10 @@ Arma el cuerpo de la peticion a Anthropic que va pegado en el modulo 3
 del escenario [SETTER] Marcelo de Make.
 
 Uso:
-    python3 build.py            -> modo nucleo (solo CEREBRO-MARCELO.md)
-    python3 build.py completo   -> nucleo + todas las fuentes de fuentes/
+    python3 build.py                          -> nucleo + Opus 5
+    python3 build.py completo                 -> nucleo + fuentes crudas
+    python3 build.py nucleo claude-haiku-4-5  -> nucleo + Haiku (5x mas barato)
+    python3 build.py nucleo claude-sonnet-5   -> nucleo + Sonnet
 
 Genera:
     salida/cuerpo-modulo3.json  -> se copia entero al campo "Request content"
@@ -15,6 +17,7 @@ import json, os, sys, glob
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 MODO = (sys.argv[1] if len(sys.argv) > 1 else "nucleo").lower()
+MODELO = sys.argv[2] if len(sys.argv) > 2 else "claude-opus-5"
 
 ESTADOS = ["nuevo", "saludado", "calificando", "espejo", "oferta", "objecion",
            "link_enviado", "nurture_libro", "derivado_clinico", "handoff_humano"]
@@ -69,11 +72,15 @@ contexto = (
     "MENSAJE NUEVO:\n{{1.mensaje}}"
 )
 
+# effort da error en Haiku 4.5: solo se manda en los modelos que lo aceptan.
+output_config = {"format": {"type": "json_schema", "schema": schema}}
+if not MODELO.startswith("claude-haiku"):
+    output_config["effort"] = "low"
+
 cuerpo = {
-    "model": "claude-opus-5",
+    "model": MODELO,
     "max_tokens": 900,
-    "output_config": {"effort": "low",
-                      "format": {"type": "json_schema", "schema": schema}},
+    "output_config": output_config,
     "system": [{"type": "text", "text": system,
                 "cache_control": {"type": "ephemeral", "ttl": "1h"}}],
     "messages": [{"role": "user", "content": contexto}],
@@ -98,6 +105,7 @@ MSG_POR_CONV = 8      # mensajes del bot en una conversacion tipica
 SALIDA_TOK = 200      # tokens que escribe el bot por mensaje
 
 print(f"modo:         {MODO}")
+print(f"modelo:       {MODELO}")
 print(f"palabras:     {palabras:,}")
 print(f"tokens:       {tokens:,}\n")
 print(f"{'modelo':18} {'x conversación':>15} {'x 200 conv/mes':>16}")
