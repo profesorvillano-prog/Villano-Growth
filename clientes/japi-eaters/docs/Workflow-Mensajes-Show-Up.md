@@ -307,14 +307,31 @@ deja el vídeo respirar.*
 
 ## 7. Los dos vídeos de Josefina
 
-### Vídeo A — "3 indicaciones" (A3) · estándar · se graba una vez · 60-90 s
+### Vídeo A — "3 indicaciones" (A3) · estándar · se graba una vez · **20 s**
 
-1. **Saludo y validación** (10 s) — "Hola, soy Josefina. Primero quiero felicitarte por postular…"
-2. **Indicación 1 — Es un proceso de admisión, no una llamada de venta** (15 s) — no todas quedan.
-3. **Indicación 2 — Vas a hablar con Rafa, de mi equipo** (15 s) — él conoce el programa por dentro; lo que le cuentes lo veo yo.
-4. **Indicación 3 — Reserva 45 minutos reales** (15 s) — desde el computador, lugar tranquilo, papel y lápiz. Si no puedes, cambia la hora ahora.
-5. **Cierre con la advertencia** (15 s) — "Si cancelas a última hora o no llegas, no vas a poder volver a postular este semestre. No es para asustarte: cada hora que abrimos se la estamos quitando a otra terapeuta."
-6. **CTA** (5 s) — "Dale a 'Sí, confirmo' y nos vemos 💜"
+Guion a decir tal cual. 54 palabras ≈ 20 segundos a ritmo normal.
+
+| Tiempo | Qué dice |
+|---|---|
+| **0-3 s** | "Hola [Nombre], soy Josefina, fundadora de Japi Eaters." |
+| **3-8 s** | "Tres cosas antes de tu reunión. **Una**: esto es un proceso de admisión, no todas quedan." |
+| **8-13 s** | "**Dos**: hablas con Rafa, de mi equipo. Lo que le cuentes lo veo yo." |
+| **13-17 s** | "**Tres**: conéctate desde el computador, con 45 minutos tranquila." |
+| **17-20 s** | "Dale a *Sí, confirmo* y nos vemos 💜" |
+
+**Cola opcional (+5 s)** — si se quiere dejar el filtro de asistencia dentro del
+vídeo: *"Y si no vas a poder, cambia la hora ahora: el cupo se lo damos a otra
+terapeuta."*
+
+**Al grabar**
+- Vertical, a cámara, sin leer. Los dos primeros segundos deciden si lo ven entero.
+- Decir el **nombre** al principio (variable del sistema o versión genérica "Hola!").
+- Contar con los dedos el una / dos / tres: sostiene la atención y marca el ritmo.
+- No pedir disculpas ni dar contexto extra: en 20 s no hay espacio y resta autoridad.
+
+*Por qué estas tres:* la primera instala que hay un filtro (sube el valor de la
+hora), la segunda evita el "pero Rafa no es terapeuta" antes de que aparezca, y la
+tercera es pura logística de show up — computador y tiempo real.
 
 ### Vídeo B — Personalizado (M7b) · uno por lead · 60-90 s
 
