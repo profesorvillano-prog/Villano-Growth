@@ -307,31 +307,60 @@ deja el vídeo respirar.*
 
 ## 7. Los dos vídeos de Josefina
 
-### Vídeo A — "3 indicaciones" (A3) · estándar · se graba una vez · **20 s**
+### Vídeo A — "3 indicaciones" (A3) · selfie · se graba una vez · **~24 s**
 
-Guion a decir tal cual. 54 palabras ≈ 20 segundos a ritmo normal.
+Se graba **una sola vez** y sirve para todas. Selfie, en la casa o la consulta,
+sin producción: si se ve producido pierde justo lo que lo hace funcionar.
 
-| Tiempo | Qué dice |
+#### Antes de apretar grabar (1 minuto)
+
+| | |
 |---|---|
-| **0-3 s** | "Hola [Nombre], soy Josefina, fundadora de Japi Eaters." |
-| **3-8 s** | "Tres cosas antes de tu reunión. **Una**: esto es un proceso de admisión, no todas quedan." |
-| **8-13 s** | "**Dos**: hablas con Rafa, de mi equipo. Lo que le cuentes lo veo yo." |
-| **13-17 s** | "**Tres**: conéctate desde el computador, con 45 minutos tranquila." |
-| **17-20 s** | "Dale a *Sí, confirmo* y nos vemos 💜" |
+| **Teléfono** | Vertical, apoyado en algo a la **altura de los ojos**. Sostenido en la mano se nota el pulso y el ángulo queda desde abajo. |
+| **Luz** | Ventana **al frente**, nunca detrás. Si la ventana queda atrás sale en contraluz. |
+| **Fondo** | Su espacio real, con algo de profundidad (una repisa, la sala). No pared pelada. |
+| **Audio** | Sin música, sin tele, lejos de baños o pasillos con eco. El teléfono a ~50 cm graba bien. |
+| **Ropa** | Como se ve en Instagram. Es la primera vez que le ve la cara y tiene que calzar con la cuenta que la trajo. |
+| **Cámara** | Frontal. Mirar **al lente**, no a su propia imagen en pantalla — es la trampa clásica del selfie y se nota altiro. |
 
-**Cola opcional (+5 s)** — si se quiere dejar el filtro de asistencia dentro del
-vídeo: *"Y si no vas a poder, cambia la hora ahora: el cupo se lo damos a otra
-terapeuta."*
+#### El guion
 
-**Al grabar**
-- Vertical, a cámara, sin leer. Los dos primeros segundos deciden si lo ven entero.
-- Decir el **nombre** al principio (variable del sistema o versión genérica "Hola!").
-- Contar con los dedos el una / dos / tres: sostiene la atención y marca el ritmo.
-- No pedir disculpas ni dar contexto extra: en 20 s no hay espacio y resta autoridad.
+> Marcas: **negrita** = énfasis · *(cursiva)* = indicación de actuación.
 
-*Por qué estas tres:* la primera instala que hay un filtro (sube el valor de la
-hora), la segunda evita el "pero Rafa no es terapeuta" antes de que aparezca, y la
-tercera es pura logística de show up — computador y tiempo real.
+| Tiempo | Qué dice y cómo |
+|---|---|
+| **0-4 s** | *(sonriendo, saludando con la mano)* "Holaaa [Nombre]! Soy Josefina, de Japi Eaters. **Qué bueno** que postulaste." |
+| **4-10 s** | *(más tranquila, bajando el ritmo)* "Te cuento tres cositas rápidas. La **primera**: esto es una postulación de verdad, **no quedan todas**." |
+| **10-16 s** | *(cercana, como contándole un secreto)* "La **segunda**: vas a hablar con Rafa, de mi equipo. Y todo lo que le cuentes, **lo leo yo**." |
+| **16-20 s** | *(práctica, contando con los dedos)* "Y la **tercera**: conéctate del computador, con 45 minutos tranquila." |
+| **20-24 s** | *(sonriendo, apuntando hacia abajo, al botón)* "Dale a *Sí, confirmo* y nos vemos allá. Un abrazo!" |
+
+66 palabras ≈ 24 segundos. **Para bajarlo a 20 s:** sacar "Qué bueno que
+postulaste", el "de verdad" de la primera, y cerrar en "Nos vemos!".
+
+**Cola opcional (+5 s)**, si se quiere el filtro de asistencia dentro del vídeo:
+*"Ah, y si no vas a poder, cambia la hora ahora: el cupo se lo damos a otra
+terapeuta."* Va **después** del cierre, para no llevarse el abrazo.
+
+#### Al grabar
+
+- **WhatsApp parte el vídeo en mudo.** El primer fotograma tiene que ser ella
+  sonriendo y saludando, no una boca a medio abrir. Vale la pena quemar
+  subtítulos.
+- Empezar a grabar **2 segundos antes** de hablar y cortar 2 después. Da aire
+  para editar.
+- **Tres tomas seguidas sin revisar**, y recién ahí elegir. Revisar entre toma y
+  toma pone rígida la siguiente.
+- Si se equivoca a mitad: **no cortar**. Repetir la frase completa y seguir.
+- Contar con los dedos el una / dos / tres sostiene la atención y marca el ritmo
+  sin esfuerzo.
+- No leer, no pedir disculpas, no dar contexto extra. En 24 segundos no hay
+  espacio y resta autoridad.
+
+*Por qué estas tres:* la primera instala que hay un filtro y sube el valor de la
+hora que acaba de tomar; la segunda desarma el "pero Rafa no es terapeuta" antes
+de que aparezca la duda; la tercera es logística pura de show up — las llamadas
+desde el teléfono, entre usuarios, son las que no cierran.
 
 ### Vídeo B — Personalizado (M7b) · uno por lead · 60-90 s
 
