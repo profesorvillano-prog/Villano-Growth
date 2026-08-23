@@ -91,10 +91,10 @@ CAMPANAS = {
         "slug": "dolor-cronico",
         "tema": "calma",
         "title": "Que te duela todos los días no es normal · Kinesiología Fixus",
-        "meta": "¿Llevas meses con dolor de espalda, lumbago o de hombro y ya te acostumbraste? No se pasa solo. Revisamos de dónde viene y te damos un plan para que deje de volver. Kinesiología 1 a 1 en Providencia, a pasos del Metro Colón.",
+        "meta": "¿Llevas meses con dolor de espalda, lumbago o de hombro y ya te acostumbraste? No se arregla con otra pastilla, parches de calor ni masajes. Revisamos de dónde viene y te damos un plan para que deje de volver. Kinesiología 1 a 1 en Providencia, a pasos del Metro Colón.",
         "kicker": "Te levantas con <span class=\"mark\">dolor de espalda</span>, aguantas todo el día en la silla y ya te acostumbraste",
         "h1": 'Que te duela la espalda todos los días <span class="mark">no es normal</span>.',
-        "lead": "El dolor de espalda se volvió tan común que lo normalizamos. No se arregla con otra pastilla ni aguantando: primero revisamos de dónde viene y de ahí armamos un plan real para eliminarlo.",
+        "lead": "El dolor de espalda se volvió tan común que lo normalizamos. No lo vas a conseguir arreglar con otra pastilla, parches de calor o masajes: primero revisamos de dónde viene y de ahí armamos un plan real para eliminarlo.",
         "wa_msg": "Hola, llevo tiempo con dolor y quiero saber cómo funciona la evaluación kinesiológica.",
 
         "ba_titulo": "Ya no es solo el dolor: es <span class=\"alerta\">toda tu vida acomodándose a él</span>",
