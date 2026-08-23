@@ -34,7 +34,6 @@ CAMPANAS = {
         "slug": "deportista",
         "title": "Vuelve a jugar sin miedo a lesionarte de nuevo · Kinesiología Fixus",
         "meta": "¿Te desgarraste o te doblaste el tobillo y llevas semanas sin jugar? Evaluamos tu lesión, te decimos en cuánto vuelves y te preparamos para aguantar el partido completo. Kinesiología 1 a 1 en Providencia, a pasos del Metro Colón.",
-        "pill": "Kinesiología deportiva · Providencia",
         "kicker": "Te desgarraste hace semanas y todavía no vuelves a la cancha",
         "h1": 'Vuelve a jugar sin miedo a que <span class="mark">se te vuelva a romper</span>.',
         "lead": "Revisamos tu lesión, te decimos en cuánto tiempo vuelves y te armamos el plan para que aguantes el partido completo. Todo parte por la evaluación.",
@@ -92,7 +91,6 @@ CAMPANAS = {
         "slug": "dolor-cronico",
         "title": "Que te duela todos los días no es normal · Kinesiología Fixus",
         "meta": "¿Llevas meses con dolor de espalda, lumbago o de hombro y ya te acostumbraste? No se pasa solo. Revisamos de dónde viene y te damos un plan para que deje de volver. Kinesiología 1 a 1 en Providencia, a pasos del Metro Colón.",
-        "pill": "Dolor de espalda y hombro · Providencia",
         "kicker": "Te levantas mal, aguantas todo el día en la silla y ya te acostumbraste",
         "h1": 'Que te duela todos los días <span class="mark">no es normal</span>.',
         "lead": "El dolor de espalda se volvió tan común que lo normalizamos. No se arregla con otra pastilla ni aguantando: primero revisamos de dónde viene y de ahí armamos un plan real para eliminarlo.",
@@ -150,7 +148,6 @@ CAMPANAS = {
         "slug": "postoperado",
         "title": "Deja de arrastrar esa lesión · Kinesiología post-operatoria Fixus",
         "meta": "¿Saliste de una operación o llevas más de un año con la misma lesión? No se arregla con reposo ni pastillas. Evaluación, ejercicios hechos para ti y acompañamiento sesión a sesión. Kinesiología 1 a 1 en Providencia, a pasos del Metro Colón.",
-        "pill": "Post-operatorio y lesiones antiguas · Providencia",
         "kicker": "Saliste de una operación o llevas más de un año arrastrando lo mismo",
         "h1": 'Deja de arrastrarlo. <span class="mark">Recupérate en serio.</span>',
         "lead": "Cuando algo lleva mucho tiempo mal no se arregla con reposo ni con pastillas. Se arregla con ejercicios hechos para ti y alguien al lado, sesión a sesión.",
@@ -270,14 +267,12 @@ PLANTILLA = r"""<!DOCTYPE html>
     <a class="logo" href="https://www.fixus.cl">
       <img src="{{LOGO}}" alt="Fixus" width="150" height="40">
     </a>
-    <p class="place">Kinesiología &amp; rendimiento · Providencia</p>
   </div>
 </header>
 
 <!-- ============================= HERO ============================= -->
 <section class="hero">
   <div class="wrap">
-    <span class="pill"><span class="dot"></span>{{PILL}}</span>
     <p class="kicker">{{KICKER}}</p>
     <h1>{{H1}}</h1>
     <p class="lead">{{LEAD}}</p>
@@ -294,7 +289,7 @@ PLANTILLA = r"""<!DOCTYPE html>
           </button>
         </div>
       </div>
-      <p class="vsl-cap">Nati te muestra en menos de 3 minutos cómo te podemos ayudar.</p>
+      <p class="vsl-cap">Ve en menos de 3 minutos cómo te podemos ayudar.</p>
     </div>
 
     <!-- CTA principal -->
@@ -304,7 +299,6 @@ PLANTILLA = r"""<!DOCTYPE html>
         <span class="txt">
           <strong>Agenda tu evaluación</strong>
           <em>Reservas y pagas tu hora ahora mismo</em>
-          <span class="tag">$24.990</span>
         </span>
         <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
       </a>
@@ -365,7 +359,6 @@ PLANTILLA = r"""<!DOCTYPE html>
         <span class="txt">
           <strong>Reservar mi evaluación</strong>
           <em>Eliges día y hora, pagas y queda agendada</em>
-          <span class="tag">$24.990</span>
         </span>
         <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
       </a>
@@ -449,7 +442,6 @@ PLANTILLA = r"""<!DOCTYPE html>
         <span class="txt">
           <strong>Agenda tu evaluación</strong>
           <em>Reservas y pagas tu hora ahora mismo</em>
-          <span class="tag">$24.990</span>
         </span>
         <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
       </a>
@@ -485,7 +477,7 @@ PLANTILLA = r"""<!DOCTYPE html>
 
 <!-- ========================= BARRA FIJA MÓVIL ========================= -->
 <div class="bar">
-  <a class="bar-cta" data-cta="pago" data-pos="barra" href="#">Agenda tu evaluación <small>$24.990</small></a>
+  <a class="bar-cta" data-cta="pago" data-pos="barra" href="#">Agenda tu evaluación</a>
   <a class="bar-wa" data-cta="whatsapp" data-pos="barra" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14c-.2.6-1.2 1.2-1.7 1.2-.5 0-.9.2-3-.9s-3.4-3.6-3.5-3.8c-.1-.2-.9-1.2-.9-2.3s.6-1.6.8-1.8c.2-.2.4-.3.6-.3h.4c.2 0 .4 0 .5.4l.7 1.7c.1.2 0 .4-.1.5l-.3.4c-.1.1-.3.3-.1.6.1.3.6 1.1 1.3 1.7.9.8 1.6 1 1.9 1.2.2.1.4 0 .5-.1l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.3.1.1.1.6 0 1z"/></svg>
   </a>
@@ -539,7 +531,6 @@ def construir(nombre, c):
         "META": c["meta"],
         "SLUG": c["slug"],
         "WA_MSG": c["wa_msg"],
-        "PILL": c["pill"],
         "KICKER": c["kicker"],
         "H1": c["h1"],
         "LEAD": c["lead"],

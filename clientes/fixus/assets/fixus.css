@@ -100,13 +100,9 @@ h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:700;letter-spacing:-.01em}
   letter-spacing:.06em;color:#fff;
 }
 .hdr .logo-txt b{color:var(--red)}
-.hdr .place{
-  margin-top:9px;font-size:.73rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--t3);font-weight:600;
-}
 
 /* ---------- Hero ---------- */
-.hero{padding:26px 0 8px;text-align:center}
+.hero{padding:30px 0 8px;text-align:center}
 .hero h1{margin-bottom:16px}
 .hero .lead{max-width:34ch;margin:0 auto}
 @media(min-width:760px){.hero .lead{max-width:46ch}}
@@ -116,15 +112,6 @@ h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:700;letter-spacing:-.01em}
   text-transform:uppercase;color:var(--t2);margin-bottom:12px;
 }
 
-/* Píldora de prueba social */
-.pill{
-  display:inline-flex;align-items:center;gap:9px;
-  border:1px solid var(--line-2);border-radius:999px;
-  background:rgba(255,255,255,.04);
-  padding:7px 15px 7px 9px;margin-bottom:20px;
-  font-size:.8rem;color:var(--t2);font-weight:500;
-}
-.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px var(--red-soft)}
 
 /* ---------- Video / VSL ---------- */
 .vsl{margin:30px auto 0;max-width:660px}
@@ -192,11 +179,6 @@ h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:700;letter-spacing:-.01em}
 .opt.primary .ico svg{stroke:#fff}
 .opt.primary .chev{stroke:#fff}
 .opt.primary .txt em{color:rgba(255,255,255,.72)}
-.tag{
-  display:inline-block;margin-top:7px;font-family:var(--display);font-weight:700;
-  font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
-  background:var(--red);color:#fff;border-radius:5px;padding:3px 8px;
-}
 .opt.ghost{background:rgba(255,255,255,.03);border-color:var(--line);padding:13px 16px}
 .opt.ghost .txt strong{font-size:.94rem;color:var(--t1)}
 .opt.ghost .ico{width:40px;height:40px}
