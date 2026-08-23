@@ -153,10 +153,9 @@ Las agendas que vienen de **pauta** nunca pasan por Instagram, así que no
 aparecen acá. Si Valen necesita ver todas, es la Smart List de contactos
 (`survey-org` + `survey-ads`), no una columna.
 
-> **Probabilidades:** las etapas 2 a 8 están casi todas en 80 %, y *CTA Lead
+> **Probabilidades:** hoy las etapas 2 a 8 están casi todas en 80 %, y *CTA Lead
 > Magnet* (80) va por delante de *CTA Formación* (60), que es al revés de lo real.
-> Con `useOpportunityProbability` en `false` solo afecta al reporte de embudo,
-> pero conviene dejar una escalera limpia: 10 · 20 · 30 · 40 · 50 · 60 · 70 · 80 · 90.
+> La escalera corregida está en la §14.
 
 ---
 
@@ -447,13 +446,157 @@ histórica. Sirven de línea base para saber si v2 mejora algo.
 1. **Crear los 4 pipelines nuevos** con sus etapas y colores *(a mano — la API de
    GHL no crea pipelines; Opportunities → ⚙ Manage Pipelines)*.
 2. **Crear las 4 etiquetas nuevas** y los motivos de pérdida.
-3. **Montar W5, W7, W9, W10 y W16** — los cinco ★. Con esos el sistema ya opera.
-4. **Cargar el guion** (`G1`-`G3`, `A1`-`A5`, `M1`-`M11`) en sus workflows. El +52
+3. **Cargar las probabilidades de la §14** al crear cada etapa — GHL las exige y
+   no se pueden dejar vacías.
+4. **Montar W5, W7, W9, W10 y W16** — los cinco ★. Con esos el sistema ya opera.
+5. **Cargar el guion** (`G1`-`G3`, `A1`-`A5`, `M1`-`M11`) en sus workflows. El +52
    necesita plantillas aprobadas por Meta antes de poder enviar `A1`, `A2`, `A3`,
    `A4`, `A5` y `M8` — empezar ese trámite el día 1, es el camino crítico.
-5. **Migrar las 120 activas** por script y cerrar las 96 restantes con motivo.
-6. **Archivar los pipelines viejos** (ocultar, no borrar: conservan el histórico
+6. **Migrar las 120 activas** por script y cerrar las 96 restantes con motivo.
+7. **Archivar los pipelines viejos** (ocultar, no borrar: conservan el histórico
    de 724 oportunidades para reportes).
-7. **Dar de alta a los 3 usuarios** con los permisos de §11.
-8. **Montar el resto de workflows** (W1-W4, W6, W8, W10-W12, W14-W15).
-9. A los 7 días: revisar las métricas de §12 contra la línea base.
+8. **Dar de alta a los 3 usuarios** con los permisos de §11.
+9. **Montar el resto de workflows** (W1-W4, W6, W8, W10-W12, W14-W15).
+10. A los 7 días: revisar las métricas de §12 contra la línea base.
+
+---
+
+## 14. Probabilidades de etapa
+
+GHL **obliga** a poner una probabilidad en cada etapa: no se puede dejar vacía.
+Como hay que ponerla, conviene que signifique algo.
+
+### Qué significa el número
+
+`stageWinProbability` es la probabilidad de que una tarjeta en esa etapa termine
+**Ganada en ese pipeline** — no de que termine en venta. Como cada pipeline gana
+por algo distinto, cada escalera es distinta:
+
+| Pipeline | Ganar significa |
+|---|---|
+| `①` Instagram | La lead tomó hora |
+| `②` Agenda | Entró a la reunión |
+| `③` Llamadas | Cerró la venta |
+| `④` Ventas | Pagó completo |
+
+Con `useOpportunityProbability` en `false`, GHL usa este número para dos cosas:
+ordenar el **reporte de embudo** y calcular el **forecast** (`valor × probabilidad`).
+
+### La regla que casi todo el mundo rompe
+
+**El orden del tablero no es el orden de probabilidad.** Las columnas de
+recuperación —*Sin Agendar*, *Seguimiento*, *Sin Confirmar*, *No-Show*,
+*Re-Agendar*— están a la derecha por comodidad visual, pero su probabilidad real
+es **más baja que la de la etapa de la que vienen**. Alguien que no agendó vale
+menos que alguien que acaba de calificar, aunque su columna esté más a la derecha.
+
+Si se les pone un número alto "porque están más adelante", el forecast se infla
+justo con las tarjetas que peor van. Es el error que hoy tiene el board de Valen,
+donde *CTA Lead Magnet* (80 %) va por delante de *CTA Formación* (60 %).
+
+### Dos criterios, según el pipeline
+
+| | `①` y `②` | `③` y `④` |
+|---|---|---|
+| Valor monetario | **$0** | **Real** (`$997`) |
+| Para qué sirve el número | ordenar el embudo | **forecast de facturación** |
+| Criterio | escalera de avance | **probabilidad medida** |
+
+En `①` y `②` el valor es cero, así que el forecast siempre da cero y lo único que
+importa es que el embudo se dibuje en el orden correcto. En `③` y `④` sí hay
+dinero: ahí el número tiene que ser realista o el forecast miente.
+
+> Corrijo lo que dije antes sobre dejar el valor en `$0` en todos los tableros:
+> vale para `①` y `②`, pero `③` y `④` deben llevar el valor real o no hay
+> forecast posible. Para no contar la misma venta dos veces, el panel Cerebro
+> debe leer **facturación de `④`** y **pipeline comercial de `③`**, nunca sumarlos.
+
+### ① Instagram · Setter
+
+Sin histórico propio: el tablero es nuevo. Escalera de avance, calibrada para que
+*Formulario Completado* caiga cerca de su valor real (72 % califica × 47 % agenda
+≈ 34 %).
+
+| # | Etapa | % |
+|---|---|---:|
+| 0 | Bienvenidas | 5 |
+| 1 | Respuesta Bienvenida | 15 |
+| 2 | CTA Lead Magnet | 25 |
+| 3 | CTA Formación | 45 |
+| 4 | Link Enviado (Survey) | 60 |
+| 5 | Formulario Completado | 80 |
+| 6 | Seguimiento | **20** |
+| 7 | Agendada | 100 |
+| 8 | Descalificada | 0 |
+
+*Seguimiento* en 20 es la aplicación de la regla: está en la columna 6 pero vale
+menos que la 3.
+
+### ② Agenda · WhatsApp
+
+Aquí sí hay datos. La cadena medida: **47 %** de las calificadas agenda, y de las
+agendadas se presenta el **39 %**. Una tarjeta recién calificada tiene por tanto
+**0,47 × 0,39 ≈ 18 %** de acabar entrando a la reunión.
+
+| # | Etapa | % | De dónde sale |
+|---|---|---:|---|
+| 0 | Calificada (Formulario) | 18 | 0,47 × 0,39 medido |
+| 1 | Sin Agendar | **5** | no agendó: por debajo de la 0 |
+| 2 | Nueva Agenda | 39 | show-up medido |
+| 3 | Sin Confirmar | **18** | no cruzó el portón |
+| 4 | Confirmada | 42 | cruzó el portón |
+| 5 | Diagnóstico | 55 | conversación humana ya hecha |
+| 6 | Pre-Llamada | 70 | vídeo personalizado enviado |
+| 7 | Día de Llamada | 90 | solo falta que entre |
+| 8 | Re-Agendar | **15** | canceló una vez |
+
+Comprobación: 88 % cruza el portón y 12 % no, así que
+`0,88 × 42 + 0,12 × 18 = 39 %` — el show-up medido. La escalera cuadra con la
+realidad, no está inventada.
+
+### ③ Llamadas · Closer
+
+Histórico real: **239 oportunidades, 137 resueltas, 18 ganadas → 13,1 %**. Con un
+show-up del 39 %, el cierre sobre quien asiste sale en **34 %**.
+
+| # | Etapa | % | De dónde sale |
+|---|---|---:|---|
+| 0 | En Llamada | 13 | win rate histórico del pipeline |
+| 1 | Asistió | 33 | 13 % ÷ 39 % de show-up |
+| 2 | No-Show | **4** | el agujero más caro del embudo |
+| 3 | Cerrada · Va a Pagar | 95 | dijo que sí; falta que pague |
+| 4 | Seguimiento | **15** | lo está pensando |
+| 5 | Reagendada | **10** | |
+
+### ④ Ventas · Cobros
+
+Sin histórico —el pipeline nunca se usó—. Escalera por cuota cobrada, a revisar
+cuando haya 20 ventas dentro.
+
+| # | Etapa | % |
+|---|---|---:|
+| 0 | Cuota de Entrada Pagada | 40 |
+| 1 | Pago Cuota 1 | 55 |
+| 2 | Pago Cuota 2 | 70 |
+| 3 | Pago Cuota 3 | 85 |
+| 4 | Pago Fallido · En Riesgo | **25** |
+| 5 | Venta Total | 100 |
+
+### Dos cosas que aparecieron al calcular esto
+
+**`①` y `②` no tienen ni una sola oportunidad Ganada en toda su historia** — 0 de
+54 y 0 de 431. Hoy "ganar" solo existe en el board del closer: los tableros de
+setter únicamente pierden. Por eso su forecast siempre ha dado cero, y por eso
+estas probabilidades nunca han significado nada. En v2 el relevo **se hace
+ganando la tarjeta**, que es justo lo que hace que estos números empiecen a
+medir algo.
+
+**La única venta con valor registrado marca `$997`**, no los `$1.250` de
+`Oferta.md`. Antes de meter valores en `③` y `④` conviene confirmar cuál es el
+precio vigente: todo el forecast se apoya en ese número.
+
+### Cuándo revisarlas
+
+A los 30 días de operar v2, con cohortes reales en vez de una foto de las
+abiertas. Los números de `②` y `③` salen de las tarjetas vivas hoy, que es una
+aproximación razonable pero no una serie histórica.
