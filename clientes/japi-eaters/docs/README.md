@@ -19,7 +19,8 @@ emails y nuevos productos.
 | [`FAQ.md`](./FAQ.md) | Preguntas frecuentes reales con respuestas en la voz de la marca. Ideal para web y bot/setter. |
 | [`Voz-y-Marca.md`](./Voz-y-Marca.md) | Tono, frases marca registrada, palabras prohibidas, paleta de color, historia y autoridad de Josefina. |
 | [`Operaciones-y-Embudo.md`](./Operaciones-y-Embudo.md) | Funnel, onboarding, plataforma Skool (niveles), mentorías, equipo, stack tecnológico, modelo 2026 y datos de audiencias. |
-| [`Pipeline-Setter-Organico.md`](./Pipeline-Setter-Organico.md) | **El pipeline de la setter orgánica (Valen · Instagram).** Las 9 etapas del board de DM, las 4 puertas de entrada, etiquetas, la Smart List de "todos los formularios", los 8 workflows, permisos exactos para darle acceso en GHL, rutina diaria y métricas. |
+| [`Sistema-Pipelines-v2.md`](./Sistema-Pipelines-v2.md) | **La estructura de CRM vigente.** Los 4 pipelines (Instagram · Agenda · Llamadas · Ventas), los dos números de WhatsApp, etapas con disparadores, vocabulario de etiquetas, los 15 workflows, los 14 slots de plantillas de mensajes, el mapeo de migración y los permisos por persona. |
+| [`Pipeline-Setter-Organico.md`](./Pipeline-Setter-Organico.md) | *(Superado por v2.)* Diseño original del board de Valen: Las 9 etapas del board de DM, las 4 puertas de entrada, etiquetas, la Smart List de "todos los formularios", los 8 workflows, permisos exactos para darle acceso en GHL, rutina diaria y métricas. |
 
 ## Fuentes
 
