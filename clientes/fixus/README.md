@@ -14,6 +14,7 @@ la **evaluación kinesiológica ($24.990)**. El WhatsApp queda como salida secun
 | `index.html` | — | Índice interno para revisar las tres (no publicar como destino de ads) |
 | `build.py` | — | Generador: plantilla única + copy por campaña |
 | `previsualizar/` | — | Las mismas 3 landings en **un solo archivo** cada una (doble clic y listo) |
+| `ghl/` | — | Las mismas 3 en **bloque para pegar en GoHighLevel** (ver `ghl/COMO-PEGAR.md`) |
 | `assets/` | — | CSS y JS compartidos |
 | `docs/` | — | Documentos fuente: Avatar, ADS y VSL |
 
@@ -23,11 +24,14 @@ Las tres páginas son **idénticas en estructura**. Solo cambia el copy.
 
 - **Para revisarlas rápido:** usa `previsualizar/`. Cada archivo lleva el CSS, el JS y el
   logo dentro, así que se abre con doble clic desde cualquier carpeta y se ve bien.
-- **Para publicar en el hosting:** sube los archivos de la raíz **junto con la carpeta
+- **Para publicar en GoHighLevel:** usa `ghl/`. Es un bloque para el elemento
+  *Custom Code / HTML*, con el CSS y el JS aislados bajo `#fixus-lp` para que los estilos
+  de GHL no lo rompan. Instrucciones en `ghl/COMO-PEGAR.md`.
+- **Para publicar en un hosting propio:** sube los archivos de la raíz **junto con la carpeta
   `assets/`**. Si subes el HTML solo, la página se ve sin estilos (letra Times New Roman
   y logo roto): es que no encuentra `assets/fixus.css`.
 
-Las dos versiones salen del mismo `build.py`, así que nunca se desincronizan.
+Las tres versiones salen del mismo `build.py`, así que nunca se desincronizan.
 
 ## Antes de publicar (obligatorio)
 
@@ -66,7 +70,7 @@ automática (`utm_content=deportista|dolor-cronico|postoperado`) para saber qué
 python3 build.py
 ```
 
-Eso regenera los tres HTML. **No edites los `.html` a mano**: se sobreescriben.
+Eso regenera las tres versiones (raíz, `previsualizar/` y `ghl/`). **No edites los `.html` a mano**: se sobreescriben.
 Si necesitas cambiar la *estructura* de las tres a la vez, edita `PLANTILLA` en el mismo archivo.
 
 ## Estructura de la página

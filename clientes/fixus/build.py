@@ -597,8 +597,153 @@ def construir_suelto(nombre):
     return destino
 
 
+
+# ============================================================================
+# 6. BLOQUE PARA PEGAR EN GOHIGHLEVEL
+# ============================================================================
+# GHL no acepta una página completa: hay que pegar un bloque dentro de su
+# elemento "Custom Code / HTML". Por eso acá:
+#   · todo el CSS se encierra bajo #fixus-lp para que los estilos de GHL no
+#     se mezclen con los nuestros (ni al revés),
+#   · el <div> se estira a ancho completo aunque GHL lo meta en su contenedor,
+#   · el CSS, el JS y las fuentes van dentro del mismo bloque.
+
+SCOPE = "#fixus-lp"
+
+
+def _prefijar(selector):
+    partes = []
+    for sel in selector.split(","):
+        sel = sel.strip()
+        if not sel:
+            continue
+        if sel.startswith(".js "):          # la clase .js vive en <html>, fuera del bloque
+            sel = sel[4:]
+        if sel in (":root", "html", "body"):
+            partes.append(SCOPE)
+        else:
+            partes.append(SCOPE + " " + sel)
+    vistos = []
+    for x in partes:
+        if x not in vistos:
+            vistos.append(x)
+    return ",".join(vistos)
+
+
+def escopar_css(css):
+    """Encierra todas las reglas bajo #fixus-lp, respetando los @media."""
+    import re
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    fuera, i, n = [], 0, len(css)
+    while i < n:
+        j = css.find("{", i)
+        if j == -1:
+            break
+        cabecera = css[i:j].strip()
+        if cabecera.startswith("@"):
+            profundidad, k = 1, j + 1
+            while k < n and profundidad:
+                if css[k] == "{":
+                    profundidad += 1
+                elif css[k] == "}":
+                    profundidad -= 1
+                k += 1
+            fuera.append(cabecera + "{" + escopar_css(css[j + 1:k - 1]) + "}")
+            i = k
+        else:
+            k = css.find("}", j)
+            cuerpo = css[j + 1:k].strip()
+            if cabecera and cuerpo:
+                fuera.append(_prefijar(cabecera) + "{" + cuerpo + "}")
+            i = k + 1
+    return "\n".join(fuera)
+
+
+RESET_GHL = """
+/* El bloque se estira a ancho completo aunque GHL lo meta en su contenedor */
+#fixus-lp{
+  position:relative;width:100vw;left:50%;right:50%;
+  margin-left:-50vw;margin-right:-50vw;
+  overflow-x:hidden;isolation:isolate;
+}
+/* Blindaje contra los estilos propios de GHL */
+#fixus-lp,#fixus-lp *{box-sizing:border-box}
+#fixus-lp *{margin:0;padding:0}
+#fixus-lp a{text-decoration:none!important;color:inherit}
+#fixus-lp ul,#fixus-lp ol,#fixus-lp li{list-style:none}
+#fixus-lp img{max-width:100%;display:block;border:0}
+#fixus-lp button{background:none;border:0;font-family:inherit;cursor:pointer}
+#fixus-lp p,#fixus-lp span,#fixus-lp li,#fixus-lp b,#fixus-lp em,
+#fixus-lp strong,#fixus-lp summary,#fixus-lp small,#fixus-lp i{font-family:inherit}
+#fixus-lp h1,#fixus-lp h2,#fixus-lp h3{text-transform:none}
+"""
+
+
+def construir_ghl(nombre):
+    origen = os.path.join(RUTA, nombre + ".html")
+    with io.open(origen, encoding="utf-8") as f:
+        html = f.read()
+
+    def leer(rel):
+        with io.open(os.path.join(RUTA, rel), encoding="utf-8") as f:
+            return f.read()
+
+    # --- CSS aislado ---
+    css = ("@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800"
+           "&family=Inter:wght@400;500;600;700&display=swap');\n"
+           + escopar_css(leer("assets/fixus.css")) + "\n" + RESET_GHL)
+
+    # --- JS: la raíz pasa a ser el div, no el body ---
+    js = leer("assets/fixus.js")
+    js = js.replace("var d = document;",
+                    "var d = document;\n  var RAIZ = d.getElementById('fixus-lp');")
+    js = js.replace("d.body ? d.body.getAttribute('data-campana') : ''",
+                    "RAIZ ? RAIZ.getAttribute('data-campana') : ''")
+    js = js.replace("d.body.getAttribute('data-campana')", "RAIZ.getAttribute('data-campana')")
+    js = js.replace("d.body.getAttribute('data-wa-msg')", "RAIZ.getAttribute('data-wa-msg')")
+    js = js.replace("#cta-hero", "#fixus-cta-hero")
+
+    # --- Cuerpo de la página, sin <html>/<head>/<body> ---
+    cuerpo = html[html.index("<body"):html.rindex("</body>")]
+    cuerpo = cuerpo[cuerpo.index(">") + 1:]
+    for basura in ('<script src="assets/fixus.js"></script>',
+                   "<script>document.getElementById('y').textContent=new Date().getFullYear();</script>"):
+        cuerpo = cuerpo.replace(basura, "")
+    cuerpo = cuerpo.replace('id="cta-hero"', 'id="fixus-cta-hero"')
+    cuerpo = cuerpo.replace('id="y"', 'id="fixus-y"')
+
+    atributos = html[html.index("<body"):html.index(">", html.index("<body"))]
+    atributos = atributos.replace("<body", "").strip()
+
+    bloque = (
+        "<!-- ===================================================================\n"
+        "     FIXUS · %s\n"
+        "     Pegar TAL CUAL en GoHighLevel: elemento \"Custom Code / HTML\".\n"
+        "     Antes de publicar, cambia los 4 valores de FIXUS = { ... } de más\n"
+        "     abajo (link de pago, WhatsApp, VSL y mapa).\n"
+        "     Generado por build.py — no editar a mano.\n"
+        "     =================================================================== -->\n"
+        "<style>\n%s\n</style>\n\n"
+        "<div id=\"fixus-lp\" %s>\n%s\n</div>\n\n"
+        "<script>\n%s\n"
+        "document.addEventListener('DOMContentLoaded',function(){\n"
+        "  var a=document.getElementById('fixus-y');\n"
+        "  if(a) a.textContent=new Date().getFullYear();\n"
+        "});\n</script>\n"
+    ) % (nombre, css, atributos, cuerpo.strip(), js)
+
+    carpeta = os.path.join(RUTA, "ghl")
+    if not os.path.isdir(carpeta):
+        os.makedirs(carpeta)
+    destino = os.path.join(carpeta, nombre + ".html")
+    with io.open(destino, "w", encoding="utf-8") as f:
+        f.write(bloque)
+    return destino
+
+
 if __name__ == "__main__":
     for nombre, c in CAMPANAS.items():
         construir(nombre, c)
         construir_suelto(nombre)
-        print("✓ %s.html  (+ previsualizar/%s.html)" % (nombre, nombre))
+        construir_ghl(nombre)
+        print("✓ %s.html  (+ previsualizar/ + ghl/)" % nombre)
