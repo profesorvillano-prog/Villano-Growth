@@ -568,6 +568,49 @@ def construir(nombre, c):
     return destino
 
 
+# ============================================================================
+# 5. VERSIÓN DE UN SOLO ARCHIVO (para revisar / enviar por correo)
+# ============================================================================
+# Mete el CSS, el JS y el logo DENTRO del HTML. Se abre con doble clic desde
+# cualquier carpeta, sin depender de assets/. Para publicar en el hosting es
+# mejor la versión normal (assets compartidos = un solo lugar que tocar).
+
+def construir_suelto(nombre):
+    import base64
+
+    origen = os.path.join(RUTA, nombre + ".html")
+    with io.open(origen, encoding="utf-8") as f:
+        html = f.read()
+
+    def leer(rel):
+        with io.open(os.path.join(RUTA, rel), encoding="utf-8") as f:
+            return f.read()
+
+    css = leer("assets/fixus.css")
+    js = leer("assets/fixus.js")
+    logo = "data:image/svg+xml;base64," + base64.b64encode(
+        leer("assets/logo.svg").encode("utf-8")).decode("ascii")
+
+    html = html.replace('<link rel="stylesheet" href="assets/fixus.css">',
+                        "<style>\n" + css + "\n</style>")
+    html = html.replace('<script src="assets/fixus.js"></script>',
+                        "<script>\n" + js + "\n</script>")
+    html = html.replace('assets/logo.svg', logo)
+    html = html.replace("<body ",
+                        "<!-- Versión de un solo archivo, generada por build.py. "
+                        "No editar a mano. -->\n<body ")
+
+    carpeta = os.path.join(RUTA, "previsualizar")
+    if not os.path.isdir(carpeta):
+        os.makedirs(carpeta)
+    destino = os.path.join(carpeta, nombre + ".html")
+    with io.open(destino, "w", encoding="utf-8") as f:
+        f.write(html)
+    return destino
+
+
 if __name__ == "__main__":
     for nombre, c in CAMPANAS.items():
-        print("✓", os.path.basename(construir(nombre, c)))
+        construir(nombre, c)
+        construir_suelto(nombre)
+        print("✓ %s.html  (+ previsualizar/%s.html)" % (nombre, nombre))

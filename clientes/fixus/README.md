@@ -13,10 +13,21 @@ la **evaluación kinesiológica ($24.990)**. El WhatsApp queda como salida secun
 | `kine-postoperado.html` | 3 · "Deja de arrastrarlo" | Post-operado o lesión de +1 año |
 | `index.html` | — | Índice interno para revisar las tres (no publicar como destino de ads) |
 | `build.py` | — | Generador: plantilla única + copy por campaña |
+| `previsualizar/` | — | Las mismas 3 landings en **un solo archivo** cada una (doble clic y listo) |
 | `assets/` | — | CSS, JS y logo compartidos |
 | `docs/` | — | Documentos fuente: Avatar, ADS y VSL |
 
 Las tres páginas son **idénticas en estructura**. Solo cambia el copy.
+
+## Cómo abrirlas
+
+- **Para revisarlas rápido:** usa `previsualizar/`. Cada archivo lleva el CSS, el JS y el
+  logo dentro, así que se abre con doble clic desde cualquier carpeta y se ve bien.
+- **Para publicar en el hosting:** sube los archivos de la raíz **junto con la carpeta
+  `assets/`**. Si subes el HTML solo, la página se ve sin estilos (letra Times New Roman
+  y logo roto): es que no encuentra `assets/fixus.css`.
+
+Las dos versiones salen del mismo `build.py`, así que nunca se desincronizan.
 
 ## Antes de publicar (obligatorio)
 

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="¿Saliste de una operación o llevas más de un año con la misma lesión? No se arregla con reposo ni pastillas. Evaluación, ejercicios hechos para ti y acompañamiento sesión a sesión. Kinesiología 1 a 1 en Providencia, a pasos del Metro Colón.">
+<title>Deja de arrastrar esa lesión · Kinesiología post-operatoria Fixus</title>
+
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IkZpeHVzIj4KICA8IS0tIEFwcm94aW1hY2nDs24gZGVsIGlzb3RpcG8gRml4dXMgbWllbnRyYXMgbm8gZXN0w6EgZWwgYXJjaGl2byBvZmljaWFsLgogICAgICAgUmVlbXBsYXphciBwb3IgZWwgU1ZHL1BORyBvcmlnaW5hbCBkZWwgbG9nby4gLS0+CiAgPGcgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj4KICAgIDxwYXRoIGQ9Ik02OCAxOC44IEEzNiAzNiAwIDEgMCAzNy43IDgzLjgiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSI3Ii8+CiAgICA8cGF0aCBkPSJNNzcuNiAyNi45IEEzNiAzNiAwIDEgMSAxOC44IDY4IiBzdHJva2U9IiNDODE2MUQiIHN0cm9rZS13aWR0aD0iNyIvPgogICAgPHBhdGggZD0iTTMxIDI3IEw2OSA3MyIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjExIi8+CiAgICA8cGF0aCBkPSJNNjkgMjcgTDMxIDczIiBzdHJva2U9IiNDODE2MUQiIHN0cm9rZS13aWR0aD0iMTEiLz4KICA8L2c+Cjwvc3ZnPgo=" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+
+<style>
+/* ==========================================================================
+   FIXUS · Sistema de diseño para landings de campaña
+   Negro + rojo Fixus. Minimalista, mobile-first, una sola acción.
+   Usado por: kine-deportista.html · kine-dolor.html · kine-postoperado.html
+   ========================================================================== */
+
+:root{
+  /* Marca */
+  --red:      #C8161D;   /* rojo Fixus (logo / banda de la web) */
+  --red-hi:   #E8353D;   /* hover y brillos */
+  --red-deep: #7E0D12;   /* sombras y degradados */
+  --red-soft: rgba(200,22,29,.14);
+
+  /* Superficies */
+  --bg:      #08080A;
+  --bg-2:    #0E0E11;
+  --surf:    #121216;
+  --surf-2:  #17171C;
+  --line:    rgba(255,255,255,.09);
+  --line-2:  rgba(255,255,255,.16);
+
+  /* Texto */
+  --t0: #FFFFFF;
+  --t1: #E6E6EA;
+  --t2: #A2A2AC;
+  --t3: #71717C;
+
+  --r:    14px;
+  --r-lg: 20px;
+
+  --display:'Archivo','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+
+  --sat: env(safe-area-inset-top,0px);
+  --sab: env(safe-area-inset-bottom,0px);
+  --z-bar: 200;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+body{
+  font-family:var(--body);
+  background:var(--bg);
+  color:var(--t1);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  /* Rejilla técnica + halo rojo superior (referencia FITPM / Social Business) */
+  background-image:
+    radial-gradient(ellipse 70% 45% at 50% -5%, rgba(200,22,29,.28) 0%, transparent 62%),
+    linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+  background-size:auto, 56px 56px, 56px 56px;
+  background-position:top center, center top, center top;
+  background-repeat:no-repeat, repeat, repeat;
+  background-attachment:scroll;
+}
+@media(min-width:900px){
+  body{background-size:auto, 72px 72px, 72px 72px}
+}
+
+img,video{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* ---------- Layout ---------- */
+.wrap{width:100%;max-width:760px;margin:0 auto;padding:0 22px}
+.wrap-wide{width:100%;max-width:1000px;margin:0 auto;padding:0 22px}
+section{position:relative}
+.sec{padding:64px 0}
+@media(min-width:760px){.sec{padding:88px 0}}
+.sec-alt{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+/* ---------- Tipografía ---------- */
+h1,h2,h3{font-family:var(--display);line-height:1.12;letter-spacing:-.02em;color:var(--t0);font-weight:800}
+h1{font-size:clamp(1.9rem,6.4vw,3.1rem)}
+h2{font-size:clamp(1.5rem,4.6vw,2.2rem)}
+h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:700;letter-spacing:-.01em}
+
+.eyebrow{
+  font-family:var(--display);font-size:.72rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--red-hi);
+  display:block;margin-bottom:14px;
+}
+.eyebrow-line{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px}
+.eyebrow-line::before,.eyebrow-line::after{content:"";height:1px;width:26px;background:var(--line-2)}
+.lead{font-size:clamp(1rem,2.7vw,1.1rem);color:var(--t2);line-height:1.62}
+.mark{color:var(--red-hi)}
+.center{text-align:center}
+.muted{color:var(--t3)}
+.small{font-size:.83rem;line-height:1.5}
+
+/* ---------- Header ---------- */
+.hdr{padding:calc(20px + var(--sat)) 0 8px;text-align:center}
+.hdr .logo{display:inline-flex;align-items:center;gap:10px}
+.hdr .logo img{height:34px;width:auto}
+.hdr .logo-txt{
+  font-family:var(--display);font-weight:800;font-size:1.42rem;
+  letter-spacing:.06em;color:#fff;
+}
+.hdr .logo-txt b{color:var(--red)}
+.hdr .place{
+  margin-top:9px;font-size:.73rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--t3);font-weight:600;
+}
+
+/* ---------- Hero ---------- */
+.hero{padding:26px 0 8px;text-align:center}
+.hero h1{margin-bottom:16px}
+.hero .lead{max-width:34ch;margin:0 auto}
+@media(min-width:760px){.hero .lead{max-width:46ch}}
+.kicker{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(.82rem,2.4vw,.95rem);letter-spacing:.04em;
+  text-transform:uppercase;color:var(--t2);margin-bottom:12px;
+}
+
+/* Píldora de prueba social */
+.pill{
+  display:inline-flex;align-items:center;gap:9px;
+  border:1px solid var(--line-2);border-radius:999px;
+  background:rgba(255,255,255,.04);
+  padding:7px 15px 7px 9px;margin-bottom:20px;
+  font-size:.8rem;color:var(--t2);font-weight:500;
+}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px var(--red-soft)}
+
+/* ---------- Video / VSL ---------- */
+.vsl{margin:30px auto 0;max-width:660px}
+.vsl-frame{
+  position:relative;border-radius:var(--r-lg);overflow:hidden;
+  border:1.5px solid rgba(200,22,29,.5);
+  box-shadow:0 0 0 1px rgba(0,0,0,.6), 0 0 42px -6px rgba(200,22,29,.55), 0 24px 60px -20px #000;
+  background:#0b0b0d;
+}
+.vsl-ratio{position:relative;width:100%;aspect-ratio:16/9}
+.vsl-ratio > iframe,.vsl-ratio > video{position:absolute;inset:0;width:100%;height:100%;border:0}
+/* Póster con botón de play (placeholder mientras no está el VSL montado) */
+.vsl-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vsl-play{
+  position:absolute;inset:0;display:flex;flex-direction:column;gap:15px;
+  align-items:center;justify-content:center;
+  background:linear-gradient(180deg,rgba(0,0,0,.10),rgba(0,0,0,.55));cursor:pointer;border:0;width:100%;
+}
+.vsl-play b{
+  font-family:var(--display);font-weight:700;font-size:.76rem;
+  letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.88);
+}
+.vsl-play b i{font-style:normal;color:var(--t3);margin-left:8px;letter-spacing:.06em}
+.vsl-mark{
+  position:absolute;top:14px;left:16px;display:flex;align-items:center;gap:7px;opacity:.5;
+}
+.vsl-mark img{width:18px;height:18px}
+.vsl-mark span{font-family:var(--display);font-weight:800;font-size:.72rem;letter-spacing:.14em;color:#fff}
+.vsl-play span{
+  width:66px;height:66px;border-radius:50%;
+  background:var(--red);display:grid;place-items:center;
+  box-shadow:0 0 0 8px rgba(200,22,29,.22), 0 10px 30px -6px rgba(0,0,0,.8);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.vsl-play:hover span{transform:scale(1.06);box-shadow:0 0 0 12px rgba(200,22,29,.24),0 10px 30px -6px #000}
+.vsl-play svg{width:22px;height:22px;fill:#fff;margin-left:3px}
+.vsl-cap{margin-top:12px;font-size:.82rem;color:var(--t3);text-align:center}
+
+/* ---------- Botones tipo tarjeta (referencia Physica) ---------- */
+.actions{margin:30px auto 0;max-width:520px;display:flex;flex-direction:column;gap:12px}
+.opt{
+  display:grid;grid-template-columns:44px 1fr 18px;align-items:center;gap:14px;
+  background:var(--surf);border:1px solid var(--line-2);border-radius:var(--r);
+  padding:15px 16px;text-align:left;width:100%;
+  transition:transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+.opt:hover{transform:translateY(-2px);border-color:var(--line-2);background:var(--surf-2)}
+.opt .ico{
+  width:44px;height:44px;border-radius:11px;display:grid;place-items:center;
+  background:rgba(255,255,255,.06);border:1px solid var(--line);
+}
+.opt .ico svg{width:20px;height:20px;stroke:var(--t1);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.opt .txt strong{display:block;font-family:var(--display);font-weight:700;font-size:1.02rem;color:var(--t0);line-height:1.25}
+.opt .txt em{display:block;font-style:normal;font-size:.82rem;color:var(--t3);margin-top:3px}
+.opt .chev{stroke:var(--t3);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;width:18px;height:18px}
+
+/* Primario: el que paga la evaluación */
+.opt.primary{
+  background:linear-gradient(180deg,rgba(200,22,29,.20),rgba(200,22,29,.07));
+  border-color:rgba(200,22,29,.72);
+  box-shadow:0 0 34px -8px rgba(200,22,29,.60), inset 0 1px 0 rgba(255,255,255,.07);
+}
+.opt.primary:hover{border-color:var(--red-hi);box-shadow:0 0 44px -6px rgba(200,22,29,.75), inset 0 1px 0 rgba(255,255,255,.09)}
+.opt.primary .ico{background:var(--red);border-color:rgba(255,255,255,.22)}
+.opt.primary .ico svg{stroke:#fff}
+.opt.primary .chev{stroke:#fff}
+.opt.primary .txt em{color:rgba(255,255,255,.72)}
+.tag{
+  display:inline-block;margin-top:7px;font-family:var(--display);font-weight:700;
+  font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--red);color:#fff;border-radius:5px;padding:3px 8px;
+}
+.opt.ghost{background:rgba(255,255,255,.03);border-color:var(--line);padding:13px 16px}
+.opt.ghost .txt strong{font-size:.94rem;color:var(--t1)}
+.opt.ghost .ico{width:40px;height:40px}
+.actions-note{margin-top:14px;text-align:center;font-size:.79rem;color:var(--t3);line-height:1.5}
+
+/* ---------- Tiras de datos ---------- */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:26px}
+.fact{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:14px 10px;text-align:center}
+.fact b{display:block;font-family:var(--display);font-size:.95rem;color:var(--t0);font-weight:700;line-height:1.2}
+.fact span{display:block;font-size:.71rem;color:var(--t3);margin-top:4px;line-height:1.35}
+@media(max-width:520px){.facts{gap:8px}.fact{padding:12px 7px}.fact b{font-size:.86rem}.fact span{font-size:.66rem}}
+
+/* ---------- Lista de checks ---------- */
+.checks{display:grid;gap:11px;margin-top:26px;max-width:600px;margin-left:auto;margin-right:auto}
+.check{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;
+  background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:14px 15px}
+.check svg{width:24px;height:24px;stroke:var(--red-hi);fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
+.check p{font-size:.94rem;color:var(--t1);line-height:1.5}
+.check p b{color:var(--t0);font-weight:600}
+
+/* ---------- Antes / Después (dolor → resultado) ---------- */
+.ba{display:grid;gap:12px;margin-top:26px}
+@media(min-width:700px){.ba{grid-template-columns:1fr 1fr}}
+.ba-card{border:1px solid var(--line);border-radius:var(--r);padding:20px;background:var(--surf)}
+.ba-card.now{border-color:rgba(200,22,29,.45);background:linear-gradient(180deg,rgba(200,22,29,.09),rgba(255,255,255,.02))}
+.ba-card h3{margin-bottom:12px;font-size:.74rem;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);font-weight:700}
+.ba-card.now h3{color:var(--red-hi)}
+.ba-card li{list-style:none;font-size:.93rem;color:var(--t2);padding:7px 0 7px 20px;position:relative;line-height:1.5}
+.ba-card li::before{content:"—";position:absolute;left:0;color:var(--t3)}
+.ba-card.now li::before{content:"→";color:var(--red-hi)}
+.ba-card.now li{color:var(--t1)}
+
+/* ---------- Proceso / timeline (referencia AU Coaching) ---------- */
+.flow{display:grid;gap:28px;margin-top:34px}
+@media(min-width:900px){.flow{grid-template-columns:minmax(0,290px) minmax(0,1fr);gap:48px;align-items:start}}
+.flow-intro h2{margin-bottom:12px}
+@media(min-width:900px){.flow-intro{position:sticky;top:38px}}
+.steps{position:relative;display:grid;gap:14px}
+.step{display:grid;grid-template-columns:38px 1fr;gap:16px;align-items:start;position:relative}
+.step::before{
+  content:"";position:absolute;left:18.5px;top:38px;bottom:-14px;width:1px;
+  background:linear-gradient(180deg,var(--line-2),var(--line));
+}
+.step:last-child::before{display:none}
+.step-n{
+  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  background:var(--red);color:#fff;font-family:var(--display);font-weight:800;
+  font-size:.8rem;letter-spacing:.02em;z-index:1;
+  box-shadow:0 0 0 5px rgba(200,22,29,.16);
+}
+.step-c{background:var(--surf);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.step-c h3{margin-bottom:6px}
+.step-c p{font-size:.9rem;color:var(--t2);line-height:1.55}
+
+/* ---------- Testimonios ---------- */
+.quotes{display:grid;gap:12px;margin-top:26px}
+@media(min-width:760px){.quotes{grid-template-columns:1fr 1fr}}
+.quote{background:var(--surf);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.quote .stars{color:var(--red-hi);font-size:.85rem;letter-spacing:.12em;margin-bottom:10px}
+.quote p{font-size:.95rem;color:var(--t1);line-height:1.6;font-style:italic}
+.quote footer{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:.82rem;color:var(--t3)}
+.quote footer b{display:block;color:var(--t1);font-weight:600;font-style:normal}
+
+/* ---------- Equipo ---------- */
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}
+.team figure{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf)}
+.team img{width:100%;aspect-ratio:3/4;object-fit:cover;filter:grayscale(1) contrast(1.06)}
+.team figcaption{padding:10px;text-align:center}
+.team b{display:block;font-family:var(--display);font-size:.86rem;color:var(--t0)}
+.team span{font-size:.72rem;color:var(--t3)}
+
+/* ---------- FAQ ---------- */
+.faq{margin-top:26px;display:grid;gap:9px;max-width:660px;margin-left:auto;margin-right:auto}
+.faq details{background:var(--surf);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.faq details[open]{border-color:var(--line-2)}
+.faq summary{
+  list-style:none;cursor:pointer;padding:15px 46px 15px 17px;position:relative;
+  font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--t0);line-height:1.4;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"";position:absolute;right:18px;top:21px;width:9px;height:9px;
+  border-right:2px solid var(--red-hi);border-bottom:2px solid var(--red-hi);
+  transform:rotate(45deg);transition:transform .2s ease;
+}
+.faq details[open] summary::after{transform:rotate(-135deg);top:24px}
+.faq .a{padding:0 17px 16px;font-size:.92rem;color:var(--t2);line-height:1.6}
+.faq .a b{color:var(--t1);font-weight:600}
+
+/* ---------- Ubicación ---------- */
+.place-card{
+  margin-top:24px;border:1px solid var(--line);border-radius:var(--r);
+  background:var(--surf);padding:20px;display:grid;gap:6px;text-align:center;
+}
+.place-card b{font-family:var(--display);color:var(--t0);font-size:1.02rem}
+.place-card a{color:var(--red-hi);font-weight:600;font-size:.9rem}
+
+/* ---------- Cierre ---------- */
+.close{text-align:center}
+.close h2{max-width:20ch;margin:0 auto 14px}
+
+/* ---------- Footer ---------- */
+.ftr{border-top:1px solid var(--line);padding:30px 0 calc(104px + var(--sab));text-align:center}
+@media(min-width:760px){.ftr{padding-bottom:36px}}
+.ftr .logo-txt{font-family:var(--display);font-weight:800;letter-spacing:.06em;color:var(--t2);font-size:1rem}
+.ftr p{font-size:.76rem;color:var(--t3);margin-top:8px;line-height:1.6}
+.ftr a{color:var(--t2)}
+
+/* ---------- Barra fija móvil ---------- */
+.bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:var(--z-bar);
+  padding:10px 14px calc(10px + var(--sab));
+  background:rgba(8,8,10,.92);backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);
+  display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;
+  transform:translateY(120%);transition:transform .28s ease;
+}
+.bar.on{transform:translateY(0)}
+@media(min-width:760px){.bar{display:none}}
+.bar-cta{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--red);color:#fff;border-radius:11px;padding:14px 16px;
+  font-family:var(--display);font-weight:700;font-size:.94rem;letter-spacing:.01em;
+  box-shadow:0 0 26px -6px rgba(200,22,29,.8);
+}
+.bar-cta small{font-weight:600;opacity:.85;font-size:.8rem}
+.bar-wa{
+  width:52px;height:52px;border-radius:11px;display:grid;place-items:center;
+  background:rgba(255,255,255,.07);border:1px solid var(--line-2);
+}
+.bar-wa svg{width:23px;height:23px;fill:#fff}
+
+/* ---------- Animación de entrada ---------- */
+.rv{opacity:0;transform:translateY(16px)}
+.js .rv{transition:opacity .55s ease, transform .55s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+
+</style>
+<script>document.documentElement.classList.add('js');</script>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Deja de arrastrar esa lesión · Kinesiología post-operatoria Fixus">
+<meta property="og:description" content="¿Saliste de una operación o llevas más de un año con la misma lesión? No se arregla con reposo ni pastillas. Evaluación, ejercicios hechos para ti y acompañamiento sesión a sesión. Kinesiología 1 a 1 en Providencia, a pasos del Metro Colón.">
+<meta property="og:locale" content="es_CL">
+</head>
+
+<!-- Versión de un solo archivo, generada por build.py. No editar a mano. -->
+<body data-campana="postoperado" data-wa-msg="Hola, vengo de una operación / llevo tiempo con una lesión y quiero saber cómo funciona la evaluación kinesiológica.">
+
+<!-- ============================ HEADER ============================ -->
+<header class="hdr">
+  <div class="wrap">
+    <a class="logo" href="https://www.fixus.cl" aria-label="Fixus">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IkZpeHVzIj4KICA8IS0tIEFwcm94aW1hY2nDs24gZGVsIGlzb3RpcG8gRml4dXMgbWllbnRyYXMgbm8gZXN0w6EgZWwgYXJjaGl2byBvZmljaWFsLgogICAgICAgUmVlbXBsYXphciBwb3IgZWwgU1ZHL1BORyBvcmlnaW5hbCBkZWwgbG9nby4gLS0+CiAgPGcgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj4KICAgIDxwYXRoIGQ9Ik02OCAxOC44IEEzNiAzNiAwIDEgMCAzNy43IDgzLjgiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSI3Ii8+CiAgICA8cGF0aCBkPSJNNzcuNiAyNi45IEEzNiAzNiAwIDEgMSAxOC44IDY4IiBzdHJva2U9IiNDODE2MUQiIHN0cm9rZS13aWR0aD0iNyIvPgogICAgPHBhdGggZD0iTTMxIDI3IEw2OSA3MyIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjExIi8+CiAgICA8cGF0aCBkPSJNNjkgMjcgTDMxIDczIiBzdHJva2U9IiNDODE2MUQiIHN0cm9rZS13aWR0aD0iMTEiLz4KICA8L2c+Cjwvc3ZnPgo=" alt="" width="34" height="34">
+      <span class="logo-txt">FI<b>X</b>US</span>
+    </a>
+    <p class="place">Kinesiología &amp; rendimiento · Providencia</p>
+  </div>
+</header>
+
+<!-- ============================= HERO ============================= -->
+<section class="hero">
+  <div class="wrap">
+    <span class="pill"><span class="dot"></span>Post-operatorio y lesiones antiguas · Providencia</span>
+    <p class="kicker">Saliste de una operación o llevas más de un año arrastrando lo mismo</p>
+    <h1>Deja de arrastrarlo. <span class="mark">Recupérate en serio.</span></h1>
+    <p class="lead">Cuando algo lleva mucho tiempo mal no se arregla con reposo ni con pastillas. Se arregla con ejercicios hechos para ti y alguien al lado, sesión a sesión.</p>
+
+    <!-- VSL -->
+    <div class="vsl">
+      <div class="vsl-frame">
+        <div class="vsl-ratio">
+          <div class="vsl-poster" style="background:radial-gradient(ellipse 66% 66% at 50% 38%,#1d1d23,#09090b)"></div>
+          <div class="vsl-mark"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IkZpeHVzIj4KICA8IS0tIEFwcm94aW1hY2nDs24gZGVsIGlzb3RpcG8gRml4dXMgbWllbnRyYXMgbm8gZXN0w6EgZWwgYXJjaGl2byBvZmljaWFsLgogICAgICAgUmVlbXBsYXphciBwb3IgZWwgU1ZHL1BORyBvcmlnaW5hbCBkZWwgbG9nby4gLS0+CiAgPGcgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj4KICAgIDxwYXRoIGQ9Ik02OCAxOC44IEEzNiAzNiAwIDEgMCAzNy43IDgzLjgiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSI3Ii8+CiAgICA8cGF0aCBkPSJNNzcuNiAyNi45IEEzNiAzNiAwIDEgMSAxOC44IDY4IiBzdHJva2U9IiNDODE2MUQiIHN0cm9rZS13aWR0aD0iNyIvPgogICAgPHBhdGggZD0iTTMxIDI3IEw2OSA3MyIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjExIi8+CiAgICA8cGF0aCBkPSJNNjkgMjcgTDMxIDczIiBzdHJva2U9IiNDODE2MUQiIHN0cm9rZS13aWR0aD0iMTEiLz4KICA8L2c+Cjwvc3ZnPgo=" alt="" width="18" height="18"><span>FIXUS</span></div>
+          <button class="vsl-play" data-video="" aria-label="Ver el video">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+            <b>Mira cómo funciona</b>
+          </button>
+        </div>
+      </div>
+      <p class="vsl-cap">Nati te muestra en menos de 3 minutos cómo te podemos ayudar.</p>
+    </div>
+
+    <!-- CTA principal -->
+    <div class="actions" id="cta-hero">
+      <a class="opt primary" data-cta="pago" data-pos="hero" href="#">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg></span>
+        <span class="txt">
+          <strong>Agenda tu evaluación</strong>
+          <em>Reservas y pagas tu hora ahora mismo</em>
+          <span class="tag">$24.990</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
+      <a class="opt ghost" data-cta="whatsapp" data-pos="hero" href="#" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.5 7.3L3 20.5l1.8-5.3A8.4 8.4 0 1 1 21 11.5z"/></svg></span>
+        <span class="txt">
+          <strong>¿Tienes una duda antes?</strong>
+          <em>Escríbenos por WhatsApp</em>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+    </div>
+    <p class="actions-note">Evaluación kinesiológica de 1 hora · Providencia, a pasos del Metro Colón</p>
+
+    <div class="facts">
+      <div class="fact"><b>1 a 1</b><span>Un kinesiólogo contigo toda la sesión</span></div>
+      <div class="fact"><b>$24.990</b><span>Evaluación inicial</span></div>
+      <div class="fact"><b>Metro Colón</b><span>Providencia, a pasos</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== ANTES / DESPUÉS ======================== -->
+<section class="sec">
+  <div class="wrap rv">
+    <div class="center">
+      <span class="eyebrow eyebrow-line">El problema</span>
+      <h2>Lo que lleva tiempo mal no se arregla solo</h2>
+      <p class="lead" style="margin-top:12px">Ni con reposo, ni con pastillas, ni esperando a ver si esta vez sí.</p>
+    </div>
+    <div class="ba">
+      <div class="ba-card">
+        <h3>Así estás hoy</h3>
+        <ul><li>Saliste de pabellón con 10 sesiones y ninguna explicación.</li>
+          <li>Llevas meses o años con la misma molestia dando vueltas.</li>
+          <li>Cada vez que intentas retomar, recaes.</li>
+          <li>No sabes hasta dónde puedes exigirte sin dañarte.</li></ul>
+      </div>
+      <div class="ba-card now">
+        <h3>Así sales de Fixus</h3>
+        <ul><li>Sabes cómo quedaste y qué necesitas recuperar.</li>
+          <li>Progresión clara: cargas que suben cuando corresponde.</li>
+          <li>Alguien al lado corrigiendo cada sesión, sin improvisar.</li>
+          <li>Recuperas la función completa, no solo el alta médica.</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== LA EVALUACIÓN ========================== -->
+<section class="sec sec-alt">
+  <div class="wrap rv">
+    <div class="center">
+      <span class="eyebrow eyebrow-line">El primer paso</span>
+      <h2>Todo parte por una hora: la evaluación</h2>
+      <p class="lead" style="margin-top:12px">Es donde entendemos cómo quedaste y qué necesitas para recuperarte de verdad, sin apuros y sin recaídas.</p>
+    </div>
+    <div class="checks"><div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Cómo quedaste.</b> Revisamos tu cirugía o tu lesión, el tiempo transcurrido y las indicaciones médicas.</p></div>
+      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Qué recuperaste y qué falta.</b> Evaluamos movilidad, fuerza y control comparando con el lado sano.</p></div>
+      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Hasta dónde puedes exigirte.</b> Definimos límites y progresión para que avances sin retroceder.</p></div>
+      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Tu paso a paso.</b> Sales con el plan escrito: qué hacemos, cuántas sesiones y con qué objetivo.</p></div></div>
+
+    <div class="actions" style="margin-top:28px">
+      <a class="opt primary" data-cta="pago" data-pos="evaluacion" href="#">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg></span>
+        <span class="txt">
+          <strong>Reservar mi evaluación</strong>
+          <em>Eliges día y hora, pagas y queda agendada</em>
+          <span class="tag">$24.990</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PROCESO ============================ -->
+<section class="sec">
+  <div class="wrap-wide rv">
+    <div class="flow">
+      <div class="flow-intro">
+        <span class="eyebrow">Cómo funciona</span>
+        <h2>Un proceso claro, medible y acompañado.</h2>
+        <p class="lead" style="margin-top:12px">Desde la primera hora sabes qué tienes, qué vamos a hacer y hasta cuándo.</p>
+      </div>
+      <div class="steps"><div class="step"><span class="step-n">01</span><div class="step-c"><h3>Evaluación inicial</h3><p>Una hora contigo: revisamos qué te pasa, desde cuándo, tu historial y qué necesitas volver a hacer.</p></div></div>
+        <div class="step"><span class="step-n">02</span><div class="step-c"><h3>Diagnóstico y plan</h3><p>Te explicamos en palabras simples qué tienes, por qué pasó y cuánto va a tomar. Sales con un paso a paso escrito.</p></div></div>
+        <div class="step"><span class="step-n">03</span><div class="step-c"><h3>Tratamiento sesión a sesión</h3><p>Camilla cuando hace falta y ejercicio siempre, con un kinesiólogo al lado corrigiendo todo el rato.</p></div></div>
+        <div class="step"><span class="step-n">04</span><div class="step-c"><h3>Ajustes según cómo respondes</h3><p>El plan se corrige semana a semana según tu avance real, no según un protocolo genérico.</p></div></div>
+        <div class="step"><span class="step-n">05</span><div class="step-c"><h3>Alta y que no vuelva</h3><p>No terminamos cuando deja de doler. Terminamos cuando estás fuerte para que no se repita.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ POR QUÉ ============================ -->
+<section class="sec sec-alt">
+  <div class="wrap rv">
+    <div class="center">
+      <span class="eyebrow eyebrow-line">La diferencia</span>
+      <h2>Por qué acá y no en cualquier parte</h2>
+    </div>
+    <div class="checks"><div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>1 a 1 toda la sesión.</b> Un kinesiólogo contigo de principio a fin, corrigiendo cada ejercicio.</p></div>
+      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Trabajamos con tus indicaciones médicas</b> y respetamos los plazos de tu cirugía.</p></div>
+      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Camilla y ejercicio.</b> La camilla acompaña, pero lo que recupera la función es el trabajo activo.</p></div>
+      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Reembolsable en tu isapre</b> si traes orden médica. Te explicamos cómo conseguirla.</p></div></div>
+  </div>
+</section>
+
+<!-- ========================== TESTIMONIOS ==========================
+     PENDIENTE: grabar los 2 testimonios del documento de avatar
+     (deportista que volvió a jugar · paciente 40+ con dolor crónico).
+     Cuando estén, borra este comentario y deja la sección visible.
+
+<section class="sec">
+  <div class="wrap rv">
+    <div class="center">
+      <span class="eyebrow eyebrow-line">Resultados reales</span>
+      <h2>Lo que dicen los pacientes</h2>
+    </div>
+    <div class="quotes">
+      <figure class="quote">
+        <div class="stars">★★★★★</div>
+        <p>"(Testimonio real aquí)"</p>
+        <footer><b>Nombre</b>Motivo de consulta · Nº de sesiones</footer>
+      </figure>
+      <figure class="quote">
+        <div class="stars">★★★★★</div>
+        <p>"(Testimonio real aquí)"</p>
+        <footer><b>Nombre</b>Motivo de consulta · Nº de sesiones</footer>
+      </figure>
+    </div>
+  </div>
+</section>
+================================================================= -->
+
+<!-- ============================== FAQ ============================== -->
+<section class="sec">
+  <div class="wrap rv">
+    <div class="center">
+      <span class="eyebrow eyebrow-line">Antes de agendar</span>
+      <h2>Lo que todos preguntan</h2>
+    </div>
+    <div class="faq"><details><summary>Vengo de una operación, ¿pueden atenderme?</summary><div class="a">Sí, es uno de los motivos de consulta más frecuentes. Trabajamos con las indicaciones de tu médico y respetamos los plazos de tu cirugía. Trae el informe operatorio o el dato de qué te hicieron y cuándo: con eso armamos la progresión.</div></details>
+      <details><summary>Ya pasó mucho tiempo, ¿sirve igual empezar ahora?</summary><div class="a">Sí. Que haya pasado un año no significa que ya no tenga arreglo: significa que hay que evaluar bien qué quedó pendiente y trabajarlo de forma progresiva. Muchos de los casos que mejor responden son justamente los que llevaban tiempo dando vueltas.</div></details>
+      <details><summary>¿Necesito orden médica para atenderme?</summary><div class="a">No. Puedes venir sin orden médica y empezar el mismo día. La orden sirve para otra cosa: <b>con ella puedes reembolsar las sesiones en tu isapre</b>. Si no la tienes, hoy existen órdenes médicas online por unos pocos miles de pesos y te explicamos cómo sacarla.</div></details>
+      <details><summary>¿Cuánto cuesta el tratamiento completo?</summary><div class="a">La evaluación inicial son <b>$24.990</b> y es lo único que pagas ahora. Si después necesitas tratamiento, el plan de <b>10 sesiones cuesta $300.000</b> y es reembolsable en tu isapre con orden médica. En la evaluación te decimos cuántas sesiones necesitas realmente: si son menos, son menos.</div></details>
+      <details><summary>¿La kinesiología no es puro masaje?</summary><div class="a">No. Usamos camilla y terapia manual cuando hace falta, pero el trabajo que resuelve el problema es el <b>ejercicio dirigido</b>: recuperar fuerza y control de la zona. Por eso el dolor no vuelve a las tres semanas.</div></details>
+      <details><summary>¿Cuántas veces por semana tengo que venir?</summary><div class="a">Lo definimos en la evaluación según tu caso. Lo habitual es <b>dos veces por semana</b>, y ajustamos si tu horario no da: preferimos una frecuencia que puedas sostener a un plan perfecto que abandones al mes.</div></details>
+      <details><summary>¿Dónde están y cómo llego?</summary><div class="a">Estamos en <b>Providencia, a pasos del Metro Colón</b>. Muchos pacientes se escapan de la pega, hacen la sesión y vuelven. <a data-cta="mapa" href="#">Ver en el mapa</a>.</div></details></div>
+  </div>
+</section>
+
+<!-- ============================= CIERRE ============================= -->
+<section class="sec sec-alt">
+  <div class="wrap rv close">
+    <span class="eyebrow eyebrow-line">Empieza acá</span>
+    <h2>Es tu oportunidad de resolverlo de una vez.</h2>
+    <p class="lead" style="max-width:40ch;margin:0 auto">Agenda tu evaluación y empecemos tu recuperación en serio.</p>
+
+    <div class="actions">
+      <a class="opt primary" data-cta="pago" data-pos="cierre" href="#">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg></span>
+        <span class="txt">
+          <strong>Agenda tu evaluación</strong>
+          <em>Reservas y pagas tu hora ahora mismo</em>
+          <span class="tag">$24.990</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+      <a class="opt ghost" data-cta="whatsapp" data-pos="cierre" href="#" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.5 7.3L3 20.5l1.8-5.3A8.4 8.4 0 1 1 21 11.5z"/></svg></span>
+        <span class="txt">
+          <strong>Prefiero preguntar primero</strong>
+          <em>Escríbenos por WhatsApp</em>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+    </div>
+
+    <div class="place-card">
+      <b>Providencia · a pasos del Metro Colón</b>
+      <span class="small muted">Santiago, Chile</span>
+      <a data-cta="mapa" href="#">Ver cómo llegar →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= FOOTER ============================= -->
+<footer class="ftr">
+  <div class="wrap">
+    <span class="logo-txt">FIXUS</span>
+    <p>
+      Kinesiología y rendimiento · Providencia, Santiago<br>
+      © <span id="y">2026</span> Fixus. Todos los derechos reservados. ·
+      <a href="https://www.fixus.cl">fixus.cl</a>
+    </p>
+  </div>
+</footer>
+
+<!-- ========================= BARRA FIJA MÓVIL ========================= -->
+<div class="bar">
+  <a class="bar-cta" data-cta="pago" data-pos="barra" href="#">Agenda tu evaluación <small>$24.990</small></a>
+  <a class="bar-wa" data-cta="whatsapp" data-pos="barra" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14c-.2.6-1.2 1.2-1.7 1.2-.5 0-.9.2-3-.9s-3.4-3.6-3.5-3.8c-.1-.2-.9-1.2-.9-2.3s.6-1.6.8-1.8c.2-.2.4-.3.6-.3h.4c.2 0 .4 0 .5.4l.7 1.7c.1.2 0 .4-.1.5l-.3.4c-.1.1-.3.3-.1.6.1.3.6 1.1 1.3 1.7.9.8 1.6 1 1.9 1.2.2.1.4 0 .5-.1l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.3.1.1.1.6 0 1z"/></svg>
+  </a>
+</div>
+
+<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+<script>
+/* ==========================================================================
+   FIXUS · Configuración y comportamiento compartido de las landings
+   --------------------------------------------------------------------------
+   👉 EDITA SOLO ESTE BLOQUE. Los tres landings toman los enlaces de aquí.
+   ========================================================================== */
+
+var FIXUS = {
+  // Link de PAGO/AGENDA de la evaluación kinesiológica ($24.990).
+  // Pega aquí el link de Flow / Mercado Pago / calendario con pago.
+  PAGO_URL: 'https://www.fixus.cl/#agenda',            // ← REEMPLAZAR
+
+  // WhatsApp (botón secundario). Formato: 56 + número, sin + ni espacios.
+  WA_NUMERO: '56900000000',                            // ← REEMPLAZAR
+
+  // VSL de kinesiología. Pega la URL EMBED del video (no la de compartir).
+  //   YouTube  → https://www.youtube.com/embed/ABC123
+  //   Vimeo    → https://player.vimeo.com/video/123456789
+  // Si lo dejas vacío, el botón de play lleva directo a agendar.
+  VSL_EMBED: '',                                       // ← REEMPLAZAR
+
+  // Ubicación (link de Google Maps del centro).
+  MAPA_URL: 'https://maps.google.com/?q=Fixus+Providencia+Santiago', // ← REEMPLAZAR
+
+  // Píxeles (opcional). Si los dejas vacíos no se carga nada.
+  META_PIXEL_ID: '',                                   // ej. '123456789012345'
+  GA4_ID: ''                                           // ej. 'G-XXXXXXXXXX'
+};
+
+(function () {
+  'use strict';
+
+  var d = document;
+  var campana = d.body ? d.body.getAttribute('data-campana') : '';
+
+  /* ---- 1. Rellena los enlaces de todos los CTA ---- */
+  function enlaces() {
+    campana = d.body.getAttribute('data-campana') || 'kinesiologia';
+
+    // Pago / agenda: se le añade UTM de campaña para poder medir qué landing vende.
+    // Las UTM van ANTES del #ancla, si el link trae una.
+    var pago = FIXUS.PAGO_URL || '#';
+    if (pago.charAt(0) !== '#') {
+      var corte = pago.indexOf('#');
+      var base = corte > -1 ? pago.slice(0, corte) : pago;
+      var ancla = corte > -1 ? pago.slice(corte) : '';
+      base += (base.indexOf('?') > -1 ? '&' : '?') +
+              'utm_source=meta&utm_medium=paid&utm_campaign=kinesiologia&utm_content=' + campana;
+      pago = base + ancla;
+    }
+    Array.prototype.forEach.call(d.querySelectorAll('[data-cta="pago"]'), function (a) {
+      a.setAttribute('href', pago);
+    });
+
+    // WhatsApp: mensaje distinto según la campaña
+    var msg = d.body.getAttribute('data-wa-msg') || 'Hola, quiero información sobre la evaluación kinesiológica.';
+    var wa = 'https://wa.me/' + FIXUS.WA_NUMERO + '?text=' + encodeURIComponent(msg);
+    Array.prototype.forEach.call(d.querySelectorAll('[data-cta="whatsapp"]'), function (a) {
+      a.setAttribute('href', wa);
+    });
+
+    Array.prototype.forEach.call(d.querySelectorAll('[data-cta="mapa"]'), function (a) {
+      a.setAttribute('href', FIXUS.MAPA_URL);
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+    });
+  }
+
+  /* ---- 2. Barra fija móvil: aparece al pasar el primer CTA ---- */
+  function barra() {
+    var bar = d.querySelector('.bar');
+    var ancla = d.querySelector('#cta-hero');
+    if (!bar || !ancla) return;
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          bar.classList.toggle('on', !e.isIntersecting && e.boundingClientRect.top < 0);
+        });
+      }, { threshold: 0 }).observe(ancla);
+    } else {
+      bar.classList.add('on');
+    }
+  }
+
+  /* ---- 3. Animación de entrada por sección ---- */
+  function revelar() {
+    var items = d.querySelectorAll('.rv');
+    if (!items.length) return;
+    if (!('IntersectionObserver' in window)) {
+      Array.prototype.forEach.call(items, function (n) { n.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+    Array.prototype.forEach.call(items, function (n) { io.observe(n); });
+  }
+
+  /* ---- 4. Reproductor del VSL: carga el iframe solo al hacer clic ---- */
+  function video() {
+    Array.prototype.forEach.call(d.querySelectorAll('[data-video]'), function (btn) {
+      btn.addEventListener('click', function () {
+        var src = FIXUS.VSL_EMBED;
+
+        // Sin video montado todavía: el play lleva al CTA en vez de romperse.
+        if (!src) {
+          var cta = d.querySelector('#cta-hero');
+          if (cta) cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+
+        var cont = btn.closest('.vsl-ratio');
+        var f = d.createElement('iframe');
+        f.src = src + (src.indexOf('?') > -1 ? '&' : '?') + 'autoplay=1&rel=0';
+        f.setAttribute('title', 'Kinesiología Fixus — cómo funciona');
+        f.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen');
+        f.setAttribute('allowfullscreen', '');
+        cont.innerHTML = '';
+        cont.appendChild(f);
+        track('VerVSL');
+      });
+    });
+  }
+
+  /* ---- 5. Medición de clics en los CTA ---- */
+  function track(evento, extra) {
+    var data = extra || {};
+    data.campana = campana;
+    if (window.fbq) window.fbq('trackCustom', evento, data);
+    if (window.gtag) window.gtag('event', evento, data);
+    if (window.dataLayer) window.dataLayer.push(Object.assign({ event: evento }, data));
+  }
+
+  function clics() {
+    d.addEventListener('click', function (e) {
+      var a = e.target.closest('[data-cta]');
+      if (!a) return;
+      var tipo = a.getAttribute('data-cta');
+      if (tipo === 'pago') track('ClicAgendarEvaluacion', { ubicacion: a.getAttribute('data-pos') || '' });
+      if (tipo === 'whatsapp') track('ClicWhatsApp', { ubicacion: a.getAttribute('data-pos') || '' });
+    });
+  }
+
+  /* ---- 6. Píxeles (solo si están configurados) ---- */
+  function pixeles() {
+    if (FIXUS.META_PIXEL_ID) {
+      !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+        t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+      }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+      window.fbq('init', FIXUS.META_PIXEL_ID);
+      window.fbq('track', 'PageView');
+    }
+    if (FIXUS.GA4_ID) {
+      var s = d.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + FIXUS.GA4_ID;
+      d.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', FIXUS.GA4_ID);
+    }
+  }
+
+  function init() { enlaces(); barra(); revelar(); video(); clics(); pixeles(); }
+
+  if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
+</script>
+</body>
+</html>
