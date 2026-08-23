@@ -430,12 +430,11 @@ Una por transición. Si una cae, se sabe exactamente quién y qué hay que arreg
 | **Cruce del portón** | `②`4 ÷ `②`2 | automático | **hoy ~88 %** (60 `confirmada` vs. 8 `sin-confirmar`) |
 | Diagnóstico completado | tarjetas de `②`5 con `Resumen Lead` | Anaís | **objetivo 100 %** |
 | **Show-up rate** | `③`1 ÷ (`③`1+`③`2) | Anaís | **hoy ~39 %** |
+| Cierre | `③`3 ÷ `③`1 | Rafa | a medir |
+| Cobro completo | `④`5 ÷ `④`0 | Admin | a medir |
 
 La métrica que resume el guion entero es el show-up: `G1` a los 10 min, el portón
 de `A3` y el vídeo personalizado de `M7b` existen todos para moverla.
-
-| Cierre | `③`3 ÷ `③`1 | Rafa | a medir |
-| Cobro completo | `④`5 ÷ `④`0 | Admin | a medir |
 
 Los dos números de "hoy" salen de las abiertas actuales (52 ghost vs. 46 con
 agenda; 34 no-show vs. 22 asistió) y son una foto de las vivas, no una serie
