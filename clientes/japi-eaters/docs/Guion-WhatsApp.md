@@ -42,7 +42,7 @@ Número **+569**, firma Rafa. Workflow **W7**.
 
 ---
 
-## FASE 1 · Al agendar → etapas **2 · Sin Confirmar** y **3 · Confirmada**
+## FASE 1 · Al agendar → etapas **2 · Nueva Agenda**, **3 · Sin Confirmar** y **4 · Confirmada**
 
 Número **+52**, voz Josefina, todo automático. Workflow **W9**.
 
@@ -54,7 +54,7 @@ hasta que la lead hace clic en *Ver vídeo* y después en *Sí, confirmo*.
 | **A1** | AUTO | Al agendar | Holaaa {{1}}! 👋 Soy Josefina, Fundadora de Japi Eaters 🥕<br>Antes de tu reunión te voy a mandar 3 indicaciones muy importantes para tu proceso de postulación.<br>Haz click en "Ver vídeo" para enviártelas 🙌<br>`[ Ver vídeo ]` |
 | **A2** | AUTO | +2 min sin clic | {{1}}, ojo 👀<br>Si no haces click en "Ver vídeo", tu hora queda sin confirmar y se libera automáticamente.<br>Son 15 segundos 🙌 |
 | **A3** | AUTO | Al pulsar *Ver vídeo* | *Vídeo de Josefina · 3 indicaciones*<br>Eso era todo {{1}} 🥦<br>Ahora ya sabes cómo va a ser la reunión y qué tener a mano.<br>¿Te dejo confirmada tu hora del [fecha y hora]?<br>`[ Sí, confirmo ]` `[ Cancelar ]` |
-| **A4** | AUTO | Al pulsar *Cancelar* | Sin problema {{1}} 🙌<br>Si fue el horario, acá puedes elegir uno que te acomode de verdad: `{{link_agenda}}`<br>Y si prefieres dejarlo para más adelante, también está bien 💜 |
+| **A4** | AUTO | Al pulsar *Cancelar* → etapa **8 · Re-Agendar** | Sin problema {{1}} 🙌<br>Si fue el horario, acá puedes elegir uno que te acomode de verdad: `{{link_agenda}}`<br>Y si prefieres dejarlo para más adelante, también está bien 💜 |
 | **A5** | AUTO | Al confirmar → **activa el +569** | Supeer {{1}}! Ahora te va a escribir mi equipo y desde ahora en adelante por aquí sólo te llegarán mensajes automáticos para que no olvides la reunión 💜 |
 
 **A5 es la bisagra del sistema.** Es el único punto donde el +52 le pasa la
@@ -66,7 +66,7 @@ Las etiquetas de esta fase ya existen y ya se están poblando: `video-enviado`
 
 ---
 
-## FASE 2 · Día del agendamiento → etapa **4 · Diagnóstico**
+## FASE 2 · Día del agendamiento → etapa **5 · Diagnóstico**
 
 Número **+569**, firma Rafa, lo opera Anaís. Workflow **W10**.
 
@@ -130,7 +130,7 @@ buscarla. **Va una sola pregunta.**
 
 ---
 
-## FASE 3 · Día pre-llamada → etapa **5 · Pre-Llamada**
+## FASE 3 · Día pre-llamada → etapa **6 · Pre-Llamada**
 
 | Id | Nº | Envío | Disparador | Texto |
 |---|---|---|---|---|
@@ -145,7 +145,7 @@ se puede reemplazar por un vídeo genérico por rama (🅐/🅑/🅒).
 
 ---
 
-## FASE 4 · Día de la llamada → etapa **6 · Día de Llamada**
+## FASE 4 · Día de la llamada → etapa **7 · Día de Llamada**
 
 | Id | Nº | Envío | Disparador | Texto |
 |---|---|---|---|---|
