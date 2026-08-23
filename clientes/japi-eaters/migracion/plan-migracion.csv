@@ -1,0 +1,143 @@
+id,nombre,contacto,origen,dias_inactiva,destino_pipeline,destino_etapa,accion,motivo,etiquetas
+bGiUWiCykWUL0Fbv8Q25,Natalia Fernanda Atienza Pizarro,6ltfoVO9LpXTNGTxexNs,① · Formulario [ORG],0,②,0 · Calificada (Formulario),MOVER,,survey-org lead-org tier-bronce prospecto-exito
+PH9KyJteNNM2RVdQuETf,Javiera Galaz,rZirlAEySi3ye3d81bd9,① · Formulario [ORG],5,②,0 · Calificada (Formulario),MOVER,,survey-org lead-org tier-bronce prospecto-exito
+km8KcfyZwIsxlrTCeOQy,Marianela Vargas Segura,bBddOgehvR1ZV6SpBJvZ,① · Formulario [ORG],7,②,0 · Calificada (Formulario),MOVER,,survey-org lead-org tier-bronce prospecto-exito
+csszPv5PBo3Jf6LO6Nxn,María Clara Tatay,62NT2MU6TLViG8gT2HDC,① · Follow Up,10,②,1 · Sin Agendar,MOVER,,survey-org lead-org tier-silver prospecto-exito ghost-agenda
+soWxOUD5ZpgHnXTUxONL,Patricia Padilla,RNMUQimCPKwAs31yhyi6,① · Ghost Intento Agenda,0,②,1 · Sin Agendar,MOVER,,survey-org lead-setter-org tier-bronce prospecto-exito ghost-agenda
+FSIfdz8V5ISaeRi4Ugbm,Rut Rodriguez,2gpG8ks9Vp1EEHhxDYbB,① · Ghost Intento Agenda,2,②,1 · Sin Agendar,MOVER,,survey-org lead-org tier-silver prospecto-exito ghost-agenda
+7tqAAyBWEeS8ItwALNxs,Ana Jessica Zamora Hernández,HHptF8M1nNsCPEVhfVfR,① · Ghost Intento Agenda,8,②,1 · Sin Agendar,MOVER,,survey-org lead-org tier-silver prospecto-exito ghost-agenda
+wmCYWZvrRGbQg0h2yJ4z,Martina Martorell,2VRaAyqEjtSit4R6bS43,① · Ghost Intento Agenda,8,②,1 · Sin Agendar,MOVER,,survey-org lead-org tier-silver prospecto-exito ghost-agenda
+qReVWckqaMgCSC1YyYqM,María Lourdes López Peñalver,SG2zLh5dSfa6mSzWZa28,① · Ghost Intento Agenda,16,②,1 · Sin Agendar,MOVER,,survey-org lead-org tier-silver prospecto-exito ghost-agenda
+ekDfdPlAoWVbCNstMMpz,Valeria López,1txlsOkei3Q1vmdYoHu4,① · Primer Contacto,4,②,1 · Sin Agendar,MOVER,,survey-org lead-org tier-bronce prospecto-exito ghost-agenda
+2u8JNn2yJX6pVpYBmM6N,Dairo MESTIZO VELASCO,WuQCEw4n3rtEasvSmuDo,② · Follow Up,12,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads presupuesto-alto tier-gold prospecto-exito ghost-agenda
+4uNBOZBcMD5eG5Wu38Ap,Judit Ferrer,9KkCvTd1iXxdXbThuDnr,② · Follow Up,22,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+me9SJsxnpdjyKxtObnFX,Yovanna Gastelbondo,bfuxZH4NZwpR98q24B86,② · Follow Up,22,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+TSDQia7EBXEHIlJSXSxb,Constanza Bruna Manriquez,vAaMjmXKX2KYAMe0crjm,② · Ghost-Nueva Agenda,-1,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+H86hOYmcqTdSWKA5V0cF,Caroly Lizbeth Duque Rubio,TNVFaQIYVVE2cMJ69opl,② · Ghost-Nueva Agenda,0,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+c2K50aVfjxwfzgCRksF0,Evelyn Carolina Benavides,yj7gSB2EvD5tOGgo13eh,② · Ghost-Nueva Agenda,0,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+qk6JNY4TDGKfnAFotcye,Veronica Fanny Verónica Fernández Zúñiga,fF4jrC6Y49wLhQoPG99K,② · Ghost-Nueva Agenda,0,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+dZRYleSO0lF4wmy3ZoxD,Lisbeth Alejandra Huertas Vallejo,varrQSxvqx2SBgqCEFI1,② · Ghost-Nueva Agenda,0,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+pHvaG56m1LWmBXfqQxtY,Luis,dOClJZMMi2HeEHCScIif,② · Ghost-Nueva Agenda,0,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+fYH49RvihODxb6r7xtBO,Rosario Bravo Castillo,Vx8xkXzySOZwyKewnPU8,② · Ghost-Nueva Agenda,0,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+YfavLPnIejBwAD5IhY7a,Vanessa Hernandez Pacheco,Ik9xh4xCDoUTSdLa0fQH,② · Ghost-Nueva Agenda,0,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+l18GNGZbLeGypoY9eFsx,Yoana Mella,Udu3GeL9BqpHnnVBf3OT,② · Ghost-Nueva Agenda,0,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+0LiRBlcOi6e1GeTZa1ne,Gabriela Aragon Galvis,nRu7Wa5xbEWGCQ6K1ytz,② · Ghost-Nueva Agenda,0,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+ISStrSG7wrmPWHF0Hr5O,Ayelén Lopez,aJAdziP4WQcrVz8m2H5y,② · Ghost-Nueva Agenda,0,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+WgNUnpfdc9zJqBVAVvk3,Aldana Beatriz Ochonga Sotomayor,WYGZ85IPiLsyUbaNcpv8,② · Ghost-Nueva Agenda,0,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+sfFvIJFJVDrraAFXOheE,Milagros Yerleny González Aizprua,bn01hZdINtriHdOh5iE5,② · Ghost-Nueva Agenda,1,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+ByRHW5eDjXZU8OFdnyaW,Yenny Gil,xQGv4XhGfXj14v4a2vWB,② · Ghost-Nueva Agenda,1,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+PBlhefB3cxpEIVL5iaEx,Paula Ruiz Arenas,Gp2MhKPsStxXJAOn3eAB,② · Ghost-Nueva Agenda,1,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+kl7vWTdNy9rGWZXKIjuF,Maribel Quijano Mejía,FGs7GwZY0Xz7y2s3RVgu,② · Ghost-Nueva Agenda,1,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+jnGlO7gqWbaZczz06spq,Abigail Arreaga Cabrera,PnCcDPiGZXGY7EcmbFkQ,② · Ghost-Nueva Agenda,2,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+hsauAHeel9qRUjq1CUqF,Carolina Loureiro,qU3fFdFYkCuW7qLFoYTq,② · Ghost-Nueva Agenda,2,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads presupuesto-alto tier-gold prospecto-exito tier-bronce ghost-agenda
+ZNT4WOGoB2IpZDm1sunR,Lucia Wilson Green,srdG1F6ooBL3eiVQtXSy,② · Ghost-Nueva Agenda,2,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+3p3OUYJkaTb6KhrwLFEt,Catalina Salinas,TnMEFshGq2v8yx9bcQUT,② · Ghost-Nueva Agenda,3,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+smmSOlaGxkPOYsgygayE,Fernanda Olivos,LenDgbD4LR5PDQ0zIGm4,② · Ghost-Nueva Agenda,3,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+nyTQ8fGyqpxrhRKviP75,Marilania HUATAY,vPzQyrAQqX8IlcHTf3xn,② · Ghost-Nueva Agenda,3,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+wOWYQz2I5sP78CgsncVL,Margarita Riveros,L5UFvOAdsPji50IXRZil,② · Ghost-Nueva Agenda,4,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+jeU7QTAbgVcpErmbFmB8,Lorenza Salas,XKarkkO7OTus7bvKPApl,② · Ghost-Nueva Agenda,5,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+LtSGo174opV7T7edM3hE,Javiera Garrido,5AUGhivwsavGXZQdu10g,② · Ghost-Nueva Agenda,5,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+S20DR4GJj3xc9VoB9D4m,Mendoza,0PQT3MPQDakmDJOiP4VB,② · Ghost-Nueva Agenda,5,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+dFEsbEQm9AHbdr67byA3,Liliana Rubira,zcZcnoi2YGDxodghEePA,② · Ghost-Nueva Agenda,5,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+JrL1bFfdRGajWmglLdxg,Laly Avalos,EDUGrXOlKwB3tIgBq3E5,② · Ghost-Nueva Agenda,5,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+bZGBcmzeS8gw3balIkJS,Juana Plua,ZJbLlJ9RzqlNxJ2urNMM,② · Ghost-Nueva Agenda,6,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+bqbMVp1wmCvE0aehcztm,Milena Gomez,kGProMEJR5hmZg5N64vO,② · Ghost-Nueva Agenda,8,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+0tE97TA5BvbbAi1S2pAg,Sebastian Escudero,9eL3cUGw6kpnRExlzT18,② · Ghost-Nueva Agenda,8,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito survey-org lead-org ghost-agenda
+2qP9LKdkZAfugrP4YocG,Helen Sandoval,Jhte4NyYxt49bx47Eb2S,② · Ghost-Nueva Agenda,8,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+XtBBnRxTFnU7QZ5HUQJy,Yesica Vanina Pockels Necovich,N00g6M4txvxJyGFglShk,② · Ghost-Nueva Agenda,9,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito ghost-agenda
+HdEg340Z7wLUF7vnmsQl,Montúfar María Judith Rodríguez,SuxZCoCXFjtFhNr81vDm,② · Ghost-Nueva Agenda,9,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+e7EwHEfUTDB7G45aOH2b,Patricia Denise Rivas Campos,zLIpJbuxu28RzCV5sT1z,② · Ghost-Nueva Agenda,9,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+88ZkgiUltYIcg9s0FfgH,Damaris Guevara,M9fdxc8gWHxxtzcMApa5,② · Ghost-Nueva Agenda,10,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+onRU3k0dURgN3v8zftiq,Irlanda María Zavala Vargas,ZCVWHwcaBchdl4samT3s,② · Ghost-Nueva Agenda,15,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+bmx526nEFhZYzVkI1sdk,Ayelen Zabena,xkQOL62k0Yyf4wURD8JK,② · Ghost-Nueva Agenda,16,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+SfVQ98ekg01JhItXJJNl,Vanesa Guadalupe Reyes Romo,Af2BuzhGMsEGmBHOBhoi,② · Ghost-Nueva Agenda,17,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+gP1oBi65hyJW8fVz5gDS,Yani Toscano,ifWf8sK3qpnlhoeYpgIp,② · Ghost-Nueva Agenda,18,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+nzWqsSXgX7t2MMlQcku1,Andrezza Pessoa,mgiHWzcVBYDNLTJJUrcJ,② · Ghost-Nueva Agenda,18,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+Z8MAfznNqx7TQkEMX1ES,José María Domínguez Vega,ILtsw1tHzUiG5EcVRO2w,② · Ghost-Nueva Agenda,18,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads presupuesto-alto tier-gold prospecto-exito ghost-agenda
+eXjtgskxZssnOCO0u2UA,Natalia Velazquez Aldana,qDJZnFdD2HwzomO3S4v1,② · Ghost-Nueva Agenda,19,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+5movk4Y2Y5xSM0TcHXW1,Mercedes Tovar,3SqbnXbgFQWRiPx4vlii,② · Ghost-Nueva Agenda,19,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+xJOfIkvVCpRvT39lLijx,Libercita ORELLANA,mHt0c3L0RYqEWg1hvdtG,② · Ghost-Nueva Agenda,19,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+cOUWolqs6UN7gVO3DzUC,Valentina Navarrete,UmVCYPikIY0Leyp9R4Xi,② · Ghost-Nueva Agenda,19,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+v2ZaHpXtbTPDwV8GnCsi,Rocío Falcón,D64z4vVNsEy4MW0g57y7,② · Ghost-Nueva Agenda,20,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+WVULq5H6vBZv4JcU7d09,Mishell Alexandra,nzPSOiKeeUNEYIB5IK0Z,② · Ghost-Nueva Agenda,20,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+Opv4ZQMrN22P6iylR0rI,Juliagny Pahola Lugo Hernández,9VWgNeenNBxSTsxlLAn4,② · Ghost-Nueva Agenda,27,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+IzPldUNpTrlJUeqw5y5w,Diana Puentes,krDSCKXiw826lHGo3oYV,② · Ghost-Nueva Agenda,29,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+o4RxWYRZkkEaFcNxwRnL,Liliabelen Gatica,KCFEm4ld3lzqnFQa7vfi,② · Ghost-Nueva Agenda,30,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+b8aYr3EThAwi7eQ5GvUK,Lizeth Alvarado,6yoHOeolkNC5NI4ASuM6,② · Ghost-Nueva Agenda,3,②,1 · Sin Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+ZOmEbZo88Y27SedvnEkg,Mikaela Alisu Ayala Zarate,QjmHzcZjjPfpjZT91pUd,① · Nuevas Agendas,1,②,2 · Nueva Agenda,MOVER,,survey-org lead-setter-org tier-bronce prospecto-exito agenda-org confirmada video-enviado
+hR7fc8VvFP2Yyg10qsKX,Magali De Poli,uiFDmyxr3piMbtpkmwnv,② · Nuevas Agendas,0,②,2 · Nueva Agenda,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito agenda-ads confirmada video-enviado
+yJGIcccAjHZhaCDdP5cP,Maria Jose Fuentes Pitre,ek1K3xt4DCTLbZW2GTWV,② · Nuevas Agendas,1,②,2 · Nueva Agenda,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito agenda-ads confirmada video-enviado
+F205HfQ3nTXPVLxvlbwZ,Loren Vanessa Beltran Piñeros,nXosbb4Kw97t0SdxwU3p,② · Llamada Confirmada,8,②,4 · Confirmada,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito agenda-ads sin-confirmar
+WUa5gCxqh5CcqwowNqIk,Alejandra Cordova,lojLrJGX5bzHwkknvjfw,② · Llamada Confirmada,29,②,4 · Confirmada,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads video-enviado confirmada
+K22o1gwth9nNOlwBQovH,Ingrys Faviana,F8LEkQf8kzbSPstwBuyZ,② · Llamada Confirmada,5,②,4 · Confirmada,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads tier-bronce confirmada video-enviado
+EtqWqrKs4fXzL4GNvr9R,Olga Lucia Serrano,IKMc15sbWPOYiTFWld9a,③ · Llamada Confirmada Setter,1,②,4 · Confirmada,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito agenda-ads confirmada video-enviado
+RvrGjnqbFYGMkUWJDhni,Belen Anais Ortiz Martínez,3p6a7jt7NXNyjyc8J1I4,③ · Llamada Confirmada Setter,2,②,4 · Confirmada,MOVER,,survey-org lead-setter-org tier-bronce prospecto-exito agenda-org confirmada video-enviado
+yvg12V9wMCSJynbSmtsI,Isabel Valenzuela,2AeAGxShj4nA0OiQo7Do,③ · Llamada Confirmada Setter,3,②,4 · Confirmada,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito agenda-ads video-enviado confirmada
+h3ofSOFNlQeYqUT4k7tA,Constanza Salas Pontigo,6TxPXtqOTFpOOKK7adoA,③ · Llamada Confirmada Setter,5,②,4 · Confirmada,MOVER,,survey-org lead-org tier-bronce prospecto-exito agenda-org confirmada video-enviado
+e6Vb6R8pUl3Fs3oK1rLu,Iara Epifani,6JHoeVOA6TdwD3Ko5Es4,③ · Llamada Confirmada Setter,8,②,4 · Confirmada,MOVER,,survey-org lead-org tier-silver prospecto-exito ghost-agenda agenda-ads
+dPOcagy5BrTtGcCzMfuk,Xochitl Ahtziri Hernández López,9EHnTEXj2Z3c1Bm9d82t,③ · Llamada Confirmada Setter,14,②,4 · Confirmada,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads sin-confirmar
+bc1CBGEafUJVC1yUJ5Yf,Jennifer Gualotuña,M9Egbj9OWs8cKifoL5ya,③ · Llamada Confirmada Setter,14,②,4 · Confirmada,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads
+rEtZ4pu8XJSkaRfeLzKI,Natalia Lichtemberg,6WdaxlpItlKAF1APPonr,① · Cancelada (Re-Agendar),7,②,8 · Re-Agendar,MOVER,,survey-org lead-org lead-revisar agenda-org video-enviado tier-silver prospecto-exito confirmada
+eak3fN4egNW8Q2ZMqCHP,Johanna Marcenaro,rbflebqFldyL69UXqrRo,② · Cancelada (Re-Agendar),3,②,8 · Re-Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito agenda-ads
+8g5AVtW1no9g3A6IiaVa,María Naranjo,VYwwcYNdloNJN1nYtXOb,② · Cancelada (Re-Agendar),8,②,8 · Re-Agendar,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito agenda-ads confirmada video-enviado
+N5LDWu8RPN4eJkzFPPwU,Elisa Smith Poblete,sROs5LdEF5T3mdPhHyCU,② · Cancelada (Re-Agendar),10,②,8 · Re-Agendar,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+m9OzJUO4oHeD8H40EU1U,Camila Barcina,vbQcIyaNYTdZe5O1Jzez,③ · Cancelada Última Hora,5,②,8 · Re-Agendar,MOVER,,lead-ads survey-postulacion prospecto-exito tier-silver survey-ads tier-bronce agenda-ads confirmada video-enviado
+4PlQ9PnfscMBTGGV1wRh,Laura López Ojeda,YStyr2csZc7kogtGRQ5i,③ · Cancelada Última Hora,8,②,8 · Re-Agendar,MOVER,,survey-org lead-org tier-silver prospecto-exito agenda-org
+kzzZUEq2X3ySy5mn0L2i,Catalina Paillao Queupomil,MLbEHHdFIpdjprfeiFgs,③ · Asistió,2,③,1 · Asistió,MOVER,,survey-ads lead-ads presupuesto-alto tier-gold prospecto-exito agenda-ads video-enviado confirmada
+r9dPLQ5lJUpnpyTxRMai,Rocío Gallegos,tXgVpwCzAMTqs2KFKmkI,③ · Asistió,11,③,1 · Asistió,MOVER,,survey-org lead-org lead-revisar agenda-org confirmada video-enviado
+wvKBd4evZKehMTIm5gfZ,Mariana Tovar,HVKzD51cMikSibdWdDb5,③ · Asistió,11,③,1 · Asistió,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+CLMMtAgDIGO6D62YrRU1,Daniela Llumiquinga,irNDTWH30TMAkqnImyy7,③ · Asistió,4,③,1 · Asistió,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+l5oPsZqOgF6lyb9flzkt,Lorena Vargas,nGY3l1VQNhK4FhNdDCWg,③ · Asistió,4,③,1 · Asistió,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads video-enviado lead-revisar confirmada
+xFGHPSlSX0Z7MVXzfUBH,Fernanda Alvarez Rubio,mqybq2hwSEs0xfPqhcyP,③ · No-Show Llamada,1,③,2 · No-Show,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito agenda-ads confirmada video-enviado
+gSkvdGac1QKlyI98Eqj1,Paula Mondaca Farias,PZW59ofzVNzXzeWKxYg2,③ · No-Show Llamada,8,③,2 · No-Show,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+XpwGZmWTfgRG1fCeVwVj,Erika Leon,ALCIVJBOPVqxJEltGxeY,③ · No-Show Llamada,17,③,2 · No-Show,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+KnSOOpwpiXDRJHGUUG8N,Saray Romero,8gZr6iXlLPiSx70rZSFO,③ · No-Show Llamada,8,③,2 · No-Show,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+Lz5QYi8DMqCiYjcwEnz3,Eugenia Guarquila,qR7lQDX11Vn21Ym5NnIy,③ · No-Show Llamada,8,③,2 · No-Show,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads video-enviado confirmada
+EfXaCwD9nYBUCVZY24Gy,Jacobo Escalante,g59bEZ5wymR508rKuSqX,③ · No-Show Llamada,22,③,2 · No-Show,MOVER,,survey-ads lead-ads presupuesto-alto tier-gold prospecto-exito agenda-ads video-enviado confirmada
+1Pi5vz63qvYVzSepbsEI,Catalina Climiño,HnJHSB7LStvlVldi3GFW,③ · No-Show Llamada,8,③,2 · No-Show,MOVER,,survey-org lead-org tier-silver prospecto-exito agenda-org confirmada video-enviado
+RN5aTsgBTmS7G2P9xiAO,Carolina Martinez,JGNDboYyMj270RrV1Inh,③ · No-Show Llamada,8,③,2 · No-Show,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads sin-confirmar
+xlVqMqwuw2YuX4O2GMYR,Paula Grupe,2weWkRzvXYmDo2XnGPOf,③ · No-Show Llamada,8,③,2 · No-Show,MOVER,,survey-org lead-org tier-silver prospecto-exito agenda-org confirmada video-enviado
+LeMrzGfHSpMgM6aLSCR0,Lesli Alexsandra Tafur Tarazona,Wzd2pIDZCIOHI5RDGxHC,③ · No-Show Llamada,8,③,2 · No-Show,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads video-enviado confirmada
+RQGY3nwXHl1NLYrUZiOG,Debora Pomares Mira,jhEWOSGLKxjkmr5W9Fl7,③ · No-Show Llamada,8,③,2 · No-Show,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+Ufm2yWCNJMeh4xOl8RDa,Angie Rodríguez,dvAfh7NrBbHHAGXjsbrG,③ · No-Show Llamada,8,③,2 · No-Show,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+9Kl4vS0vDb5Ah0XxHJXs,Gabriel Llerena,pjb1uf3MawqGDhoFdh27,③ · No-Show Llamada,8,③,2 · No-Show,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+CkUqbvwQjSs3YJ8aOTBN,Lourdes Mejia,h7pf6VnYwfd6u299P53H,③ · No-Show Llamada,8,③,2 · No-Show,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+udqoWVy4TXViwzY4j8KJ,Daniel Alejandro Castrillon,PfsYtjuhSN3ncdjMJGDw,③ · No-Show Llamada,8,③,2 · No-Show,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+bQ7RVddEPwgW2s0SEznR,Rocio Corvalan,4q1rpS4Ph5IUDiH2KaXz,③ · Follow Up Asistentes,0,③,4 · Seguimiento,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito agenda-ads confirmada video-enviado
+izisSLxqixFofR8V8tYt,Yendry Rojas Espinoza,iKopMEg9sjHW3xQrF6NV,③ · Follow Up Asistentes,0,③,4 · Seguimiento,MOVER,,survey-ads lead-ads sin-presupuesto tier-out presupuesto-alto tier-gold prospecto-exito agenda-ads video-enviado confirmada
+jDNMbMC2gsd7Z5jYylck,Ámbar Guerrero,yvUF75OJpnA8XOOOKbxO,③ · Follow Up Asistentes,0,③,4 · Seguimiento,MOVER,,survey-org lead-org tier-bronce prospecto-exito agenda-org confirmada video-enviado
+lDEqodCjm9KWBm7RJRJj,Maria Laura Lenzi,N49enYXnsvpGXcjP9EBO,③ · Follow Up Asistentes,1,③,4 · Seguimiento,MOVER,,survey-org lead-org tier-bronce prospecto-exito agenda-org confirmada video-enviado
+3rnHouJvr1pJVtaU6OgU,Ana Luisa Dorcy,Dsq5e442P2YMLrfODiFR,③ · Follow Up Asistentes,4,③,4 · Seguimiento,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito agenda-ads confirmada video-enviado
+B1zOPxGjWWtzekVaraoM,Daniela Mollo,A3wnU0zGyO6nwKoQSX9M,③ · Follow Up Asistentes,4,③,4 · Seguimiento,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito agenda-ads confirmada video-enviado
+CIdFuOBLKObEZy8UlHZJ,Andrea Toledo,yHjITMhEhifsiZO5L7SA,③ · Follow Up Asistentes,4,③,4 · Seguimiento,MOVER,,survey-ads lead-ads presupuesto-alto tier-gold prospecto-exito agenda-ads decisor-tercero video-enviado confirmada
+jGD0t2wQmbSPstJGYJ99,Jessica Nuñez,Bk55hbA1dCC60ZXVMN57,③ · Follow Up Asistentes,4,③,4 · Seguimiento,MOVER,,survey-ads lead-ads tier-bronce prospecto-exito agenda-ads confirmada video-enviado
+Y6VvVQcAz4kivdkamxOs,Marcela Lascao,CWreTHGLtzxl7yEF8raC,③ · Follow Up Asistentes,8,③,4 · Seguimiento,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada decisor-tercero video-enviado
+7wPRj3VBjoR0OoPnqeO4,Marelbis Casas,dvVUXaIp7jMXWbclKzoG,③ · Follow Up Asistentes,12,③,4 · Seguimiento,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+h9BujBPgDH46nlWbP7cL,Crys Álvarez González,qc9MWsg15kj11jMYmZ16,③ · Follow Up Asistentes,8,③,4 · Seguimiento,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+ukpn1US4gyhzYfMHdjDb,Yaritza Irene Solís Ganchozo,fnj53ZRuvO4i1xvKWBpu,③ · Follow Up Asistentes,17,③,4 · Seguimiento,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+4nrcOlXLTpZZYEpBwqbi,Tyrone Salgado Mação,uZCUgxbr4NNnKrzaA7sv,③ · Follow Up Asistentes,19,③,4 · Seguimiento,MOVER,,survey-ads lead-ads agenda-ads presupuesto-alto tier-gold prospecto-exito sin-confirmar
+JktM6F7fJ1lniaeD2MXl,Francisca Rivera San Martín,4JKQkF6v2ugefYmiKwsE,③ · Follow Up Asistentes,23,③,4 · Seguimiento,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+JYeivZpyckMpvCZPd5zq,Italia Rofriguez,sVxaZaIh7Mjxa7ue4a5p,③ · Follow Up Asistentes,10,③,4 · Seguimiento,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads video-enviado confirmada
+PwiXPMu0zGqFEoQ35TBV,Valentina Mora,hDTOu1REnvm4B90Sjueq,③ · Follow Up Asistentes,28,③,4 · Seguimiento,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+mnSJCwZ9T3zjCMjvj5QA,Maura Alejandra Isabel Ortiz Leal,9sJ6rwwoERfzkuEMFivq,③ · Paga Reserva,0,④,0 · Cuota de Entrada Pagada,MOVER,,survey-org lead-org tier-bronce prospecto-exito agenda-org confirmada video-enviado
+cHB3rNwTjI0wB14nnHKX,Lidia Aucay,P4STwy1Z1nX8FkI1lO46,③ · Paga Reserva,3,④,0 · Cuota de Entrada Pagada,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+FQXoMXVH5z7KfFqkyi5L,Sandra Mariana Muiño,6lJcuUTnWJVnWSLjZgx8,③ · Paga Reserva,5,④,0 · Cuota de Entrada Pagada,MOVER,,survey-org lead-org tier-bronce prospecto-exito agenda-org confirmada video-enviado
+3Ui28AdpfO5uiS1aP4Ec,Silvia Usnayo,rmnnD6a5HiZsPOzH0Qr8,③ · Paga Reserva,14,④,0 · Cuota de Entrada Pagada,MOVER,,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+yfmInvCTDQdgfKxU9Ofk,Ivana Valenzuela,t13SQNvVGDeEl9XfTTK4,① · Descalificada,9,,,PERDIDA,No cualifica,agenda-org survey-org lead-org tier-silver prospecto-exito sin-confirmar
+x93w1FLlkDCTEclJlGNg,Sebastian Escudero,9eL3cUGw6kpnRExlzT18,① · Formulario [ORG],8,,,PERDIDA,Duplicada — se conserva ② · Ghost-Nueva Agenda,survey-ads lead-ads tier-silver prospecto-exito survey-org lead-org ghost-agenda
+fYNkgvbEFs3TrcmxZTyI,Rocio Ruiz Jiménez,YZ5k9Y4shVx4trRDOkub,② · Descalificada,5,,,PERDIDA,No cualifica,survey-ads lead-ads tier-bronce prospecto-exito agenda-ads sin-confirmar
+4Dk0JjV1ibm4MG06dpKy,Valeska Barra,AG5AnsAsgXjnlrFK7TDk,② · Descalificada,11,,,PERDIDA,No cualifica,survey-ads lead-ads tier-silver prospecto-exito agenda-ads
+Yv2EaEfTXgsNUPq6JZeW,Eneida Anai Nuñez Mejia,DafqeQdauI2X2btLsMpJ,② · Descalificada,10,,,PERDIDA,No cualifica,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+IG3hgo2O9HUnWPaiuyMK,Génesis Troconis,xwdJaVkohB1eJZLNMNAm,② · Descalificada,16,,,PERDIDA,No cualifica,survey-ads lead-ads tier-silver prospecto-exito agenda-ads confirmada video-enviado
+J3IlQ0DN3bf2N6PZB46R,Flor De Azalea Alvarado,RL1sNlTlqsD542uM3Ir9,② · Descalificada,18,,,PERDIDA,No cualifica,survey-ads lead-ads tier-silver prospecto-exito agenda-ads video-enviado confirmada
+WO8hGDMsx3IR9vQ2iZ02,Aleida Martínez,w8zB8YSWiF9YyrnxQzRG,② · Descalificada,19,,,PERDIDA,No cualifica,survey-ads lead-ads tier-silver prospecto-exito agenda-ads sin-confirmar
+UJKFpzJHRi9oPp9Zqh5M,Lety Valencia,Og0MvB6ywQkPBjVPXVy8,② · Descalificada,26,,,PERDIDA,No cualifica,survey-ads lead-ads tier-silver prospecto-exito agenda-ads sin-confirmar
+bwHlpbz8wPk8Li8USl21,Ilse García,gUJKsSzWZIAghsumm08O,② · Descalificada,26,,,PERDIDA,No cualifica,survey-ads lead-ads tier-silver prospecto-exito agenda-ads sin-confirmar
+kgPnv4GGNfiPovIeMLzz,Graciela Dabbah Cardozo,y3MFV3EVAqdgHHMziziw,② · Descalificada,8,,,PERDIDA,No cualifica,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+I52Asm9U9Sual3uED1eT,Loy Rengifo Guevara,UMeNG5GYuEoGnufbrOpo,② · Descalificada,18,,,PERDIDA,No cualifica,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+gltKMEeL97cwZHBal4DJ,Rilna Liz Muller Maquine,xEv0OFKaIfWN6u9rFjM7,② · Descalificada,29,,,PERDIDA,No cualifica,survey-ads lead-ads tier-silver prospecto-exito ghost-agenda
+Qjipxh8GNMUlJXPbCEI8,Yendry Rojas,iKopMEg9sjHW3xQrF6NV,② · Llamada Confirmada,0,,,PERDIDA,Duplicada — se conserva ③ · Follow Up Asistentes,survey-ads lead-ads sin-presupuesto tier-out presupuesto-alto tier-gold prospecto-exito agenda-ads video-enviado confirmada
+NxuIgTXH3BXfWSkqMnbp,Lorena Vargas,nGY3l1VQNhK4FhNdDCWg,② · Llamada Confirmada,8,,,PERDIDA,Duplicada — se conserva ③ · Asistió,survey-ads lead-ads tier-silver prospecto-exito agenda-ads video-enviado lead-revisar confirmada
+Uq5tpBo9Orbl0KZhAJWZ,Italia Rofriguez,sVxaZaIh7Mjxa7ue4a5p,② · Llamada Confirmada,10,,,PERDIDA,Duplicada — se conserva ③ · Follow Up Asistentes,survey-ads lead-ads tier-silver prospecto-exito agenda-ads video-enviado confirmada
+KOGwQxRBzSR4Vn76ez20,Eugenia Guarquila,qR7lQDX11Vn21Ym5NnIy,② · Llamada Confirmada,22,,,PERDIDA,Duplicada — se conserva ③ · No-Show Llamada,survey-ads lead-ads tier-silver prospecto-exito agenda-ads video-enviado confirmada
+YcLjkerr3AKkd4qbXu02,Loren Vanessa Beltran Piñeros,nXosbb4Kw97t0SdxwU3p,③ · Llamada Confirmada Setter,9,,,PERDIDA,Duplicada — se conserva ② · Llamada Confirmada,survey-ads lead-ads tier-bronce prospecto-exito agenda-ads sin-confirmar
