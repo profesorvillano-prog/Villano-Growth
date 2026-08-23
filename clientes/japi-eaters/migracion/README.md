@@ -14,7 +14,7 @@
 |---|---:|---:|
 | Tarjetas a mover por API | 124 | **~20** |
 | Tarjetas a cerrar | 18 | ~26 |
-| Etapas a crear | 30 | **4** |
+| Etapas a crear | 31 | **4** |
 | Histórico conservado | en tableros archivados | **en el mismo sitio** |
 
 Reutilizar `②` es el gran ahorro: sus **52 tarjetas en *Ghost - Nueva Agenda***
@@ -39,19 +39,26 @@ Renombrar el pipeline y luego, etapa por etapa:
 
 | Etapa actual | Abiertas | Acción |
 |---|---:|---|
-| Formulario [ADS] | 1 | renombrar → **Calificada (Formulario)** |
-| Ghost - Nueva Agenda | **52** | renombrar → **Sin Agendar** |
+| Calificada (Formulario) | 1 | ✅ ya renombrada |
+| Sin Agendar (Ghost) | **52** | ✅ ya renombrada |
 | Nuevas Agendas | 2 | renombrar → **Nueva Agenda** |
-| Llamada Confirmada | 11 | renombrar → **Confirmada** |
+| Sin Confirmar | 0 | renombrar → **Sin Confirmar (Agenda)** |
+| **Llamada Confirmada** | 11 | renombrar → **Confirmada (Agenda)** |
 | Llamada Preparación | 0 | renombrar → **Pre-Llamada** |
 | Cancelada (Re-Agendar) | 3 | renombrar → **Re-Agendar** |
-| Follow Up | 4 | **vaciar** → mover las 4 a *Sin Agendar* · luego borrar |
+| Follow Up | 4 | **vaciar** → mover las 4 a *Sin Agendar (Ghost)* · luego borrar |
 | Descalificada | 25 | **vaciar** → cerrar las 25 como Perdida · luego borrar |
-| — | | **crear** *Sin Confirmar* |
 | — | | **crear** *Diagnóstico* |
+| — | | **crear** *Confirmada (Víspera)* |
 | — | | **crear** *Día de Llamada* |
 
-Después: reordenar a las 9 posiciones de la §4 y cargar probabilidades (§14).
+> **Ojo con *Llamada Confirmada*.** Sus 11 tarjetas confirmaron con el proceso
+> viejo, que es la **puerta 1** (al agendar). Por eso se renombra a *Confirmada
+> (Agenda)* y **no** se reutiliza para la puerta 2: si se dejara con el nombre
+> viejo apuntando a la víspera, esas 11 aparecerían como confirmadas para una
+> llamada que nadie les recordó.
+
+Después: reordenar a las 10 posiciones de la §4 y cargar probabilidades (§14).
 
 **Recibe además las 16 abiertas de `①`** según el mapeo de la sección siguiente.
 

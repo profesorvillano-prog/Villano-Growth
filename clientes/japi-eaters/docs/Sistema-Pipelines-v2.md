@@ -161,58 +161,66 @@ aparecen acá. Si Valen necesita ver todas, es la Smart List de contactos
 
 ## 4. ② Agenda · WhatsApp — Anaís
 
-**El pipeline del show-up, y el que ejecuta el guion completo.** Entra todo el
-que postuló y calificó, venga de Instagram o de pauta.
+**El pipeline del show-up.** Entra todo el que postuló y calificó, venga de
+Instagram o de pauta. Textos en [`Guion-WhatsApp.md`](./Guion-WhatsApp.md).
 
-**9 etapas, una por momento del guion.** Textos completos en
-[`Guion-WhatsApp.md`](./Guion-WhatsApp.md).
+### Las dos puertas de confirmación
 
-| # | Etapa | Fase · mensajes | Nº | Entra | Sale | Color |
-|---|---|---|---|---|---|---|
-| 0 | **Calificada (Formulario)** | — | — | Formulario con `tier` ≠ `out` | → 2 si agenda · → 1 a los 10 min sin agendar | `#3B82F6` |
-| 1 | **Sin Agendar** | FASE 0 · `G1` `G2` `G3` | +569 | 10 min sin tomar hora | → 2 si agenda · Perdida si dice "ahora no" · caduca a 14 d | `#64748B` |
-| 2 | **Nueva Agenda** | FASE 1 · `A1` | +52 | Cita creada | → 4 si cruza el portón · → 3 a los 2 min sin clic · → 8 si cancela | `#0EA5E9` |
-| 3 | **Sin Confirmar** | FASE 1 · `A2` | +52 | 2 min sin pulsar *Ver vídeo* | → 4 si confirma · → 8 o Perdida si se libera la hora | `#EA580C` |
-| 4 | **Confirmada** | FASE 1 · `A3` `A5` | +52 | Pulsó *Sí, confirmo* | → 5 automático (`A5` activa el +569) | `#16A34A` |
-| 5 | **Diagnóstico** | FASE 2 · `M1`–`M6` | +569 | `A5` enviado | → 6 con el `Resumen Lead` escrito | `#7C3AED` |
-| 6 | **Pre-Llamada** | FASE 3 · `M7` `M8` | +569 / +52 | Víspera de la llamada | → 7 el día de la cita | `#CA8A04` |
-| 7 | **Día de Llamada** | FASE 4 · `M9` `M10` `M11` | +569 | Es el día | **Gana** al entrar a la reunión → `③` | `#0891B2` |
-| 8 | **Re-Agendar** | FASE 1 · `A4` | +52 | Pulsó *Cancelar* | → 2 con nueva hora · Perdida a los 14 d | `#C026D3` |
+El guion tiene **dos momentos de confirmación distintos**, y confundirlos es lo
+que hace que el show-up se escape:
 
-**La etapa 0 no manda ningún mensaje.** El link del calendario va en la página de
-gracias del formulario: la lead sale de postular directo a elegir hora. Por eso la
-etapa se llama *Calificada (Formulario)* y no *Link Enviado* — el link solo vuelve
-a aparecer en `G2` y `G3`, cuando ya no agendó. La etapa 0 es un paso de tránsito:
-si funciona, la tarjeta pasa a **2** en segundos.
+| | **Puerta 1 · al agendar** | **Puerta 2 · la víspera** |
+|---|---|---|
+| Cuándo | minutos después de tomar hora | la noche antes / esa mañana |
+| Mensajes | `A1` → `A2` → `A3` → `A5` | `M7` `M8` |
+| Qué pide | *Ver vídeo* → *Sí, confirmo* | que responda al recordatorio |
+| Qué protege | que la hora no se ocupe en falso | **que aparezca** |
 
-### Por qué *Nueva Agenda* y *Sin Confirmar* van separadas
+Alguien puede cruzar la puerta 1 sin problema y desaparecer en la 2 — y ese es
+justamente el no-show. Por eso cada puerta tiene su propio par de columnas:
+*Sin Confirmar (Agenda)* / *Confirmada (Agenda)* para la primera, y
+*Pre-Llamada* / *Confirmada (Víspera)* para la segunda.
 
-Son dos trabajos distintos y una sola columna los escondería:
+### Las 10 etapas
 
-- **2 · Nueva Agenda** es lo que Anaís quiere ver cada mañana: quién tomó hora
-  desde ayer. Es información, no tarea.
-- **3 · Sin Confirmar** es cola de trabajo: gente con hora tomada que no cruzó el
-  portón y cuya hora está por liberarse. Es la única etapa de toda la FASE 1 que
-  puede necesitar mano humana.
+| # | Etapa | Fase · mensajes | Nº | Entra | Sale |
+|---|---|---|---|---|---|
+| 0 | **Calificada (Formulario)** | — | — | Formulario con `tier` ≠ `out` | → 2 si agenda · → 1 a los 10 min |
+| 1 | **Sin Agendar (Ghost)** | FASE 0 · `G1` `G2` `G3` | +569 | 10 min sin tomar hora | → 2 si agenda · Perdida si dice "ahora no" |
+| 2 | **Nueva Agenda** | FASE 1 · `A1` | +52 | Cita creada | → 4 si cruza · → 3 a los 2 min sin clic |
+| 3 | **Sin Confirmar (Agenda)** | FASE 1 · `A2` | +52 | 2 min sin pulsar *Ver vídeo* | → 4 si confirma · → 9 o Perdida si se libera la hora |
+| 4 | **Confirmada (Agenda)** | FASE 1 · `A3` `A5` | +52 | Pulsó *Sí, confirmo* | → 5 automático (`A5` activa el +569) |
+| 5 | **Diagnóstico** | FASE 2 · `M1`–`M6` | +569 | `A5` enviado | → 6 con el `Resumen Lead` escrito |
+| 6 | **Pre-Llamada** | FASE 3 · `M7` `M8` | +569 / +52 | Víspera de la llamada | → 7 si responde · **se queda si no** |
+| 7 | **Confirmada (Víspera)** | respuesta a `M7`/`M8` | +52 | Confirmó que viene | → 8 el día de la cita |
+| 8 | **Día de Llamada** | FASE 4 · `M9` `M10` `M11` | +569 | Es el día | **Gana** al entrar a la reunión → `③` |
+| 9 | **Re-Agendar** | FASE 1 · `A4` | +52 | Pulsó *Cancelar* | → 2 con nueva hora · Perdida a los 14 d |
 
-Hoy conviven **60 `confirmada` y 8 `sin-confirmar`** en la cuenta: el mecanismo ya
-corre, esta es la columna que lo hace visible.
+### La cola de no-show se lee sola
 
-### Las tres cosas que este diseño cambia respecto de v2 inicial
+**No hace falta una columna "no confirmó la víspera".** Quien no responde a `M7`
+ni a `M8` simplemente **se queda en Pre-Llamada**: la mañana de la llamada, todo
+lo que siga en la 6 es la cola de riesgo de Anaís.
 
-1. **El levantamiento sale a los 10 minutos, no a las 4 horas.** Lo fija `G1`. Es
-   la diferencia entre alcanzarla mientras todavía tiene el teléfono en la mano y
-   escribirle cuando ya cambió de contexto.
-2. **Confirmar no es un recordatorio: es un portón de dos pasos.** *Ver vídeo* →
-   *Sí, confirmo*. Quien no lo cruza cae a la etapa 3 y su hora se libera.
+El workflow del día mueve a *Día de Llamada* tanto lo que viene de la 7 como lo
+que sigue en la 6, pero a estos últimos les pone `riesgo-noshow`. Así Rafa entra
+a la llamada sabiendo cuál nunca confirmó.
+
+### Lo demás que cambia respecto de v2 inicial
+
+1. **El levantamiento sale a los 10 minutos, no a las 4 horas.** Lo fija `G1`: la
+   diferencia entre alcanzarla con el teléfono en la mano y escribirle cuando ya
+   cambió de contexto.
+2. **La puerta 1 no es un recordatorio, es un portón.** *Ver vídeo* → *Sí,
+   confirmo*, y quien no lo cruza pierde la hora. Hoy conviven 60 `confirmada` y
+   8 `sin-confirmar`: el mecanismo ya corre, le faltaba tablero.
 3. **Existe una etapa de diagnóstico humano** (`M1`–`M6`) que no estaba
    contemplada. Es donde Anaís califica de verdad y donde se escribe el
-   `Resumen Lead` — literalmente el *"[su dolor, en SUS palabras]"* de `M6`.
+   `Resumen Lead` — el *"[su dolor, en SUS palabras]"* de `M6`.
 
-**La etapa 5 es la que hay que vigilar.** Es la única con seis mensajes, cuatro de
-ellos manuales y con ramificación. Si Anaís se atasca, se atasca ahí. El workflow
-le sirve la rama correcta (🅐/🅑/🅒) ya elegida según el formulario, para que no
-tenga que buscarla.
+**La etapa 5 es la que hay que vigilar.** Seis mensajes, cuatro manuales y con
+ramificación. Si Anaís se atasca, se atasca ahí. El workflow le sirve la rama
+correcta (🅐/🅑/🅒) ya elegida según el formulario.
 
 ---
 
@@ -267,7 +275,8 @@ workflows vivos. Solo se añaden las tres que faltan.
 | `tier-gold/silver/bronce/out` | ✅ existe | Calificación automática del formulario |
 | `agenda-org` · `agenda-ads` | ✅ existe | Tomó hora |
 | `ghost-agenda` | ✅ existe | Llenó y no agendó |
-| `confirmada` · `sin-confirmar` | ✅ existe | Estado de confirmación |
+| `confirmada` · `sin-confirmar` | ✅ existe | Puerta 1 · confirmación al agendar |
+| `confirmada-vispera` · `riesgo-noshow` | 🆕 nuevas | Puerta 2 · confirmación de la víspera |
 | `sin-presupuesto` · `presupuesto-alto` | ✅ existe | Señal de ticket |
 | `bienvenida-enviada` | 🆕 nueva | Se mandó el saludo inicial (la pone ManyChat) |
 | `cta-leadmagnet` · `cta-formacion` | 🆕 nuevas | Intención detectada en el DM |
@@ -292,20 +301,18 @@ esos el sistema ya opera.
 
 ### Pipeline ② — Agenda ★
 
-Cada workflow ejecuta una fase del guion. Los identificadores (`G1`, `A3`, `M6`…)
-remiten a [`Guion-WhatsApp.md`](./Guion-WhatsApp.md).
-
 | # | Workflow | Disparador | Acción |
 |---|---|---|---|
 | **W5 ★** | **Calificada** | Formulario enviado **y** `tier` ≠ `out` | Gana la tarjeta de `①` · Crea en `②`/0 · La página de gracias la manda al calendario |
 | W6 | Descalificada | Formulario con `tier-out` | `M13` por el +569 · Perdida con motivo. **No entra a `②`** |
-| **W7 ★** | **Levantamiento · FASE 0** | **10 min** en etapa 0 sin cita | → 1 · Tag `ghost-agenda` · `G1` +569 · `G2` a las 3 h · `G3` manual al día siguiente · Si responde "ahora no" → Perdida |
+| **W7 ★** | **Levantamiento · FASE 0** | **10 min** en etapa 0 sin cita | → 1 · Tag `ghost-agenda` · `G1` +569 · `G2` a las 3 h · `G3` manual al día siguiente · "ahora no" → Perdida |
 | W8 | Nueva agenda | Cita creada | → 2 · Tag `agenda-*` · Dispara `A1` por el +52 |
-| **W9 ★** | **Portón de confirmación · FASE 1** | Etapa 2 | `A2` a los 2 min sin clic → 3 · Al pulsar *Ver vídeo* → `A3` + tag `video-enviado` · Al confirmar → 4, tag `confirmada`, dispara `A5` · Al cancelar → 8 con `A4` |
-| **W10 ★** | **Diagnóstico · FASE 2** | `A5` enviado (activa el +569) | → 5 · `M1` a los 5 min, `M2` a los 5 seg · Sirve a Anaís la rama 🅐/🅑/🅒 según *"¿Con qué situación te identificas más hoy?"* · Tarea: escribir el `Resumen Lead` con el texto de `M6` |
+| **W9a ★** | **Puerta 1 · al agendar** | Etapa 2 | `A2` a los 2 min sin clic → 3 · *Ver vídeo* → `A3` + tag `video-enviado` · *Sí, confirmo* → 4, tag `confirmada`, dispara `A5` · *Cancelar* → 9 con `A4` |
+| **W10 ★** | **Diagnóstico · FASE 2** | `A5` enviado | → 5 · `M1` a los 5 min, `M2` a los 5 seg · Sirve la rama 🅐/🅑/🅒 según el formulario · Tarea: escribir el `Resumen Lead` con `M6` |
 | W11 | Pre-llamada · FASE 3 | Víspera | → 6 · Tarea a Anaís para `M7a-c` · `M8` automático por el +52 esa noche |
-| W12 | Día de llamada · FASE 4 | Es el día | → 7 · `M9` en la mañana · `M10` 15 min antes · Tarea `M11` a la hora · Gana y crea en `③`/0 |
-| W13 | Caducidad | 14 d en 1 o en 8 | Perdida con motivo obligatorio |
+| **W9b ★** | **Puerta 2 · la víspera** | Responde a `M7` o `M8` | → 7 · Tag `confirmada-vispera` |
+| W12 | Día de llamada · FASE 4 | Es el día | → 8 desde 6 **y** desde 7 · Lo que venía de 6 se marca `riesgo-noshow` · `M9` mañana · `M10` 15 min antes · Tarea `M11` · Gana y crea en `③`/0 |
+| W13 | Caducidad | 14 d en 1 o en 9 | Perdida con motivo obligatorio |
 
 ### Pipeline ③ — Llamadas
 
@@ -494,11 +501,11 @@ y las columnas de recuperación no son un paso del camino: son desvíos. Metidas
 el gráfico, deforman la figura y hacen que el embudo parezca ensancharse a mitad.
 
 Conviene **desmarcarlas del embudo y de la tarta**: `Seguimiento`, `Sin Agendar`,
-`Sin Confirmar`, `Re-Agendar`, `No-Show`, `Descalificada` y `Pago Fallido`. Su
+`Sin Confirmar (Agenda)`, `Re-Agendar`, `No-Show`, `Descalificada` y `Pago Fallido`. Su
 probabilidad sigue existiendo y contando para el forecast; simplemente dejan de
 ensuciar el gráfico. En la hoja de carga van marcadas con `—`.
 
-### Hoja de carga · las 30 etapas
+### Hoja de carga · las 31 etapas
 
 Todo junto, para teclear de una pasada al crear cada pipeline. La columna
 **Embudo** es el *Show in reports*.
@@ -515,14 +522,15 @@ Todo junto, para teclear de una pasada al crear cada pipeline. La columna
 | | 7 | Agendada | 100 | ✓ |
 | | 8 | Descalificada | 0 | — |
 | **②** Agenda | 0 | Calificada (Formulario) | 18 | ✓ |
-| | 1 | Sin Agendar | 5 | — |
+| | 1 | Sin Agendar (Ghost) | 5 | — |
 | | 2 | Nueva Agenda | 39 | ✓ |
-| | 3 | Sin Confirmar | 18 | — |
-| | 4 | Confirmada | 42 | ✓ |
+| | 3 | Sin Confirmar (Agenda) | 18 | — |
+| | 4 | Confirmada (Agenda) | 42 | ✓ |
 | | 5 | Diagnóstico | 55 | ✓ |
-| | 6 | Pre-Llamada | 70 | ✓ |
-| | 7 | Día de Llamada | 90 | ✓ |
-| | 8 | Re-Agendar | 15 | — |
+| | 6 | Pre-Llamada | 65 | ✓ |
+| | 7 | Confirmada (Víspera) | 85 | ✓ |
+| | 8 | Día de Llamada | 92 | ✓ |
+| | 9 | Re-Agendar | 15 | — |
 | **③** Llamadas | 0 | En Llamada | 13 | ✓ |
 | | 1 | Asistió | 33 | ✓ |
 | | 2 | No-Show | 4 | — |
@@ -615,18 +623,20 @@ agendadas se presenta el **39 %**. Una tarjeta recién calificada tiene por tant
 | # | Etapa | % | De dónde sale |
 |---|---|---:|---|
 | 0 | Calificada (Formulario) | 18 | 0,47 × 0,39 medido |
-| 1 | Sin Agendar | **5** | no agendó: por debajo de la 0 |
+| 1 | Sin Agendar (Ghost) | **5** | no agendó: por debajo de la 0 |
 | 2 | Nueva Agenda | 39 | show-up medido |
-| 3 | Sin Confirmar | **18** | no cruzó el portón |
-| 4 | Confirmada | 42 | cruzó el portón |
+| 3 | Sin Confirmar (Agenda) | **18** | no cruzó la puerta 1 |
+| 4 | Confirmada (Agenda) | 42 | cruzó la puerta 1 |
 | 5 | Diagnóstico | 55 | conversación humana ya hecha |
-| 6 | Pre-Llamada | 70 | vídeo personalizado enviado |
-| 7 | Día de Llamada | 90 | solo falta que entre |
-| 8 | Re-Agendar | **15** | canceló una vez |
+| 6 | Pre-Llamada | 65 | mezcla de quien confirmará y quien no |
+| 7 | Confirmada (Víspera) | **85** | **el mejor predictor de que aparece** |
+| 8 | Día de Llamada | 92 | solo falta que entre |
+| 9 | Re-Agendar | **15** | canceló una vez |
 
-Comprobación: 88 % cruza el portón y 12 % no, así que
-`0,88 × 42 + 0,12 × 18 = 39 %` — el show-up medido. La escalera cuadra con la
-realidad, no está inventada.
+Dos comprobaciones. Puerta 1: 88 % cruza y 12 % no, así que
+`0,88 × 42 + 0,12 × 18 = 39 %`, el show-up medido. Puerta 2: si dos tercios
+confirman la víspera, `0,65 × 85 + 0,35 × 30 = 66 %`, que es la Pre-Llamada.
+La escalera cuadra con la realidad, no está inventada.
 
 ### ③ Llamadas · Closer
 
