@@ -34,12 +34,12 @@ CAMPANAS = {
         "slug": "deportista",
         "title": "Vuelve a jugar sin miedo a lesionarte de nuevo · Kinesiología Fixus",
         "meta": "¿Te desgarraste o te doblaste el tobillo y llevas semanas sin jugar? Evaluamos tu lesión, te decimos en cuánto vuelves y te preparamos para aguantar el partido completo. Kinesiología 1 a 1 en Providencia, a pasos del Metro Colón.",
-        "kicker": "Te desgarraste hace semanas y todavía no vuelves a la cancha",
-        "h1": 'Vuelve a jugar sin miedo a que <span class="mark">se te vuelva a romper</span>.',
+        "kicker": "Te <span class=\"mark\">desgarraste o lesionaste</span> hace semanas y todavía no vuelves a la cancha",
+        "h1": 'Vuelve a jugar sin miedo a <span class="mark">volver a lesionarte</span>.',
         "lead": "Revisamos tu lesión, te decimos en cuánto tiempo vuelves y te armamos el plan para que aguantes el partido completo. Todo parte por la evaluación.",
         "wa_msg": "Hola, me lesioné jugando y quiero saber cómo funciona la evaluación kinesiológica.",
 
-        "ba_titulo": "Volver antes de tiempo es la razón #1 por la que te vuelves a lesionar",
+        "ba_titulo": "Volver antes de tiempo es la razón #1 por la que <span class=\"alerta\">te vuelves a lesionar</span>",
         "ba_bajada": "Aguantar, congelar y probar suerte el domingo no es un plan de recuperación.",
         "antes_h": "Así estás hoy",
         "antes": [
@@ -96,7 +96,7 @@ CAMPANAS = {
         "lead": "El dolor de espalda se volvió tan común que lo normalizamos. No se arregla con otra pastilla ni aguantando: primero revisamos de dónde viene y de ahí armamos un plan real para eliminarlo.",
         "wa_msg": "Hola, llevo tiempo con dolor y quiero saber cómo funciona la evaluación kinesiológica.",
 
-        "ba_titulo": "Llevas meses diciendo que se te va a pasar",
+        "ba_titulo": "Llevas meses diciendo que <span class=\"alerta\">se te va a pasar</span>",
         "ba_bajada": "Y no se pasa. El dolor que no se trata bien se instala y empieza a quitarte cosas del día a día.",
         "antes_h": "Así estás hoy",
         "antes": [
@@ -153,7 +153,7 @@ CAMPANAS = {
         "lead": "Cuando algo lleva mucho tiempo mal no se arregla con reposo ni con pastillas. Se arregla con ejercicios hechos para ti y alguien al lado, sesión a sesión.",
         "wa_msg": "Hola, vengo de una operación / llevo tiempo con una lesión y quiero saber cómo funciona la evaluación kinesiológica.",
 
-        "ba_titulo": "Lo que lleva tiempo mal no se arregla solo",
+        "ba_titulo": "Lo que lleva tiempo mal <span class=\"alerta\">no se arregla solo</span>",
         "ba_bajada": "Ni con reposo, ni con pastillas, ni esperando a ver si esta vez sí.",
         "antes_h": "Así estás hoy",
         "antes": [
@@ -316,7 +316,7 @@ PLANTILLA = r"""<!DOCTYPE html>
 
     <div class="facts">
       <div class="fact"><b>1 a 1</b><span>Un kinesiólogo contigo toda la sesión</span></div>
-      <div class="fact"><b>$24.990</b><span>Evaluación inicial</span></div>
+      <div class="fact"><b>Isapre</b><span>Reembolsable con orden médica</span></div>
       <div class="fact"><b>Metro Colón</b><span>Providencia, a pasos</span></div>
     </div>
   </div>
@@ -702,6 +702,35 @@ def construir_ghl(nombre):
     js = js.replace("d.body.getAttribute('data-campana')", "RAIZ.getAttribute('data-campana')")
     js = js.replace("d.body.getAttribute('data-wa-msg')", "RAIZ.getAttribute('data-wa-msg')")
     js = js.replace("#cta-hero", "#fixus-cta-hero")
+
+    # GHL mete el bloque dentro de una sección/fila/columna que traen su propio
+    # relleno y su fondo blanco. Esto los anula desde dentro, sin tocar el editor.
+    js += """
+
+/* --- GHL: elimina el relleno y el fondo de los contenedores que lo envuelven --- */
+(function () {
+  function ajustar() {
+    var n = document.getElementById('fixus-lp');
+    if (!n) return;
+    var p = n.parentElement;
+    while (p && p !== document.body) {
+      p.style.setProperty('padding', '0', 'important');
+      p.style.setProperty('margin-top', '0', 'important');
+      p.style.setProperty('margin-bottom', '0', 'important');
+      p.style.setProperty('background', 'transparent', 'important');
+      p.style.setProperty('border', '0', 'important');
+      p = p.parentElement;
+    }
+    document.body.style.setProperty('margin', '0', 'important');
+    document.body.style.setProperty('background-color', '#08080A', 'important');
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ajustar);
+  else ajustar();
+  window.addEventListener('load', ajustar);
+  setTimeout(ajustar, 400);
+  setTimeout(ajustar, 1500);
+})();
+"""
 
     # --- Cuerpo de la página, sin <html>/<head>/<body> ---
     cuerpo = html[html.index("<body"):html.rindex("</body>")]
