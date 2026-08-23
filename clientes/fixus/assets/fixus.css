@@ -344,11 +344,11 @@ h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:700;letter-spacing:-.01em}
    ========================================================================== */
 
 [data-tema="calma"]{
-  --red:      #9E2B30;   /* ladrillo, no eléctrico */
-  --red-hi:   #862327;
-  --red-deep: #5E181B;
-  --red-soft: rgba(158,43,48,.10);
-  --alerta:   #8C2226;
+  --red:      #D0141C;   /* rojo Fixus vivo: el color sí es eléctrico, el resto no */
+  --red-hi:   #E8353D;
+  --red-deep: #8E0F14;
+  --red-soft: rgba(208,20,28,.12);
+  --alerta:   #D0141C;
 
   --oscuro:   #14151A;   /* la franja de arriba y el pie */
   --bg:       #F7F7F5;
@@ -377,6 +377,7 @@ h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:700;letter-spacing:-.01em}
   --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.18);
 }
 [data-tema="calma"] .hero{padding-bottom:40px}
+[data-tema="calma"] .kicker{color:#EDEDF1}
 
 /* --- Video: sin halo rojo --- */
 [data-tema="calma"] .vsl-frame{
@@ -402,7 +403,7 @@ h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:700;letter-spacing:-.01em}
 [data-tema="calma"] .mark{color:var(--red)}
 [data-tema="calma"] .alerta{
   color:var(--alerta);text-shadow:none;
-  box-shadow:inset 0 -2px 0 0 rgba(140,34,38,.30);
+  box-shadow:inset 0 -2px 0 0 rgba(208,20,28,.38);
 }
 [data-tema="calma"] .check svg{stroke:var(--red)}
 [data-tema="calma"] .step-n{box-shadow:0 0 0 4px rgba(158,43,48,.12)}
@@ -414,9 +415,9 @@ h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:700;letter-spacing:-.01em}
   background:var(--oscuro);border-color:var(--oscuro);
   box-shadow:0 20px 44px -24px rgba(19,20,24,.55);
 }
-[data-tema="calma"] .ba-card.now h3{color:#E08A8E}
+[data-tema="calma"] .ba-card.now h3{color:#FF565E}
 [data-tema="calma"] .ba-card.now li{color:#F0F0F2}
-[data-tema="calma"] .ba-card.now li::before{color:#E08A8E}
+[data-tema="calma"] .ba-card.now li::before{color:#FF565E}
 
 /* --- FAQ, ubicación y barra --- */
 [data-tema="calma"] .faq details{background:#FFFFFF}
