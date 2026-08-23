@@ -94,23 +94,69 @@ manda recordatorios. Un solo punto de traspaso, y está automatizado.
 
 ## 3. ① Instagram · Setter — Valen
 
-**7 etapas, íntegramente en el DM de Instagram** — sin WhatsApp. Termina cuando
-la lead califica; ahí la tarjeta se gana y nace la de `②`.
+**Creado en la cuenta el 23/ago/2026** — `ZJbdlB7FnM3V5YY5BiDG`. Vive íntegro en
+el DM de Instagram, sin WhatsApp.
 
-| # | Etapa | Quién mueve | Entra | Sale | Color |
+Además de ser su tablero de trabajo, es **su marcador**: las dos últimas columnas
+existen para que Valen vea el resultado de lo que empujó, aunque el trabajo
+posterior ya no sea suyo.
+
+| # | Etapa | Quién mueve | Entra | Sale | ID |
 |---|---|---|---|---|---|
-| 0 | **Bienvenidas** | 🤖 | Seguidora nueva / DM frío | → 1 si responde · → 5 a las 72 h | `#6366F1` |
-| 1 | **Conversación** | 🤖 | Contestó cualquier mensaje | → 2 o 3 según lo que pida | `#0D9488` |
-| 2 | **CTA Lead Magnet** | 🤖 | Palabra clave / comentario | → 3 al preguntar por la formación | `#F97316` |
-| 3 | **CTA Formación** | 👤 Valen | Intención de compra detectada | → 4 al mandar el link | `#7C3AED` |
-| 4 | **Link Enviado** | 👤 Valen | Pegó el link del formulario | → 5 a las 48 h · → 6 al llegar | `#CA8A04` |
-| 5 | **Ghost DM** | 🤖 | 72 h sin respuesta / 3 toques | → 1 si reaparece · Perdida a 21 d | `#64748B` |
-| 6 | **Formulario Completado** | 🤖 | Llegó la postulación | **Gana** si califica → nace en `②` · Perdida con motivo si no | `#3B82F6` |
+| 0 | **Bienvenidas** | 🤖 | Seguidora nueva / DM frío | → 1 si responde · → 6 a las 72 h | `ea1ff088…` |
+| 1 | **Respuesta Bienvenida** | 🤖 | Contestó el saludo | → 2 o 3 según lo que pida | `7c105885…` |
+| 2 | **CTA Lead Magnet** | 🤖 | Palabra clave / comentario | → 3 al preguntar por la formación | `08608923…` |
+| 3 | **CTA Formación** | 👤 Valen | Intención de compra detectada | → 4 al mandar el link | `463f7aa6…` |
+| 4 | **Link Enviado (Survey)** | 👤 Valen | Pegó el link del formulario | → 5 al llegar · → 6 a las 48 h | `c293f1ec…` |
+| 5 | **Formulario Completado** | 🤖 | Llegó la postulación | → 7 si califica · → 8 si `tier-out` | `c571ea2a…` |
+| 6 | **Seguimiento** | 👤 Valen | Se enfrió en 2, 4 o 5 | → vuelve donde toque · caduca a 21 d | `5ac012c1…` |
+| 7 | **Agendada** | 🤖 | Tomó hora (desde `②`) | **Ganada.** Terminal | `f8091b45…` |
+| 8 | **Descalificada** | 🤖 | `tier-out` en el formulario | **Perdida** con motivo, tras escribirle | `82547b51…` |
 
-**La calificación no la decide Valen.** El formulario ya calcula `tier_score` y
-`producto_recomendado`; la etiqueta `tier-*` está puesta en el 100 % de los casos
-y se ve en la tarjeta. `tier-out` → perdida con motivo, tras el mensaje de
-cortesía.
+### Un ajuste de orden
+
+Hoy **Seguimiento está en la posición 4**, entre *CTA Formación* y *Link Enviado*.
+Conviene arrastrarla a la **posición 6**, después de *Formulario Completado*.
+
+El motivo no es estético: Seguimiento recibe tarjetas de las etapas 2, 4 y 5. Con
+la columna a mitad del embudo, cada regreso mueve la tarjeta **hacia atrás
+cruzando** *Link Enviado*, y el reporte de embudo —que lee de izquierda a
+derecha— cuenta *Link Enviado* como paso posterior a *Seguimiento*. La
+conversión **Link → Formulario**, que es el número que mide el guión del DM,
+queda contaminada.
+
+Con Seguimiento en la 6, el board se lee de corrido: todo lo que sigue vivo pero
+sin resolver está en Seguimiento, y lo resuelto cae en Agendada o Descalificada.
+Es un solo arrastre.
+
+### Las dos columnas terminales son el marcador, no el archivo
+
+`Agendada` y `Descalificada` existen porque Valen tiene que enterarse de en qué
+terminó lo que ella empujó. Pero una columna terminal sin regla de salida se
+convierte en cementerio: hoy hay **25 tarjetas atascadas** en la *Descalificada*
+de `②`, 17 de ellas con más de 22 días.
+
+La regla que lo evita:
+
+- **Agendada** → la tarjeta se marca **Ganada** en cuanto entra. Sigue visible en
+  su vista de ganadas de la semana; el trabajo real continúa en `②`.
+- **Descalificada** → es la bandeja de *"hay que escribirle"*. Valen manda el
+  mensaje de cortesía (`M13`) y ahí marca **Perdida con motivo**. La columna
+  debería estar casi siempre vacía.
+
+Su board está filtrado a *Open opportunities*, así que ambas se vacían solas en
+cuanto se marca el estado.
+
+### Lo que este board no le muestra
+
+Las agendas que vienen de **pauta** nunca pasan por Instagram, así que no
+aparecen acá. Si Valen necesita ver todas, es la Smart List de contactos
+(`survey-org` + `survey-ads`), no una columna.
+
+> **Probabilidades:** las etapas 2 a 8 están casi todas en 80 %, y *CTA Lead
+> Magnet* (80) va por delante de *CTA Formación* (60), que es al revés de lo real.
+> Con `useOpportunityProbability` en `false` solo afecta al reporte de embudo,
+> pero conviene dejar una escalera limpia: 10 · 20 · 30 · 40 · 50 · 60 · 70 · 80 · 90.
 
 ---
 
@@ -242,7 +288,8 @@ esos el sistema ya opera.
 | W1 | Crear oportunidad IG | Tag `bienvenida-enviada` | Crea en `①`/0, asigna a Valen, source `[IG] Bienvenida` |
 | W2 | Respondió | Mensaje entrante | Si está en 0 → mueve a 1 |
 | W3 | Intención | Tag `cta-leadmagnet` / `cta-formacion` | Crea o mueve a 2 / 3 |
-| W4 | Ghost DM | 72 h sin respuesta | → 5 · Perdida a 21 d |
+| W4 | Seguimiento y caducidad | 72 h sin respuesta en 0 · 48 h en 4 | → 6 · Perdida a los 21 d |
+| W4b | **Marcador** | Cita creada (desde `②`) → `①`/7 **Ganada** · `tier-out` → `①`/8 | Mantiene el marcador de Valen al día sin que ella mueva nada |
 
 ### Pipeline ② — Agenda ★
 
