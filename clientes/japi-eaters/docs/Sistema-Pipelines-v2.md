@@ -466,6 +466,80 @@ histórica. Sirven de línea base para saber si v2 mejora algo.
 GHL **obliga** a poner una probabilidad en cada etapa: no se puede dejar vacía.
 Como hay que ponerla, conviene que signifique algo.
 
+### ¿Se pueden quitar? No — pero hay tres palancas
+
+**Toda etapa de GHL lleva probabilidad obligatoria.** No existe una etapa sin
+número: el campo `stageWinProbability` siempre está, en los cinco pipelines de la
+cuenta y en cualquiera que se cree. No hay forma de dejarlo vacío.
+
+Lo que sí se puede es decidir **cuánto pesa**:
+
+| Palanca | Dónde | Qué hace |
+|---|---|---|
+| `stageWinProbability` | cada etapa | El número. Obligatorio, no se puede borrar. |
+| **Use opportunity-level probability** | arriba del pipeline | `OFF` → manda la etapa · `ON` → cada tarjeta lleva la suya |
+| **Show in reports** (embudo · tarta) | cada etapa | Saca la etapa del reporte, sin tocar su número |
+
+Los cinco pipelines están hoy con el toggle en **OFF**, que es lo correcto:
+con `ON`, alguien tendría que poner un porcentaje a mano en cada tarjeta.
+
+Y hay una cuarta vía, la más simple: **con valor monetario `$0`, el forecast da
+cero haga lo que haga la probabilidad**. Por eso en `①` y `②` el número solo
+sirve para ordenar el embudo.
+
+### Sacar del reporte lo que no es una fase
+
+*Show in reports* es la palanca infrautilizada. Un embudo dibuja una **secuencia**,
+y las columnas de recuperación no son un paso del camino: son desvíos. Metidas en
+el gráfico, deforman la figura y hacen que el embudo parezca ensancharse a mitad.
+
+Conviene **desmarcarlas del embudo y de la tarta**: `Seguimiento`, `Sin Agendar`,
+`Sin Confirmar`, `Re-Agendar`, `No-Show`, `Descalificada` y `Pago Fallido`. Su
+probabilidad sigue existiendo y contando para el forecast; simplemente dejan de
+ensuciar el gráfico. En la hoja de carga van marcadas con `—`.
+
+### Hoja de carga · las 30 etapas
+
+Todo junto, para teclear de una pasada al crear cada pipeline. La columna
+**Embudo** es el *Show in reports*.
+
+| Pipeline | # | Etapa | % | Embudo |
+|---|---:|---|---:|:---:|
+| **①** Instagram | 0 | Bienvenidas | 5 | ✓ |
+| | 1 | Respuesta Bienvenida | 15 | ✓ |
+| | 2 | CTA Lead Magnet | 25 | ✓ |
+| | 3 | CTA Formación | 45 | ✓ |
+| | 4 | Link Enviado (Survey) | 60 | ✓ |
+| | 5 | Formulario Completado | 80 | ✓ |
+| | 6 | Seguimiento | 20 | — |
+| | 7 | Agendada | 100 | ✓ |
+| | 8 | Descalificada | 0 | — |
+| **②** Agenda | 0 | Calificada (Formulario) | 18 | ✓ |
+| | 1 | Sin Agendar | 5 | — |
+| | 2 | Nueva Agenda | 39 | ✓ |
+| | 3 | Sin Confirmar | 18 | — |
+| | 4 | Confirmada | 42 | ✓ |
+| | 5 | Diagnóstico | 55 | ✓ |
+| | 6 | Pre-Llamada | 70 | ✓ |
+| | 7 | Día de Llamada | 90 | ✓ |
+| | 8 | Re-Agendar | 15 | — |
+| **③** Llamadas | 0 | En Llamada | 13 | ✓ |
+| | 1 | Asistió | 33 | ✓ |
+| | 2 | No-Show | 4 | — |
+| | 3 | Cerrada · Va a Pagar | 95 | ✓ |
+| | 4 | Seguimiento | 15 | — |
+| | 5 | Reagendada | 10 | — |
+| **④** Ventas | 0 | Cuota de Entrada Pagada | 40 | ✓ |
+| | 1 | Pago Cuota 1 | 55 | ✓ |
+| | 2 | Pago Cuota 2 | 70 | ✓ |
+| | 3 | Pago Cuota 3 | 85 | ✓ |
+| | 4 | Pago Fallido · En Riesgo | 25 | — |
+| | 5 | Venta Total | 100 | ✓ |
+
+**Los pipelines viejos no se tocan.** Sus probabilidades quedan como están hasta
+que se archiven (§13, paso 7): cambiarlas ahora movería reportes históricos sin
+ganar nada.
+
 ### Qué significa el número
 
 `stageWinProbability` es la probabilidad de que una tarjeta en esa etapa termine
