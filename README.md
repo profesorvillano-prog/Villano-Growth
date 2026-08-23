@@ -49,7 +49,8 @@ Villano Growth (repo: Villano-Growth)
    ├─ gian-fp-coach/      ← Gian FP Coach
    ├─ japi-eaters/        ← Japi Eaters
    ├─ family-eaters/      ← Family Eaters
-   └─ ingresos-extra-to/  ← Ingresos Extra TO (Sala de Skool)
+   ├─ ingresos-extra-to/  ← Ingresos Extra TO (Sala de Skool)
+   └─ fixus/              ← FIXUS (kinesiología y rendimiento, Chile)
 ```
 
 Cada cliente vive en su propia subcarpeta dentro de `clientes/`. Cuando crezca,
