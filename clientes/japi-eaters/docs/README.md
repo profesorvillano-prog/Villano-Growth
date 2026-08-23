@@ -20,6 +20,7 @@ emails y nuevos productos.
 | [`Voz-y-Marca.md`](./Voz-y-Marca.md) | Tono, frases marca registrada, palabras prohibidas, paleta de color, historia y autoridad de Josefina. |
 | [`Operaciones-y-Embudo.md`](./Operaciones-y-Embudo.md) | Funnel, onboarding, plataforma Skool (niveles), mentorías, equipo, stack tecnológico, modelo 2026 y datos de audiencias. |
 | [`Sistema-Pipelines-v2.md`](./Sistema-Pipelines-v2.md) | **La estructura de CRM vigente.** Los 4 pipelines (Instagram · Agenda · Llamadas · Ventas), los dos números de WhatsApp, etapas con disparadores, vocabulario de etiquetas, los 15 workflows, los 14 slots de plantillas de mensajes, el mapeo de migración y los permisos por persona. |
+| [`Guion-WhatsApp.md`](./Guion-WhatsApp.md) | **Los textos.** El guion completo de WhatsApp de la postulación a la llamada: los dos números (+52 Josefina automático · +569 Rafa operado por Anaís), las 5 fases, los 21 mensajes con sus disparadores, la pregunta de diagnóstico ramificada en 🅐/🅑/🅒 y los tres huecos que faltan por escribir. |
 | [`Pipeline-Setter-Organico.md`](./Pipeline-Setter-Organico.md) | *(Superado por v2.)* Diseño original del board de Valen: Las 9 etapas del board de DM, las 4 puertas de entrada, etiquetas, la Smart List de "todos los formularios", los 8 workflows, permisos exactos para darle acceso en GHL, rutina diaria y métricas. |
 
 ## Fuentes
