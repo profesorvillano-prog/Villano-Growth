@@ -14,7 +14,7 @@ la **evaluación kinesiológica ($24.990)**. El WhatsApp queda como salida secun
 | `index.html` | — | Índice interno para revisar las tres (no publicar como destino de ads) |
 | `build.py` | — | Generador: plantilla única + copy por campaña |
 | `previsualizar/` | — | Las mismas 3 landings en **un solo archivo** cada una (doble clic y listo) |
-| `assets/` | — | CSS, JS y logo compartidos |
+| `assets/` | — | CSS y JS compartidos |
 | `docs/` | — | Documentos fuente: Avatar, ADS y VSL |
 
 Las tres páginas son **idénticas en estructura**. Solo cambia el copy.
@@ -50,7 +50,6 @@ automática (`utm_content=deportista|dolor-cronico|postoperado`) para saber qué
 ### Pendientes de material
 - [ ] **VSL grabado y subido** (guion en `docs/VSL-Kinesiologia.docx`). Mientras `VSL_EMBED`
       esté vacío, el botón de play lleva al CTA en vez de romperse.
-- [ ] **Logo oficial**: `assets/logo.svg` es una reconstrucción. Reemplazar por el archivo real.
 - [ ] **Testimonios**: la sección está lista y **comentada** dentro del HTML (buscar
       `TESTIMONIOS` en `build.py`). Descomentar cuando estén grabados los 2 del documento
       de avatar. No publicar testimonios inventados.
@@ -83,6 +82,16 @@ Si necesitas cambiar la *estructura* de las tres a la vez, edita `PLANTILLA` en 
 9. **FAQ**: orden médica, reembolso isapre, "ya hice kine y no me resultó", precio, ubicación
 10. **Cierre** con CTA + ubicación
 11. **Barra fija móvil** con los dos botones
+
+## Logo
+
+El logo sale del CDN del cliente:
+`https://assets.cdn.filesafe.space/LK0isBMjR28HLsU5VrX3/media/6a8a40b7cdd4b797a357456c.png`
+
+Está definido una sola vez, en la constante `LOGO` de `build.py`. Si cambia, se cambia ahí
+y se regeneran las páginas. Ojo: al venir de un CDN externo, si ese link cae el logo
+desaparece; cuando montes las landings en el hosting definitivo conviene subir el archivo
+al mismo servidor.
 
 ## Notas de campaña
 

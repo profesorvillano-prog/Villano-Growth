@@ -93,7 +93,8 @@ h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:700;letter-spacing:-.01em}
 /* ---------- Header ---------- */
 .hdr{padding:calc(20px + var(--sat)) 0 8px;text-align:center}
 .hdr .logo{display:inline-flex;align-items:center;gap:10px}
-.hdr .logo img{height:34px;width:auto}
+.hdr .logo img{height:40px;width:auto;object-fit:contain}
+@media(min-width:760px){.hdr .logo img{height:46px}}
 .hdr .logo-txt{
   font-family:var(--display);font-weight:800;font-size:1.42rem;
   letter-spacing:.06em;color:#fff;
@@ -150,7 +151,7 @@ h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:700;letter-spacing:-.01em}
 .vsl-mark{
   position:absolute;top:14px;left:16px;display:flex;align-items:center;gap:7px;opacity:.5;
 }
-.vsl-mark img{width:18px;height:18px}
+.vsl-mark img{height:17px;width:auto}
 .vsl-mark span{font-family:var(--display);font-weight:800;font-size:.72rem;letter-spacing:.14em;color:#fff}
 .vsl-play span{
   width:66px;height:66px;border-radius:50%;
@@ -301,6 +302,7 @@ h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:700;letter-spacing:-.01em}
 .ftr{border-top:1px solid var(--line);padding:30px 0 calc(104px + var(--sab));text-align:center}
 @media(min-width:760px){.ftr{padding-bottom:36px}}
 .ftr .logo-txt{font-family:var(--display);font-weight:800;letter-spacing:.06em;color:var(--t2);font-size:1rem}
+.ftr .logo-ftr{height:26px;width:auto;margin:0 auto;opacity:.6}
 .ftr p{font-size:.76rem;color:var(--t3);margin-top:8px;line-height:1.6}
 .ftr a{color:var(--t2)}
 

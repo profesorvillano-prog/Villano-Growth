@@ -18,6 +18,9 @@ import os
 
 RUTA = os.path.dirname(os.path.abspath(__file__))
 
+# Logo oficial de Fixus (CDN del cliente). Si algún día cambia, se cambia acá.
+LOGO = "https://assets.cdn.filesafe.space/LK0isBMjR28HLsU5VrX3/media/6a8a40b7cdd4b797a357456c.png"
+
 # ============================================================================
 # 1. COPY POR CAMPAÑA  (un anuncio = un avatar = una landing)
 # ============================================================================
@@ -242,7 +245,7 @@ PLANTILLA = r"""<!DOCTYPE html>
 <meta name="description" content="{{META}}">
 <title>{{TITLE}}</title>
 
-<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="icon" href="{{LOGO}}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
@@ -264,9 +267,8 @@ PLANTILLA = r"""<!DOCTYPE html>
 <!-- ============================ HEADER ============================ -->
 <header class="hdr">
   <div class="wrap">
-    <a class="logo" href="https://www.fixus.cl" aria-label="Fixus">
-      <img src="assets/logo.svg" alt="" width="34" height="34">
-      <span class="logo-txt">FI<b>X</b>US</span>
+    <a class="logo" href="https://www.fixus.cl">
+      <img src="{{LOGO}}" alt="Fixus" width="150" height="40">
     </a>
     <p class="place">Kinesiología &amp; rendimiento · Providencia</p>
   </div>
@@ -285,7 +287,7 @@ PLANTILLA = r"""<!DOCTYPE html>
       <div class="vsl-frame">
         <div class="vsl-ratio">
           <div class="vsl-poster" style="background:radial-gradient(ellipse 66% 66% at 50% 38%,#1d1d23,#09090b)"></div>
-          <div class="vsl-mark"><img src="assets/logo.svg" alt="" width="18" height="18"><span>FIXUS</span></div>
+          <div class="vsl-mark"><img src="{{LOGO}}" alt="" width="64" height="17"></div>
           <button class="vsl-play" data-video="" aria-label="Ver el video">
             <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
             <b>Mira cómo funciona</b>
@@ -472,7 +474,7 @@ PLANTILLA = r"""<!DOCTYPE html>
 <!-- ============================= FOOTER ============================= -->
 <footer class="ftr">
   <div class="wrap">
-    <span class="logo-txt">FIXUS</span>
+    <img class="logo-ftr" src="{{LOGO}}" alt="Fixus" width="96" height="26">
     <p>
       Kinesiología y rendimiento · Providencia, Santiago<br>
       © <span id="y">2026</span> Fixus. Todos los derechos reservados. ·
@@ -532,6 +534,7 @@ def faq(extra):
 def construir(nombre, c):
     html = PLANTILLA
     reemplazos = {
+        "LOGO": LOGO,
         "TITLE": c["title"],
         "META": c["meta"],
         "SLUG": c["slug"],
@@ -576,8 +579,6 @@ def construir(nombre, c):
 # mejor la versión normal (assets compartidos = un solo lugar que tocar).
 
 def construir_suelto(nombre):
-    import base64
-
     origen = os.path.join(RUTA, nombre + ".html")
     with io.open(origen, encoding="utf-8") as f:
         html = f.read()
@@ -588,14 +589,10 @@ def construir_suelto(nombre):
 
     css = leer("assets/fixus.css")
     js = leer("assets/fixus.js")
-    logo = "data:image/svg+xml;base64," + base64.b64encode(
-        leer("assets/logo.svg").encode("utf-8")).decode("ascii")
-
     html = html.replace('<link rel="stylesheet" href="assets/fixus.css">',
                         "<style>\n" + css + "\n</style>")
     html = html.replace('<script src="assets/fixus.js"></script>',
                         "<script>\n" + js + "\n</script>")
-    html = html.replace('assets/logo.svg', logo)
     html = html.replace("<body ",
                         "<!-- Versión de un solo archivo, generada por build.py. "
                         "No editar a mano. -->\n<body ")
