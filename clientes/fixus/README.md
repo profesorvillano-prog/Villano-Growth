@@ -87,6 +87,19 @@ Si necesitas cambiar la *estructura* de las tres a la vez, edita `PLANTILLA` en 
 10. **Cierre** con CTA + ubicación
 11. **Barra fija móvil** con los dos botones
 
+## Temas de color
+
+Cada campaña elige su piel con la clave `tema` en `CAMPANAS`. El esqueleto, el copy y
+el CTA son los mismos; solo cambia el color.
+
+| Tema | Campañas | Cómo se ve |
+|---|---|---|
+| `electrico` (por defecto) | deportista, post-operado | Negro con rojo Fixus intenso, halos y rejilla. Energía deportiva. |
+| `calma` | dolor de espalda | Franja oscura arriba (logo y video) y el resto claro. Rojo ladrillo apagado, sin brillos. Sobrio, para el perfil de oficina 40-55. |
+
+Para cambiarle el tema a una campaña, edita su `"tema"` en `build.py` y vuelve a
+generar. El tema `calma` vive al final de `assets/fixus.css`, bajo `[data-tema="calma"]`.
+
 ## Logo
 
 El logo sale del CDN del cliente:

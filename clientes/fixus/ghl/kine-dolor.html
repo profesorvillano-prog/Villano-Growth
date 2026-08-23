@@ -245,6 +245,67 @@
 @media(prefers-reduced-motion:reduce){#fixus-lp *{animation:none!important;transition:none!important}
 #fixus-lp .rv{opacity:1;transform:none}
 #fixus-lp{scroll-behavior:auto}}
+#fixus-lp[data-tema="calma"]{--red:      #9E2B30;   
+  --red-hi:   #862327;
+  --red-deep: #5E181B;
+  --red-soft: rgba(158,43,48,.10);
+  --alerta:   #8C2226;
+
+  --oscuro:   #14151A;   
+  --bg:       #F7F7F5;
+  --bg-2:     #FFFFFF;
+  --surf:     #FFFFFF;
+  --surf-2:   #FBFBF9;
+  --line:     rgba(19,20,24,.11);
+  --line-2:   rgba(19,20,24,.20);
+
+  --t0: #14151A;
+  --t1: #34363D;
+  --t2: #5B5E67;
+  --t3: #8B8E97;
+
+  background-image:none;
+  background-color:var(--bg);
+  color:var(--t1);}
+#fixus-lp[data-tema="calma"] .hdr,#fixus-lp[data-tema="calma"] .hero{background:var(--oscuro);
+  --t0:#FFFFFF; --t1:#E9E9EC; --t2:#A7A9B1; --t3:#82848D;
+  --surf:#1C1D23; --surf-2:#22232A;
+  --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.18);}
+#fixus-lp[data-tema="calma"] .hero{padding-bottom:40px}
+#fixus-lp[data-tema="calma"] .vsl-frame{border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 20px 50px -24px rgba(0,0,0,.9);}
+#fixus-lp[data-tema="calma"] .vsl-play span{box-shadow:0 0 0 6px rgba(255,255,255,.10)}
+#fixus-lp[data-tema="calma"] .vsl-play:hover span{box-shadow:0 0 0 9px rgba(255,255,255,.13)}
+#fixus-lp[data-tema="calma"] .opt.primary{background:var(--red);border-color:var(--red);box-shadow:none;}
+#fixus-lp[data-tema="calma"] .opt.primary:hover{background:var(--red-hi);border-color:var(--red-hi);box-shadow:none}
+#fixus-lp[data-tema="calma"] .opt.primary .ico{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.26)}
+#fixus-lp[data-tema="calma"] .opt.primary .txt strong{color:#fff}
+#fixus-lp[data-tema="calma"] .opt.primary .txt em{color:rgba(255,255,255,.80)}
+#fixus-lp[data-tema="calma"] .opt.primary .chev{stroke:#fff}
+#fixus-lp[data-tema="calma"] .sec-alt{background:#FFFFFF;border-color:var(--line)}
+#fixus-lp[data-tema="calma"] .eyebrow{color:var(--red)}
+#fixus-lp[data-tema="calma"] .mark{color:var(--red)}
+#fixus-lp[data-tema="calma"] .alerta{color:var(--alerta);text-shadow:none;
+  box-shadow:inset 0 -2px 0 0 rgba(140,34,38,.30);}
+#fixus-lp[data-tema="calma"] .check svg{stroke:var(--red)}
+#fixus-lp[data-tema="calma"] .step-n{box-shadow:0 0 0 4px rgba(158,43,48,.12)}
+#fixus-lp[data-tema="calma"] .step::before{background:var(--line-2)}
+#fixus-lp[data-tema="calma"] .ba-card{background:#FFFFFF}
+#fixus-lp[data-tema="calma"] .ba-card.now{background:var(--oscuro);border-color:var(--oscuro);
+  box-shadow:0 20px 44px -24px rgba(19,20,24,.55);}
+#fixus-lp[data-tema="calma"] .ba-card.now h3{color:#E08A8E}
+#fixus-lp[data-tema="calma"] .ba-card.now li{color:#F0F0F2}
+#fixus-lp[data-tema="calma"] .ba-card.now li::before{color:#E08A8E}
+#fixus-lp[data-tema="calma"] .faq details{background:#FFFFFF}
+#fixus-lp[data-tema="calma"] .faq summary::after{border-color:var(--red)}
+#fixus-lp[data-tema="calma"] .place-card{background:#FFFFFF}
+#fixus-lp[data-tema="calma"] .place-card a{color:var(--red)}
+#fixus-lp[data-tema="calma"] .bar{background:rgba(255,255,255,.95);border-top:1px solid var(--line);}
+#fixus-lp[data-tema="calma"] .bar-cta{background:var(--red);box-shadow:none}
+#fixus-lp[data-tema="calma"] .bar-wa{background:var(--oscuro);border-color:var(--oscuro)}
+#fixus-lp[data-tema="calma"] .ftr{background:var(--oscuro);border-color:rgba(255,255,255,.10);
+  --t2:#A7A9B1; --t3:#82848D;}
+#fixus-lp[data-tema="calma"] .ftr a{color:#C9CACF}
 
 /* El bloque se estira a ancho completo aunque GHL lo meta en su contenedor */
 #fixus-lp{
@@ -265,7 +326,7 @@
 
 </style>
 
-<div id="fixus-lp" data-campana="dolor-cronico" data-wa-msg="Hola, llevo tiempo con dolor y quiero saber cómo funciona la evaluación kinesiológica.">
+<div id="fixus-lp" data-campana="dolor-cronico" data-tema="calma" data-wa-msg="Hola, llevo tiempo con dolor y quiero saber cómo funciona la evaluación kinesiológica.">
 <!-- ============================ HEADER ============================ -->
 <header class="hdr">
   <div class="wrap">
@@ -278,8 +339,8 @@
 <!-- ============================= HERO ============================= -->
 <section class="hero">
   <div class="wrap">
-    <p class="kicker">Te levantas mal, aguantas todo el día en la silla y ya te acostumbraste</p>
-    <h1>Que te duela todos los días <span class="mark">no es normal</span>.</h1>
+    <p class="kicker">Te levantas con <span class="mark">dolor de espalda</span>, aguantas todo el día en la silla y ya te acostumbraste</p>
+    <h1>Que te duela la espalda todos los días <span class="mark">no es normal</span>.</h1>
     <p class="lead">El dolor de espalda se volvió tan común que lo normalizamos. No se arregla con otra pastilla ni aguantando: primero revisamos de dónde viene y de ahí armamos un plan real para eliminarlo.</p>
 
     <!-- VSL -->

@@ -89,10 +89,11 @@ CAMPANAS = {
     # ------------------------------------------------------------------ #
     "kine-dolor": {
         "slug": "dolor-cronico",
+        "tema": "calma",
         "title": "Que te duela todos los días no es normal · Kinesiología Fixus",
         "meta": "¿Llevas meses con dolor de espalda, lumbago o de hombro y ya te acostumbraste? No se pasa solo. Revisamos de dónde viene y te damos un plan para que deje de volver. Kinesiología 1 a 1 en Providencia, a pasos del Metro Colón.",
-        "kicker": "Te levantas mal, aguantas todo el día en la silla y ya te acostumbraste",
-        "h1": 'Que te duela todos los días <span class="mark">no es normal</span>.',
+        "kicker": "Te levantas con <span class=\"mark\">dolor de espalda</span>, aguantas todo el día en la silla y ya te acostumbraste",
+        "h1": 'Que te duela la espalda todos los días <span class="mark">no es normal</span>.',
         "lead": "El dolor de espalda se volvió tan común que lo normalizamos. No se arregla con otra pastilla ni aguantando: primero revisamos de dónde viene y de ahí armamos un plan real para eliminarlo.",
         "wa_msg": "Hola, llevo tiempo con dolor y quiero saber cómo funciona la evaluación kinesiológica.",
 
@@ -259,7 +260,7 @@ PLANTILLA = r"""<!DOCTYPE html>
 <meta property="og:locale" content="es_CL">
 </head>
 
-<body data-campana="{{SLUG}}" data-wa-msg="{{WA_MSG}}">
+<body data-campana="{{SLUG}}" data-tema="{{TEMA}}" data-wa-msg="{{WA_MSG}}">
 
 <!-- ============================ HEADER ============================ -->
 <header class="hdr">
@@ -530,6 +531,7 @@ def construir(nombre, c):
         "TITLE": c["title"],
         "META": c["meta"],
         "SLUG": c["slug"],
+        "TEMA": c.get("tema", "electrico"),
         "WA_MSG": c["wa_msg"],
         "KICKER": c["kicker"],
         "H1": c["h1"],
@@ -621,6 +623,8 @@ def _prefijar(selector):
             sel = sel[4:]
         if sel in (":root", "html", "body"):
             partes.append(SCOPE)
+        elif sel.startswith("["):                # [data-tema="…"] va pegado al id
+            partes.append(SCOPE + sel)
         else:
             partes.append(SCOPE + " " + sel)
     vistos = []

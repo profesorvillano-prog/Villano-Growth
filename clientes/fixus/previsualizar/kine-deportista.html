@@ -353,6 +353,106 @@ h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:700;letter-spacing:-.01em}
   html{scroll-behavior:auto}
 }
 
+/* ==========================================================================
+   TEMA "CALMA" · para el avatar de oficina (dolor de espalda / hombro)
+   Mismo esqueleto, otra piel: nada de neón. Franja oscura arriba para que
+   respire el logo y el video, y el resto en claro, sobrio y legible.
+   Se activa con data-tema="calma".
+   ========================================================================== */
+
+[data-tema="calma"]{
+  --red:      #9E2B30;   /* ladrillo, no eléctrico */
+  --red-hi:   #862327;
+  --red-deep: #5E181B;
+  --red-soft: rgba(158,43,48,.10);
+  --alerta:   #8C2226;
+
+  --oscuro:   #14151A;   /* la franja de arriba y el pie */
+  --bg:       #F7F7F5;
+  --bg-2:     #FFFFFF;
+  --surf:     #FFFFFF;
+  --surf-2:   #FBFBF9;
+  --line:     rgba(19,20,24,.11);
+  --line-2:   rgba(19,20,24,.20);
+
+  --t0: #14151A;
+  --t1: #34363D;
+  --t2: #5B5E67;
+  --t3: #8B8E97;
+
+  background-image:none;
+  background-color:var(--bg);
+  color:var(--t1);
+}
+
+/* --- Franja oscura: cabecera y hero --- */
+[data-tema="calma"] .hdr,
+[data-tema="calma"] .hero{
+  background:var(--oscuro);
+  --t0:#FFFFFF; --t1:#E9E9EC; --t2:#A7A9B1; --t3:#82848D;
+  --surf:#1C1D23; --surf-2:#22232A;
+  --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.18);
+}
+[data-tema="calma"] .hero{padding-bottom:40px}
+
+/* --- Video: sin halo rojo --- */
+[data-tema="calma"] .vsl-frame{
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 20px 50px -24px rgba(0,0,0,.9);
+}
+[data-tema="calma"] .vsl-play span{box-shadow:0 0 0 6px rgba(255,255,255,.10)}
+[data-tema="calma"] .vsl-play:hover span{box-shadow:0 0 0 9px rgba(255,255,255,.13)}
+
+/* --- Botones: rojo plano, sin brillos --- */
+[data-tema="calma"] .opt.primary{
+  background:var(--red);border-color:var(--red);box-shadow:none;
+}
+[data-tema="calma"] .opt.primary:hover{background:var(--red-hi);border-color:var(--red-hi);box-shadow:none}
+[data-tema="calma"] .opt.primary .ico{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.26)}
+[data-tema="calma"] .opt.primary .txt strong{color:#fff}
+[data-tema="calma"] .opt.primary .txt em{color:rgba(255,255,255,.80)}
+[data-tema="calma"] .opt.primary .chev{stroke:#fff}
+
+/* --- Secciones claras --- */
+[data-tema="calma"] .sec-alt{background:#FFFFFF;border-color:var(--line)}
+[data-tema="calma"] .eyebrow{color:var(--red)}
+[data-tema="calma"] .mark{color:var(--red)}
+[data-tema="calma"] .alerta{
+  color:var(--alerta);text-shadow:none;
+  box-shadow:inset 0 -2px 0 0 rgba(140,34,38,.30);
+}
+[data-tema="calma"] .check svg{stroke:var(--red)}
+[data-tema="calma"] .step-n{box-shadow:0 0 0 4px rgba(158,43,48,.12)}
+[data-tema="calma"] .step::before{background:var(--line-2)}
+
+/* --- Antes / después: acá la solución es la tarjeta oscura --- */
+[data-tema="calma"] .ba-card{background:#FFFFFF}
+[data-tema="calma"] .ba-card.now{
+  background:var(--oscuro);border-color:var(--oscuro);
+  box-shadow:0 20px 44px -24px rgba(19,20,24,.55);
+}
+[data-tema="calma"] .ba-card.now h3{color:#E08A8E}
+[data-tema="calma"] .ba-card.now li{color:#F0F0F2}
+[data-tema="calma"] .ba-card.now li::before{color:#E08A8E}
+
+/* --- FAQ, ubicación y barra --- */
+[data-tema="calma"] .faq details{background:#FFFFFF}
+[data-tema="calma"] .faq summary::after{border-color:var(--red)}
+[data-tema="calma"] .place-card{background:#FFFFFF}
+[data-tema="calma"] .place-card a{color:var(--red)}
+[data-tema="calma"] .bar{
+  background:rgba(255,255,255,.95);border-top:1px solid var(--line);
+}
+[data-tema="calma"] .bar-cta{background:var(--red);box-shadow:none}
+[data-tema="calma"] .bar-wa{background:var(--oscuro);border-color:var(--oscuro)}
+
+/* --- Pie oscuro, para que el logo se vea --- */
+[data-tema="calma"] .ftr{
+  background:var(--oscuro);border-color:rgba(255,255,255,.10);
+  --t2:#A7A9B1; --t3:#82848D;
+}
+[data-tema="calma"] .ftr a{color:#C9CACF}
+
 </style>
 <script>document.documentElement.classList.add('js');</script>
 
@@ -364,7 +464,7 @@ h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:700;letter-spacing:-.01em}
 </head>
 
 <!-- Versión de un solo archivo, generada por build.py. No editar a mano. -->
-<body data-campana="deportista" data-wa-msg="Hola, me lesioné jugando y quiero saber cómo funciona la evaluación kinesiológica.">
+<body data-campana="deportista" data-tema="electrico" data-wa-msg="Hola, me lesioné jugando y quiero saber cómo funciona la evaluación kinesiológica.">
 
 <!-- ============================ HEADER ============================ -->
 <header class="hdr">
