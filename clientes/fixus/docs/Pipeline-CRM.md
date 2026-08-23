@@ -15,13 +15,15 @@ La agencia **vende la entrada**; FIXUS **vende el plan**. El CRM tiene que refle
 exactamente esa línea:
 
 ```
-        ─────────── AGENCIA (automatizado) ───────────┃── FIXUS (presencial) ──
-                                                      ┃
- Anuncio → Landing → Pago entrada → Agenda → Asiste   ┃   Vende el plan → Ganado/Perdido
-                                                      ┃
-        1        2         3          4        5      ┃          6
-                                                      ┃
-                                              línea de traspaso
+  ── AGENCIA (automatizado) ─────────────────────────────────────────────────┃ ── FIXUS (presencial) ──
+                                                                             ┃
+   1 · Checkout abierto  ┐                                                   ┃
+   2 · Pago rechazado    ├→ 3 · Entrada pagada → 4 · Agendado → 6 · Asistió  ┃ → 7 · Plan vendido
+   Conversaciones (WA)   ┘                              │                    ┃
+                                                        ↓                    ┃    Ganado / Perdido
+                                                 5 · No asistió              ┃
+                                                                             ┃
+                                                             línea de traspaso
 ```
 
 Tres consecuencias de diseño que hay que respetar:
@@ -35,15 +37,22 @@ Tres consecuencias de diseño que hay que respetar:
 
 ---
 
-## 1. Estructura: dos pipelines, no uno
+## 1. Estructura: tres pipelines
 
-Se crean **dos pipelines separados** en GoHighLevel, con la **misma arquitectura de
-etapas** y contenido distinto:
+Dos para los servicios —con la **misma arquitectura de etapas** y contenido
+distinto— y uno para la capa previa de conversaciones:
 
-| Pipeline | Nombre exacto en GHL |
-|---|---|
-| Embudo A | `FIXUS · 3 a 1` |
-| Embudo B | `FIXUS · Kinesiología` |
+| Pipeline | Nombre exacto en GHL | Qué contiene |
+|---|---|---|
+| Embudo A | `FIXUS · 3 a 1` | Quien **ya pagó** o intentó pagar la clase de prueba |
+| Embudo B | `FIXUS · Kinesiología` | Quien **ya pagó** o intentó pagar la evaluación |
+| Conversaciones | `FIXUS · Conversaciones` | Quien escribió por WhatsApp / DM y **aún no pagó** |
+
+El tercero es la capa previa: recoge lo que llega por conversación, lo califica y lo
+enruta al pipeline de servicio que corresponda. Está desarrollado en
+[`Captacion-Previa.md`](./Captacion-Previa.md) §5 — incluida la regla que lo
+mantiene sano (**enruta, no vende**) y por qué va aparte y no como etapas dentro de
+los pipelines de pago.
 
 **Por qué separados y no un solo pipeline con un campo `servicio`:**
 
@@ -61,40 +70,57 @@ etapas** y contenido distinto:
 
 ---
 
-## 2. Las 6 etapas
+## 2. Las 7 etapas
 
-Idénticas en ambos pipelines. La columna **Quién mueve** es lo importante: solo la
-etapa 6 es humana.
+Idénticas en ambos pipelines de servicio. La columna **Quién mueve** es lo
+importante: solo la etapa 7 es humana.
 
 | # | Etapa | Quién mueve | Disparador de entrada | Salidas |
 |---|---|---|---|---|
-| 1 | **Pago iniciado** | 🤖 automático | Abrió el checkout / se creó usuario en Xflow y no pagó | → 2 si paga · → Perdido a las 24 h |
-| 2 | **Entrada pagada · por agendar** | 🤖 automático | **Pago aprobado** (webhook o formulario post-pago) | → 3 al agendar · → 2 con nudges 1 h / 24 h / 48 h |
-| 3 | **Agendado** | 🤖 automático | Cita creada en el calendario del CRM | → 5 si asiste · → 4 si no |
-| 4 | **No asistió · recuperar** | 🤖 automático | Cita marcada *No-Show*, o 2 h después de la hora sin marca | → 3 si reagenda · → Perdido a los 10 días |
-| 5 | **Asistió · esperando resultado** | 🤖 automático | Cita marcada *Showed* o formulario del profesor | → 6 (Ganado) · → Perdido |
-| 6 | **Plan vendido** | 🙋 **FIXUS** | El profesional confirma la venta del plan | Estado **Ganado** |
+| 1 | **Interés · checkout abierto** | 🤖 automático | Se creó usuario en Xflow / se abrió el checkout y no pagó | → 3 si paga · → Perdido a las 48 h |
+| 2 | **Pago rechazado o pendiente** | 🤖 automático | Intento de pago con `rejected`, `pending` o `in_process` | → 3 si completa · → Perdido a los 5 días |
+| 3 | **Entrada pagada · por agendar** | 🤖 automático | **Pago aprobado** (webhook o formulario post-pago) | → 4 al agendar · nudges 1 h / 24 h / 48 h |
+| 4 | **Agendado** | 🤖 automático | Cita creada en el calendario del CRM | → 6 si asiste · → 5 si no |
+| 5 | **No asistió · recuperar** | 🤖 automático | Cita marcada *No-Show*, o 2 h después de la hora sin marca | → 4 si reagenda · → Perdido a los 10 días |
+| 6 | **Asistió · esperando resultado** | 🤖 automático | Cita marcada *Showed* o formulario del profesor | → 7 (Ganado) · → Perdido |
+| 7 | **Plan vendido** | 🙋 **FIXUS** | El profesional confirma la venta del plan | Estado **Ganado** |
+
+> **Las etapas 1 y 2 son la capa de captación previa.** Cuánto se llena cada una
+> depende por completo de la ruta de pago elegida — con Xflow se llenan las dos, con
+> Mercado Pago solo la 2, con la página de gracias ninguna. El detalle de qué se
+> puede capturar en cada caso está en [`Captacion-Previa.md`](./Captacion-Previa.md).
 
 **Estados de la oportunidad (`status` de GHL, no etapas):**
 
-- `Open` — en las etapas 1 a 5.
-- `Won` — al llegar a la etapa 6. Se registra `monto_plan`.
+- `Open` — en las etapas 1 a 6.
+- `Won` — al llegar a la etapa 7. Se registra `monto_plan`.
 - `Lost` — desde **cualquier** etapa, siempre con `motivo_perdida` obligatorio.
 - `Abandoned` — no se usa. Todo lo que muere es `Lost` con motivo, o la métrica
   deja de ser interpretable.
 
-### Por qué la etapa 1 existe aunque a veces quede vacía
+### Por qué las etapas 1 y 2 están separadas
 
-En el flujo ideal la persona **no entrega datos antes de pagar**, así que en la
-ruta Mercado Pago la etapa 1 solo se llena si el checkout captura el email antes
-de aprobar el pago. En la ruta Xflow, en cambio, sí se llena siempre (Xflow obliga
-a crear usuario primero) y ahí vale oro: **es la recuperación de carrito
-abandonado**, y con un producto de $8.990 esa recuperación es el ingreso más barato
-del embudo.
+Porque piden mensajes distintos, y ese es el único criterio válido para separar
+etapas: si dos grupos reciben el mismo mensaje, son la misma etapa.
 
-Si la ruta elegida no permite capturar nada antes del pago, la etapa 1 queda vacía
-y **no pasa nada** — el embudo empieza en la 2. No se elimina la etapa: se deja
-para cuando la ruta de pago lo permita.
+- **Etapa 1** — la persona dudó. Hay que convencerla de volver: recordarle qué
+  compra y por cuánto.
+- **Etapa 2** — la persona **ya decidió comprar** y falló el medio de pago. No hay
+  nada que convencer; hay que resolver un problema técnico (*"tu banco rechazó el
+  pago, prueba con transferencia"*).
+
+La 2 es la de mayor intención de todo el embudo y hoy **se pierde entera**: nadie
+se entera de que alguien intentó pagar y no pudo.
+
+### Por qué la etapa 1 puede quedar vacía, y está bien
+
+En el flujo ideal la persona **no entrega datos antes de pagar**. Con Xflow la etapa
+se llena sola (obliga a crear usuario primero) y ahí vale oro: es recuperación de
+carrito abandonado. Con Mercado Pago o con la página de gracias no se llena, porque
+el abandono no se notifica.
+
+Si queda vacía, **no pasa nada** — el embudo empieza en la 2 o en la 3. Se deja
+creada por si la ruta de pago cambia; si sigue vacía a las tres semanas, se elimina.
 
 ### Por qué "No asistió" es etapa y no motivo de pérdida
 
@@ -109,8 +135,8 @@ Recién a los 10 días y tras 3 intentos pasa a `Lost`.
 
 | Momento | Valor de la oportunidad | Por qué |
 |---|---|---|
-| Al crearse (etapa 2) | Precio de entrada ($8.990 / $24.990) | El pipeline muestra el ingreso ya cobrado, no una proyección |
-| Al marcarse Ganado (etapa 6) | `monto_entrada + monto_plan` | Ingreso real atribuible a la pauta |
+| Al crearse (etapa 3) | Precio de entrada ($8.990 / $24.990) | El pipeline muestra el ingreso ya cobrado, no una proyección |
+| Al marcarse Ganado (etapa 7) | `monto_entrada + monto_plan` | Ingreso real atribuible a la pauta |
 
 **Plan mensual:** `monto_plan` = **primer pago** (no el LTV). El trimestral se
 carga completo porque se cobra completo. Se guarda `tipo_plan` aparte para poder
@@ -151,10 +177,19 @@ marca `descuento_entrada_aplicado = Sí`. Así la facturación del panel es caja
 | `monto_plan` | Número | 🙋 FIXUS |
 | `descuento_entrada_aplicado` | Sí/No | 🙋 FIXUS |
 | `motivo_perdida` | Desplegable (ver abajo) | 🙋 FIXUS / 🤖 |
+| `origen_entrada` | Desplegable: `pauta-directa`, `pauta-ctwa`, `conversacion`, `organico`, `referido` | 🤖 |
+| `estado_intento_pago` | Desplegable: `aprobado`, `rechazado`, `pendiente` + motivo | 🤖 |
 | `utm_source`, `utm_campaign`, `utm_content`, `utm_term`, `landing_url`, `click_id` | Texto | 🤖 desde la landing |
 
 > `utm_content` es el campo que conecta la venta del plan con **el anuncio
 > concreto** que la trajo. Sin él no se puede optimizar creatividad, solo campaña.
+
+> **`origen_entrada` es el campo que salva el CAC.** Ahora que las conversaciones de
+> WhatsApp también alimentan los pipelines de pago, sin este campo estarías
+> dividiendo la inversión en pauta entre entradas que llegaron gratis por orgánico —
+> y el costo por entrada vendida se vería mejor de lo que realmente es. Con él, cada
+> origen tiene su propio CAC y son comparables entre sí. Ver
+> [`Medicion.md`](./Medicion.md) §5.
 
 ### Motivos de pérdida (lista cerrada, obligatoria)
 
@@ -220,9 +255,9 @@ oportunidades que quedaron sin resultado y se cierran.
 
 ### Regla de higiene
 
-Si una oportunidad lleva **72 h en la etapa 5** sin resultado, se dispara:
+Si una oportunidad lleva **72 h en la etapa 6** sin resultado, se dispara:
 recordatorio al profesor a las 24 h, y tarea a Natalia + aviso a la agencia a las
-72 h. Una etapa 5 que se acumula significa que la métrica de conversión presencial
+72 h. Una etapa 6 que se acumula significa que la métrica de conversión presencial
 está muerta, y hay que verlo la misma semana, no en la reunión de fin de mes.
 
 ---
@@ -235,9 +270,13 @@ Decisiones explícitas para que el CRM no se convierta en el sistema del centro:
 - ❌ Recovery, nutrición, 1 a 1 y clases de plan → **Xflow**.
 - ❌ Fichas clínicas, evoluciones y contenido de las sesiones → **Xflow**. El CRM
   solo lee **disponibilidad** del calendario: ve "ocupado", no de qué se trata.
-- ❌ Leads que no pagaron entrada y llegaron por WhatsApp orgánico → no entran a
-  estos pipelines. Si se quieren medir, van a un pipeline aparte para no ensuciar
-  el costo por entrada vendida.
+- ❌ Leads que no pagaron entrada y llegaron por WhatsApp orgánico → **no entran a
+  los pipelines de pago**. Van al pipeline `FIXUS · Conversaciones`, y recién cruzan
+  cuando pagan, con `origen_entrada = conversacion`. Así el costo por entrada
+  vendida sigue siendo interpretable.
+- ❌ Clics anónimos al botón de pago → se quedan en Meta como público de
+  retargeting. Un clic sin identidad no es una oportunidad; meterlo al CRM solo
+  infla el conteo. Ver [`Captacion-Previa.md`](./Captacion-Previa.md) §2.
 
 ---
 
@@ -245,11 +284,18 @@ Decisiones explícitas para que el CRM no se convierta en el sistema del centro:
 
 | Fase | Qué se hace | Bloqueado por |
 |---|---|---|
-| **1 · Esqueleto** | Subcuenta GHL, 2 pipelines, 6 etapas, campos, etiquetas, motivos de pérdida | Acceso a GHL de FIXUS |
+| **0 · Conversaciones** | Subcuenta GHL + pipeline `FIXUS · Conversaciones` + bot de calificación (W11–W12) | **Nada externo** — se puede empezar ya |
+| **1 · Esqueleto** | Los 2 pipelines de servicio, 7 etapas, campos, etiquetas, motivos de pérdida | Acceso a GHL de FIXUS |
 | **2 · Entrada** | Ruta de pago + página de gracias con captura de RUT + calendarios sincronizados | Decisión Xflow vs Mercado Pago · calendarios del equipo |
 | **3 · Asistencia** | Workflows W1–W5: confirmaciones, nudges, recordatorios, no-show | Número de WhatsApp definido |
 | **4 · Cierre** | Formulario de cierre + W6–W8 + alertas de 72 h | Nombres/contactos de los 3 profesores + kine |
-| **5 · Medición** | Escenarios Make → Supabase (`ventas`, `ht_pipeline`) | Fases 1–4 corriendo |
+| **5 · Captación previa** | W10 (pagos fallidos) + exit-intent + evento `InitiateCheckout` | Ruta de pago funcionando |
+| **6 · Medición** | Escenarios Make → Supabase (`ventas`, `ht_pipeline`) | Fases 1–4 corriendo |
+
+**La fase 0 va primero a propósito:** no depende de decisiones de terceros, captura
+lo que hoy ya llega por WhatsApp y se pierde, y **produce la línea base de tasa de
+cierre sobre conversaciones** — el dato pendiente contra el cual habrá que comparar
+el embudo nuevo. Si se monta ahora, en 3–4 semanas está medido con datos reales.
 
 **La fase 2 es la que bloquea el encendido de pauta.** Y tiene una salida que no
 depende de nadie externo — ver *Ruta C* en

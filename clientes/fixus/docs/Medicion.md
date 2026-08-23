@@ -19,6 +19,20 @@ Las cuatro primeras son diagnóstico: cada una apunta a un responsable y a un
 arreglo distinto. La quinta es la que permite escalar con criterio en vez de con
 intuición.
 
+### Métricas de la capa previa al pago
+
+Con las etapas 1 y 2 y el pipeline de conversaciones, se abren cuatro más:
+
+| Métrica | Cómo se calcula | Qué decide |
+|---|---|---|
+| **Clic → pago** | `entradas pagadas ÷ clics al checkout` | Si el problema está en la **landing** (poca gente llega al botón) o en el **checkout** (llegan y no pagan) |
+| **Recuperación de pagos fallidos** | `pagos completados tras rechazo ÷ intentos fallidos` | Cuánto vale la pena invertir en W10. Suele ser el ingreso más barato del embudo |
+| **Conversación → entrada pagada** | `pagaron ÷ conversaciones calificadas` | **La línea base que hoy falta**: es la tasa de cierre sobre WhatsApp que hoy solo vive en la cabeza de Natalia |
+| **Mix de origen** | `% de entradas pagadas por `origen_entrada`` | Cuánto del resultado es pauta y cuánto es orgánico que habría llegado igual |
+
+La tercera es la más valiosa de las cuatro, y no necesita que la pauta esté
+encendida para empezar a medirse.
+
 **Se miden separadas por embudo, siempre.** Promediar 3 a 1 con kinesiología no
 produce información, produce un número que no describe a ninguno de los dos.
 
@@ -84,7 +98,7 @@ Se revisan en la reunión semanal. Cada uno apunta a un arreglo concreto:
 | Conversión presencial 3 a 1 | ≥ 40% | < 25% | Speech del centro · comparar entre profesores |
 | Conversión presencial kine | ≥ 50% | < 30% | La evaluación no está cerrando con plazo de retorno claro |
 | `Esperaba clase grupal` | 0% | > 10% de las pérdidas | **Landing y anuncio**, no el centro |
-| Etapa 5 estancada | < 3 tarjetas | > 8 tarjetas | Nadie está llenando el formulario de cierre → la métrica 4 está muerta |
+| Etapa 6 estancada | < 3 tarjetas | > 8 tarjetas | Nadie está llenando el formulario de cierre → la métrica 4 está muerta |
 | Pagos ÷ oportunidades creadas | ≥ 95% | < 90% | La captura post-pago está perdiendo gente |
 
 Los umbrales "bien" son objetivos, no benchmarks verificados. Se ajustan con el
@@ -105,11 +119,11 @@ separadas en el tablero sin trabajo extra.
 | `cliente` | `fixus` (constante) | — |
 | `fecha` | Fecha de la corrida, zona Chile | — |
 | `pipeline_name` | `FIXUS · 3 a 1` o `FIXUS · Kinesiología` | constante del escenario |
-| `mensajes` | **Pagos iniciados** (etapa 1) | 0 si la ruta de pago no captura pre-pago |
-| `respuestas` | **Entradas pagadas** (nuevas en etapa 2) | ← la métrica de la pauta |
+| `mensajes` | **Captación previa**: entradas a etapa 1 + etapa 2 + conversaciones nuevas | 0 si la ruta de pago no captura nada pre-pago |
+| `respuestas` | **Entradas pagadas** (nuevas en etapa 3) | ← la métrica de la pauta |
 | `propuestas` | **Confirmaciones de asistencia** (respondieron CONFIRMO) | mide la capa de recordatorios |
-| `bookings` | **Agendados** (nuevos en etapa 3) | |
-| `asistencias` | **Asistieron** (nuevos en etapa 5) | |
+| `bookings` | **Agendados** (nuevos en etapa 4) | |
+| `asistencias` | **Asistieron** (nuevos en etapa 6) | |
 | `ventas` | **Planes vendidos** (`Won` en la ventana) | |
 | `facturacion` | `Σ monto_entrada + Σ monto_plan` de la ventana | |
 
@@ -122,6 +136,11 @@ separadas en el tablero sin trabajo extra.
 > ticket de los otros clientes. En FIXUS significan lo de la tabla de arriba. Si
 > confunde en la revisión semanal, el arreglo es renombrar las etiquetas en la
 > pestaña del panel por cliente — cambio de UI en `cerebro/`, no de datos.
+
+> El pipeline `FIXUS · Conversaciones` **no manda una fila propia** a `ht_pipeline`:
+> sus conversaciones se suman a `mensajes` del pipeline de servicio que resulte de
+> la calificación. Así el panel muestra un solo embudo por servicio, con la capa
+> previa incluida arriba, en vez de tres series que hay que sumar mentalmente.
 
 ### `ventas` — tiempo real (webhook)
 
@@ -142,14 +161,45 @@ El panel considera venta aprobada cuando `estado` contiene `approved`, `paid`,
 
 ---
 
-## 5. Lo que falta para que la medición sirva
+## 5. CAC por origen: el cálculo que hay que hacer bien
+
+Desde que las conversaciones de WhatsApp también terminan en los pipelines de pago,
+**el costo por entrada vendida deja de ser un solo número**. Calcularlo en bloque
+mezcla entradas que costaron dinero con entradas que llegaron gratis, y el resultado
+se ve mejor de lo que es — justo el error que lleva a subir presupuesto sobre una
+métrica falsa.
+
+Se calcula **por origen**, usando el campo `origen_entrada`:
+
+```
+CAC pauta directa = inversión en campañas a landing
+                    ÷ entradas con origen_entrada = pauta-directa
+
+CAC click-to-WhatsApp = inversión en campañas CTWA
+                        ÷ entradas con origen_entrada = pauta-ctwa
+
+Orgánico y referidos       → CAC $0 en pauta, pero cuestan tiempo de Natalia.
+                             Se cuentan aparte y NO se restan de la pauta.
+```
+
+**Lo que esto permite responder**, y que casi nadie tiene medido: *¿sale más barata
+una clase de prueba mandando el tráfico a la landing, o mandándolo a WhatsApp?*
+Ambos caminos terminan en la misma métrica, así que la comparación es directa — pero
+solo si el origen quedó registrado desde el primer día. **Si se empieza sin el campo,
+el dato no se puede reconstruir después.**
+
+---
+
+## 6. Lo que falta para que la medición sirva
 
 Estos datos no bloquean el encendido de la pauta, pero **sin ellos no se puede
 decir si el embudo funcionó**:
 
 - [ ] **Tasa de cierre actual sobre consultas de WhatsApp.** La maneja Natalia. Es
       la línea base: sin ella no hay contra qué comparar y en dos meses la
-      discusión va a ser de opiniones.
+      discusión va a ser de opiniones. **El pipeline `FIXUS · Conversaciones` la
+      produce solo** — montarlo ya (fase 0) es la manera de tener el dato medido en
+      3–4 semanas en vez de estimado de memoria.
 - [ ] **Permanencia media del plan mensual del 3 a 1.** Cambia el CPA máximo por
       un factor de 3 o más. Es el dato de mayor impacto de toda esta lista.
 - [ ] Facturación mensual actual y meta a 6 meses.

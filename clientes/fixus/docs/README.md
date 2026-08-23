@@ -7,7 +7,8 @@ en estos documentos.
 | Documento | Qué contiene |
 |---|---|
 | [`Embudo-Estrategia.md`](./Embudo-Estrategia.md) | La estrategia: por qué se cobra la entrada, los dos embudos separados (3 a 1 y kine), precios, geos, anuncios, landing con video, lenguaje acordado, venta presencial y riesgos. |
-| [`Pipeline-CRM.md`](./Pipeline-CRM.md) | **El pipeline.** Dos pipelines en GHL, las 6 etapas, campos personalizados, etiquetas, motivos de pérdida, la línea de traspaso agencia → FIXUS y el orden de implementación. |
+| [`Pipeline-CRM.md`](./Pipeline-CRM.md) | **El pipeline.** Tres pipelines en GHL, las 7 etapas, campos personalizados, etiquetas, motivos de pérdida, la línea de traspaso agencia → FIXUS y el orden de implementación. |
+| [`Captacion-Previa.md`](./Captacion-Previa.md) | Qué se puede captar **antes** del pago: clics al botón, checkouts abandonados, pagos rechazados y conversaciones de WhatsApp. Los cuatro niveles, el pipeline de conversaciones y la atribución. |
 | [`Automatizaciones-y-Pago.md`](./Automatizaciones-y-Pago.md) | Las tres rutas de pago (Xflow · Mercado Pago · página de gracias), los webhooks, y los nueve workflows de confirmación, recordatorios, no-show y cierre. |
 | [`Medicion.md`](./Medicion.md) | Las 5 métricas, el cálculo de valor por entrada pagada (cuánto se puede pagar por lead), umbrales de alarma y la conexión con el panel Cerebro. |
 
@@ -24,6 +25,8 @@ del **30/jul/2026 (Felipe)** y **4/ago/2026 (Natalia)**.
   alimenta la boleta automática de Simple Factura.
 - **FIXUS solo hace una cosa en el CRM:** decir si la persona compró el plan. Si le
   pedimos más, no lo va a hacer.
+- **El pipeline de conversaciones enruta, no vende.** Si se convierte en canal de
+  venta por chat, recrea justo lo que el embudo vino a reemplazar.
 - **"3 a 1" no es clase grupal.** Si la confusión no se rompe en la landing, se
   rompe en el mostrador y se pierde la venta.
 - **Lenguaje humano, sin tecnicismos** — ver la tabla de reemplazos en

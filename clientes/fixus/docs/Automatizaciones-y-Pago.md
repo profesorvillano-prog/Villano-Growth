@@ -63,13 +63,16 @@ cuenta con la SPA de Fixus y comparta acceso.
    - Mercado Pago avisa con el **id del pago**, no con el pago completo →
      `GET https://api.mercadopago.com/v1/payments/{id}` con
      `Authorization: Bearer <ACCESS_TOKEN>`.
-   - **Filtro:** seguir solo si `status = approved`.
+   - **Router por `status`** — no filtrar y descartar: `approved` sigue el flujo
+     normal (W1), y `rejected` / `pending` / `in_process` van a **W10**. Ese
+     segundo grupo es el de mayor intención del embudo y hoy se pierde entero
+     (ver [`Captacion-Previa.md`](./Captacion-Previa.md) §4).
    - Mapear: `id` → `id_transaccion` · `transaction_amount` → `monto_entrada` ·
      `payer.email` / `payer.first_name` / `payer.phone` → contacto ·
      `payer.identification.number` → `rut` *(si el medio de pago lo entrega)* ·
      `external_reference` → servicio + UTMs · `date_approved` → `fecha_pago`.
    - **Router por servicio** → GHL: *upsert contacto* + *crear oportunidad* en el
-     pipeline correcto, etapa **2 · Entrada pagada · por agendar**.
+     pipeline correcto, etapa **3 · Entrada pagada · por agendar**.
    - Rama paralela → Supabase `ventas` (`fuente = "mercadopago"`,
      `transaction_id = id`, `estado = "approved"`), con el upsert
      `on_conflict=fuente,transaction_id` que ya está documentado en
@@ -98,7 +101,7 @@ Paga (Xflow o MP) → redirección → PÁGINA DE GRACIAS DEL CRM
                                    ├─ formulario: nombre · email · teléfono · RUT · comuna
                                    └─ calendario con horarios reales, ahí mismo
                                         ↓
-                     el envío crea la oportunidad en la etapa 2 y agenda en la 3
+                     el envío crea la oportunidad en la etapa 3 y agenda en la 4
 ```
 
 Esta página hace **tres cosas a la vez**: captura los datos post-pago (que es el
@@ -132,7 +135,7 @@ de envío **08:00–21:00** (salvo el recordatorio de −1 h, que va siempre).
 **Disparador:** webhook de pago o envío del formulario de la página de gracias.
 
 1. Upsert de contacto (clave: email o teléfono).
-2. Crear oportunidad en el pipeline correcto, **etapa 2**, valor = precio de entrada.
+2. Crear oportunidad en el pipeline correcto, **etapa 3**, valor = precio de entrada.
 3. Rellenar campos: producto, monto, medio de pago, id de transacción, UTMs.
 4. Etiquetas `fixus` + `3a1`/`kine` + `pago-entrada`.
 5. **Email de confirmación inmediato** — qué compró, cuánto pagó, y el link para
@@ -142,7 +145,7 @@ de envío **08:00–21:00** (salvo el recordatorio de −1 h, que va siempre).
 
 ### W2 · Pagó y no agendó
 
-**Disparador:** 1 h en etapa 2 sin cita.
+**Disparador:** 1 h en etapa 3 sin cita.
 
 - **+1 h** — WhatsApp: *"Ya está tu clase pagada, solo falta elegir el horario"* + link.
 - **+24 h** — Email con los horarios de la semana.
@@ -153,7 +156,7 @@ de envío **08:00–21:00** (salvo el recordatorio de −1 h, que va siempre).
 
 **Disparador:** cita creada en el calendario.
 
-1. Mover a **etapa 3 · Agendado**, guardar `fecha_cita` y `profesor_asignado`.
+1. Mover a **etapa 4 · Agendado**, guardar `fecha_cita` y `profesor_asignado`.
 2. Confirmación (email + WhatsApp) con: fecha y hora · **dirección y referencia de
    Metro Colón** · cuánto dura · qué llevar (ropa deportiva, toalla, botella) ·
    a nombre de quién preguntar.
@@ -186,16 +189,16 @@ de envío **08:00–21:00** (salvo el recordatorio de −1 h, que va siempre).
 
 ### W5 · Después de la cita
 
-**Rama *Showed***: mover a **etapa 5** · etiqueta `asistio` · disparar W6.
+**Rama *Showed***: mover a **etapa 6** · etiqueta `asistio` · disparar W6.
 
 **Rama *No-Show*** (marcada, o 2 h después de la hora sin marca):
 
-- Mover a **etapa 4 · No asistió · recuperar**, `intentos_reagenda + 1`.
+- Mover a **etapa 5 · No asistió · recuperar**, `intentos_reagenda + 1`.
 - **Mismo día** — WhatsApp: *"Tu clase pagada sigue disponible, ¿la movemos?"*
 - **+1 día** — Email con horarios.
 - **+3 días** — Último WhatsApp.
 - **Día 10** — `Lost`, motivo `No asistió (3 intentos)`.
-- Si reagenda en cualquier punto → vuelve a **etapa 3** y se reinicia W4.
+- Si reagenda en cualquier punto → vuelve a **etapa 4** y se reinicia W4.
 
 ### W6 · Resultado presencial *(la línea de traspaso)*
 
@@ -204,8 +207,8 @@ de envío **08:00–21:00** (salvo el recordatorio de −1 h, que va siempre).
 1. Enviar al **profesor asignado** el link del formulario de cierre, ya vinculado a
    esa oportunidad (4 preguntas, ver `Pipeline-CRM.md` §5).
 2. Al recibir la respuesta:
-   - **Compró** → etapa 6, `Won`, valor = entrada + plan, etiqueta `plan-vendido`.
-   - **Lo está pensando** → se queda en etapa 5, se reintenta a las 48 h.
+   - **Compró** → etapa 7, `Won`, valor = entrada + plan, etiqueta `plan-vendido`.
+   - **Lo está pensando** → se queda en etapa 6, se reintenta a las 48 h.
    - **No compró** → `Lost` con motivo obligatorio.
    - Si marca 1 a 1 o nutrición → etiqueta `puente-1a1` / `puente-kine-entreno`.
 3. **Sin respuesta a las 24 h** → recordatorio al profesor.
@@ -233,6 +236,65 @@ Reactivación a **15 / 45 / 90 días**, con mensaje distinto según `motivo_perd
 Dos de esos motivos no generan mensaje, generan **una revisión de pauta**. Es la
 manera de que el motivo de pérdida no sea decoración.
 
+### W10 · Recuperación de pago fallido o pendiente
+
+**Disparador:** webhook con `status` distinto de `approved`.
+
+1. Upsert de contacto y oportunidad en **etapa 2**, guardando `estado_intento_pago`
+   con el motivo del rechazo.
+2. **Mensaje a los 15 min**, redactado según el motivo — la tabla de mensajes por
+   motivo está en [`Captacion-Previa.md`](./Captacion-Previa.md) §4. Un rechazo por
+   fondos y uno por datos de tarjeta no se responden igual.
+3. Recordatorios a **2 h** y **24 h** con el link de pago.
+4. **Día 5** → `Lost`, motivo `Pago no completado`.
+5. Si el pago se completa en cualquier momento → **etapa 3** y entra a W1.
+
+> Ojo con el orden: Mercado Pago manda `rejected` y después `approved` cuando la
+> persona reintenta con otro medio. La deduplicación por `id_transaccion` **no**
+> alcanza acá, porque son transacciones distintas del mismo comprador. La clave de
+> deduplicación efectiva es el **email o teléfono**: si ya existe oportunidad
+> abierta para esa persona en el pipeline, se mueve de etapa en vez de crear otra.
+
+### W11 · Conversación entrante *(pipeline `FIXUS · Conversaciones`)*
+
+**Disparador:** primer mensaje entrante por WhatsApp, IG DM o Facebook.
+
+1. Crear contacto y oportunidad en **Conversaciones · etapa 1**.
+2. Guardar el origen: texto pre-llenado del `wa.me`, o bloque `referral` del anuncio
+   si vino de Click-to-WhatsApp.
+3. **Respuesta automática en menos de 1 minuto**, con las dos preguntas de
+   calificación: *¿entrenamiento o lesión?* y *¿en qué comuna estás?*
+4. Al responder ambas → **Conversaciones · etapa 2 · Calificado**, rellenando
+   `servicio` y `comuna`.
+5. Comuna fuera de zona → `Lost`, motivo `Fuera de zona`. Ese conteo es dato de
+   calidad para la geo de la pauta, no un descarte silencioso.
+
+### W12 · Link enviado y seguimiento
+
+**Disparador:** entrada a Conversaciones · etapa 3.
+
+- **Inmediato** — link de pago del servicio correcto + el argumento de una línea.
+- **+24 h** — *"¿Alguna duda antes de reservar?"*
+- **+72 h** — Prueba social: un testimonio del avatar que corresponda.
+- **+7 días** — Último mensaje, luego `Lost` con motivo.
+- **Si paga** → `Won` en Conversaciones (etapa 4) y **oportunidad nueva** en el
+  pipeline del servicio, etapa 3, con `origen_entrada = conversacion`.
+
+> **Regla dura: este workflow enruta, no vende.** Si una conversación necesita más
+> que estos cuatro mensajes, la landing no está explicando bien — y el arreglo va en
+> la landing, no en el chat. Ver [`Captacion-Previa.md`](./Captacion-Previa.md) §5.
+
+### W13 · Eventos de conversión hacia Meta
+
+- **Clic en el botón de pago** → `InitiateCheckout` por píxel + API de Conversiones.
+- **Pago aprobado** → `Purchase` con el valor real, vía API de Conversiones desde
+  Make (no solo píxel: así la conversión llega aunque el navegador la bloquee).
+- **Plan vendido** → evento personalizado `PlanVendido` con `monto_plan`.
+
+El tercero es el que más rinde a mediano plazo: le enseña a Meta a buscar gente que
+**compra el plan**, no gente que compra una clase de $8.990. Requiere volumen para
+funcionar, así que se activa cuando haya historia suficiente.
+
 ### W9 · Sincronización con Cerebro
 
 - **Tiempo real:** cada pago aprobado y cada `Won` → upsert a Supabase `ventas`.
@@ -252,3 +314,9 @@ manera de que el motivo de pérdida no sea decoración.
 - [ ] Colores del calendario diferenciados (kine vs 3 a 1).
 - [ ] Recorrido completo end-to-end hecho por alguien del equipo, de anuncio a
       formulario de cierre, antes del primer peso de pauta.
+- [ ] Pago rechazado a propósito (tarjeta de prueba) → verificar que cae en la
+      etapa 2 y que llega el mensaje correcto según el motivo.
+- [ ] Mensaje pre-llenado de `wa.me` distinto por landing y por anuncio, y probado
+      en un teléfono real.
+- [ ] Confirmado si la integración de WhatsApp de GHL expone el bloque `referral`
+      de los anuncios Click-to-WhatsApp. Si no, el webhook entra primero a Make.

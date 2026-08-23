@@ -13,7 +13,10 @@ presencialmente**, que es donde Fixus ya es fuerte.
 
 ```
 Anuncio → Landing con video → Pago de entrada → Agenda → Asiste → Venta presencial
-└──────────────── agencia (automatizado) ─────────────────┘└──── FIXUS ────┘
+              ╷                    ╷
+              │                    └── rechazado o pendiente ──┐
+              └── WhatsApp ──→ califica ──→ link de pago ──────┘
+└──────────────────── agencia (automatizado) ─────────────────────┘└─ FIXUS ─┘
 ```
 
 ## Contenido
@@ -35,7 +38,10 @@ encender sin depender del equipo técnico de Xflow.
 Pendientes abiertos, con detalle en `docs/Pipeline-CRM.md` §8:
 
 - Acceso a la subcuenta de GoHighLevel.
-- Decisión de ruta de pago.
+- Decisión de ruta de pago — y si el webhook de Xflow informa también los pagos
+  **fallidos**, no solo los aprobados.
+- Confirmar si la integración de WhatsApp de GHL expone la atribución de anuncios
+  Click-to-WhatsApp.
 - Calendarios de los 3 profesores del 3 a 1 + kinesiología.
 - Plantillas de WhatsApp enviadas a aprobación de Meta.
 - Precio final de la clase de prueba ($8.990 o $10.000) y política de descuento
