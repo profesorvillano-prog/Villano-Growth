@@ -153,7 +153,7 @@ CAMPANAS = {
         "title": "Ya pasó demasiado tiempo como para seguir postergándolo · Kinesiología Fixus",
         "meta": "¿Saliste de una operación o llevas más de un año con la misma lesión? El reposo y las pastillas no te van a devolver lo que perdiste. Te decimos cómo quedaste, hasta dónde puedes exigirte y qué se puede recuperar. Kinesiología 1 a 1 en Providencia, a pasos del Metro Colón.",
         "kicker": "Saliste de una operación o llevas más de un año con <span class=\"mark\">la misma lesión</span>",
-        "h1": 'Ya pasó demasiado tiempo de tu cirugía o lesión como para seguir <span class="mark">a medias y postergándolo</span>.',
+        "h1": 'Llevas demasiado tiempo <span class="mark">a medias y postergándolo</span>.',
         "lead": "El reposo, las pastillas y esperar a ver si mejora ya los probaste. Si lleva tanto tiempo mal es por algo: dale play y te explicamos qué es lo que falta.",
         "wa_msg": "Hola, vengo de una operación / llevo tiempo con una lesión y quiero saber cómo funciona la evaluación.",
 
