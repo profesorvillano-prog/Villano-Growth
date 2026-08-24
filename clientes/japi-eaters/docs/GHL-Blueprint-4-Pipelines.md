@@ -20,9 +20,11 @@
 5. **Salidas por goal, no por espera**: toda secuencia de seguimiento usa un
    *goal event* (cita agendada, pago recibido, etapa alcanzada) para expulsar al
    contacto en el momento en que convierte.
-6. **Toda creación de oportunidad asigna responsable** (*Assign to user*) y fija
-   el **valor monetario** ($1.250, precio del programa) para que los reportes por
-   valor y el CAPI por valor funcionen.
+6. **Toda creación de oportunidad asigna responsable** (*Assign to user*). El
+   **valor monetario** ($1.250) se fija recién **al crear la oportunidad en ③**
+   (handoff ②-5): las opps de ①/② quedan en $0 para que ningún reporte de
+   "won revenue" agregado infle ingresos. Ventas en $ se leen en ③, cash en ④,
+   y nunca se suma revenue cruzando pipelines.
 
 ## Los 4 pipelines y su dueño
 
@@ -86,14 +88,14 @@ registra los hitos y le avisa cuando algo se enfría.
 
 | WF | Disparador | Acciones clave | Origen |
 |---|---|---|---|
-| **②-1A · Calificación ADS** | Survey `[SURVEY - ADS]` | Estructura actual de tiers **intacta** + 4 fixes: nodo Descalificada → crear en *Calificada (Formulario)* con status **lost** / reason `Inversión`; **assign Anaís**; valor $1.250; set `Fuente Lead = ads` | [ADS] 1 |
+| **②-1A · Calificación ADS** | Survey `[SURVEY - ADS]` | Estructura actual de tiers **intacta** + 4 fixes: nodo Descalificada → crear en *Calificada (Formulario)* con status **lost** / reason `Inversión`; **assign Anaís**; sin valor monetario (el valor se fija en ③, ver Principios §6); set `Fuente Lead = ads` | [ADS] 1 |
 | **②-1B · Calificación ORG** | Surveys `[SURVEY - ORG]` **y** `[SURVEY - ORG SETTER]` (2 triggers) | Igual que ②-1A pero destino **② / Calificada (Formulario)** (ya no el pipeline legacy), `Fuente Lead = org` | [ORG] 1 + [SETTER - ORG] 1 |
 | **②-2 · Ghost multi-toque** | Tag added `tier-gold` / `tier-silver` / **`tier-bronce`** (fix: ORG hoy no incluye bronce) | **Goal de salida: appointment booked.** T+2 h sin agenda → *Sin Agendar (Ghost)* + tag `ghost-agenda` + WhatsApp toque 1 (`ghost_agenda_ads` / **`ghost_agenda_org`** según fuente). T+24 h → toque 2 (audio/beneficio). T+72 h → toque 3 último aviso + mover a *Follow Up* + task para Anaís + Slack `#0-leads-conflictos` | [ADS] 2 + [ORG] 2 |
 | **②-3 · Confirmación de cita** | Appointment booked (cal. [A] con tag `lead-ads`; cal. [ORG] resto) | Mover → *Nueva Agenda* + Slack `#4-nuevas-agendas`. Enviar template botón (`v2_confirmar_jose`) y mover → ***Sin Confirmar (Agenda)***. Al pulsar **Confirmar** → mover → ***Confirmada (Agenda)***, limpiar `ghost-agenda`/`sin-confirmar`, tag `confirmada`, y continuar video selfie + mensaje de Rafa como hoy. Undelivered / Time Out → tag `sin-confirmar` + Slack `#0-leads-conflictos`. **Fix rama duplicada**: si "decide en pareja" → mensaje que invita a la pareja a la llamada. Ya **no** borra los tags de fuente | [ADS] 3 + [ORG] 3 |
 | **②-3.1 · Diagnóstico** *(nuevo, usa la etapa muerta)* | Survey pre-llamada completado (formulario corto de diagnóstico) | Mover → *Diagnóstico* + tag `diagnostico-ok` + **Slack DM a Rafa** con las 3 respuestas clave para preparar la llamada | Nuevo |
 | **②-4 · Recordatorios** | Appointment booked, **con filtro de tag por fuente** (fix) | 24 h antes → *Pre-Llamada (Preparación)* + `wa_recordatorio_24h` + Slack `#5-llamadas-preparacion`. 4 h antes → ***Día de Llamada*** + `wa_recordatorio_8h`. 1 h antes → `wa_recordatorio_1h`. 35 min antes → DM Slack al closer | [ADS] 4 + [ORG] 4 |
 | **②-4.1 · Cancelación** | Appointment cancelled | Remove de ②-4 (como hoy) **+ mover → *Re-Agendar (Cancelada)*** + WhatsApp con link de re-agenda + Slack `#4-nuevas-agendas`; si a las 48 h no re-agendó → *Follow Up* + task Anaís | [ADS] 4.1 + [ORG] 4.1 |
-| **②-5 · Handoff Closer** | Pipeline stage changed → *Llamada Confirmada* | Crear opp en ③ / *Llamada Confirmada*, **assign Rafa**, copiar valor y fuente; **marcar la opp de ② como won** (fix: hoy se borra); Slack `#6-confirmaciones-llamadas` | [ADS] 5 + [ORG] 5 |
+| **②-5 · Handoff Closer** | Pipeline stage changed → *Llamada Confirmada* | Crear opp en ③ / *Llamada Confirmada*, **assign Rafa**, fijar valor $1.250 y copiar fuente; **marcar la opp de ② como won** (fix: hoy se borra); Slack `#6-confirmaciones-llamadas` | [ADS] 5 + [ORG] 5 |
 
 ### Pipeline ③ — Llamadas · Closer [Rafa]
 
