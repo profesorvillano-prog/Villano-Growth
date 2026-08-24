@@ -20,6 +20,7 @@ emails y nuevos productos.
 | [`Voz-y-Marca.md`](./Voz-y-Marca.md) | Tono, frases marca registrada, palabras prohibidas, paleta de color, historia y autoridad de Josefina. |
 | [`GHL-Auditoria-Workflows.md`](./GHL-Auditoria-Workflows.md) | Auditoría de los 17 workflows de GoHighLevel (ago 2026): hallazgos priorizados P0-P2, defectos que pierden leads o ensucian métricas, y qué conservar. |
 | [`GHL-Blueprint-4-Pipelines.md`](./GHL-Blueprint-4-Pipelines.md) | Rediseño del motor GHL sobre los 4 pipelines: smart tags, workflows por pipeline, movimientos automáticos, Slack, responsables, métricas y plan de implementación en 5 fases. |
+| [`GHL-Fase-0-Quick-Fixes.md`](./GHL-Fase-0-Quick-Fixes.md) | Guía de ejecución manual de los 7 arreglos críticos en GHL: pasos clic a clic, verificación y prueba de humo (~40 min). |
 | [`Operaciones-y-Embudo.md`](./Operaciones-y-Embudo.md) | Funnel, onboarding, plataforma Skool (niveles), mentorías, equipo, stack tecnológico, modelo 2026 y datos de audiencias. |
 
 ## Fuentes
