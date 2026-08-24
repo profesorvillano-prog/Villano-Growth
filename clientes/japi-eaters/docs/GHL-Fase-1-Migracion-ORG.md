@@ -1,117 +1,107 @@
 # Fase 1 — Migración ORG a la autopista nueva (guía de ejecución)
 
-> Objetivo: que el flujo orgánico deje de usar el pipeline legacy
-> `[SETTER - ORG] Formación` y viva en la autopista nueva:
-> **① Instagram · Setter [Valen]** (prospección pre-survey) →
-> **② Agenda · WhatsApp [Anaís]** (donde caen las calificadas de ORG y las de ADS).
+> **Modelo simplificado (decisión 24-08):** todo lo orgánico pre-agenda vive en
+> **① Instagram · Setter [Valen]** — link bio y setter por igual. El pipeline
+> **② Agenda · WhatsApp [Anaís]** arranca en *Calificada (Formulario)* **solo
+> con ADS**; las ORG entran a ② recién al **agendar**, por *Nueva Agenda*.
+> El puente es [ORG] 3: al agendar cierra ① como **Agendada / Won** (el win de
+> Valen) y crea la tarjeta de ② en **Nueva Agenda / Open** (el turno de Anaís).
 > Requiere la [Fase 0](./GHL-Fase-0-Quick-Fixes.md) completada.
-> Tiempo estimado: **60-90 min**.
 
-## La lógica de destino
-
-| Lead | Entra por | Cae en |
-|---|---|---|
-| ADS | Survey [SURVEY - ADS] | ② directo (ya funciona así) |
-| ORG link bio | Survey [SURVEY - ORG] | ② directo (hoy cae al legacy → se repunta) |
-| ORG setteada por Valen | Survey [SURVEY - ORG SETTER] | ② + su tarjeta en ① se cierra como Won |
-
-① es solo de Valen y pre-survey: ella trabaja a mano Bienvenidas → CTA → Link
-Enviado; la tarjeta se cierra sola cuando la lead completa el survey del setter.
-② queda como el único pipeline de agenda, con la fuente marcada por tags.
+| Lead | Pre-agenda | Al agendar | Post-agenda |
+|---|---|---|---|
+| ADS | ② desde Calificada (Formulario) | ② Nueva Agenda | ② → ③ → ④ |
+| ORG (link bio y setter) | ① (Valen) | ① Agendada **Won** + ② Nueva Agenda | ② → ③ → ④ |
 
 ---
 
-## Paso A — Repuntar los workflows ORG a ② (6 ediciones)
+## Paso A — Repuntar los workflows ORG (6 ediciones)
 
 Publica cada workflow al terminar su edición, en este orden.
 
 ### A1 · [ORG] 1 · Calificación — ID `c98e6ba6`
 
-1. Nodo **Crear en Descalificada** → cambiar a: Pipeline `②`, Stage
-   **Calificada (Formulario)**, Status **Lost**, Lost reason `Inversion`
-   (queda idéntico al de [ADS] 1 tras el Fix 4).
-2. Los 3 nodos **Crear Oportunidad [ORG] Formación - Formulario** (Bronce,
-   Silver, Gold) → cambiar a: Pipeline `②`, Stage **Calificada (Formulario)**,
-   sin valor monetario, y si el nodo lo permite, **Opportunity owner = Anaís**.
+1. Nodo **Crear en Descalificada** → Pipeline `①`, Stage **Descalificada**,
+   Status **Lost**, Lost reason `Inversion`. *(① tiene etapa Descalificada
+   propia — mejor que ensuciar ②.)*
+2. Los 3 nodos **Crear Oportunidad [ORG] Formación - Formulario** (Bronce /
+   Silver / Gold) → Pipeline `①`, Stage **Formulario Completado**, Status
+   **Open**, Owner **Valen**, sin valor.
 
 ### A2 · [SETTER - ORG] 1 · Calificación — ID `8439135d`
 
-1. Mismas 4 ediciones que A1 (nodo Descalificada + 3 nodos de tier → ②).
-2. **Extra — progreso de la tarjeta de Valen**: después de la acción 1 (tags),
-   añadir **Create/Update Opportunity** → Pipeline `① Instagram · Setter [Valen]`,
-   Stage **Formulario Completado**, Status **Open**, Owner **Valen**, sin valor.
-   *(Solo en este workflow: el survey del setter es, por definición, lead
-   trabajada por Valen. Las de link bio no tocan ①. El **Won** de Valen no es
-   el formulario: es la **agenda** — lo cierra el A2-bis.)*
-
-### A2-bis · Nuevo mini-workflow: `[①] Agendó → Won` (3 nodos)
-
-El win del setter es que la lead agende. Crear un workflow nuevo en la carpeta
-[ORG]:
-
-- **Trigger**: Customer booked appointment → In calendar = `[ORG] Programa
-  Éxito en Alimentación Infantil` + filtro **Has tag = `lead-setter-org`**.
-- **Acción**: Create/Update Opportunity → Pipeline `①`, Stage **Agendada**,
-  Status **Won**, Owner **Valen**, sin valor → END.
-- Publicar.
-
-El filtro por `lead-setter-org` garantiza que solo las leads setteadas por
-Valen tocan ①; una lead de link bio o de ADS que agende ahí no crea tarjetas
-fantasma en su pipeline.
+- Mismas 4 ediciones que A1 (Descalificada + 3 tiers → ①). Para las leads que
+  Valen ya venía trabajando en ①, el create/update solo avanza su tarjeta a
+  *Formulario Completado*; para las de link bio, la crea ahí directamente.
 
 ### A3 · [ORG] 2 · Agenda + Ghost — ID `851e8b99`
 
-- Nodo **Cambiar a Ghost Agenda** → Pipeline `②`, Stage **Sin Agendar (Ghost)**.
+- Nodo **Cambiar a Ghost Agenda** → Pipeline `①`, Stage **Seguimiento**,
+  Status **Open**. *(El ghost orgánico se trabaja en el tablero de Valen, no
+  en el de Anaís — coherente con "② solo recibe ORG agendadas".)*
+- El WhatsApp de ghost y el Slack quedan igual (más el trigger `tier-bronce`
+  del Fix 3).
 
-### A4 · [ORG] 3 · Confirmación — ID `4a74420d`
+### A4 · [ORG] 3 · Confirmación — ID `4a74420d` ✅ ya editado
 
-- Nodo **Cambiar a Nueva Agenda** → Pipeline `②`, Stage **Nueva Agenda**.
-- Aprovechar: en el nodo **Remove Tag**, quitar de la lista `lead-ads`
-  (dejar solo `agenda-ads`). La fuente no se borra nunca. Hacer el espejo en
-  [ADS] 3: dejar solo `agenda-org` (no `lead-org` ni `lead-setter-org`).
+Como quedó armado:
+
+1. Nodo 1 (ex "Cambiar a Nueva Agenda") → Pipeline `①`, Stage **Agendada**,
+   Status **Won**. Renombrarlo a `Cerrar ① Agendada (Won)` para que el canvas
+   se lea solo. Añadir Owner **Valen** si el campo está disponible.
+2. Nodo 3 (Create or update opportunity) → Pipeline `②`, Stage **Nueva
+   Agenda**, Status **Open**. Renombrar a `Crear ② Nueva Agenda` y añadir
+   Owner **Anaís**.
+3. En el nodo **Remove Tag**: dejar solo `agenda-ads` — quitar `lead-ads` de
+   la lista (la fuente no se borra nunca). Espejo en [ADS] 3: dejar solo
+   `agenda-org` (quitar `lead-org` y `lead-setter-org`).
+
+**Edge case a cubrir:** el trigger es "booking en calendario [ORG]" sin filtro
+de tag. Si una lead **de ADS** re-agenda por el calendario orgánico (pasa: por
+eso existía el swap de tags), el nodo 1 le crearía una tarjeta **Won en ①** que
+infla la métrica de Valen. Cobertura: envolver el nodo 1 en un **If/else →
+Tags NOT include `lead-ads`** (rama SI: cerrar ①; rama None: saltar directo al
+Remove Tag). El nodo de ② sí corre para todas.
 
 ### A5 · [ORG] 4 · Recordatorios — ID `5296147d`
 
 - Nodo **Cambiar a Llamada en Preparación** → Pipeline `②`,
-  Stage **Pre-Llamada (Preparación)**.
+  Stage **Pre-Llamada (Preparación)**. *(Post-agenda = territorio de Anaís.)*
 
 ### A6 · Handoff único — [ADS] 5 absorbe a [ORG] 5
 
 El trigger de [ADS] 5 (`8ab3d347`) es "② / Llamada Confirmada" **sin filtro de
-tag**, así que en cuanto las ORG vivan en ②, ese workflow hace el handoff de
-ambas fuentes solo.
+tag**: con las ORG entrando a ② al agendar, hace el handoff de ambas fuentes.
 
-1. En [ADS] 5: renombrar a `[②] 5 · Handoff Closer (ADS + ORG)` y revisar que
-   el mensaje de Slack no diga "ads" (va al canal `#6-confirmaciones-llamadas`
-   para todo).
-2. **[ORG] 5** (`c0eead4d`): pasar a **Draft / despublicar** (no borrar todavía;
-   se elimina cuando el legacy quede vacío).
+1. Renombrar [ADS] 5 a `[②] 5 · Handoff Closer (ADS + ORG)` y revisar que el
+   Slack no diga «ads» (canal `#6-confirmaciones-llamadas` para todo).
+2. **[ORG] 5** (`c0eead4d`): pasar a **Draft** (no borrar todavía).
 
 ---
 
 ## Paso B — Migrar las oportunidades abiertas del legacy
 
-En Opportunities → pipeline `[SETTER - ORG] Formación` → filtrar **status Open**
-y mover por etapa según esta tabla (bulk edit si está disponible; si no, a mano
-— el volumen es bajo):
+Opportunities → `[SETTER - ORG] Formación` → filtro **Open**, por etapa
+(bulk edit si está disponible; si no, a mano — el volumen es bajo).
+Las que van a ① → owner Valen; las que van a ② → owner Anaís.
 
-| Etapa legacy | → Etapa en ② |
+| Etapa legacy | → Destino |
 |---|---|
-| Formulario [ORG] | Calificada (Formulario) |
-| Ghost - Primer Contacto | Sin Agendar (Ghost) |
-| Primer Contacto | Calificada (Formulario) |
-| Ghost Intento Agenda | Sin Agendar (Ghost) |
-| Follow Up | Follow Up |
-| Nuevas Agendas | Nueva Agenda |
-| Llamada Preparación | Pre-Llamada (Preparación) |
-| Cancelada (Re-Agendar) | Re-Agendar (Cancelada) |
+| Formulario [ORG] | ① Formulario Completado |
+| Primer Contacto | ① Formulario Completado |
+| Ghost - Primer Contacto | ① Seguimiento |
+| Ghost Intento Agenda | ① Seguimiento |
+| Follow Up | ① Seguimiento |
+| Nuevas Agendas | ② Nueva Agenda |
+| Llamada Preparación | ② Pre-Llamada (Preparación) |
+| Cancelada (Re-Agendar) | ② Re-Agendar (Cancelada) |
 | Descalificada | **No migrar**: bulk status → Lost y se quedan en el legacy |
 | Llamada Confirmada | ⚠ ver nota |
 
 > ⚠ **Llamada Confirmada**: mover una tarjeta a ②/Llamada Confirmada dispara el
-> handoff (crea tarjeta en ③ + Slack). Revisar una por una: si el contacto **ya
-> tiene** oportunidad en ③, marcar la del legacy como Won y no moverla; si no
-> la tiene, moverla a ② y dejar que el handoff corra (es lo deseado).
+> handoff (crea en ③ + Slack). Revisar una por una: si el contacto **ya tiene**
+> oportunidad en ③ → marcar la del legacy Won y no mover; si no la tiene →
+> mover a ② y dejar que el handoff corra.
 
 Las Won/Lost históricas **se quedan en el legacy** como registro.
 
@@ -120,38 +110,43 @@ Las Won/Lost históricas **se quedan en el legacy** como registro.
 ## Paso C — Retirar el legacy (sin borrar)
 
 1. Renombrar el pipeline a `zz [RETIRADO] Setter ORG` y desmarcar
-   *Show in funnel* y *Show in pie chart*.
+   *Show in funnel* / *Show in pie chart*.
 2. **No borrarlo**: en GHL, eliminar un pipeline **elimina sus oportunidades**
-   y con ellas el histórico. Se borra recién cuando ya no se necesite consultar
-   datos viejos (meses).
-3. El canal Slack `5-confirmaciones-llamadas` queda sin emisor → archivarlo
-   (todo el handoff reporta en `#6-confirmaciones-llamadas`).
+   y el histórico. Se borra recién en unos meses.
+3. Archivar el canal Slack `5-confirmaciones-llamadas` (el handoff reporta en
+   `#6-confirmaciones-llamadas`).
 
 ---
 
-## QA — probar el carril ORG completo (10 min)
+## Métricas con el modelo simplificado
 
-1. Contacto de prueba completa el survey `[SURVEY - ORG SETTER]` con tier Silver
-   → aparece en ② *Calificada (Formulario)* (no en el legacy) y su tarjeta
-   en ① pasó a **Formulario Completado (Open)**.
-2. No agenda en 2 h → pasa a ② *Sin Agendar (Ghost)* + WhatsApp ghost.
-3. Agenda en el calendario [ORG] → ② *Nueva Agenda* + Slack #4, y la tarjeta
-   de ① quedó **Agendada / Won** (workflow A2-bis).
-4. Mover a mano a ② *Llamada Confirmada* → se crea en ③ con owner Rafa y
-   value 1250, la de ② queda Won, Slack #6. **Un solo workflow disparó** (el
-   handoff unificado; [ORG] 5 está en draft).
-5. Legacy: 0 oportunidades Open.
+- **Valen (①):** win rate = Agendada (Won) / tarjetas creadas. Su funnel
+  completo: Bienvenidas → … → Formulario Completado → Agendada.
+- **Anaís (②):** para ADS mide desde *Calificada (Formulario)*; para ORG mide
+  desde *Nueva Agenda*. Al comparar fuentes, usar la tasa **agenda → llamada
+  confirmada** (existe para ambas); la tasa formulario → agenda de ORG se lee
+  en ①.
+
+## QA — carril ORG de punta a punta (10 min)
+
+1. Contacto de prueba completa `[SURVEY - ORG SETTER]` con tier Silver → tarjeta
+   en ① **Formulario Completado (Open, Valen)**; **nada en ②** ni en el legacy.
+2. Sin agendar 2 h → ① **Seguimiento** + WhatsApp ghost.
+3. Agenda en calendario [ORG] → ① **Agendada / Won** y ② **Nueva Agenda
+   (Open, Anaís)** + Slack #4.
+4. Mover ② a *Llamada Confirmada* → se crea en ③ (owner Rafa, value 1250),
+   la de ② queda Won, Slack #6, un solo workflow disparó.
+5. Legacy con 0 oportunidades Open.
 6. Borrar/taggear `test` el contacto de prueba.
 
 | ✔ | Paso |
 |---|---|
-| ☐ | A1 · [ORG] 1 → ② |
-| ☐ | A2 · [SETTER - ORG] 1 → ② + progreso de ① |
-| ☐ | A2-bis · Mini-workflow [①] Agendó → Won |
-| ☐ | A3 · [ORG] 2 → ② Sin Agendar (Ghost) |
-| ☐ | A4 · [ORG] 3 → ② Nueva Agenda + tags de fuente |
+| ☐ | A1 · [ORG] 1 → ① (Formulario Completado / Descalificada) |
+| ☐ | A2 · [SETTER - ORG] 1 → ① |
+| ☐ | A3 · [ORG] 2 ghost → ① Seguimiento |
+| ☐ | A4 · [ORG] 3 puente ①→② ✅ + if/else lead-ads + tags |
 | ☐ | A5 · [ORG] 4 → ② Pre-Llamada |
 | ☐ | A6 · Handoff unificado + [ORG] 5 a draft |
-| ☐ | B · Migración de abiertas (tabla de mapeo) |
-| ☐ | C · Legacy oculto/renombrado, canal archivado |
+| ☐ | B · Migración de abiertas (tabla nueva) |
+| ☐ | C · Legacy oculto, canal archivado |
 | ☐ | QA · Carril ORG completo |
