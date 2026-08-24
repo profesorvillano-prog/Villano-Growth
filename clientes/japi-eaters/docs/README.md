@@ -18,6 +18,8 @@ emails y nuevos productos.
 | [`Casos-de-Exito.md`](./Casos-de-Exito.md) | Transformaciones reales de alumnas, testimonios en video y números de respaldo. Prueba social. |
 | [`FAQ.md`](./FAQ.md) | Preguntas frecuentes reales con respuestas en la voz de la marca. Ideal para web y bot/setter. |
 | [`Voz-y-Marca.md`](./Voz-y-Marca.md) | Tono, frases marca registrada, palabras prohibidas, paleta de color, historia y autoridad de Josefina. |
+| [`GHL-Auditoria-Workflows.md`](./GHL-Auditoria-Workflows.md) | Auditoría de los 17 workflows de GoHighLevel (ago 2026): hallazgos priorizados P0-P2, defectos que pierden leads o ensucian métricas, y qué conservar. |
+| [`GHL-Blueprint-4-Pipelines.md`](./GHL-Blueprint-4-Pipelines.md) | Rediseño del motor GHL sobre los 4 pipelines: smart tags, workflows por pipeline, movimientos automáticos, Slack, responsables, métricas y plan de implementación en 5 fases. |
 | [`Operaciones-y-Embudo.md`](./Operaciones-y-Embudo.md) | Funnel, onboarding, plataforma Skool (niveles), mentorías, equipo, stack tecnológico, modelo 2026 y datos de audiencias. |
 
 ## Fuentes
