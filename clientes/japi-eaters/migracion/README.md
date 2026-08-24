@@ -70,7 +70,7 @@ El encaje aquí es aún mejor: **seis renombrados, ninguna etapa nueva**.
 
 | Etapa actual | Abiertas | Acción |
 |---|---:|---|
-| Llamada Confirmada Setter | 8 | renombrar → **En Llamada** |
+| Llamada Confirmada Setter | 8 | renombrar → **Llamada Confirmada** |
 | Asistió | 22 | *(sin cambios)* |
 | Follow Up Asistentes | 28 | renombrar → **Seguimiento** |
 | No-Show Llamada | 34 | renombrar → **No-Show** |

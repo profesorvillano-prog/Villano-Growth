@@ -230,12 +230,31 @@ correcta (🅐/🅑/🅒) ya elegida según el formulario.
 
 | # | Etapa | Quién mueve | Entra | Sale | Color |
 |---|---|---|---|---|---|
-| 0 | **En Llamada** | 🤖 | Ganó en `②`6 al entrar a la reunión | → 1 o 2 según asista | `#6366F1` |
+| 0 | **Llamada Confirmada** | 🤖 | La mañana de la llamada, desde `②`8 | → 1 o 2 según asista | `#6366F1` |
 | 1 | **Asistió** | 👤 Rafa | Se conectó | → 3 si compra · → 4 si lo piensa | `#0EA5E9` |
 | 2 | **No-Show** | 🤖 | No se conectó | → `②` etapa 5 para reagendar · Perdida a 14 d | `#EF4444` |
 | 3 | **Cerrada · Va a Pagar** | 👤 Rafa | Dijo que sí | **Gana** → nace en `④` | `#16A34A` |
 | 4 | **Seguimiento** | 👤 Rafa | Lo está pensando | → 3 si cierra · Perdida a 21 d con motivo | `#C026D3` |
 | 5 | **Reagendada** | 👤 Rafa | Cambió la hora | → 0 con la nueva fecha | `#CA8A04` |
+
+### El testigo se pasa en la mañana, no al entrar
+
+`②`8 *Día de Llamada* y `③`0 *Llamada Confirmada* son la misma gente en el mismo
+día, y por un rato conviven a propósito — son dos trabajos distintos:
+
+| | `②`8 · Anaís | `③`0 · Rafa |
+|---|---|---|
+| Nace | la mañana de la llamada | la mañana de la llamada |
+| Trabajo | `M9`, `M10` y `M11` desde el +569 | mirar su agenda del día |
+| Se cierra | **gana** cuando la lead entra a la reunión | pasa a *Asistió* o *No-Show* |
+
+Si `②` ganara al empezar el día, los recordatorios `M10` y `M11` se quedarían sin
+tarjeta que los dispare. Por eso Anaís conserva la suya hasta que la persona
+entra, y Rafa tiene la lista desde primera hora.
+
+**El nombre importa:** *Llamada Confirmada* le dice a Rafa la precondición que le
+interesa — alguien ya confirmó esta llamada. Si aun así no aparece, el problema no
+es que nadie la haya recordado.
 
 **El cambio que arregla el cementerio:** hoy *No-Show* y *Follow Up Asistentes*
 no tienen fecha de caducidad y acumulan 62 tarjetas. En v2 las dos tienen cierre
@@ -311,7 +330,7 @@ esos el sistema ya opera.
 | **W10 ★** | **Diagnóstico · FASE 2** | `A5` enviado | → 5 · `M1` a los 5 min, `M2` a los 5 seg · Sirve la rama 🅐/🅑/🅒 según el formulario · Tarea: escribir el `Resumen Lead` con `M6` |
 | W11 | Pre-llamada · FASE 3 | Víspera | → 6 · Tarea a Anaís para `M7a-c` · `M8` automático por el +52 esa noche |
 | **W9b ★** | **Puerta 2 · la víspera** | Responde a `M7` o `M8` | → 7 · Tag `confirmada-vispera` |
-| W12 | Día de llamada · FASE 4 | Es el día | → 8 desde 6 **y** desde 7 · Lo que venía de 6 se marca `riesgo-noshow` · `M9` mañana · `M10` 15 min antes · Tarea `M11` · Gana y crea en `③`/0 |
+| W12 | Día de llamada · FASE 4 | Es el día | → 8 desde 6 **y** desde 7 · Lo que venía de 6 se marca `riesgo-noshow` · **Crea la tarjeta en `③`/0 por la mañana** · `M9` mañana · `M10` 15 min antes · Tarea `M11` · Gana en `②` cuando entra a la reunión |
 | W13 | Caducidad | 14 d en 1 o en 9 | Perdida con motivo obligatorio |
 
 ### Pipeline ③ — Llamadas
@@ -373,23 +392,36 @@ Criterio de **activa**: abierta y con movimiento en los últimos 21 días.
 
 ### Mapeo etapa por etapa
 
-| Etapa actual | → Destino v2 |
-|---|---|
-| `①` Formulario [ORG] · `②` Formulario [ADS] | `②` 0 · Calificada · Link Enviado |
-| `①` Ghost Intento Agenda · `②` Ghost - Nueva Agenda | `②` 2 · Ghost Agenda |
-| `①` Nuevas Agendas · `②` Nuevas Agendas | `②` 1 · Agenda Tomada |
-| `①` Llamada Confirmada · `②` Llamada Confirmada | `②` 3 · Confirmada |
-| `①` Cancelada · `②` Cancelada (Re-Agendar) | `②` 5 · Reagendar |
-| `①` Primer Contacto · Follow Up · `②` Follow Up | `①` 1 · Conversación |
-| `①` Ghost - Primer Contacto | `①` 5 · Ghost DM |
-| `③` Llamada Confirmada Setter | `③` 0 · Llamada Hoy |
-| `③` Asistió | `③` 1 · Asistió |
-| `③` No-Show Llamada | `③` 2 · No-Show |
-| `③` Follow Up Asistentes | `③` 4 · Seguimiento |
-| `③` Cancelada Última Hora | `③` 5 · Reagendada |
-| `③` Paga Reserva | `④` 0 · Cuota de Entrada Pagada |
-| `③` Venta High Ticket | `④` 5 · Venta Total |
-| Descalificada (ambos) | Perdida · motivo *No cualifica* |
+Actualizado al enfoque por **reutilización** (los tres pipelines se renombran en
+vez de crearse de cero — ver `migracion/README.md`). Lo que se **renombra** no
+mueve tarjetas; solo las filas marcadas *mover* requieren API.
+
+| Etapa actual | → Destino v2 | |
+|---|---|---|
+| `②` Formulario [ADS] | `②` 0 · Calificada (Formulario) | renombrar |
+| `②` Ghost - Nueva Agenda | `②` 1 · Sin Agendar (Ghost) | renombrar |
+| `②` Nuevas Agendas | `②` 2 · Nueva Agenda | renombrar |
+| `②` Sin Confirmar | `②` 3 · Sin Confirmar (Agenda) | renombrar |
+| `②` Llamada Confirmada | `②` 4 · Confirmada (Agenda) | renombrar |
+| `②` Llamada Preparación | `②` 6 · Pre-Llamada | renombrar |
+| `②` Cancelada (Re-Agendar) | `②` 9 · Re-Agendar | renombrar |
+| `②` Follow Up | `②` 1 · Sin Agendar (Ghost) | **mover** · 4 |
+| `③` Llamada Confirmada Setter | `③` 0 · Llamada Confirmada | renombrar |
+| `③` Asistió | `③` 1 · Asistió | *(igual)* |
+| `③` No-Show Llamada | `③` 2 · No-Show | renombrar |
+| `③` Venta High Ticket | `③` 3 · Cerrada · Va a Pagar | renombrar |
+| `③` Follow Up Asistentes | `③` 4 · Seguimiento | renombrar |
+| `③` Cancelada Última Hora | `③` 5 · Reagendada | renombrar |
+| `③` Paga Reserva | `④` 0 · Cuota de Entrada Pagada | **mover** · 6 |
+| `④` Nuevo Cierre | `④` 0 · Cuota de Entrada Pagada | renombrar |
+| `①` Formulario [ORG] | `②` 0 · Calificada (Formulario) | **mover** · 4 |
+| `①` Ghost Intento Agenda · Primer Contacto · Follow Up | `②` 1 · Sin Agendar (Ghost) | **mover** · 7 |
+| `①` Nuevas Agendas | `②` 2 · Nueva Agenda | **mover** · 1 |
+| `①` Cancelada (Re-Agendar) | `②` 9 · Re-Agendar | **mover** · 3 |
+| Descalificada de `①` y `②` | Perdida · motivo *No cualifica* | **cerrar** · 26 |
+
+**Etapas a crear:** `②` *Diagnóstico*, *Confirmada (Víspera)*, *Día de Llamada* ·
+`④` *Pago Fallido · En Riesgo*.
 
 > **La migración sí es automatizable.** La API de GHL permite cambiar pipeline y
 > etapa de una oportunidad existente (`PUT /opportunities/{id}`). Las 120 activas
@@ -531,7 +563,7 @@ Todo junto, para teclear de una pasada al crear cada pipeline. La columna
 | | 7 | Confirmada (Víspera) | 85 | ✓ |
 | | 8 | Día de Llamada | 92 | ✓ |
 | | 9 | Re-Agendar | 15 | — |
-| **③** Llamadas | 0 | En Llamada | 13 | ✓ |
+| **③** Llamadas | 0 | Llamada Confirmada | 13 | ✓ |
 | | 1 | Asistió | 33 | ✓ |
 | | 2 | No-Show | 4 | — |
 | | 3 | Cerrada · Va a Pagar | 95 | ✓ |
@@ -645,7 +677,7 @@ show-up del 39 %, el cierre sobre quien asiste sale en **34 %**.
 
 | # | Etapa | % | De dónde sale |
 |---|---|---:|---|
-| 0 | En Llamada | 13 | win rate histórico del pipeline |
+| 0 | Llamada Confirmada | 13 | win rate histórico del pipeline |
 | 1 | Asistió | 33 | 13 % ÷ 39 % de show-up |
 | 2 | No-Show | **4** | el agujero más caro del embudo |
 | 3 | Cerrada · Va a Pagar | 95 | dijo que sí; falta que pague |
