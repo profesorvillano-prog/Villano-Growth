@@ -46,30 +46,32 @@ Slack Anaís. Setter: ghost sin WhatsApp. Remates:
 3. Opcional: al final de la rama Setter, **DM Slack a Valen**
    ("👻 {{contact.name}} no agendó — empújala por IG").
 
-### A4 · [ORG] 3 · Confirmación — ID `4a74420d`
+### A4 · [ORG] 3 · Confirmación — el puente con Go To — ID `4a74420d` ✅ ya editado
 
-Como las ramas de un If/else en GHL **nunca se vuelven a juntar**, el cierre de
-① no va dentro de este workflow (obligaría a duplicar toda la cola en ambas
-ramas). Se saca a un mini-workflow aparte (A4-bis):
+Estructura final (el **Go To** reunifica la rama Setter con el carril genérico):
 
-1. **Eliminar el nodo 1** (`Cerrar ① Agendada (Won)`): [ORG] 3 vuelve a ser
-   lineal — Remove Tag → `Crear ② Nueva Agenda` (Open, Owner **Anaís**, corre
-   para todas) → tag `agenda-org` → confirmación.
-2. Nodo **Remove Tag**: dejar solo `agenda-ads` (no quitar `lead-ads`).
-   Espejo en [ADS] 3: dejar solo `agenda-org`.
+```
+Trigger (booking [ORG])
+└─ Condition ¿Es Setter?
+   ├─ Setter (tags include lead-setter-org):
+   │     Cerrar ① Agendada (Won) → Go to ──┐
+   └─ None (Bio, ADS re-agendas): ─────────┴→ Remove Tag → Crear ② Nueva Agenda
+                                     → tag agenda-org → ¿Primera vez o re-agenda? → …
+```
 
-### A4-bis · Mini-workflow `[①] Agendó → Won` (2 nodos, nuevo)
+Remates:
 
-Dispara en paralelo con [ORG] 3 en la misma agenda, pero solo para leads de
-Valen — el filtro va en el **trigger**, no en un if/else:
+1. **Go To → destino = nodo Remove Tag** (primer paso del carril genérico), para
+   que las setter también reciban ② Nueva Agenda + confirmación tras cerrar ①.
+2. El nodo de la rama Setter: confirmar **① / Agendada / Won / Owner Valen** y
+   renombrarlo `Cerrar ① Agendada (Won)`.
+3. Nodo genérico `Crear ② Nueva Agenda`: Open, Owner **Anaís** — corre para todas.
+4. Nodo **Remove Tag**: dejar solo `agenda-ads` (no quitar `lead-ads`). Espejo
+   en [ADS] 3: dejar solo `agenda-org`.
 
-- **Trigger:** Customer booked appointment → In calendar = `[ORG] Programa
-  Éxito en Alimentación Infantil` **+ Has tag = `lead-setter-org`**.
-- **Acción:** Create/Update Opportunity → `①` / **Agendada** / **Won** /
-  Owner **Valen**, sin valor → END. Publicar.
-
-Sin el filtro de tag, un booking de Bio (o una ADS re-agendando por este
-calendario) crearía una **Won fantasma** en el pipeline de Valen.
+La Condition con `lead-setter-org` es el gate: Bio y ADS caen en None y nunca
+tocan ① (sin ella, un booking de Bio crearía una Won fantasma en el pipeline de
+Valen). No hace falta ningún workflow aparte.
 
 ### A5 · [ORG] 4 · Recordatorios — ID `5296147d`
 
@@ -140,8 +142,7 @@ Legacy: 0 Open. Limpiar contactos de prueba.
 | ☐ | A1 · [ORG] 1 (Bio) → ② |
 | ☐ | A2 · [SETTER - ORG] 1 (Setter) → ① |
 | ☐ | A3 · [ORG] 2 ramas Bio/Setter ✅ + destinos + wait Setter |
-| ☐ | A4 · [ORG] 3 sin nodo de ① + tags de fuente |
-| ☐ | A4-bis · Mini-workflow [①] Agendó → Won |
+| ☐ | A4 · [ORG] 3 con Condition Setter + Go To ✅ |
 | ☐ | A5 · [ORG] 4 → ② Pre-Llamada |
 | ☐ | A6 · Handoff unificado + [ORG] 5 a draft |
 | ☐ | B · Migración por tag (①/②) |
