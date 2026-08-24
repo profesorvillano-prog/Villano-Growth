@@ -37,13 +37,27 @@ Publica cada workflow al terminar su edición, en este orden.
 ### A2 · [SETTER - ORG] 1 · Calificación — ID `8439135d`
 
 1. Mismas 4 ediciones que A1 (nodo Descalificada + 3 nodos de tier → ②).
-2. **Extra — cierre de la tarjeta de Valen**: después de la acción 1 (tags),
+2. **Extra — progreso de la tarjeta de Valen**: después de la acción 1 (tags),
    añadir **Create/Update Opportunity** → Pipeline `① Instagram · Setter [Valen]`,
-   Stage **Formulario Completado**, Status **Won**, Owner **Valen**, sin valor.
-   Así, cuando una lead setteada completa el survey, la tarjeta de Valen se
-   cierra como ganada automáticamente. *(Solo en este workflow: el survey del
-   setter es, por definición, lead trabajada por Valen. Las de link bio no
-   tocan ①.)*
+   Stage **Formulario Completado**, Status **Open**, Owner **Valen**, sin valor.
+   *(Solo en este workflow: el survey del setter es, por definición, lead
+   trabajada por Valen. Las de link bio no tocan ①. El **Won** de Valen no es
+   el formulario: es la **agenda** — lo cierra el A2-bis.)*
+
+### A2-bis · Nuevo mini-workflow: `[①] Agendó → Won` (3 nodos)
+
+El win del setter es que la lead agende. Crear un workflow nuevo en la carpeta
+[ORG]:
+
+- **Trigger**: Customer booked appointment → In calendar = `[ORG] Programa
+  Éxito en Alimentación Infantil` + filtro **Has tag = `lead-setter-org`**.
+- **Acción**: Create/Update Opportunity → Pipeline `①`, Stage **Agendada**,
+  Status **Won**, Owner **Valen**, sin valor → END.
+- Publicar.
+
+El filtro por `lead-setter-org` garantiza que solo las leads setteadas por
+Valen tocan ①; una lead de link bio o de ADS que agende ahí no crea tarjetas
+fantasma en su pipeline.
 
 ### A3 · [ORG] 2 · Agenda + Ghost — ID `851e8b99`
 
@@ -118,10 +132,11 @@ Las Won/Lost históricas **se quedan en el legacy** como registro.
 ## QA — probar el carril ORG completo (10 min)
 
 1. Contacto de prueba completa el survey `[SURVEY - ORG SETTER]` con tier Silver
-   → aparece en ② *Calificada (Formulario)* (no en el legacy) y, si tenía
-   tarjeta en ①, quedó **Won / Formulario Completado**.
+   → aparece en ② *Calificada (Formulario)* (no en el legacy) y su tarjeta
+   en ① pasó a **Formulario Completado (Open)**.
 2. No agenda en 2 h → pasa a ② *Sin Agendar (Ghost)* + WhatsApp ghost.
-3. Agenda en el calendario [ORG] → ② *Nueva Agenda* + Slack #4.
+3. Agenda en el calendario [ORG] → ② *Nueva Agenda* + Slack #4, y la tarjeta
+   de ① quedó **Agendada / Won** (workflow A2-bis).
 4. Mover a mano a ② *Llamada Confirmada* → se crea en ③ con owner Rafa y
    value 1250, la de ② queda Won, Slack #6. **Un solo workflow disparó** (el
    handoff unificado; [ORG] 5 está en draft).
@@ -131,7 +146,8 @@ Las Won/Lost históricas **se quedan en el legacy** como registro.
 | ✔ | Paso |
 |---|---|
 | ☐ | A1 · [ORG] 1 → ② |
-| ☐ | A2 · [SETTER - ORG] 1 → ② + cierre de ① |
+| ☐ | A2 · [SETTER - ORG] 1 → ② + progreso de ① |
+| ☐ | A2-bis · Mini-workflow [①] Agendó → Won |
 | ☐ | A3 · [ORG] 2 → ② Sin Agendar (Ghost) |
 | ☐ | A4 · [ORG] 3 → ② Nueva Agenda + tags de fuente |
 | ☐ | A5 · [ORG] 4 → ② Pre-Llamada |
