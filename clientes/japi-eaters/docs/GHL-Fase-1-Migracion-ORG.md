@@ -46,18 +46,30 @@ Slack Anaís. Setter: ghost sin WhatsApp. Remates:
 3. Opcional: al final de la rama Setter, **DM Slack a Valen**
    ("👻 {{contact.name}} no agendó — empújala por IG").
 
-### A4 · [ORG] 3 · Confirmación — el puente — ID `4a74420d` ✅ ya editado
+### A4 · [ORG] 3 · Confirmación — ID `4a74420d`
 
-1. Nodo 1 (`Cerrar ① Agendada (Won)`) → `①` / *Agendada* / **Won** ✅.
-   **Gate obligatorio**: envolverlo en If/else → **Tags include
-   `lead-setter-org`** (rama SI: cerrar ①; None: seguir). Con el modelo de 3
-   carriles, las Bio nunca tienen tarjeta en ① — sin este filtro, un booking
-   de Bio (o una ADS re-agendando por este calendario) crearía una **Won
-   fantasma** en el pipeline de Valen.
-2. Nodo 3 (`Crear ② Nueva Agenda`) → `②` / *Nueva Agenda* / Open, Owner
-   **Anaís** ✅ — corre para todas.
-3. Nodo **Remove Tag**: dejar solo `agenda-ads` (no quitar `lead-ads`).
+Como las ramas de un If/else en GHL **nunca se vuelven a juntar**, el cierre de
+① no va dentro de este workflow (obligaría a duplicar toda la cola en ambas
+ramas). Se saca a un mini-workflow aparte (A4-bis):
+
+1. **Eliminar el nodo 1** (`Cerrar ① Agendada (Won)`): [ORG] 3 vuelve a ser
+   lineal — Remove Tag → `Crear ② Nueva Agenda` (Open, Owner **Anaís**, corre
+   para todas) → tag `agenda-org` → confirmación.
+2. Nodo **Remove Tag**: dejar solo `agenda-ads` (no quitar `lead-ads`).
    Espejo en [ADS] 3: dejar solo `agenda-org`.
+
+### A4-bis · Mini-workflow `[①] Agendó → Won` (2 nodos, nuevo)
+
+Dispara en paralelo con [ORG] 3 en la misma agenda, pero solo para leads de
+Valen — el filtro va en el **trigger**, no en un if/else:
+
+- **Trigger:** Customer booked appointment → In calendar = `[ORG] Programa
+  Éxito en Alimentación Infantil` **+ Has tag = `lead-setter-org`**.
+- **Acción:** Create/Update Opportunity → `①` / **Agendada** / **Won** /
+  Owner **Valen**, sin valor → END. Publicar.
+
+Sin el filtro de tag, un booking de Bio (o una ADS re-agendando por este
+calendario) crearía una **Won fantasma** en el pipeline de Valen.
 
 ### A5 · [ORG] 4 · Recordatorios — ID `5296147d`
 
@@ -128,7 +140,8 @@ Legacy: 0 Open. Limpiar contactos de prueba.
 | ☐ | A1 · [ORG] 1 (Bio) → ② |
 | ☐ | A2 · [SETTER - ORG] 1 (Setter) → ① |
 | ☐ | A3 · [ORG] 2 ramas Bio/Setter ✅ + destinos + wait Setter |
-| ☐ | A4 · [ORG] 3 puente ✅ + gate lead-setter-org + tags |
+| ☐ | A4 · [ORG] 3 sin nodo de ① + tags de fuente |
+| ☐ | A4-bis · Mini-workflow [①] Agendó → Won |
 | ☐ | A5 · [ORG] 4 → ② Pre-Llamada |
 | ☐ | A6 · Handoff unificado + [ORG] 5 a draft |
 | ☐ | B · Migración por tag (①/②) |
