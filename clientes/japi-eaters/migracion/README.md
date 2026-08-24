@@ -12,7 +12,7 @@
 
 | | Crear de cero | **Reutilizar** |
 |---|---:|---:|
-| Tarjetas a mover por API | 124 | **~20** |
+| Tarjetas a mover por API | 124 | **~19** |
 | Tarjetas a cerrar | 18 | ~26 |
 | Etapas a crear | 31 | **4** |
 | Histórico conservado | en tableros archivados | **en el mismo sitio** |
@@ -66,7 +66,8 @@ Después: reordenar a las 10 posiciones de la §4 y cargar probabilidades (§14)
 
 ## ③ `[CLOSER] Agenda` → **Llamadas · Closer**
 
-El encaje aquí es aún mejor: **seis renombrados, ninguna etapa nueva**.
+El encaje aquí es el mejor de los tres: **seis renombrados, ninguna etapa nueva y
+ninguna que vaciar**. Las 102 abiertas se quedan donde están.
 
 | Etapa actual | Abiertas | Acción |
 |---|---:|---|
@@ -76,7 +77,7 @@ El encaje aquí es aún mejor: **seis renombrados, ninguna etapa nueva**.
 | No-Show Llamada | 34 | renombrar → **No-Show** |
 | Cancelada Última Hora | 2 | renombrar → **Reagendada** |
 | Venta High Ticket | 0 abiertas · **18 ganadas** | renombrar → **Cerrada · Va a Pagar** |
-| Paga Reserva | 6 | **vaciar** → mover las 6 a `④`/0 · luego borrar |
+| Paga Reserva | 6 | ✅ **se queda** — es una etapa de v2 (dinero puesto, no venta) |
 
 > *Venta High Ticket* se renombra en vez de borrarse **a propósito**: ahí viven las
 > 18 oportunidades ganadas del histórico. Borrar la etapa las pondría en riesgo, y
@@ -153,8 +154,7 @@ que anotar la fecha del corte y avisar al panel Cerebro, que agrupa por
 2. Cerrar las **25 Descalificada** de `②` y la **1** de `①` (Perdida con motivo).
 3. Mover las **4** de *Follow Up* de `②` → *Sin Agendar*, y las **6** de
    *Paga Reserva* de `③` → `④`/0.
-4. **Borrar** las etapas ya vacías: *Follow Up* y *Descalificada* de `②`,
-   *Paga Reserva* de `③`.
+4. **Borrar** las etapas ya vacías: *Follow Up* y *Descalificada* de `②`.
 5. **Renombrar** las 13 etapas y los 3 pipelines.
 6. **Crear** las 4 etapas nuevas, reordenar y cargar probabilidades (§14).
 7. Mover las **15 abiertas restantes de `①`** a `②`.
@@ -162,5 +162,5 @@ que anotar la fecha del corte y avisar al panel Cerebro, que agrupa por
 9. **Verificar** los cuatro tableros a ojo.
 10. **Reactivar** workflows, ya apuntando a la estructura nueva.
 
-Los pasos 2, 3 y 7 son los únicos que requieren API: **unas 46 operaciones**, que
+Los pasos 2, 3 y 7 son los únicos que requieren API: **unas 40 operaciones**, que
 puedo ejecutar de una pasada en cuanto los renombrados estén hechos.

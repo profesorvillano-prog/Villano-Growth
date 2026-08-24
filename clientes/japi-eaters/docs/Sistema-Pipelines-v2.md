@@ -226,39 +226,42 @@ correcta (🅐/🅑/🅒) ya elegida según el formulario.
 
 ## 5. ③ Llamadas · Closer — Rafa
 
-**6 etapas.** Sale todo lo que sea cobro: eso vive en `④`.
+**7 etapas.** El cobro vive en `④`; aquí queda el compromiso, que no es lo mismo.
 
 | # | Etapa | Quién mueve | Entra | Sale | Color |
 |---|---|---|---|---|---|
 | 0 | **Llamada Confirmada** | 🤖 | La mañana de la llamada, desde `②`8 | → 1 o 2 según asista | `#6366F1` |
-| 1 | **Asistió** | 👤 Rafa | Se conectó | → 3 si compra · → 4 si lo piensa | `#0EA5E9` |
-| 2 | **No-Show** | 🤖 | No se conectó | → `②` etapa 5 para reagendar · Perdida a 14 d | `#EF4444` |
-| 3 | **Cerrada · Va a Pagar** | 👤 Rafa | Dijo que sí | **Gana** → nace en `④` | `#16A34A` |
-| 4 | **Seguimiento** | 👤 Rafa | Lo está pensando | → 3 si cierra · Perdida a 21 d con motivo | `#C026D3` |
-| 5 | **Reagendada** | 👤 Rafa | Cambió la hora | → 0 con la nueva fecha | `#CA8A04` |
+| 1 | **Asistió** | 👤 Rafa | Se conectó | → 3 si compra · → 4 si reserva · → 5 si lo piensa | `#0EA5E9` |
+| 2 | **No-Show** | 🤖 | No se conectó | → `②`9 para reagendar · Perdida a 14 d | `#EF4444` |
+| 3 | **Cerrada · Va a Pagar** | 👤 Rafa | Dijo que sí, **sin dinero todavía** | **Gana** al pagar → nace en `④` | `#16A34A` |
+| 4 | **Paga Reserva** | 👤 Rafa | Puso **reserva no devolvible** para entrar más adelante | **Gana** cuando completa → `④` | `#0D9488` |
+| 5 | **Seguimiento** | 👤 Rafa | Lo está pensando | → 3 o 4 si cierra · Perdida a 21 d con motivo | `#C026D3` |
+| 6 | **Reagendada** | 👤 Rafa | Cambió la hora | → 0 con la nueva fecha | `#CA8A04` |
 
-### El testigo se pasa en la mañana, no al entrar
+### Reserva y promesa no son lo mismo
 
-`②`8 *Día de Llamada* y `③`0 *Llamada Confirmada* son la misma gente en el mismo
-día, y por un rato conviven a propósito — son dos trabajos distintos:
+*Cerrada · Va a Pagar* y *Paga Reserva* parecen el mismo estado y no lo son:
 
-| | `②`8 · Anaís | `③`0 · Rafa |
+| | **Cerrada · Va a Pagar** | **Paga Reserva** |
 |---|---|---|
-| Nace | la mañana de la llamada | la mañana de la llamada |
-| Trabajo | `M9`, `M10` y `M11` desde el +569 | mirar su agenda del día |
-| Se cierra | **gana** cuando la lead entra a la reunión | pasa a *Asistió* o *No-Show* |
+| Qué hay | una promesa | **dinero no devolvible** |
+| Cuándo entra | ahora, esta cohorte | más adelante |
+| Trabajo de Rafa | perseguir el pago esta semana | sostener hasta que abra la cohorte |
+| Riesgo | se enfría y desaparece | se olvida de que reservó |
 
-Si `②` ganara al empezar el día, los recordatorios `M10` y `M11` se quedarían sin
-tarjeta que los dispare. Por eso Anaís conserva la suya hasta que la persona
-entra, y Rafa tiene la lista desde primera hora.
+**El dinero pesa más que la intención**, así que *Paga Reserva* va por encima:
+quien ya puso plata que no recupera termina entrando más veces que quien solo
+dijo que sí. Por eso también bajé *Va a Pagar* de 95 a 85: decir que sí en la
+llamada y no pagar es de las fugas más comunes que hay.
 
-**El nombre importa:** *Llamada Confirmada* le dice a Rafa la precondición que le
-interesa — alguien ya confirmó esta llamada. Si aun así no aparece, el problema no
-es que nadie la haya recordado.
+> **Esta columna sí puede tener tarjetas viejas y está bien.** A diferencia de
+> *No-Show* o *Seguimiento*, una reserva no se pudre: tiene fecha. No lleva
+> caducidad automática — lo que lleva es un recordatorio cuando se acerca su
+> cohorte.
 
-**El cambio que arregla el cementerio:** hoy *No-Show* y *Follow Up Asistentes*
+**El cambio que arregla el cementerio:****El cambio que arregla el cementerio:** hoy *No-Show* y *Follow Up Asistentes*
 no tienen fecha de caducidad y acumulan 62 tarjetas. En v2 las dos tienen cierre
-automático (14 y 21 días) y el no-show vuelve a `②` para que lo levante el número
+automático (14 y 21 días) — *Paga Reserva* queda expresamente fuera de esa regla y el no-show vuelve a `②` para que lo levante el número
 de agenda, en vez de morir en el board del closer.
 
 ---
@@ -338,8 +341,9 @@ esos el sistema ya opera.
 | # | Workflow | Disparador | Acción |
 |---|---|---|---|
 | W14 | No-show | Rafa marca etapa 2 | Tag `no-show` · **`M12` a las 2 h** · Devuelve a `②`/8 para reagendar |
-| W15 | Caducidad | 14 d en 2 · 21 d en 4 | Perdida con motivo obligatorio |
-| **W16 ★** | **Cierre → Cobro** | Rafa mueve a etapa 3 | Gana en `③` · Crea en `④`/0 · `M15` con el link de pago |
+| W15 | Caducidad | 14 d en 2 · 21 d en 5 | Perdida con motivo obligatorio. **La etapa 4 queda exenta** |
+| **W16 ★** | **Cierre → Cobro** | Rafa mueve a etapa 3 | `M15` con el link de pago · Al confirmarse el pago: gana en `③` y crea en `④` |
+| W16b | Reserva | Rafa mueve a etapa 4 | Tag `reserva-pagada` · Recordatorio 15 d antes de que abra su cohorte · Al completar: gana en `③` y crea en `④` |
 
 ### Pipeline ④ — Ventas
 
@@ -412,7 +416,7 @@ mueve tarjetas; solo las filas marcadas *mover* requieren API.
 | `③` Venta High Ticket | `③` 3 · Cerrada · Va a Pagar | renombrar |
 | `③` Follow Up Asistentes | `③` 4 · Seguimiento | renombrar |
 | `③` Cancelada Última Hora | `③` 5 · Reagendada | renombrar |
-| `③` Paga Reserva | `④` 0 · Cuota de Entrada Pagada | **mover** · 6 |
+| `③` Paga Reserva | `③` 4 · Paga Reserva | *(se queda)* |
 | `④` Nuevo Cierre | `④` 0 · Cuota de Entrada Pagada | renombrar |
 | `①` Formulario [ORG] | `②` 0 · Calificada (Formulario) | **mover** · 4 |
 | `①` Ghost Intento Agenda · Primer Contacto · Follow Up | `②` 1 · Sin Agendar (Ghost) | **mover** · 7 |
@@ -537,7 +541,7 @@ Conviene **desmarcarlas del embudo y de la tarta**: `Seguimiento`, `Sin Agendar`
 probabilidad sigue existiendo y contando para el forecast; simplemente dejan de
 ensuciar el gráfico. En la hoja de carga van marcadas con `—`.
 
-### Hoja de carga · las 31 etapas
+### Hoja de carga · las 32 etapas
 
 Todo junto, para teclear de una pasada al crear cada pipeline. La columna
 **Embudo** es el *Show in reports*.
@@ -566,9 +570,10 @@ Todo junto, para teclear de una pasada al crear cada pipeline. La columna
 | **③** Llamadas | 0 | Llamada Confirmada | 13 | ✓ |
 | | 1 | Asistió | 33 | ✓ |
 | | 2 | No-Show | 4 | — |
-| | 3 | Cerrada · Va a Pagar | 95 | ✓ |
-| | 4 | Seguimiento | 15 | — |
-| | 5 | Reagendada | 10 | — |
+| | 3 | Cerrada · Va a Pagar | 85 | ✓ |
+| | 4 | Paga Reserva | 92 | ✓ |
+| | 5 | Seguimiento | 15 | — |
+| | 6 | Reagendada | 10 | — |
 | **④** Ventas | 0 | Cuota de Entrada Pagada | 40 | ✓ |
 | | 1 | Pago Cuota 1 | 55 | ✓ |
 | | 2 | Pago Cuota 2 | 70 | ✓ |
@@ -680,9 +685,10 @@ show-up del 39 %, el cierre sobre quien asiste sale en **34 %**.
 | 0 | Llamada Confirmada | 13 | win rate histórico del pipeline |
 | 1 | Asistió | 33 | 13 % ÷ 39 % de show-up |
 | 2 | No-Show | **4** | el agujero más caro del embudo |
-| 3 | Cerrada · Va a Pagar | 95 | dijo que sí; falta que pague |
-| 4 | Seguimiento | **15** | lo está pensando |
-| 5 | Reagendada | **10** | |
+| 3 | Cerrada · Va a Pagar | 85 | dijo que sí; **sin dinero aún** |
+| 4 | Paga Reserva | **92** | **reserva no devolvible puesta** |
+| 5 | Seguimiento | **15** | lo está pensando |
+| 6 | Reagendada | **10** | |
 
 ### ④ Ventas · Cobros
 
