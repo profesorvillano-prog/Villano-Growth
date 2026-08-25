@@ -7,6 +7,15 @@
 > `#7-closer-ventas` creado. Tiempo estimado: **2-3 h** de armado + plantillas
 > de WhatsApp a aprobar en Meta (ver §Plantillas — pedirlas ANTES de empezar).
 
+## Decisión 25-08: sin mensajería automática en esta fase
+
+Los nodos de WhatsApp de F2-2, F2-4 y F2-6 **se reemplazan por Tasks a Rafa**
+en los mismos tiempos (la cadencia existe, la ejecuta él a mano) hasta que el
+guion del +569 esté activo y validado. Los workflows quedan como
+detectar → mover etapa → tag → Slack → Task. Cuando el +569 esté listo, se
+cambian las Tasks por los envíos según `GHL-Guion-Dos-Numeros.md`.
+⚠ El tag `no-show` de F2-2 **sí va** (no es mensajería): F2-3 depende de él.
+
 ## Reparto: qué se mueve solo y qué mueve Rafa
 
 | Etapa de ③ | Quién la mueve |
