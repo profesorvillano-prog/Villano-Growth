@@ -22,6 +22,7 @@ emails y nuevos productos.
 | [`GHL-Blueprint-4-Pipelines.md`](./GHL-Blueprint-4-Pipelines.md) | Rediseño del motor GHL sobre los 4 pipelines: smart tags, workflows por pipeline, movimientos automáticos, Slack, responsables, métricas y plan de implementación en 5 fases. |
 | [`GHL-Fase-0-Quick-Fixes.md`](./GHL-Fase-0-Quick-Fixes.md) | Guía de ejecución manual de los 7 arreglos críticos en GHL: pasos clic a clic, verificación y prueba de humo (~40 min). |
 | [`GHL-Fase-1-Migracion-ORG.md`](./GHL-Fase-1-Migracion-ORG.md) | Guía de migración del flujo orgánico al pipeline ① de Valen y al ② de Anaís, con retiro del pipeline legacy [SETTER - ORG]. |
+| [`GHL-Fase-2-Closer.md`](./GHL-Fase-2-Closer.md) | Guía de la Fase 2: automatización del pipeline ③ del closer — asistencia/no-show, recuperación, reserva con dunning, cierre conectado a ④ y seguimiento a asistentes. |
 | [`Operaciones-y-Embudo.md`](./Operaciones-y-Embudo.md) | Funnel, onboarding, plataforma Skool (niveles), mentorías, equipo, stack tecnológico, modelo 2026 y datos de audiencias. |
 
 ## Fuentes
