@@ -90,8 +90,8 @@ registra los hitos y le avisa cuando algo se enfría.
 |---|---|---|---|
 | **②-1A · Calificación ADS** | Survey `[SURVEY - ADS]` | Estructura actual de tiers **intacta** + 4 fixes: nodo Descalificada → crear en *Calificada (Formulario)* con status **lost** / reason `Inversión`; **assign Anaís**; sin valor monetario (el valor se fija en ③, ver Principios §6); set `Fuente Lead = ads` | [ADS] 1 |
 | **②-1B · Calificación ORG** | Surveys `[SURVEY - ORG]` **y** `[SURVEY - ORG SETTER]` (2 triggers) | Igual que ②-1A pero destino **② / Calificada (Formulario)** (ya no el pipeline legacy), `Fuente Lead = org` | [ORG] 1 + [SETTER - ORG] 1 |
-| **②-2 · Ghost multi-toque** | Tag added `tier-gold` / `tier-silver` / **`tier-bronce`** (fix: ORG hoy no incluye bronce) | **Goal de salida: appointment booked.** T+2 h sin agenda → *Sin Agendar (Ghost)* + tag `ghost-agenda` + WhatsApp toque 1 (`ghost_agenda_ads` / **`ghost_agenda_org`** según fuente). T+24 h → toque 2 (audio/beneficio). T+72 h → toque 3 último aviso + mover a *Follow Up* + task para Anaís + Slack `#0-leads-conflictos` | [ADS] 2 + [ORG] 2 |
-| **②-3 · Confirmación de cita** | Appointment booked (cal. [A] con tag `lead-ads`; cal. [ORG] resto) | Mover → *Nueva Agenda* + Slack `#4-nuevas-agendas`. Enviar template botón (`v2_confirmar_jose`) y mover → ***Sin Confirmar (Agenda)***. Al pulsar **Confirmar** → mover → ***Confirmada (Agenda)***, limpiar `ghost-agenda`/`sin-confirmar`, tag `confirmada`, y continuar video selfie + mensaje de Rafa como hoy. Undelivered / Time Out → tag `sin-confirmar` + Slack `#0-leads-conflictos`. **Fix rama duplicada**: si "decide en pareja" → mensaje que invita a la pareja a la llamada. Ya **no** borra los tags de fuente | [ADS] 3 + [ORG] 3 |
+| **②-2 · Ghost multi-toque** | Tag added `tier-gold` / `tier-silver` / **`tier-bronce`** (fix: ORG hoy no incluye bronce) | **Goal de salida: appointment booked.** T+2 h sin agenda → *Sin Agendar (Ghost)* + tag `ghost-agenda` + WhatsApp toque 1 (`ghost_agenda_ads` / **`ghost_agenda_org`** según fuente). T+24 h → toque 2 (audio/beneficio). T+72 h → toque 3 último aviso + mover a *Follow Up* + task para Anaís + Slack `#9-ghost-sin-agendar` | [ADS] 2 + [ORG] 2 |
+| **②-3 · Confirmación de cita** | Appointment booked (cal. [A] con tag `lead-ads`; cal. [ORG] resto) | Mover → *Nueva Agenda* + Slack `#4-nuevas-agendas`. Enviar template botón (`v2_confirmar_jose`) y mover → ***Sin Confirmar (Agenda)***. Al pulsar **Confirmar** → mover → ***Confirmada (Agenda)***, limpiar `ghost-agenda`/`sin-confirmar`, tag `confirmada`, y continuar video selfie + mensaje de Rafa como hoy. Undelivered / Time Out → tag `sin-confirmar` + Slack `#9-ghost-sin-agendar`. **Fix rama duplicada**: si "decide en pareja" → mensaje que invita a la pareja a la llamada. Ya **no** borra los tags de fuente | [ADS] 3 + [ORG] 3 |
 | **②-3.1 · Diagnóstico** *(nuevo, usa la etapa muerta)* | Survey pre-llamada completado (formulario corto de diagnóstico) | Mover → *Diagnóstico* + tag `diagnostico-ok` + **Slack DM a Rafa** con las 3 respuestas clave para preparar la llamada | Nuevo |
 | **②-4 · Recordatorios** | Appointment booked, **con filtro de tag por fuente** (fix) | 24 h antes → *Pre-Llamada (Preparación)* + `wa_recordatorio_24h` + Slack `#5-llamadas-preparacion`. 4 h antes → ***Día de Llamada*** + `wa_recordatorio_8h`. 1 h antes → `wa_recordatorio_1h`. 35 min antes → DM Slack al closer | [ADS] 4 + [ORG] 4 |
 | **②-4.1 · Cancelación** | Appointment cancelled | Remove de ②-4 (como hoy) **+ mover → *Re-Agendar (Cancelada)*** + WhatsApp con link de re-agenda + Slack `#4-nuevas-agendas`; si a las 48 h no re-agendó → *Follow Up* + task Anaís | [ADS] 4.1 + [ORG] 4.1 |
@@ -143,7 +143,8 @@ un escenario de **Make** que añade tags `pago-hotmart-ok` / `pago-hotmart-fail`
 | `#6-confirmaciones-llamadas` | Handoff a closer (②-5) — **absorbe `5-confirmaciones-llamadas`** | Rafa |
 | `#7-closer-ventas` *(nuevo)* | Asistió / no-show, reservas pendientes y 🎉 ventas (③-1, ③-3, ③-4) | **Todos + director de ventas** |
 | `#8-cobros` *(nuevo)* | Pagos ok, fallidos, venta total (④) | Rafa, Seba, director |
-| `#0-leads-conflictos` | Rama None, undelivered, ghost agotado — **absorbe `leads-conflictos` y `1-leads-conflicto`** | Anaís |
+| `#9-ghost-sin-agendar` | Feed 👻 de seguimiento: leads que no agendaron (renombrado del viejo `leads-conflicto` privado; los nodos siguen publicando porque Slack conserva el ID) | Anaís, Valen |
+| `#9-leads-conflictos` | Solo conflictos reales: rama None (`lead-revisar`), Undelivered / Time Out. Regla de salud: casi vacío = sistema sano | Anaís |
 | DMs | Valen (①-3), Rafa (②-3.1 diagnóstico, T-35 min, no-show), Anaís (onboarding tras venta) | — |
 
 **Formato estándar de mensaje** (todos los workflows):
@@ -199,7 +200,7 @@ handoff, valor real en Purchase.
 **Fase 1 — Pipeline ② completo (semana 1):** ②-1B apunta a ② (deja de escribir
 al legacy); ②-2 multi-toque con goals; ②-3 usa *Sin Confirmar* / *Confirmada*;
 ②-4 usa *Día de Llamada*; ②-4.1 mueve a *Re-Agendar*; ②-5 asigna a Rafa.
-Crear plantillas `ghost_agenda_org`, toques 2-3 y canal `#0-leads-conflictos`.
+Crear plantillas `ghost_agenda_org`, toques 2-3 y canales `#9-*`.
 
 **Fase 2 — Pipeline ③ (semana 2):** ③-1 a ③-5; canales `#7-cierres-ventas`;
 survey de diagnóstico + ②-3.1.
