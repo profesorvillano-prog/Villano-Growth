@@ -73,10 +73,19 @@ La Condition con `lead-setter-org` es el gate: Bio y ADS caen en None y nunca
 tocan ① (sin ella, un booking de Bio crearía una Won fantasma en el pipeline de
 Valen). No hace falta ningún workflow aparte.
 
-### A5 · [ORG] 4 · Recordatorios — ID `5296147d`
+### A5 · [ORG] 4 · Recordatorios — ID `5296147d` (y espejo en [ADS] 4)
 
 - Nodo **Cambiar a Llamada en Preparación** → `②` / **Pre-Llamada
   (Preparación)**. Post-agenda todas viven en ②.
+- **Alerta 🚨 de Día de Llamada** (en [ADS] 4 y [ORG] 4): en el punto de 4 h
+  antes, mover la tarjeta a `②` / **Día de Llamada** y añadir un Slack a
+  `#5-llamadas-preparacion`:
+  `🚨 HOY — llamada con {{contact.first_name}} {{contact.last_name}} a las
+  {{appointment.only_start_time}} · tier {{contact.custom_fields.tier_score}} ·
+  [ADS]/[ORG] · 📱 {{contact.phone}}`
+  Complementa el 🔔 de 24 h que ya existe; el DM al closer 35 min antes queda
+  igual. El canal se convierte en el tablero del día: 🔔 = preparar,
+  🚨 = empujar ahora.
 
 ### A6 · Handoff único — [ADS] 5 absorbe a [ORG] 5
 
