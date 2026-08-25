@@ -77,21 +77,24 @@ Los recordatorios ([ADS/ORG] 4) quedan sin cambios de etapa:
   (`🔄 RE-AGENDÓ — {{contact.first_name}} tiene nueva llamada`).
 - Los recordatorios de ②-4 corren solos con la nueva cita.
 
-## F2-4 · `[③] 4 · Reserva por pagar` (nuevo)
+## F2-4 · `[③] 4 · Reserva pagada` (nuevo)
+
+> Semántica confirmada: *Reserva (Por Pagar)* = **ya pagó la reserva**, queda
+> por pagar el resto. Es victoria parcial (entró el primer dinero), no cobranza.
 
 - **Trigger:** Pipeline stage changed → In pipeline `③`, stage
-  **Reserva (Por Pagar)**. **Goal de salida: stage `Cerrada (Venta)`** (pagó).
+  **Reserva (Por Pagar)** (la mueve Rafa al recibir el pago de reserva).
 - **Acciones:**
-  1. Slack `#7-closer-ventas`: `💰 RESERVA — {{contact.first_name}} por pagar · Rafa envió el link`
-  2. Wait 24 h → WhatsApp recordatorio 1 (`reserva_recordatorio_1`):
-     *"{{first}}, tu cupo sigue reservado ✨ Te dejo de nuevo el link para
-     asegurarlo: {{link}}"*
-  3. Wait 24 h → WhatsApp recordatorio 2 (`reserva_recordatorio_2`): urgencia
-     suave (cupos/cohorte).
-  4. Wait 24 h → **Task Rafa** ("Reserva sin pagar 72 h — llamar") + Slack
-     `#7-closer-ventas` (`⚠️ Reserva de {{contact.first_name}} lleva 72 h sin pago`).
-- El link de pago lo envía **Rafa en la llamada** (o aquí como acción 0 si se
-  estandariza un link único).
+  1. **Remove From Workflow → `[③] 6 · Seguimiento`** (si venía de ahí).
+  2. Add tag → `reserva-pagada`.
+  3. **Create Opportunity → `④ [VENTAS] Cobros` / Cuota de Reserva / Open /
+     Owner Rafa / Name Full Name / Value 1250** — el registro de cobros nace
+     aquí, con el primer pago.
+  4. Slack `#7-closer-ventas`: `💰 RESERVA PAGADA — {{contact.first_name}}
+     aseguró su cupo · Rafa: cerrar venta total`
+  5. Wait 48 h → **Task Rafa** "Cerrar venta total: {{contact.first_name}}
+     pagó reserva hace 48 h" (el Remove de F2-5 la cancela si ya cerró).
+- La gestión de cuotas restantes y pagos fallidos es de ④ (Fase 3).
 
 ## F2-5 · `[③] 5 · Cierre` (nuevo — el workflow más importante)
 
@@ -100,8 +103,10 @@ Los recordatorios ([ADS/ORG] 4) quedan sin cambios de etapa:
   1. Update Opportunity → `③` / Cerrada (Venta) / **Status Won** (Rafa ajustó
      antes el valor real si difiere de 1.250).
   2. Add tag → `cliente-activo`.
-  3. **Create Opportunity → `④ [VENTAS] Cobros` / Cuota de Reserva / Open /
-     Owner Rafa / Value = valor de la venta.**
+  3. **Create *or update* Opportunity → `④ [VENTAS] Cobros` / Cuota de Reserva /
+     Open / Owner Rafa / Value = valor de la venta** (normalmente ya existe,
+     creada por F2-4; el update la respeta y cubre el cierre directo sin reserva).
+  3b. **Remove From Workflow → `[③] 4 · Reserva pagada`** (cancela la task de 48 h).
   4. Slack `#7-closer-ventas`:
      `🎉 VENTA — {{contact.first_name}} {{contact.last_name}} · Tier {{contact.tier_score}} · 📱 {{contact.phone}}`
   5. **DM Slack a Anaís**: `🚀 Nueva alumna: {{contact.first_name}} — iniciar onboarding (Sesión de Claridad + form de ingreso + grupo WhatsApp)`
@@ -160,7 +165,7 @@ nodos de WhatsApp (envío manual), y se cambian al aprobarse.
 | ☐ | F2-1 · [③] 1 Asistió |
 | ☐ | F2-2 · [③] 2 No-Show + recuperación |
 | ☐ | F2-3 · [③] 3 Re-agendada |
-| ☐ | F2-4 · [③] 4 Reserva por pagar |
+| ☐ | F2-4 · [③] 4 Reserva pagada (crea la tarjeta de ④) |
 | ☐ | F2-5 · [③] 5 Cierre (④ + onboarding) |
 | ☐ | F2-6 · [③] 6 Seguimiento asistentes |
 | ☐ | Plantillas WhatsApp enviadas a aprobación |
