@@ -77,15 +77,15 @@ Valen). No hace falta ningún workflow aparte.
 
 - Nodo **Cambiar a Llamada en Preparación** → `②` / **Pre-Llamada
   (Preparación)**. Post-agenda todas viven en ②.
-- **Alerta 🚨 de Día de Llamada** (en [ADS] 4 y [ORG] 4): en el punto de 4 h
-  antes, mover la tarjeta a `②` / **Día de Llamada** y añadir un Slack a
-  `#5-llamadas-preparacion`:
-  `🚨 HOY — llamada con {{contact.first_name}} {{contact.last_name}} a las
-  {{appointment.only_start_time}} · tier {{contact.custom_fields.tier_score}} ·
-  [ADS]/[ORG] · 📱 {{contact.phone}}`
-  Complementa el 🔔 de 24 h que ya existe; el DM al closer 35 min antes queda
-  igual. El canal se convierte en el tablero del día: 🔔 = preparar,
-  🚨 = empujar ahora.
+- **Alerta 🚨 de "HOY"** (en [ADS] 4 y [ORG] 4): entre el nodo *Wait 4h* y
+  *WhatsApp 4 hrs*, añadir **solo un Slack** a `#5-llamadas-preparacion`:
+  `🚨 HOY — llamada con {{contact.first_name}} a las
+  {{appointment.only_start_time}} · 📱 {{contact.phone}} [ADS]/[ORG]`
+  Complementa el 🔔 de 24 h; el DM al closer 35 min antes queda igual.
+  ⚠ **No mover la tarjeta a *Día de Llamada* en este paso**: si Anaís ya
+  confirmó antes de las 4 h, el Handoff marcó la tarjeta de ② como Won y un
+  movimiento automático la reabriría. El movimiento a *Día de Llamada* se
+  monta en la Fase 2 con una condición que respete las ya confirmadas.
 
 ### A6 · Handoff único — [ADS] 5 absorbe a [ORG] 5
 
