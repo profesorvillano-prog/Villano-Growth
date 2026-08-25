@@ -138,10 +138,11 @@ un escenario de **Make** que añade tags `pago-hotmart-ok` / `pago-hotmart-fail`
 |---|---|---|
 | `#1-leads-bronce` / `#2-leads-silver` / `#3-leads-gold` | Lead calificado por tier (②-1) | Anaís |
 | `#4-nuevas-agendas` | Nueva agenda, re-agenda, cancelación (②-3, ②-4.1) | Anaís |
-| `#5-llamadas-preparacion` | T-24 h de cada llamada (②-4) | Anaís, Rafa |
+| `#5-llamadas-preparacion` | 🔔 T-24 h de cada llamada (②-4) | Anaís, Rafa |
+| `#0-llamadas-hoy` *(nuevo)* | El tablero del día: 🚨 T-4 h, ⏰ T-35 min, cancelaciones y no-shows del día. El prefijo 0 lo deja primero en Slack | **Todos + director de ventas** |
 | `#6-confirmaciones-llamadas` | Handoff a closer (②-5) — **absorbe `5-confirmaciones-llamadas`** | Rafa |
-| `#7-cierres-ventas` *(nuevo)* | Reservas pendientes y ventas (③-3, ③-4) | Todos |
-| `#8-cobros` *(nuevo)* | Pagos ok, fallidos, venta total (④) | Rafa, Seba |
+| `#7-closer-ventas` *(nuevo)* | Asistió / no-show, reservas pendientes y 🎉 ventas (③-1, ③-3, ③-4) | **Todos + director de ventas** |
+| `#8-cobros` *(nuevo)* | Pagos ok, fallidos, venta total (④) | Rafa, Seba, director |
 | `#0-leads-conflictos` | Rama None, undelivered, ghost agotado — **absorbe `leads-conflictos` y `1-leads-conflicto`** | Anaís |
 | DMs | Valen (①-3), Rafa (②-3.1 diagnóstico, T-35 min, no-show), Anaís (onboarding tras venta) | — |
 
@@ -181,7 +182,10 @@ vuelve confiable. KPIs y su fuente:
 - **Por fuente y por tier**: todos los KPIs se cortan con `Fuente Lead` y
   `Tier Score` (por eso son campos, no solo tags).
 - **Digest semanal**: escenario de Make (lunes 9:00) que lee opportunities por
-  etapa vía API y publica el resumen del funnel en `#7-cierres-ventas`.
+  etapa vía API y publica el resumen del funnel en `#7-closer-ventas`.
+- **Digest matinal del director** (Fase 3): escenario de Make (8:00) que publica
+  en `#0-llamadas-hoy` la lista de llamadas del día — hora, nombre, tier,
+  fuente, closer.
 - Las *stage win probabilities* de ①-④ ya son coherentes; al retirar el legacy
   desaparecen las incoherentes (Descalificada 90,91 %).
 
