@@ -23,6 +23,7 @@ emails y nuevos productos.
 | [`GHL-Fase-0-Quick-Fixes.md`](./GHL-Fase-0-Quick-Fixes.md) | Guía de ejecución manual de los 7 arreglos críticos en GHL: pasos clic a clic, verificación y prueba de humo (~40 min). |
 | [`GHL-Fase-1-Migracion-ORG.md`](./GHL-Fase-1-Migracion-ORG.md) | Guía de migración del flujo orgánico al pipeline ① de Valen y al ② de Anaís, con retiro del pipeline legacy [SETTER - ORG]. |
 | [`GHL-Fase-2-Closer.md`](./GHL-Fase-2-Closer.md) | Guía de la Fase 2: automatización del pipeline ③ del closer — asistencia/no-show, recuperación, reserva con dunning, cierre conectado a ④ y seguimiento a asistentes. |
+| [`GHL-Guion-Dos-Numeros.md`](./GHL-Guion-Dos-Numeros.md) | Plan para montar el guion de WhatsApp a dos números (+52 API con botones, +569 conversacional firma Rafa) sobre los workflows existentes, con warm-up y orden de implementación. |
 | [`Operaciones-y-Embudo.md`](./Operaciones-y-Embudo.md) | Funnel, onboarding, plataforma Skool (niveles), mentorías, equipo, stack tecnológico, modelo 2026 y datos de audiencias. |
 
 ## Fuentes
