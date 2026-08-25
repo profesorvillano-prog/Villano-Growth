@@ -139,7 +139,7 @@ un escenario de **Make** que añade tags `pago-hotmart-ok` / `pago-hotmart-fail`
 | `#1-leads-bronce` / `#2-leads-silver` / `#3-leads-gold` | Lead calificado por tier (②-1) | Anaís |
 | `#4-nuevas-agendas` | Nueva agenda, re-agenda, cancelación (②-3, ②-4.1) | Anaís |
 | `#5-llamadas-preparacion` | 🔔 T-24 h de cada llamada (②-4) | Anaís, Rafa |
-| `#0-llamadas-hoy` *(nuevo)* | El tablero del día: 🚨 T-4 h, ⏰ T-35 min, cancelaciones y no-shows del día. El prefijo 0 lo deja primero en Slack | **Todos + director de ventas** |
+| `#0-llamadas-hoy` *(nuevo)* | El tablero del día: 🚨 T-4 h, cancelaciones y no-shows del día. El prefijo 0 lo deja primero en Slack. El aviso ⏰ T-35 min queda como **DM privado al closer** (empujón de ejecución, no información de equipo) | **Todos + director de ventas** |
 | `#6-confirmaciones-llamadas` | Handoff a closer (②-5) — **absorbe `5-confirmaciones-llamadas`** | Rafa |
 | `#7-closer-ventas` *(nuevo)* | Asistió / no-show, reservas pendientes y 🎉 ventas (③-1, ③-3, ③-4) | **Todos + director de ventas** |
 | `#8-cobros` *(nuevo)* | Pagos ok, fallidos, venta total (④) | Rafa, Seba, director |
