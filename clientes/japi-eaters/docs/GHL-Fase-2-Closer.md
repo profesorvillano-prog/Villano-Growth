@@ -17,17 +17,21 @@
 
 ---
 
-## F2-0 · Remate pendiente de Fase 1: tag `en-closer` + Día de Llamada
+## F2-0 · Tag `en-closer` (simplificado — decisión 25-08)
 
-1. En **[Handoff] 5**: añadir acción **Add tag → `en-closer`** (después de crear
-   la opp en ③). Este tag marca "la lead ya es de Rafa".
-2. En **[ADS] 4 y [ORG] 4** (recordatorios), en el punto de 4 h: añadir
-   **If/else → Tags NOT include `en-closer`** y dentro de la rama SI el nodo
-   **Create/Update Opportunity → ② / Día de Llamada / Open**; la rama None
-   sigue con Go To al WhatsApp de 4 h. Así la etapa *Día de Llamada* por fin
-   se mueve sola **sin reabrir** tarjetas que el Handoff ya marcó Won.
-3. En **[ADS] 3 / [ORG] 3** (confirmación): al inicio, **Remove tag
-   `en-closer`** si existe (una re-agenda devuelve la lead al carril de Anaís).
+La etapa *Día de Llamada* de ② **se elimina** (Settings → Pipelines → ②; está
+vacía): el tablero del día ya es `#0-llamadas-hoy` con los mensajes 🚨, y una
+etapa espejo no valía la guarda que necesitaba. Con eso, F2-0 queda en dos
+nodos:
+
+1. En **[Handoff] 5**: **Add tag → `en-closer`** tras crear la opp en ③ ✅.
+   Marca "la lead ya es de Rafa" (útil en Smart Lists y en F2-6).
+2. En **[ADS] 3 y [ORG] 3**: al inicio, **Remove tag `en-closer`** — si una
+   lead que ya estaba con Rafa re-agenda, vuelve limpia al ciclo de Anaís.
+   Para una lead primeriza el Remove no hace nada (inofensivo).
+
+Los recordatorios ([ADS/ORG] 4) quedan sin cambios de etapa:
+🔔 24 h → 🚨 4 h a `#0` → WhatsApp 4 h → 1 h → DM 35 min.
 
 ## F2-1 · `[③] 1 · Asistió` (nuevo, 4 nodos)
 
@@ -143,7 +147,7 @@ nodos de WhatsApp (envío manual), y se cambian al aprobarse.
 
 | ✔ | Paso |
 |---|---|
-| ☐ | F2-0 · Tag en-closer + Día de Llamada con guard |
+| ☐ | F2-0 · Tag en-closer (Handoff ✅ + Remove en confirmación) + borrar etapa Día de Llamada |
 | ☐ | F2-1 · [③] 1 Asistió |
 | ☐ | F2-2 · [③] 2 No-Show + recuperación |
 | ☐ | F2-3 · [③] 3 Re-agendada |
