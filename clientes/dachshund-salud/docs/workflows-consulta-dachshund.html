@@ -1,0 +1,268 @@
+<title>Workflows Consulta Dachshund</title>
+<style>
+:root{
+  --gd:#2D4A3E;--gm:#3B5E50;--gb:#4A7A64;--gi:#F2F7F4;
+  --gold:#C8962E;--golp:#FBF0DC;
+  --bg:#F8F8F5;--card:#FFFFFF;--bd:#D8E5DF;
+  --t0:#18261E;--t1:#3A5045;--t2:#56695F;--t3:#7E948A;--ok:#1f9d55;
+  --display:'Montserrat','DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --body:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:var(--body);font-size:15px;line-height:1.55;padding:28px 16px 56px}
+.wrap{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(24px,4.5vw,34px);color:var(--gd);letter-spacing:-.01em;text-wrap:balance;margin-top:6px}
+.lead{color:var(--t2);margin-top:8px;max-width:66ch}
+.lead b{color:var(--t0)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;overflow:hidden}
+.chd{display:flex;gap:14px;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--bd);flex-wrap:wrap}
+.chd h2{font-family:var(--display);font-weight:700;font-size:15px;color:var(--t0)}
+.chd p{font-size:13px;color:var(--t2);margin-top:2px;max-width:56ch}
+.cbtn{flex-shrink:0;background:var(--gd);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-family:var(--display);font-weight:700;font-size:14px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .15s}
+.cbtn:hover{background:var(--gm)}
+.cbtn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.cbtn.ok{background:var(--ok)}
+textarea{display:block;width:100%;height:180px;border:none;padding:14px 16px;background:var(--gi);color:#2A3B32;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;line-height:1.55;resize:vertical;white-space:pre-wrap;overflow:auto;-webkit-overflow-scrolling:touch}
+textarea:focus-visible{outline:2px solid var(--gb);outline-offset:-2px}
+.pad{padding:18px}
+.pad h2{font-family:var(--display);font-weight:700;font-size:15px;color:var(--t0);margin-bottom:10px}
+.pad h3{font-family:var(--display);font-weight:700;font-size:13px;color:var(--gd);margin:14px 0 6px}
+ol,ul{padding-left:22px;display:flex;flex-direction:column;gap:7px;color:var(--t1)}
+li b{color:var(--t0)}
+code{background:var(--gi);border:1px solid var(--bd);border-radius:6px;padding:1px 6px;font-size:12.5px;color:var(--t1);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.warn{background:var(--golp);border:1px solid rgba(200,150,46,.4);border-radius:12px;padding:14px 16px;color:var(--t1);font-size:14px}
+.warn b{color:#7A5A16}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--bd);vertical-align:top}
+th{font-family:var(--display);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--t3)}
+td code{white-space:nowrap}
+.tblwrap{overflow-x:auto}
+.foot{color:var(--t3);font-size:13px}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap">
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Dachshund Salud · Embudo Consulta / Asesoría</div>
+    <h1>Workflows para pegar en la IA de GHL</h1>
+    <p class="lead">Seis prompts, uno por workflow. Pégalos de a uno en el asistente de IA de Workflows y <b>revisa el borrador antes de publicar</b>: la IA a veces deja el filtro del trigger o la plantilla de WhatsApp sin seleccionar. La lógica: confirmar al que <b>pagó y agendó</b>, rescatar al que <b>pagó y no agendó</b> (por servicio), y recordatorios 24h y 4h para ambos calendarios.</p>
+  </header>
+
+  <section class="card"><div class="pad">
+    <h2>Antes de empezar (manual, 5 minutos)</h2>
+    <h3>Crea el pipeline (los pipelines no los hace la IA)</h3>
+    <ul>
+      <li>Nombre: <b>Dachshund · Consulta y Asesoría</b></li>
+      <li>Etapas: <b>1. Pagó sin agendar · 2. Agendada · 3. Sesión realizada · 4. No asistió / Reagendar</b></li>
+      <li>El servicio se distingue por el nombre de la oportunidad ("Consulta · Nombre" / "Asesoría · Nombre") y por tags, no por etapas duplicadas.</li>
+    </ul>
+    <h3>Tags que usan los workflows</h3>
+    <div class="tblwrap"><table>
+      <tr><th>Tag</th><th>Quién lo recibe</th></tr>
+      <tr><td><code>consulta-pagada</code></td><td>Pagó la Consulta Diagnóstica (PayPal o Mercado Pago)</td></tr>
+      <tr><td><code>consulta-agendada</code></td><td>Agendó en Calendario Consulta</td></tr>
+      <tr><td><code>asesoria-pagada</code></td><td>Pagó la Asesoría Nutricional</td></tr>
+      <tr><td><code>asesoria-agendada</code></td><td>Agendó en Calendario Asesoría</td></tr>
+    </table></div>
+  </div></section>
+
+  <section class="warn"><b>Tres requisitos antes de activar:</b> (1) las 6 plantillas de WhatsApp deben salir de "Pendiente" a <b>Aprobadas</b> por Meta; los workflows se pueden crear ya y activar después. (2) El checkout debe pedir <b>teléfono obligatorio</b>: si el pago llega solo con email (típico en PayPal), el WhatsApp de "pagó sin agendar" no tiene a dónde salir. (3) Si tus productos, calendarios o plantillas tienen otro nombre exacto, ajústalo en el prompt antes de pegarlo.</section>
+
+  <section class="warn"><b>⚠️ Si cobras con los links externos (mpago.li / paypal.com/ncp):</b> el trigger "Payment Received" solo ve pagos cobrados <b>dentro</b> de GHL, así que con esos links no dispara nunca. Opciones: conectar <b>PayPal nativo</b> (Payments → Integrations) y cobrar con un checkout de GHL; para <b>Mercado Pago</b>, una app del App Marketplace o un <b>puente con Make</b> (webhook de pago → Make → contacto en GHL + tag <code>consulta-pagada</code> / <code>asesoria-pagada</code>). Con links externos, cambia el trigger de W1 y W2 a <b>"Contact Tag Added"</b> con ese tag y elimina el paso 1 del prompt; el resto queda igual. Plan B manual: agrega el tag a mano cuando llegue el aviso de pago y el workflow dispara igual. W3, W4 y W5 no necesitan nada de esto porque los calendarios son de GHL.</section>
+
+  <section class="card">
+    <div class="chd">
+      <div><h2>W1 · Consulta · Pago recibido</h2><p>Pago de la consulta (PayPal o Mercado Pago): tag, oportunidad y rescate del que no agenda.</p></div>
+      <button class="cbtn" data-t="ta-0">Copiar prompt</button>
+    </div>
+    <textarea id="ta-0" readonly spellcheck="false" onclick="this.select()">Crea un workflow llamado &quot;Consulta · Pago recibido&quot;.
+
+Trigger: &quot;Payment Received&quot; con filtro: el producto es &quot;Videoconsulta
+Diagnóstica Dachshund&quot; (aplica a pagos de PayPal y de Mercado Pago).
+
+Pasos en orden:
+1. Add Contact Tag: &quot;consulta-pagada&quot;.
+2. Create Opportunity: pipeline &quot;Dachshund · Consulta y Asesoría&quot;, etapa
+   &quot;Pagó sin agendar&quot;, nombre &quot;Consulta · {{contact.name}}&quot;, valor 89,
+   estado Open.
+3. Wait: 20 minutos.
+4. If/Else: ¿el contacto tiene el tag &quot;consulta-agendada&quot;?
+   - Rama SÍ: terminar el workflow (la confirmación la envía otro workflow).
+   - Rama NO: Send WhatsApp template &quot;consulta_pagada_sin_agenda&quot;,
+     variable {{1}} = nombre del contacto.
+5. Wait: 24 horas.
+6. If/Else: ¿el contacto tiene el tag &quot;consulta-agendada&quot;?
+   - Rama SÍ: terminar.
+   - Rama NO: volver a enviar la plantilla &quot;consulta_pagada_sin_agenda&quot;
+     y terminar.
+
+Configuración: permitir reingreso del contacto (allow re-entry) por si
+compra de nuevo en el futuro.</textarea>
+  </section>
+
+  <section class="card">
+    <div class="chd">
+      <div><h2>W2 · Asesoría · Pago recibido</h2><p>Pago de la asesoría (venta por DM o post-diagnóstico): mismo flujo con sus plantillas.</p></div>
+      <button class="cbtn" data-t="ta-1">Copiar prompt</button>
+    </div>
+    <textarea id="ta-1" readonly spellcheck="false" onclick="this.select()">Crea un workflow llamado &quot;Asesoría · Pago recibido&quot;.
+
+Trigger: &quot;Payment Received&quot; con filtro: el producto es &quot;Asesoría
+Nutricional&quot; (aplica a pagos de PayPal y de Mercado Pago).
+
+Pasos en orden:
+1. Add Contact Tag: &quot;asesoria-pagada&quot;.
+2. Create Opportunity: pipeline &quot;Dachshund · Consulta y Asesoría&quot;, etapa
+   &quot;Pagó sin agendar&quot;, nombre &quot;Asesoría · {{contact.name}}&quot;, valor 197,
+   estado Open.
+3. Wait: 20 minutos.
+4. If/Else: ¿el contacto tiene el tag &quot;asesoria-agendada&quot;?
+   - Rama SÍ: terminar el workflow.
+   - Rama NO: Send WhatsApp template &quot;asesoria_pagada_sin_agenda&quot;,
+     variable {{1}} = nombre del contacto.
+5. Wait: 24 horas.
+6. If/Else: ¿el contacto tiene el tag &quot;asesoria-agendada&quot;?
+   - Rama SÍ: terminar.
+   - Rama NO: volver a enviar la plantilla &quot;asesoria_pagada_sin_agenda&quot;
+     y terminar.
+
+Configuración: permitir reingreso del contacto.</textarea>
+  </section>
+
+  <section class="card">
+    <div class="chd">
+      <div><h2>W3 · Consulta · Agendada (confirmación)</h2><p>Agendó en Calendario Consulta: confirmación por WhatsApp y oportunidad a &quot;Agendada&quot;.</p></div>
+      <button class="cbtn" data-t="ta-2">Copiar prompt</button>
+    </div>
+    <textarea id="ta-2" readonly spellcheck="false" onclick="this.select()">Crea un workflow llamado &quot;Consulta · Agendada&quot;.
+
+Trigger: &quot;Customer Booked Appointment&quot; con filtro: calendario es
+&quot;Calendario Consulta&quot;.
+
+Pasos en orden:
+1. Add Contact Tag: &quot;consulta-agendada&quot;.
+2. Create/Update Opportunity: pipeline &quot;Dachshund · Consulta y Asesoría&quot;,
+   mover la oportunidad del contacto a la etapa &quot;Agendada&quot; (si no existe,
+   crearla con nombre &quot;Consulta · {{contact.name}}&quot; y valor 89).
+3. Send WhatsApp template &quot;consulta_agendada_confirmacion&quot;,
+   variable {{1}} = nombre del contacto y, si la plantilla lleva fecha y
+   hora, mapear {{appointment.start_time}}.
+
+Configuración: permitir reingreso del contacto (puede reagendar).</textarea>
+  </section>
+
+  <section class="card">
+    <div class="chd">
+      <div><h2>W4 · Asesoría · Agendada (confirmación)</h2><p>Agendó en Calendario Asesoría: confirmación por WhatsApp y oportunidad a &quot;Agendada&quot;.</p></div>
+      <button class="cbtn" data-t="ta-3">Copiar prompt</button>
+    </div>
+    <textarea id="ta-3" readonly spellcheck="false" onclick="this.select()">Crea un workflow llamado &quot;Asesoría · Agendada&quot;.
+
+Trigger: &quot;Customer Booked Appointment&quot; con filtro: calendario es
+&quot;Calendario Asesoría&quot;.
+
+Pasos en orden:
+1. Add Contact Tag: &quot;asesoria-agendada&quot;.
+2. Create/Update Opportunity: pipeline &quot;Dachshund · Consulta y Asesoría&quot;,
+   mover la oportunidad del contacto a la etapa &quot;Agendada&quot; (si no existe,
+   crearla con nombre &quot;Asesoría · {{contact.name}}&quot; y valor 197).
+3. Send WhatsApp template &quot;asesoria_confirmacion&quot; (la de confirmación de
+   asesoría), variable {{1}} = nombre del contacto y, si la plantilla lleva
+   fecha y hora, mapear {{appointment.start_time}}.
+
+Configuración: permitir reingreso del contacto.</textarea>
+  </section>
+
+  <section class="card">
+    <div class="chd">
+      <div><h2>W5 · Recordatorios 24h y 4h (ambos servicios)</h2><p>Recordatorios estándar 24h y 4h antes, para los dos calendarios.</p></div>
+      <button class="cbtn" data-t="ta-4">Copiar prompt</button>
+    </div>
+    <textarea id="ta-4" readonly spellcheck="false" onclick="this.select()">Crea un workflow llamado &quot;Recordatorios de sesión 24h y 4h&quot;.
+
+Trigger: &quot;Customer Booked Appointment&quot; con filtro: calendario es
+&quot;Calendario Consulta&quot; O &quot;Calendario Asesoría&quot; (los dos calendarios entran
+al mismo workflow).
+
+Pasos en orden:
+1. Wait: hasta 24 horas antes de la hora de inicio de la cita
+   (wait until 24 hours before appointment start time).
+2. If/Else: ¿la cita sigue con estado Confirmed (no cancelada ni
+   reagendada)?
+   - Rama NO: terminar el workflow.
+   - Rama SÍ: Send WhatsApp template &quot;recordatorio_sesion_24h&quot;,
+     variable {{1}} = nombre del contacto.
+3. Wait: hasta 4 horas antes de la hora de inicio de la cita.
+4. If/Else: ¿la cita sigue con estado Confirmed?
+   - Rama NO: terminar.
+   - Rama SÍ: Send WhatsApp template &quot;recordatorio_sesion_4h&quot;.
+
+Configuración: permitir reingreso del contacto (cada nueva cita genera sus
+recordatorios). Si el contacto reagenda, la ejecución anterior debe
+terminar y entrar la nueva.</textarea>
+  </section>
+
+  <section class="card">
+    <div class="chd">
+      <div><h2>W6 · Después de la sesión (pipeline al día) — opcional</h2><p>Opcional: al marcar Showed / No Show, el pipeline se actualiza solo.</p></div>
+      <button class="cbtn" data-t="ta-5">Copiar prompt</button>
+    </div>
+    <textarea id="ta-5" readonly spellcheck="false" onclick="this.select()">Crea un workflow llamado &quot;Sesión realizada o no asistió&quot;.
+
+Trigger 1: &quot;Appointment Status&quot; cambia a &quot;Showed&quot; en los calendarios
+&quot;Calendario Consulta&quot; o &quot;Calendario Asesoría&quot;.
+Trigger 2: &quot;Appointment Status&quot; cambia a &quot;No Show&quot; en esos mismos
+calendarios.
+
+Pasos:
+1. If/Else según el estado de la cita:
+   - Si es &quot;Showed&quot;: Update Opportunity, mover la oportunidad del contacto
+     a la etapa &quot;Sesión realizada&quot; del pipeline &quot;Dachshund · Consulta y
+     Asesoría&quot;.
+   - Si es &quot;No Show&quot;: Update Opportunity, mover a la etapa &quot;No asistió /
+     Reagendar&quot; y enviar la plantilla de WhatsApp
+     &quot;consulta_pagada_sin_agenda&quot; con el link para reagendar (ya pagó, solo
+     necesita tomar otra hora).</textarea>
+  </section>
+
+  <section class="card"><div class="pad">
+    <h2>Mapa rápido: qué le llega a cada persona</h2>
+    <div class="tblwrap"><table>
+      <tr><th>Situación</th><th>Workflow</th><th>WhatsApp que llega</th></tr>
+      <tr><td>Pagó consulta y agendó al tiro</td><td>W1 (silencio) + W3</td><td><code>consulta_agendada_confirmacion</code></td></tr>
+      <tr><td>Pagó consulta y NO agendó</td><td>W1</td><td><code>consulta_pagada_sin_agenda</code> (20 min y 24 h)</td></tr>
+      <tr><td>Pagó asesoría (DM / post-diagnóstico) y agendó</td><td>W2 (silencio) + W4</td><td><code>asesoria_confirmacion</code></td></tr>
+      <tr><td>Pagó asesoría y NO agendó</td><td>W2</td><td><code>asesoria_pagada_sin_agenda</code></td></tr>
+      <tr><td>Cualquier cita confirmada</td><td>W5</td><td><code>recordatorio_sesion_24h</code> y <code>recordatorio_sesion_4h</code></td></tr>
+      <tr><td>Sesión hecha / no asistió</td><td>W6</td><td>Solo pipeline; el no-show recibe link para reagendar</td></tr>
+    </table></div>
+    <h3>Prueba antes de encender</h3>
+    <ol>
+      <li>Pago de prueba por Mercado Pago y otro por PayPal con un contacto tuyo: verificar tag, oportunidad en "Pagó sin agendar" y WhatsApp a los 20 minutos.</li>
+      <li>Agendar con ese mismo contacto: verificar confirmación, oportunidad en "Agendada" y que el rescate de 24 h ya no salga.</li>
+      <li>Cita de prueba para mañana: verificar el recordatorio de 24 h.</li>
+    </ol>
+  </div></section>
+
+  <p class="foot">La asesoría no se vende con landing: entra por DM o post-diagnóstico con su link de pago directo, por eso W2 no depende del funnel. El detalle completo vive en el repositorio en <code>clientes/dachshund-salud/docs/Workflows-Consulta-Asesoria.md</code>.</p>
+</div>
+
+<script>
+document.querySelectorAll('.cbtn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var ta = document.getElementById(btn.dataset.t);
+    ta.select(); ta.setSelectionRange(0, ta.value.length);
+    var done = function(ok){
+      if(!ok) return;
+      var prev = btn.textContent;
+      btn.textContent = 'Copiado \u2713'; btn.classList.add('ok');
+      setTimeout(function(){ btn.textContent = prev; btn.classList.remove('ok'); }, 2200);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ta.value).then(function(){done(true)}, function(){done(document.execCommand('copy'))});
+    } else { done(document.execCommand('copy')); }
+  });
+});
+</script>
