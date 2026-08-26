@@ -131,39 +131,74 @@
 #dax-lp .opt.ghost .txt strong{font-size:.94rem;color:var(--t1)}
 #dax-lp .opt.ghost .ico{width:40px;height:40px}
 #dax-lp .actions-note{margin-top:14px;text-align:center;font-size:.84rem;color:var(--t3);line-height:1.55}
-#dax-lp .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:26px}
-#dax-lp .fact{background:var(--wh);border:1px solid var(--br);border-radius:12px;padding:14px 10px;text-align:center}
-#dax-lp .fact b{display:block;font-family:var(--display);font-size:.95rem;color:var(--gd);font-weight:700;line-height:1.2}
+#dax-lp .facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:26px;
+  background:var(--wh);border:1px solid var(--br);border-radius:14px;overflow:hidden;
+  box-shadow:0 14px 34px -24px rgba(24,38,30,.35);}
+#dax-lp .fact{padding:16px 10px;text-align:center;position:relative}
+#dax-lp .fact + .fact{border-left:1px solid var(--br)}
+#dax-lp .fact .f-ico{width:34px;height:34px;margin:0 auto 8px;border-radius:50%;
+  background:var(--golp);display:grid;place-items:center;}
+#dax-lp .fact .f-ico svg{width:17px;height:17px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#dax-lp .fact b{display:block;font-family:var(--display);font-size:.95rem;color:var(--gd);font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums}
 #dax-lp .fact span{display:block;font-size:.71rem;color:var(--t3);margin-top:4px;line-height:1.35}
-@media(max-width:520px){#dax-lp .facts{gap:8px}
-#dax-lp .fact{padding:12px 7px}
+@media(max-width:520px){#dax-lp .fact{padding:13px 7px}
+#dax-lp .fact .f-ico{width:30px;height:30px;margin-bottom:6px}
 #dax-lp .fact b{font-size:.86rem}
 #dax-lp .fact span{font-size:.66rem}}
 #dax-lp .checks{display:grid;gap:11px;margin-top:26px;max-width:600px;margin-left:auto;margin-right:auto}
 #dax-lp .check{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;
-  background:var(--wh);border:1px solid var(--br);border-radius:12px;padding:14px 15px}
+  background:var(--wh);border:1px solid var(--br);border-radius:12px;padding:14px 15px;
+  transition:transform .18s ease, box-shadow .18s ease;}
+#dax-lp .check:hover{transform:translateY(-2px);box-shadow:0 14px 30px -20px rgba(24,38,30,.4)}
 #dax-lp .check svg{width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
+#dax-lp .check svg path{stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .55s ease .25s}
+#dax-lp .rv.in .check svg path{stroke-dashoffset:0}
 #dax-lp .check p{font-size:1rem;color:var(--t1);line-height:1.55}
 #dax-lp .check p b{color:var(--t0);font-weight:600}
-#dax-lp .ba{display:grid;gap:12px;margin-top:26px}
-@media(min-width:700px){#dax-lp .ba{grid-template-columns:1fr 1fr}}
+#dax-lp .checks-2col{max-width:760px}
+@media(min-width:700px){#dax-lp .checks-2col{grid-template-columns:1fr 1fr;align-items:stretch}}
+#dax-lp .check.bonus{background:var(--golp);border-color:rgba(200,150,46,.45);position:relative}
+#dax-lp .check.bonus .chip{position:absolute;top:-9px;right:12px;background:var(--gold);color:#fff;
+  font-family:var(--display);font-weight:700;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+  border-radius:999px;padding:3px 10px;box-shadow:0 4px 10px -4px rgba(122,90,22,.6);}
+#dax-lp .stag{opacity:0;transform:translateY(12px);transition:opacity .5s ease, transform .5s ease}
+#dax-lp .rv.in .stag{opacity:1;transform:none;transition-delay:calc(var(--i,0)*90ms)}
+#dax-lp .ba{display:grid;gap:14px;margin-top:26px;position:relative}
+@media(min-width:700px){#dax-lp .ba{grid-template-columns:1fr 1fr;gap:26px}}
 #dax-lp .ba-card{border:1px solid var(--br);border-radius:var(--r);padding:20px;background:var(--wh)}
 #dax-lp .ba-card h3{margin-bottom:12px;font-size:.74rem;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);font-weight:700}
-#dax-lp .ba-card li{list-style:none;font-size:.98rem;color:var(--t2);padding:8px 0 8px 20px;position:relative;line-height:1.55}
-#dax-lp .ba-card li::before{content:"—";position:absolute;left:0;color:var(--t3)}
+#dax-lp .ba-card li{list-style:none;font-size:.98rem;color:var(--t2);padding:8px 0 8px 24px;position:relative;line-height:1.55}
+#dax-lp .ba-card li::before{content:"✕";position:absolute;left:0;top:8px;color:var(--red);opacity:.55;font-size:.8rem;font-weight:700}
 #dax-lp .ba-card.now{background:var(--gd);border-color:var(--gd);
   box-shadow:0 22px 50px -22px rgba(24,38,30,.6);}
 #dax-lp .ba-card.now h3{color:var(--golb)}
-#dax-lp .ba-card.now li{color:var(--gi);padding-left:24px}
-#dax-lp .ba-card.now li::before{content:"✓";color:var(--golb);font-weight:800}
-#dax-lp .costs{display:grid;gap:11px;margin-top:26px;max-width:620px;margin-left:auto;margin-right:auto}
-#dax-lp .cost{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;
-  background:var(--wh);border:1px solid var(--br);border-radius:12px;padding:14px 16px}
-#dax-lp .cost p{font-size:.97rem;color:var(--t1);line-height:1.5}
-#dax-lp .cost p b{color:var(--t0);font-weight:600}
-#dax-lp .cost .amt{font-family:var(--display);font-weight:800;font-size:.95rem;color:var(--red);white-space:nowrap;text-align:right}
-#dax-lp .cost .amt small{display:block;font-family:var(--body);font-weight:500;font-size:.68rem;color:var(--t3);letter-spacing:.04em}
-#dax-lp .cost-note{margin-top:16px;text-align:center;font-family:var(--display);font-weight:700;
+#dax-lp .ba-card.now li{color:var(--gi)}
+#dax-lp .ba-card.now li::before{content:"✓";color:var(--golb);font-weight:800;opacity:1;font-size:.95rem;top:7px}
+#dax-lp .ba-arrow{width:46px;height:46px;border-radius:50%;background:var(--gold);
+  display:grid;place-items:center;justify-self:center;margin:-4px auto;position:relative;z-index:2;
+  box-shadow:0 0 0 6px var(--cr), 0 10px 24px -8px rgba(122,90,22,.55);
+  transform:rotate(90deg);}
+#dax-lp .ba-arrow svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+@media(min-width:700px){#dax-lp .ba-arrow{position:absolute;left:50%;top:50%;margin:0;transform:translate(-50%,-50%);
+  box-shadow:0 0 0 6px var(--gi), 0 10px 24px -8px rgba(122,90,22,.55);}}
+#dax-lp .receipt{margin:26px auto 0;max-width:560px;background:var(--wh);border:1px solid var(--br);border-radius:16px;
+  padding:22px 22px 18px;box-shadow:0 22px 50px -28px rgba(24,38,30,.45);}
+#dax-lp .receipt-hd{font-family:var(--display);font-weight:800;font-size:.78rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--t2);text-align:center;padding-bottom:12px;
+  border-bottom:2px dashed var(--br);}
+#dax-lp .r-row{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;
+  padding:13px 0;border-bottom:1px dashed var(--br);}
+#dax-lp .r-row p{font-size:.95rem;color:var(--t1);line-height:1.45}
+#dax-lp .r-row p b{color:var(--t0);font-weight:600}
+#dax-lp .r-row .amt{font-family:var(--display);font-weight:800;font-size:.92rem;color:var(--red);
+  white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums;}
+#dax-lp .r-row .amt small{display:block;font-family:var(--body);font-weight:500;font-size:.67rem;color:var(--t3);letter-spacing:.03em}
+#dax-lp .r-row:last-of-type{border-bottom:0}
+#dax-lp .r-total{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;
+  margin-top:4px;padding:15px 14px;background:var(--gi);border:1px solid var(--gp);border-radius:12px;}
+#dax-lp .r-total p{font-family:var(--display);font-weight:800;font-size:.98rem;color:var(--gd);line-height:1.35}
+#dax-lp .r-total .amt{font-family:var(--display);font-weight:800;font-size:1.15rem;color:var(--gb);white-space:nowrap;font-variant-numeric:tabular-nums}
+#dax-lp .cost-note{margin-top:18px;text-align:center;font-family:var(--display);font-weight:700;
   font-size:clamp(.95rem,2.6vw,1.08rem);color:var(--t0);max-width:34ch;margin-left:auto;margin-right:auto;line-height:1.45}
 #dax-lp .flow{display:grid;gap:28px;margin-top:34px}
 @media(min-width:900px){#dax-lp .flow{grid-template-columns:minmax(0,290px) minmax(0,1fr);gap:48px;align-items:start}}
@@ -229,6 +264,8 @@
 #dax-lp .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){#dax-lp *{animation:none!important;transition:none!important}
 #dax-lp .rv{opacity:1;transform:none}
+#dax-lp .stag{opacity:1;transform:none}
+#dax-lp .check svg path{stroke-dashoffset:0}
 #dax-lp{scroll-behavior:auto}}
 
 /* El bloque se estira a ancho completo aunque GHL lo meta en su contenedor */
@@ -302,9 +339,18 @@
     <p class="actions-note">Consulta Diagnóstica Dachshund · 100% online, desde cualquier país</p>
 
     <div class="facts">
-      <div class="fact"><b>Solo salchichas</b><span>6 años dedicado en exclusiva a la raza</span></div>
-      <div class="fact"><b>+3.000</b><span>Dueños asesorados en todo LATAM y España</span></div>
-      <div class="fact"><b>2 regalos</b><span>Antiparasitario natural + test de inflamación</span></div>
+      <div class="fact">
+        <span class="f-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="15.5" rx="4.2" ry="3.6"/><circle cx="6.2" cy="10.5" r="1.9"/><circle cx="10.2" cy="7.2" r="1.9"/><circle cx="14.6" cy="7.2" r="1.9"/><circle cx="18.4" cy="10.5" r="1.9"/></svg></span>
+        <b>Solo salchichas</b><span>6 años dedicado en exclusiva a la raza</span>
+      </div>
+      <div class="fact">
+        <span class="f-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.4 3.8 5.6 3.8 9S14.5 18.6 12 21M12 3C9.5 5.4 8.2 8.6 8.2 12s1.3 6.6 3.8 9"/></svg></span>
+        <b><span data-count="3000" data-prefix="+">+3.000</span></b><span>Dueños asesorados en todo LATAM y España</span>
+      </div>
+      <div class="fact">
+        <span class="f-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M4 12h16M12 9v11M12 9c-1.5 0-4-.8-4-3a2 2 0 0 1 4 0M12 9c1.5 0 4-.8 4-3a2 2 0 0 0-4 0"/></svg></span>
+        <b>2 regalos</b><span>Antiparasitario natural + test de inflamación</span>
+      </div>
     </div>
   </div>
 </section>
@@ -318,14 +364,15 @@
       <p class="lead" style="margin-top:12px">Cada recaída de tu salchicha es plata, tiempo y culpa tuya. Y nadie te ha dado una respuesta de verdad.</p>
     </div>
     <div class="ba">
-      <div class="ba-card">
+      <div class="ba-card stag" style="--i:0">
         <h3>Así estás hoy</h3>
         <ul><li>Vas de veterinario en veterinario y nadie te dice qué tiene realmente.</li>
           <li>Cada visita termina igual: otra crema, otro corticoide, otra croqueta "premium".</li>
           <li>Mejora unas semanas, recae, y la culpa te la llevas tú.</li>
           <li>Te acuestas googleando si lo que hace tu perro "es normal en la raza".</li></ul>
       </div>
-      <div class="ba-card now">
+      <div class="ba-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="ba-card now stag" style="--i:2">
         <h3>Así sales de la consulta</h3>
         <ul><li>Sabes con nombre y apellido qué tiene tu salchicha y por qué.</li>
           <li>Tienes el camino escrito: qué hacer, en qué orden y qué esperar.</li>
@@ -358,10 +405,10 @@
       <h2>Una hora que ordena meses de confusión</h2>
       <p class="lead" style="margin-top:12px">No es "otra consulta más". Es el diagnóstico que debió llegar primero.</p>
     </div>
-    <div class="checks"><div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>El diagnóstico preciso, con nombre y apellido.</b> Qué tiene tu salchicha y cómo se está manifestando (piel, peso, digestión o conducta).</p></div>
-      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Por qué pasó.</b> Qué de su alimentación y su historia lo llevó hasta acá, para que no se repita.</p></div>
-      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>El camino paso a paso.</b> Qué hacer ahora, en qué orden y qué esperar en cada etapa. Te lo llevas claro, no "vuelva en un mes a ver cómo sigue".</p></div>
-      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>2 regalos incluidos:</b> la receta del <b>antiparasitario natural</b> y el <b>test de inflamación crónica</b> para monitorear a tu perro en casa.</p></div></div>
+    <div class="checks checks-2col"><div class="check stag" style="--i:0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>El diagnóstico preciso, con nombre y apellido.</b> Qué tiene tu salchicha y cómo se está manifestando (piel, peso, digestión o conducta).</p></div>
+      <div class="check stag" style="--i:1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Por qué pasó.</b> Qué de su alimentación y su historia lo llevó hasta acá, para que no se repita.</p></div>
+      <div class="check stag" style="--i:2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>El camino paso a paso.</b> Qué hacer ahora, en qué orden y qué esperar en cada etapa. Te lo llevas claro, no "vuelva en un mes a ver cómo sigue".</p></div>
+      <div class="check bonus stag" style="--i:3"><span class="chip">De regalo</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>2 regalos incluidos:</b> la receta del <b>antiparasitario natural</b> y el <b>test de inflamación crónica</b> para monitorear a tu perro en casa.</p></div></div>
 
     <div class="actions" style="margin-top:28px">
       <a class="opt primary" data-cta="paypal" data-pos="consulta" href="#" target="_blank" rel="noopener">
@@ -392,11 +439,13 @@
       <h2>Esperar también tiene precio, y es más alto</h2>
       <p class="lead" style="margin-top:12px">Esto es lo que cuesta seguir tapando el síntoma en vez de diagnosticar la causa:</p>
     </div>
-    <div class="costs">
-      <div class="cost"><p><b>Croquetas "premium" e hipoalergénicas</b> que no resuelven nada</p><span class="amt">USD $60 a $70<small>al mes, para siempre</small></span></div>
-      <div class="cost"><p><b>Corticoides, champús y cremas medicadas</b>: alivio de semanas, recaída segura</p><span class="amt">Cada mes<small>y cada recaída</small></span></div>
-      <div class="cost"><p><b>Cirugía de columna</b> cuando el sobrepeso ya dañó los discos de tu salchicha</p><span class="amt">USD $3.000 a $5.000<small>en el peor escenario</small></span></div>
-      <div class="cost"><p><b>Años de vida de tu perro.</b> Cada kilo de más en un salchicha se paga en esperanza de vida</p><span class="amt">Sin precio<small>y sin vuelta atrás</small></span></div>
+    <div class="receipt">
+      <div class="receipt-hd">La cuenta de seguir esperando</div>
+      <div class="r-row stag" style="--i:0"><p><b>Croquetas "premium" e hipoalergénicas</b> que no resuelven nada</p><span class="amt">USD $60 a $70<small>al mes, para siempre</small></span></div>
+      <div class="r-row stag" style="--i:1"><p><b>Corticoides, champús y cremas medicadas</b>: alivio de semanas, recaída segura</p><span class="amt">Cada mes<small>y cada recaída</small></span></div>
+      <div class="r-row stag" style="--i:2"><p><b>Cirugía de columna</b> cuando el sobrepeso ya dañó los discos de tu salchicha</p><span class="amt">USD $3.000 a $5.000<small>en el peor escenario</small></span></div>
+      <div class="r-row stag" style="--i:3"><p><b>Años de vida de tu perro.</b> Cada kilo de más en un salchicha se paga en esperanza de vida</p><span class="amt">Sin precio<small>y sin vuelta atrás</small></span></div>
+      <div class="r-total stag" style="--i:4"><p>La consulta que lo evita hoy</p><span class="amt">USD $89</span></div>
     </div>
     <p class="cost-note">Consultar a tiempo es la diferencia entre ajustar el plato hoy… y pagar una cirugía mañana.</p>
   </div>
@@ -610,6 +659,41 @@ var DAX = {
     });
   }
 
+  /* ---- 4b. Contador del "+3.000" al entrar en pantalla ---- */
+  function contador() {
+    var els = d.querySelectorAll('#dax-lp [data-count]');
+    if (!els.length) return;
+    var reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function fmt(n, prefijo) { return prefijo + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+
+    function animar(el) {
+      var fin = parseInt(el.getAttribute('data-count'), 10) || 0;
+      var prefijo = el.getAttribute('data-prefix') || '';
+      if (reducido || !('requestAnimationFrame' in window)) { el.textContent = fmt(fin, prefijo); return; }
+      var t0 = null, DUR = 1100;
+      function paso(t) {
+        if (!t0) t0 = t;
+        var p = Math.min((t - t0) / DUR, 1);
+        p = 1 - Math.pow(1 - p, 4);
+        el.textContent = fmt(Math.round(fin * p), prefijo);
+        if (p < 1) requestAnimationFrame(paso);
+      }
+      requestAnimationFrame(paso);
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      Array.prototype.forEach.call(els, function (el) { animar(el); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { animar(e.target); io.unobserve(e.target); }
+      });
+    }, { threshold: .6 });
+    Array.prototype.forEach.call(els, function (el) { io.observe(el); });
+  }
+
   /* ---- 5. Medición de clics en los CTA ---- */
   function track(evento, extra) {
     var data = extra || {};
@@ -653,7 +737,7 @@ var DAX = {
     }
   }
 
-  function init() { enlaces(); barra(); revelar(); video(); clics(); pixeles(); }
+  function init() { enlaces(); barra(); revelar(); video(); contador(); clics(); pixeles(); }
 
   if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', init);
   else init();
