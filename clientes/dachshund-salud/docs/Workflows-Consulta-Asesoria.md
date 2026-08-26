@@ -48,6 +48,29 @@ referencia):
 - Los nombres exactos de productos, calendarios y plantillas deben calzar
   con los tuyos; ajusta el texto del prompt si difieren.
 
+**⚠️ Pagos con links externos (mpago.li / paypal.com/ncp):**
+
+El trigger "Payment Received" **solo ve pagos cobrados dentro de GHL**
+(order forms, invoices o links de pago creados en GHL con un proveedor
+integrado). Los links creados en los paneles de Mercado Pago y PayPal
+ocurren fuera y GHL nunca se entera. Soluciones:
+
+- **PayPal (USD):** conectar nativo en *Payments → Integrations → PayPal*
+  y crear el checkout del producto **en GHL**. "Payment Received" dispara y
+  el checkout pide teléfono. Cambiar el link del botón LATAM de la landing
+  por el checkout de GHL.
+- **Mercado Pago (CLP):** no es proveedor nativo. O se instala una app de
+  Mercado Pago del App Marketplace de GHL (custom payment provider, de
+  terceros), o se hace un **puente con Make**: webhook de pago de MP →
+  Make → buscar/crear contacto en GHL → agregar tag `consulta-pagada` /
+  `asesoria-pagada`.
+- **Con links externos**, el trigger de W1 y W2 cambia a **"Contact Tag
+  Added"** (`consulta-pagada` / `asesoria-pagada`) y se elimina el paso 1
+  del prompt (el tag ya lo puso Make o se puso a mano). El resto es igual.
+  Plan B manual mientras no exista el puente: agregar el tag a mano cuando
+  llegue el aviso de pago; el workflow dispara igual.
+- **W3, W4 y W5 no necesitan nada de esto**: los calendarios son de GHL.
+
 ---
 
 ## 1. Prompts para la IA de workflows de GHL
