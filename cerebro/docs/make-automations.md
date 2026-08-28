@@ -24,6 +24,11 @@ Cada tablero lee una tabla de Supabase; Make es quien la llena.
 > Planificador, Tareas, Accesos y KPIs **NO** los toca Make — los maneja la app
 > directamente (los edita el equipo/cliente y se guardan en Supabase).
 
+> ⚠️ **Los bots de WhatsApp/IG tampoco pasan por Make.** Make cobra por operación
+> y un bot conversacional gasta ~12 ops por mensaje entrante. El tráfico por
+> mensaje va por GHL (webhook gratis) → Supabase Edge Function → Claude. Ver
+> [`docs/bots-setter-arquitectura-y-costes.md`](../../docs/bots-setter-arquitectura-y-costes.md).
+
 ### El campo `cliente` (slug)
 Todas las tablas usan una columna `cliente` con el **slug canónico** del cliente.
 Usá siempre estos (uno fijo por cuenta/escenario):
