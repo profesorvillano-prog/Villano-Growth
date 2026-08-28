@@ -31,6 +31,10 @@
    US$ 0,30 por conversación extra. Margen ~75 % y factura previsible para el
    cliente. Con un tope de gasto duro en Supabase, el precio fijo no te puede
    explotar.
+6. **Con volumen alto (Marcelo) el precio va por tramos**, no por un plan único:
+   500 → US$ 180, 1.500 → US$ 390, 3.000 → US$ 650. Y la prueba de Haiku 4.5 deja
+   de ser opcional: a 3.000 conversaciones vale US$ 99/mes. Detalle en la
+   **sección 8**, que es la que aplica a Marcelo.
 
 ---
 
@@ -237,11 +241,22 @@ system de 10k tokens, historial medio 800 tokens/turno, respuesta 150 tokens):
 
 ### Coste por conversación (con caché)
 
-| Modelo | US$/conversación | 250 conv/mes | 500 conv/mes | 1.000 conv/mes |
-|---|---|---|---|---|
-| Haiku 4.5 | **0,039** | US$ 10 | US$ 20 | US$ 39 |
-| **Sonnet 5** | **0,077** | US$ 19 | US$ 39 | US$ 77 |
-| Opus 5 | 0,193 | US$ 48 | US$ 97 | US$ 193 |
+El coste **no es lineal**: la escritura de caché se amortiza entre todas las
+conversaciones de la misma hora, así que cuanto más volumen, más barata sale
+cada conversación. El suelo es el coste variable puro (lecturas de caché +
+historial + salida): **US$ 0,061** en Sonnet 5 y **US$ 0,031** en Haiku 4.5.
+
+| Modelo | 500 conv | 1.000 conv | 2.000 conv | 3.000 conv | 5.000 conv |
+|---|---|---|---|---|---|
+| Haiku 4.5 | US$ 20 | US$ 37 | US$ 68 | US$ 99 | US$ 160 |
+| **Sonnet 5** | **US$ 41** | **US$ 74** | **US$ 137** | **US$ 198** | **US$ 320** |
+| Opus 5 | US$ 113 | US$ 189 | US$ 342 | US$ 495 | US$ 801 |
+
+| Modelo | US$/conv a 500 | US$/conv a 3.000 | Suelo |
+|---|---|---|---|
+| Haiku 4.5 | 0,040 | 0,033 | 0,031 |
+| Sonnet 5 | 0,081 | 0,066 | 0,061 |
+| Opus 5 | 0,225 | 0,165 | 0,153 |
 
 ### Qué modelo usar
 
@@ -368,14 +383,17 @@ complementa**: un setter part-time en Chile o Argentina son US$ 400–700/mes.
 - Extra natural: cobrar aparte las campañas de recaptación de verano (los "no
   ahora" etiquetados en el CRM) — ahí sí hay coste de plantillas de WhatsApp.
 
-**Marcelo / Dachshund Salud** — high ticket, acompañamiento 1:1 a US$ 497.
-- Menos volumen, más valor por conversación. Setup US$ 690 + **US$ 149/mes** con
-  300 conversaciones incluidas.
-- El argumento: *"una venta extra cada tres meses ya lo paga; el bot filtra a los
-  N1–N2 para que solo hables tú con los N4–N5"*.
-- Aquí sí conviene subir a Opus 5 en la ruta de **objeciones de precio del high
-  ticket** (US$ 0,19/conv, son pocas conversaciones y valen US$ 497 cada una).
-  El resto del tráfico se queda en Sonnet.
+**Marcelo / Dachshund Salud** — high ticket a US$ 497 y **mucho volumen de leads**.
+Este es el caso que rompe el plan de cupo pequeño: ver la sección 8 completa.
+- Escalera por tramos, no un precio único (ver tabla de la sección 8).
+  A **1.500 conversaciones/mes**: setup US$ 890 + **US$ 390/mes**, con extra a
+  US$ 0,25/conv. A **3.000/mes**: **US$ 650/mes**.
+- El argumento cambia con el volumen: no es "contesta rápido", es **"te protege
+  la agenda"**. Con muchos leads el cuello de botella pasa a ser él, no el bot.
+  El trabajo del bot es filtrar N1–N2 sin piedad para que solo hable con N4–N5.
+- **Ojo con Opus 5 en volumen alto.** A 300 conversaciones era barato; a 3.000
+  cuesta US$ 495/mes. Reservalo para la ruta de objeciones del high ticket
+  (< 10 % del tráfico) o directamente no lo uses.
 
 ### Cláusulas que te protegen
 
@@ -391,7 +409,111 @@ complementa**: un setter part-time en Chile o Argentina son US$ 400–700/mes.
 
 ---
 
-## 8. Plan de implementación
+## 8. Cuando hay mucho volumen (el caso de Marcelo)
+
+Marcelo no tiene 250 conversaciones al mes: tiene **muchos leads**. Eso cambia
+tres cosas y deja otras tres igual. Conviene tener claro cuál es cuál.
+
+### Lo que NO cambia
+
+- **La arquitectura.** GHL webhook gratis → Edge Function → API de GHL sigue
+  costando US$ 0 de infraestructura a cualquier volumen. Si hubieras montado el
+  bot sobre Make o sobre el Custom Webhook de GHL, el volumen alto sería una
+  catástrofe: 3.000 conversaciones × 12 mensajes = 36.000 mensajes/mes son
+  **432.000 ops de Make (~US$ 430/mes)** o **US$ 360/mes de premium actions**.
+  Con la arquitectura correcta, cero.
+- **Supabase.** El free tier son 500.000 invocaciones de Edge Functions al mes;
+  36.000 mensajes no lo rozan. Si el volumen sube mucho más, pasás a Pro
+  (US$ 25/mes) y sigue siendo ruido.
+- **El tope de gasto duro.** Sigue siendo lo que hace vendible el precio fijo,
+  y a este volumen es todavía más necesario.
+
+### Lo que SÍ cambia
+
+**1. El precio no puede ser un único plan.** A 3.000 conversaciones tu coste en
+Sonnet 5 es US$ 198/mes: cobrar US$ 149 sería perder plata. Escalera por tramos:
+
+| Plan | Conv. incluidas | Precio/mes | Coste (Sonnet) | Margen | Coste (Haiku) | Margen |
+|---|---|---|---|---|---|---|
+| Starter | 500 | US$ 180 | US$ 41 | 77 % | US$ 20 | 89 % |
+| Growth | 1.500 | US$ 390 | US$ 106 | 73 % | US$ 53 | 86 % |
+| Scale | 3.000 | US$ 650 | US$ 198 | 70 % | US$ 99 | 85 % |
+| Extra | — | US$ 0,25/conv | US$ 0,061 | 76 % | US$ 0,031 | 88 % |
+
+Setup US$ 890 en Growth/Scale (más KB, más rutas, más pruebas).
+
+**2. La prueba de Haiku 4.5 sube a prioridad 1.** A 500 conversaciones la
+diferencia Sonnet↔Haiku son US$ 20/mes y no vale la pena tocarla. A 3.000 son
+**US$ 99/mes** — el experimento se paga solo en la primera semana. Muévelo de
+la fase 6 a la **fase 2**.
+
+Y el argumento que tenía en contra del enrutado por modelo (dos cachés, dos
+namespaces) **se cae con el volumen**: a 3.000 conversaciones hay tráfico
+suficiente para mantener las dos cachés calientes todo el día hábil, y la
+escritura de ambas suma ~US$ 21/mes. El reparto realista:
+
+| Ruta | % del tráfico | Modelo | Por qué |
+|---|---|---|---|
+| FAQ pura (croqueta, dosis, envíos, precio del pack) | ~70 % | Haiku 4.5 | Respuesta que está literal en la KB |
+| Calificación + objeciones + cierre del 1:1 | ~30 % | Sonnet 5 | Aquí se gana o se pierde la venta |
+
+Coste mixto a 3.000 conv: **~US$ 141/mes** (vs. 198 en Sonnet puro).
+Si Haiku aguanta la ruta completa, US$ 99. **Medí antes de repartir.**
+
+**3. El tamaño de la KB pasa de detalle a partida presupuestaria.** Cada turno
+lee la KB entera desde caché. A 36.000 turnos/mes:
+
+| KB | Coste de lecturas/mes (Sonnet, 3.000 conv) |
+|---|---|
+| 12.000 tokens | US$ 86 |
+| 10.000 tokens | US$ 72 |
+| **6.000 tokens** | **US$ 43** |
+
+Bajar la KB de Marcelo de 10k a 6k tokens son **US$ 29/mes** a Sonnet y US$ 15 a
+Haiku, todos los meses. Con sus 120 KB de documentación el riesgo real es el
+contrario: que el `Bot-KB.md` salga de 25k tokens y el bot cueste el triple. La
+disciplina de KB es, a este volumen, la segunda palanca después del modelo.
+
+Lo mismo con el historial: recortar de 10 a 6 turnos son otros ~US$ 22/mes.
+
+### Los cuellos de botella nuevos
+
+- **Rate limits de la API de Claude.** Un anuncio que pega fuerte mete un pico de
+  mensajes en minutos. Revisá los límites de tu tier en la consola (peticiones y
+  tokens por minuto) y montá **reintentos con backoff exponencial + cola** en la
+  Edge Function. Sin eso, el pico se traduce en leads sin respuesta.
+- **Ráfagas contra la API de GHL.** Hay límite por ráfaga por location (del orden
+  de 100 peticiones cada 10 s — verificalo en tu cuenta). Con tres llamadas por
+  mensaje, un pico de 40 mensajes simultáneos lo roza. Misma solución: cola.
+- **El cuello de botella pasa a ser Marcelo.** Si escala el 15 % de 3.000
+  conversaciones, son **450 traspasos al mes** — imposible. Con muchos leads el
+  trabajo del bot deja de ser "contestar rápido" y pasa a ser **"filtrar sin
+  piedad"**: solo llegan a Marcelo los N4–N5. Ese es el KPI a vigilar en
+  `bot_usage` (`escalado_humano`), y también el argumento de venta: *el bot te
+  protege la agenda*.
+- **Los casos raros aparecen sí o sí.** A 3.000 conversaciones/mes las 
+  prohibiciones de la KB se van a poner a prueba. Rutina fija: revisar 20
+  conversaciones por semana y registrar el motivo de cada escalado.
+
+### El coste que sí escala mal: las plantillas de WhatsApp
+
+Las respuestas dentro de la ventana de 24 h son gratis, pero **el seguimiento no**.
+Si a cada lead le mandás dos o tres recordatorios fuera de ventana, son 6.000–9.000
+plantillas de marketing al mes. Según la tarifa del país eso puede ser **más caro
+que Claude entero**. Tres reglas:
+
+1. Confirmá la tarifa por plantilla del país de Marcelo con su proveedor **antes**
+   de diseñar la secuencia de seguimiento.
+2. Facturá las campañas de recaptación **aparte** del abono del bot, con el coste
+   de plantillas a cargo del cliente o repercutido.
+3. Para generar los mensajes personalizados de esas campañas (que no son en tiempo
+   real), usá la **Message Batches API: 50 % de descuento**. Personalizar 5.000
+   mensajes con Haiku en batch cuesta menos de US$ 10 — el gasto está en el envío,
+   no en la generación.
+
+---
+
+## 9. Plan de implementación
 
 | Fase | Qué | Tiempo |
 |---|---|---|
@@ -401,6 +523,11 @@ complementa**: un setter part-time en Chile o Argentina son US$ 400–700/mes.
 | **4** | Con datos reales: cerrar el precio de Sebastián y clonar todo para Marcelo (misma función, otro slug, otra KB). | 2 días |
 | **5** | Panel de consumo del bot en el Cerebro (lee `bot_usage`) → reporte mensual automático. | 2 días |
 | **6** | Prueba controlada de Haiku 4.5 en la ruta FAQ. Si aguanta la calidad, el margen sube ~20 puntos. | 1 semana |
+
+> **En el caso de Marcelo, la fase 6 se adelanta a la fase 2.** Con volumen alto
+> el modelo es la partida de coste dominante y la prueba de Haiku se paga sola en
+> días. Añadí también, antes de producción: cola con backoff para los picos de
+> anuncios, y el KPI de `escalado_humano` en el panel desde el día uno.
 
 ### Verificaciones que no te puedes saltar
 
