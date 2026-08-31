@@ -19,10 +19,21 @@ intestino y la alimentación.
 - **`index.html`** — landing / VSL del programa high ticket (3 meses).
 - **`landing-consulta.html`** — **Landing 1 del embudo de consulta**: bloque
   autocontenido para pegar en GoHighLevel (elemento *Custom Code / HTML*).
-  Adaptación de la landing de consulta de Dachshund Salud al dúo
-  Ezequiel + Catalina. Vende la **Consulta de Evaluación Autoinmune (USD $60)**,
-  descontable del programa, con doble pasarela (PayPal/tarjeta internacional y
-  Mercado Pago Argentina).
+  Vende la **Consulta de Evaluación Autoinmune (USD $60)**, descontable del
+  programa, con doble pasarela (PayPal/tarjeta internacional y Mercado Pago
+  Argentina).
+
+  **Ángulo del copy: camino natural de sanación.** No agita el costo de seguir
+  enfermo (ese enfoque se descartó): vende el camino. Ejes, todos tomados de
+  `docs/Mensajes-Angulos-y-Copy.md`:
+
+  - *"Si el alimento te enfermó, el alimento también te puede sanar."*
+  - **Camino A / Camino B**: uno maneja la enfermedad, el otro la revierte.
+  - **Las 3 fases** (apagar el incendio → sellar la frontera → reconstruir la
+    inmunidad) como sección propia, en lugar del recibo de costos.
+  - *"Tratar la piel sin cambiar el plato es secar el piso con la llave abierta."*
+  - Se habla de **revertir** y **remisión funcional**, nunca de cura, y hay una
+    nota explícita de que los tiempos varían y no se prometen plazos.
 - **`docs/`** — base de conocimiento (fuente de verdad). Ver
   [`docs/README.md`](./docs/README.md) para el índice completo.
 
