@@ -23,17 +23,28 @@ intestino y la alimentación.
   programa, con doble pasarela (PayPal/tarjeta internacional y Mercado Pago
   Argentina).
 
-  **Ángulo del copy: camino natural de sanación.** No agita el costo de seguir
-  enfermo (ese enfoque se descartó): vende el camino. Ejes, todos tomados de
-  `docs/Mensajes-Angulos-y-Copy.md`:
+  **Ángulo del copy: situación actual → situación deseada.** El foco está en
+  el punto de partida de la persona y en adónde puede llegar; la consulta se
+  posiciona como **el primer gran paso: entender tu caso completo y saber qué
+  hacer**. Decisiones deliberadas:
 
-  - *"Si el alimento te enfermó, el alimento también te puede sanar."*
-  - **Camino A / Camino B**: uno maneja la enfermedad, el otro la revierte.
-  - **Las 3 fases** (apagar el incendio → sellar la frontera → reconstruir la
-    inmunidad) como sección propia, en lugar del recibo de costos.
-  - *"Tratar la piel sin cambiar el plato es secar el piso con la llave abierta."*
-  - Se habla de **revertir** y **remisión funcional**, nunca de cura, y hay una
-    nota explícita de que los tiempos varían y no se prometen plazos.
+  - **No se habla del vehículo.** La palabra "programa" no aparece en el copy
+    visible. El acompañamiento se menciona una sola vez, en la FAQ *"¿Esto es
+    una llamada de ventas?"*, y solo para responder que no lo es.
+  - **No se nombra quién atiende en el hero ni en los pasos.** La consulta la
+    lleva Ezequiel; eso se dice una vez en la nota bajo el dúo y una vez en la
+    FAQ *"¿Quién me atiende?"* (donde además se aclara que no es médico, por
+    compliance). Catalina aparece como parte del proyecto, no de la consulta.
+  - **Sección Punto A / Punto B**: "Hoy" contra "Adónde puedes llegar", en
+    lenguaje concreto y sensorial, con una nota de honestidad inmediata sobre
+    que los tiempos varían.
+  - **El primer gran paso** en 3 tarjetas: dónde estás · por qué llegaste ahí ·
+    qué hacer mañana. Son las tres respuestas de la consulta, no las fases del
+    programa.
+  - Se eliminó el "se descuenta del programa" de la sección de beneficios: es
+    argumento de venta del vehículo y empujaba a leer la página como una
+    llamada de ventas.
+
 - **`docs/`** — base de conocimiento (fuente de verdad). Ver
   [`docs/README.md`](./docs/README.md) para el índice completo.
 
