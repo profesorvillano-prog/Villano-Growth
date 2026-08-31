@@ -59,8 +59,9 @@ Todo se edita en el bloque `var STA = { ... }` al final del archivo:
 - `TESTIMONIO_VIDEO_EMBED` / `TESTIMONIOS_IMG` — la sección de testimonios
   aparece sola cuando se carga al menos uno.
 - `META_PIXEL_ID` / `GA4_ID` — píxeles (opcionales).
-- Fotos reales de **Ezequiel** y **Catalina** en la sección del dúo (marcadas
-  con `TODO` en el HTML).
+- ~~Fotos de Ezequiel y Catalina~~ — ya incorporadas desde el CDN de GHL. Se
+  muestran en 4:5 con `object-position:50% 22%`, para conservar el rostro si la
+  foto original es más alta que ese recorte.
 - Confirmar la **grafía exacta** del apellido de Catalina (viene de
   transcripción: "Klimboski").
 
