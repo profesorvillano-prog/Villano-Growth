@@ -1,9 +1,13 @@
 # Cliente: Ezequiel Racca
 
 Carpeta del cliente **Ezequiel Racca**. Perfil nuevo **100% enfocado en
-enfermedades autoinmunes de la piel** (dermatitis/eczema, psoriasis, vitíligo y
-lupus), separado de su otro proyecto "Una vida sin medicamentos" (diabetes e
-hipertensión).
+enfermedades autoinmunes** (dermatitis/eczema, psoriasis, vitíligo, lupus, Crohn,
+colitis ulcerosa), separado de su otro proyecto "Una vida sin medicamentos"
+(diabetes e hipertensión).
+
+La marca se trabaja como **dúo**: **Ezequiel Racca** (odontólogo, nutrición y
+medicina funcional) + **Dra. Catalina Klimboski** (médica, medicina funcional).
+Nombre de marca: **Sana tu Autoinmune**.
 
 Producto principal: **Método Piel en Calma** (nombre provisional) — acompañamiento
 1-a-1 de 3 meses en nutrición y medicina funcional, llevado adelante junto a un
@@ -12,14 +16,47 @@ intestino y la alimentación.
 
 ## Contenido
 
-- **`index.html`** — landing / VSL del programa (estructura tipo Japi Eaters /
-  Dachshund Salud, adaptada a autoinmunes de la piel).
+- **`index.html`** — landing / VSL del programa high ticket (3 meses).
+- **`landing-consulta.html`** — **Landing 1 del embudo de consulta**: bloque
+  autocontenido para pegar en GoHighLevel (elemento *Custom Code / HTML*).
+  Adaptación de la landing de consulta de Dachshund Salud al dúo
+  Ezequiel + Catalina. Vende la **Consulta de Evaluación Autoinmune (USD $60)**,
+  descontable del programa, con doble pasarela (PayPal/tarjeta internacional y
+  Mercado Pago Argentina).
 - **`docs/`** — base de conocimiento (fuente de verdad). Ver
   [`docs/README.md`](./docs/README.md) para el índice completo.
 
+## Embudo de consulta (GoHighLevel)
+
+```
+Landing Consulta  ← landing-consulta.html
+  → Calendario Consulta
+  → Calendario Asesoría
+  → Redirección Mercado Pago
+  → Thank You CONSULTA
+  → Thank You ASESORÍA
+```
+
+### Pendientes de `landing-consulta.html`
+
+Todo se edita en el bloque `var STA = { ... }` al final del archivo:
+
+- `PAGO_URL_PAYPAL` — link de pago PayPal/tarjeta (USD $60).
+- `PAGO_URL_MPAGO` — link de Mercado Pago (Argentina).
+- `PRECIO_ARS` — monto en pesos (hoy dice "en pesos"); cambia en toda la página.
+- `VSL_EMBED` + `VSL_POSTER` — video y portada del VSL de la consulta.
+- `TESTIMONIO_VIDEO_EMBED` / `TESTIMONIOS_IMG` — la sección de testimonios
+  aparece sola cuando se carga al menos uno.
+- `META_PIXEL_ID` / `GA4_ID` — píxeles (opcionales).
+- Fotos reales de **Ezequiel** y **Catalina** en la sección del dúo (marcadas
+  con `TODO` en el HTML).
+- Confirmar la **grafía exacta** del apellido de Catalina (viene de
+  transcripción: "Klimboski").
+
 ## Estado y pendientes (de la reunión de onboarding 08/06/2026)
 
-Antes de publicar la landing, reemplazar los marcadores `TODO` / `[...]`:
+Antes de publicar la landing del programa (`index.html`), reemplazar los
+marcadores `TODO` / `[...]`:
 
 - `[URL-FORMULARIO]` — link real del formulario de evaluación / WhatsApp.
 - VSL — portada real (`vid-poster`) y `media-id` del video (Wistia/YouTube/Vimeo).
@@ -30,10 +67,11 @@ Antes de publicar la landing, reemplazar los marcadores `TODO` / `[...]`:
 - Paleta: la landing usa púrpura/ciruela (color de la concienciación autoinmune y
   del lupus) + dorado. Ezequiel está abierto a opciones.
 
-> ⚠️ **Compliance:** Ezequiel es odontólogo, no médico. El enfoque complementa (no
-> reemplaza) al médico tratante y el programa va acompañado por un médico. Nunca
-> sugerir abandonar medicación sin supervisión. Mantener estos límites en todo el
-> copy.
+> ⚠️ **Compliance:** Ezequiel es odontólogo, no médico — se declara de forma
+> explícita en la landing. La parte clínica la cubre la **Dra. Catalina
+> Klimboski**. El enfoque complementa (no reemplaza) al médico tratante. Nunca
+> sugerir abandonar medicación sin supervisión, ni prometer cura. Mantener estos
+> límites en todo el copy.
 
 ## Skills
 

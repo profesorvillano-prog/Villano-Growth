@@ -1,0 +1,901 @@
+<!-- ===================================================================
+     SANA TU AUTOINMUNE · Consulta de Evaluación Autoinmune
+     Ezequiel Racca + Dra. Catalina Klimboski
+     Pegar TAL CUAL en GoHighLevel: elemento "Custom Code / HTML".
+     Antes de publicar, cambia los valores de STA = { ... } de más
+     abajo (links de pago PayPal y Mercado Pago, precio en ARS y VSL).
+     Basada en la arquitectura de la landing de consulta de Dachshund Salud.
+     =================================================================== -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+#sta-lp{
+  --gd:   #3A2A52;   /* ciruela profundo */
+  --gm:   #4B3868;
+  --gb:   #6B5290;
+  --gp:   #E7DCF3;   /* lila pálido */
+  --gi:   #F5F1FA;
+  --gold: #C19330;
+  --golb: #D7B85A;
+  --golp: #FBF1D9;
+  --cr:   #F8F6F4;   /* crema, fondo */
+  --wh:   #FFFFFF;
+  --t0:   #241A33;
+  --t1:   #463A57;
+  --t2:   #685B79;
+  --t3:   #968AA6;
+  --br:   #E4DCEC;
+  --red:  #B83228;
+  --rdb:  #FDF0EE;
+
+  --r:    14px;
+  --r-lg: 20px;
+
+  --display:'Montserrat','DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --body:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+
+  --sat: env(safe-area-inset-top,0px);
+  --sab: env(safe-area-inset-bottom,0px);
+  --z-bar: 200;}
+#sta-lp *,#sta-lp *::before,#sta-lp *::after{margin:0;padding:0;box-sizing:border-box}
+#sta-lp{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+#sta-lp{font-family:var(--body);
+  background:var(--cr);
+  color:var(--t1);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  overflow-wrap:break-word;
+  -webkit-tap-highlight-color:rgba(58,42,82,.16);
+  background-image:radial-gradient(ellipse 70% 42% at 50% -4%, rgba(107,82,144,.18) 0%, transparent 62%);
+  background-repeat:no-repeat;background-position:top center;}
+#sta-lp img,#sta-lp video{max-width:100%;display:block}
+#sta-lp a{color:inherit;text-decoration:none}
+#sta-lp .wrap{width:100%;max-width:760px;margin:0 auto;padding:0 22px}
+#sta-lp .wrap-wide{width:100%;max-width:1000px;margin:0 auto;padding:0 22px}
+#sta-lp section{position:relative}
+#sta-lp .sec{padding:64px 0}
+@media(min-width:760px){#sta-lp .sec{padding:88px 0}}
+#sta-lp .sec-alt{background:var(--gi);border-top:1px solid var(--br);border-bottom:1px solid var(--br)}
+#sta-lp .sec-dark{background:var(--gd);color:var(--gp)}
+#sta-lp .sec-dark h2{color:var(--wh)}
+#sta-lp h1,#sta-lp h2,#sta-lp h3{font-family:var(--display);line-height:1.14;letter-spacing:-.02em;color:var(--t0);font-weight:800;text-wrap:balance;overflow-wrap:break-word}
+#sta-lp h1{font-size:clamp(1.85rem,6.2vw,3rem)}
+#sta-lp h2{font-size:clamp(1.5rem,4.6vw,2.2rem)}
+#sta-lp h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:700;letter-spacing:-.01em}
+#sta-lp .eyebrow{font-family:var(--display);font-size:.72rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+  display:block;margin-bottom:14px;}
+#sta-lp .eyebrow-line{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px}
+#sta-lp .eyebrow-line::before,#sta-lp .eyebrow-line::after{content:"";height:1px;width:26px;background:var(--br)}
+#sta-lp .sec-dark .eyebrow-line::before,#sta-lp .sec-dark .eyebrow-line::after{background:rgba(255,255,255,.25)}
+#sta-lp .lead{font-size:clamp(1rem,2.7vw,1.1rem);color:var(--t2);line-height:1.62}
+#sta-lp .sec-dark .lead{color:var(--gp)}
+#sta-lp .mark{color:var(--gb)}
+#sta-lp .alerta{color:var(--red);box-shadow:inset 0 -2px 0 0 rgba(184,50,40,.4);padding-bottom:1px}
+#sta-lp .center{text-align:center}
+#sta-lp .muted{color:var(--t3)}
+#sta-lp .small{font-size:.83rem;line-height:1.5}
+#sta-lp .hdr{padding:calc(20px + var(--sat)) 0 8px;text-align:center}
+#sta-lp .hdr .logo-txt{font-family:var(--display);font-weight:800;font-size:1.18rem;
+  letter-spacing:.05em;color:var(--gd);text-transform:uppercase}
+#sta-lp .hdr .logo-txt b{color:var(--gold)}
+#sta-lp .hdr .logo-sub{font-size:.78rem;color:var(--t3);letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+#sta-lp .hero{padding:28px 0 8px;text-align:center}
+#sta-lp .hero h1{margin-bottom:16px}
+#sta-lp .hero .lead{max-width:36ch;margin:0 auto}
+@media(min-width:760px){#sta-lp .hero .lead{max-width:52ch}}
+#sta-lp .kicker{font-family:var(--display);font-weight:700;
+  font-size:clamp(.82rem,2.4vw,.95rem);letter-spacing:.03em;
+  text-transform:uppercase;color:var(--t2);margin-bottom:12px;}
+#sta-lp .vsl{margin:30px auto 0;max-width:660px}
+#sta-lp .vsl-frame{position:relative;border-radius:var(--r-lg);overflow:hidden;
+  border:1.5px solid rgba(193,147,48,.55);
+  box-shadow:0 0 0 1px rgba(36,26,51,.06), 0 26px 60px -24px rgba(36,26,51,.5);
+  background:var(--gd);}
+#sta-lp .vsl-ratio{position:relative;width:100%;aspect-ratio:16/9}
+#sta-lp .vsl-ratio > iframe,#sta-lp .vsl-ratio > video{position:absolute;inset:0;width:100%;height:100%;border:0}
+#sta-lp .vsl-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#sta-lp .vsl-play{position:absolute;inset:0;display:flex;flex-direction:column;gap:15px;
+  align-items:center;justify-content:center;
+  background:linear-gradient(180deg,rgba(36,26,51,.12),rgba(36,26,51,.58));cursor:pointer;border:0;width:100%;}
+#sta-lp .vsl-play b{font-family:var(--display);font-weight:700;font-size:.76rem;
+  letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.92);}
+#sta-lp .vsl-play span{width:66px;height:66px;border-radius:50%;
+  background:var(--gold);display:grid;place-items:center;
+  box-shadow:0 0 0 8px rgba(193,147,48,.28), 0 10px 30px -6px rgba(36,26,51,.6);
+  transition:transform .18s ease, box-shadow .18s ease;}
+#sta-lp .vsl-play:hover span{transform:scale(1.06);box-shadow:0 0 0 12px rgba(193,147,48,.3),0 10px 30px -6px rgba(36,26,51,.6)}
+#sta-lp .vsl-play svg{width:22px;height:22px;fill:#fff;margin-left:3px}
+#sta-lp .vsl-cap{margin-top:12px;font-size:.82rem;color:var(--t3);text-align:center}
+#sta-lp .actions{margin:30px auto 0;max-width:520px;display:flex;flex-direction:column;gap:12px}
+#sta-lp .opt{display:grid;grid-template-columns:44px 1fr 18px;align-items:center;gap:14px;
+  background:var(--wh);border:1px solid var(--br);border-radius:var(--r);
+  padding:15px 16px;text-align:left;width:100%;
+  transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease;}
+#sta-lp .opt:hover{transform:translateY(-2px);box-shadow:0 14px 34px -18px rgba(36,26,51,.35)}
+#sta-lp .opt .ico{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;
+  background:var(--gi);border:1px solid var(--br);}
+#sta-lp .opt .ico svg{width:20px;height:20px;stroke:var(--gm);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+#sta-lp .opt .txt strong{display:block;font-family:var(--display);font-weight:700;font-size:1.02rem;color:var(--t0);line-height:1.25}
+#sta-lp .opt .txt em{display:block;font-style:normal;font-size:.87rem;color:var(--t3);margin-top:3px}
+#sta-lp .opt .chev{stroke:var(--t3);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;width:18px;height:18px}
+#sta-lp .opt.primary{background:linear-gradient(180deg,var(--gm),var(--gd));
+  border-color:var(--gd);
+  box-shadow:0 18px 40px -14px rgba(58,42,82,.65), inset 0 1px 0 rgba(255,255,255,.12);}
+#sta-lp .opt.primary:hover{box-shadow:0 22px 48px -12px rgba(58,42,82,.75), inset 0 1px 0 rgba(255,255,255,.14)}
+#sta-lp .opt.primary .ico{background:var(--gold);border-color:rgba(255,255,255,.28)}
+#sta-lp .opt.primary .ico svg{stroke:#fff}
+#sta-lp .opt.primary .chev{stroke:#fff}
+#sta-lp .opt.primary .txt strong{color:#fff}
+#sta-lp .opt.primary .txt em{color:rgba(255,255,255,.75)}
+#sta-lp .opt.ghost{background:var(--wh);border-color:var(--br);padding:13px 16px}
+#sta-lp .opt.ghost .txt strong{font-size:.94rem;color:var(--t1)}
+#sta-lp .opt.ghost .ico{width:40px;height:40px}
+#sta-lp .actions-note{margin-top:14px;text-align:center;font-size:.84rem;color:var(--t3);line-height:1.55}
+#sta-lp .facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:26px;
+  background:var(--wh);border:1px solid var(--br);border-radius:14px;overflow:hidden;
+  box-shadow:0 14px 34px -24px rgba(36,26,51,.35);}
+#sta-lp .fact{padding:16px 10px;text-align:center;position:relative}
+#sta-lp .fact + .fact{border-left:1px solid var(--br)}
+#sta-lp .fact .f-ico{width:34px;height:34px;margin:0 auto 8px;border-radius:50%;
+  background:var(--golp);display:grid;place-items:center;}
+#sta-lp .fact .f-ico svg{width:17px;height:17px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#sta-lp .fact b{display:block;font-family:var(--display);font-size:.95rem;color:var(--gd);font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums}
+#sta-lp .fact span{display:block;font-size:.71rem;color:var(--t3);margin-top:4px;line-height:1.35}
+@media(max-width:520px){#sta-lp .fact{padding:13px 7px}
+#sta-lp .fact .f-ico{width:30px;height:30px;margin-bottom:6px}
+#sta-lp .fact b{font-size:.86rem}
+#sta-lp .fact span{font-size:.66rem}}
+#sta-lp .checks{display:grid;gap:11px;margin-top:26px;max-width:600px;margin-left:auto;margin-right:auto}
+#sta-lp .check{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;
+  background:var(--wh);border:1px solid var(--br);border-radius:12px;padding:14px 15px;
+  transition:transform .18s ease, box-shadow .18s ease;}
+#sta-lp .check:hover{transform:translateY(-2px);box-shadow:0 14px 30px -20px rgba(36,26,51,.4)}
+#sta-lp .check svg{width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
+#sta-lp .check svg path{stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .55s ease .25s}
+#sta-lp .rv.in .check svg path{stroke-dashoffset:0}
+#sta-lp .check p{font-size:1rem;color:var(--t1);line-height:1.55}
+#sta-lp .check p b{color:var(--t0);font-weight:600}
+#sta-lp .checks-2col{max-width:760px}
+@media(min-width:700px){#sta-lp .checks-2col{grid-template-columns:1fr 1fr;align-items:stretch}}
+#sta-lp .check.bonus{background:var(--golp);border-color:rgba(193,147,48,.45);position:relative}
+#sta-lp .check.bonus .chip{position:absolute;top:-9px;right:12px;background:var(--gold);color:#fff;
+  font-family:var(--display);font-weight:700;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+  border-radius:999px;padding:3px 10px;box-shadow:0 4px 10px -4px rgba(122,90,22,.6);}
+#sta-lp .stag{opacity:0;transform:translateY(12px);transition:opacity .5s ease, transform .5s ease}
+#sta-lp .rv.in .stag{opacity:1;transform:none;transition-delay:calc(var(--i,0)*90ms)}
+#sta-lp .ba{display:grid;gap:14px;margin-top:26px;position:relative}
+@media(min-width:700px){#sta-lp .ba{grid-template-columns:1fr 1fr;gap:26px}}
+#sta-lp .ba-card{border:1px solid var(--br);border-radius:var(--r);padding:20px;background:var(--wh)}
+#sta-lp .ba-card h3{margin-bottom:12px;font-size:.74rem;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);font-weight:700}
+#sta-lp .ba-card li{list-style:none;font-size:.98rem;color:var(--t2);padding:8px 0 8px 24px;position:relative;line-height:1.55}
+#sta-lp .ba-card li::before{content:"✕";position:absolute;left:0;top:8px;color:var(--red);opacity:.55;font-size:.8rem;font-weight:700}
+#sta-lp .ba-card.now{background:var(--gd);border-color:var(--gd);
+  box-shadow:0 22px 50px -22px rgba(36,26,51,.6);}
+#sta-lp .ba-card.now h3{color:var(--golb)}
+#sta-lp .ba-card.now li{color:var(--gi)}
+#sta-lp .ba-card.now li::before{content:"✓";color:var(--golb);font-weight:800;opacity:1;font-size:.95rem;top:7px}
+#sta-lp .ba-arrow{width:46px;height:46px;border-radius:50%;background:var(--gold);
+  display:grid;place-items:center;justify-self:center;margin:-4px auto;position:relative;z-index:2;
+  box-shadow:0 0 0 6px var(--cr), 0 10px 24px -8px rgba(122,90,22,.55);
+  transform:rotate(90deg);}
+#sta-lp .ba-arrow svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+@media(min-width:700px){#sta-lp .ba-arrow{position:absolute;left:50%;top:50%;margin:0;transform:translate(-50%,-50%);
+  box-shadow:0 0 0 6px var(--gi), 0 10px 24px -8px rgba(122,90,22,.55);}}
+#sta-lp .receipt{margin:26px auto 0;max-width:560px;background:var(--wh);border:1px solid var(--br);border-radius:16px;
+  padding:22px 22px 18px;box-shadow:0 22px 50px -28px rgba(36,26,51,.45);}
+#sta-lp .receipt-hd{font-family:var(--display);font-weight:800;font-size:.78rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--t2);text-align:center;padding-bottom:12px;
+  border-bottom:2px dashed var(--br);}
+#sta-lp .r-row{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;
+  padding:13px 0;border-bottom:1px dashed var(--br);}
+#sta-lp .r-row p{font-size:.95rem;color:var(--t1);line-height:1.45}
+#sta-lp .r-row p b{color:var(--t0);font-weight:600}
+#sta-lp .r-row .amt{font-family:var(--display);font-weight:800;font-size:.92rem;color:var(--red);
+  white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums;}
+#sta-lp .r-row .amt small{display:block;font-family:var(--body);font-weight:500;font-size:.67rem;color:var(--t3);letter-spacing:.03em}
+#sta-lp .r-row:last-of-type{border-bottom:0}
+#sta-lp .r-total{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;
+  margin-top:4px;padding:15px 14px;background:var(--gi);border:1px solid var(--gp);border-radius:12px;}
+#sta-lp .r-total p{font-family:var(--display);font-weight:800;font-size:.98rem;color:var(--gd);line-height:1.35}
+#sta-lp .r-total .amt{font-family:var(--display);font-weight:800;font-size:1.15rem;color:var(--gb);white-space:nowrap;font-variant-numeric:tabular-nums}
+#sta-lp .cost-note{margin-top:18px;text-align:center;font-family:var(--display);font-weight:700;
+  font-size:clamp(.95rem,2.6vw,1.08rem);color:var(--t0);max-width:36ch;margin-left:auto;margin-right:auto;line-height:1.45}
+#sta-lp .flow{display:grid;gap:28px;margin-top:34px}
+@media(min-width:900px){#sta-lp .flow{grid-template-columns:minmax(0,290px) minmax(0,1fr);gap:48px;align-items:start}}
+#sta-lp .flow-intro h2{margin-bottom:12px}
+@media(min-width:900px){#sta-lp .flow-intro{position:sticky;top:38px}}
+#sta-lp .steps{position:relative;display:grid;gap:14px}
+#sta-lp .step{display:grid;grid-template-columns:38px 1fr;gap:16px;align-items:start;position:relative}
+#sta-lp .step::before{content:"";position:absolute;left:18.5px;top:38px;bottom:-14px;width:1px;background:var(--br)}
+#sta-lp .step:last-child::before{display:none}
+#sta-lp .step-n{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  background:var(--gd);color:#fff;font-family:var(--display);font-weight:800;
+  font-size:.8rem;letter-spacing:.02em;z-index:1;
+  box-shadow:0 0 0 5px rgba(58,42,82,.14);}
+#sta-lp .step-c{background:var(--wh);border:1px solid var(--br);border-radius:var(--r);padding:16px 18px}
+#sta-lp .step-c h3{margin-bottom:6px}
+#sta-lp .step-c p{font-size:.97rem;color:var(--t2);line-height:1.55}
+#sta-lp .duo{display:grid;gap:18px;margin-top:30px}
+@media(min-width:760px){#sta-lp .duo{grid-template-columns:1fr 1fr;gap:22px}}
+#sta-lp .duo-card{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:0 22px 50px -28px rgba(36,26,51,.45);
+  transition:transform .18s ease, box-shadow .18s ease;}
+#sta-lp .duo-card:hover{transform:translateY(-3px);box-shadow:0 26px 56px -26px rgba(36,26,51,.55)}
+#sta-lp .duo-card > img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:var(--gi)}
+#sta-lp .duo-body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:9px;flex:1}
+#sta-lp .duo-body h3{font-size:1.2rem}
+#sta-lp .duo-role{font-family:var(--display);font-weight:700;font-size:.72rem;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--gold);line-height:1.45}
+#sta-lp .duo-body p{font-size:.95rem;color:var(--t2);line-height:1.6}
+#sta-lp .auth-creds{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:12px}
+#sta-lp .auth-creds span{background:var(--golp);border:1px solid rgba(193,147,48,.35);color:#7A5A16;
+  font-size:.74rem;font-weight:600;border-radius:999px;padding:5px 11px}
+#sta-lp .duo-note{margin:22px auto 0;max-width:600px;text-align:center;background:var(--wh);
+  border:1px solid var(--br);border-left:3px solid var(--gold);border-radius:12px;padding:16px 18px;
+  font-size:.95rem;color:var(--t2);line-height:1.6}
+#sta-lp .duo-note b{color:var(--t0);font-weight:600}
+#sta-lp .conds{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:24px;max-width:680px;margin-left:auto;margin-right:auto}
+#sta-lp .conds span{background:var(--wh);border:1px solid var(--br);border-radius:999px;
+  padding:7px 14px;font-size:.85rem;color:var(--t1);font-weight:500;
+  box-shadow:0 6px 16px -12px rgba(36,26,51,.4)}
+#sta-lp .testi-video{margin:26px auto 0;max-width:560px}
+#sta-lp .testis{display:grid;gap:14px;margin-top:26px;max-width:760px;margin-left:auto;margin-right:auto;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));align-items:start}
+#sta-lp .testi-shot{border-radius:16px;overflow:hidden;border:1px solid var(--br);background:var(--wh);
+  box-shadow:0 16px 38px -24px rgba(36,26,51,.5);
+  transition:transform .18s ease, box-shadow .18s ease;}
+#sta-lp .testi-shot:hover{transform:translateY(-3px);box-shadow:0 22px 46px -22px rgba(36,26,51,.55)}
+#sta-lp .testi-shot img{width:100%;height:auto;display:block}
+#sta-lp .testi-cap{margin-top:14px;text-align:center;font-size:.82rem;color:var(--t3)}
+#sta-lp .faq{margin-top:26px;display:grid;gap:9px;max-width:660px;margin-left:auto;margin-right:auto}
+#sta-lp .faq details{background:var(--wh);border:1px solid var(--br);border-radius:12px;overflow:hidden}
+#sta-lp .faq details[open]{border-color:var(--gb)}
+#sta-lp .faq summary{list-style:none;cursor:pointer;padding:17px 46px 17px 17px;position:relative;
+  font-family:var(--display);font-weight:700;font-size:1rem;color:var(--t0);line-height:1.4;}
+#sta-lp .faq summary::-webkit-details-marker{display:none}
+#sta-lp .faq summary::after{content:"";position:absolute;right:18px;top:23px;width:9px;height:9px;
+  border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);
+  transform:rotate(45deg);transition:transform .2s ease;}
+#sta-lp .faq details[open] summary::after{transform:rotate(-135deg);top:26px}
+#sta-lp .faq .a{padding:0 17px 17px;font-size:.97rem;color:var(--t2);line-height:1.62}
+#sta-lp .faq .a b{color:var(--t1);font-weight:600}
+#sta-lp .close{text-align:center}
+#sta-lp .close h2{max-width:24ch;margin:0 auto 14px}
+#sta-lp .ftr{border-top:1px solid var(--br);padding:30px 0 calc(104px + var(--sab));text-align:center}
+@media(min-width:760px){#sta-lp .ftr{padding-bottom:36px}}
+#sta-lp .ftr .logo-txt{font-family:var(--display);font-weight:800;letter-spacing:.06em;color:var(--t2);font-size:1rem;text-transform:uppercase}
+#sta-lp .ftr p{font-size:.76rem;color:var(--t3);margin-top:8px;line-height:1.6}
+#sta-lp .ftr .legal{margin-top:12px;font-size:.72rem;color:var(--t3);max-width:56ch;margin-left:auto;margin-right:auto;line-height:1.6}
+#sta-lp .bar{position:fixed;left:0;right:0;bottom:0;z-index:var(--z-bar);
+  padding:10px 14px calc(10px + var(--sab));
+  background:rgba(248,246,244,.94);backdrop-filter:blur(14px);
+  border-top:1px solid var(--br);
+  display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;
+  transform:translateY(120%);transition:transform .28s ease;}
+#sta-lp .bar.on{transform:translateY(0)}
+@media(min-width:760px){#sta-lp .bar{display:none}}
+#sta-lp .bar-cta{display:flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--gd);color:#fff;border-radius:11px;padding:14px 16px;
+  font-family:var(--display);font-weight:700;font-size:.94rem;letter-spacing:.01em;
+  box-shadow:0 10px 26px -8px rgba(58,42,82,.7);}
+#sta-lp .bar-cta small{font-weight:600;opacity:.85;font-size:.8rem}
+#sta-lp .bar-alt{display:grid;place-items:center;border-radius:11px;padding:14px 12px;
+  background:var(--wh);border:1px solid var(--br);
+  font-family:var(--display);font-weight:700;font-size:.78rem;color:var(--gm);white-space:nowrap}
+#sta-lp .rv{opacity:0;transform:translateY(16px)}
+#sta-lp .rv{transition:opacity .55s ease, transform .55s ease}
+#sta-lp .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){#sta-lp *{animation:none!important;transition:none!important}
+#sta-lp .rv{opacity:1;transform:none}
+#sta-lp .stag{opacity:1;transform:none}
+#sta-lp .check svg path{stroke-dashoffset:0}
+#sta-lp{scroll-behavior:auto}}
+
+/* El bloque se estira a ancho completo aunque GHL lo meta en su contenedor */
+#sta-lp{
+  position:relative;width:100vw;left:50%;right:50%;
+  margin-left:-50vw;margin-right:-50vw;
+  overflow-x:hidden;isolation:isolate;
+}
+/* Blindaje contra los estilos propios de GHL */
+#sta-lp,#sta-lp *{box-sizing:border-box}
+#sta-lp *{margin:0;padding:0}
+#sta-lp a{text-decoration:none!important;color:inherit}
+#sta-lp ul,#sta-lp ol,#sta-lp li{list-style:none}
+#sta-lp img{max-width:100%;display:block;border:0}
+#sta-lp button{background:none;border:0;font-family:inherit;cursor:pointer}
+#sta-lp p,#sta-lp span,#sta-lp li,#sta-lp b,#sta-lp em,
+#sta-lp strong,#sta-lp summary,#sta-lp small,#sta-lp i{font-family:inherit}
+#sta-lp h1,#sta-lp h2,#sta-lp h3{text-transform:none}
+</style>
+
+<div id="sta-lp" data-campana="consulta-autoinmune">
+<!-- ============================ HEADER ============================ -->
+<header class="hdr">
+  <div class="wrap">
+    <div class="logo-txt">Sana tu <b>Autoinmune</b></div>
+    <div class="logo-sub">Ezequiel Racca · Dra. Catalina Klimboski</div>
+  </div>
+</header>
+
+<!-- ============================= HERO ============================= -->
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">Ya probaste cremas, corticoides y dietas de eliminación. <span class="alerta">Y los brotes siguen volviendo</span></p>
+    <h1>La consulta que por fin te explica <span class="mark">por qué tu cuerpo se ataca a sí mismo</span>.</h1>
+    <p class="lead">Una consulta online 1 a 1 con Ezequiel Racca y la Dra. Catalina Klimboski. Sales entendiendo qué está pasando de verdad en tu cuerpo, por qué la piel es el mensajero y no la causa, y con el camino escrito para empezar a apagar la inflamación desde el intestino.</p>
+
+    <!-- VSL -->
+    <div class="vsl">
+      <div class="vsl-frame">
+        <div class="vsl-ratio">
+          <img class="vsl-poster" id="sta-vsl-poster" src="https://placehold.co/1280x720/3A2A52/D7B85A.png?text=Sana+tu+Autoinmune" alt="Ezequiel Racca explica por qué las enfermedades autoinmunes empiezan en el intestino" width="1280" height="720">
+          <button type="button" class="vsl-play" data-video aria-label="Reproducir el video">
+            <b>Míralo antes de agendar · 3 min</b>
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          </button>
+        </div>
+      </div>
+      <p class="vsl-cap">Por qué tu enfermedad no mejora y qué vamos a hacer distinto.</p>
+    </div>
+
+    <!-- CTA principal -->
+    <div class="actions" id="sta-cta-hero">
+      <a class="opt primary" data-cta="paypal" data-pos="hero" href="#" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg></span>
+        <span class="txt">
+          <strong>Pagos internacionales 🌎 · <span data-precio="usd">USD $60</span></strong>
+          <em>PayPal o tarjeta · pagas y eliges tu hora</em>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
+      <a class="opt ghost" data-cta="mpago" data-pos="hero" href="#" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5c1.2-1.8 2.3-2.7 3.5-2.7s2.3.9 3.5 2.7"/></svg></span>
+        <span class="txt">
+          <strong>Pagos Argentina 🇦🇷 · <span data-precio="ars">en pesos</span></strong>
+          <em>Mercado Pago · pagas y eliges tu hora</em>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+    </div>
+    <p class="actions-note">Consulta de Evaluación Autoinmune · 100% online, desde cualquier país</p>
+
+    <div class="facts">
+      <div class="fact">
+        <span class="f-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9.5" r="2.6"/><path d="M14.6 19.5c0-2.5 1.9-4.2 4.2-4.2 1 0 1.9.3 2.7.9"/></svg></span>
+        <b>Dúo clínico</b><span>Nutrición funcional + médica, en la misma consulta</span>
+      </div>
+      <div class="fact">
+        <span class="f-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.6-7-10a4.2 4.2 0 0 1 7-3.1A4.2 4.2 0 0 1 19 11c0 5.4-7 10-7 10z"/></svg></span>
+        <b>1 hora completa</b><span>Tu caso revisado antes, no una consulta de 15 minutos</span>
+      </div>
+      <div class="fact">
+        <span class="f-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <b>Se descuenta</b><span>Si entras al programa, esta consulta se te descuenta</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== ANTES / DESPUÉS ======================== -->
+<section class="sec">
+  <div class="wrap rv">
+    <div class="center">
+      <span class="eyebrow eyebrow-line">Esto no es solo la piel</span>
+      <h2>Lo que más cansa <span class="mark">no es el brote: es no entender nada</span></h2>
+      <p class="lead" style="margin-top:12px">Años de consultas, medicamentos y dietas, y nadie te explicó todavía por qué tu sistema inmune se volvió en tu contra.</p>
+    </div>
+    <div class="ba">
+      <div class="ba-card stag" style="--i:0">
+        <h3>Así estás hoy</h3>
+        <ul><li>Vas de especialista en especialista y cada uno mira una parte, nadie mira el conjunto.</li>
+          <li>Cada consulta termina igual: otra crema, otro corticoide, otro inmunosupresor.</li>
+          <li>Mejoras unas semanas, vuelve el brote, y ya no sabes qué lo disparó.</li>
+          <li>Te dijeron "es crónico, es de por vida" y te fuiste sin ninguna explicación de la causa.</li></ul>
+      </div>
+      <div class="ba-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="ba-card now stag" style="--i:2">
+        <h3>Así sales de la consulta</h3>
+        <ul><li>Entiendes qué está pasando en tu cuerpo y por qué tu piel reacciona así.</li>
+          <li>Tienes el camino escrito: qué hacer, en qué orden y qué esperar en cada etapa.</li>
+          <li>Sabes qué estudios pedir y cuáles no valen tu dinero.</li>
+          <li>Dejas de sentir que tu cuerpo es impredecible: por fin hay un mecanismo que lo explica.</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== EL MECANISMO ========================== -->
+<section class="sec sec-alt">
+  <div class="wrap rv">
+    <div class="center">
+      <span class="eyebrow eyebrow-line">El problema de fondo</span>
+      <h2>Te están tratando la piel. <span class="alerta">La causa está en el intestino</span></h2>
+      <p class="lead" style="margin-top:12px">"Psoriasis", "dermatitis atópica", "vitíligo" no son causas: son nombres de lo que se ve. Por eso la crema, el corticoide y la dieta sin gluten alivian… y el brote vuelve.</p>
+    </div>
+    <div class="checks"><div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>El 80% de tu sistema inmune vive en el intestino.</b> Cuando la barrera intestinal se daña, pasan al torrente sanguíneo partículas que no deberían pasar. El sistema inmune se enciende y deja de distinguir entre lo extraño y tu propio tejido.</p></div>
+      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>La ciencia de 2024-2025 lo confirmó.</b> El eje intestino–piel está documentado en psoriasis, dermatitis atópica, vitíligo y lupus: la disbiosis intestinal sostiene la cascada inflamatoria que después ves en tu piel y en tus articulaciones.</p></div>
+      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Por eso el ciclo se repite:</b> medicar → aliviar → recaer. El inmunosupresor te baja los síntomas bajándote la inmunidad. Alivia. Pero mientras nadie toque la causa, el cuerpo vuelve a encenderse.</p></div>
+      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Esta consulta hace la pregunta que casi nadie hace:</b> qué comes, qué historia trae tu intestino y qué se encendió antes del primer brote. De ahí sale la evaluación real, y recién ahí tiene sentido hablar de plan.</p></div></div>
+  </div>
+</section>
+
+<!-- ========================= LA CONSULTA ========================= -->
+<section class="sec">
+  <div class="wrap rv">
+    <div class="center">
+      <span class="eyebrow eyebrow-line">Qué te llevas</span>
+      <h2>Una hora que ordena años de confusión</h2>
+      <p class="lead" style="margin-top:12px">No es "otra consulta más". Es la evaluación que debió llegar primero.</p>
+    </div>
+    <div class="checks checks-2col"><div class="check stag" style="--i:0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Tu evaluación funcional completa.</b> Historia clínica, alimentación, medicación, análisis y síntomas revisados en conjunto, no por partes.</p></div>
+      <div class="check stag" style="--i:1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Por qué llegaste hasta acá.</b> Qué de tu alimentación, tu intestino y tu historia encendió el proceso, explicado en simple, para que deje de parecer azar.</p></div>
+      <div class="check stag" style="--i:2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>El camino paso a paso.</b> Qué hacer ahora, en qué orden y qué esperar. Te lo llevas claro, no un "volvé en un mes a ver cómo seguís".</p></div>
+      <div class="check stag" style="--i:3"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Qué estudios pedir y cuáles no.</b> Si falta algo importante, te decimos exactamente cuál y por qué, en vez de una batería genérica y cara.</p></div>
+      <div class="check bonus stag" style="--i:4"><span class="chip">De regalo</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Tu guía de 2 semanas, incluida.</b> Salgas o no con nosotros después, te llevas un plan escrito de 14 días para empezar a bajar la inflamación desde el primer plato.</p></div>
+      <div class="check bonus stag" style="--i:5"><span class="chip">Se descuenta</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Si decides entrar al programa, esta consulta se te descuenta.</b> No pagas dos veces por conocer tu caso. Y si no entras, igual te vas con la evaluación y la guía.</p></div></div>
+
+    <div class="actions" style="margin-top:28px">
+      <a class="opt primary" data-cta="paypal" data-pos="consulta" href="#" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg></span>
+        <span class="txt">
+          <strong>Reservar mi consulta online</strong>
+          <em>Pagos internacionales 🌎 · <span data-precio="usd">USD $60</span> con PayPal o tarjeta</em>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+      <a class="opt ghost" data-cta="mpago" data-pos="consulta" href="#" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5c1.2-1.8 2.3-2.7 3.5-2.7s2.3.9 3.5 2.7"/></svg></span>
+        <span class="txt">
+          <strong>Pagos Argentina 🇦🇷 · <span data-precio="ars">en pesos</span></strong>
+          <em>Mercado Pago</em>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== EL COSTO DE ESPERAR ======================== -->
+<section class="sec sec-alt">
+  <div class="wrap rv">
+    <div class="center">
+      <span class="eyebrow eyebrow-line">Consultar a tiempo</span>
+      <h2>Esperar también tiene precio, y es más alto</h2>
+      <p class="lead" style="margin-top:12px">Esto es lo que cuesta seguir tapando el brote en vez de entender la causa:</p>
+    </div>
+    <div class="receipt">
+      <div class="receipt-hd">La cuenta de seguir esperando</div>
+      <div class="r-row stag" style="--i:0"><p><b>Cremas, corticoides tópicos y humectantes</b> que alivian semanas y vuelven a fallar</p><span class="amt">Cada mes<small>y cada recaída</small></span></div>
+      <div class="r-row stag" style="--i:1"><p><b>Inmunosupresores y biológicos</b>: efectos adversos, controles de hígado y dependencia creciente</p><span class="amt">Todo el año<small>por tiempo indefinido</small></span></div>
+      <div class="r-row stag" style="--i:2"><p><b>Consultas sueltas y análisis repetidos</b> entre dermatólogo, reumatólogo y gastroenterólogo, sin nadie que conecte los puntos</p><span class="amt">Sin cierre<small>y sin respuesta</small></span></div>
+      <div class="r-row stag" style="--i:3"><p><b>El avance de la enfermedad.</b> Cada mes sin tocar la causa es inflamación que sigue trabajando en silencio</p><span class="amt">Sin precio<small>el tiempo no vuelve</small></span></div>
+      <div class="r-total stag" style="--i:4"><p>La consulta que ordena todo hoy</p><span class="amt" data-precio="usd">USD $60</span></div>
+    </div>
+    <p class="cost-note">Entender la causa a tiempo es la diferencia entre ajustar el plato hoy… y sumar un medicamento más mañana.</p>
+  </div>
+</section>
+
+<!-- ============================ PROCESO ============================ -->
+<section class="sec">
+  <div class="wrap-wide rv">
+    <div class="flow">
+      <div class="flow-intro">
+        <span class="eyebrow">Cómo funciona</span>
+        <h2>Simple, online y sin vueltas.</h2>
+        <p class="lead" style="margin-top:12px">Desde que pagas hasta que tienes tu evaluación pasan días, no meses.</p>
+      </div>
+      <div class="steps"><div class="step"><span class="step-n">01</span><div class="step-c"><h3>Agenda y paga</h3><p>Eliges pagar en dólares (PayPal o tarjeta) o en pesos argentinos (Mercado Pago). Al pagar, eliges día y hora para tu consulta online.</p></div></div>
+        <div class="step"><span class="step-n">02</span><div class="step-c"><h3>Cuéntanos tu caso</h3><p>Completas un cuestionario breve: tu diagnóstico, tu historia, qué comes, qué medicación tomas y los análisis que tengas a mano. Llegamos a la consulta con tu caso ya estudiado.</p></div></div>
+        <div class="step"><span class="step-n">03</span><div class="step-c"><h3>La consulta online</h3><p>Una hora 1 a 1 con Ezequiel y la Dra. Catalina, desde donde estés. Revisamos tu caso contigo, te explicamos en simple qué está pasando y respondemos todas tus preguntas.</p></div></div>
+        <div class="step"><span class="step-n">04</span><div class="step-c"><h3>Sales con la evaluación y el camino</h3><p>Qué tienes, por qué, el paso a paso, y tu guía de 2 semanas para empezar. Es la última vez que sales de una consulta con más dudas que respuestas.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ AUTORIDAD (DÚO) ============================ -->
+<section class="sec sec-alt">
+  <div class="wrap-wide rv">
+    <div class="center">
+      <span class="eyebrow eyebrow-line">Quiénes te atienden</span>
+      <h2>Dos miradas sobre el mismo caso</h2>
+      <p class="lead" style="margin-top:12px;max-width:52ch;margin-left:auto;margin-right:auto">La nutrición funcional que trabaja la causa, y la mirada médica que cuida tu tratamiento. En la misma hora, sobre tu caso.</p>
+    </div>
+    <div class="duo">
+      <div class="duo-card stag" style="--i:0">
+        <!-- TODO: reemplazar por la foto real de Ezequiel -->
+        <img src="https://placehold.co/1080x1350/3A2A52/D7B85A.png?text=Ezequiel+Racca" alt="Ezequiel Racca, especialista en nutrición funcional para enfermedades autoinmunes" loading="lazy" width="1080" height="1350">
+        <div class="duo-body">
+          <h3>Ezequiel Racca</h3>
+          <p class="duo-role">Odontólogo · Nutrición y medicina funcional</p>
+          <p>Lo digo desde el primer minuto: <b>no soy médico</b>, soy odontólogo, y me formé durante años en nutrición y medicina funcional, incluso en clínicas de Estados Unidos dedicadas solo a pacientes autoinmunes. Ahí vi enfermedades llamadas incurables cambiar con una sola variable: la alimentación.</p>
+          <p>Por eso trabajo junto a una médica, y por eso esta consulta no reemplaza a tu especialista: le suma la pieza que casi nadie mira.</p>
+          <div class="auth-creds">
+            <span>Nutrición funcional</span>
+            <span>Formación en clínicas de EE.UU.</span>
+            <span>Enfoque autoinmune</span>
+          </div>
+        </div>
+      </div>
+      <div class="duo-card stag" style="--i:1">
+        <!-- TODO: reemplazar por la foto real de Catalina -->
+        <img src="https://placehold.co/1080x1350/4B3868/D7B85A.png?text=Dra.+Catalina" alt="Dra. Catalina Klimboski, médica dedicada a medicina funcional" loading="lazy" width="1080" height="1350">
+        <div class="duo-body">
+          <h3>Dra. Catalina Klimboski</h3>
+          <p class="duo-role">Médica · Medicina funcional</p>
+          <p>Médica en ejercicio, dedicada a la medicina funcional. Llegó a este enfoque como paciente: <b>revirtió su propia colitis ulcerosa</b> cuando la medicina convencional solo le ofrecía más medicación y peores brotes.</p>
+          <p>Es quien mira la parte clínica de tu caso: tu medicación, tus análisis y tus tiempos, para que nada de lo que hagas ponga en riesgo tu tratamiento.</p>
+          <div class="auth-creds">
+            <span>Médica</span>
+            <span>Medicina funcional</span>
+            <span>Caso de éxito en colitis ulcerosa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="duo-note"><b>Trabajamos junto a tu médico, nunca en su lugar.</b> No pedimos que abandones ninguna medicación por tu cuenta: cualquier ajuste se hace con supervisión médica y a tu ritmo.</p>
+  </div>
+</section>
+
+<!-- ======================== PARA QUIÉN ES ======================== -->
+<section class="sec">
+  <div class="wrap rv center">
+    <span class="eyebrow eyebrow-line">Para quién es</span>
+    <h2>Si tu diagnóstico está en esta lista, esta consulta es para ti</h2>
+    <p class="lead" style="margin-top:12px;max-width:50ch;margin-left:auto;margin-right:auto">Distintos nombres, el mismo origen: un sistema inmune encendido que empieza en el intestino.</p>
+    <div class="conds">
+      <span>Psoriasis</span>
+      <span>Dermatitis atópica / eczema</span>
+      <span>Vitíligo</span>
+      <span>Lupus</span>
+      <span>Enfermedad de Crohn</span>
+      <span>Colitis ulcerosa</span>
+      <span>Tiroiditis de Hashimoto</span>
+      <span>Artritis reumatoide</span>
+      <span>Otras autoinmunes</span>
+    </div>
+    <p class="actions-note" style="max-width:52ch;margin-left:auto;margin-right:auto">¿Tu diagnóstico no aparece? Igual cuéntanoslo en el cuestionario: si tu caso necesita otro tipo de manejo, te lo decimos con honestidad en la misma consulta.</p>
+  </div>
+</section>
+
+<!-- ========================== TESTIMONIOS ==========================
+     Se muestra sola cuando se cargan TESTIMONIO_VIDEO_EMBED o
+     TESTIMONIOS_IMG en la configuración STA de más abajo.          -->
+<section class="sec sec-alt" id="sta-testis" style="display:none">
+  <div class="wrap rv">
+    <div class="center">
+      <span class="eyebrow eyebrow-line">Resultados reales</span>
+      <h2>Personas que dejaron de adivinar</h2>
+      <p class="lead" style="margin-top:12px">Esto es lo que nos escriben después de la consulta.</p>
+    </div>
+
+    <div class="testi-video" id="sta-testi-video" style="display:none">
+      <div class="vsl-frame"><div class="vsl-ratio" id="sta-testi-video-slot"></div></div>
+      <p class="vsl-cap">Su historia, contada por ella misma.</p>
+    </div>
+
+    <div class="testis" id="sta-testi-imgs" style="display:none">
+      <figure class="testi-shot stag" style="--i:0"><img data-testi="0" src="" alt="Mensaje de WhatsApp de una paciente contando la mejora de su piel después de la consulta" loading="lazy"></figure>
+      <figure class="testi-shot stag" style="--i:1"><img data-testi="1" src="" alt="Mensaje de WhatsApp de un paciente agradeciendo la evaluación de Ezequiel y la Dra. Catalina" loading="lazy"></figure>
+      <figure class="testi-shot stag" style="--i:2"><img data-testi="2" src="" alt="Mensaje de WhatsApp con el avance de una persona con enfermedad autoinmune en el programa" loading="lazy"></figure>
+    </div>
+    <p class="testi-cap">Mensajes reales, compartidos con permiso. Cada caso es individual y los resultados varían.</p>
+  </div>
+</section>
+
+<!-- ============================== FAQ ============================== -->
+<section class="sec">
+  <div class="wrap rv">
+    <div class="center">
+      <span class="eyebrow eyebrow-line">Antes de agendar</span>
+      <h2>Lo que todos preguntan</h2>
+    </div>
+    <div class="faq"><details><summary>¿Esto reemplaza a mi médico?</summary><div class="a">No, y no queremos que lo haga. Tu dermatólogo, reumatólogo o gastroenterólogo siguen igual. Esta consulta resuelve lo que ellos no alcanzan a cubrir: <b>entender la causa</b> detrás de los brotes y darte el camino nutricional y funcional para trabajarla, con una médica revisando la parte clínica.</div></details>
+      <details><summary>¿Tengo que dejar mi medicación?</summary><div class="a">Nunca por tu cuenta. La Dra. Catalina revisa tu medicación dentro de la consulta y cualquier ajuste se hace <b>de forma gradual y supervisada</b>, junto a tu médico tratante. El objetivo es que con el tiempo necesites menos, no generarte una crisis.</div></details>
+      <details><summary>¿Ezequiel es médico?</summary><div class="a">No, y lo dice él mismo desde el primer minuto: <b>es odontólogo</b>, formado durante años en nutrición y medicina funcional, incluso en clínicas de EE.UU. dedicadas a pacientes autoinmunes. Precisamente por eso la consulta la hace junto a la Dra. Catalina Klimboski, médica, para que la parte clínica esté siempre cubierta.</div></details>
+      <details><summary>Ya probé dietas de eliminación y no sirvió</summary><div class="a">La dieta de eliminación es la primera capa: quita lo que inflama, pero no repara. Lo que falta es la segunda capa —<b>restaurar la barrera intestinal y bajar la inflamación de base</b>— y saber en qué orden hacerlo. Eso es exactamente lo que se ordena en esta consulta.</div></details>
+      <details><summary>¿Me van a prometer que me curo?</summary><div class="a">No. Sería deshonesto. Las enfermedades autoinmunes no se "curan" con ningún enfoque, pero <b>la remisión funcional está documentada</b>: menos brotes, menos intensidad, mejor calidad de vida. Te vamos a decir con honestidad qué es realista en tu caso y qué no.</div></details>
+      <details><summary>¿Cómo es la consulta?</summary><div class="a">Una hora 1 a 1, 100% online, desde cualquier país. Antes completas un cuestionario sobre tu caso, así la hora se usa en explicarte y resolver, no en llenar fichas.</div></details>
+      <details><summary>¿Necesito análisis previos?</summary><div class="a">No. Si tienes análisis, los revisamos en la consulta. Si falta alguno importante, te decimos <b>exactamente cuál pedir y por qué</b>, en vez de mandarte una batería genérica.</div></details>
+      <details><summary>¿Qué pasa justo después de pagar?</summary><div class="a">Eliges día y hora para tu consulta online y recibes el cuestionario. La evaluación, el camino y tu guía de 2 semanas te los llevas en la misma consulta.</div></details>
+      <details><summary>¿Y si mi caso necesita más que una consulta?</summary><div class="a">La consulta es la evaluación y el camino. Si tu caso necesita acompañamiento para ejecutarlo, existe un programa de 3 meses y te lo contamos ahí, sin presión. <b>Si entras, esta consulta se te descuenta.</b> Y si no lo necesitas, también te lo decimos.</div></details>
+      <details><summary>¿En qué moneda pago?</summary><div class="a">Hay dos botones según dónde estés: <b>Pagos internacionales 🌎</b> (<span data-precio="usd">USD $60</span> por PayPal o tarjeta, desde cualquier país) y <b>Pagos Argentina 🇦🇷</b> (<span data-precio="ars">en pesos</span> por Mercado Pago). Es la misma consulta, elige el que te acomode.</div></details></div>
+  </div>
+</section>
+
+<!-- ============================= CIERRE ============================= -->
+<section class="sec sec-dark">
+  <div class="wrap rv close">
+    <span class="eyebrow eyebrow-line" style="color:var(--golb)">Empieza acá</span>
+    <h2>Pasa de "es de por vida" a un camino concreto, en 1 hora.</h2>
+    <p class="lead" style="max-width:44ch;margin:0 auto">Agenda tu consulta y sal, por fin, con una explicación de verdad y un plan que puedes empezar mañana.</p>
+
+    <div class="actions">
+      <a class="opt primary" data-cta="paypal" data-pos="cierre" href="#" target="_blank" rel="noopener" style="background:linear-gradient(180deg,var(--golb),var(--gold));border-color:var(--gold);box-shadow:0 18px 40px -14px rgba(0,0,0,.5)">
+        <span class="ico" style="background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.3)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg></span>
+        <span class="txt">
+          <strong>Quiero entender mi caso ahora · <span data-precio="usd">USD $60</span></strong>
+          <em>Pagos internacionales 🌎 · PayPal o tarjeta · eliges tu hora</em>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+      <a class="opt ghost" data-cta="mpago" data-pos="cierre" href="#" target="_blank" rel="noopener" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.2)">
+        <span class="ico" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18)"><svg viewBox="0 0 24 24" aria-hidden="true" style="stroke:#fff"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5c1.2-1.8 2.3-2.7 3.5-2.7s2.3.9 3.5 2.7"/></svg></span>
+        <span class="txt">
+          <strong style="color:#fff">Pagos Argentina 🇦🇷 · <span data-precio="ars">en pesos</span></strong>
+          <em style="color:rgba(255,255,255,.65)">Mercado Pago · pagas y eliges tu hora</em>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true" style="stroke:#fff"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= FOOTER ============================= -->
+<footer class="ftr">
+  <div class="wrap">
+    <div class="logo-txt">Sana tu Autoinmune</div>
+    <p>
+      Ezequiel Racca · Dra. Catalina Klimboski<br>
+      © <span id="sta-y">2026</span> Sana tu Autoinmune. Todos los derechos reservados.
+    </p>
+    <p class="legal">
+      Este servicio es complementario y no reemplaza el diagnóstico ni el tratamiento de tu médico
+      tratante. No se solicita ni se sugiere abandonar medicación por cuenta propia. Cada caso es
+      individual y los resultados varían según la condición de partida, el compromiso y la respuesta
+      biológica de cada persona.
+    </p>
+  </div>
+</footer>
+
+<!-- ========================= BARRA FIJA MÓVIL ========================= -->
+<div class="bar">
+  <a class="bar-cta" data-cta="paypal" data-pos="barra" href="#" target="_blank" rel="noopener">Agendar · 🌎 <small data-precio="usd">USD $60</small></a>
+  <a class="bar-alt" data-cta="mpago" data-pos="barra" href="#" target="_blank" rel="noopener">Argentina 🇦🇷</a>
+</div>
+</div>
+
+<script>
+/* ==========================================================================
+   SANA TU AUTOINMUNE · Configuración de la landing de la Consulta
+   --------------------------------------------------------------------------
+   👉 EDITA SOLO ESTE BLOQUE. Todos los botones y precios toman los valores
+      de aquí.
+   ========================================================================== */
+
+var STA = {
+  // Pagos internacionales / resto del mundo (PayPal o tarjeta — USD $60).
+  PAGO_URL_PAYPAL: '',                                // ← REEMPLAZAR
+
+  // Pagos Argentina (Mercado Pago — en pesos).
+  PAGO_URL_MPAGO: '',                                 // ← REEMPLAZAR
+
+  // Precios mostrados en toda la página. Cambiar acá los cambia en todos lados.
+  PRECIO_USD: 'USD $60',
+  PRECIO_ARS: 'en pesos',                             // ← ej. 'ARS $75.000' cuando esté definido
+
+  // VSL de Ezequiel (máx. 3 min). Pega la URL EMBED del video (no la de compartir).
+  //   YouTube  → https://www.youtube.com/embed/ABC123
+  //   Vimeo    → https://player.vimeo.com/video/123456789
+  //   Wistia   → https://fast.wistia.net/embed/iframe/ABC123
+  // Si lo dejas vacío, el botón de play lleva directo a los botones de pago.
+  VSL_EMBED: '',                                      // ← REEMPLAZAR
+
+  // Portada del VSL (sube la imagen a Media de GHL y pega la URL).
+  VSL_POSTER: '',                                     // ← REEMPLAZAR
+
+  // Testimonios. La sección aparece sola cuando cargas al menos uno.
+  TESTIMONIO_VIDEO_EMBED: '',                         // ← cuando esté el video
+  // Pantallazos de WhatsApp: sube las imágenes a Media de GHL y pega aquí
+  // las 3 URLs (con menos también funciona, se muestran las que haya).
+  TESTIMONIOS_IMG: ['', '', ''],                      // ← cuando estén los pantallazos
+
+  // Píxeles (opcional). Si los dejas vacíos no se carga nada.
+  META_PIXEL_ID: '',                                  // ej. '123456789012345'
+  GA4_ID: ''                                          // ej. 'G-XXXXXXXXXX'
+};
+
+(function () {
+  'use strict';
+
+  var d = document;
+  var RAIZ = d.getElementById('sta-lp');
+  var campana = RAIZ ? RAIZ.getAttribute('data-campana') : 'consulta-autoinmune';
+
+  /* ---- 0. Precios: se escriben una sola vez arriba ---- */
+  function precios() {
+    Array.prototype.forEach.call(d.querySelectorAll('#sta-lp [data-precio="usd"]'), function (n) {
+      if (STA.PRECIO_USD) n.textContent = STA.PRECIO_USD;
+    });
+    Array.prototype.forEach.call(d.querySelectorAll('#sta-lp [data-precio="ars"]'), function (n) {
+      if (STA.PRECIO_ARS) n.textContent = STA.PRECIO_ARS;
+    });
+  }
+
+  /* ---- 1. Rellena los enlaces de todos los CTA ---- */
+  function enlaces() {
+    Array.prototype.forEach.call(d.querySelectorAll('[data-cta="paypal"]'), function (a) {
+      a.setAttribute('href', STA.PAGO_URL_PAYPAL || '#sta-cta-hero');
+    });
+    Array.prototype.forEach.call(d.querySelectorAll('[data-cta="mpago"]'), function (a) {
+      a.setAttribute('href', STA.PAGO_URL_MPAGO || '#sta-cta-hero');
+    });
+  }
+
+  /* ---- 2. Barra fija móvil: aparece al pasar el primer CTA ---- */
+  function barra() {
+    var bar = d.querySelector('#sta-lp .bar');
+    var ancla = d.querySelector('#sta-cta-hero');
+    if (!bar || !ancla) return;
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          bar.classList.toggle('on', !e.isIntersecting && e.boundingClientRect.top < 0);
+        });
+      }, { threshold: 0 }).observe(ancla);
+    } else {
+      bar.classList.add('on');
+    }
+  }
+
+  /* ---- 3. Animación de entrada por sección ---- */
+  function revelar() {
+    var items = d.querySelectorAll('#sta-lp .rv');
+    if (!items.length) return;
+    if (!('IntersectionObserver' in window)) {
+      Array.prototype.forEach.call(items, function (n) { n.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+    Array.prototype.forEach.call(items, function (n) { io.observe(n); });
+  }
+
+  /* ---- 4. Reproductor del VSL: carga el iframe solo al hacer clic ---- */
+  function video() {
+    var poster = d.getElementById('sta-vsl-poster');
+    if (poster && STA.VSL_POSTER) poster.setAttribute('src', STA.VSL_POSTER);
+
+    Array.prototype.forEach.call(d.querySelectorAll('#sta-lp [data-video]'), function (btn) {
+      btn.addEventListener('click', function () {
+        var src = STA.VSL_EMBED;
+
+        // Sin video montado todavía: el play lleva al CTA en vez de romperse.
+        if (!src) {
+          var cta = d.querySelector('#sta-cta-hero');
+          if (cta) cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+
+        var cont = btn.closest('.vsl-ratio');
+        var f = d.createElement('iframe');
+        f.src = src + (src.indexOf('?') > -1 ? '&' : '?') + 'autoplay=1&rel=0';
+        f.setAttribute('title', 'Consulta de Evaluación Autoinmune');
+        f.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen');
+        f.setAttribute('allowfullscreen', '');
+        cont.innerHTML = '';
+        cont.appendChild(f);
+        track('VerVSL');
+      });
+    });
+  }
+
+  /* ---- 4a. Testimonios: la sección aparece solo si hay contenido ---- */
+  function testimonios() {
+    var sec = d.getElementById('sta-testis');
+    if (!sec) return;
+    var hay = false;
+
+    var vid = (STA.TESTIMONIO_VIDEO_EMBED || '').trim();
+    if (vid) {
+      var cont = d.getElementById('sta-testi-video');
+      var slot = d.getElementById('sta-testi-video-slot');
+      var f = d.createElement('iframe');
+      f.src = vid;
+      f.setAttribute('title', 'Testimonio de una persona después de la consulta');
+      f.setAttribute('loading', 'lazy');
+      f.setAttribute('allow', 'accelerometer; encrypted-media; picture-in-picture; fullscreen');
+      f.setAttribute('allowfullscreen', '');
+      slot.appendChild(f);
+      cont.style.display = '';
+      hay = true;
+    }
+
+    var imgs = STA.TESTIMONIOS_IMG || [];
+    var visibles = 0;
+    Array.prototype.forEach.call(d.querySelectorAll('#sta-testis [data-testi]'), function (img) {
+      var url = (imgs[parseInt(img.getAttribute('data-testi'), 10)] || '').trim();
+      if (url) { img.src = url; visibles++; }
+      else if (img.parentElement) { img.parentElement.style.display = 'none'; }
+    });
+    if (visibles) { d.getElementById('sta-testi-imgs').style.display = ''; hay = true; }
+
+    if (hay) sec.style.display = '';
+  }
+
+  /* ---- 5. Medición de clics en los CTA ---- */
+  function track(evento, extra) {
+    var data = extra || {};
+    data.campana = campana;
+    if (window.fbq) window.fbq('trackCustom', evento, data);
+    if (window.gtag) window.gtag('event', evento, data);
+    if (window.dataLayer) window.dataLayer.push(Object.assign({ event: evento }, data));
+  }
+
+  function clics() {
+    d.addEventListener('click', function (e) {
+      var a = e.target.closest('[data-cta]');
+      if (!a) return;
+      var tipo = a.getAttribute('data-cta');
+      if (tipo === 'paypal') track('ClicPagoPaypal', { ubicacion: a.getAttribute('data-pos') || '' });
+      if (tipo === 'mpago') track('ClicPagoMercadoPago', { ubicacion: a.getAttribute('data-pos') || '' });
+    });
+  }
+
+  /* ---- 6. Píxeles (solo si están configurados) ---- */
+  function pixeles() {
+    if (STA.META_PIXEL_ID) {
+      !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+        t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+      }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+      window.fbq('init', STA.META_PIXEL_ID);
+      window.fbq('track', 'PageView');
+    }
+    if (STA.GA4_ID) {
+      var s = d.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + STA.GA4_ID;
+      d.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', STA.GA4_ID);
+    }
+  }
+
+  function init() { precios(); enlaces(); barra(); testimonios(); revelar(); video(); clics(); pixeles(); }
+
+  if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
+
+/* --- GHL: elimina el relleno y el fondo de los contenedores que lo envuelven --- */
+(function () {
+  function ajustar() {
+    var n = document.getElementById('sta-lp');
+    if (!n) return;
+    var p = n.parentElement;
+    while (p && p !== document.body) {
+      p.style.setProperty('padding', '0', 'important');
+      p.style.setProperty('margin-top', '0', 'important');
+      p.style.setProperty('margin-bottom', '0', 'important');
+      p.style.setProperty('background', 'transparent', 'important');
+      p.style.setProperty('border', '0', 'important');
+      p = p.parentElement;
+    }
+    document.body.style.setProperty('margin', '0', 'important');
+    document.body.style.setProperty('background-color', '#F8F6F4', 'important');
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ajustar);
+  else ajustar();
+  window.addEventListener('load', ajustar);
+  setTimeout(ajustar, 400);
+  setTimeout(ajustar, 1500);
+})();
+
+document.addEventListener('DOMContentLoaded',function(){
+  var a=document.getElementById('sta-y');
+  if(a) a.textContent=new Date().getFullYear();
+});
+</script>
