@@ -25,13 +25,10 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 MODO = (sys.argv[1] if len(sys.argv) > 1 else "paula").lower()
 MODELO = sys.argv[2] if len(sys.argv) > 2 else "claude-opus-5"
 
-ESTADOS = ["nuevo", "saludado", "calificando", "espejo", "oferta", "objecion",
-           "link_enviado", "nurture_libro", "derivado_clinico", "handoff_humano"]
-ACCIONES = ["responder", "ofrecer_producto", "pedir_fotos", "derivar_clinico", "handoff_humano"]
-PRODUCTOS = ["ninguno", "libro1_nutricion", "libro2_recomposicion", "consulta_97",
-             "asesoria_197", "metodo_497"]
-CAMPOS = ["nombre_persona", "nombre_perro", "edad_perro", "sintoma", "hace_cuanto",
-          "come_hoy", "ya_intento", "pais", "origen_cta"]
+ESTADOS = ["nuevo", "calificando", "mecanismo_explicado", "fotos_pedidas",
+           "precio_dado", "cierre_propuesto", "quiere_agendar", "derivado_humano", "frio"]
+ACCIONES = ["responder", "cerrar_consulta", "derivar_humano"]
+CAMPOS = ["nombre_persona", "nombre_perro", "edad_perro", "sintoma", "come_hoy", "ya_intento"]
 
 def leer(p):
     with open(p, encoding="utf-8") as f:
@@ -41,52 +38,45 @@ ARCHIVO = "CEREBRO-PAULA.md" if MODO == "paula" else "CEREBRO-MARCELO.md"
 system = leer(os.path.join(BASE, ARCHIVO))
 
 if MODO == "completo":
-    partes = [system, "\n\n---\n\n# MIS FUENTES COMPLETAS\n",
-              "Lo que sigue es el texto integro de mi material. Lo uso para responder "
-              "con precision, nunca para copiar parrafos enteros en un chat de WhatsApp.\n"]
+    partes = [system, "\n\n---\n\n# MIS FUENTES COMPLETAS\n"]
     for ruta in sorted(glob.glob(os.path.join(BASE, "fuentes", "*.txt"))):
         nombre = os.path.basename(ruta).replace(".txt", "").replace("-", " ").upper()
         partes.append(f"\n## FUENTE: {nombre}\n\n{leer(ruta)}\n")
     system = "\n".join(partes)
 
 schema = {
-    "type": "object",
-    "additionalProperties": False,
-    "required": ["respuesta", "estado", "accion", "producto", "temperatura",
-                 "riesgo", "datos", "nota_interna"],
+    "type": "object", "additionalProperties": False,
+    "required": ["mensajes", "resumen", "estado", "temperatura", "accion", "riesgo", "datos"],
     "properties": {
-        "respuesta": {"type": "string"},
+        "mensajes": {"type": "array", "items": {"type": "string"}},
+        "resumen": {"type": "string"},
         "estado": {"type": "string", "enum": ESTADOS},
+        "temperatura": {"type": "string", "enum": ["caliente", "tibio", "frio"]},
         "accion": {"type": "string", "enum": ACCIONES},
-        "producto": {"type": "string", "enum": PRODUCTOS},
-        "temperatura": {"type": "string", "enum": ["gold", "silver", "bronze", "out"]},
-        "riesgo": {"type": "string", "enum": ["ninguno", "medico", "urgencia", "fuera_de_alcance"]},
-        "datos": {"type": "object", "additionalProperties": False,
-                  "required": CAMPOS,
+        "riesgo": {"type": "string", "enum": ["ninguno", "medico", "urgencia"]},
+        "datos": {"type": "object", "additionalProperties": False, "required": CAMPOS,
                   "properties": {c: {"type": "string"} for c in CAMPOS}},
-        "nota_interna": {"type": "string"},
     },
 }
 
-contexto = (
-    "ESTADO ACTUAL: {{2.estado}}\n"
-    "DATOS YA CAPTURADOS: {{2.datos}}\n"
-    "ORIGEN (CTA): {{1.fuente}}\n"
-    "CANAL: {{1.canal}}\n"
-    "NOMBRE EN EL PERFIL: {{1.nombre}}\n"
-    "SEGUIMIENTOS ENVIADOS: {{2.fu_count}}\n\n"
-    "HISTORIAL:\n{{2.historial}}\n\n"
-    "MENSAJE NUEVO:\n{{1.mensaje}}"
-)
+contexto = ("CANAL: {{1.canal}}\n"
+            "NOMBRE EN EL PERFIL: {{replace(1.nombre; newline; \" \")}}\n"
+            "ORIGEN (CTA): {{1.fuente}}\n"
+            "ESTADO ACTUAL: {{2.estado}}\n"
+            "TURNOS: {{ifempty(2.turnos; 0)}}\n\n"
+            "RESUMEN DE LO QUE YA CONVERSARON (tu memoria, escrita por ti en el turno anterior):\n"
+            "{{replace(2.historial; newline; \" \")}}\n\n"
+            "MENSAJE NUEVO DEL LEAD:\n"
+            "{{replace(1.mensaje; newline; \" \")}}")
 
-# effort da error en Haiku 4.5: solo se manda en los modelos que lo aceptan.
 output_config = {"format": {"type": "json_schema", "schema": schema}}
 if not MODELO.startswith("claude-haiku"):
     output_config["effort"] = "low"
 
 cuerpo = {
     "model": MODELO,
-    "max_tokens": 900,
+    "max_tokens": 1000,
+    "thinking": {"type": "disabled"},
     "output_config": output_config,
     "system": [{"type": "text", "text": system,
                 "cache_control": {"type": "ephemeral", "ttl": "1h"}}],
