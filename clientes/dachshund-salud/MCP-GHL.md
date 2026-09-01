@@ -149,12 +149,18 @@ Para tenerlo en todas las sesiones y no solo en este repositorio, va en
 | Nombre | `GHL Subcuentas` |
 | URL | `https://services.leadconnectorhq.com/mcp/anthropic/v2` |
 | Autenticación | **Siempre requerido** (Claude lo detecta solo) |
+| Cliente OAuth | **Sin ID de cliente, registrar uno automáticamente** (DCR) |
 | Encabezados | **Ninguno.** Con OAuth el token `pit-` no se usa |
 
 ⚠️ El diálogo viene con **"Ninguno"** preseleccionado en Autenticación. Si lo
 dejás así aparece la advertencia amarilla y el conector no conecta. Hay que
 marcar **"Siempre requerido"**, que es la opción que Claude marcó como
 *Detectado*.
+
+En Cliente OAuth aparecen tres opciones y la primera dice *Recomendado*, pero esa
+es la recomendación genérica de Anthropic. La que corresponde es la marcada como
+**Detectado**: Claude ya sondeó el servidor y encontró que soporta registro
+dinámico (DCR). Elegir CIMD cuando el servidor no lo admite hace que falle.
 
 Al dar Agregar se abre el login de HighLevel y ahí elegís **qué sub-cuentas
 habilitar**. Después trabajás nombrando la cuenta ("en la cuenta de Marcelo,
