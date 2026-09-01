@@ -1,7 +1,56 @@
 # MCP de GoHighLevel · Marcelo Dachshund
 
-Conecta Claude Code directamente a la sub-cuenta de Marcelo en GHL: contactos,
+Conecta Claude directamente a la sub-cuenta de Marcelo en GHL: contactos,
 conversaciones, oportunidades, calendarios y pagos.
+
+---
+
+## 0. El locationId NO va en la URL
+
+Es la confusión más común. GoHighLevel expone **una sola URL para todo el mundo**;
+la sub-cuenta se identifica por cabecera, no por la dirección. No existe algo como
+`.../mcp/TzjuywpjnaS5aZn5RTs8`.
+
+Hay dos endpoints, y la diferencia importa:
+
+| Endpoint | Cómo identifica la cuenta | Autenticación |
+|---|---|---|
+| `https://services.leadconnectorhq.com/mcp/` | Cabecera `locationId` | Token de integración privada (PIT) |
+| `https://services.leadconnectorhq.com/mcp/anthropic/v2` | **Multi sub-cuenta.** El `locationId` sale del OAuth y la cabecera es opcional: nombrás la cuenta en el prompt | OAuth (botón conectar) |
+
+Cabeceras del primero:
+
+```
+Authorization: Bearer pit-...
+locationId:    TzjuywpjnaS5aZn5RTs8
+Version:       2021-07-28
+```
+
+## 0.1 Por qué probablemente buscabas la URL con el ID
+
+Porque **claude.ai no deja tener dos conectores con la misma URL**. Al intentar
+agregar el de Marcelo teniendo ya `GHL_Cool_Drive`, tira:
+
+```
+Error: A server with this URL already exists
+```
+
+Es un límite conocido de claude.ai, reportado y todavía abierto
+([issue #178](https://github.com/anthropics/claude-ai-mcp/issues/178)), y **no
+tiene workaround**: agregarle un query string o un path a la URL no sirve, porque
+el que tiene que reconocer esa dirección es GoHighLevel, no Claude.
+
+**La solución es el endpoint `v2`**, que HighLevel sacó justamente para agencias
+con varias sub-cuentas: se conecta **una sola vez** por OAuth y desde ahí trabajás
+con Marcelo, Cool Drive y las que vengan, eligiendo la cuenta al nombrarla en el
+prompt. Si no queda claro cuál, Claude lista las disponibles y te pregunta.
+
+> Este dato sale de la documentación de HighLevel, que no pude abrir desde este
+> entorno (la política de red bloquea sus dominios). Verificá el endpoint `v2` en
+> su portal de soporte antes de darlo por hecho. Si el `v2` no te sirve, el `.mcp.json`
+> de este repositorio (punto 1) funciona igual: **el límite de URL duplicada es de
+> claude.ai, no de Claude Code**, donde podés tener tantos servidores con la misma
+> URL como quieras mientras cambien las cabeceras.
 
 ---
 
@@ -88,10 +137,21 @@ sirven para las dos cosas.
 
 ## 4. Alternativa: conectarlo a nivel de cuenta
 
-Si preferís tenerlo disponible en todas las sesiones y no solo dentro de este
-repositorio (que es como están hoy `GHL_Cool_Drive` y el de Japi Eaters), se
-agrega como conector en **claude.ai → Settings → Connectors → Add custom
-connector**:
+Para tenerlo en todas las sesiones y no solo en este repositorio, va en
+**claude.ai → Settings → Connectors → Add custom connector**. Dos caminos:
+
+**Recomendado: el endpoint multi-cuenta.** Un solo conector para todos los clientes.
+
+| Campo | Valor |
+|---|---|
+| Nombre | `GoHighLevel` |
+| URL | `https://services.leadconnectorhq.com/mcp/anthropic/v2` |
+| Auth | OAuth: conectar → login en HighLevel → aprobar las sub-cuentas |
+
+Durante la autorización elegís qué sub-cuentas habilitar. Después trabajás
+nombrando la cuenta ("en la cuenta de Marcelo, buscá..."). No hace falta PIT.
+
+**Si preferís uno dedicado a Marcelo** (y todavía no tenés otro GHL conectado):
 
 | Campo | Valor |
 |---|---|
@@ -99,9 +159,10 @@ connector**:
 | URL | `https://services.leadconnectorhq.com/mcp/` |
 | Header 1 | `Authorization: Bearer <el token>` |
 | Header 2 | `locationId: TzjuywpjnaS5aZn5RTs8` |
+| Header 3 | `Version: 2021-07-28` |
 
-Ahí sí va el token literal, pero queda guardado en tu cuenta y no en un archivo
-público.
+Ojo: si ya tenés `GHL_Cool_Drive` con esa misma URL, claude.ai lo va a rechazar
+(ver punto 0.1). Ahí no queda otra que el `v2`.
 
 ---
 

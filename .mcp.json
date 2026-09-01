@@ -5,7 +5,8 @@
       "url": "https://services.leadconnectorhq.com/mcp/",
       "headers": {
         "Authorization": "Bearer ${GHL_MARCELO_TOKEN}",
-        "locationId": "${GHL_MARCELO_LOCATION}"
+        "locationId": "${GHL_MARCELO_LOCATION}",
+        "Version": "2021-07-28"
       }
     }
   }
