@@ -45,12 +45,14 @@ con varias sub-cuentas: se conecta **una sola vez** por OAuth y desde ahí traba
 con Marcelo, Cool Drive y las que vengan, eligiendo la cuenta al nombrarla en el
 prompt. Si no queda claro cuál, Claude lista las disponibles y te pregunta.
 
-> Este dato sale de la documentación de HighLevel, que no pude abrir desde este
-> entorno (la política de red bloquea sus dominios). Verificá el endpoint `v2` en
-> su portal de soporte antes de darlo por hecho. Si el `v2` no te sirve, el `.mcp.json`
-> de este repositorio (punto 1) funciona igual: **el límite de URL duplicada es de
-> claude.ai, no de Claude Code**, donde podés tener tantos servidores con la misma
-> URL como quieras mientras cambien las cabeceras.
+> **Verificado (septiembre 2026):** al cargar la URL en claude.ai, el diálogo de
+> conector personalizado detecta el servidor y marca la autenticación como
+> `Siempre requerido — Detectado`. O sea que el endpoint existe y usa OAuth.
+>
+> Si el `v2` no sirviera, el `.mcp.json` de este repositorio (punto 1) funciona
+> igual: **el límite de URL duplicada es de claude.ai, no de Claude Code**, donde
+> podés tener tantos servidores con la misma URL como quieras mientras cambien
+> las cabeceras.
 
 ---
 
@@ -144,12 +146,19 @@ Para tenerlo en todas las sesiones y no solo en este repositorio, va en
 
 | Campo | Valor |
 |---|---|
-| Nombre | `GoHighLevel` |
+| Nombre | `GHL Subcuentas` |
 | URL | `https://services.leadconnectorhq.com/mcp/anthropic/v2` |
-| Auth | OAuth: conectar → login en HighLevel → aprobar las sub-cuentas |
+| Autenticación | **Siempre requerido** (Claude lo detecta solo) |
+| Encabezados | **Ninguno.** Con OAuth el token `pit-` no se usa |
 
-Durante la autorización elegís qué sub-cuentas habilitar. Después trabajás
-nombrando la cuenta ("en la cuenta de Marcelo, buscá..."). No hace falta PIT.
+⚠️ El diálogo viene con **"Ninguno"** preseleccionado en Autenticación. Si lo
+dejás así aparece la advertencia amarilla y el conector no conecta. Hay que
+marcar **"Siempre requerido"**, que es la opción que Claude marcó como
+*Detectado*.
+
+Al dar Agregar se abre el login de HighLevel y ahí elegís **qué sub-cuentas
+habilitar**. Después trabajás nombrando la cuenta ("en la cuenta de Marcelo,
+buscá..."). No hace falta PIT.
 
 **Si preferís uno dedicado a Marcelo** (y todavía no tenés otro GHL conectado):
 
