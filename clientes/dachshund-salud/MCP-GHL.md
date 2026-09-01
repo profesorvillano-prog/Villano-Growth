@@ -56,11 +56,17 @@ prompt. Si no queda claro cuál, Claude lista las disponibles y te pregunta.
 
 ---
 
-## 1. Las credenciales NO van en este repo
+## 1. Plan B: `.mcp.json` con token privado
+
+> **No hace falta si ya conectaste `GHL Subcuentas` por OAuth (punto 4).** Esto es
+> el camino alternativo, para cuando no se puede instalar a nivel agencia.
+> El archivo `.mcp.json` **se quitó del repo a propósito**: con las variables sin
+> definir, Claude Code intenta levantar un servidor roto en cada sesión. Si lo
+> necesitás, crealo en la raíz con este contenido.
 
 Este repositorio es **público**. El token de integración privada da acceso de
-lectura y escritura a los datos de los pacientes de Marcelo. Por eso
-[`.mcp.json`](../../.mcp.json) usa variables de entorno y no valores literales:
+lectura y escritura a los datos de los pacientes de Marcelo. Por eso el archivo
+usa variables de entorno y no valores literales:
 
 ```json
 {
@@ -207,8 +213,8 @@ Con esto conectado se puede trabajar sobre la operación real sin salir de Claud
 
 ## 6. Rotar el token
 
-El token que se usó para armar esto viajó por un chat. Conviene **regenerarlo en
-GHL una vez que la configuración esté probada**: Settings → Private Integrations →
+Con el conector OAuth andando, **el token `pit-` ya no se usa para nada**. Viajó
+por un chat, así que lo correcto es **regenerarlo o borrarlo directamente**: Settings → Private Integrations →
 Delete y crear uno nuevo con los mismos scopes. Después se actualiza la variable
 de entorno y el módulo HTTP del escenario de Make.
 
