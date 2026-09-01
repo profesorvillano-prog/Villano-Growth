@@ -211,3 +211,65 @@ setter. Y `Tier` puede absorber la temperatura.
 - [ ] Decidir dónde vive el lead antes de pagar (tags o etapas nuevas en VENTAS)
 - [ ] Remapear el módulo 8 del Escenario 1 a los campos que existen
 - [ ] Confirmar con Marcelo si el pipeline orgánico se eliminó o nunca existió
+
+
+---
+
+## 8. Volumen real de conversaciones (18-ago a 1-sep 2026)
+
+Contado en vivo, día por día, con `search-conversation`.
+
+### Instagram
+
+| | Total 15 días | Promedio/día |
+|---|---|---|
+| Conversaciones **con actividad** | **490** | 33 |
+| Conversaciones **nuevas** | **356** | 24 |
+
+Días pico: 18-ago (89 activas) y 28-ago (51). Días flojos: 22-ago y 27-ago (16-17).
+Histórico total de conversaciones de Instagram en la cuenta: **5.874**.
+
+### WhatsApp
+
+**39 conversaciones** con actividad en las dos semanas. Histórico: 409.
+
+### ⚠️ El WhatsApp es el teléfono personal de Marcelo
+
+Al leer esas 39 conversaciones aparece lo siguiente: saludos de cumpleaños, un
+contacto llamado "Papá", una cuñada, amigos del gimnasio, y un proveedor de
+huevos que manda su lista de precios. Mezclado con eso hay clientes reales,
+reconocibles porque llevan el nombre del perro entre paréntesis: Marcia Palacios
+(Milo), Luis Corcho (Nala), María José García (Matilde), Constanza Valencia
+(Magnolia).
+
+**No se puede poner a Paula en ese número.** Le respondería al padre de Marcelo y
+al vendedor de huevos. Las opciones son:
+
+1. **Número aparte para el bot.** Un WhatsApp Business API nuevo, solo para el
+   embudo. Es lo correcto y lo más limpio.
+2. **Solo Instagram por ahora.** Es donde está el 93% del volumen de todas formas
+   (490 contra 39). Se enciende ahí y WhatsApp queda para Marcelo.
+
+La opción 2 permite arrancar sin esperar nada.
+
+Dato aparte: los contadores de no leídos en ese WhatsApp llegan a 2.131, 278 y
+198 mensajes. Marcelo no está leyendo ese canal.
+
+### Qué implica para el presupuesto
+
+Todos los cálculos del proyecto asumían **200 conversaciones al mes**. El volumen
+real de Instagram es de unas **700 nuevas al mes** (356 en 15 días), 3,5 veces más.
+
+| Concepto | Con 200 conv | Con 700 conv |
+|---|---|---|
+| Paula en Opus 5 | $17 | **~$58** |
+| Paula en Haiku 4.5 | $3 | **~$12** |
+| Operaciones de Make (6 por mensaje, 8 mensajes) | 9.600 | **~33.600** |
+| Plan de Make necesario | Core (10.000) | **Pro (40.000)** |
+
+O sea: el plan Core **no alcanza**. Hay que ir a Pro, o reducir operaciones por
+mensaje, o filtrar qué conversaciones entran al bot.
+
+> **Salvedad del método:** `lastMessageType` filtra por el tipo del *último*
+> mensaje. Una conversación de Instagram cuyo último mensaje sea una nota interna
+> o una actividad del CRM no aparece. Los números son un piso, no un techo.
