@@ -162,8 +162,19 @@ es la recomendación genérica de Anthropic. La que corresponde es la marcada co
 **Detectado**: Claude ya sondeó el servidor y encontró que soporta registro
 dinámico (DCR). Elegir CIMD cuando el servidor no lo admite hace que falle.
 
-Al dar Agregar se abre el login de HighLevel y ahí elegís **qué sub-cuentas
-habilitar**. Después trabajás nombrando la cuenta ("en la cuenta de Marcelo,
+Al dar Agregar se abre el login de HighLevel y te lleva a instalar la app
+**`lc-mcp - Anthropic`** del marketplace. Ahí hay un desplegable arriba del botón
+Install:
+
+- **Agency View** → la correcta. Instala a nivel agencia y en el paso siguiente
+  te deja marcar **varias sub-cuentas** con un solo conector.
+- Sub-Account View → instala para una sola location. Volvés al problema de la URL
+  duplicada cuando quieras sumar otro cliente.
+
+Requiere ser owner o admin de la agencia. Si el Install rechaza por permisos, no
+queda otra que Sub-Account View sobre la location de Marcelo.
+
+Después elegís **qué sub-cuentas habilitar**. Después trabajás nombrando la cuenta ("en la cuenta de Marcelo,
 buscá..."). No hace falta PIT.
 
 **Si preferís uno dedicado a Marcelo** (y todavía no tenés otro GHL conectado):
