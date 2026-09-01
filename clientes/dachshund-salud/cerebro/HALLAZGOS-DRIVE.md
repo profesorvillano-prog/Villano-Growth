@@ -1,4 +1,4 @@
-# Hallazgos al leer el Drive de Marcelo
+# Hallazgos al leer el Drive y la cuenta de GHL de Marcelo
 
 > Al construir el cerebro leí el KB, los dos libros, las tres fichas de producto,
 > la guía del setter y las transcripciones. Aparecieron cosas que **contradicen**
@@ -129,3 +129,85 @@ prudente que Marcelo en chat. Es a propósito.
 
 Los cambios de nombre de pipeline y de tags hay que aplicarlos en el escenario de
 Make antes de encender.
+
+
+---
+
+## 7. Lo que dice la cuenta real de GHL (septiembre 2026)
+
+Leído en vivo con el conector `GHL Subcuentas`, location
+`TzjuywpjnaS5aZn5RTs8`. **Contradice tanto la guía del setter como lo que armamos
+nosotros.**
+
+### 7.1 El "pipeline orgánico" no existe
+
+`Guia del setter - Flujos y Pipeline CRM.pdf` describe un pipeline orgánico de
+seis etapas (Conversación abierta → Interesada ebook → Interesada asesoría →
+Follow up 1 → Follow up 2 → Derivada). **En la cuenta hay un solo pipeline.**
+
+**`VENTAS`** (`zJsoqk6LKTzQXu7q4Q8C`, actualizado el 26 de agosto), nueve etapas:
+
+| # | Etapa | ID |
+|---|---|---|
+| 0 | Venta ebook NUTRICION | `268e08e8-ac81-43da-be39-858217b21766` |
+| 1 | Venta eBook RECOMPOSICION | `5b8c27ba-4823-486f-957e-6cba9cda42f2` |
+| 2 | Venta PACK eBooks | `9088cf04-3a56-410b-9628-361f8ff419de` |
+| 3 | **Venta CONSULTA** | `6078e444-75bc-4813-9ccf-7d6dae86af91` |
+| 4 | Pagó Sin agendar | `aa8dbce9-12aa-4a51-b2b7-7b93b327afdd` |
+| 5 | Agendada | `4c307782-5618-44d5-bf58-268c06bd5396` |
+| 6 | Sesión realizada | `fa72b849-d698-44aa-8120-d3571922d45a` |
+| 7 | No asistió | `48e088e4-3ed0-45d3-ae49-a2405da621d7` |
+| 8 | **Venta ASESORÍA** | `1ba36cb7-056c-4ae8-95f8-a5fed6a2292f` |
+
+Es un pipeline **post-pago**: arranca en la venta y sigue hasta la sesión. No hay
+ninguna etapa para el lead que todavía está conversando.
+
+**Qué implica:**
+
+- `05-Setup-GHL.md` propone crear un pipeline `Consultas Dachshund` de ocho
+  etapas. **No hay que crearlo**: duplicaría lo que ya existe.
+- La sección 3 de este mismo documento decía "usar el pipeline orgánico que ya
+  existe". **Tampoco**: no existe.
+- Falta decidir dónde vive el lead **antes** de pagar. O se agregan dos o tres
+  etapas al principio de `VENTAS`, o el bot no toca oportunidades y se apoya solo
+  en tags hasta que entre el pago. Lo segundo es más simple y no ensucia el
+  embudo de ventas.
+- `Pagó Sin agendar` → `Agendada` → `Sesión realizada` → `No asistió` confirma que
+  el circuito post-pago que asumimos existe y funciona. El bot no tiene que
+  tocarlo.
+- Las etapas confirman la escalera: ebook Nutrición, ebook Recomposición, Pack,
+  **Consulta** y **Asesoría** son productos distintos y se miden por separado.
+
+### 7.2 Los custom fields del setter no existen, pero hay otros que sirven
+
+Ninguno de los once `setter_*` que propone `05-Setup-GHL.md` está creado. Lo que
+sí hay (contactos):
+
+| Campo | Key | Tipo | Sirve para |
+|---|---|---|---|
+| edad | `contact.edad` | TEXT | edad del perro |
+| Alimentacion | `contact.alimentacion` | TEXT | qué come hoy |
+| diagnosticos | `contact.diagnosticos` | TEXT | síntoma / condición |
+| inversion | `contact.inversion` | TEXT | **capacidad de inversión** |
+| inversion_reciente | `contact.inversion_reciente` | TEXT | **cuánto ya gastó sin resultado** |
+| condicion_corporal | `contact.condicion_corporal` | TEXT | peso |
+| costillas · pelaje · energia | `contact.*` | TEXT | señales del Scanner de Vitalidad |
+| Lead Score | `contact.lead_score` | NUMERICAL | scoring |
+| Tier | `contact.tier` | TEXT | equivale a nuestra `temperatura` |
+
+Los nueve primeros comparten carpeta: vienen del **Scanner de Vitalidad**.
+
+**Qué implica:** el bot debería **escribir en estos campos**, no crear once
+paralelos. `inversion_reciente` es especialmente valioso porque es justo el dato
+que más pesa para cerrar (lo que ya gastó sin resultado), y ya tiene dónde
+guardarse.
+
+Faltarían solo tres: nombre del perro, hace cuánto está así, y el estado del
+setter. Y `Tier` puede absorber la temperatura.
+
+### 7.3 Qué hay que corregir
+
+- [ ] Reescribir `05-Setup-GHL.md` §2 y §4 contra la estructura real
+- [ ] Decidir dónde vive el lead antes de pagar (tags o etapas nuevas en VENTAS)
+- [ ] Remapear el módulo 8 del Escenario 1 a los campos que existen
+- [ ] Confirmar con Marcelo si el pipeline orgánico se eliminó o nunca existió
