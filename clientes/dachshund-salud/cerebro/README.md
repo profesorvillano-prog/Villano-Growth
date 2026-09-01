@@ -1,29 +1,75 @@
-# Cerebro del bot · Dr. Marcelo Hernán
+# Cerebro del bot · Dachshund Salud
 
-> El bot **es Marcelo**, en primera persona, en WhatsApp e Instagram. Acá vive todo
-> lo que sabe, cómo habla y qué puede y no puede decir.
-> Decisión del cliente (agosto 2026): el bot firma como Marcelo, no como asistente.
+> Acá vive el prompt del bot que atiende WhatsApp e Instagram: quién es, cómo
+> habla, qué puede y qué no puede decir.
+> **Persona por defecto: Paula**, asistente del equipo que califica y agenda.
+> `CEREBRO-MARCELO.md` queda disponible por si se quiere el bot en primera
+> persona de Marcelo.
 
 ---
+
+## Las dos personas
+
+| | **Paula** (por defecto) | **Marcelo** |
+|---|---|---|
+| Quién dice ser | Asistente del equipo | El Dr. Marcelo, en primera persona |
+| Qué sabe de nutrición | Cinco mecanismos generales, nada más | Todo el conocimiento clínico |
+| Ante una pregunta técnica | La usa de **puente** a la consulta | Tiene que contenerse para no responderla |
+| Si dice una burrada | Se equivocó el equipo | Se equivocó un veterinario colegiado |
+| Tamaño | 3.175 tokens | 6.757 tokens |
+| Coste (200 conv/mes, Opus 5) | **$17** | $26 |
+| Coste (200 conv/mes, Haiku 4.5) | **$3** | $5 |
+
+**Paula es la recomendada, y no por el precio.** Su ignorancia técnica es la
+herramienta de venta: que ella no pueda responder "cuánto le doy de comer" es
+creíble y empuja a la consulta. Que Marcelo no lo responda parece evasivo.
 
 ## Qué hay acá
 
 | Archivo | Qué es |
 |---|---|
-| **`CEREBRO-MARCELO.md`** | El prompt completo. Identidad, voz, vocabulario obligatorio, todo el conocimiento clínico, los 5 productos con precios reales, flujo de conversación, objeciones y 12 reglas duras. Esto es lo que se edita cuando el bot dice algo mal. |
-| `fuentes/` | Texto crudo de las fuentes originales, versionado. Hoy: el manuscrito del Libro 1 y la transcripción del webinar (20.780 palabras de Marcelo hablando textual). |
-| `build.py` | Arma el cuerpo de la petición listo para pegar en Make, y te dice cuánto cuesta. |
+| **`CEREBRO-PAULA.md`** | El prompt por defecto. Asistente que califica, pide fotos y agenda. Su sección clave es "Mi mejor herramienta es no saber", con el puente de tres movimientos. |
+| `CEREBRO-MARCELO.md` | La versión en primera persona, con todo el conocimiento clínico. Sirve para el bot de soporte a compradores. |
+| `COMO-CIERRA.md` | Por qué cierra lo que cierra: el diagnóstico parcial, las dos fotos, los micro-compromisos, la métrica única. |
+| `HALLAZGOS-DRIVE.md` | Lo que apareció al leer el Drive y contradice los docs viejos. |
+| `fuentes/` | Texto crudo de las fuentes. **No versionado** (ver `fuentes.md`). |
+| `build.py` | Arma el cuerpo listo para pegar en Make y calcula el coste. |
 | `salida/` | Lo que genera el script. **`cuerpo-modulo3.json` es lo que se pega en Make.** |
 
----
+## Por qué el conocimiento NO va en un vector store
+
+La arquitectura que se ve en los tutoriales de Make (módulo *OpenAI → Message an
+assistant* con la biblioteca cargada en un vector store) resuelve un problema que
+este bot no tiene, y crea uno que sí importa.
+
+**Lo que promete:** la knowledge base vive en el servidor del proveedor, se
+recuperan solo los fragmentos relevantes, y no pagás el libro entero en cada
+mensaje.
+
+**Por qué acá es contraproducente:**
+
+1. **Le das a Paula justo lo que le prohibiste decir.** El recuperador va a traerle
+   el capítulo con los gramajes cuando alguien pregunte por gramajes. Estarías
+   pagando para darle la capacidad de romper la regla número 2.
+2. **Deja de ser determinista.** Con el prompt fijo sabés exactamente qué sabe. Con
+   recuperación, cada mensaje ve un contexto distinto y las reglas se cumplen de
+   forma desigual.
+3. **No hay problema de coste que resolver.** Paula entera son 3.175 tokens: $3 al
+   mes con Haiku. La optimización que promete el vector store no aplica.
+4. **Duplica el estado.** Los threads del proveedor conviven con el data store de
+   Make y hay que mantener los dos sincronizados.
+
+El vector store es la arquitectura correcta para **el otro bot**: el de soporte a
+quienes ya compraron. Ahí responder con la cita exacta del libro es entregar el
+producto, no regalarlo.
 
 ## Cómo se carga en Make
 
 ```bash
-python3 build.py                          # núcleo + Opus 5 (recomendado)
-python3 build.py completo                 # núcleo + fuentes crudas
-python3 build.py nucleo claude-haiku-4-5  # núcleo + Haiku (5 veces más barato)
-python3 build.py nucleo claude-sonnet-5   # núcleo + Sonnet
+python3 build.py                          # Paula + Opus 5 (recomendado)
+python3 build.py paula claude-haiku-4-5   # Paula + Haiku (5 veces más barato)
+python3 build.py marcelo                  # el bot habla como Marcelo
+python3 build.py completo                 # Marcelo + libros y transcripciones
 ```
 
 > El script sabe que **`effort` da error en Haiku 4.5** y lo omite solo. Por eso

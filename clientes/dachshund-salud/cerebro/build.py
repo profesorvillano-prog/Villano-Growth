@@ -4,10 +4,16 @@ Arma el cuerpo de la peticion a Anthropic que va pegado en el modulo 3
 del escenario [SETTER] Marcelo de Make.
 
 Uso:
-    python3 build.py                          -> nucleo + Opus 5
-    python3 build.py completo                 -> nucleo + fuentes crudas
-    python3 build.py nucleo claude-haiku-4-5  -> nucleo + Haiku (5x mas barato)
-    python3 build.py nucleo claude-sonnet-5   -> nucleo + Sonnet
+    python3 build.py                          -> Paula + Opus 5 (recomendado)
+    python3 build.py paula claude-haiku-4-5   -> Paula + Haiku (5x mas barato)
+    python3 build.py marcelo                  -> el bot habla como Marcelo
+    python3 build.py completo                 -> Marcelo + fuentes crudas
+
+Personas:
+    paula    CEREBRO-PAULA.md    asistente que califica y agenda. No responde
+                                 preguntas tecnicas: las usa de puente a la consulta.
+    marcelo  CEREBRO-MARCELO.md  el bot es Marcelo en primera persona.
+    completo Marcelo + todo el texto de fuentes/ (libros y transcripciones).
 
 Genera:
     salida/cuerpo-modulo3.json  -> se copia entero al campo "Request content"
@@ -16,7 +22,7 @@ Genera:
 import json, os, sys, glob
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-MODO = (sys.argv[1] if len(sys.argv) > 1 else "nucleo").lower()
+MODO = (sys.argv[1] if len(sys.argv) > 1 else "paula").lower()
 MODELO = sys.argv[2] if len(sys.argv) > 2 else "claude-opus-5"
 
 ESTADOS = ["nuevo", "saludado", "calificando", "espejo", "oferta", "objecion",
@@ -31,7 +37,8 @@ def leer(p):
     with open(p, encoding="utf-8") as f:
         return f.read().strip()
 
-system = leer(os.path.join(BASE, "CEREBRO-MARCELO.md"))
+ARCHIVO = "CEREBRO-PAULA.md" if MODO == "paula" else "CEREBRO-MARCELO.md"
+system = leer(os.path.join(BASE, ARCHIVO))
 
 if MODO == "completo":
     partes = [system, "\n\n---\n\n# MIS FUENTES COMPLETAS\n",
@@ -104,7 +111,7 @@ MODELOS = {"claude-opus-5": (5.0, 25.0), "claude-sonnet-5": (3.0, 15.0),
 MSG_POR_CONV = 8      # mensajes del bot en una conversacion tipica
 SALIDA_TOK = 200      # tokens que escribe el bot por mensaje
 
-print(f"modo:         {MODO}")
+print(f"persona:      {MODO}  ({ARCHIVO})")
 print(f"modelo:       {MODELO}")
 print(f"palabras:     {palabras:,}")
 print(f"tokens:       {tokens:,}\n")
