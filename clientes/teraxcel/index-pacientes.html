@@ -132,12 +132,13 @@
                       radial-gradient(1px 1px at 72% 58%, rgba(255,255,255,0.16) 1px, transparent 0);
     background-size:180px 180px; opacity:.7;
   }
-  .hero-inner{position:relative; z-index:2; max-width:820px; padding-bottom:44px;}
-  .hero h1{font-size:clamp(32px,5.4vw,54px); line-height:1.08; margin-bottom:20px;}
+  .hero-inner{position:relative; z-index:2; max-width:880px; margin:0 auto; text-align:center; padding-bottom:44px;}
+  .hero h1{font-size:clamp(32px,5.4vw,54px); line-height:1.08; margin-bottom:18px;}
   .hero h1 .accent{color:var(--teal-light); font-weight:600;}
-  .hero .lede{font-size:clamp(17px,2vw,19px); line-height:1.65; color:rgba(255,255,255,0.82); max-width:620px; margin-bottom:30px;}
-  .hero-cta{display:flex; align-items:center; gap:18px; flex-wrap:wrap;}
-  .hero-micro{font-size:12.5px; color:rgba(143,216,222,0.92); line-height:1.5; letter-spacing:.01em;}
+  .hero .lede{font-size:clamp(16.5px,2vw,19px); line-height:1.6; color:rgba(255,255,255,0.82); max-width:640px; margin:0 auto 28px;}
+  .hero-video{max-width:760px; margin:0 auto 26px;}
+  .hero-cta{display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap;}
+  .hero-micro{font-size:12.5px; color:rgba(143,216,222,0.92); line-height:1.5; letter-spacing:.01em; text-align:left;}
   .hero-stats{
     position:relative; z-index:2;
     border-top:1px solid rgba(255,255,255,0.12);
@@ -154,15 +155,11 @@
   .hero-stats .num small{font-size:.5em; color:var(--teal-light);}
   .hero-stats .lbl{margin-top:9px; font-family:var(--font-body); font-size:12px; letter-spacing:.03em; color:rgba(255,255,255,0.62); text-transform:uppercase;}
 
-  /* VSL */
-  .vsl-section{background:var(--bone); padding:64px 0;}
-  .vsl-head{max-width:720px; margin-bottom:26px;}
-  .vsl-head .kicker{font-family:var(--font-body); font-size:12.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--teal); margin-bottom:12px;}
-  .vsl-head h2{font-size:clamp(24px,3.4vw,34px); line-height:1.18;}
+  /* VSL embed (dentro del hero) */
   .video-embed{
-    max-width:840px;
     border-radius:18px; overflow:hidden;
-    box-shadow:0 30px 60px -30px rgba(8,15,58,0.4);
+    box-shadow:0 30px 70px -28px rgba(0,0,0,0.55);
+    border:1px solid rgba(143,216,222,0.18);
   }
   .video-embed wistia-player{display:block; border-radius:18px; overflow:hidden;}
 
@@ -200,35 +197,40 @@
   .angle-card h3{font-size:20px; line-height:1.25; margin-bottom:8px;}
   .angle-card p{font-size:15.5px; color:var(--gray); line-height:1.6;}
 
-  /* Solución */
-  .solution{
+  /* El Método teraXcel */
+  .method{
     background:radial-gradient(120% 100% at 50% 0%, #142368 0%, var(--ink) 55%, #050A29 100%);
     color:var(--white);
   }
-  .solution-grid{display:grid; grid-template-columns:0.95fr 1.05fr; gap:48px; align-items:center;}
-  .solution-photo{border-radius:20px; overflow:hidden; aspect-ratio:4/3; max-height:440px; background:linear-gradient(145deg,#1a2548,#050a22); box-shadow:0 30px 60px -34px rgba(0,0,0,0.6);}
-  .solution-photo img{width:100%; height:100%; object-fit:cover;}
-  .solution h2{font-size:clamp(26px,3.6vw,38px); line-height:1.16; margin-bottom:16px;}
-  .solution h2 em{font-style:normal; color:var(--teal-light); font-weight:600;}
-  .solution .intro{color:rgba(255,255,255,0.78); font-size:16.5px; line-height:1.66; margin-bottom:22px;}
-  .sol-points{list-style:none;}
-  .sol-points li{
-    display:flex; gap:13px; align-items:flex-start;
-    padding:13px 0; border-top:1px solid rgba(255,255,255,0.1);
-    font-size:16px; line-height:1.5; color:rgba(255,255,255,0.92);
+  .method-head{max-width:730px; margin:0 auto 34px; text-align:center;}
+  .method-head .kicker{font-family:var(--font-body); font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--teal-light); margin-bottom:14px;}
+  .method-head h2{font-size:clamp(27px,3.8vw,40px); line-height:1.14; margin-bottom:14px;}
+  .method-head h2 em{font-style:normal; color:var(--teal-light); font-weight:600;}
+  .method-head p{color:rgba(255,255,255,0.78); font-size:17px; line-height:1.6;}
+  .method-photo{max-width:900px; margin:0 auto 40px; border-radius:20px; overflow:hidden; aspect-ratio:16/9; max-height:440px; background:linear-gradient(145deg,#1a2548,#050a22); box-shadow:0 30px 60px -34px rgba(0,0,0,0.6);}
+  .method-photo img{width:100%; height:100%; object-fit:cover;}
+  .method-steps{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-bottom:28px;}
+  .method-step{background:rgba(255,255,255,0.04); border:1px solid rgba(143,216,222,0.2); border-radius:18px; padding:28px 26px 30px;}
+  .method-step .n{
+    font-family:var(--font-title); font-weight:600; font-size:15px;
+    width:42px; height:42px; border-radius:50%; margin-bottom:18px;
+    background:rgba(79,180,198,0.16); color:var(--teal-light);
+    display:flex; align-items:center; justify-content:center;
   }
-  .sol-points li:first-child{border-top:none;}
+  .method-step h3{font-size:20px; line-height:1.25; margin-bottom:10px;}
+  .method-step p{font-size:15px; color:rgba(255,255,255,0.72); line-height:1.62;}
+  .method-authority{display:flex; flex-wrap:wrap; gap:10px; justify-content:center;}
+  .method-authority span{
+    font-family:var(--font-body); font-size:12.5px; letter-spacing:.02em;
+    border:1px solid rgba(143,216,222,0.3); border-radius:100px; padding:9px 16px;
+    color:rgba(255,255,255,0.88);
+  }
+  .method-authority b{color:var(--teal-light); font-weight:600;}
   .check{
     width:22px; height:22px; flex-shrink:0; margin-top:1px; border-radius:50%;
     background:rgba(79,180,198,0.16); color:var(--teal-light);
     display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700;
   }
-  .authority{
-    margin-top:26px; padding:20px 24px; border-radius:16px;
-    background:rgba(255,255,255,0.05); border:1px solid rgba(143,216,222,0.28);
-    font-size:15px; line-height:1.6; color:rgba(255,255,255,0.86);
-  }
-  .authority b{color:var(--teal-light); font-weight:600;}
 
   /* Testimonios */
   .cases-section{background:var(--white);}
@@ -319,7 +321,8 @@
   footer p{font-family:var(--font-body); font-size:11.5px; color:rgba(255,255,255,0.5);}
 
   @media (max-width:860px){
-    .empathy-grid, .solution-grid{grid-template-columns:1fr; gap:32px;}
+    .empathy-grid{grid-template-columns:1fr; gap:32px;}
+    .method-steps{grid-template-columns:1fr; max-width:440px; margin-left:auto; margin-right:auto;}
     .empathy-photo{order:-1; aspect-ratio:16/10; max-height:340px;}
     .angles-grid, .cases-grid{grid-template-columns:1fr; max-width:440px; margin:0 auto;}
     .hero-stats{grid-template-columns:1fr;}
@@ -356,8 +359,14 @@
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.3 7-11a7 7 0 10-14 0c0 4.7 7 11 7 11z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
       Puerto Varas · Puerto Montt · Región de Los Lagos
     </div>
-    <h1 class="reveal in">Tu dolor de espalda ya duró demasiado. <span class="accent">Es hora de tratar la causa, no solo el dolor.</span></h1>
-    <p class="lede reveal in">Si vives en Puerto Varas o la Región de Los Lagos y ya pasaste por kinesiología, pastillas o infiltraciones sin resultado, el Método teraXcel trata tu dolor lumbar de raíz: sin cirugía y guiado por ecografía.</p>
+    <h1 class="reveal in">Vuelve a moverte sin dolor de espalda. <span class="accent">Sin cirugía.</span></h1>
+    <p class="lede reveal in">El Método teraXcel trata la causa de tu dolor lumbar, guiado por ecografía. 90% de resultados, en un promedio de 2 semanas. Puerto Varas y toda la Región de Los Lagos.</p>
+    <div class="hero-video video-embed reveal in">
+      <script src="https://fast.wistia.com/player.js" async></script>
+      <script src="https://fast.wistia.com/embed/5h3gbry4gy.js" async type="module"></script>
+      <style>wistia-player[media-id='5h3gbry4gy']:not(:defined){background:center / contain no-repeat url('https://fast.wistia.com/embed/medias/5h3gbry4gy/swatch'); display:block; filter:blur(5px); padding-top:56.25%;}</style>
+      <wistia-player media-id="5h3gbry4gy" aspect="1.7777777777777777"></wistia-player>
+    </div>
     <div class="hero-cta reveal in">
       <a href="#agenda" class="btn-primary on-dark">
         Agenda tu evaluación
@@ -380,22 +389,6 @@
         <div class="num">Único</div>
         <div class="lbl">en la Región de Los Lagos</div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- 2. VSL -->
-<section class="vsl-section" id="video">
-  <div class="wrap">
-    <div class="vsl-head reveal">
-      <div class="kicker">Míralo en 1 minuto</div>
-      <h2>Por qué tu dolor sigue ahí, y qué se puede hacer.</h2>
-    </div>
-    <div class="video-embed reveal">
-      <script src="https://fast.wistia.com/player.js" async></script>
-      <script src="https://fast.wistia.com/embed/5h3gbry4gy.js" async type="module"></script>
-      <style>wistia-player[media-id='5h3gbry4gy']:not(:defined){background:center / contain no-repeat url('https://fast.wistia.com/embed/medias/5h3gbry4gy/swatch'); display:block; filter:blur(5px); padding-top:56.25%;}</style>
-      <wistia-player media-id="5h3gbry4gy" aspect="1.7777777777777777"></wistia-player>
     </div>
   </div>
 </section>
@@ -456,27 +449,39 @@
   </div>
 </section>
 
-<!-- 5. SOLUCIÓN -->
-<section class="solution" id="metodo">
+<!-- 5. EL MÉTODO -->
+<section class="method section-dark" id="metodo">
   <div class="wrap">
-    <div class="solution-grid">
-      <figure class="solution-photo reveal">
-        <img src="https://assets.cdn.filesafe.space/yivQnN9Zd8scHJmY0B16/media/6a983889efeed0ae2596989c.jpg" alt="Procedimiento clínico guiado por ecografía — Método teraXcel" loading="lazy" width="1200" height="900">
-      </figure>
-      <div class="reveal">
-        <h2>Un camino distinto: <em>tratar la causa, sin cirugía.</em></h2>
-        <p class="intro">Entre la kinesiología que no te resultó y una cirugía que no quieres, faltaba una opción. El Método teraXcel trabaja guiado por ecografía sobre el tejido exacto que genera tu dolor: con precisión milimétrica, sin cirugía y sin pabellón.</p>
-        <ul class="sol-points">
-          <li><span class="check" aria-hidden="true">✓</span><span>Fisioterapia avanzada, no la kinesiología tradicional que ya probaste.</span></li>
-          <li><span class="check" aria-hidden="true">✓</span><span>Sin cirugía, sin pabellón. Procedimiento ambulatorio con anestesia local.</span></li>
-          <li><span class="check" aria-hidden="true">✓</span><span>Guiado por ecografía, con precisión milimétrica sobre la causa del dolor.</span></li>
-          <li><span class="check" aria-hidden="true">✓</span><span>Recuperación mucho más simple que la de una cirugía.</span></li>
-          <li><span class="check" aria-hidden="true">✓</span><span>Muchos pacientes notan cambios desde la primera sesión.</span></li>
-        </ul>
-        <div class="authority">
-          Un <b>método propio</b> que hoy se enseña en Europa, aplicado por un <b>equipo especialista en columna</b>. <b>Únicos en Latinoamérica</b> con esta tecnología, y hoy el único disponible en la Región de Los Lagos.
-        </div>
-      </div>
+    <div class="method-head reveal">
+      <div class="kicker">El Método teraXcel</div>
+      <h2>El punto medio que le faltaba a tu espalda.</h2>
+      <p>Ni seguir con lo de siempre que no resulta, ni resignarte al pabellón. Un tratamiento de precisión que va directo a la causa de tu dolor, sin cirugía.</p>
+    </div>
+    <figure class="method-photo reveal">
+      <img src="https://assets.cdn.filesafe.space/yivQnN9Zd8scHJmY0B16/media/6a983889efeed0ae2596989c.jpg" alt="Procedimiento clínico guiado por ecografía — Método teraXcel" loading="lazy" width="1600" height="900">
+    </figure>
+    <div class="method-steps">
+      <article class="method-step reveal">
+        <div class="n">01</div>
+        <h3>Encontramos la causa</h3>
+        <p>Evaluación guiada por ecografía. No adivinamos: vemos exactamente qué tejido está generando tu dolor.</p>
+      </article>
+      <article class="method-step reveal">
+        <div class="n">02</div>
+        <h3>La tratamos de raíz</h3>
+        <p>Precisión milimétrica, sin cirugía ni pabellón, con anestesia local. Un ciclo de en promedio 2 semanas.</p>
+      </article>
+      <article class="method-step reveal">
+        <div class="n">03</div>
+        <h3>Vuelves a tu vida</h3>
+        <p>Muchos pacientes sienten cambios desde la primera sesión, con un resultado pensado para durar.</p>
+      </article>
+    </div>
+    <div class="method-authority reveal">
+      <span><b>Fisioterapia</b>, no kinesiología</span>
+      <span><b>Únicos en Latinoamérica</b> con esta tecnología</span>
+      <span>Método que hoy se <b>enseña en Europa</b></span>
+      <span><b>90%</b> de resultados</span>
     </div>
   </div>
 </section>
