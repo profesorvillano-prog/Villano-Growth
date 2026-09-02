@@ -199,6 +199,10 @@ lead, sin tocar Make, sin WhatsApp y sin que nadie reciba nada:
 
 Es privada hasta que la compartas desde el menú de la página.
 
+> ⚠️ **Marcelo necesita cuenta de Claude para que esta versión funcione.** La
+> página pregunta usando la cuenta de quien la abre. Si él no tiene, carga pero no
+> responde. Para ese caso está la versión web de abajo.
+
 Qué ve él:
 
 - **El chat**, igual que en Instagram. Le escribe y Paula responde.
@@ -223,6 +227,35 @@ ninguna API key** y no consume nada de Marcelo.
 
 Cuando cambies el cerebro, `python3 sandbox.py` regenera la página y se republica
 en la misma URL.
+
+### Si Marcelo no tiene cuenta de Claude: la versión web
+
+En `cerebro/sala-web/` está la misma sala preparada para Vercel, con la API key
+del lado del servidor. Marcelo abre un link y listo, sin cuenta de nada.
+
+```bash
+cd clientes/dachshund-salud/cerebro
+python3 build.py paula claude-sonnet-5
+python3 sala.py
+cd sala-web && vercel --prod
+```
+
+Después, en Vercel → Settings → Environment Variables:
+
+| Variable | Valor |
+|---|---|
+| `ANTHROPIC_API_KEY` | Una key propia de Marcelo, con límite de gasto |
+| `CLAVE_SALA` | Una palabra cualquiera, ej. `hansel2026` |
+
+El link que le mandas lleva la clave: `https://tu-proyecto.vercel.app/?c=hansel2026`.
+Sin ella la página carga pero no responde, así la sala no queda abierta a internet
+gastando tu key.
+
+En esta versión el feedback no se guarda en ninguna base: se junta en la página y
+hay un botón **Copiar mi feedback** para que Marcelo lo pegue donde quiera.
+
+Detalle en `cerebro/sala-web/README.md`. Los dos archivos que genera `sala.py`
+están en `.gitignore` porque llevan el cerebro completo inyectado.
 
 ## 5. Probar el cerebro por consola (para vos)
 
