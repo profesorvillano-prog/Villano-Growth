@@ -25,6 +25,12 @@ CUERPO = json.load(open(os.path.join(BASE, "salida", "cuerpo-modulo3.json"), enc
 NUM = re.compile(r"\b\d+\s*(g|gr|gramos|kg|kilos|ml|cc|cucharada)", re.I)
 
 CASOS = [
+    ("usa el nombre del perfil sin preguntarlo", "", "hola, mi salchicha se rasca mucho", [
+        ("no pregunta el nombre de la persona",
+         lambda r: not re.search(r"(como te llamas|cual es tu nombre|tu nombre)", r["mensajes"][0], re.I)),
+        ("guarda el nombre del perfil",
+         lambda r: "sof" in (r["datos"].get("nombre_persona","") or "").lower()),
+     ]),
     ("saludo inicial", "", "hola", [
         ("saluda y pregunta por el caso", lambda r: len(r["mensajes"][0]) > 10),
         ("no abre con 'en que te puedo ayudar'",
@@ -108,6 +114,8 @@ REGLAS_GLOBALES = [
     ("sin signo de apertura", lambda r: "¿" not in r["mensajes"][0] and "¡" not in r["mensajes"][0]),
     ("vocabulario: no dice dueno/mascota",
      lambda r: not re.search(r"\b(dueñ|dueno|mascota)", r["mensajes"][0], re.I)),
+    ("una sola pregunta por mensaje", lambda r: r["mensajes"][0].count("?") <= 1),
+    ("no trata de usted", lambda r: not re.search(r"\b(usted|ustedes)\b", r["mensajes"][0], re.I)),
     ("no dice pienso ni BARF",
      lambda r: not re.search(r"\b(pienso|barf)\b", r["mensajes"][0], re.I)),
 ]
@@ -115,7 +123,7 @@ REGLAS_GLOBALES = [
 def llamar(resumen, mensaje):
     cuerpo = json.loads(json.dumps(CUERPO))
     cuerpo["messages"][0]["content"] = (
-        f"CANAL: IG\nNOMBRE EN EL PERFIL: Ana\nORIGEN (CTA): salud\n"
+        f"CANAL: IG\nNOMBRE EN EL PERFIL: Sofia Rojas\nORIGEN (CTA): salud\n"
         f"ESTADO ACTUAL: {'calificando' if resumen else 'nuevo'}\n"
         f"TURNOS: {2 if resumen else 0}\n\n"
         f"RESUMEN DE LO QUE YA CONVERSARON (tu memoria, escrita por ti en el turno anterior):\n{resumen}\n\n"

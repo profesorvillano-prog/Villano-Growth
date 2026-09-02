@@ -134,6 +134,16 @@ footer button:hover{border-color:var(--oro);color:var(--oro)}
         <div class="fila"><span class="k">Etapa</span><span id="s-estado" class="v">nuevo</span></div>
         <div class="fila"><span class="k">Temperatura</span><span id="s-temp" class="chip tibio">&mdash;</span></div>
         <div class="fila"><span class="k">Acci&oacute;n</span><span id="s-accion" class="v">&mdash;</span></div>
+        <div class="fila" style="border-top:1px solid var(--linea);padding-top:14px">
+          <span class="k" style="flex:1">Nombre en el perfil</span>
+          <input id="perfil" value="Sof&iacute;a Rojas" spellcheck="false"
+            style="width:130px;border:1px solid var(--linea);background:var(--crema);border-radius:100px;
+            padding:4px 12px;font:500 12.5px 'IBM Plex Mono',monospace;color:var(--tinta)">
+        </div>
+        <p class="nota" style="padding:0;margin:-6px 0 0">Es el nombre que llega de Instagram o WhatsApp.
+        Paula deber&iacute;a usarlo sin preguntarlo. Vac&iacute;alo o pon un usuario tipo <em>salchi_kira</em>
+        para ver qu&eacute; hace cuando no hay nombre.</p>
+
         <div class="memoria">
           <span class="k">Su memoria (400 caracteres)</span>
           <p id="s-resumen">Todav&iacute;a no conversaron.</p>
@@ -234,7 +244,7 @@ async function enviar(texto){
 ---
 
 CANAL: IG
-NOMBRE EN EL PERFIL: (prueba)
+NOMBRE EN EL PERFIL: ${$("perfil").value.trim()}
 ESTADO ACTUAL: ${turnos ? "calificando" : "nuevo"}
 TURNOS: ${turnos}
 
