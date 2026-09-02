@@ -1,0 +1,62 @@
+<!-- ===================================================================
+     SANA TU AUTOINMUNE · Redirección post pago
+     Paso 2 del embudo. Pegar en GoHighLevel: elemento Custom Code / HTML.
+     Revisar antes de publicar: el href del botón (/agendaconsulta).
+     =================================================================== -->
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  .sta{--deep:#0E2E3E;--teal:#0E7C8B;--tealw:#E8F4F6;--cta1:#0C7382;--cta2:#0A6270;
+       --mint:#2F9E7C;--mintw:#E9F5F0;--ground:#F5F8F9;--wh:#fff;
+       --t0:#0D2029;--t1:#2E4650;--t2:#55707B;--t3:#6B858F;--br:#DCE7EB;
+       --ease:cubic-bezier(.22,.61,.36,1);
+       font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+       color:var(--t1);background:var(--ground);-webkit-font-smoothing:antialiased;line-height:1.62;
+       min-height:100vh;display:flex;align-items:center;justify-content:center;padding:44px 20px}
+  .sta *{box-sizing:border-box}
+  .sta h1{font-family:"Instrument Sans","IBM Plex Sans",sans-serif;color:var(--t0);margin:0}
+  .sta-card{background:var(--wh);border:1px solid var(--br);border-radius:14px;max-width:520px;width:100%;
+            padding:46px 38px;text-align:center;box-shadow:0 20px 50px -34px rgba(13,32,41,.5)}
+  .sta-brand{display:inline-flex;align-items:center;gap:9px;margin-bottom:28px}
+  .sta-mk{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--teal);display:grid;place-items:center;flex:none}
+  .sta-mk svg{width:13px;height:13px;stroke:var(--teal);stroke-width:2.2;fill:none;stroke-linecap:round}
+  .sta-brand b{font-family:"Instrument Sans",sans-serif;font-weight:700;letter-spacing:.08em;font-size:13px;color:var(--deep);text-transform:uppercase}
+  .sta-brand b i{font-style:normal;color:var(--teal)}
+  .sta-check{width:62px;height:62px;border-radius:50%;background:var(--mintw);margin:0 auto 24px;display:flex;align-items:center;justify-content:center}
+  .sta-check svg{width:29px;height:29px;stroke:var(--mint);stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .sta-check svg path{stroke-dasharray:26;stroke-dashoffset:26;animation:sta-draw .7s var(--ease) .25s forwards}
+  @keyframes sta-draw{to{stroke-dashoffset:0}}
+  .sta-card h1{font-size:26px;line-height:1.22;font-weight:700;letter-spacing:-.021em}
+  .sta-card>p{margin:14px 0 0;font-size:16.5px;color:var(--t2)}
+  .sta-btn{display:flex;align-items:center;justify-content:center;gap:11px;margin:32px 0 0;
+           background:linear-gradient(180deg,var(--cta1),var(--cta2));color:#fff;text-decoration:none;
+           font-family:"Instrument Sans",sans-serif;font-weight:700;font-size:16px;padding:18px 24px;border-radius:10px;
+           box-shadow:0 14px 30px -12px rgba(12,115,130,.6),inset 0 1px 0 rgba(255,255,255,.16);
+           transition:transform .22s var(--ease),box-shadow .22s var(--ease)}
+  .sta-btn:hover{color:#fff;transform:translateY(-2px);box-shadow:0 20px 40px -14px rgba(12,115,130,.7),inset 0 1px 0 rgba(255,255,255,.2)}
+  .sta-btn:focus-visible{outline:2px solid var(--deep);outline-offset:3px}
+  .sta-btn svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none;transition:transform .22s var(--ease)}
+  .sta-btn:hover svg{transform:translateX(4px)}
+  .sta-sub{margin:16px 0 0;font-size:13.5px;color:var(--t2)}
+  .sta-help{margin-top:28px;padding-top:22px;border-top:1px solid var(--br);font-size:13.5px;color:var(--t2)}
+  .sta-help a{color:var(--teal);font-weight:600;text-decoration:underline}
+  @media(prefers-reduced-motion:reduce){.sta *{animation:none!important;transition:none!important}
+    .sta-check svg path{stroke-dashoffset:0}}
+  @media(max-width:640px){.sta-card{padding:34px 24px}.sta-card h1{font-size:22px}.sta-card>p{font-size:15.5px}}
+</style>
+<div class="sta">
+  <div class="sta-card">
+    <div class="sta-brand">
+      <span class="sta-mk"><svg viewBox="0 0 24 24"><path d="M12 6v12M6 12h12"/></svg></span>
+      <b>Sana tu <i>Autoinmune</i></b>
+    </div>
+    <div class="sta-check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h1>Ya está, tu pago fue recibido.</h1>
+    <p>Falta un paso: elegir el horario de tu consulta.</p>
+    <a class="sta-btn" href="/agendaconsulta">
+      Continuar y agendar
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+    </a>
+    <p class="sta-sub">Toma menos de un minuto. Es una hora, por videollamada.</p>
+    <div class="sta-help">¿Algo no funcionó? Escríbenos por <a href="https://ig.me/m/ezequielracca" target="_blank" rel="noopener">Instagram</a> y lo resolvemos el mismo día.</div>
+  </div>
+</div>

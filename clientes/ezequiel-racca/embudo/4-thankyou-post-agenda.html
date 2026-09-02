@@ -1,0 +1,128 @@
+<!-- ===================================================================
+     SANA TU AUTOINMUNE · Thank you page post agenda
+     Paso 4 del embudo. Pegar en GoHighLevel: elemento Custom Code / HTML.
+     =================================================================== -->
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  .sta{--deep:#0E2E3E;--teal:#0E7C8B;--tealw:#E8F4F6;--mint:#2F9E7C;--mintw:#E9F5F0;
+       --ground:#F5F8F9;--tint:#EEF4F6;--wh:#fff;
+       --t0:#0D2029;--t1:#2E4650;--t2:#55707B;--t3:#6B858F;--br:#DCE7EB;--br2:#EAF1F3;
+       --ease:cubic-bezier(.22,.61,.36,1);
+       font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+       color:var(--t1);background:var(--ground);-webkit-font-smoothing:antialiased;line-height:1.62}
+  .sta *{box-sizing:border-box}
+  .sta h1,.sta h2,.sta h3{font-family:"Instrument Sans","IBM Plex Sans",sans-serif;color:var(--t0);margin:0}
+  .sta-wrap{max-width:860px;margin:0 auto;padding:0 20px}
+  .sta-bar{background:var(--deep);padding:17px 0;text-align:center}
+  .sta-bar b{font-family:"Instrument Sans",sans-serif;font-weight:700;letter-spacing:.09em;font-size:14px;color:#fff;display:block;text-transform:uppercase}
+  .sta-bar b i{font-style:normal;color:#6FC4CF}
+  .sta-bar span{display:block;margin-top:5px;font-size:10.5px;letter-spacing:.16em;color:#9CBDC7;text-transform:uppercase}
+  .sta-hero{padding:50px 0 40px;text-align:center}
+  .sta-pill{display:inline-flex;align-items:center;gap:8px;font-family:"Instrument Sans",sans-serif;font-size:11px;
+            font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#1D7A5C;background:var(--mintw);
+            border:1px solid #CFE6DC;border-radius:6px;padding:8px 15px;margin-bottom:22px}
+  .sta-pill svg{width:12px;height:12px;stroke:var(--mint);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .sta-pill svg path{stroke-dasharray:26;stroke-dashoffset:26;animation:sta-draw .7s var(--ease) .3s forwards}
+  @keyframes sta-draw{to{stroke-dashoffset:0}}
+  .sta-hero h1{font-size:34px;line-height:1.16;font-weight:700;letter-spacing:-.022em;max-width:640px;margin:0 auto}
+  .sta-hero p{margin:16px auto 0;max-width:580px;font-size:16.5px;color:var(--t2)}
+  .sta-wa{display:flex;gap:16px;align-items:flex-start;background:var(--wh);border:1px solid var(--br);
+          border-radius:14px;padding:22px 24px;margin-bottom:54px}
+  .sta-wa .ic{flex:0 0 38px;height:38px;border-radius:10px;background:var(--tealw);display:grid;place-items:center}
+  .sta-wa .ic svg{width:18px;height:18px;stroke:var(--teal);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .sta-wa h3{font-size:16px;font-weight:700;margin-bottom:5px}
+  .sta-wa p{margin:0;font-size:15px;color:var(--t2)}
+  .sta-sec{margin-bottom:54px}
+  .sta-sec>h2{font-family:"Instrument Sans",sans-serif;font-size:12px;font-weight:600;letter-spacing:.19em;
+              text-transform:uppercase;color:var(--teal);margin-bottom:26px;padding-bottom:13px;border-bottom:1px solid var(--br)}
+  .sta-steps{display:grid;gap:14px}
+  .sta-step{display:flex;gap:20px;background:var(--wh);border:1px solid var(--br);border-radius:14px;padding:24px 26px;
+            transition:border-color .22s var(--ease),box-shadow .22s var(--ease)}
+  .sta-step:hover{border-color:#C3D8DE;box-shadow:0 16px 38px -30px rgba(13,32,41,.55)}
+  .sta-num{flex:0 0 42px;height:42px;border-radius:10px;background:var(--tealw);color:var(--teal);
+           font-family:"Instrument Sans",sans-serif;font-weight:700;font-size:14px;
+           display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+  .sta-step h3{font-size:17px;font-weight:700;margin-bottom:6px;line-height:1.3}
+  .sta-step p{margin:0;font-size:15.5px;color:var(--t2)}
+  .sta-prep{background:var(--tint);border:1px solid var(--br);border-radius:14px;padding:30px 28px;position:relative;overflow:hidden}
+  .sta-prep::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:radial-gradient(circle at 1px 1px,rgba(14,46,62,.055) 1px,transparent 0);background-size:22px 22px}
+  .sta-prep>*{position:relative}
+  .sta-prep p.sta-intro{margin:0 0 20px;font-size:15.5px;color:var(--t2)}
+  .sta-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+  .sta-list li{position:relative;padding-left:26px;font-size:15.5px;color:var(--t1)}
+  .sta-list li::before{content:"";position:absolute;left:2px;top:10px;width:8px;height:8px;border-radius:2px;background:var(--teal)}
+  .sta-list li b{color:var(--t0);font-weight:600}
+  .sta-close{text-align:center;background:var(--deep);border-radius:14px;padding:40px 30px;margin-bottom:56px}
+  .sta-close h2{color:#fff;font-size:22px;font-weight:700;line-height:1.28;max-width:520px;margin:0 auto;letter-spacing:-.018em}
+  .sta-close p{margin:13px auto 0;max-width:520px;font-size:15.5px;color:#B9D2DA}
+  .sta-foot{border-top:1px solid var(--br);padding:28px 0 38px;text-align:center;background:var(--wh)}
+  .sta-foot p{margin:0;font-size:12.5px;color:var(--t2);letter-spacing:.02em}
+  .sta-foot p+p{margin-top:6px}
+  @media(prefers-reduced-motion:reduce){.sta *{animation:none!important;transition:none!important}
+    .sta-pill svg path{stroke-dashoffset:0}}
+  @media(max-width:640px){.sta-hero{padding:36px 0 30px}.sta-hero h1{font-size:26px}.sta-hero p{font-size:15.5px}
+    .sta-wa{padding:20px;gap:14px}.sta-step{flex-direction:column;gap:14px;padding:22px 20px}
+    .sta-num{flex:0 0 auto;width:42px}.sta-prep{padding:26px 20px}.sta-close{padding:32px 22px}.sta-close h2{font-size:19px}}
+</style>
+<div class="sta">
+  <div class="sta-bar"><b>Sana tu <i>Autoinmune</i></b><span>Enfermedades autoinmunes · Abordaje desde la causa</span></div>
+  <div class="sta-wrap">
+    <div class="sta-hero">
+      <span class="sta-pill"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Hora reservada</span>
+      <h1>Listo, tu consulta ya está agendada.</h1>
+      <p>Recibirás el enlace de la videollamada por correo. Desde ahora empezamos a revisar tu caso para llegar preparados.</p>
+    </div>
+    <div class="sta-wa">
+      <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.9-.9L3 20.5l1.6-4.9A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z"/></svg></div>
+      <div>
+        <h3>Te escribimos por WhatsApp</h3>
+        <p>En las próximas horas te llega un mensaje al número que dejaste, con la confirmación del horario y el cuestionario previo. No tienes que hacer nada más por ahora.</p>
+      </div>
+    </div>
+    <div class="sta-sec">
+      <h2>De aquí hasta tu consulta</h2>
+      <div class="sta-steps">
+        <div class="sta-step"><div class="sta-num">01</div><div>
+          <h3>Confirmación y cuestionario</h3>
+          <p>Te escribimos por WhatsApp para confirmar el horario y enviarte el cuestionario previo. Responderlo toma unos minutos.</p>
+          </div></div>
+        <div class="sta-step"><div class="sta-num">02</div><div>
+          <h3>Revisamos tu caso antes de hablar</h3>
+          <p>Con tu historia, tu alimentación, tu medicación y tus análisis sobre la mesa, llegamos a la consulta con el caso ya estudiado. Esa hora no se gasta en recopilar datos.</p>
+          </div></div>
+        <div class="sta-step"><div class="sta-num">03</div><div>
+          <h3>La consulta, uno a uno</h3>
+          <p>Una hora por videollamada. Sales entendiendo qué está pasando en tu cuerpo, por qué llegaste hasta acá y qué hacer a partir de mañana.</p>
+          </div></div>
+      </div>
+    </div>
+    <div class="sta-sec">
+      <h2>Ve preparando</h2>
+      <div class="sta-prep">
+        <p class="sta-intro">No hace falta que lo tengas todo. Mientras más completo llegues, más aprovechamos la hora.</p>
+        <ul class="sta-list">
+          <li><b>Tus análisis más recientes</b>, aunque te hayan dicho que salieron bien.</li>
+          <li><b>Medicación y suplementos</b> que tomas hoy, con las dosis.</li>
+          <li><b>Cómo comes en un día normal</b>, sin maquillarlo.</li>
+          <li><b>Desde cuándo tienes los síntomas</b> y qué los empeora o los calma.</li>
+          <li><b>Qué has probado antes</b> y qué resultado te dio.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sta-close">
+      <h2>El primer paso no era hacer más. Era entender.</h2>
+      <p>Ya lo diste. Nos vemos en la consulta.</p>
+    </div>
+  </div>
+  <div class="sta-foot"><div class="sta-wrap">
+    <p>Sana tu Autoinmune · Abordaje de enfermedades autoinmunes desde la causa</p>
+    <p>© <span class="sta-y">2026</span> · Todos los derechos reservados</p>
+    </div></div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var y=document.querySelector('.sta .sta-y');
+  if(y) y.textContent=new Date().getFullYear();
+});
+</script>
