@@ -43,22 +43,33 @@ Make le pone al contacto cuando hay que escalar a un humano
 
 ### Acciones
 
-1. **Wait** - `15 seconds`
-2. **Custom Webhook** - configuracion abajo
+1. **Custom Webhook** - configuracion abajo
 
-### Settings del workflow
+**Sin Wait, igual que el bot de Cool Drive.** Lo unico que cuelga del trigger es
+el webhook.
 
-| Opcion | Valor | Por que |
-|---|---|---|
-| Allow Re-Entry | **OFF** | Junta las rafagas de mensajes en una sola corrida |
+### Que pasa con las rafagas de mensajes
 
-Sin el Wait + Re-Entry OFF, tres mensajes seguidos generan tres ejecuciones y
-tres respuestas de Paula pisandose.
+La gente manda tres mensajes seguidos. Sin Wait eso son tres ejecuciones. El
+problema real no son las tres respuestas: es que las tres **leen la misma
+memoria al mismo tiempo**, cada una contesta ignorando a las otras dos, y la
+ultima en escribir pisa a las anteriores.
 
-> El costo: a Make le llega el **primer** mensaje de la rafaga, no el ultimo. En
-> la practica no molesta, porque el resto del contexto le llega a Paula en el
-> turno siguiente y su memoria de 400 caracteres lo absorbe. Es lo mismo que hace
-> el bot de Cool Drive.
+Eso esta resuelto del lado de Make, no aca: el escenario `7035201` esta en
+**procesamiento secuencial** (`sequential: true`). Make atiende una ejecucion
+por vez, y la segunda arranca recien cuando la primera guardo la memoria. La
+rafaga sigue generando tres respuestas, pero encadenadas en vez de pisadas: cada
+una lee el resumen actualizado.
+
+> El costo del secuencial es que una ejecucion colgada detiene la cola. Por eso
+> los cinco modulos del escenario tienen manejador de error (`Resume` o
+> `Ignore`): ninguno puede quedar colgado.
+
+**Si en la semana de sombra las rafagas resultan molestas**, ahi si agregar
+**Wait 15 seconds** antes del webhook y poner **Allow Re-Entry en OFF** en
+Configuracion. No antes: el precio de esa solucion es que a Make le llega el
+**primer** mensaje de la rafaga y no el ultimo, y no vale la pena pagarlo por un
+problema que quiza no exista.
 
 ---
 
