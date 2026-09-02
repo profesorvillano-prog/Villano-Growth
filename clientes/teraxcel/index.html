@@ -22,6 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://assets.cdn.filesafe.space" crossorigin>
+<link rel="preconnect" href="https://fast.wistia.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -78,15 +79,11 @@
   header .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px;}
   header .logo-link{
     display:inline-flex; align-items:center;
-    padding:4px 6px;
+    padding:2px 4px;
     border-radius:8px;
   }
-  .logo-word{
-    font-family:var(--font-title); font-weight:700;
-    font-size:20px; letter-spacing:-0.03em; color:var(--ink);
-    line-height:1;
-  }
-  .logo-word b{color:var(--teal); font-weight:700;}
+  .logo{height:40px; width:auto; display:block;}
+  .logo-chip{display:inline-flex; align-items:center; background:#fff; padding:6px 10px; border-radius:10px;}
   .nav-links{display:flex; align-items:center; gap:18px; flex-wrap:wrap; justify-content:flex-end;}
   .nav-links a:not(.nav-cta){
     font-family:var(--font-body);
@@ -208,17 +205,11 @@
 
   /* Video */
   .video-section{background:var(--bone);}
-  .video-frame{
-    position:relative; aspect-ratio:16/9; border-radius:18px; overflow:hidden;
-    background:linear-gradient(145deg, #0F1B54, #080F3A 60%, #142368);
-    border:1px solid rgba(8,15,58,0.10);
+  .video-embed{
+    border-radius:18px; overflow:hidden;
     box-shadow:0 30px 60px -30px rgba(8,15,58,0.4);
   }
-  .video-frame video{
-    width:100%; height:100%;
-    display:block; object-fit:cover;
-    background:#050A29;
-  }
+  .video-embed wistia-player{display:block; border-radius:18px; overflow:hidden;}
   @keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
 
   /* Cases */
@@ -471,7 +462,7 @@
 
   footer{padding:40px 0; background:var(--ink); border-top:1px solid rgba(255,255,255,0.08);}
   footer .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;}
-  footer .logo-word{color:#fff; font-size:18px;}
+  footer .logo{height:26px;}
   footer p{font-family:var(--font-body); font-size:11.5px; color:rgba(255,255,255,0.5);}
 
   @media (max-width:920px){
@@ -505,7 +496,7 @@
 <header id="siteHeader">
   <div class="wrap">
     <a href="#top" class="logo-link" aria-label="teraXcel inicio">
-      <span class="logo-word">tera<b>X</b>cel</span>
+      <img class="logo" src="https://assets.cdn.filesafe.space/yivQnN9Zd8scHJmY0B16/media/6a98462ea1de6b8a2271ac4c.jpg" alt="teraXcel" width="160" height="40">
     </a>
     <nav class="nav-links" aria-label="Secciones">
       <a href="#casos">Casos</a>
@@ -556,18 +547,11 @@
 <section class="video-section section-tight" id="video">
   <div class="wrap" style="max-width:820px;">
     <div class="eyebrow reveal"><span class="rule"></span> Fase 01 — Conoce el método</div>
-    <div class="video-frame reveal">
-      <video
-        controls
-        playsinline
-        preload="metadata"
-        poster="https://assets.cdn.filesafe.space/yivQnN9Zd8scHJmY0B16/media/6a983889efeed0ae2596989c.jpg"
-        title="Metodología teraXcel"
-      >
-        <source src="https://assets.cdn.filesafe.space/yivQnN9Zd8scHJmY0B16/media/6a983889da522bf1739f0c78.mov" type="video/mp4">
-        <source src="https://assets.cdn.filesafe.space/yivQnN9Zd8scHJmY0B16/media/6a983889da522bf1739f0c78.mov" type="video/quicktime">
-        Tu navegador no soporta la reproducción de video.
-      </video>
+    <div class="video-embed reveal">
+      <script src="https://fast.wistia.com/player.js" async></script>
+      <script src="https://fast.wistia.com/embed/5h3gbry4gy.js" async type="module"></script>
+      <style>wistia-player[media-id='5h3gbry4gy']:not(:defined){background:center / contain no-repeat url('https://fast.wistia.com/embed/medias/5h3gbry4gy/swatch'); display:block; filter:blur(5px); padding-top:56.25%;}</style>
+      <wistia-player media-id="5h3gbry4gy" aspect="1.7777777777777777"></wistia-player>
     </div>
   </div>
 </section>
@@ -854,7 +838,7 @@
 
 <footer>
   <div class="wrap">
-    <span class="logo-word">tera<b>X</b>cel</span>
+    <span class="logo-chip"><img class="logo" src="https://assets.cdn.filesafe.space/yivQnN9Zd8scHJmY0B16/media/6a98462ea1de6b8a2271ac4c.jpg" alt="teraXcel" width="120" height="26"></span>
     <p>© teraXcel · Terapia celular avanzada</p>
   </div>
 </footer>

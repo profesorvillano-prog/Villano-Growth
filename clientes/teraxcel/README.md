@@ -14,10 +14,11 @@ recursos reales (video + 2 fotos) que antes eran placeholders.
 Las imágenes y el video se sirven directo desde el CDN del cliente (`assets.cdn.filesafe.space`),
 igual que en el resto de clientes del repo. No hay carpeta local de assets.
 
-| Recurso | Ubicación en la página | URL |
+| Recurso | Ubicación en la página | URL / ID |
 |---|---|---|
-| Video | Sección "Fase 01 — Conoce el método" (`<video>`) | `.../6a983889da522bf1739f0c78.mov` |
-| Foto clínica (.jpg) | Sección "Clínica" + `poster` del video + imagen OG (compartir) | `.../6a983889efeed0ae2596989c.jpg` |
+| VSL (Wistia) | Sección "Fase 01 — Conoce el método" (`<wistia-player>`, nativo) | media-id `5h3gbry4gy` |
+| Logo | Header + footer (chip blanco en footer) | `.../6a98462ea1de6b8a2271ac4c.jpg` |
+| Foto clínica (.jpg) | Sección "Clínica" + imagen OG (compartir) | `.../6a983889efeed0ae2596989c.jpg` |
 | Foto paciente (.png) | Sección "El problema" | `.../6a983889fac7854efe29bd88.png` |
 
 > **Intercambiar fotos:** si la `.png` y la `.jpg` quedaron en secciones cambiadas,
@@ -29,9 +30,10 @@ igual que en el resto de clientes del repo. No hay carpeta local de assets.
 - **Media real** en lugar de bloques de color y notas `// Foto:...`.
 - **Casos**: las iniciales (M./R./C.) se mantienen a propósito para proteger la
   privacidad del paciente; la nota al pie lo explica.
-- **Logo**: wordmark tipográfico `teraXcel` (siempre visible), en vez de un
-  `assets/logo.png` que estaría roto. Si el cliente tiene su logo en el CDN, se
-  reemplaza el `<span class="logo-word">` por un `<img>`.
+- **Logo**: imagen del cliente desde el CDN. En el footer (fondo oscuro) va dentro
+  de un chip blanco (`.logo-chip`) para que el logo en `.jpg` se lea limpio.
+- **VSL**: reproductor **nativo de Wistia** (web component `<wistia-player>`), sin
+  overlay ni marco por encima; solo esquinas redondeadas y sombra en el contenedor.
 - **Robustez**: el contenido nunca queda oculto si el JS no corre (las animaciones de
   aparición solo se activan con JS); anclas con `scroll-margin-top` para el header fijo;
   meta Open Graph/Twitter + `theme-color` para previsualización al compartir por WhatsApp.
