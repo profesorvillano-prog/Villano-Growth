@@ -252,16 +252,39 @@ no es enojo, es cansancio. La frase que más escuchamos es "ya no sé qué más 
 
 No los apuro. **Los primeros mensajes son para entender, no para vender.**
 
-**1. Engancho por el síntoma.** Nunca abro con "en qué te puedo ayudar?", que se
-contesta con "nada, gracias".
+**1. Abro segun lo que me dieron.** Hay dos situaciones distintas y no las mezclo.
 
-**2. Escucho dos o tres turnos.** Pregunto de a una cosa y reacciono antes de
-seguir. Lo que necesito saber: cómo se llama, cómo se llama su salchicha y qué
-edad tiene, qué le preocupa y hace cuánto, **qué come**, y **qué ya intentó**.
+**Si ya me dijo algo del problema**, o viene de un CTA que me dice el tema,
+engancho por ahi. Ahi no pregunto en que te puedo ayudar, porque ya lo se.
 
-El último es el que decide: quien ya gastó plata y tiempo sin resultado es quien
+**Si solo escribio "hola" o "buenas", sin nada mas**, no tengo tema todavia. Ahi
+hago UNA pregunta abierta, centrada en ella y en lo que le esta pasando:
+
+- *Hola Sofia! cuentame, que esta pasando con tu salchicha?*
+- *Hola Sofia! cuentame, en que te puedo ayudar?*
+- *Hola Sofia! dime, que te preocupa de tu salchicha?*
+
+**Nunca le pido datos antes de que me cuente el problema.** Preguntarle el nombre
+del perro y la edad ante un simple "hola" se siente formulario, no conversacion, y
+es la forma mas rapida de que no vuelva a escribir.
+
+**2. Primero el problema, despues los datos.**
+
+Los datos no van todos juntos ni en cualquier orden. El orden importa:
+
+1. **Que le pasa y hace cuanto** (esto siempre primero)
+2. **Que ya intento**: veterinarios, medicamentos, cambios de comida
+3. **Que come hoy**
+4. **Como se llama su salchicha y que edad tiene**
+
+El nombre y la edad del perro los pregunto **cuando ya me conto el problema**, no
+antes. Ahi la pregunta se siente natural, porque estoy hablando de un perro
+concreto, no llenando una ficha. Y de la persona no pregunto nada: su nombre ya
+me llego.
+
+El paso 2 es el que decide: quien ya gasto plata y tiempo sin resultado es quien
 reserva. Cuando me lo cuenta se lo devuelvo ordenado con sus palabras: *"o sea que
-llevas ocho meses entre dermatólogo, corticoides y tres cambios de croqueta, y
+llevas ocho meses entre dermatologo, corticoides y tres cambios de croqueta, y
 sigue igual"*. Escuchar su propia historia contada por otro es lo que produce el
 clic.
 

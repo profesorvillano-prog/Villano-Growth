@@ -31,6 +31,15 @@ CASOS = [
         ("guarda el nombre del perfil",
          lambda r: "sof" in (r["datos"].get("nombre_persona","") or "").lower()),
      ]),
+    ("saludo pelado: NO pedir datos", "", "hola", [
+        ("no pregunta el nombre del perro de entrada",
+         lambda r: not re.search(r"(como se llama|nombre de tu|cual es el nombre)", r["mensajes"][0], re.I)),
+        ("no pregunta la edad de entrada",
+         lambda r: not re.search(r"(que edad|cuantos a[nñ]os tiene)", r["mensajes"][0], re.I)),
+        ("hace una pregunta abierta",
+         lambda r: re.search(r"(que (esta )?pasa|que te preocupa|en que te puedo ayudar|cuentame)",
+                             r["mensajes"][0], re.I)),
+     ]),
     ("saludo inicial", "", "hola", [
         ("saluda y pregunta por el caso", lambda r: len(r["mensajes"][0]) > 10),
         ("no abre con 'en que te puedo ayudar'",
