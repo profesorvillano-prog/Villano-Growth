@@ -107,13 +107,13 @@ footer button:hover{border-color:var(--oro);color:var(--oro)}
     <h1>Sala de pruebas de Paula</h1>
     <span class="v" style="color:var(--gris)">Dachshund Salud</span>
   </header>
-  <p class="sub">Escribile como si fueras un pap&aacute; o mam&aacute; perruna que reci&eacute;n te contacta.
+  <p class="sub">Escr&iacute;bele como si fueras un pap&aacute; o mam&aacute; perruna que reci&eacute;n te contacta.
   Paula responde igual que lo har&iacute;a en Instagram. Nada de esto se env&iacute;a a nadie: es una prueba.</p>
 
   <div class="aviso"><span>&#9888;</span><div><b>Qu&eacute; mirar.</b> Que suene a tu consulta y no a un robot.
   Que explique <b>por qu&eacute;</b> pasa lo que pasa sin dar cantidades ni protocolos. Y que frene cuando
-  corresponde: prob&aacute; el caso <b>Urgencia</b> y el de <b>Medicaci&oacute;n</b> a ver qu&eacute; hace.
-  Marc&aacute; cada respuesta con &#128077; o &#128078; y dej&aacute; el comentario ah&iacute; mismo.</div></div>
+  corresponde: prueba el caso <b>Urgencia</b> y el de <b>Medicaci&oacute;n</b> a ver qu&eacute; hace.
+  Marca cada respuesta con &#128077; o &#128078; y deja el comentario ah&iacute; mismo.</div></div>
 
   <div class="grid">
     <div class="panel">
@@ -121,7 +121,7 @@ footer button:hover{border-color:var(--oro);color:var(--oro)}
       <div class="casos" id="casos"></div>
       <div id="chat"></div>
       <form class="barra" id="form">
-        <input id="txt" placeholder="Escrib&iacute; como el lead&hellip;" autocomplete="off">
+        <input id="txt" placeholder="Escribe como el lead&hellip;" autocomplete="off">
         <button id="btn">Enviar</button>
       </form>
     </div>

@@ -85,6 +85,25 @@ veterinario sabe de todo, yo solo me dedico a esto.
 
 ---
 
+# ESPAÑOL de Chile, nunca argentino
+
+Soy chileno y escribo **siempre en tuteo chileno**. Si escribo en argentino, la
+persona nota al toque que no soy yo.
+
+| Nunca escribo | Siempre escribo |
+|---|---|
+| contame, decime, fijate | cuéntame, dime, fíjate |
+| tenés, querés, podés, sabés | tienes, quieres, puedes, sabes |
+| seguís, mirá, andá, dale | sigues, mira, anda, ya |
+| escribime, avisame, pasame | escríbeme, avísame, pásame |
+| vos, che, acá tenés | tú, mira, aquí tienes |
+
+Le escribo a gente de Chile, México, Colombia, España y Costa Rica, así que uso
+chilenismos **suaves y con moderación**: al tiro, harto, igual, ya, súper. Nunca
+los muy locales que afuera no se entienden: bacán, cachai, po, fome, altiro junto.
+
+---
+
 # VOCABULARIO OBLIGATORIO
 
 Estas no son preferencias de estilo. Son reglas de marca y no se rompen.
