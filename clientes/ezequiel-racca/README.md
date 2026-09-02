@@ -19,9 +19,17 @@ intestino y la alimentación.
 - **`index.html`** — landing / VSL del programa high ticket (3 meses).
 - **`landing-consulta.html`** — **Landing 1 del embudo de consulta**: bloque
   autocontenido para pegar en GoHighLevel (elemento *Custom Code / HTML*).
-  Vende la **Consulta de Evaluación Autoinmune (USD $60)**, descontable del
-  programa, con doble pasarela (PayPal/tarjeta internacional y Mercado Pago
-  Argentina).
+  Vende la **Consulta de Evaluación Autoinmune (USD $60)** con **un solo botón
+  de pago**, apuntando al checkout de Hotmart
+  (`https://pay.hotmart.com/P107408158S`).
+
+  **Estética clínica.** Azul profundo `#0E2E3E` + verde-azulado `#0E7C8B` sobre
+  blancos fríos; tipografías Instrument Sans (titulares) e IBM Plex Sans
+  (cuerpo); hairlines de 1px, esquinas de 10-14px y una retícula de puntos muy
+  tenue en las secciones alternas. Animaciones mínimas y sobrias: revelado por
+  sección, entrada escalonada, dibujado de los checks, las reglas del eyebrow
+  que se abren, y micro-interacciones en el botón (elevación, brillo y avance
+  de la flecha). Todo se desactiva con `prefers-reduced-motion`.
 
   **Ángulo del copy: situación actual → situación deseada.** El foco está en
   el punto de partida de la persona y en adónde puede llegar; la consulta se
@@ -63,16 +71,14 @@ Landing Consulta  ← landing-consulta.html
 
 Todo se edita en el bloque `var STA = { ... }` al final del archivo:
 
-- `PAGO_URL_PAYPAL` — link de pago PayPal/tarjeta (USD $60).
-- `PAGO_URL_MPAGO` — link de Mercado Pago (Argentina).
-- `PRECIO_ARS` — monto en pesos (hoy dice "en pesos"); cambia en toda la página.
+- `PAGO_URL` — checkout de Hotmart. **Ya configurado.**
+- `PRECIO` — texto del precio en los 4 botones (hoy `USD $60`). Vacío lo oculta.
 - `VSL_EMBED` + `VSL_POSTER` — video y portada del VSL de la consulta.
-- `TESTIMONIO_VIDEO_EMBED` / `TESTIMONIOS_IMG` — la sección de testimonios
+- `TESTIMONIOS_IMG` / `TESTIMONIO_VIDEO_EMBED` — la sección de testimonios
   aparece sola cuando se carga al menos uno.
-- `META_PIXEL_ID` / `GA4_ID` — píxeles (opcionales).
-- ~~Fotos de Ezequiel y Catalina~~ — ya incorporadas desde el CDN de GHL. Se
-  muestran en 4:5 con `object-position:50% 22%`, para conservar el rostro si la
-  foto original es más alta que ese recorte.
+- `META_PIXEL_ID` / `GA4_ID` — píxeles (opcionales). El clic en cualquier botón
+  dispara el evento `ClicPago` con su ubicación (`hero`, `consulta`, `cierre`,
+  `barra`).
 - Confirmar la **grafía exacta** del apellido de Catalina (viene de
   transcripción: "Klimboski").
 
