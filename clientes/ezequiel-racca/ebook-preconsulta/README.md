@@ -1,4 +1,4 @@
-# Ebook Pre-Consulta — Sánate Autoinmune (Hotmart)
+# Ebook Pre-Consulta — Sana Tu Autoinmune (Hotmart)
 
 Material educativo **pre-llamada** que se entrega automáticamente en Hotmart cuando
 la persona paga su **Consulta de Diagnóstico**. Cumple el requisito de Hotmart de
@@ -61,7 +61,7 @@ potencia.
 
 ## Pendientes antes de publicar
 
-- [ ] Confirmar **nombre de marca** (candidato: "Sánate Autoinmune").
+- [ ] Confirmar **nombre de marca** (candidato: "Sana Tu Autoinmune").
 - [ ] Definir **precio/moneda** y `[LINK-AGENDA]` real del flujo Hotmart → consulta.
 - [ ] Cargar datos de contacto reales (`[WHATSAPP]`, `[@INSTAGRAM]`, `[EMAIL-CONTACTO]`).
 - [ ] Foto del dúo `[FOTO-DUO]` para portada (pendiente de la sesión de fotos).
