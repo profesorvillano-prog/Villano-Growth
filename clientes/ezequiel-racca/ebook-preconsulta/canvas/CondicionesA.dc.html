@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700&family=Mulish:wght@400;500;600;700;800&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Mulish', system-ui, sans-serif; color: #2A2431; }
+    .serif { font-family: 'Spectral', Georgia, serif; }
+    a { color: #9C7B34; } a:hover { color: #6f571f; }
+    .lbl { font-size:10px;letter-spacing:2px;font-weight:800;text-transform:uppercase;color:#a89bb0;}
+    .txt { font-size:13.5px;line-height:1.55;color:#453f52;margin-top:3px;}
+  </style>
+</helmet>
+<div style="width:794px;height:1123px;position:relative;overflow:hidden;background:#FBF8F3;">
+  <div style="position:absolute;top:36px;left:72px;right:72px;display:flex;justify-content:space-between;align-items:center;">
+    <span style="font-size:11px;letter-spacing:3px;color:#9C7B34;font-weight:700;text-transform:uppercase;">Sánate Autoinmune</span>
+    <span style="font-size:11px;letter-spacing:2px;color:#BCB1C4;">06</span>
+  </div>
+
+  <div style="position:absolute;top:92px;left:72px;right:72px;bottom:88px;">
+    <div style="display:flex;align-items:baseline;gap:18px;">
+      <span class="serif" style="font-size:15px;letter-spacing:4px;color:#C2A05B;font-weight:600;text-transform:uppercase;">Capítulo 3</span>
+      <span style="flex:1;height:1px;background:#E4DAC8;"></span>
+    </div>
+    <h2 class="serif" style="margin-top:14px;font-weight:500;font-size:34px;line-height:1.1;color:#33243d;">Tu condición, mirada desde la raíz</h2>
+    <p style="margin-top:10px;font-size:13.5px;line-height:1.55;color:#6a6276;">El intestino es el tronco común; cada condición tiene su rama. Buscá la tuya. <span style="font-style:italic;">(Es divulgación de evidencia emergente, no un diagnóstico de tu caso.)</span></p>
+
+    <!-- card: psoriasis -->
+    <div style="margin-top:20px;background:#fff;border:1px solid #EEE6DA;border-top:4px solid #B4472F;padding:22px 26px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:30px;height:30px;border-radius:50%;background:#F4E2DD;display:flex;align-items:center;justify-content:center;"><span style="width:11px;height:11px;border-radius:50%;background:#B4472F;display:block;"></span></div>
+        <div class="serif" style="font-size:22px;font-weight:600;color:#33243d;">Psoriasis</div>
+      </div>
+      <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px 26px;">
+        <div><div class="lbl">Lo que te dijeron</div><div class="txt">Placas crónicas, cortisona, metotrexato, tal vez un biológico. “Es genético, es para siempre”.</div></div>
+        <div><div class="lbl">Lo que muestra la ciencia (2024–2025)</div><div class="txt">La alteración de la flora intestinal activa la misma vía inflamatoria (IL-23 / IL-17) que produce las placas. Se halló relación <strong>causal</strong>, y mejoras al intervenir el microbioma junto al tratamiento.</div></div>
+      </div>
+      <div style="margin-top:14px;background:#FBF6F4;border-left:3px solid #B4472F;padding:10px 14px;"><span class="lbl" style="color:#B4472F;">La nota honesta</span><div class="txt" style="margin-top:2px;">No es magia ni inmediato. Primero cambian los marcadores de inflamación; la piel, más adelante. Es un proceso, y por eso se acompaña.</div></div>
+    </div>
+
+    <!-- card: eczema -->
+    <div style="margin-top:18px;background:#fff;border:1px solid #EEE6DA;border-top:4px solid #4E7A52;padding:22px 26px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:30px;height:30px;border-radius:50%;background:#E4EFE1;display:flex;align-items:center;justify-content:center;"><span style="width:11px;height:11px;border-radius:50%;background:#4E7A52;display:block;"></span></div>
+        <div class="serif" style="font-size:22px;font-weight:600;color:#33243d;">Dermatitis atópica / Eczema</div>
+      </div>
+      <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px 26px;">
+        <div><div class="lbl">Lo que te dijeron</div><div class="txt">Piel sensible, hidratación eterna, corticoides tópicos, dietas de eliminación con resultados a medias.</div></div>
+        <div><div class="lbl">Lo que muestra la ciencia</div><div class="txt">De las condiciones con evidencia <strong>más sólida</strong> del eje intestino–piel: a más severidad, más intestino permeable y menos bacterias buenas. Esa disbiosis dispara la inflamación Th2 que rompe la barrera y enciende la picazón.</div></div>
+      </div>
+      <div style="margin-top:14px;background:#F5FAF3;border-left:3px solid #4E7A52;padding:10px 14px;"><span class="lbl" style="color:#4E7A52;">La nota honesta</span><div class="txt" style="margin-top:2px;">La dieta de eliminación es solo la primera capa. Falta la segunda —reparar el intestino y calmar la inflamación de base—, y ahí se juega el cambio de fondo.</div></div>
+    </div>
+
+    <div style="margin-top:16px;text-align:center;font-size:12px;letter-spacing:2px;color:#BCB1C4;">continúa →</div>
+  </div>
+
+  <div style="position:absolute;bottom:34px;left:72px;right:72px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:1px;color:#BCB1C4;border-top:1px solid #E7DECF;padding-top:12px;">
+    <span>Guía Pre-Consulta</span><span>Tu condición desde la raíz</span>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700&family=Mulish:wght@400;500;600;700;800&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Mulish', system-ui, sans-serif; color: #2A2431; }
+    .serif { font-family: 'Spectral', Georgia, serif; }
+    a { color: #9C7B34; } a:hover { color: #6f571f; }
+    .cat { display:flex;gap:10px;align-items:center;margin-bottom:5px; }
+    .cat .nm { font-size:14px;font-weight:800;color:#33243d; }
+    .items { font-size:12.5px;line-height:1.5;color:#5a5266;padding-left:28px; }
+    .catwrap { padding:11px 0; }
+  </style>
+</helmet>
+<div style="width:794px;height:1123px;position:relative;overflow:hidden;background:#FBF8F3;">
+  <div style="position:absolute;top:36px;left:72px;right:72px;display:flex;justify-content:space-between;align-items:center;">
+    <span style="font-size:11px;letter-spacing:3px;color:#9C7B34;font-weight:700;text-transform:uppercase;">Sánate Autoinmune</span>
+    <span style="font-size:11px;letter-spacing:2px;color:#BCB1C4;">10</span>
+  </div>
+
+  <div style="position:absolute;top:96px;left:72px;right:72px;bottom:92px;">
+    <div style="display:flex;align-items:center;gap:20px;">
+      <div class="serif" style="font-size:74px;font-weight:700;color:#EADFCB;line-height:0.8;">02</div>
+      <div>
+        <div style="font-size:12px;letter-spacing:3px;color:#9C7B34;font-weight:700;text-transform:uppercase;">Palanca dos</div>
+        <h2 class="serif" style="margin-top:4px;font-weight:600;font-size:34px;line-height:1;color:#33243d;">Volvé a la comida real</h2>
+      </div>
+    </div>
+
+    <p style="margin-top:18px;font-size:14.5px;line-height:1.6;color:#3a3342;">Sacado lo que inflama, sumá comida de un solo ingrediente, con base <strong>animal</strong>. La grasa animal, lejos de ser el enemigo, es aquí una aliada. Esta es una <strong>guía general de referencia</strong>; tu lista fina y personalizada sale en la consulta.</p>
+
+    <div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:22px;">
+      <!-- ANIMAL -->
+      <div style="background:#FBF5EE;border:1px solid #EAD9C4;padding:20px 22px;">
+        <div class="serif" style="font-size:18px;font-weight:700;color:#9C5B2E;border-bottom:2px solid #E6C9A6;padding-bottom:10px;display:flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9C5B2E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-11"/></svg>Permitidos de origen animal</div>
+        <div class="catwrap" style="border-bottom:1px solid #EEE0CE;">
+          <div class="cat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4472F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4a4 4 0 013 6.6c-1 1.2-1 2.4-1 3.4a4 4 0 11-8 0c0-1.2-.3-2-1.2-2.8A4 4 0 0110 4z"/></svg><span class="nm">Carnes</span></div>
+          <div class="items">Res/ternera, cerdo, pollo, pescado, mariscos, moluscos y más. Caldo de carne. <em>Ojo con los embutidos.</em></div>
+        </div>
+        <div class="catwrap" style="border-bottom:1px solid #EEE0CE;">
+          <div class="cat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C2882F" stroke-width="1.7"><path d="M12 3c-3 0-6 5-6 9a6 6 0 0012 0c0-4-3-9-6-9z"/></svg><span class="nm">Huevos</span></div>
+          <div class="items">Gallina, codorniz, pato. Mejor si son de granja o libres.</div>
+        </div>
+        <div class="catwrap" style="border-bottom:1px solid #EEE0CE;">
+          <div class="cat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C2A05B" stroke-width="1.7" stroke-linejoin="round"><path d="M4 12l8-4 8 4v2H4z"/><path d="M4 14v3a8 3 0 0016 0v-3"/></svg><span class="nm">Lácteos</span></div>
+          <div class="items">Quesos maduros y grasosos, manteca. Yogur griego y crema si se toleran, con moderación.</div>
+        </div>
+        <div class="catwrap">
+          <div class="cat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a8194" stroke-width="1.7" stroke-linejoin="round"><path d="M8 3h8l-1 4v12a2 2 0 01-2 2h-2a2 2 0 01-2-2V7z"/></svg><span class="nm">Crema de leche</span></div>
+          <div class="items">Preferible a la leche de vaca.</div>
+        </div>
+      </div>
+
+      <!-- VEGETAL -->
+      <div style="background:#F3F7F0;border:1px solid #D7E4CF;padding:20px 22px;">
+        <div class="serif" style="font-size:18px;font-weight:700;color:#3E6B41;border-bottom:2px solid #C9DEC0;padding-bottom:10px;display:flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3E6B41" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-11"/></svg>Permitidos de origen vegetal</div>
+        <div class="catwrap" style="border-bottom:1px solid #E2ECDC;">
+          <div class="cat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A4E7E" stroke-width="1.7"><ellipse cx="12" cy="13" rx="5" ry="7"/><path d="M12 6c0-2 1-3 3-3"/></svg><span class="nm">Frutas saladas</span></div>
+          <div class="items">Con semilla adentro: aceitunas, calabaza, palta, pepino, morrón, tomate, berenjena, zucchini, chile, ají.</div>
+        </div>
+        <div class="catwrap" style="border-bottom:1px solid #E2ECDC;">
+          <div class="cat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4E7A52" stroke-width="1.7" stroke-linejoin="round"><path d="M4 20c0-8 6-14 16-14 0 10-8 14-16 14z"/><path d="M4 20c4-6 8-8 12-9"/></svg><span class="nm">Verduras verdes</span></div>
+          <div class="items">Acelga, cilantro, espárragos, espinaca, lechugas, pepino, rúcula, cebolla, verdeo, apio.</div>
+        </div>
+        <div class="catwrap" style="border-bottom:1px solid #E2ECDC;">
+          <div class="cat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A5C8A" stroke-width="1.7"><circle cx="9" cy="14" r="4"/><circle cx="16" cy="12" r="3.5"/><path d="M9 10V6M16 8.5V5"/></svg><span class="nm">Frutas</span></div>
+          <div class="items">Arándanos, frambuesas, frutillas, moras, limón, kiwi, naranja, mandarina, durazno (moderado).</div>
+        </div>
+        <div class="catwrap" style="border-bottom:1px solid #E2ECDC;">
+          <div class="cat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4E7A52" stroke-width="1.7" stroke-linecap="round"><path d="M12 3v18M12 8c-3 0-4-2-4-3M12 12c3 0 4-2 4-3M12 16c-3 0-4-2-4-3"/></svg><span class="nm">Especias</span></div>
+          <div class="items">Ají, ajo, albahaca, laurel, orégano, perejil, romero, tomillo, etc.</div>
+        </div>
+        <div class="catwrap">
+          <div class="cat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9C5B2E" stroke-width="1.7" stroke-linejoin="round"><path d="M5 12a7 7 0 0114 0z"/><path d="M10 12v6a2 2 0 004 0v-6"/></svg><span class="nm">Hongos</span></div>
+          <div class="items">Champiñones, portobellos.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;display:flex;gap:18px;">
+      <div style="flex:1;background:#33243d;padding:18px 22px;display:flex;gap:14px;align-items:flex-start;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C2A05B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+        <div><div class="serif" style="font-size:15px;font-weight:700;color:#EBD9AE;">Empezá hoy</div><p style="margin-top:5px;font-size:13.5px;line-height:1.55;color:rgba(243,236,221,0.92);">Armá un plato con esta lógica: buena porción de proteína animal con su grasa + verduras verdes. Que tu próxima compra tenga más de esto y menos paquetes.</p></div>
+      </div>
+    </div>
+    <p style="margin-top:12px;font-size:11.5px;line-height:1.5;color:#8a8194;"><strong>Nota:</strong> en autoinmunes, al inicio se suelen restringir más los lácteos, muchas frutas y algunas verduras. Cuánto y por cuánto tiempo depende de tu sensibilidad: eso se calibra en tu plan.</p>
+  </div>
+
+  <div style="position:absolute;bottom:34px;left:72px;right:72px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:1px;color:#BCB1C4;border-top:1px solid #E7DECF;padding-top:12px;">
+    <span>Guía Pre-Consulta</span><span>Palanca 2 · Comida real</span>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

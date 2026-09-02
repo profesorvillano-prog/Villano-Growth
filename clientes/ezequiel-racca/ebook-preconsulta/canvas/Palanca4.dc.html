@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700&family=Mulish:wght@400;500;600;700;800&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Mulish', system-ui, sans-serif; color: #2A2431; }
+    .serif { font-family: 'Spectral', Georgia, serif; }
+    a { color: #9C7B34; } a:hover { color: #6f571f; }
+    p.body { font-size: 15.5px; line-height: 1.72; color: #3a3342; }
+    .li { display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.55;color:#3a3342; }
+    .dot { width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:7px; }
+  </style>
+</helmet>
+<div style="width:794px;height:1123px;position:relative;overflow:hidden;background:#FBF8F3;">
+  <div style="position:absolute;top:36px;left:72px;right:72px;display:flex;justify-content:space-between;align-items:center;">
+    <span style="font-size:11px;letter-spacing:3px;color:#9C7B34;font-weight:700;text-transform:uppercase;">Sánate Autoinmune</span>
+    <span style="font-size:11px;letter-spacing:2px;color:#BCB1C4;">12</span>
+  </div>
+
+  <div style="position:absolute;top:108px;left:72px;right:72px;bottom:96px;">
+    <div style="display:flex;align-items:center;gap:22px;">
+      <div class="serif" style="font-size:88px;font-weight:700;color:#EADFCB;line-height:0.8;">04</div>
+      <div>
+        <div style="font-size:12px;letter-spacing:3px;color:#9C7B34;font-weight:700;text-transform:uppercase;">Palanca cuatro</div>
+        <h2 class="serif" style="margin-top:6px;font-weight:600;font-size:34px;line-height:1.02;color:#33243d;">El colesterol:<br>no entres en pánico</h2>
+      </div>
+    </div>
+
+    <p class="body" style="margin-top:30px;">Cuando empieces a comer más grasa real, es posible que en un análisis te suba el <strong style="color:#33243d;">colesterol total o el LDL</strong>. Y ahí aparece el miedo, muchas veces más en tu entorno que en vos. Vale la pena entenderlo con calma.</p>
+
+    <div style="margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+      <div style="background:#F3F7F0;border:1px solid #D7E4CF;padding:18px 20px;">
+        <div class="serif" style="font-size:15px;font-weight:700;color:#3E6B41;margin-bottom:12px;">Lo que suele pasar</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="li"><span class="dot" style="background:#3E6B41;"></span><div>En personas <strong>delgadas y metabólicamente sanas</strong> que bajan mucho los carbohidratos, un LDL más alto puede reflejar que el cuerpo está <strong>usando y transportando grasa como combustible</strong> —no necesariamente daño.</div></div>
+          <div class="li"><span class="dot" style="background:#3E6B41;"></span><div>Los marcadores que mejor hablan de tu salud metabólica —<strong>triglicéridos bajos y HDL alto</strong>— suelen mejorar con este estilo de comer.</div></div>
+        </div>
+      </div>
+      <div style="background:#FBF5EE;border:1px solid #EAD9C4;padding:18px 20px;">
+        <div class="serif" style="font-size:15px;font-weight:700;color:#9C5B2E;margin-bottom:12px;">La parte honesta y responsable</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="li"><span class="dot" style="background:#9C5B2E;"></span><div><strong>Medir, no ignorar.</strong> El colesterol no se desestima a la ligera: se mira en contexto, con tu historia completa.</div></div>
+          <div class="li"><span class="dot" style="background:#9C5B2E;"></span><div>Si hay <strong>enfermedad metabólica, cardiovascular o antecedentes de peso</strong>, el criterio cambia y el LDL sí importa. Cada caso es distinto.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:26px;background:#33243d;padding:22px 26px;display:flex;gap:16px;align-items:flex-start;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C2A05B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+      <div><div class="serif" style="font-size:16px;font-weight:700;color:#EBD9AE;">Empezá hoy</div><p style="margin-top:6px;font-size:14.5px;line-height:1.6;color:rgba(243,236,221,0.92);">No tomes decisiones por un solo número asustado. Anotá tu duda sobre el colesterol y <strong style="color:#fff;">la charlamos en tu consulta</strong>, con tu historia y tus análisis a la vista.</p></div>
+    </div>
+
+    <p style="margin-top:20px;font-size:12.5px;line-height:1.5;color:#8a8194;font-style:italic;">Nada de esto es indicación de suspender ni de iniciar medicación. Eso lo define tu médico, con vos.</p>
+  </div>
+
+  <div style="position:absolute;bottom:34px;left:72px;right:72px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:1px;color:#BCB1C4;border-top:1px solid #E7DECF;padding-top:12px;">
+    <span>Guía Pre-Consulta</span><span>Palanca 4 · El colesterol</span>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

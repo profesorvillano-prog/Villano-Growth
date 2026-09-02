@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700&family=Mulish:wght@400;500;600;700;800&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Mulish', system-ui, sans-serif; color: #2A2431; }
+    .serif { font-family: 'Spectral', Georgia, serif; }
+    a { color: #9C7B34; } a:hover { color: #6f571f; }
+    .lbl { font-size:10px;letter-spacing:2px;font-weight:800;text-transform:uppercase;color:#a89bb0;}
+    .txt { font-size:13.5px;line-height:1.55;color:#453f52;margin-top:3px;}
+  </style>
+</helmet>
+<div style="width:794px;height:1123px;position:relative;overflow:hidden;background:#FBF8F3;">
+  <div style="position:absolute;top:36px;left:72px;right:72px;display:flex;justify-content:space-between;align-items:center;">
+    <span style="font-size:11px;letter-spacing:3px;color:#9C7B34;font-weight:700;text-transform:uppercase;">Sánate Autoinmune</span>
+    <span style="font-size:11px;letter-spacing:2px;color:#BCB1C4;">07</span>
+  </div>
+
+  <div style="position:absolute;top:92px;left:72px;right:72px;bottom:88px;">
+    <div style="display:flex;align-items:baseline;gap:18px;">
+      <span class="serif" style="font-size:13px;letter-spacing:4px;color:#C2A05B;font-weight:600;text-transform:uppercase;">Capítulo 3 · continuación</span>
+      <span style="flex:1;height:1px;background:#E4DAC8;"></span>
+    </div>
+
+    <!-- card: vitiligo -->
+    <div style="margin-top:22px;background:#fff;border:1px solid #EEE6DA;border-top:4px solid #6E6A80;padding:22px 26px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:30px;height:30px;border-radius:50%;background:#EAE8EE;display:flex;align-items:center;justify-content:center;"><span style="width:11px;height:11px;border-radius:50%;background:#fff;border:2px solid #6E6A80;display:block;"></span></div>
+        <div class="serif" style="font-size:22px;font-weight:600;color:#33243d;">Vitíligo</div>
+      </div>
+      <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px 26px;">
+        <div><div class="lbl">Lo que te dijeron</div><div class="txt">Manchas sin color, tacrolimus, fototerapia, y muchas veces un “no hay mucho más que hacer”.</div></div>
+        <div><div class="lbl">Lo que muestra la ciencia</div><div class="txt">Un estudio <em>landmark</em> de 2025 describió por primera vez cómo el desequilibrio intestinal genera <strong>estrés oxidativo</strong> que va apagando los melanocitos. La fototerapia actúa en la piel, no en el intestino: por eso sus resultados suelen ser parciales.</div></div>
+      </div>
+      <div style="margin-top:14px;background:#F6F5F8;border-left:3px solid #6E6A80;padding:10px 14px;"><span class="lbl" style="color:#6E6A80;">La nota honesta</span><div class="txt" style="margin-top:2px;">Lo primero y más valioso suele ser <strong>frenar el avance</strong>; la repigmentación, cuando ocurre, viene después. Primero se estabiliza, luego se recupera. En ese orden.</div></div>
+    </div>
+
+    <!-- card: lupus -->
+    <div style="margin-top:18px;background:#fff;border:1px solid #EEE6DA;border-top:4px solid #7A4E7E;padding:22px 26px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:30px;height:30px;border-radius:50%;background:#F1E7F2;display:flex;align-items:center;justify-content:center;"><span style="width:11px;height:11px;border-radius:50%;background:#7A4E7E;display:block;"></span></div>
+        <div class="serif" style="font-size:22px;font-weight:600;color:#33243d;">Lupus</div>
+      </div>
+      <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px 26px;">
+        <div><div class="lbl">Lo que te dijeron</div><div class="txt">Hidroxicloroquina, corticoides, controles de por vida. “Esto es para siempre y hay que cuidarse”.</div></div>
+        <div><div class="lbl">Lo que muestra la ciencia</div><div class="txt">También aquí el aumento de la permeabilidad intestinal y el desequilibrio de la flora se correlacionan con la <strong>actividad inflamatoria</strong> de la enfermedad. El intestino aparece como un punto donde <strong>sí</strong> se puede intervenir, sumando al tratamiento.</div></div>
+      </div>
+      <div style="margin-top:14px;background:#33243d;padding:12px 16px;"><span class="lbl" style="color:#EBD9AE;">La nota honesta — muy importante</span><div class="txt" style="margin-top:2px;color:rgba(243,236,221,0.9);">El lupus es una condición <strong style="color:#EBD9AE;">delicada</strong> que puede comprometer órganos. El acompañamiento médico no es opcional: es imprescindible. Nuestro enfoque <strong>se suma</strong> a tu reumatólogo, jamás lo reemplaza. El objetivo realista es reducir la carga inflamatoria y la frecuencia de los brotes, no “curar”.</div></div>
+    </div>
+  </div>
+
+  <div style="position:absolute;bottom:34px;left:72px;right:72px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:1px;color:#BCB1C4;border-top:1px solid #E7DECF;padding-top:12px;">
+    <span>Guía Pre-Consulta</span><span>Tu condición desde la raíz</span>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
