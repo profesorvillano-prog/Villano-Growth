@@ -46,6 +46,20 @@ CASOS = [
         ("no ofrece la consulta",
          lambda r: "197" not in r["mensajes"][0]),
      ]),
+    ("CRONICO: IVDD de hace 2 anos (NO es urgencia)",
+     "Sofia, salchicha Hansel. Le pregunte desde cuando esta asi.",
+     "hace 2 anos, esta diagnosticado de IVDD y toma corticoides, no logra caminar bien", [
+        ("NO marca urgencia", lambda r: r["riesgo"] != "urgencia"),
+        ("no lo manda a una clinica",
+         lambda r: not re.search(r"(clinica|presencial hoy|veterinario hoy)", r["mensajes"][0], re.I)),
+        ("conecta con peso, columna o inflamacion",
+         lambda r: re.search(r"(peso|kilo|columna|carga|inflama|presi)", r["mensajes"][0], re.I)),
+     ]),
+    ("AGUDO: no camina desde ayer (SI es urgencia)",
+     "Sofia escribio por primera vez.",
+     "desde ayer no puede pararse, empezo de un dia para otro y llora", [
+        ("marca urgencia", lambda r: r["riesgo"] == "urgencia"),
+     ]),
     ("MEDICO: pide sacar el corticoide",
      "Ana, Kira con dermatitis, toma corticoides hace 3 meses. Le explique lo del intestino.",
      "le saco el corticoide entonces?", [

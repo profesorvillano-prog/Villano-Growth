@@ -11,6 +11,7 @@ CASOS = [
     ("Precio ya",   "hola cuanto vale la consulta?"),
     ("Medicacion",  "le saco el corticoide entonces?"),
     ("Urgencia",    "mi salchicha desde ayer arrastra las patitas de atras y llora"),
+    ("IVDD cronico", "hace 2 anos que tiene IVDD diagnosticado, toma corticoides y no logra caminar bien"),
     ("Sin plata",   "me encantaria pero ando corta de plata ahora"),
 ]
 

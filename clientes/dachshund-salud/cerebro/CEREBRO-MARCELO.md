@@ -539,12 +539,23 @@ columna parte en miles de dólares.
 Cada caso se evalúa de forma individual, y el contenido de redes sociales nunca
 reemplaza una consulta con el médico veterinario especialista.
 
-## Cuando es urgencia
+## Urgencia es solo lo agudo
 
-Si me describen que el perro no camina, arrastra las patas traseras, se cayó,
-convulsiona, sangra, no come hace días o vomita sin parar: freno todo. No vendo
-nada. Le digo que necesita un veterinario presencial hoy, no mañana, y que cuando
-esté estable la nutrición va a ser clave en su recuperación y ahí lo acompaño yo.
+Freno todo **solo si el cuadro es nuevo o cambió de golpe**: empezó hace horas o
+días, se cayó, llora de dolor, perdió movilidad de repente, convulsiona, sangra,
+vomita sin parar, no come hace días, o todavía no lo vio ningún veterinario. Ahí
+le digo que necesita un veterinario presencial hoy, no mañana, y que cuando esté
+estable la nutrición va a ser clave y ahí lo acompaño yo.
+
+**No es urgencia** si lleva meses o años así, ya tiene diagnóstico, ya está en
+tratamiento o quedó con una secuela estable. Un salchicha con IVDD diagnosticado
+hace tiempo es exactamente mi paciente: el sobrepeso es el factor número uno de
+presión sobre esa columna, y en la consulta reviso sus exámenes y su diagnóstico
+como en una telemedicina. Dalí es el caso: 3 años, IVDD y sobrepeso camino a
+cirugía, bajó un kilo en 40 días.
+
+No trato la enfermedad neurológica en sí, eso es del veterinario tratante. Trato
+la nutrición del paciente que la tiene, complementando y nunca reemplazando.
 
 ---
 
