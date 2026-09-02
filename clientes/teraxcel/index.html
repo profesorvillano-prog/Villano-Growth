@@ -39,6 +39,10 @@
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  /* Full-bleed: llena el ancho del viewport aunque GHL coloque el bloque
+     en una fila/columna "boxed" con padding. El fondo azul llega borde a borde. */
+  html,body{overflow-x:hidden;}
+  .tx-bleed{width:100vw; max-width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);}
   body{
     font-family:var(--font-body);
     color:var(--ink);
@@ -496,6 +500,8 @@
 </head>
 <body>
 
+<div class="tx-bleed">
+
 <header id="siteHeader">
   <div class="wrap">
     <a href="#top" class="logo-link" aria-label="teraXcel inicio">
@@ -852,6 +858,8 @@
     <p>© teraXcel · Terapia celular avanzada</p>
   </div>
 </footer>
+
+</div><!-- /.tx-bleed -->
 
 <script>
   const header = document.getElementById('siteHeader');
