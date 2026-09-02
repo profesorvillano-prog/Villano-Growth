@@ -153,11 +153,48 @@ proposito, para que un lead que se enfria no retroceda en el tablero.
 
 ---
 
+## El bug del modulo HTTP creado por API
+
+Un modulo `http:ActionSendData` creado por blueprint necesita seis campos que la
+interfaz de Make rellena sola pero la API no: `serializeUrl`, `shareCookies`,
+`rejectUnauthorized`, `followRedirect`, `useQuerystring` y `useMtls`. Sin ellos el
+modulo falla con `BundleValidationError: Validation failed for 6 parameter(s)`
+**antes de hacer la peticion**, asi que el error no dice nada del servicio de
+destino y es facil confundirlo con un problema de la API remota.
+
+Afectaba a los cinco modulos HTTP del escenario `7035201` y a los dos del
+`7035204`. Ya esta corregido en los siete. **Cualquier modulo HTTP nuevo que se
+cree por API tiene que llevar esos campos.**
+
+El diagnostico costo una vuelta de mas porque el manejador `Ignore` del modulo 3
+cortaba la ejecucion antes de que los otros cuatro mostraran su propio fallo: se
+veia como si solo fallara el cerebro.
+
+---
+
 ## Lo que todavia falta para encender
 
-1. `PEGAR_GHL_TOKEN` en los modulos 5, 8, 12 y 30 del escenario `7035201`.
-2. `PEGAR_ANTHROPIC_API_KEY` en el modulo 3.
-3. El cerebro en el modulo 3 (`cerebro/salida/cuerpo-modulo3.json`).
-4. Plan Pro de Make + data store `setter_marcelo` propio.
+Todo lo configurable ya esta cargado, incluido el cerebro completo en el modulo 3.
+Lo unico que queda son **credenciales**, que por definicion no salen de este repo:
+
+| # | Que | Donde |
+|---|---|---|
+| 1 | API key de Anthropic con limite de gasto | Esc. `7035201`, modulo 3, header `x-api-key` |
+| 2 | PIT nuevo de GHL | Esc. `7035201`, modulos 5, 8, 12 y 30, header `Authorization`, como `Bearer <pit>` |
+| 3 | El mismo PIT | Esc. `7035204`, modulo 5 |
+
+Para el PIT: **Settings -> Private Integrations -> Create**, con los scopes
+`conversations/message.write`, `contacts.readonly`, `contacts.write`,
+`opportunities.readonly` y `opportunities.write`. El PIT anterior
+(`pit-41a64e08...`) paso por un chat y hay que borrarlo, no reutilizarlo.
+
+Y despues, fuera de las credenciales:
+
+4. Plan Pro de Make + data store `setter_marcelo` propio (hoy los 4 modulos
+   apuntan al `173778`, que es el de otro cliente).
 5. Etiquetar con `bot-on` a los contactos de prueba antes de publicar el
    workflow de WhatsApp.
+6. Decidir que pasa con la automatizacion de Instagram que Marcelo ya tiene
+   corriendo: hay conversaciones con respuestas marcadas como `automated`
+   (a `isol_sol2017` le contesto sola "Y en que quieres exactamente que te
+   ayude?"). Si se enciende el workflow de IG sin apagar esa, contestan las dos.
