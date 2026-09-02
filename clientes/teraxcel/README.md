@@ -5,9 +5,19 @@ para dolor lumbar persistente, Región de Los Lagos). Profesionalización del HT
 por el cliente: se preservó estructura, copy, paleta y tipografías, y se cablearon los
 recursos reales (video + 2 fotos) que antes eran placeholders.
 
-## Archivo
+## Archivos
 
-- `index.html` — landing completa, autocontenida (CSS y JS inline, sin dependencias de build).
+- `index.html` — **Variante A (institucional/método):** profesionalización de la landing enviada
+  por el cliente. Estructura, copy y método tal como los entregaron, con media real cableada.
+- `index-pacientes.html` — **Variante B (paciente/marketing):** misma marca, copy 100% emocional
+  y local para tráfico frío de Meta. Hero inmediato (Puerto Varas / Región de Los Lagos), VSL
+  arriba, empatía con el recorrido del paciente (kine, pastillas, infiltraciones, cirugía), los
+  5 ángulos del avatar, y menos jerga técnica. Basada en las transcripciones con Joaquín (kick-off
+  y discovery): avatar que ya tomó acción, posicionamiento "entre lo tradicional y la cirugía",
+  fisioterapia (no kinesiología), 90% de resultados, único en Latinoamérica.
+
+Ambas son autocontenidas (CSS y JS inline, sin build) y llevan el mismo VSL de Wistia,
+logo, full-bleed para GHL y robustez.
 
 ## Recursos (CDN GoHighLevel)
 
