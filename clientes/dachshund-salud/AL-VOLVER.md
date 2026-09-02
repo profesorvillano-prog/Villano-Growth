@@ -190,7 +190,41 @@ agrupar los tres mensajes seguidos que manda la gente.
 
 ---
 
-## 4. Probar el cerebro sin tocar Make
+## 4. Que Marcelo lo pruebe sin encender nada
+
+Publiqué una **sala de pruebas** donde Marcelo conversa con Paula como si fuera un
+lead, sin tocar Make, sin WhatsApp y sin que nadie reciba nada:
+
+**https://claude.ai/code/artifact/74b89cac-6125-403a-8725-c29421aab1bc**
+
+Es privada hasta que la compartas desde el menú de la página.
+
+Qué ve él:
+
+- **El chat**, igual que en Instagram. Le escribe y Paula responde.
+- **Siete situaciones de un toque**: Piel, Premium, Gramajes, Precio ya,
+  Medicación, Urgencia, Sin plata. Son los casos donde el bot se rompe si está mal
+  escrito, así no tiene que inventarlos.
+- **"Lo que Paula está pensando"**: riesgo, etapa, temperatura, acción, y su
+  memoria de 400 caracteres. Eso último es clave para que entienda por qué a veces
+  se olvida de algo.
+- **El freno de mano en vivo**: si prueba *Urgencia* o *Medicación*, ve tachado el
+  mensaje que Paula iba a mandar y debajo el mensaje seguro que sale en su lugar.
+  Es la mejor forma de que confíe en que el bot no va a decir una barbaridad con
+  su nombre.
+- **👍 / 👎 y un comentario en cada respuesta**, que queda guardado para que lo leas.
+
+Corre sobre la cuenta de Claude de quien abre la página, así que **no expone
+ninguna API key** y no consume nada de Marcelo.
+
+> Ojo: la sala usa el mismo cerebro pero no pasa por Make, así que no prueba el
+> `Sleep`, ni el pipeline, ni los tags. Prueba lo único que Marcelo puede juzgar:
+> **qué dice Paula y cuándo se calla**.
+
+Cuando cambies el cerebro, `python3 sandbox.py` regenera la página y se republica
+en la misma URL.
+
+## 5. Probar el cerebro por consola (para vos)
 
 Antes de pegar nada, se puede validar el prompt contra la API real:
 
@@ -220,14 +254,14 @@ comillas dobles, sin guion largo, sin signos de apertura, y sin decir "dueño",
 Devuelve código de salida distinto de cero si algo falla, así que sirve para
 correrlo cada vez que se toque el cerebro.
 
-## 5. Y después, la semana de sombra
+## 6. Y después, la semana de sombra
 
 No encender directo. El doc `automatizaciones/setter-ig-wsp/06-Checklist-y-Pruebas.md`
 tiene los 18 casos y el encendido gradual: semana 1 el bot redacta pero no envía.
 
 ---
 
-## 6. Lo que yo no pude hacer
+## 7. Lo que yo no pude hacer
 
 - **`.claude/settings.local.json`**: el clasificador de permisos me bloquea escribir
   ese archivo, porque sería ampliarme permisos a mí mismo. Lo tenés que crear vos
@@ -248,7 +282,7 @@ tiene los 18 casos y el encendido gradual: semana 1 el bot redacta pero no enví
 
 ---
 
-## 7. Y lo de siempre
+## 8. Y lo de siempre
 
 **El repositorio sigue público.** Ahora contiene además el cerebro completo de
 Paula, los precios de Marcelo y la estructura de su cuenta. Settings → General →
