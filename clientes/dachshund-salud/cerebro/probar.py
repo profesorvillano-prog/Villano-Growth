@@ -115,6 +115,12 @@ REGLAS_GLOBALES = [
     ("vocabulario: no dice dueno/mascota",
      lambda r: not re.search(r"\b(dueñ|dueno|mascota)", r["mensajes"][0], re.I)),
     ("una sola pregunta por mensaje", lambda r: r["mensajes"][0].count("?") <= 1),
+    ("no une dos preguntas con 'y'",
+     lambda r: not re.search(r"\?", r["mensajes"][0]) or not re.search(
+         r"\by (qu[eé]|cu[aá]nto|cu[aá]ndo|c[oó]mo|d[oó]nde|desde|hace)\b",
+         r["mensajes"][0].rsplit(".", 1)[-1], re.I)),
+    ("no dice 'le has probado'",
+     lambda r: not re.search(r"le has (probado|hecho|dado a probar)", r["mensajes"][0], re.I)),
     ("no trata de usted", lambda r: not re.search(r"\b(usted|ustedes)\b", r["mensajes"][0], re.I)),
     ("no dice pienso ni BARF",
      lambda r: not re.search(r"\b(pienso|barf)\b", r["mensajes"][0], re.I)),
