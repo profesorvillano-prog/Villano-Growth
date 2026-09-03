@@ -16,6 +16,7 @@ emails y nuevos productos.
 | [`Conocimiento-Nicho.md`](./Conocimiento-Nicho.md) | El "porqué" clínico y de mercado: tesis central, comportamientos/errores que estancan, mitos de la industria, oportunidad y la visión de Josefina. |
 | [`Mensajes-Angulos-y-Copy.md`](./Mensajes-Angulos-y-Copy.md) | Big idea, mecanismo único, mensajes que mueven, ganchos/hooks de ads ganadores, argumentos emocionales/racionales, manejo de objeciones, CTAs, posicionamiento y estrategias de marketing usadas. |
 | [`Casos-de-Exito.md`](./Casos-de-Exito.md) | Transformaciones reales de alumnas, testimonios en video y números de respaldo. Prueba social. |
+| [`Guia-Video-Entrevistas-Casos-de-Exito.md`](./Guia-Video-Entrevistas-Casos-de-Exito.md) · [PDF](./Guia-Video-Entrevistas-Casos-de-Exito.pdf) | Guía para Josefina: cómo estructurar, conducir y editar video-entrevistas a alumnas (casos de éxito) para YouTube. Patrones de 6 entrevistas de Tus Finanzas Libres, estructura por bloques con minutos, banco de preguntas adaptado a ÉxiTO, técnicas de entrevistadora, pre-producción, edición, errores y checklist. |
 | [`FAQ.md`](./FAQ.md) | Preguntas frecuentes reales con respuestas en la voz de la marca. Ideal para web y bot/setter. |
 | [`Voz-y-Marca.md`](./Voz-y-Marca.md) | Tono, frases marca registrada, palabras prohibidas, paleta de color, historia y autoridad de Josefina. |
 | [`Operaciones-y-Embudo.md`](./Operaciones-y-Embudo.md) | Funnel, onboarding, plataforma Skool (niveles), mentorías, equipo, stack tecnológico, modelo 2026 y datos de audiencias. |
