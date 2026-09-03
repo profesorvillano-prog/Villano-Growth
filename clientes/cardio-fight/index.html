@@ -1,0 +1,1392 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0d">
+<title>Cardio Fight</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#129354;</text></svg>">
+<style>
+:root{
+  --bg:#0b0b0d; --card:#16161a; --card-2:#1d1d22; --line:#2a2a31;
+  --ink:#f4f4f5; --muted:#9b9ba4; --accent:#e2373f; --accent-ink:#fff;
+  --ok:#3ec489; --warn:#f0b429; --bad:#e2373f;
+  --r:14px; --pad:16px;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+     font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3{margin:0;line-height:1.2;letter-spacing:-.01em}
+
+/* ---------- estructura ---------- */
+.app{max-width:640px;margin:0 auto;padding:0 var(--pad) 120px}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(11,11,13,.92);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  padding:14px var(--pad) 12px;margin:0 calc(var(--pad)*-1) 18px;
+  display:flex;align-items:center;gap:12px}
+.topbar .brand{font-weight:800;letter-spacing:.14em;font-size:13px;text-transform:uppercase}
+.topbar .brand b{color:var(--accent)}
+.topbar .who{margin-left:auto;color:var(--muted);font-size:13px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:45%}
+.section{margin:0 0 26px}
+.section > h2{font-size:13px;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--muted);font-weight:700;margin:0 0 10px}
+
+/* ---------- tarjetas ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.card + .card{margin-top:10px}
+.stack{display:flex;flex-direction:column;gap:10px}
+.row{display:flex;align-items:center;gap:12px}
+.grow{flex:1;min-width:0}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.tiny{font-size:12px}
+.strong{font-weight:700}
+.truncate{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- botones ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:46px;padding:0 18px;border-radius:11px;border:1px solid var(--line);
+  background:var(--card-2);color:var(--ink);font-weight:600;cursor:pointer;
+  text-decoration:none;transition:filter .12s,opacity .12s}
+.btn:active{filter:brightness(1.25)}
+.btn[disabled]{opacity:.45;cursor:default}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent}
+.btn.danger{color:var(--bad);border-color:#43242a}
+.btn.block{width:100%}
+.btn.sm{min-height:36px;padding:0 12px;font-size:13px;border-radius:9px}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ---------- formularios ---------- */
+label.f{display:block;margin-bottom:12px}
+label.f > span{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+input,select,textarea{width:100%;background:var(--card-2);border:1px solid var(--line);
+  border-radius:11px;padding:12px 14px;min-height:46px;outline:none}
+input:focus,select,textarea:focus{border-color:#4a4a55}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),
+  linear-gradient(135deg,var(--muted) 50%,transparent 50%);
+  background-position:calc(100% - 20px) 21px,calc(100% - 14px) 21px;
+  background-size:6px 6px;background-repeat:no-repeat;padding-right:40px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.pin{letter-spacing:.5em;text-align:center;font-size:22px;font-weight:700}
+
+/* ---------- chips / etiquetas ---------- */
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.05em;padding:4px 9px;border-radius:999px;
+  border:1px solid var(--line);background:var(--card-2);color:var(--muted);white-space:nowrap}
+.chip.ok{color:var(--ok);border-color:#1f4536}
+.chip.warn{color:var(--warn);border-color:#4a3c15}
+.chip.bad{color:var(--bad);border-color:#43242a}
+.chip.accent{color:var(--accent);border-color:#43242a}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+
+/* ---------- pestañas inferiores ---------- */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;
+  background:rgba(11,11,13,.95);backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.tabs-in{max-width:640px;margin:0 auto;display:flex}
+.tab{flex:1;background:none;border:0;padding:10px 4px 12px;color:var(--muted);
+  font-size:11px;font-weight:600;cursor:pointer;display:flex;flex-direction:column;
+  align-items:center;gap:3px}
+.tab .ic{font-size:20px;line-height:1}
+.tab[aria-selected="true"]{color:var(--accent)}
+
+/* ---------- filtros y cifras ---------- */
+.filtros{display:flex;flex-direction:column;gap:8px;margin:0 0 16px}
+.seg.wrap{display:flex;width:100%;overflow-x:auto;scrollbar-width:none}
+.seg.wrap::-webkit-scrollbar{display:none}
+.seg.wrap button{flex:1 0 auto;white-space:nowrap;padding:8px 14px;font-size:13px}
+.cifras{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 22px}
+.cifra{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:14px 12px;text-align:center}
+.cifra .v{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.cifra .k{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--muted);margin-top:5px}
+.cifra.ok  .v{color:var(--ok)}
+.cifra.bad .v{color:var(--bad)}
+.cifra.dinero{grid-column:span 3;text-align:left;padding:16px}
+.cifra.dinero .v{font-size:32px}
+
+/* ---------- navegación de la agenda ---------- */
+.seg{display:inline-flex;background:var(--card-2);border:1px solid var(--line);
+  border-radius:11px;padding:3px;gap:3px}
+.seg button{border:0;background:none;color:var(--muted);font-weight:600;font-size:14px;
+  padding:8px 18px;border-radius:8px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.navrow{display:flex;align-items:center;gap:10px;margin:0 0 12px}
+.strip-wrap{display:flex;align-items:center;gap:6px;margin:0 0 16px}
+.strip{display:flex;gap:8px;overflow-x:auto;scroll-behavior:smooth;
+  scroll-snap-type:x proximity;padding:2px 0 6px;flex:1;
+  scrollbar-width:none;-ms-overflow-style:none}
+.strip::-webkit-scrollbar{display:none}
+.nav{flex:none;width:34px;height:52px;border-radius:10px;border:1px solid var(--line);
+  background:var(--card-2);color:var(--muted);font-size:19px;line-height:1;cursor:pointer}
+.nav[disabled]{opacity:.3;cursor:default}
+.dia{flex:none;width:54px;scroll-snap-align:center;border-radius:12px;cursor:pointer;
+  border:1px solid var(--line);background:var(--card);color:var(--ink);
+  padding:8px 0 7px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.dia .dw{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.dia .dn{font-size:19px;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+.dia .pt{width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:2px}
+.dia .pt.off{background:transparent}
+.dia.hoy .dn{color:var(--accent)}
+.dia.sem{background:var(--card-2);border-color:#3a3a45}
+.dia.sel{background:var(--accent);border-color:var(--accent)}
+.dia.sel .dw,.dia.sel .dn{color:var(--accent-ink)}
+.dia.sel .pt{background:var(--accent-ink)}
+.cabecera{display:flex;align-items:baseline;gap:10px;margin:0 0 12px}
+.cabecera h2{font-size:19px;font-weight:800;letter-spacing:-.01em;text-transform:none;
+  color:var(--ink);margin:0}
+.cabecera .n{font-size:13px;color:var(--muted)}
+.acciones .btn{font-size:14px;white-space:nowrap;padding:0 10px}
+.card.pasada{opacity:.5}
+
+/* ---------- clase / día ---------- */
+.day{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--muted);margin:22px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.day.today{color:var(--accent)}
+.klass{display:flex;gap:14px;align-items:flex-start}
+.klass > .act{flex:none}
+.klass .time{font-variant-numeric:tabular-nums;font-weight:800;font-size:18px;
+  line-height:1.2;min-width:52px}
+.klass .time small{display:block;font-size:12px;font-weight:500;color:var(--muted)}
+.meter{height:5px;border-radius:3px;background:var(--card-2);overflow:hidden;margin-top:10px}
+.meter i{display:block;height:100%;background:var(--accent);border-radius:3px}
+.meter.full i{background:var(--warn)}
+.roster{margin:12px 0 0;padding:12px 0 0;border-top:1px dashed var(--line);
+  display:flex;flex-direction:column;gap:8px}
+.roster .p{display:flex;align-items:center;gap:10px;font-size:14px}
+.avatar{width:28px;height:28px;border-radius:50%;background:var(--card-2);
+  display:grid;place-items:center;font-size:11px;font-weight:800;color:var(--muted);flex:none}
+
+/* ---------- modal ---------- */
+.veil{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.6);
+  display:flex;align-items:flex-end;justify-content:center;padding:0}
+.sheet{background:var(--card);width:100%;max-width:640px;max-height:92vh;overflow:auto;
+  border-radius:20px 20px 0 0;border:1px solid var(--line);border-bottom:0;
+  padding:20px var(--pad) calc(24px + env(safe-area-inset-bottom));
+  animation:up .18s ease-out}
+@keyframes up{from{transform:translateY(16px);opacity:.6}to{transform:none;opacity:1}}
+.sheet h3{font-size:19px;margin-bottom:16px}
+@media(min-width:641px){
+  .veil{align-items:center;padding:20px}
+  .sheet{border-radius:20px;border-bottom:1px solid var(--line)}
+}
+
+/* ---------- avisos ---------- */
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:60;
+  background:#fff;color:#111;padding:12px 18px;border-radius:999px;font-weight:600;
+  font-size:14px;box-shadow:0 8px 30px rgba(0,0,0,.5);max-width:90vw;text-align:center}
+.toast.bad{background:var(--bad);color:#fff}
+.note{border-radius:12px;padding:12px 14px;font-size:14px;
+  border:1px solid var(--line);background:var(--card-2)}
+.note.bad{color:#ffc9cc;border-color:#43242a;background:#2a171a}
+.note.ok{color:#bdf0d8;border-color:#1f4536;background:#12241d}
+.empty{text-align:center;color:var(--muted);padding:36px 20px;font-size:15px}
+.empty .big{font-size:34px;display:block;margin-bottom:10px;opacity:.5}
+.spin{width:22px;height:22px;border:2px solid var(--line);border-top-color:var(--accent);
+  border-radius:50%;animation:sp .7s linear infinite;margin:40px auto}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* ---------- login ---------- */
+.login{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  max-width:400px;margin:0 auto;padding:32px 20px}
+.login .logo{text-align:center;margin-bottom:32px}
+.login .logo .glove{font-size:46px}
+.login .logo h1{font-size:26px;font-weight:800;letter-spacing:-.02em;margin-top:8px}
+.login .logo h1 b{color:var(--accent)}
+.login .logo p{color:var(--muted);font-size:14px;margin:6px 0 0}
+</style>
+</head>
+<body>
+
+<!-- ============================ ENTRAR ============================ -->
+<div id="screen-login" class="login">
+  <div class="logo">
+    <div class="glove">🥊</div>
+    <h1>CARDIO <b>FIGHT</b></h1>
+    <p>Reserva tus clases</p>
+  </div>
+  <form id="form-login" class="stack" novalidate>
+    <label class="f">
+      <span>Tu teléfono</span>
+      <input id="li-user" type="tel" inputmode="numeric" autocomplete="username"
+             placeholder="9 1234 5678" required>
+    </label>
+    <label class="f">
+      <span>Tu PIN</span>
+      <input id="li-pin" class="pin" type="password" inputmode="numeric"
+             autocomplete="current-password" maxlength="8" placeholder="••••" required>
+    </label>
+    <div id="li-error" class="note bad" hidden></div>
+    <button class="btn primary block" id="li-go" type="submit">Entrar</button>
+    <p class="small muted" style="text-align:center;margin:14px 0 0">
+      ¿No tienes PIN? Pídeselo al profe por WhatsApp.
+    </p>
+  </form>
+</div>
+
+<!-- ============================ APP ============================ -->
+<div id="screen-app" hidden>
+  <div class="app">
+    <div class="topbar">
+      <div class="brand">CARDIO <b>FIGHT</b></div>
+      <div class="who" id="who"></div>
+    </div>
+
+    <!-- ---------- vista ALUMNO ---------- -->
+    <div class="view" id="v-mis" hidden>
+      <div class="section">
+        <h2>Mis clases reservadas</h2>
+        <div id="mis-reservas"></div>
+      </div>
+      <div class="section">
+        <h2>Horarios disponibles</h2>
+        <div id="mis-horarios"></div>
+      </div>
+    </div>
+
+    <!-- ---------- vista PROFE: agenda ---------- -->
+    <div class="view" id="v-agenda" hidden>
+      <div class="navrow">
+        <div class="seg" id="agenda-modo">
+          <button data-modo="dia" aria-pressed="true">Día</button>
+          <button data-modo="semana" aria-pressed="false">Semana</button>
+        </div>
+        <button class="btn sm ghost" data-hoy style="margin-left:auto">Hoy</button>
+      </div>
+      <div class="strip-wrap">
+        <button class="nav" data-mover="-1" aria-label="Anterior">‹</button>
+        <div class="strip" id="agenda-strip"></div>
+        <button class="nav" data-mover="1" aria-label="Siguiente">›</button>
+      </div>
+      <div class="grid2 acciones" style="margin-bottom:20px;gap:10px">
+        <button class="btn primary" data-act="nueva-clase">＋ Nueva clase</button>
+        <button class="btn" data-act="horario-semanal">📅 Horario semanal</button>
+      </div>
+      <div class="cabecera" id="agenda-cabecera"></div>
+      <div id="agenda-lista"></div>
+    </div>
+
+    <!-- ---------- vista PROFE: alumnos ---------- -->
+    <div class="view" id="v-alumnos" hidden>
+      <div class="btn-row" style="margin-bottom:14px">
+        <button class="btn primary grow" data-act="nuevo-alumno">＋ Nuevo alumno</button>
+      </div>
+      <input id="busca-alumno" type="search" placeholder="Buscar por nombre o teléfono"
+             style="margin-bottom:14px" autocomplete="off">
+      <div class="filtros">
+        <div class="seg wrap" id="filtro-plan">
+          <button data-fplan="todos" aria-pressed="true">Todos</button>
+          <button data-fplan="full"   aria-pressed="false">Personalizado</button>
+          <button data-fplan="grupal" aria-pressed="false">Grupal</button>
+        </div>
+        <div class="seg wrap" id="filtro-pago">
+          <button data-fpago="todos"    aria-pressed="true">Todos</button>
+          <button data-fpago="al_dia"   aria-pressed="false">Al día</button>
+          <button data-fpago="sin_pago" aria-pressed="false">Sin pago</button>
+          <button data-fpago="vencido"  aria-pressed="false">Deudores</button>
+        </div>
+      </div>
+      <div class="cabecera" id="alumnos-cabecera"></div>
+      <div id="alumnos-lista"></div>
+    </div>
+
+    <!-- ---------- vista PROFE: pagos ---------- -->
+    <div class="view" id="v-pagos" hidden>
+      <div class="btn-row" style="margin-bottom:18px">
+        <button class="btn primary grow" data-act="nuevo-pago">＋ Registrar pago</button>
+      </div>
+      <div id="pagos-cifras"></div>
+      <div class="section" id="pagos-pendientes"></div>
+      <div class="section">
+        <h2>Últimos pagos</h2>
+        <div id="pagos-lista"></div>
+      </div>
+    </div>
+
+    <!-- ---------- vista PROFE: ajustes ---------- -->
+    <div class="view" id="v-ajustes" hidden>
+      <div class="section">
+        <h2>Datos del gimnasio</h2>
+        <div class="card">
+          <form id="form-ajustes">
+            <label class="f"><span>Nombre del gimnasio</span>
+              <input id="aj-gym" maxlength="60" required></label>
+            <label class="f"><span>Tu nombre</span>
+              <input id="aj-name" maxlength="60"></label>
+            <label class="f"><span>Tu teléfono (con el que entras)</span>
+              <input id="aj-phone" type="tel" inputmode="numeric" required></label>
+            <div class="grid2">
+              <label class="f"><span>Zona horaria</span>
+                <select id="aj-tz"></select></label>
+              <label class="f"><span>Aviso mínimo para cancelar</span>
+                <select id="aj-cancel">
+                  <option value="0">Sin límite</option>
+                  <option value="1">1 hora antes</option>
+                  <option value="2">2 horas antes</option>
+                  <option value="3">3 horas antes</option>
+                  <option value="6">6 horas antes</option>
+                  <option value="12">12 horas antes</option>
+                  <option value="24">1 día antes</option>
+                </select></label>
+            </div>
+            <button class="btn primary block" type="submit">Guardar cambios</button>
+          </form>
+        </div>
+      </div>
+      <div class="section">
+        <h2>Seguridad</h2>
+        <button class="btn block" data-act="cambiar-pin">Cambiar mi PIN</button>
+      </div>
+      <div class="section">
+        <h2>Sesión</h2>
+        <button class="btn ghost block danger" data-act="salir">Cerrar sesión</button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="tabs" id="tabs"><div class="tabs-in" id="tabs-in"></div></nav>
+</div>
+
+<div id="modal-host"></div>
+<div id="toast-host"></div>
+
+<script>
+"use strict";
+/* ==========================================================================
+   Cardio Fight — app de reservas
+   Todo el acceso a datos pasa por funciones RPC de Supabase que validan el
+   token de sesión. Esta clave "anon" es pública a propósito: por sí sola no
+   deja leer ni escribir nada (las tablas están cerradas).
+   ========================================================================== */
+const SB_URL = "https://boxbmbhuarhasgblozvk.supabase.co";
+const SB_KEY = "sb_publishable_15dxTLSvGlBIsIIC_rvJ_Q_bItef-8H";
+
+/* ---------------------------------------------------------------- utilidades */
+const $  = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
+  ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+
+const DIAS  = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
+const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+
+const aDate = iso => { const [y,m,d] = iso.split("-").map(Number); return new Date(y, m-1, d); };
+const isoDe = dt => `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,"0")}-${String(dt.getDate()).padStart(2,"0")}`;
+const sumaDias = (iso, n) => { const t = aDate(iso); t.setDate(t.getDate()+n); return isoDe(t); };
+
+function fecha(iso, hoy) {
+  if (iso === hoy) return "Hoy";
+  if (hoy && iso === sumaDias(hoy, 1)) return "Mañana";
+  const t = aDate(iso);
+  return `${DIAS[t.getDay()]} ${t.getDate()} ${MESES[t.getMonth()]}`;
+}
+const dinero = n => "$" + Number(n || 0).toLocaleString("es-CL");
+const iniciales = n => String(n||"?").trim().split(/\s+/).slice(0,2).map(p=>p[0]).join("").toUpperCase();
+const wa = (tel, texto) => `https://wa.me/${String(tel||"").replace(/\D/g,"")}` +
+                           (texto ? `?text=${encodeURIComponent(texto)}` : "");
+const PLAN = { grupal: "Solo grupales", full: "Personalizado + grupales" };
+
+/* ------------------------------------------------------------------ avisos */
+let toastT;
+function aviso(msg, malo) {
+  clearTimeout(toastT);
+  $("#toast-host").innerHTML = `<div class="toast${malo ? " bad" : ""}">${esc(msg)}</div>`;
+  toastT = setTimeout(() => { $("#toast-host").innerHTML = ""; }, malo ? 4200 : 2400);
+}
+
+/* ------------------------------------------------------------------ modales */
+function abrirHoja(titulo, cuerpo, alMontar) {
+  const host = $("#modal-host");
+  host.innerHTML =
+    `<div class="veil"><div class="sheet" role="dialog" aria-modal="true">
+       <h3>${esc(titulo)}</h3>${cuerpo}</div></div>`;
+  const veil = $(".veil", host);
+  veil.addEventListener("mousedown", e => { if (e.target === veil) cerrarHoja(); });
+  document.addEventListener("keydown", escCerrar);
+  if (alMontar) alMontar($(".sheet", host));
+  const foco = $("input:not([type=hidden]), select, textarea", host);
+  if (foco && window.innerWidth > 640) foco.focus();
+}
+const escCerrar = e => { if (e.key === "Escape") cerrarHoja(); };
+function cerrarHoja() {
+  $("#modal-host").innerHTML = "";
+  document.removeEventListener("keydown", escCerrar);
+}
+function confirmar(titulo, texto, etiqueta, alAceptar) {
+  abrirHoja(titulo, `
+    <p class="muted" style="margin:0 0 20px">${esc(texto)}</p>
+    <div class="btn-row">
+      <button class="btn grow" data-x="no">Cancelar</button>
+      <button class="btn primary grow" data-x="si">${esc(etiqueta)}</button>
+    </div>`, hoja => {
+      $('[data-x="no"]', hoja).onclick = cerrarHoja;
+      $('[data-x="si"]', hoja).onclick = () => { cerrarHoja(); alAceptar(); };
+    });
+}
+
+/* --------------------------------------------------------------------- api */
+async function api(fn, args) {
+  let res;
+  try {
+    res = await fetch(`${SB_URL}/rest/v1/rpc/${fn}`, {
+      method: "POST",
+      headers: { apikey: SB_KEY, Authorization: "Bearer " + SB_KEY,
+                 "Content-Type": "application/json" },
+      body: JSON.stringify(args || {})
+    });
+  } catch (e) {
+    return { ok: false, error: "Sin conexión a internet. Revisa tu señal e intenta otra vez." };
+  }
+  if (!res.ok) return { ok: false, error: "El servidor no responde. Intenta en un momento." };
+  try { return await res.json(); }
+  catch (e) { return { ok: false, error: "Respuesta inesperada del servidor." }; }
+}
+
+/** Llama a la API, muestra el error si lo hay y devuelve null en ese caso. */
+async function pedir(fn, args) {
+  const r = await api(fn, args);
+  if (!r || !r.ok) {
+    const msg = (r && r.error) || "Algo salió mal.";
+    if (msg === "Sesión expirada.") { salir(true); return null; }
+    aviso(msg, true);
+    return null;
+  }
+  return r;
+}
+
+/* ------------------------------------------------------------------ estado */
+const S = {
+  token: localStorage.getItem("cf_token") || null,
+  role: null, nombre: null, plan: null, gym: "Cardio Fight",
+  vista: null, alumnos: [], hoy: null, cancelHoras: 3,
+  agenda: [], agendaDia: null, agendaModo: "dia",
+  fPlan: "todos", fPago: "todos"
+};
+
+/* ==========================================================================
+   ENTRAR
+   ========================================================================== */
+$("#form-login").addEventListener("submit", async e => {
+  e.preventDefault();
+  const btn = $("#li-go"), err = $("#li-error");
+  err.hidden = true;
+  btn.disabled = true; btn.textContent = "Entrando…";
+  const r = await api("cf_login", { p_user: $("#li-user").value, p_pin: $("#li-pin").value });
+  btn.disabled = false; btn.textContent = "Entrar";
+  if (!r || !r.ok) {
+    err.textContent = (r && r.error) || "No se pudo entrar.";
+    err.hidden = false;
+    $("#li-pin").value = ""; $("#li-pin").focus();
+    return;
+  }
+  localStorage.setItem("cf_token", r.token);
+  S.token = r.token;
+  arrancar(r);
+});
+
+function salir(porExpirar) {
+  if (S.token && !porExpirar) api("cf_logout", { p_token: S.token });
+  localStorage.removeItem("cf_token");
+  S.token = null; S.role = null;
+  $("#screen-app").hidden = true;
+  $("#screen-login").hidden = false;
+  $("#li-pin").value = "";
+  $("#li-error").hidden = !porExpirar;
+  if (porExpirar) $("#li-error").textContent = "Tu sesión se cerró. Entra de nuevo.";
+  cerrarHoja();
+}
+
+function arrancar(info) {
+  S.role = info.role; S.nombre = info.name;
+  S.plan = info.plan || null; S.gym = info.gym_name || "Cardio Fight";
+  $("#screen-login").hidden = true;
+  $("#screen-app").hidden = false;
+  $("#who").textContent = info.name || "";
+  document.title = S.gym;
+  pintarPestanas();
+  irA(S.role === "profe" ? "agenda" : "mis");
+}
+
+/* -------------------------------------------------------------- pestañas */
+const PESTANAS = {
+  profe: [
+    { id: "agenda",  ic: "📋", txt: "Agenda"  },
+    { id: "alumnos", ic: "👥", txt: "Alumnos" },
+    { id: "pagos",   ic: "💵", txt: "Pagos"   },
+    { id: "ajustes", ic: "⚙️", txt: "Ajustes" }
+  ],
+  alumno: [{ id: "mis", ic: "🥊", txt: "Mis clases" }]
+};
+
+function pintarPestanas() {
+  const tabs = PESTANAS[S.role] || [];
+  $("#tabs").hidden = tabs.length < 2 && S.role !== "alumno";
+  $("#tabs-in").innerHTML = tabs.map(t =>
+    `<button class="tab" role="tab" data-ir="${t.id}" aria-selected="false">
+       <span class="ic">${t.ic}</span><span>${t.txt}</span></button>`).join("") +
+    (S.role === "alumno"
+      ? `<button class="tab" data-act="menu-alumno"><span class="ic">⚙️</span><span>Mi cuenta</span></button>`
+      : "");
+}
+
+function irA(vista) {
+  S.vista = vista;
+  $$(".view").forEach(v => v.hidden = true);
+  const el = $("#v-" + vista);
+  if (el) el.hidden = false;
+  $$("#tabs-in .tab").forEach(t => t.setAttribute("aria-selected", String(t.dataset.ir === vista)));
+  window.scrollTo(0, 0);
+  ({ mis: verMis, agenda: verAgenda, alumnos: verAlumnos,
+     pagos: verPagos, ajustes: verAjustes }[vista] || (() => {}))();
+}
+
+const cargando = sel => { const e = $(sel); if (e) e.innerHTML = '<div class="spin"></div>'; };
+const vacio = (icono, texto) =>
+  `<div class="empty"><span class="big">${icono}</span>${esc(texto)}</div>`;
+
+/* ==========================================================================
+   VISTA DEL ALUMNO
+   ========================================================================== */
+async function verMis() {
+  cargando("#mis-reservas"); $("#mis-horarios").innerHTML = "";
+  const r = await pedir("cf_student_home", { p_token: S.token });
+  if (!r) return;
+
+  S.hoy = r.today; S.cancelHoras = r.cancel_hours;
+  const clases = r.classes || [];
+  const mias   = clases.filter(c => c.my_booking_id);
+  const libres = clases.filter(c => !c.my_booking_id);
+
+  const pago = r.me.paid_until;
+  const avisoPago = !pago
+    ? `<div class="note" style="margin-bottom:16px">Aún no tienes pagos registrados. Habla con el profe.</div>`
+    : (pago < r.today
+        ? `<div class="note bad" style="margin-bottom:16px">Tu plan venció el ${fecha(pago)}. Renuévalo con el profe.</div>`
+        : "");
+
+  $("#mis-reservas").innerHTML = avisoPago + (mias.length
+    ? mias.map(c => tarjetaClase(c, "alumno")).join("")
+    : vacio("🗓️", "Todavía no tienes clases reservadas. Elige un horario abajo."));
+
+  $("#mis-horarios").innerHTML = libres.length
+    ? porDias(libres, c => tarjetaClase(c, "alumno"))
+    : vacio("🥊", "No hay horarios publicados para los próximos días.");
+}
+
+/** Agrupa una lista de clases por fecha y las pinta bajo un encabezado de día. */
+function porDias(clases, pintar) {
+  const dias = [];
+  clases.forEach(c => {
+    let g = dias[dias.length - 1];
+    if (!g || g.d !== c.class_date) dias.push(g = { d: c.class_date, cs: [] });
+    g.cs.push(c);
+  });
+  return dias.map(g =>
+    `<div class="day${g.d === S.hoy ? " today" : ""}">${esc(fecha(g.d, S.hoy))}</div>
+     <div class="stack">${g.cs.map(pintar).join("")}</div>`).join("");
+}
+
+function tarjetaClase(c, modo) {
+  const libres = c.capacity - c.taken;
+  const lleno  = libres <= 0;
+  const pct    = Math.min(100, Math.round((c.taken / c.capacity) * 100));
+  const tipo   = c.kind === "personalizado" ? "Personalizado" : "Grupal";
+  const titulo = c.title || tipo;
+
+  let accion = "";
+  if (modo === "alumno") {
+    accion = c.my_booking_id
+      ? `<button class="btn sm ghost danger" data-cancelar="${c.my_booking_id}">Cancelar</button>`
+      : (lleno
+          ? `<button class="btn sm" disabled>Sin cupos</button>`
+          : `<button class="btn sm primary" data-reservar="${c.id}">Reservar</button>`);
+  }
+
+  return `<div class="card">
+    <div class="klass">
+      <div class="time">${esc(c.start_time)}<small>${esc(c.end_time)}</small></div>
+      <div class="grow">
+        <div class="truncate strong">${esc(titulo)}</div>
+        <div class="small muted" style="margin-top:2px">
+          ${esc(tipo)} · ${c.my_booking_id ? "cupo reservado ✓"
+            : (lleno ? "sin cupos" : `${libres} de ${c.capacity} libres`)}
+        </div>
+        <div class="meter${lleno ? " full" : ""}"><i style="width:${pct}%"></i></div>
+      </div>
+      ${accion ? `<div class="act">${accion}</div>` : ""}
+    </div>
+  </div>`;
+}
+
+/* ==========================================================================
+   VISTA DEL PROFE — AGENDA (día a día, con vista de semana)
+   ========================================================================== */
+const DIAS_VISIBLES = 42;                       // 6 semanas de margen hacia delante
+const lunesDe = iso => { const t = aDate(iso); t.setDate(t.getDate() - ((t.getDay() + 6) % 7)); return isoDe(t); };
+const MES_LARGO = ["enero","febrero","marzo","abril","mayo","junio","julio",
+                   "agosto","septiembre","octubre","noviembre","diciembre"];
+const DIA_LARGO = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+
+async function verAgenda() {
+  cargando("#agenda-lista");
+  const r = await pedir("cf_admin_agenda", { p_token: S.token, p_days: DIAS_VISIBLES });
+  if (!r) return;
+  S.hoy = r.today;
+  S.agenda = r.classes || [];
+  if (!S.agendaDia || S.agendaDia < S.hoy) S.agendaDia = S.hoy;
+  if (!S.alumnos.length) await cargarAlumnos();
+  pintarAgenda();
+}
+
+/** Días del rango navegable, con si tienen clases o no. */
+function diasDelRango() {
+  const conClase = new Set(S.agenda.map(c => c.class_date));
+  return Array.from({ length: DIAS_VISIBLES }, (_, i) => {
+    const d = sumaDias(S.hoy, i);
+    return { d, hay: conClase.has(d) };
+  });
+}
+
+function pintarAgenda() {
+  const semana = S.agendaModo === "semana";
+  const ini = semana ? lunesDe(S.agendaDia) : S.agendaDia;
+  const fin = semana ? sumaDias(ini, 6) : ini;
+
+  $$("#agenda-modo button").forEach(b =>
+    b.setAttribute("aria-pressed", String((b.dataset.modo === "semana") === semana)));
+
+  // --- tira de días ---
+  $("#agenda-strip").innerHTML = diasDelRango().map(({ d, hay }) => {
+    const t = aDate(d);
+    const dentro = d >= ini && d <= fin;
+    const clase = ["dia",
+      d === S.hoy ? "hoy" : "",
+      dentro ? (semana ? "sem" : "sel") : "",
+      semana && d === S.agendaDia ? "sel" : ""].filter(Boolean).join(" ");
+    return `<button class="${clase}" data-dia="${d}">
+      <span class="dw">${DIAS[t.getDay()]}</span>
+      <span class="dn">${t.getDate()}</span>
+      <span class="pt${hay ? "" : " off"}"></span></button>`;
+  }).join("");
+
+  const sel = $(`#agenda-strip [data-dia="${S.agendaDia}"]`);
+  if (sel) sel.scrollIntoView({ block: "nearest", inline: "center" });
+
+  const limite = sumaDias(S.hoy, DIAS_VISIBLES - 1);
+  $('[data-mover="-1"]').disabled = ini <= S.hoy;
+  $('[data-mover="1"]').disabled  = fin >= limite;
+
+  // --- clases del rango elegido ---
+  const clases = S.agenda.filter(c => c.class_date >= ini && c.class_date <= fin);
+  const gente  = clases.reduce((t, c) => t + c.roster.length, 0);
+  const t = aDate(ini);
+
+  $("#agenda-cabecera").innerHTML = semana
+    ? `<h2>Semana del ${t.getDate()} ${MESES[t.getMonth()]}</h2>
+       <span class="n">${clases.length} clase${clases.length === 1 ? "" : "s"} · ${gente} reserva${gente === 1 ? "" : "s"}</span>`
+    : `<h2>${ini === S.hoy ? "Hoy" : DIA_LARGO[t.getDay()]}, ${t.getDate()} de ${MES_LARGO[t.getMonth()]}</h2>
+       <span class="n">${gente} reserva${gente === 1 ? "" : "s"}</span>`;
+
+  if (!clases.length) {
+    $("#agenda-lista").innerHTML = `<div class="empty">
+      <span class="big">🥊</span>
+      ${semana ? "Ninguna clase esta semana." : "Ningún horario este día."}
+      <div style="margin-top:16px"><button class="btn primary" data-act="nueva-clase">＋ Crear una clase</button></div>
+    </div>`;
+    return;
+  }
+  $("#agenda-lista").innerHTML = semana
+    ? porDias(clases, tarjetaAgenda)
+    : `<div class="stack">${clases.map(tarjetaAgenda).join("")}</div>`;
+}
+
+function tarjetaAgenda(c) {
+  const libres = c.capacity - c.roster.length;
+  const pct    = Math.min(100, Math.round((c.roster.length / c.capacity) * 100));
+  const tipo   = c.kind === "personalizado" ? "Personalizado" : "Grupal";
+
+  const gente = c.roster.length
+    ? `<div class="roster">${c.roster.map(p => `
+        <div class="p">
+          <span class="avatar">${esc(iniciales(p.name))}</span>
+          <span class="grow truncate">${esc(p.name)}</span>
+          <a class="btn sm ghost" href="${wa(p.phone)}" target="_blank" rel="noopener"
+             aria-label="WhatsApp a ${esc(p.name)}">💬</a>
+          <button class="btn sm ghost danger" data-sacar="${p.booking_id}"
+                  data-nombre="${esc(p.name)}" aria-label="Sacar a ${esc(p.name)}">✕</button>
+        </div>`).join("")}</div>`
+    : `<div class="roster"><span class="small muted">Nadie anotado todavía.</span></div>`;
+
+  return `<div class="card${c.past ? " pasada" : ""}">
+    <div class="klass">
+      <div class="time">${esc(c.start_time)}<small>${esc(c.end_time)}</small></div>
+      <div class="grow">
+        <div class="row" style="gap:8px">
+          <div class="grow truncate strong">${esc(c.title || tipo)}</div>
+          <span class="chip${c.kind === "personalizado" ? " accent" : ""}">${esc(tipo)}</span>
+        </div>
+        <div class="small muted" style="margin-top:2px">
+          ${c.roster.length} de ${c.capacity} · ${libres > 0 ? `${libres} libres` : "completa"}
+        </div>
+        <div class="meter${libres <= 0 ? " full" : ""}"><i style="width:${pct}%"></i></div>
+      </div>
+    </div>
+    ${gente}
+    <div class="btn-row" style="margin-top:12px">
+      <button class="btn sm grow" data-anotar="${c.id}" ${libres <= 0 ? "disabled" : ""}>＋ Anotar alumno</button>
+      <button class="btn sm" data-editar-clase="${c.id}">Editar</button>
+      <button class="btn sm ghost danger" data-borrar-clase="${c.id}">Borrar</button>
+    </div>
+  </div>`;
+}
+
+/* ==========================================================================
+   VISTA DEL PROFE — ALUMNOS
+   ========================================================================== */
+async function cargarAlumnos() {
+  const r = await pedir("cf_admin_students", { p_token: S.token });
+  if (!r) return null;
+  S.alumnos = r.students || []; S.hoy = r.today;
+  return S.alumnos;
+}
+
+async function verAlumnos() {
+  cargando("#alumnos-lista");
+  if (!(await cargarAlumnos())) return;
+  pintarAlumnos();
+}
+
+const ESTADO_PAGO = {
+  al_dia:     ["ok",   "Al día"],
+  por_vencer: ["warn", "Vence pronto"],
+  vencido:    ["bad",  "Vencido"],
+  sin_pago:   ["",     "Sin pago"]
+};
+
+function pintarAlumnos() {
+  const q  = ($("#busca-alumno").value || "").trim().toLowerCase();
+  const fp = S.fPlan, fg = S.fPago;
+
+  $$("#filtro-plan button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.fplan === fp)));
+  $$("#filtro-pago button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.fpago === fg)));
+
+  if (!S.alumnos.length) {
+    $("#alumnos-cabecera").innerHTML = "";
+    $("#alumnos-lista").innerHTML =
+      vacio("👥", "Todavía no tienes alumnos. Dale a «Nuevo alumno» para dar de alta al primero.");
+    return;
+  }
+
+  const lista = S.alumnos.filter(a =>
+       (fp === "todos" || a.plan === fp)
+    && (fg === "todos"
+        || (fg === "al_dia" ? (a.pay_status === "al_dia" || a.pay_status === "por_vencer")
+                            : a.pay_status === fg))
+    && (!q || (a.full_name + " " + a.phone).toLowerCase().includes(q)));
+
+  const cobra = lista.filter(a => a.pay_status === "vencido" || a.pay_status === "sin_pago").length;
+  $("#alumnos-cabecera").innerHTML =
+    `<h2>${lista.length} alumno${lista.length === 1 ? "" : "s"}</h2>` +
+    (cobra ? `<span class="n">${cobra} por cobrar</span>` : "");
+
+  if (!lista.length) {
+    $("#alumnos-lista").innerHTML = vacio("🔍", "Ningún alumno con ese filtro.");
+    return;
+  }
+
+  $("#alumnos-lista").innerHTML = lista.map(a => {
+    const [cls, txt] = ESTADO_PAGO[a.pay_status] || ["", ""];
+    return `<div class="card">
+      <div class="row">
+        <span class="avatar" style="width:38px;height:38px;font-size:13px">${esc(iniciales(a.full_name))}</span>
+        <div class="grow" style="min-width:0">
+          <div class="truncate strong">${esc(a.full_name)}</div>
+          <div class="small muted truncate">${esc(PLAN[a.plan])}${a.upcoming ? ` · ${a.upcoming} clase${a.upcoming > 1 ? "s" : ""} reservada${a.upcoming > 1 ? "s" : ""}` : ""}</div>
+        </div>
+        <div style="text-align:right">
+          ${a.active ? "" : '<span class="chip bad">Pausado</span><br>'}
+          <span class="chip ${cls}" style="margin-top:${a.active ? 0 : 6}px">${esc(txt)}</span>
+        </div>
+      </div>
+      ${a.paid_until ? `<div class="tiny muted" style="margin-top:8px">Pagado hasta el ${esc(fecha(a.paid_until))}</div>` : ""}
+      <div class="btn-row" style="margin-top:12px">
+        <button class="btn sm primary" data-pagar="${a.id}">💵 Pago</button>
+        <a class="btn sm" href="${wa(a.phone)}" target="_blank" rel="noopener">💬 WhatsApp</a>
+        <button class="btn sm" data-editar-alumno="${a.id}">Editar</button>
+        <button class="btn sm ghost" data-pausar="${a.id}" data-a="${a.active ? 0 : 1}">
+          ${a.active ? "Pausar" : "Reactivar"}</button>
+        <button class="btn sm ghost danger" data-borrar-alumno="${a.id}">Eliminar</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+$("#busca-alumno").addEventListener("input", pintarAlumnos);
+
+/* ==========================================================================
+   VISTA DEL PROFE — PAGOS
+   ========================================================================== */
+async function verPagos() {
+  cargando("#pagos-lista");
+  $("#pagos-cifras").innerHTML = ""; $("#pagos-pendientes").innerHTML = "";
+  const r = await pedir("cf_admin_payments", { p_token: S.token });
+  if (!r) { $("#pagos-lista").innerHTML = ""; return; }
+  S.hoy = r.today;
+
+  const mes = MES_LARGO[aDate(r.today).getMonth()];
+  $("#pagos-cifras").innerHTML = `<div class="cifras">
+    <div class="cifra dinero">
+      <div class="k" style="margin:0 0 4px">Ganado en ${esc(mes)}</div>
+      <div class="v">${dinero(r.month_total)}</div>
+      <div class="k" style="margin-top:6px">${r.month_count} pago${r.month_count === 1 ? "" : "s"} registrado${r.month_count === 1 ? "" : "s"}</div>
+    </div>
+    <div class="cifra ok"><div class="v">${r.al_dia}</div><div class="k">Al día</div></div>
+    <div class="cifra bad"><div class="v">${r.pendientes}</div><div class="k">Pendientes</div></div>
+    <div class="cifra"><div class="v">${r.al_dia + r.pendientes}</div><div class="k">Alumnos</div></div>
+  </div>`;
+
+  const deudores = r.deudores || [], porVencer = r.por_vencer || [];
+  $("#pagos-pendientes").innerHTML = deudores.length
+    ? `<h2>Por cobrar (${deudores.length})</h2>` + deudores.map(a => {
+        const venc = a.pay_status === "vencido";
+        const texto = venc
+          ? `Hola ${a.full_name}, se te venció el plan de ${S.gym} el ${fecha(a.paid_until)}. ¿Lo renovamos?`
+          : `Hola ${a.full_name}, para reservar tus clases en ${S.gym} falta activar tu plan. ¿Lo vemos?`;
+        return `<div class="card">
+          <div class="row">
+            <span class="avatar">${esc(iniciales(a.full_name))}</span>
+            <div class="grow" style="min-width:0">
+              <div class="truncate strong">${esc(a.full_name)}</div>
+              <div class="small muted">${venc ? `Venció el ${esc(fecha(a.paid_until))}` : "Nunca ha pagado"}${a.active ? "" : " · pausado"}</div>
+            </div>
+            <span class="chip ${venc ? "bad" : ""}">${venc ? "Vencido" : "Sin pago"}</span>
+          </div>
+          <div class="btn-row" style="margin-top:12px">
+            <button class="btn sm primary grow" data-pagar="${a.id}">💵 Registrar pago</button>
+            <a class="btn sm" href="${wa(a.phone, texto)}" target="_blank" rel="noopener">💬 Cobrar</a>
+          </div>
+        </div>`;
+      }).join("")
+    : `<div class="note ok">Todos tus alumnos están al día. 👏</div>`;
+
+  if (porVencer.length) {
+    $("#pagos-pendientes").innerHTML += `<div class="note" style="margin-top:12px">
+      Vencen esta semana: ${porVencer.map(a => `${esc(a.full_name)} (${esc(fecha(a.paid_until))})`).join(", ")}.
+    </div>`;
+  }
+
+  const pagos = r.payments || [];
+  $("#pagos-lista").innerHTML = pagos.length ? pagos.map(p => `
+    <div class="card">
+      <div class="row">
+        <div class="grow" style="min-width:0">
+          <div class="truncate strong">${esc(p.student_name)}</div>
+          <div class="small muted">${esc(fecha(p.paid_on))} · ${esc(p.method)}</div>
+          <div class="tiny muted">Cubre ${esc(fecha(p.covers_from))} → ${esc(fecha(p.covers_to))}</div>
+          ${p.note ? `<div class="tiny muted" style="margin-top:4px">${esc(p.note)}</div>` : ""}
+        </div>
+        <div style="text-align:right">
+          <div class="strong" style="font-size:17px">${dinero(p.amount)}</div>
+          <button class="btn sm ghost danger" data-borrar-pago="${p.id}"
+                  style="margin-top:6px">Borrar</button>
+        </div>
+      </div>
+    </div>`).join("")
+    : vacio("💵", "Todavía no has registrado ningún pago.");
+}
+
+/* ==========================================================================
+   VISTA DEL PROFE — AJUSTES
+   ========================================================================== */
+const ZONAS = ["America/Santiago","America/Argentina/Buenos_Aires","America/Bogota","America/Lima",
+  "America/Mexico_City","America/Guayaquil","America/Caracas","America/Montevideo",
+  "America/La_Paz","America/Asuncion","America/Panama","America/Santo_Domingo",
+  "America/Guatemala","America/Costa_Rica","America/New_York","America/Los_Angeles",
+  "Europe/Madrid","Europe/London"];
+
+async function verAjustes() {
+  const r = await pedir("cf_admin_settings", { p_token: S.token });
+  if (!r) return;
+  const s = r.settings;
+  $("#aj-tz").innerHTML = ZONAS.map(z =>
+    `<option value="${z}">${z.split("/").pop().replace(/_/g, " ")}</option>`).join("") +
+    (ZONAS.includes(s.tz) ? "" : `<option value="${esc(s.tz)}">${esc(s.tz)}</option>`);
+  $("#aj-gym").value = s.gym_name;
+  $("#aj-name").value = s.teacher_name;
+  $("#aj-phone").value = s.teacher_phone;
+  $("#aj-tz").value = s.tz;
+  $("#aj-cancel").value = String(s.cancel_hours);
+}
+
+$("#form-ajustes").addEventListener("submit", async e => {
+  e.preventDefault();
+  const r = await pedir("cf_admin_save_settings", {
+    p_token: S.token,
+    p_gym_name: $("#aj-gym").value,
+    p_teacher_name: $("#aj-name").value,
+    p_teacher_phone: $("#aj-phone").value,
+    p_tz: $("#aj-tz").value,
+    p_cancel_hours: Number($("#aj-cancel").value)
+  });
+  if (!r) return;
+  S.gym = $("#aj-gym").value.trim();
+  document.title = S.gym;
+  aviso("Cambios guardados");
+});
+
+/* ==========================================================================
+   FORMULARIOS
+   ========================================================================== */
+/** Selector de alumno que solo se muestra cuando el tipo es «personalizado». */
+const selectorAlumno = (sel) => `
+  <label class="f" data-solo-1a1 hidden><span>Alumno del 1 a 1 (opcional)</span>
+    <select name="alumno1a1">
+      <option value="">Sin asignar todavía</option>
+      ${S.alumnos.map(a => `<option value="${a.id}"${a.id === sel ? " selected" : ""}>${esc(a.full_name)}</option>`).join("")}
+    </select></label>`;
+
+/** Enlaza el select de tipo con la visibilidad del selector de alumno. */
+function enlazarTipo(hoja, alCambiar) {
+  const tipo = $('[name="tipo"]', hoja), campo = $("[data-solo-1a1]", hoja);
+  const pintar = () => {
+    const uno = tipo.value === "personalizado";
+    if (campo) campo.hidden = !uno;
+    if (alCambiar) alCambiar(uno);
+  };
+  tipo.onchange = pintar;
+  pintar();
+}
+
+const enviando = (btn, on, txt) => {
+  btn.disabled = on;
+  btn.textContent = on ? "Guardando…" : txt;
+};
+
+/* ------------------------------------------------------------ alumno */
+function formAlumno(id) {
+  const a = id ? S.alumnos.find(x => x.id === id) : null;
+  abrirHoja(a ? "Editar alumno" : "Nuevo alumno", `
+    <form id="f-alu">
+      <label class="f"><span>Nombre y apellido</span>
+        <input name="nombre" maxlength="80" required value="${esc(a ? a.full_name : "")}"></label>
+      <label class="f"><span>Teléfono (con código de país, así funciona el WhatsApp)</span>
+        <input name="tel" type="tel" inputmode="numeric" required
+               placeholder="56912345678" value="${esc(a ? a.phone : "")}"></label>
+      <label class="f"><span>Plan contratado</span>
+        <select name="plan">
+          <option value="grupal"${a && a.plan === "grupal" ? " selected" : ""}>Grupal — solo clases grupales</option>
+          <option value="full"${a && a.plan === "full" ? " selected" : ""}>Personalizado full — 1 a 1 + grupales</option>
+        </select></label>
+      <label class="f"><span>PIN de 4 dígitos ${a ? "(déjalo vacío para no cambiarlo)" : "(vacío = se genera solo)"}</span>
+        <input name="pin" inputmode="numeric" maxlength="8" placeholder="${a ? "sin cambios" : "automático"}"></label>
+      <label class="f"><span>Nota interna (opcional)</span>
+        <input name="notas" maxlength="200" value="${esc(a && a.notes ? a.notes : "")}"></label>
+      <div class="btn-row">
+        <button type="button" class="btn grow" data-x="no">Cancelar</button>
+        <button type="submit" class="btn primary grow">${a ? "Guardar" : "Dar de alta"}</button>
+      </div>
+    </form>`, hoja => {
+      $('[data-x="no"]', hoja).onclick = cerrarHoja;
+      $("#f-alu", hoja).onsubmit = async e => {
+        e.preventDefault();
+        const f = e.target, btn = $('button[type="submit"]', f), txt = btn.textContent;
+        enviando(btn, true, txt);
+        const r = await pedir("cf_admin_save_student", {
+          p_token: S.token, p_id: id || null,
+          p_name: f.nombre.value, p_phone: f.tel.value, p_plan: f.plan.value,
+          p_pin: f.pin.value.trim() || null, p_notes: f.notas.value
+        });
+        enviando(btn, false, txt);
+        if (!r) return;
+        cerrarHoja();
+        await cargarAlumnos();
+        if (S.vista === "alumnos") pintarAlumnos();
+        if (r.pin) hojaPin(f.nombre.value.trim(), f.tel.value.replace(/\D/g, ""), r.pin, r.created);
+        else aviso("Alumno actualizado");
+      };
+    });
+}
+
+function hojaPin(nombre, tel, pin, esNuevo) {
+  const url = location.origin + location.pathname;
+  const texto = `¡Hola ${nombre}! Ya puedes reservar tus clases de ${S.gym} desde aquí:\n${url}\n\n` +
+                `Entra con tu teléfono ${tel} y este PIN: ${pin}`;
+  abrirHoja(esNuevo ? "Alumno dado de alta" : "PIN cambiado", `
+    <p class="muted" style="margin:0 0 16px">Este es el PIN de <b>${esc(nombre)}</b>. Mándaselo por WhatsApp:</p>
+    <div class="card" style="text-align:center;margin-bottom:18px">
+      <div class="small muted">PIN</div>
+      <div style="font-size:40px;font-weight:800;letter-spacing:.15em">${esc(pin)}</div>
+    </div>
+    <a class="btn primary block" href="${wa(tel, texto)}" target="_blank" rel="noopener"
+       style="margin-bottom:10px">💬 Enviárselo por WhatsApp</a>
+    <button class="btn ghost block" data-x="no">Listo</button>`, hoja => {
+      $('[data-x="no"]', hoja).onclick = cerrarHoja;
+    });
+}
+
+/* ------------------------------------------------------------- pago */
+function formPago(alumnoId) {
+  if (!S.alumnos.length) { aviso("Primero da de alta a un alumno.", true); return; }
+  const hoy = S.hoy || isoDe(new Date());
+  abrirHoja("Registrar pago", `
+    <form id="f-pago">
+      <label class="f"><span>Alumno</span>
+        <select name="alumno" required>${S.alumnos.map(a =>
+          `<option value="${a.id}"${a.id === alumnoId ? " selected" : ""}>${esc(a.full_name)}</option>`).join("")}</select></label>
+      <div class="grid2">
+        <label class="f"><span>Monto</span>
+          <input name="monto" type="number" inputmode="numeric" min="0" step="1" required placeholder="35000"></label>
+        <label class="f"><span>Forma de pago</span>
+          <select name="metodo">
+            <option value="efectivo">Efectivo</option>
+            <option value="transferencia">Transferencia</option>
+            <option value="tarjeta">Tarjeta</option>
+            <option value="otro">Otro</option>
+          </select></label>
+      </div>
+      <div class="grid2">
+        <label class="f"><span>El plan cubre desde</span>
+          <input name="desde" type="date" required value="${hoy}"></label>
+        <label class="f"><span>hasta</span>
+          <input name="hasta" type="date" required value="${sumaDias(hoy, 30)}"></label>
+      </div>
+      <label class="f"><span>Nota (opcional)</span>
+        <input name="nota" maxlength="200" placeholder="Ej: pagó la mitad ahora"></label>
+      <div class="btn-row">
+        <button type="button" class="btn grow" data-x="no">Cancelar</button>
+        <button type="submit" class="btn primary grow">Registrar pago</button>
+      </div>
+    </form>`, hoja => {
+      $('[data-x="no"]', hoja).onclick = cerrarHoja;
+      $("#f-pago", hoja).onsubmit = async e => {
+        e.preventDefault();
+        const f = e.target, btn = $('button[type="submit"]', f), txt = btn.textContent;
+        enviando(btn, true, txt);
+        const r = await pedir("cf_admin_add_payment", {
+          p_token: S.token, p_student_id: f.alumno.value,
+          p_amount: Number(f.monto.value), p_method: f.metodo.value,
+          p_covers_from: f.desde.value, p_covers_to: f.hasta.value,
+          p_paid_on: null, p_note: f.nota.value
+        });
+        enviando(btn, false, txt);
+        if (!r) return;
+        cerrarHoja();
+        aviso("Pago registrado");
+        await cargarAlumnos();
+        if (S.vista === "pagos") verPagos(); else if (S.vista === "alumnos") pintarAlumnos();
+      };
+    });
+}
+
+/* ------------------------------------------------------------ clase */
+function formClase(id) {
+  const c = id ? (S.agenda || []).find(x => x.id === id) : null;
+  const hoy = S.agendaDia || S.hoy || isoDe(new Date());
+  const yaAsignado = c && c.kind === "personalizado" && c.roster[0] ? c.roster[0].student_id : "";
+  abrirHoja(c ? "Editar clase" : "Nueva clase", `
+    <form id="f-clase">
+      <label class="f"><span>Tipo</span>
+        <select name="tipo">
+          <option value="grupal"${c && c.kind === "grupal" ? " selected" : ""}>Clase grupal</option>
+          <option value="personalizado"${c && c.kind === "personalizado" ? " selected" : ""}>Personalizado (1 a 1)</option>
+        </select></label>
+      ${selectorAlumno(yaAsignado)}
+      <label class="f"><span>Nombre de la clase (opcional)</span>
+        <input name="titulo" maxlength="60" placeholder="Kickboxing" value="${esc(c ? c.title : "")}"></label>
+      <label class="f"><span>Día</span>
+        <input name="fecha" type="date" required value="${esc(c ? c.class_date : hoy)}"></label>
+      <div class="grid2">
+        <label class="f"><span>Empieza</span>
+          <input name="ini" type="time" required value="${esc(c ? c.start_time : "19:00")}"></label>
+        <label class="f"><span>Termina</span>
+          <input name="fin" type="time" required value="${esc(c ? c.end_time : "20:00")}"></label>
+      </div>
+      <label class="f"><span>Cupos</span>
+        <input name="cupos" type="number" inputmode="numeric" min="1" max="100" required
+               value="${c ? c.capacity : 12}"></label>
+      <div class="btn-row">
+        <button type="button" class="btn grow" data-x="no">Cancelar</button>
+        <button type="submit" class="btn primary grow">${c ? "Guardar" : "Crear clase"}</button>
+      </div>
+    </form>`, hoja => {
+      $('[data-x="no"]', hoja).onclick = cerrarHoja;
+      const cupos = $('[name="cupos"]', hoja);
+      enlazarTipo(hoja, uno => { if (uno) cupos.value = 1; });
+      $("#f-clase", hoja).onsubmit = async e => {
+        e.preventDefault();
+        const f = e.target, btn = $('button[type="submit"]', f), txt = btn.textContent;
+        enviando(btn, true, txt);
+        const r = await pedir("cf_admin_save_class", {
+          p_token: S.token, p_id: id || null, p_kind: f.tipo.value,
+          p_date: f.fecha.value, p_start: f.ini.value, p_end: f.fin.value,
+          p_capacity: Number(f.cupos.value), p_title: f.titulo.value,
+          p_student_id: f.tipo.value === "personalizado" ? (f.alumno1a1.value || null) : null
+        });
+        enviando(btn, false, txt);
+        if (!r) return;
+        cerrarHoja(); aviso(c ? "Clase actualizada" : "Clase creada"); verAgenda();
+      };
+    });
+}
+
+/* -------------------------------------------------- horario semanal */
+function formHorarioSemanal() {
+  abrirHoja("Crear horario semanal", `
+    <p class="muted small" style="margin:0 0 16px">
+      Crea de una vez la misma clase todas las semanas, para los próximos 3 meses.
+      Repítelo para cada franja horaria. Hacerlo dos veces no duplica nada.
+    </p>
+    <form id="f-hor">
+      <label class="f"><span>Días de la semana</span></label>
+      <div class="btn-row" style="margin:-6px 0 16px" id="dias-sem">
+        ${["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"].map((d, i) =>
+          `<button type="button" class="btn sm" data-dia="${(i + 1) % 7}">${d}</button>`).join("")}
+      </div>
+      <label class="f"><span>Tipo</span>
+        <select name="tipo">
+          <option value="grupal">Clase grupal</option>
+          <option value="personalizado">Personalizado (1 a 1)</option>
+        </select></label>
+      ${selectorAlumno("")}
+      <label class="f"><span>Nombre de la clase (opcional)</span>
+        <input name="titulo" maxlength="60" placeholder="Kickboxing"></label>
+      <div class="grid2">
+        <label class="f"><span>Empieza</span><input name="ini" type="time" required value="19:00"></label>
+        <label class="f"><span>Termina</span><input name="fin" type="time" required value="20:00"></label>
+      </div>
+      <label class="f"><span>Cupos por clase</span>
+        <input name="cupos" type="number" min="1" max="100" required value="12"></label>
+      <div class="btn-row">
+        <button type="button" class="btn grow" data-x="no">Cancelar</button>
+        <button type="submit" class="btn primary grow">Crear horario</button>
+      </div>
+    </form>`, hoja => {
+      $('[data-x="no"]', hoja).onclick = cerrarHoja;
+      enlazarTipo(hoja, uno => { if (uno) $('[name="cupos"]', hoja).value = 1; });
+      const sel = new Set();
+      $$("[data-dia]", hoja).forEach(b => b.onclick = () => {
+        const d = Number(b.dataset.dia);
+        if (sel.has(d)) { sel.delete(d); b.classList.remove("primary"); }
+        else { sel.add(d); b.classList.add("primary"); }
+      });
+      $("#f-hor", hoja).onsubmit = async e => {
+        e.preventDefault();
+        if (!sel.size) { aviso("Elige al menos un día de la semana.", true); return; }
+        const f = e.target, btn = $('button[type="submit"]', f), txt = btn.textContent;
+        enviando(btn, true, txt);
+        const r = await pedir("cf_admin_generate_classes", {
+          p_token: S.token, p_weekdays: Array.from(sel), p_start: f.ini.value,
+          p_end: f.fin.value, p_kind: f.tipo.value, p_capacity: Number(f.cupos.value),
+          p_title: f.titulo.value, p_from: null,
+          p_student_id: f.tipo.value === "personalizado" ? (f.alumno1a1.value || null) : null
+        });
+        enviando(btn, false, txt);
+        if (!r) return;
+        cerrarHoja();
+        aviso(r.created
+          ? `${r.created} clases creadas${r.booked ? ` y asignadas` : ""}`
+          : "Esas clases ya existían");
+        verAgenda();
+      };
+    });
+}
+
+/* -------------------------------------------- anotar a mano / PIN */
+function formAnotar(claseId) {
+  const libres = S.alumnos.filter(a => a.active);
+  if (!libres.length) { aviso("No tienes alumnos activos.", true); return; }
+  abrirHoja("Anotar alumno", `
+    <form id="f-anotar">
+      <label class="f"><span>¿A quién anotamos?</span>
+        <select name="alumno" required>${libres.map(a =>
+          `<option value="${a.id}">${esc(a.full_name)}</option>`).join("")}</select></label>
+      <div class="btn-row">
+        <button type="button" class="btn grow" data-x="no">Cancelar</button>
+        <button type="submit" class="btn primary grow">Anotar</button>
+      </div>
+    </form>`, hoja => {
+      $('[data-x="no"]', hoja).onclick = cerrarHoja;
+      $("#f-anotar", hoja).onsubmit = async e => {
+        e.preventDefault();
+        const r = await pedir("cf_admin_add_booking", {
+          p_token: S.token, p_class_id: claseId, p_student_id: e.target.alumno.value });
+        if (!r) return;
+        cerrarHoja(); aviso("Alumno anotado"); verAgenda();
+      };
+    });
+}
+
+function formPin() {
+  abrirHoja("Cambiar mi PIN", `
+    <form id="f-pin">
+      <label class="f"><span>PIN actual</span>
+        <input name="viejo" class="pin" type="password" inputmode="numeric" maxlength="8" required></label>
+      <label class="f"><span>PIN nuevo (4 a 8 dígitos)</span>
+        <input name="nuevo" class="pin" type="password" inputmode="numeric" maxlength="8" required></label>
+      <div class="btn-row">
+        <button type="button" class="btn grow" data-x="no">Cancelar</button>
+        <button type="submit" class="btn primary grow">Cambiar</button>
+      </div>
+    </form>`, hoja => {
+      $('[data-x="no"]', hoja).onclick = cerrarHoja;
+      $("#f-pin", hoja).onsubmit = async e => {
+        e.preventDefault();
+        const r = await pedir("cf_change_pin", {
+          p_token: S.token, p_old: e.target.viejo.value, p_new: e.target.nuevo.value });
+        if (!r) return;
+        cerrarHoja(); aviso("PIN cambiado");
+      };
+    });
+}
+
+function menuAlumno() {
+  abrirHoja("Mi cuenta", `
+    <div class="card" style="margin-bottom:16px">
+      <div class="strong">${esc(S.nombre || "")}</div>
+      <div class="small muted">${esc(PLAN[S.plan] || "")}</div>
+    </div>
+    <button class="btn block" data-act="cambiar-pin" style="margin-bottom:10px">Cambiar mi PIN</button>
+    <button class="btn ghost block danger" data-act="salir">Cerrar sesión</button>`);
+}
+
+/* ==========================================================================
+   ACCIONES (un solo escuchador para toda la app)
+   ========================================================================== */
+document.addEventListener("click", async e => {
+  const t = e.target.closest("[data-ir],[data-act],[data-reservar],[data-cancelar]," +
+    "[data-sacar],[data-anotar],[data-editar-clase],[data-borrar-clase]," +
+    "[data-pagar],[data-editar-alumno],[data-pausar],[data-borrar-alumno],[data-borrar-pago]," +
+    "[data-modo],[data-mover],[data-hoy],[data-dia],[data-fplan],[data-fpago]");
+  if (!t) return;
+  const d = t.dataset;
+
+  if (d.ir) return irA(d.ir);
+
+  /* ---- agenda: día / semana ---- */
+  if (d.fplan) { S.fPlan = d.fplan; return pintarAlumnos(); }
+  if (d.fpago) { S.fPago = d.fpago; return pintarAlumnos(); }
+  if (d.modo)  { S.agendaModo = d.modo; return pintarAgenda(); }
+  if (d.dia)   { S.agendaDia = d.dia;   return pintarAgenda(); }
+  if (d.hoy !== undefined) { S.agendaDia = S.hoy; return pintarAgenda(); }
+  if (d.mover) {
+    const paso = Number(d.mover) * (S.agendaModo === "semana" ? 7 : 1);
+    const tope = sumaDias(S.hoy, DIAS_VISIBLES - 1);
+    let destino = sumaDias(S.agendaDia, paso);
+    if (destino < S.hoy) destino = S.hoy;
+    if (destino > tope)  destino = tope;
+    S.agendaDia = destino;
+    return pintarAgenda();
+  }
+
+  if (d.act) {
+    e.preventDefault();
+    return ({
+      "nueva-clase":     () => formClase(null),
+      "horario-semanal": formHorarioSemanal,
+      "nuevo-alumno":    () => formAlumno(null),
+      "nuevo-pago":      () => formPago(null),
+      "cambiar-pin":     () => { cerrarHoja(); formPin(); },
+      "menu-alumno":     menuAlumno,
+      "salir":           () => salir(false)
+    }[d.act] || (() => {}))();
+  }
+
+  /* ---- alumno ---- */
+  if (d.reservar) {
+    t.disabled = true;
+    const r = await pedir("cf_book", { p_token: S.token, p_class_id: d.reservar });
+    t.disabled = false;
+    if (r) { aviso("¡Listo! Cupo reservado 🥊"); verMis(); } else { verMis(); }
+    return;
+  }
+  if (d.cancelar) {
+    return confirmar("Cancelar reserva",
+      `¿Seguro que sueltas tu cupo? Recuerda avisar con al menos ${S.cancelHoras} h de antelación.`,
+      "Sí, cancelar", async () => {
+        const r = await pedir("cf_cancel_booking", { p_token: S.token, p_booking_id: d.cancelar });
+        if (r) aviso("Reserva cancelada");
+        verMis();
+      });
+  }
+
+  /* ---- profe: agenda ---- */
+  if (d.anotar)       return formAnotar(d.anotar);
+  if (d.editarClase)  return formClase(d.editarClase);
+  if (d.sacar) {
+    return confirmar("Sacar de la clase", `¿Quitas a ${d.nombre} de esta clase?`, "Sí, sacar",
+      async () => { if (await pedir("cf_admin_remove_booking",
+        { p_token: S.token, p_booking_id: d.sacar })) { aviso("Alumno sacado"); verAgenda(); } });
+  }
+  if (d.borrarClase) {
+    return confirmar("Borrar clase",
+      "Se borra la clase y se cancelan las reservas que tenga. Avisa a los alumnos.", "Sí, borrar",
+      async () => { if (await pedir("cf_admin_delete_class",
+        { p_token: S.token, p_id: d.borrarClase })) { aviso("Clase borrada"); verAgenda(); } });
+  }
+
+  /* ---- profe: alumnos ---- */
+  if (d.pagar)        return formPago(d.pagar);
+  if (d.editarAlumno) return formAlumno(d.editarAlumno);
+  if (d.pausar) {
+    const activar = d.a === "1";
+    const nombre = (S.alumnos.find(x => x.id === d.pausar) || {}).full_name || "el alumno";
+    const hacer = async () => {
+      if (await pedir("cf_admin_set_active",
+          { p_token: S.token, p_id: d.pausar, p_active: activar })) {
+        aviso(activar ? "Alumno reactivado" : "Alumno pausado");
+        await cargarAlumnos(); pintarAlumnos();
+      }
+    };
+    if (activar) return hacer();
+    return confirmar("Pausar alumno",
+      `${nombre} no podrá entrar a la app y se sueltan sus reservas futuras. Puedes reactivarlo cuando pague.`,
+      "Sí, pausar", hacer);
+  }
+  if (d.borrarAlumno) {
+    const nombre = (S.alumnos.find(x => x.id === d.borrarAlumno) || {}).full_name || "este alumno";
+    return confirmar("Eliminar alumno",
+      `Se borra ${nombre} y todas sus reservas. El historial de pagos se conserva. Esto no se puede deshacer.`,
+      "Sí, eliminar", async () => {
+        if (await pedir("cf_admin_delete_student", { p_token: S.token, p_id: d.borrarAlumno })) {
+          aviso("Alumno eliminado");
+          await cargarAlumnos(); pintarAlumnos();
+        }
+      });
+  }
+
+  /* ---- profe: pagos ---- */
+  if (d.borrarPago) {
+    return confirmar("Borrar pago", "Se borra este pago del historial. ¿Seguro?", "Sí, borrar",
+      async () => { if (await pedir("cf_admin_delete_payment",
+        { p_token: S.token, p_id: d.borrarPago })) { aviso("Pago borrado"); verPagos(); } });
+  }
+});
+
+/* Al volver a la app tras un rato, refrescamos la vista. */
+let ultimoRefresco = Date.now();
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) { ultimoRefresco = Date.now(); return; }
+  if (S.token && S.vista && Date.now() - ultimoRefresco > 60000) irA(S.vista);
+});
+
+/* ==========================================================================
+   ARRANQUE
+   ========================================================================== */
+(async function () {
+  if (!S.token) return;
+  $("#screen-login").hidden = true;
+  const r = await api("cf_me", { p_token: S.token });
+  if (r && r.ok) return arrancar(r);
+  localStorage.removeItem("cf_token");
+  S.token = null;
+  $("#screen-login").hidden = false;
+})();
+</script>
+</body>
+</html>
