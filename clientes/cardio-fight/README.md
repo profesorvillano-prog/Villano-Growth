@@ -30,12 +30,24 @@ contraseñas largas. Queda la sesión abierta: no tendrás que entrar cada día.
 
 ### 1. Publicar tus horarios — pestaña **Agenda**
 
-Tienes dos formas:
+La agenda se ve **un día a la vez**. Arriba tienes la tira de días: deslízala
+con el dedo o usa las flechas ‹ ›. El puntito rojo bajo un día significa que
+ese día tiene clases. El botón **Hoy** te devuelve al día de hoy, y el
+interruptor **Día / Semana** cambia entre ver solo ese día o la semana entera.
+
+Para crear clases tienes dos formas:
 
 - **📅 Horario semanal** — para tu horario fijo. Eliges los días (por ejemplo
-  lunes, miércoles y viernes), la hora, los cupos y cuántas semanas. Te crea
-  todas las clases de una vez. Repítelo para cada franja horaria que tengas.
-- **＋ Nueva clase** — para una clase suelta o un personalizado concreto.
+  lunes, miércoles y viernes), la hora y los cupos, y te crea todas las clases
+  de los **próximos 3 meses** de una vez. Repítelo para cada franja horaria.
+  Hacerlo dos veces no duplica nada.
+- **＋ Nueva clase** — para una clase suelta o un personalizado concreto. Se
+  crea en el día que estés viendo.
+
+**Personalizados 1 a 1:** al elegir el tipo *Personalizado*, aparece un
+selector de **alumno**. Si lo eliges ahí, la clase queda creada **con esa
+persona ya anotada**, sin pasos extra. Funciona igual en el horario semanal:
+te deja montar «los martes a las 18:00 con Ana» en una sola pantalla.
 
 Cada clase es de un tipo:
 
@@ -63,11 +75,26 @@ La app le genera un **PIN de 4 dígitos** y te da un botón para
 > Guarda el teléfono **con el código del país** (ej. `56912345678`). Así
 > funciona el botón de WhatsApp.
 
-### 3. Registrar un pago — pestaña **Pagos** o botón 💵 del alumno
+### 3. Cobrar — pestaña **Pagos**
 
-Pon el monto, cómo te pagó y **hasta qué fecha le cubre el plan**. Con eso la
-app sabe quién está al día y te avisa de quién debe. Registrar un pago
-**reactiva automáticamente** a un alumno que estaba pausado.
+Nada más entrar ves lo importante:
+
+- **Ganado en el mes** y cuántos pagos llevas registrados.
+- **Al día** y **Pendientes**: cuántos alumnos hay en cada situación.
+- **Por cobrar**: la lista de quién debe, con si se le venció el plan o si
+  nunca ha pagado, y un botón **💬 Cobrar** que le abre WhatsApp con el
+  mensaje ya escrito.
+- Abajo, el historial de **últimos pagos**.
+
+Para registrar uno, pon el monto, cómo te pagó y **hasta qué fecha le cubre el
+plan**. De ahí sale todo lo anterior. Registrar un pago **reactiva
+automáticamente** a un alumno que estaba pausado.
+
+### 3b. Encontrar a alguien — pestaña **Alumnos**
+
+Además del buscador tienes dos filas de filtros: por **plan**
+(Personalizado / Grupal) y por **pago** (Al día / Sin pago / Deudores). Se
+combinan: por ejemplo «Personalizado + Deudores» te da justo a quién llamar.
 
 ### 4. Cuando alguien no paga
 

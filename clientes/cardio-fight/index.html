@@ -96,6 +96,56 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 .tab .ic{font-size:20px;line-height:1}
 .tab[aria-selected="true"]{color:var(--accent)}
 
+/* ---------- filtros y cifras ---------- */
+.filtros{display:flex;flex-direction:column;gap:8px;margin:0 0 16px}
+.seg.wrap{display:flex;width:100%;overflow-x:auto;scrollbar-width:none}
+.seg.wrap::-webkit-scrollbar{display:none}
+.seg.wrap button{flex:1 0 auto;white-space:nowrap;padding:8px 14px;font-size:13px}
+.cifras{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 22px}
+.cifra{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:14px 12px;text-align:center}
+.cifra .v{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.cifra .k{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--muted);margin-top:5px}
+.cifra.ok  .v{color:var(--ok)}
+.cifra.bad .v{color:var(--bad)}
+.cifra.dinero{grid-column:span 3;text-align:left;padding:16px}
+.cifra.dinero .v{font-size:32px}
+
+/* ---------- navegación de la agenda ---------- */
+.seg{display:inline-flex;background:var(--card-2);border:1px solid var(--line);
+  border-radius:11px;padding:3px;gap:3px}
+.seg button{border:0;background:none;color:var(--muted);font-weight:600;font-size:14px;
+  padding:8px 18px;border-radius:8px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.navrow{display:flex;align-items:center;gap:10px;margin:0 0 12px}
+.strip-wrap{display:flex;align-items:center;gap:6px;margin:0 0 16px}
+.strip{display:flex;gap:8px;overflow-x:auto;scroll-behavior:smooth;
+  scroll-snap-type:x proximity;padding:2px 0 6px;flex:1;
+  scrollbar-width:none;-ms-overflow-style:none}
+.strip::-webkit-scrollbar{display:none}
+.nav{flex:none;width:34px;height:52px;border-radius:10px;border:1px solid var(--line);
+  background:var(--card-2);color:var(--muted);font-size:19px;line-height:1;cursor:pointer}
+.nav[disabled]{opacity:.3;cursor:default}
+.dia{flex:none;width:54px;scroll-snap-align:center;border-radius:12px;cursor:pointer;
+  border:1px solid var(--line);background:var(--card);color:var(--ink);
+  padding:8px 0 7px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.dia .dw{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.dia .dn{font-size:19px;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+.dia .pt{width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:2px}
+.dia .pt.off{background:transparent}
+.dia.hoy .dn{color:var(--accent)}
+.dia.sem{background:var(--card-2);border-color:#3a3a45}
+.dia.sel{background:var(--accent);border-color:var(--accent)}
+.dia.sel .dw,.dia.sel .dn{color:var(--accent-ink)}
+.dia.sel .pt{background:var(--accent-ink)}
+.cabecera{display:flex;align-items:baseline;gap:10px;margin:0 0 12px}
+.cabecera h2{font-size:19px;font-weight:800;letter-spacing:-.01em;text-transform:none;
+  color:var(--ink);margin:0}
+.cabecera .n{font-size:13px;color:var(--muted)}
+.acciones .btn{font-size:14px;white-space:nowrap;padding:0 10px}
+.card.pasada{opacity:.5}
+
 /* ---------- clase / día ---------- */
 .day{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
   color:var(--muted);margin:22px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
@@ -203,10 +253,23 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 
     <!-- ---------- vista PROFE: agenda ---------- -->
     <div class="view" id="v-agenda" hidden>
-      <div class="grid2" style="margin-bottom:18px;gap:10px">
+      <div class="navrow">
+        <div class="seg" id="agenda-modo">
+          <button data-modo="dia" aria-pressed="true">Día</button>
+          <button data-modo="semana" aria-pressed="false">Semana</button>
+        </div>
+        <button class="btn sm ghost" data-hoy style="margin-left:auto">Hoy</button>
+      </div>
+      <div class="strip-wrap">
+        <button class="nav" data-mover="-1" aria-label="Anterior">‹</button>
+        <div class="strip" id="agenda-strip"></div>
+        <button class="nav" data-mover="1" aria-label="Siguiente">›</button>
+      </div>
+      <div class="grid2 acciones" style="margin-bottom:20px;gap:10px">
         <button class="btn primary" data-act="nueva-clase">＋ Nueva clase</button>
         <button class="btn" data-act="horario-semanal">📅 Horario semanal</button>
       </div>
+      <div class="cabecera" id="agenda-cabecera"></div>
       <div id="agenda-lista"></div>
     </div>
 
@@ -216,7 +279,21 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
         <button class="btn primary grow" data-act="nuevo-alumno">＋ Nuevo alumno</button>
       </div>
       <input id="busca-alumno" type="search" placeholder="Buscar por nombre o teléfono"
-             style="margin-bottom:16px" autocomplete="off">
+             style="margin-bottom:14px" autocomplete="off">
+      <div class="filtros">
+        <div class="seg wrap" id="filtro-plan">
+          <button data-fplan="todos" aria-pressed="true">Todos</button>
+          <button data-fplan="full"   aria-pressed="false">Personalizado</button>
+          <button data-fplan="grupal" aria-pressed="false">Grupal</button>
+        </div>
+        <div class="seg wrap" id="filtro-pago">
+          <button data-fpago="todos"    aria-pressed="true">Todos</button>
+          <button data-fpago="al_dia"   aria-pressed="false">Al día</button>
+          <button data-fpago="sin_pago" aria-pressed="false">Sin pago</button>
+          <button data-fpago="vencido"  aria-pressed="false">Deudores</button>
+        </div>
+      </div>
+      <div class="cabecera" id="alumnos-cabecera"></div>
       <div id="alumnos-lista"></div>
     </div>
 
@@ -225,7 +302,8 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
       <div class="btn-row" style="margin-bottom:18px">
         <button class="btn primary grow" data-act="nuevo-pago">＋ Registrar pago</button>
       </div>
-      <div id="pagos-resumen" class="section"></div>
+      <div id="pagos-cifras"></div>
+      <div class="section" id="pagos-pendientes"></div>
       <div class="section">
         <h2>Últimos pagos</h2>
         <div id="pagos-lista"></div>
@@ -387,7 +465,9 @@ async function pedir(fn, args) {
 const S = {
   token: localStorage.getItem("cf_token") || null,
   role: null, nombre: null, plan: null, gym: "Cardio Fight",
-  vista: null, alumnos: [], hoy: null, agenda: null, cancelHoras: 3
+  vista: null, alumnos: [], hoy: null, cancelHoras: 3,
+  agenda: [], agendaDia: null, agendaModo: "dia",
+  fPlan: "todos", fPago: "todos"
 };
 
 /* ==========================================================================
@@ -546,19 +626,85 @@ function tarjetaClase(c, modo) {
 }
 
 /* ==========================================================================
-   VISTA DEL PROFE — AGENDA
+   VISTA DEL PROFE — AGENDA (día a día, con vista de semana)
    ========================================================================== */
+const DIAS_VISIBLES = 42;                       // 6 semanas de margen hacia delante
+const lunesDe = iso => { const t = aDate(iso); t.setDate(t.getDate() - ((t.getDay() + 6) % 7)); return isoDe(t); };
+const MES_LARGO = ["enero","febrero","marzo","abril","mayo","junio","julio",
+                   "agosto","septiembre","octubre","noviembre","diciembre"];
+const DIA_LARGO = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+
 async function verAgenda() {
   cargando("#agenda-lista");
-  const r = await pedir("cf_admin_agenda", { p_token: S.token, p_days: 21 });
+  const r = await pedir("cf_admin_agenda", { p_token: S.token, p_days: DIAS_VISIBLES });
   if (!r) return;
-  S.hoy = r.today; S.agenda = r.classes || [];
-  if (!S.alumnos.length) cargarAlumnos();
+  S.hoy = r.today;
+  S.agenda = r.classes || [];
+  if (!S.agendaDia || S.agendaDia < S.hoy) S.agendaDia = S.hoy;
+  if (!S.alumnos.length) await cargarAlumnos();
+  pintarAgenda();
+}
 
-  const futuras = S.agenda.filter(c => !c.past);
-  $("#agenda-lista").innerHTML = futuras.length
-    ? porDias(futuras, tarjetaAgenda)
-    : vacio("📋", "No tienes clases publicadas. Crea tu horario semanal y los alumnos podrán reservar.");
+/** Días del rango navegable, con si tienen clases o no. */
+function diasDelRango() {
+  const conClase = new Set(S.agenda.map(c => c.class_date));
+  return Array.from({ length: DIAS_VISIBLES }, (_, i) => {
+    const d = sumaDias(S.hoy, i);
+    return { d, hay: conClase.has(d) };
+  });
+}
+
+function pintarAgenda() {
+  const semana = S.agendaModo === "semana";
+  const ini = semana ? lunesDe(S.agendaDia) : S.agendaDia;
+  const fin = semana ? sumaDias(ini, 6) : ini;
+
+  $$("#agenda-modo button").forEach(b =>
+    b.setAttribute("aria-pressed", String((b.dataset.modo === "semana") === semana)));
+
+  // --- tira de días ---
+  $("#agenda-strip").innerHTML = diasDelRango().map(({ d, hay }) => {
+    const t = aDate(d);
+    const dentro = d >= ini && d <= fin;
+    const clase = ["dia",
+      d === S.hoy ? "hoy" : "",
+      dentro ? (semana ? "sem" : "sel") : "",
+      semana && d === S.agendaDia ? "sel" : ""].filter(Boolean).join(" ");
+    return `<button class="${clase}" data-dia="${d}">
+      <span class="dw">${DIAS[t.getDay()]}</span>
+      <span class="dn">${t.getDate()}</span>
+      <span class="pt${hay ? "" : " off"}"></span></button>`;
+  }).join("");
+
+  const sel = $(`#agenda-strip [data-dia="${S.agendaDia}"]`);
+  if (sel) sel.scrollIntoView({ block: "nearest", inline: "center" });
+
+  const limite = sumaDias(S.hoy, DIAS_VISIBLES - 1);
+  $('[data-mover="-1"]').disabled = ini <= S.hoy;
+  $('[data-mover="1"]').disabled  = fin >= limite;
+
+  // --- clases del rango elegido ---
+  const clases = S.agenda.filter(c => c.class_date >= ini && c.class_date <= fin);
+  const gente  = clases.reduce((t, c) => t + c.roster.length, 0);
+  const t = aDate(ini);
+
+  $("#agenda-cabecera").innerHTML = semana
+    ? `<h2>Semana del ${t.getDate()} ${MESES[t.getMonth()]}</h2>
+       <span class="n">${clases.length} clase${clases.length === 1 ? "" : "s"} · ${gente} reserva${gente === 1 ? "" : "s"}</span>`
+    : `<h2>${ini === S.hoy ? "Hoy" : DIA_LARGO[t.getDay()]}, ${t.getDate()} de ${MES_LARGO[t.getMonth()]}</h2>
+       <span class="n">${gente} reserva${gente === 1 ? "" : "s"}</span>`;
+
+  if (!clases.length) {
+    $("#agenda-lista").innerHTML = `<div class="empty">
+      <span class="big">🥊</span>
+      ${semana ? "Ninguna clase esta semana." : "Ningún horario este día."}
+      <div style="margin-top:16px"><button class="btn primary" data-act="nueva-clase">＋ Crear una clase</button></div>
+    </div>`;
+    return;
+  }
+  $("#agenda-lista").innerHTML = semana
+    ? porDias(clases, tarjetaAgenda)
+    : `<div class="stack">${clases.map(tarjetaAgenda).join("")}</div>`;
 }
 
 function tarjetaAgenda(c) {
@@ -578,7 +724,7 @@ function tarjetaAgenda(c) {
         </div>`).join("")}</div>`
     : `<div class="roster"><span class="small muted">Nadie anotado todavía.</span></div>`;
 
-  return `<div class="card">
+  return `<div class="card${c.past ? " pasada" : ""}">
     <div class="klass">
       <div class="time">${esc(c.start_time)}<small>${esc(c.end_time)}</small></div>
       <div class="grow">
@@ -625,17 +771,35 @@ const ESTADO_PAGO = {
 };
 
 function pintarAlumnos() {
-  const q = ($("#busca-alumno").value || "").trim().toLowerCase();
-  const lista = q
-    ? S.alumnos.filter(a => (a.full_name + " " + a.phone).toLowerCase().includes(q))
-    : S.alumnos;
+  const q  = ($("#busca-alumno").value || "").trim().toLowerCase();
+  const fp = S.fPlan, fg = S.fPago;
+
+  $$("#filtro-plan button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.fplan === fp)));
+  $$("#filtro-pago button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.fpago === fg)));
 
   if (!S.alumnos.length) {
+    $("#alumnos-cabecera").innerHTML = "";
     $("#alumnos-lista").innerHTML =
       vacio("👥", "Todavía no tienes alumnos. Dale a «Nuevo alumno» para dar de alta al primero.");
     return;
   }
-  if (!lista.length) { $("#alumnos-lista").innerHTML = vacio("🔍", "Ningún alumno con ese nombre."); return; }
+
+  const lista = S.alumnos.filter(a =>
+       (fp === "todos" || a.plan === fp)
+    && (fg === "todos"
+        || (fg === "al_dia" ? (a.pay_status === "al_dia" || a.pay_status === "por_vencer")
+                            : a.pay_status === fg))
+    && (!q || (a.full_name + " " + a.phone).toLowerCase().includes(q)));
+
+  const cobra = lista.filter(a => a.pay_status === "vencido" || a.pay_status === "sin_pago").length;
+  $("#alumnos-cabecera").innerHTML =
+    `<h2>${lista.length} alumno${lista.length === 1 ? "" : "s"}</h2>` +
+    (cobra ? `<span class="n">${cobra} por cobrar</span>` : "");
+
+  if (!lista.length) {
+    $("#alumnos-lista").innerHTML = vacio("🔍", "Ningún alumno con ese filtro.");
+    return;
+  }
 
   $("#alumnos-lista").innerHTML = lista.map(a => {
     const [cls, txt] = ESTADO_PAGO[a.pay_status] || ["", ""];
@@ -669,24 +833,53 @@ $("#busca-alumno").addEventListener("input", pintarAlumnos);
    VISTA DEL PROFE — PAGOS
    ========================================================================== */
 async function verPagos() {
-  cargando("#pagos-lista"); $("#pagos-resumen").innerHTML = "";
+  cargando("#pagos-lista");
+  $("#pagos-cifras").innerHTML = ""; $("#pagos-pendientes").innerHTML = "";
   const r = await pedir("cf_admin_payments", { p_token: S.token });
-  if (!r) return;
+  if (!r) { $("#pagos-lista").innerHTML = ""; return; }
   S.hoy = r.today;
-  if (!S.alumnos.length) await cargarAlumnos();
 
-  const deben = S.alumnos.filter(a => a.pay_status === "vencido" || a.pay_status === "sin_pago");
-  $("#pagos-resumen").innerHTML = `
-    <div class="card">
-      <div class="small muted">Cobrado este mes</div>
-      <div style="font-size:30px;font-weight:800;letter-spacing:-.02em">${dinero(r.month_total)}</div>
-      ${deben.length
-        ? `<div class="note bad" style="margin-top:12px">
-             ${deben.length} alumno${deben.length > 1 ? "s" : ""} sin el pago al día:
-             ${deben.slice(0, 6).map(a => esc(a.full_name)).join(", ")}${deben.length > 6 ? "…" : ""}
-           </div>`
-        : `<div class="note ok" style="margin-top:12px">Todos tus alumnos están al día. 👏</div>`}
+  const mes = MES_LARGO[aDate(r.today).getMonth()];
+  $("#pagos-cifras").innerHTML = `<div class="cifras">
+    <div class="cifra dinero">
+      <div class="k" style="margin:0 0 4px">Ganado en ${esc(mes)}</div>
+      <div class="v">${dinero(r.month_total)}</div>
+      <div class="k" style="margin-top:6px">${r.month_count} pago${r.month_count === 1 ? "" : "s"} registrado${r.month_count === 1 ? "" : "s"}</div>
+    </div>
+    <div class="cifra ok"><div class="v">${r.al_dia}</div><div class="k">Al día</div></div>
+    <div class="cifra bad"><div class="v">${r.pendientes}</div><div class="k">Pendientes</div></div>
+    <div class="cifra"><div class="v">${r.al_dia + r.pendientes}</div><div class="k">Alumnos</div></div>
+  </div>`;
+
+  const deudores = r.deudores || [], porVencer = r.por_vencer || [];
+  $("#pagos-pendientes").innerHTML = deudores.length
+    ? `<h2>Por cobrar (${deudores.length})</h2>` + deudores.map(a => {
+        const venc = a.pay_status === "vencido";
+        const texto = venc
+          ? `Hola ${a.full_name}, se te venció el plan de ${S.gym} el ${fecha(a.paid_until)}. ¿Lo renovamos?`
+          : `Hola ${a.full_name}, para reservar tus clases en ${S.gym} falta activar tu plan. ¿Lo vemos?`;
+        return `<div class="card">
+          <div class="row">
+            <span class="avatar">${esc(iniciales(a.full_name))}</span>
+            <div class="grow" style="min-width:0">
+              <div class="truncate strong">${esc(a.full_name)}</div>
+              <div class="small muted">${venc ? `Venció el ${esc(fecha(a.paid_until))}` : "Nunca ha pagado"}${a.active ? "" : " · pausado"}</div>
+            </div>
+            <span class="chip ${venc ? "bad" : ""}">${venc ? "Vencido" : "Sin pago"}</span>
+          </div>
+          <div class="btn-row" style="margin-top:12px">
+            <button class="btn sm primary grow" data-pagar="${a.id}">💵 Registrar pago</button>
+            <a class="btn sm" href="${wa(a.phone, texto)}" target="_blank" rel="noopener">💬 Cobrar</a>
+          </div>
+        </div>`;
+      }).join("")
+    : `<div class="note ok">Todos tus alumnos están al día. 👏</div>`;
+
+  if (porVencer.length) {
+    $("#pagos-pendientes").innerHTML += `<div class="note" style="margin-top:12px">
+      Vencen esta semana: ${porVencer.map(a => `${esc(a.full_name)} (${esc(fecha(a.paid_until))})`).join(", ")}.
     </div>`;
+  }
 
   const pagos = r.payments || [];
   $("#pagos-lista").innerHTML = pagos.length ? pagos.map(p => `
@@ -750,6 +943,26 @@ $("#form-ajustes").addEventListener("submit", async e => {
 /* ==========================================================================
    FORMULARIOS
    ========================================================================== */
+/** Selector de alumno que solo se muestra cuando el tipo es «personalizado». */
+const selectorAlumno = (sel) => `
+  <label class="f" data-solo-1a1 hidden><span>Alumno del 1 a 1 (opcional)</span>
+    <select name="alumno1a1">
+      <option value="">Sin asignar todavía</option>
+      ${S.alumnos.map(a => `<option value="${a.id}"${a.id === sel ? " selected" : ""}>${esc(a.full_name)}</option>`).join("")}
+    </select></label>`;
+
+/** Enlaza el select de tipo con la visibilidad del selector de alumno. */
+function enlazarTipo(hoja, alCambiar) {
+  const tipo = $('[name="tipo"]', hoja), campo = $("[data-solo-1a1]", hoja);
+  const pintar = () => {
+    const uno = tipo.value === "personalizado";
+    if (campo) campo.hidden = !uno;
+    if (alCambiar) alCambiar(uno);
+  };
+  tipo.onchange = pintar;
+  pintar();
+}
+
 const enviando = (btn, on, txt) => {
   btn.disabled = on;
   btn.textContent = on ? "Guardando…" : txt;
@@ -874,7 +1087,8 @@ function formPago(alumnoId) {
 /* ------------------------------------------------------------ clase */
 function formClase(id) {
   const c = id ? (S.agenda || []).find(x => x.id === id) : null;
-  const hoy = S.hoy || isoDe(new Date());
+  const hoy = S.agendaDia || S.hoy || isoDe(new Date());
+  const yaAsignado = c && c.kind === "personalizado" && c.roster[0] ? c.roster[0].student_id : "";
   abrirHoja(c ? "Editar clase" : "Nueva clase", `
     <form id="f-clase">
       <label class="f"><span>Tipo</span>
@@ -882,6 +1096,7 @@ function formClase(id) {
           <option value="grupal"${c && c.kind === "grupal" ? " selected" : ""}>Clase grupal</option>
           <option value="personalizado"${c && c.kind === "personalizado" ? " selected" : ""}>Personalizado (1 a 1)</option>
         </select></label>
+      ${selectorAlumno(yaAsignado)}
       <label class="f"><span>Nombre de la clase (opcional)</span>
         <input name="titulo" maxlength="60" placeholder="Kickboxing" value="${esc(c ? c.title : "")}"></label>
       <label class="f"><span>Día</span>
@@ -901,8 +1116,8 @@ function formClase(id) {
       </div>
     </form>`, hoja => {
       $('[data-x="no"]', hoja).onclick = cerrarHoja;
-      const tipo = $('[name="tipo"]', hoja), cupos = $('[name="cupos"]', hoja);
-      tipo.onchange = () => { if (tipo.value === "personalizado") cupos.value = 1; };
+      const cupos = $('[name="cupos"]', hoja);
+      enlazarTipo(hoja, uno => { if (uno) cupos.value = 1; });
       $("#f-clase", hoja).onsubmit = async e => {
         e.preventDefault();
         const f = e.target, btn = $('button[type="submit"]', f), txt = btn.textContent;
@@ -910,7 +1125,8 @@ function formClase(id) {
         const r = await pedir("cf_admin_save_class", {
           p_token: S.token, p_id: id || null, p_kind: f.tipo.value,
           p_date: f.fecha.value, p_start: f.ini.value, p_end: f.fin.value,
-          p_capacity: Number(f.cupos.value), p_title: f.titulo.value
+          p_capacity: Number(f.cupos.value), p_title: f.titulo.value,
+          p_student_id: f.tipo.value === "personalizado" ? (f.alumno1a1.value || null) : null
         });
         enviando(btn, false, txt);
         if (!r) return;
@@ -923,7 +1139,8 @@ function formClase(id) {
 function formHorarioSemanal() {
   abrirHoja("Crear horario semanal", `
     <p class="muted small" style="margin:0 0 16px">
-      Crea de una vez la misma clase todas las semanas. Puedes repetirlo para cada franja horaria.
+      Crea de una vez la misma clase todas las semanas, para los próximos 3 meses.
+      Repítelo para cada franja horaria. Hacerlo dos veces no duplica nada.
     </p>
     <form id="f-hor">
       <label class="f"><span>Días de la semana</span></label>
@@ -936,29 +1153,22 @@ function formHorarioSemanal() {
           <option value="grupal">Clase grupal</option>
           <option value="personalizado">Personalizado (1 a 1)</option>
         </select></label>
+      ${selectorAlumno("")}
       <label class="f"><span>Nombre de la clase (opcional)</span>
         <input name="titulo" maxlength="60" placeholder="Kickboxing"></label>
       <div class="grid2">
         <label class="f"><span>Empieza</span><input name="ini" type="time" required value="19:00"></label>
         <label class="f"><span>Termina</span><input name="fin" type="time" required value="20:00"></label>
       </div>
-      <div class="grid2">
-        <label class="f"><span>Cupos por clase</span>
-          <input name="cupos" type="number" min="1" max="100" required value="12"></label>
-        <label class="f"><span>¿Cuántas semanas?</span>
-          <select name="semanas">
-            <option value="4">4 semanas</option>
-            <option value="8">8 semanas</option>
-            <option value="12" selected>12 semanas</option>
-            <option value="26">26 semanas</option>
-          </select></label>
-      </div>
+      <label class="f"><span>Cupos por clase</span>
+        <input name="cupos" type="number" min="1" max="100" required value="12"></label>
       <div class="btn-row">
         <button type="button" class="btn grow" data-x="no">Cancelar</button>
         <button type="submit" class="btn primary grow">Crear horario</button>
       </div>
     </form>`, hoja => {
       $('[data-x="no"]', hoja).onclick = cerrarHoja;
+      enlazarTipo(hoja, uno => { if (uno) $('[name="cupos"]', hoja).value = 1; });
       const sel = new Set();
       $$("[data-dia]", hoja).forEach(b => b.onclick = () => {
         const d = Number(b.dataset.dia);
@@ -973,12 +1183,15 @@ function formHorarioSemanal() {
         const r = await pedir("cf_admin_generate_classes", {
           p_token: S.token, p_weekdays: Array.from(sel), p_start: f.ini.value,
           p_end: f.fin.value, p_kind: f.tipo.value, p_capacity: Number(f.cupos.value),
-          p_weeks: Number(f.semanas.value), p_title: f.titulo.value, p_from: null
+          p_title: f.titulo.value, p_from: null,
+          p_student_id: f.tipo.value === "personalizado" ? (f.alumno1a1.value || null) : null
         });
         enviando(btn, false, txt);
         if (!r) return;
         cerrarHoja();
-        aviso(r.created ? `${r.created} clases creadas` : "Esas clases ya existían");
+        aviso(r.created
+          ? `${r.created} clases creadas${r.booked ? ` y asignadas` : ""}`
+          : "Esas clases ya existían");
         verAgenda();
       };
     });
@@ -1048,11 +1261,28 @@ function menuAlumno() {
 document.addEventListener("click", async e => {
   const t = e.target.closest("[data-ir],[data-act],[data-reservar],[data-cancelar]," +
     "[data-sacar],[data-anotar],[data-editar-clase],[data-borrar-clase]," +
-    "[data-pagar],[data-editar-alumno],[data-pausar],[data-borrar-alumno],[data-borrar-pago]");
+    "[data-pagar],[data-editar-alumno],[data-pausar],[data-borrar-alumno],[data-borrar-pago]," +
+    "[data-modo],[data-mover],[data-hoy],[data-dia],[data-fplan],[data-fpago]");
   if (!t) return;
   const d = t.dataset;
 
   if (d.ir) return irA(d.ir);
+
+  /* ---- agenda: día / semana ---- */
+  if (d.fplan) { S.fPlan = d.fplan; return pintarAlumnos(); }
+  if (d.fpago) { S.fPago = d.fpago; return pintarAlumnos(); }
+  if (d.modo)  { S.agendaModo = d.modo; return pintarAgenda(); }
+  if (d.dia)   { S.agendaDia = d.dia;   return pintarAgenda(); }
+  if (d.hoy !== undefined) { S.agendaDia = S.hoy; return pintarAgenda(); }
+  if (d.mover) {
+    const paso = Number(d.mover) * (S.agendaModo === "semana" ? 7 : 1);
+    const tope = sumaDias(S.hoy, DIAS_VISIBLES - 1);
+    let destino = sumaDias(S.agendaDia, paso);
+    if (destino < S.hoy) destino = S.hoy;
+    if (destino > tope)  destino = tope;
+    S.agendaDia = destino;
+    return pintarAgenda();
+  }
 
   if (d.act) {
     e.preventDefault();

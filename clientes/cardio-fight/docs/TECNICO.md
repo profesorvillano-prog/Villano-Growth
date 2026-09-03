@@ -76,6 +76,28 @@ qué es «ahora»: `cf_now()` devuelve `now() at time zone tz`. De ahí salen
 - Índice único `(class_date, start_time, kind, title)`: generar dos veces el
   mismo horario semanal no duplica clases (`on conflict do nothing`).
 
+## Dos fallos que solo aparecen ejecutando
+
+Ambos eran errores de SQL **dentro** de funciones plpgsql, que Postgres no
+valida hasta que la función se ejecuta. Compilaban, se desplegaban y fallaban
+en producción:
+
+1. `cf_admin_payments` ordenaba por `p.created_at`, columna que su propia
+   subconsulta no seleccionaba. La pantalla de Pagos se quedaba girando.
+2. `cf_cancel_booking` declaraba la variable `c` y además usaba `c` como alias
+   de `cf_classes`: `column reference "c.id" is ambiguous`. Cancelar una
+   reserva fallaba **siempre**.
+
+Ninguno lo veía un test de interfaz contra un simulador, ni un recorrido SQL
+que no llegara a llamar a esas dos funciones.
+
+**Regla para este proyecto: cualquier cambio en el esquema tiene que ir
+seguido de la ejecución de las 22 funciones RPC contra la base real.** El
+bloque de humo vive en el historial de la sesión y se puede rehacer: crea
+alumnos con teléfonos `9900000xx` y clases con título `ZZTEST%`, ejercita
+todas las funciones y borra por esos marcadores al terminar. Es no
+destructivo, así que puede correrse con datos reales dentro.
+
 ## Pruebas
 
 - **Base de datos:** bloque `DO` con el recorrido completo (login, alta, plan,
