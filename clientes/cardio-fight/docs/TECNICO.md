@@ -51,6 +51,43 @@ select p.proname, pg_get_function_arguments(p.oid)
  order by 1;
 ```
 
+## Inscripción por enlace (sin cuentas)
+
+El modelo real del gimnasio es: el profe manda la clase al grupo de WhatsApp
+y la gente dice «voy». Pedirle cuenta a cada persona (hay niños) era fricción
+sin retorno, así que el flujo principal no tiene login:
+
+- `cf_classes.share_token` — 9 bytes aleatorios en hex, creados la primera vez
+  que se comparte la clase. El enlace es `?c=<token>`.
+- `cf_bookings` acepta ahora inscripciones sin alumno: `student_id` es
+  nullable y aparece `guest_name`, con un `check` que exige uno de los dos.
+  `source` distingue `app` / `profe` / `enlace`.
+- Índice único sobre `(class_id, cf_norm_name(guest_name))`: el mismo nombre no
+  entra dos veces. `cf_norm_name` quita tildes y espacios de más y se declara
+  IMMUTABLE (usando la forma de dos argumentos de `unaccent`) para poder
+  indexarla.
+- `cf_match_student` cruza el nombre escrito con la lista de alumnos usando
+  `pg_trgm`: igualdad exacta sobre el nombre normalizado → `exacto`;
+  `similarity >= 0.55` → `parecido` (el profe confirma con un toque);
+  si no → `desconocido`. El resultado se guarda en `cf_bookings.match`.
+- `cf_pay_status(student_id, hoy)` devuelve el estado de pago, y
+  `no_registrado` cuando no hay alumno enlazado.
+
+Las tres funciones públicas (`cf_link_class`, `cf_link_signup`,
+`cf_link_cancel`) no reciben token de sesión: el `share_token` **es** la
+credencial. Quien tenga el enlace puede anotarse, ver la lista y borrarse a sí
+mismo; no puede leer nada de otras clases, ni alumnos, ni pagos.
+
+El login por PIN sigue existiendo y escribe en la misma tabla de reservas,
+pero ya no es el camino principal.
+
+**Compromiso asumido a propósito:** cualquiera con el enlace puede anotarse
+con el nombre que quiera y ocupar un cupo. Para un grupo de WhatsApp cerrado
+de un gimnasio pequeño es proporcionado; el profe ve y borra cualquier
+inscripción, y el aviso de «no registrado» hace visible al colado. Si algún
+día molesta, el siguiente paso natural es pedir los 4 últimos dígitos del
+teléfono además del nombre.
+
 ## Fechas y horas
 
 Las clases se guardan como `date` + `time` **locales del gimnasio**, no como
@@ -92,7 +129,7 @@ Ninguno lo veía un test de interfaz contra un simulador, ni un recorrido SQL
 que no llegara a llamar a esas dos funciones.
 
 **Regla para este proyecto: cualquier cambio en el esquema tiene que ir
-seguido de la ejecución de las 22 funciones RPC contra la base real.** El
+seguido de la ejecución de las 27 funciones RPC contra la base real.** El
 bloque de humo vive en el historial de la sesión y se puede rehacer: crea
 alumnos con teléfonos `9900000xx` y clases con título `ZZTEST%`, ejercita
 todas las funciones y borra por esos marcadores al terminar. Es no
@@ -102,8 +139,8 @@ destructivo, así que puede correrse con datos reales dentro.
 
 - **Base de datos:** bloque `DO` con el recorrido completo (login, alta, plan,
   cupos, solapes, pago, pausa) ejecutado contra el Postgres real.
-- **Interfaz:** `scratchpad/e2e.mjs` con Playwright, 24 comprobaciones sobre
-  las dos vistas, contra un simulador de la API (`mock.mjs`) que replica las
+- **Interfaz:** `scratchpad/e2e.mjs` con Playwright, 62 comprobaciones sobre
+  las tres vistas (profe, alumno y enlace público), contra un simulador de la API (`mock.mjs`) que replica las
   respuestas reales. Se simula porque la política de red del entorno de
   desarrollo bloquea `*.supabase.co` desde el navegador local.
 

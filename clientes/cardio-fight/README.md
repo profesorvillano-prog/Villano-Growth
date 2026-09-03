@@ -1,10 +1,15 @@
 # Cardio Fight — app de reservas
 
-App mínima para que el profe deje de gestionar las clases por WhatsApp.
+App mínima para que el profe deje de gestionar las clases a mano por WhatsApp.
 
-- **El profe** publica horarios, ve quién va a cada clase, registra pagos y
-  activa o elimina alumnos.
-- **Los alumnos** entran, ven los horarios y reservan su cupo. Nada más.
+**Nadie necesita crearse una cuenta.** El profe comparte el enlace de la clase
+en el grupo de WhatsApp, la gente toca, escribe su nombre y queda anotada.
+La app cruza ese nombre con la lista de quién ha pagado y le avisa al profe
+de quién no está al día.
+
+- **El profe** es el único con cuenta: publica horarios, comparte clases,
+  ve quién va a cada una y registra los pagos.
+- **Todos los demás** solo tocan un enlace y escriben su nombre.
 
 Todo cabe en un archivo: [`index.html`](index.html). Los datos viven en
 Supabase (plan gratuito).
@@ -60,22 +65,51 @@ En la agenda ves cada clase con **la lista de quién va**. Ya no hace falta
 preguntar por WhatsApp. Desde ahí puedes escribirle a cualquiera (💬), sacarlo
 de la clase (✕) o anotarlo tú a mano.
 
-### 2. Dar de alta un alumno — pestaña **Alumnos**
+### 2. Mandar la clase al grupo de WhatsApp
 
-Pulsa **＋ Nuevo alumno**, pon nombre, teléfono y su plan:
+En cualquier clase de la agenda, **📤 Compartir por WhatsApp**. Te prepara el
+mensaje con el nombre de la clase, el día, la hora, los cupos que quedan y el
+enlace:
+
+> 🥊 **CARDIO FIGHT**
+> **Kickboxing**
+> Lunes 8 de septiembre
+> ⏰ 19:00 a 20:00
+> 👥 Quedan 8 de 12 cupos
+>
+> Anótate aquí 👇
+> `https://cardio-fight.vercel.app/?c=...`
+
+Pulsas el botón, eliges el grupo de Cardio Fight y listo. También puedes
+**copiar el mensaje** o **solo el enlace** si prefieres pegarlo tú.
+
+Quien abra el enlace ve la clase, quiénes van ya, y escribe **su nombre y
+apellido** para anotarse. No pide contraseña ni descargar nada. Si se llena,
+la app no deja anotar a nadie más. Si alguien no puede ir, con el mismo
+enlace se da de baja y libera su cupo.
+
+> Cada clase tiene su propio enlace, imposible de adivinar. Si prefieres que
+> no se vea la lista de quién va, cámbialo en **Ajustes → Lista de inscritos**.
+
+### 3. La lista de quién ha pagado — pestaña **Alumnos**
+
+Esta pestaña es **tu lista de quién paga**, no una lista de usuarios. Pulsa
+**＋ Nuevo alumno**, pon nombre, teléfono y su plan:
 
 | Plan | Qué incluye |
 |---|---|
 | **Grupal** | Solo las clases grupales |
 | **Personalizado full** | Los 1 a 1 **y** las clases grupales |
 
-La app le genera un **PIN de 4 dígitos** y te da un botón para
-**mandárselo por WhatsApp** con el enlace a la app. Un toque y listo.
+**El PIN es opcional y casi nunca hace falta**: la gente se anota por el
+enlace de cada clase. Solo dáselo si quieres que alguien (por ejemplo un
+adulto de personalizado) pueda entrar a la app y ver sus clases. Si lo
+generas, la app te da un botón para mandárselo por WhatsApp.
 
 > Guarda el teléfono **con el código del país** (ej. `56912345678`). Así
 > funciona el botón de WhatsApp.
 
-### 3. Cobrar — pestaña **Pagos**
+### 4. Cobrar — pestaña **Pagos**
 
 Nada más entrar ves lo importante:
 
@@ -90,13 +124,13 @@ Para registrar uno, pon el monto, cómo te pagó y **hasta qué fecha le cubre e
 plan**. De ahí sale todo lo anterior. Registrar un pago **reactiva
 automáticamente** a un alumno que estaba pausado.
 
-### 3b. Encontrar a alguien — pestaña **Alumnos**
+### 4b. Encontrar a alguien — pestaña **Alumnos**
 
 Además del buscador tienes dos filas de filtros: por **plan**
 (Personalizado / Grupal) y por **pago** (Al día / Sin pago / Deudores). Se
 combinan: por ejemplo «Personalizado + Deudores» te da justo a quién llamar.
 
-### 4. Cuando alguien no paga
+### 5. Cuando alguien no paga
 
 Tienes dos botones en su ficha:
 
@@ -109,9 +143,25 @@ Tienes dos botones en su ficha:
 
 ---
 
+## Cómo sabe la app si quien se anota ha pagado
+
+Al escribir su nombre, la app lo compara con tu lista de alumnos:
+
+| Lo que ve el profe | Qué significa |
+|---|---|
+| **Al día** / **Vence pronto** | Encontrado en tu lista y con el pago en regla |
+| **Vencido** / **Sin pago** | Está en tu lista, pero debe |
+| **No registrado** | Ese nombre no está en tu lista. Puedes **asignarlo a un alumno** si es alguien que ya tienes con el nombre escrito de otra forma, o darlo de alta |
+| «Se anotó como *X*. ¿Es *Y*?» | El nombre se parece pero no es idéntico (una tilde, un apodo). Confirmas con un toque |
+
+Cada clase muestra un aviso **⚠️ N por revisar** con la cuenta de personas
+que no están al día o que no reconoce. Así ves de un vistazo si hay que
+cobrarle a alguien antes de que entre a entrenar.
+
 ## Reglas que la app aplica sola
 
-- Un alumno **no puede reservar dos clases a la misma hora**.
+- **El mismo nombre no se puede anotar dos veces** en la misma clase.
+- Hay que escribir **nombre y apellido**: con solo el nombre no deja.
 - Una clase **no admite más gente que los cupos** que pusiste, ni aunque dos
   alumnos pulsen «Reservar» en el mismo segundo.
 - Un alumno de plan grupal **no ve ni puede reservar** los personalizados.
