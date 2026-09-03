@@ -9,6 +9,9 @@ App mínima para que el profe deje de gestionar las clases por WhatsApp.
 Todo cabe en un archivo: [`index.html`](index.html). Los datos viven en
 Supabase (plan gratuito).
 
+**Dónde vive:** proyecto Vercel `cardio-fight`, enlazado a este repositorio
+con la carpeta raíz `clientes/cardio-fight`. Cada push despliega solo.
+
 ---
 
 ## Manual del profe
