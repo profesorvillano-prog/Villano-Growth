@@ -31,6 +31,32 @@ CASOS = [
         ("guarda el nombre del perfil",
          lambda r: "sof" in (r["datos"].get("nombre_persona","") or "").lower()),
      ]),
+    ("saludo pelado: se presenta como Paula", "", "hola", [
+        ("dice que es Paula",
+         lambda r: re.search(r"\bpaula\b", r["mensajes"][0], re.I)),
+        ("se separa de Marcelo (equipo / trabajo con)",
+         lambda r: re.search(r"(del equipo|equipo del|trabajo con)", r["mensajes"][0], re.I)),
+        ("no pregunta por la salchicha en el saludo pelado",
+         lambda r: not re.search(r"(con tu salchicha|a tu salchicha|tu perr)", r["mensajes"][0], re.I)),
+     ]),
+    ("precio: solo la consulta de 89", "", "cuanto cuesta la consulta?", [
+        ("da 89 y no otro precio",
+         lambda r: "89" in r["mensajes"][0]),
+     ]),
+    ("no vende la asesoria", "Ana, salchicha Kira con dermatitis. Ya le di el precio de la consulta.",
+     "y la asesoria de que se trata? cuanto sale?", [
+        ("no le pone precio a la asesoria",
+         lambda r: not re.search(r"\b(497|197|285)\b", r["mensajes"][0])),
+        ("devuelve a la consulta",
+         lambda r: re.search(r"consulta", r["mensajes"][0], re.I)),
+     ]),
+    ("fotos ya mandadas: no las vuelve a pedir",
+     "Ana, salchicha Kira con dermatitis hace 8 meses, come Royal Canin. Le pedi las fotos y me las mando.",
+     "listo, ahi te las mande", [
+        ("no vuelve a pedir fotos",
+         lambda r: not re.search(r"(m[aá]ndame|manda|env[ií]ame|puedes mandar).{0,30}(foto|imagen)",
+                                 r["mensajes"][0], re.I)),
+     ]),
     ("saludo pelado: NO pedir datos", "", "hola", [
         ("no pregunta el nombre del perro de entrada",
          lambda r: not re.search(r"(como se llama|nombre de tu|cual es el nombre)", r["mensajes"][0], re.I)),
@@ -133,6 +159,20 @@ REGLAS_GLOBALES = [
     ("no trata de usted", lambda r: not re.search(r"\b(usted|ustedes)\b", r["mensajes"][0], re.I)),
     ("no dice pienso ni BARF",
      lambda r: not re.search(r"\b(pienso|barf)\b", r["mensajes"][0], re.I)),
+    ("no abre con interjeccion y coma",
+     lambda r: not re.match(r"\s*(ay|uy|oye|osea|o sea|mira|ah|uf|wow|bueno|claro|gracias)\s*[,!]",
+                            r["mensajes"][0], re.I)),
+    ("no dimensiona la gravedad",
+     lambda r: not re.search(r"\b(temas? fuertes?|muy grave|es grave|delicad[oa] la cosa)\b",
+                             r["mensajes"][0], re.I)),
+    ("no menciona libros ni asesoria ni metodo",
+     lambda r: not re.search(r"\b(libro|ebook|asesor[ií]a|m[eé]todo|recomposici[oó]n|acompa[nñ]amiento)\b",
+                             r["mensajes"][0], re.I)),
+    ("si da precio, es 89",
+     lambda r: not re.search(r"\b(197|497|285|27|47)\s*(usd|d[oó]lares|\$)?\b", r["mensajes"][0], re.I)
+               or "89" in r["mensajes"][0]),
+    ("no inventa un link",
+     lambda r: not re.search(r"https?://|\bpaypal\.|\bmpago\.|mercadopago\.", r["mensajes"][0], re.I)),
 ]
 
 def llamar(resumen, mensaje):

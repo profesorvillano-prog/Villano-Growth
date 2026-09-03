@@ -66,6 +66,7 @@ contexto = ("CANAL: {{1.canal}}\n"
             "TURNOS: {{ifempty(2.turnos; 0)}}\n\n"
             "RESUMEN DE LO QUE YA CONVERSARON (tu memoria, escrita por ti en el turno anterior):\n"
             "{{replace(2.historial; newline; \" \")}}\n\n"
+            "ADJUNTOS QUE MANDO: {{1.adjuntos}}\n\n"
             "MENSAJE NUEVO DEL LEAD:\n"
             "{{replace(1.mensaje; newline; \" \")}}")
 
