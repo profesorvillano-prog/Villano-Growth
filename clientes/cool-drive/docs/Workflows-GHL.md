@@ -71,20 +71,26 @@ campos personalizados `bot_*` del contacto en GHL existen pero **nadie los
 escribe**: quedaron de un diseño anterior. No los uses como fuente de verdad.
 
 ### 2. `[BOT] Marcar alumno`
-Trigger: oportunidad movida a ganada, o tag `pagado`.
-Acción: agregar `alumno` y `bot-off`; quitar `atencion-humana`.
+Triggers: oportunidad a *Won*, o tag `pagado` agregado.
+Acciones: agregar `alumno` y `bot-off`, quitar `atencion-humana`.
+Es el que saca del bot a quien paga, sin esperar a que el bot lo detecte.
 
 ### 3. `[BOT] Devolver al bot`
 Trigger: tag `bot-on` agregado.
-Acción: quitar `bot-off`, `atencion-humana` y `bot-on`.
+Acciones: quitar `bot-off`, `atencion-humana` y `bot-on`.
+Sin este workflow, toda conversación escalada a humano queda fuera del bot
+para siempre.
 
 ### 4. `[REACTIVACION] Leads antiguos`
-Trigger: agregado manual desde una vista filtrada del pipeline.
-Filtros: sin `alumno`, sin `bot-off`, sin `reactivacion-sept`, sin conversación
-en los últimos 7 días.
-Acción: enviar plantilla `follow_up`, agregar `reactivacion-sept`. Cuando la
-persona responde, el workflow 1 la entrega al bot.
+Sin trigger automático: los contactos se agregan con la acción masiva
+*Add to workflow* desde una vista filtrada del pipeline.
+Filtros de salida: `alumno`, `bot-off`, `reactivacion-sept`.
+Acciones: enviar plantilla `follow_up`, agregar `reactivacion-sept`.
+La plantilla solo reabre la ventana de 24 h; cuando la persona responde, el
+workflow de su canal la entrega al bot.
 
 ### 5. `[SEGUIMIENTO] Fuera de ventana`
-Trigger: contacto sin respuesta a las 48 h, sin `alumno` ni `bot-off`.
-Acción: enviar plantilla `follow_up`. Máximo dos veces por contacto.
+Trigger: Customer Replied en WhatsApp.
+Esperas condicionadas de 48 h y 72 h, con plantilla `follow_up` en cada una.
+Se pisa con el escenario de seguimiento de Make: si se crea este, hay que
+bajar el máximo de intentos de Make de 3 a 1.
