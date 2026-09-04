@@ -8,6 +8,8 @@
 > por persona.
 >
 > Fuente de verdad. Si se edita en Make, se actualiza acá.
+>
+> **Desplegado en Make el 2026-09-04.**
 > El prompt del bot conversacional es [`Prompt-Bot-WhatsApp.md`](./Prompt-Bot-WhatsApp.md).
 
 ## Promo vigente

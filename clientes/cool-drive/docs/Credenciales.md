@@ -118,3 +118,18 @@ conector ya configurado. La configuración se hace sí o sí desde
 Antes de borrar o regenerar cualquier credencial: anotar en el gestor de
 contraseñas dónde estaba usada. La mayoría de las caídas del bot no son del
 bot, son un token que alguien rotó sin actualizar los dos lugares.
+
+## 5. Edición de los escenarios: por API, no a mano
+
+Los prompts y las expresiones de Make se editan **por la API** (Claude tiene
+acceso al conector de Make), no pegando a mano en la UI.
+
+Motivo concreto, no teórico: el pegado manual del 2026-09-04 rompió cinco
+expresiones en los dos escenarios. En todos los casos se perdió el tercer
+argumento de `replace()` — quedó `replace(x; newline; )` en vez de
+`replace(x; newline; " ")` — y en el escenario de seguimiento el contador de
+intentos `{{ifempty(1.data.fu_count; 0) + 1}}` se convirtió en una
+concatenación de texto, dejando al bot sin saber si iba por el intento 1, 2 o 3.
+
+Ninguno de esos errores hace fallar el escenario de forma visible: se combinan
+con los manejadores `Ignore`/`Resume` y el panel sigue en verde.

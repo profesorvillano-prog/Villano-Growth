@@ -4,6 +4,7 @@
 > escenario `[BOT] Cool Drive - WhatsApp + Instagram` de Make.
 >
 > Esta es la **fuente de verdad**. Si se edita en Make, se actualiza acá.
+> **Desplegado en Make el 2026-09-04.**
 > Las reglas de negocio detrás de cada instrucción viven en
 > [`Bot-WhatsApp.md`](./Bot-WhatsApp.md) y [`Escuela-y-Servicio.md`](./Escuela-y-Servicio.md).
 
