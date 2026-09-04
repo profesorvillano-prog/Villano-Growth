@@ -373,6 +373,15 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
                   <option value="24">1 día antes</option>
                 </select></label>
             </div>
+            <label class="f">
+              <span>Enlace del grupo de WhatsApp del gimnasio</span>
+              <input id="aj-grupo" type="url" inputmode="url" placeholder="https://chat.whatsapp.com/..."
+                     autocomplete="off"></label>
+            <p class="tiny muted" style="margin:-6px 0 16px">
+              En WhatsApp: abre el grupo → toca su nombre arriba → <b>Invitar por enlace</b> →
+              <b>Copiar enlace</b>, y pégalo aquí. Sirve para que al compartir una clase se te
+              abra el grupo directamente.
+            </p>
             <label class="f" style="margin-bottom:16px">
               <span>Lista de inscritos en el enlace</span>
               <select id="aj-roster">
@@ -924,20 +933,35 @@ async function formCompartir(claseId) {
   const url = location.origin + location.pathname + "?c=" + d.share_token;
   const msg = mensajeClase(d, url);
 
+  const grupo = d.wa_group_url;
   abrirHoja("Compartir la clase", `
     <p class="muted small" style="margin:0 0 14px">
       Mándalo al grupo de WhatsApp. Quien quiera ir toca el enlace, escribe su nombre y queda anotado.
     </p>
     <div class="card" style="white-space:pre-wrap;font-size:14px;line-height:1.5;margin-bottom:16px"
          id="cp-msg">${esc(msg)}</div>
-    <a class="btn primary block" id="cp-wa" href="https://wa.me/?text=${encodeURIComponent(msg)}"
-       target="_blank" rel="noopener" style="margin-bottom:10px">💬 Enviar por WhatsApp</a>
+    ${grupo ? `
+      <a class="btn primary block" id="cp-grupo" href="${esc(grupo)}" target="_blank" rel="noopener"
+         style="margin-bottom:8px">📋 Copiar y abrir el grupo</a>
+      <p class="tiny muted" style="text-align:center;margin:0 0 14px">
+        Se copia el mensaje y se abre el grupo: solo tienes que <b>mantener pulsado y pegar</b>.</p>` : ""}
+    <a class="btn ${grupo ? "" : "primary"} block" id="cp-wa"
+       href="https://wa.me/?text=${encodeURIComponent(msg)}"
+       target="_blank" rel="noopener" style="margin-bottom:10px">💬 ${grupo ? "Enviar a otro chat" : "Enviar por WhatsApp"}</a>
+    ${grupo ? "" : `<p class="tiny muted" style="text-align:center;margin:-4px 0 14px">
+      Si guardas el enlace de tu grupo en <b>Ajustes</b>, te lo abro directamente.</p>`}
     <div class="btn-row" style="margin-bottom:10px">
       <button class="btn grow" data-copiar="msg">Copiar mensaje</button>
       <button class="btn grow" data-copiar="url">Copiar solo el enlace</button>
     </div>
     <button class="btn ghost block" data-x="no">Cerrar</button>`, hoja => {
       $('[data-x="no"]', hoja).onclick = cerrarHoja;
+      const btnGrupo = $("#cp-grupo", hoja);
+      if (btnGrupo) btnGrupo.onclick = () => {
+        // El copiado tiene que ocurrir dentro del toque; luego el enlace navega solo.
+        try { navigator.clipboard.writeText(msg); aviso("Mensaje copiado: pégalo en el grupo"); }
+        catch (e) { aviso("No pude copiar; usa «Copiar mensaje».", true); }
+      };
       $$("[data-copiar]", hoja).forEach(b => b.onclick = async () => {
         const texto = b.dataset.copiar === "url" ? url : msg;
         try { await navigator.clipboard.writeText(texto); aviso("Copiado"); }
@@ -1149,6 +1173,7 @@ async function verAjustes() {
   $("#aj-tz").value = s.tz;
   $("#aj-cancel").value = String(s.cancel_hours);
   $("#aj-roster").value = s.show_roster ? "1" : "0";
+  $("#aj-grupo").value  = s.wa_group_url || "";
 }
 
 $("#form-ajustes").addEventListener("submit", async e => {
@@ -1160,7 +1185,8 @@ $("#form-ajustes").addEventListener("submit", async e => {
     p_teacher_phone: $("#aj-phone").value,
     p_tz: $("#aj-tz").value,
     p_cancel_hours: Number($("#aj-cancel").value),
-    p_show_roster: $("#aj-roster").value === "1"
+    p_show_roster: $("#aj-roster").value === "1",
+    p_wa_group_url: $("#aj-grupo").value.trim() || null
   });
   if (!r) return;
   S.gym = $("#aj-gym").value.trim();

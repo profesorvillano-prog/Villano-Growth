@@ -88,6 +88,25 @@ inscripción, y el aviso de «no registrado» hace visible al colado. Si algún
 día molesta, el siguiente paso natural es pedir los 4 últimos dígitos del
 teléfono además del nombre.
 
+## Por qué no se publica solo en el grupo de WhatsApp
+
+Se evaluó y se descartó:
+
+- Los enlaces `wa.me` y `whatsapp://send` solo aceptan un **número de
+  teléfono**. No existe un esquema público que apunte a un grupo.
+- La **API oficial de WhatsApp Business (Cloud API)** no puede enviar mensajes
+  a grupos, solo a usuarios individuales.
+- Las librerías no oficiales (whatsapp-web.js, Baileys) sí publican en grupos,
+  pero exigen mantener una sesión del WhatsApp personal del profe en un
+  servidor, incumplen los términos de uso y arriesgan el cierre de su cuenta.
+  Desproporcionado para un gimnasio pequeño.
+
+Lo implementado es lo más corto posible sin nada de eso: `cf_settings.wa_group_url`
+guarda el enlace de invitación del grupo (validado contra
+`^https://chat\.whatsapp\.com/[A-Za-z0-9_-]{6,64}$`). El botón copia el mensaje
+al portapapeles **dentro del gesto del usuario** —requisito de Safari e iOS—
+y deja que el `<a href>` navegue al grupo. Dos toques: tocar y pegar.
+
 ## Fechas y horas
 
 Las clases se guardan como `date` + `time` **locales del gimnasio**, no como
@@ -129,7 +148,7 @@ Ninguno lo veía un test de interfaz contra un simulador, ni un recorrido SQL
 que no llegara a llamar a esas dos funciones.
 
 **Regla para este proyecto: cualquier cambio en el esquema tiene que ir
-seguido de la ejecución de las 27 funciones RPC contra la base real.** El
+seguido de la ejecución de las 28 funciones RPC contra la base real.** El
 bloque de humo vive en el historial de la sesión y se puede rehacer: crea
 alumnos con teléfonos `9900000xx` y clases con título `ZZTEST%`, ejercita
 todas las funciones y borra por esos marcadores al terminar. Es no
