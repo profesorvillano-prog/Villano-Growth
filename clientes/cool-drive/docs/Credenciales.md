@@ -21,8 +21,20 @@ subcuenta de Cool Drive (contactos, conversaciones, oportunidades, calendario).
 
 ### Cómo se configura el conector MCP en Claude
 
-El endpoint MCP de GHL no usa OAuth: la credencial va en cabeceras. En el
-conector (menú **⋮ → Editar**) tienen que estar las dos:
+El endpoint MCP de GHL **no usa OAuth**: autentica con el PIT en una cabecera.
+Al crear el conector, Claude "detecta" OAuth y preselecciona *Autenticación:
+Siempre requerido* — **esa detección es incorrecta para GHL** y es la causa
+número uno del `401`, incluso con un token perfectamente válido.
+
+Configuración que funciona (verificada):
+
+| Campo | Valor |
+|---|---|
+| URL | `https://services.leadconnectorhq.com/mcp/?locationId=<ID de la subcuenta>` |
+| **Autenticación** | **Ninguno** — *"para servidores que usan una API key en lugar de OAuth"*. No dejar "Siempre requerido". |
+| Encabezado | `Authorization` = `Bearer ` + el PIT |
+
+Sobre las cabeceras:
 
 | Cabecera | Valor |
 |---|---|
@@ -44,9 +56,9 @@ normal en este conector — la autenticación es por cabecera, no por login.
 2. **En Make:** abrir cualquier escenario de Cool Drive → módulo de GoHighLevel
    → la conexión guardada → *Reconnect* y pegar el mismo PIT. La conexión es
    compartida: se arregla una vez y sirve para todos los escenarios.
-3. Verificar: en Claude, pedir los datos de la ubicación
-   (`locations_get-location`). Si responde `401 Invalid Private Integration
-   token`, el PIT sigue mal.
+3. Verificar con dos llamadas, no una: `locations_get-location` (debe devolver
+   *COOL DRIVE*, Maipú) y `contacts_get-contacts` con `limit: 1`. La primera
+   sola no prueba los scopes de contactos, que son los que usa el bot.
 
 ### Cuándo hay que rotarlo
 
@@ -77,7 +89,8 @@ conector ya configurado. La configuración se hace sí o sí desde
 | Síntoma | Causa |
 |---|---|
 | `401 Invalid Private Integration token` con el conector recién creado | Falta la cabecera `Authorization`, o le falta el prefijo `Bearer ` |
-| Mismo 401 con la cabecera puesta | El PIT se generó en otra subcuenta (o a nivel agencia) y no corresponde al `locationId` |
+| Mismo 401 con la cabecera puesta | **Autenticación quedó en "Siempre requerido"**: Claude intenta OAuth y el PIT nunca se usa. Cambiar a *Ninguno*. |
+| Mismo 401 con autenticación en *Ninguno* | El PIT se generó en otra subcuenta (o a nivel agencia) y no corresponde al `locationId` |
 | 401 en unas herramientas y no en otras | Al PIT le faltan scopes: revisar contactos, conversaciones, oportunidades y calendarios en *Private Integrations* |
 
 ## 4. Regla operativa
