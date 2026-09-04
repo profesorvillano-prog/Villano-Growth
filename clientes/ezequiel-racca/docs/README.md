@@ -11,6 +11,7 @@ bot/setter deben apoyarse en estos documentos.
 | [`Conocimiento-Nicho.md`](./Conocimiento-Nicho.md) | El "porqué": qué es una autoinmune, eje intestino–inmunidad–piel, tradicional vs funcional, la alimentación ancestral, límites del enfoque. |
 | [`Oferta.md`](./Oferta.md) | Método Piel en Calma: programa de 3 meses, qué incluye, 3 fases, garantía, calificación, embudo y pendientes. |
 | [`FAQ.md`](./FAQ.md) | Preguntas frecuentes en la voz de Ezequiel (web, bot/setter, anuncios). |
+| [`Workflows-Consulta.md`](./Workflows-Consulta.md) | Automatizaciones del embudo a consulta en GHL: webhook de Hotmart, confirmación, "pagada sin agenda", recordatorios 24 h/4 h/1 h y freno por cancelación. |
 
 **Fuente principal:** transcripción de la *Reunión de Onboarding (08/06/2026)*
 (Fathom) entre Ezequiel, Sebastián (Profesor Villano) y Rodri.
