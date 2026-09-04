@@ -19,6 +19,23 @@ subcuenta de Cool Drive (contactos, conversaciones, oportunidades, calendario).
 | **Dónde se usa** | (a) conector MCP `GHL_Cool_Drive` en Claude · (b) conexión *GoHighLevel* de los escenarios de Make |
 | **Dónde se guarda el valor** | Gestor de contraseñas, entrada *Cool Drive — GHL PIT* |
 
+### Cómo se configura el conector MCP en Claude
+
+El endpoint MCP de GHL no usa OAuth: la credencial va en cabeceras. En el
+conector (menú **⋮ → Editar**) tienen que estar las dos:
+
+| Cabecera | Valor |
+|---|---|
+| `Authorization` | `Bearer ` + el PIT — **con el prefijo `Bearer` y el espacio**. Pegar el `pit-...` pelado devuelve `401 Invalid Private Integration token`. |
+| `locationId` | El ID de la subcuenta Cool Drive (el mismo que aparece en la URL del conector). |
+
+URL del conector: `https://services.leadconnectorhq.com/mcp/`.
+
+Que el panel diga **Conectado** no significa que el token sirva: solo que
+Claude alcanza el endpoint y ve la lista de herramientas. La prueba real es
+llamar a una herramienta. Si además dice *Iniciar sesión: No requerido*, es
+normal en este conector — la autenticación es por cabecera, no por login.
+
 ### Reponerlo
 
 1. **En Claude:** *Settings → Connectors* → conector `GHL_Cool_Drive` →
@@ -46,7 +63,24 @@ el bot.
 | Webhooks de Make | URL del webhook en el escenario | La URL **es** el secreto: no se publica |
 | WhatsApp / Instagram | Conectado dentro de GHL, no en Make | Se reconecta desde GHL, no requiere PIT |
 
-## 3. Regla operativa
+## 3. Límite del entorno remoto
+
+Las sesiones de Claude Code en la nube **no alcanzan
+`services.leadconnectorhq.com`** (la política de red del entorno corta el
+túnel con 403). Desde una sesión remota no se puede validar un PIT con `curl`
+ni arreglar el conector: lo único disponible es llamar a las herramientas del
+conector ya configurado. La configuración se hace sí o sí desde
+*Settings → Connectors* en la cuenta.
+
+## 3.5 Los tres 401 posibles
+
+| Síntoma | Causa |
+|---|---|
+| `401 Invalid Private Integration token` con el conector recién creado | Falta la cabecera `Authorization`, o le falta el prefijo `Bearer ` |
+| Mismo 401 con la cabecera puesta | El PIT se generó en otra subcuenta (o a nivel agencia) y no corresponde al `locationId` |
+| 401 en unas herramientas y no en otras | Al PIT le faltan scopes: revisar contactos, conversaciones, oportunidades y calendarios en *Private Integrations* |
+
+## 4. Regla operativa
 
 Antes de borrar o regenerar cualquier credencial: anotar en el gestor de
 contraseñas dónde estaba usada. La mayoría de las caídas del bot no son del
