@@ -69,9 +69,29 @@ el bot.
 
 ## 2. Otras conexiones del bot
 
-| Conexión | Dónde vive | Notas |
+**Make no usa una "conexión" de GoHighLevel.** Los escenarios de Cool Drive
+llaman a la API de GHL con módulos **HTTP genéricos**, con el token escrito a
+mano dentro de cada módulo. No hay nada que "reconectar": hay que editar módulo
+por módulo.
+
+Escenarios en la carpeta *Cool Drive* (equipo `My Team`):
+
+| Escenario | Módulos con el PIT en la cabecera `Authorization` |
+|---|---|
+| `[BOT] Cool Drive - WhatsApp + Instagram` | Enviar mensaje · Mover en el pipeline · Avisar a Sebastián |
+| `[BOT] Cool Drive - Seguimiento automatico` | (mismos módulos HTTP hacia GHL) |
+
+El módulo *Cerebro* del primer escenario lleva además la **API key de Anthropic**
+en la cabecera `x-api-key`, también en texto plano.
+
+> **Riesgo conocido:** todos los módulos de GHL tienen manejo de error
+> `Ignore`/`Resume`. Si el token es inválido, GHL devuelve 401, el módulo lo
+> traga y **Make marca la ejecución como exitosa**. O sea: el bot puede estar
+> sin responder a nadie y el panel de Make se ve todo verde. No confíes en el
+> estado de la ejecución para saber si el token sirve.
+
+| Otras conexiones | Dónde vive | Notas |
 |---|---|---|
-| Make ↔ GHL | Conexión guardada en Make (ver §1) | Compartida por todos los escenarios de Cool Drive |
 | Webhooks de Make | URL del webhook en el escenario | La URL **es** el secreto: no se publica |
 | WhatsApp / Instagram | Conectado dentro de GHL, no en Make | Se reconecta desde GHL, no requiere PIT |
 
