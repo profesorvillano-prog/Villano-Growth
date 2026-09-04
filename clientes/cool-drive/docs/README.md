@@ -11,6 +11,7 @@ y landing, debe apoyarse en estos documentos.
 | [`Bot-WhatsApp.md`](./Bot-WhatsApp.md) | Comportamiento del bot: tono, flujos de conversación, la escalera de ofertas, qué escala a humano y qué tiene prohibido hacer. |
 | [`Avatares.md`](./Avatares.md) | Los 3 perfiles de cliente (joven 18–21, adulto 30–40+, papá/mamá que decide), sus objeciones y ángulos de mensaje. Base para anuncios y para adaptar el tono del bot. |
 | [`Prompt-Bot-WhatsApp.md`](./Prompt-Bot-WhatsApp.md) | **El prompt exacto** que corre en el módulo Cerebro de Make. Fuente de verdad: si se edita en Make, se actualiza acá. |
+| [`Prompt-Seguimiento.md`](./Prompt-Seguimiento.md) | El prompt del escenario de seguimiento automático (cada 4 h, máximo 3 intentos por lead). |
 | [`Credenciales.md`](./Credenciales.md) | **Dónde vive cada credencial** (PIT de GHL, conexiones de Make, webhooks) y cómo reponerla. No contiene valores: el repo es público. |
 
 **Fuentes:** reuniones con Sebastián Berríos del **24/jul** y **30/jul**,
