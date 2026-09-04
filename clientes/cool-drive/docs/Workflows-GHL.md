@@ -37,10 +37,38 @@ por plantilla desde GHL.
 Detalle y prompts para el asistente de IA de GHL: ver el cuerpo de este
 documento en el repositorio, sección siguiente.
 
-### 1. `[BOT] Entrada de mensajes`
-Trigger: mensaje entrante (WhatsApp + Instagram DM).
-Filtro: el contacto no tiene `alumno` ni `bot-off`.
-Acción: POST al webhook de Make del escenario conversacional.
+### 1. `Bot Respuesta WHATSAPP` y `Bot Respuesta IG` — ya creados
+Son dos workflows, uno por canal, porque el filtro *Reply channel* de GHL solo
+admite un valor.
+
+Trigger: Customer Replied, con *Reply channel* = WhatsApp / Instagram DM.
+Filtro: *Doesn't have tag* = `bot-off`.
+Acción: webhook POST al escenario conversacional de Make.
+
+Body (solo estos cuatro campos; es todo lo que el escenario consume):
+
+```json
+{
+  "contactId": "{{contact.id}}",
+  "canal": "WhatsApp",
+  "nombre": "{{contact.name}}",
+  "mensaje": "{{message.body}}"
+}
+```
+
+En el de Instagram, `canal` va como `IG`. Esos dos valores son exactamente los
+que la API de GHL espera en el campo `type` al responder: cualquier otra cosa
+falla con 422.
+
+**Por qué basta con filtrar `bot-off` y no hace falta también `alumno`:** GHL
+no permite dos filtros *Doesn't have tag* en el mismo trigger, y no hace falta,
+porque `alumno` nunca existe sin `bot-off` — los dos caminos que ponen `alumno`
+(el módulo del bot y el workflow 2) ponen ambos tags juntos. Además el
+escenario de Make verifica los dos por su cuenta.
+
+**Memoria del bot:** vive en el datastore de Make (`cooldrive_memoria`). Los
+campos personalizados `bot_*` del contacto en GHL existen pero **nadie los
+escribe**: quedaron de un diseño anterior. No los uses como fuente de verdad.
 
 ### 2. `[BOT] Marcar alumno`
 Trigger: oportunidad movida a ganada, o tag `pagado`.
