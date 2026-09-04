@@ -105,9 +105,9 @@ workflows del calendario (CONSULTA 2 y 5). Nunca a mano, nunca desde otro sitio.
 
 | # | Nodo | Configuración |
 |---|---|---|
-| 1 | **Filtro del trigger** | Solo `event = PURCHASE_APPROVED`. Hoy dice "No se han aplicado filtros": sin esto entran reembolsos, disputas y compras pendientes como si fueran ventas. |
+| 1 | **Filtro del trigger** | No hace falta: el webhook configurado en Hotmart envía **solo** `PURCHASE_APPROVED` (confirmado por Ezequiel/Sebastián). Si algún día se le agregan más eventos a esa misma URL, hay que filtrar acá. |
 | 2 | **Crear/actualizar contacto** | Buscar por **email**, y si no hay, por teléfono. Mapear: `buyer.name` → nombre · `buyer.email` → email · `buyer.checkout_phone` → teléfono en **E.164** (§7.3) · `purchase.transaction` → campo `id_transaccion` (crear el campo) · `purchase.order_date` → `fecha_pago`. |
-| 3 | **If/Else — ¿ya tiene `compra-consulta`?** | Sí → **End**. Hotmart reintenta el webhook y manda `PURCHASE_APPROVED` más de una vez; sin este corte se duplica la secuencia entera y la persona recibe todo dos veces. |
+| 3 | **If/Else — ¿ya tiene `compra-consulta`?** *(opcional)* | Sí → **End**. Hotmart reintenta la notificación si no recibe un 200, y ahí llega dos veces la misma compra. El riesgo es acotado: GHL no vuelve a disparar el activador *Etiqueta añadida* si la etiqueta ya estaba, así que un reintento no relanza CONSULTA 3. Es un seguro barato, no una urgencia. |
 | 4 | **Add Tag** | `compra-consulta` |
 | 5 | *(opcional)* **Crear oportunidad** | Pipeline de consulta, etapa "Consulta pagada". Deja la métrica de pagos ↔ agendas visible sin exportar nada. |
 
@@ -226,7 +226,7 @@ estos nodos importa.)*
 
 | Workflow | Acción | Prioridad |
 |---|---|---|
-| CONSULTA 1 · Hotmart | Ajustar el existente (filtro de evento + corte de duplicados) | Alta |
+| CONSULTA 1 · Hotmart | Ajustar el existente (teléfono en E.164; corte de duplicados opcional) | Media |
 | CONSULTA 2 · Confirmación | Ampliar `Consulta Agendada - Añadir TAG` con el mensaje | **Crítica** |
 | CONSULTA 3 · Pagada sin agenda | Crear de cero | **Crítica** |
 | CONSULTA 4 · Recordatorios | Crear de cero | Alta |
@@ -298,7 +298,7 @@ esa hora simplemente no aparece: **la cancelación se convierte en no-show**, qu
 es el peor resultado posible (bloquea la agenda y quema el horario). Habilitar
 reprogramación — con CONSULTA 5 montado, una reprogramación se maneja sola.
 
-### 7.3 · Teléfono en formato E.164
+### 7.3 · Teléfono en formato E.164  ← el arreglo más importante de CONSULTA 1
 Hotmart entrega el teléfono partido (código de país + número) y a veces con ceros
 o guiones. WhatsApp necesita `+549...`. Normalizar en el mapeo del webhook
 (CONSULTA 1, nodo 2). **Un teléfono mal formateado no da error visible**: el
@@ -340,7 +340,6 @@ Con un contacto de prueba (teléfono real de Ezequiel o del equipo):
 - [ ] **Cita a 30 h vista** → llegan los tres recordatorios, en horario correcto, y el de 1 h trae el link de Meet **que abre**.
 - [ ] **Cita cancelada a mano en GHL** → no llega ningún recordatorio más.
 - [ ] **Contacto sin nombre** → la plantilla se envía igual (valor por defecto), no falla.
-- [ ] **Reembolso en Hotmart** → no entra al embudo (filtro de evento del paso 1).
 
 ---
 
