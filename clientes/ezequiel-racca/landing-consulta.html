@@ -113,22 +113,11 @@
   background:var(--deep);}
 #sta-lp .vsl-ratio{position:relative;width:100%;aspect-ratio:16/9}
 #sta-lp .vsl-ratio > iframe,#sta-lp .vsl-ratio > video{position:absolute;inset:0;width:100%;height:100%;border:0}
-#sta-lp .vsl-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-#sta-lp .vsl-play{position:absolute;inset:0;display:flex;flex-direction:column;gap:16px;
-  align-items:center;justify-content:center;
-  background:linear-gradient(180deg,rgba(13,32,41,.16),rgba(13,32,41,.6));cursor:pointer;border:0;width:100%;}
-#sta-lp .vsl-play b{font-family:var(--display);font-weight:600;font-size:.72rem;
-  letter-spacing:.17em;text-transform:uppercase;color:rgba(255,255,255,.9);}
-#sta-lp .vsl-play i{width:62px;height:62px;border-radius:50%;font-style:normal;
-  background:var(--wh);display:grid;place-items:center;position:relative;
-  box-shadow:0 10px 30px -8px rgba(13,32,41,.6);
-  transition:transform .25s var(--ease);}
-#sta-lp .vsl-play i::after{content:"";position:absolute;inset:-1px;border-radius:50%;
-  border:1px solid rgba(255,255,255,.55);opacity:.6;
-  animation:sta-ring 2.8s var(--ease) infinite}
-@keyframes sta-ring{0%{transform:scale(1);opacity:.55}70%{transform:scale(1.5);opacity:0}100%{opacity:0}}
-#sta-lp .vsl-play:hover i{transform:scale(1.05)}
-#sta-lp .vsl-play svg{width:20px;height:20px;fill:var(--deep);margin-left:3px;position:relative}
+#sta-lp wistia-player{display:block;width:100%}
+/* Reserva el espacio 16:9 mientras el player de Wistia todavía no se define */
+#sta-lp wistia-player[media-id='59aympjyvi']:not(:defined){
+  background:center / contain no-repeat url('https://fast.wistia.com/embed/medias/59aympjyvi/swatch');
+  display:block;filter:blur(5px);padding-top:56.25%;}
 #sta-lp .vsl-cap{margin-top:13px;font-size:.81rem;color:var(--t2);text-align:center}
 
 /* ── Botón de pago (único) ────────────────────────────────────── */
@@ -379,16 +368,12 @@
     <h1>Antes de sanar, necesitas entender <span class="mark">qué está pasando de verdad en tu cuerpo</span>.</h1>
     <p class="lead">Ese es el primer gran paso, y casi nadie te lo da. En una hora revisamos tu caso completo: tu historia, lo que comes, lo que tomas y tus análisis. Sales sabiendo qué te está pasando, por qué, y exactamente qué hacer a partir de mañana.</p>
 
-    <!-- VSL -->
+    <!-- VSL · para cambiar el video, reemplaza las 4 apariciones del media-id -->
     <div class="vsl">
       <div class="vsl-frame">
-        <div class="vsl-ratio">
-          <img class="vsl-poster" id="sta-vsl-poster" src="https://placehold.co/1280x720/0E2E3E/E8F4F6.png?text=Sana+tu+Autoinmune" alt="Por qué una enfermedad autoinmune no mejora y cuál es el primer paso real" width="1280" height="720">
-          <button type="button" class="vsl-play" data-video aria-label="Reproducir el video">
-            <b>Míralo antes de agendar · 3 min</b>
-            <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></i>
-          </button>
-        </div>
+        <script src="https://fast.wistia.com/player.js" async></script>
+        <script src="https://fast.wistia.com/embed/59aympjyvi.js" async type="module"></script>
+        <wistia-player media-id="59aympjyvi" aspect="1.7777777777777777"></wistia-player>
       </div>
       <p class="vsl-cap">Por qué tu enfermedad no mejora, y cuál es el primer paso real.</p>
     </div>
@@ -396,7 +381,7 @@
     <!-- CTA principal -->
     <div class="cta-wrap" id="sta-cta-hero">
       <a class="cta" data-cta data-pos="hero" href="#" target="_blank" rel="noopener">
-        <span>Reservar mi consulta</span>
+        <span>Agendar mi llamada</span>
         <span class="price" data-precio>USD $60</span>
         <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
       </a>
@@ -551,7 +536,7 @@
     </div>
     <div class="duo">
       <div class="duo-card stag" style="--i:0">
-        <img src="https://assets.cdn.filesafe.space/KG0HeFXOJjAdf0BYP6oy/media/6a4acbb4c025581f8ffd64cb.png" alt="Ezequiel Racca, especialista en nutrición funcional para enfermedades autoinmunes" loading="lazy" width="1080" height="1350">
+        <img src="https://assets.cdn.filesafe.space/KG0HeFXOJjAdf0BYP6oy/media/6a9af910e29b3baf97b9b086.png" alt="Ezequiel Racca, especialista en nutrición funcional para enfermedades autoinmunes" loading="lazy" width="1080" height="1350">
         <div class="duo-body">
           <h3>Ezequiel Racca</h3>
           <p class="duo-role">Odontólogo · Nutrición y medicina funcional</p>
@@ -565,7 +550,7 @@
         </div>
       </div>
       <div class="duo-card stag" style="--i:1">
-        <img src="https://assets.cdn.filesafe.space/KG0HeFXOJjAdf0BYP6oy/media/6a95c87be68555d6d5f03565.jpeg" alt="Dra. Catalina Klimboski, médica dedicada a medicina funcional" loading="lazy" width="1080" height="1350">
+        <img src="https://assets.cdn.filesafe.space/KG0HeFXOJjAdf0BYP6oy/media/6a9af9109a2eb1d7808afac3.png" alt="Dra. Catalina Klimboski, médica dedicada a medicina funcional" loading="lazy" width="1080" height="1350">
         <div class="duo-body">
           <h3>Dra. Catalina Klimboski</h3>
           <p class="duo-role">Médica · Medicina funcional</p>
@@ -707,15 +692,6 @@ var STA = {
   // Precio mostrado en todos los botones. Déjalo vacío ('') para no mostrarlo.
   PRECIO: 'USD $60',
 
-  // VSL de la consulta (máx. 3 min). Pega la URL EMBED del video (no la de compartir).
-  //   YouTube  → https://www.youtube.com/embed/ABC123
-  //   Vimeo    → https://player.vimeo.com/video/123456789
-  //   Wistia   → https://fast.wistia.net/embed/iframe/ABC123
-  // Si lo dejas vacío, el botón de play lleva directo al botón de pago.
-  VSL_EMBED: '',                                      // ← REEMPLAZAR
-
-  // Portada del VSL (sube la imagen a Media de GHL y pega la URL).
-  VSL_POSTER: '',                                     // ← REEMPLAZAR
 
   // Testimonios. La sección aparece sola cuando cargas al menos uno.
   TESTIMONIO_VIDEO_EMBED: '',                         // ← cuando esté el video
@@ -781,35 +757,6 @@ var STA = {
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: .08 });
     Array.prototype.forEach.call(items, function (n) { io.observe(n); });
-  }
-
-  /* ---- 4. Reproductor del VSL: carga el iframe solo al hacer clic ---- */
-  function video() {
-    var poster = d.getElementById('sta-vsl-poster');
-    if (poster && STA.VSL_POSTER) poster.setAttribute('src', STA.VSL_POSTER);
-
-    Array.prototype.forEach.call(d.querySelectorAll('#sta-lp [data-video]'), function (btn) {
-      btn.addEventListener('click', function () {
-        var src = STA.VSL_EMBED;
-
-        // Sin video montado todavía: el play lleva al CTA en vez de romperse.
-        if (!src) {
-          var cta = d.querySelector('#sta-cta-hero');
-          if (cta) cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          return;
-        }
-
-        var cont = btn.closest('.vsl-ratio');
-        var f = d.createElement('iframe');
-        f.src = src + (src.indexOf('?') > -1 ? '&' : '?') + 'autoplay=1&rel=0';
-        f.setAttribute('title', 'Consulta de Evaluación Autoinmune');
-        f.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen');
-        f.setAttribute('allowfullscreen', '');
-        cont.innerHTML = '';
-        cont.appendChild(f);
-        track('VerVSL');
-      });
-    });
   }
 
   /* ---- 4a. Testimonios: la sección aparece solo si hay contenido ---- */
@@ -886,7 +833,7 @@ var STA = {
     }
   }
 
-  function init() { precios(); enlaces(); barra(); testimonios(); revelar(); video(); clics(); pixeles(); }
+  function init() { precios(); enlaces(); barra(); testimonios(); revelar(); clics(); pixeles(); }
 
   if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', init);
   else init();

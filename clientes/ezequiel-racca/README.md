@@ -73,7 +73,12 @@ Todo se edita en el bloque `var STA = { ... }` al final del archivo:
 
 - `PAGO_URL` — checkout de Hotmart. **Ya configurado.**
 - `PRECIO` — texto del precio en los 4 botones (hoy `USD $60`). Vacío lo oculta.
-- `VSL_EMBED` + `VSL_POSTER` — video y portada del VSL de la consulta.
+  Etiquetas actuales: hero `Agendar mi llamada`, medio `Quiero entender mi caso`,
+  cierre y barra móvil `Reservar mi consulta`.
+- ~~`VSL_EMBED` + `VSL_POSTER`~~ — el VSL ya está montado con el reproductor
+  de **Wistia** (`media-id` `59aympjyvi`), embebido directo en el HTML. Para
+  cambiar el video hay que reemplazar las 4 apariciones de ese id. Se quitaron
+  la portada con botón de play y su lógica de carga diferida.
 - `TESTIMONIOS_IMG` / `TESTIMONIO_VIDEO_EMBED` — la sección de testimonios
   aparece sola cuando se carga al menos uno.
 - `META_PIXEL_ID` / `GA4_ID` — píxeles (opcionales). El clic en cualquier botón
