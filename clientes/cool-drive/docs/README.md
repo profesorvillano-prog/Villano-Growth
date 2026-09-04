@@ -10,6 +10,7 @@ y landing, debe apoyarse en estos documentos.
 | [`FAQ.md`](./FAQ.md) | Preguntas reales que llegan por WhatsApp/Instagram, con respuestas listas en la voz de la escuela. Es el corazón del bot. |
 | [`Bot-WhatsApp.md`](./Bot-WhatsApp.md) | Comportamiento del bot: tono, flujos de conversación, la escalera de ofertas, qué escala a humano y qué tiene prohibido hacer. |
 | [`Avatares.md`](./Avatares.md) | Los 3 perfiles de cliente (joven 18–21, adulto 30–40+, papá/mamá que decide), sus objeciones y ángulos de mensaje. Base para anuncios y para adaptar el tono del bot. |
+| [`Credenciales.md`](./Credenciales.md) | **Dónde vive cada credencial** (PIT de GHL, conexiones de Make, webhooks) y cómo reponerla. No contiene valores: el repo es público. |
 
 **Fuentes:** reuniones con Sebastián Berríos del **24/jul** y **30/jul**,
 documento *Avatares Cool Drive*, landing horizontal (GHL), flyer *Planes

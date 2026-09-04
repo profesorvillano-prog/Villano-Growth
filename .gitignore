@@ -1,0 +1,13 @@
+# Secretos: este repositorio es público. Nunca commitear credenciales.
+.env
+.env.*
+!.env.example
+*.secret
+*.secrets
+.secrets/
+credenciales.local.*
+**/.claude/settings.local.json
+
+# Basura de sistema y dependencias
+.DS_Store
+node_modules/
