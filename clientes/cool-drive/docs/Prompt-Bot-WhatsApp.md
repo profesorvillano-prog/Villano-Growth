@@ -155,3 +155,23 @@ Lead: esta semana (el resumen ya dice qué curso, NO preguntas de nuevo ni salud
 Lead: si (es un sí a tu última pregunta, avanzas) -> [Buenísimo. Y aprovechas la promo de septiembre, el Full queda en $119.990. Te paso los datos para que asegures el cupo?]
 Lead: como funciona el curso? -> [Parte todos los lunes con 2 semanas de teoría desde tu casa, después una semana de pruebas online y una presencial acá. Recién ahí se agendan las prácticas y se cierra con 2 psicotécnicas. Te hace sentido?]
 Lead: quiero inscribirme (ya definido en Full) -> accion cerrar_inscripcion, temperatura caliente, [Buenísimo! Te dejo el link para pagar el Full con el precio de septiembre, https://mpago.la/2sagado. Si prefieres transferir es a Sebastián Berrios San Martín, RUT 18.338.794-4, Mercado Pago cuenta vista 1048110832. Mándame el comprobante por acá 🚗]
+
+---
+
+## Compuerta de alumnos (2026-09-04)
+
+El escenario ahora consulta los tags del contacto en GHL **antes** de procesar
+el mensaje (módulo *Tags del contacto*). Si el contacto tiene `alumno` o
+`bot-off`, el flujo se detiene y el bot no responde.
+
+Cuando el bot detecta a alguien ya inscrito devuelve `accion:
+alumno_existente`, contesta un mensaje corto derivando al equipo, y el módulo
+*Avisar a Sebastián* le pone los tags `bot-off` + `alumno`. Desde el mensaje
+siguiente el bot ya no se activa con esa persona.
+
+Para devolverle una conversación al bot, basta quitar los tags `bot-off` y
+`alumno` en GHL.
+
+`pausado` en el datastore ahora solo se activa con `derivar_humano` y
+`alumno_existente`, ya no con `cerrar_inscripcion`: quien pidió el link de pago
+sigue pudiendo conversar con el bot y sigue recibiendo seguimientos.
