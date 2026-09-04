@@ -80,8 +80,19 @@ enlace:
 > Anótate aquí 👇
 > `https://cardio-fight.vercel.app/?c=...`
 
-Pulsas el botón, eliges el grupo de Cardio Fight y listo. También puedes
-**copiar el mensaje** o **solo el enlace** si prefieres pegarlo tú.
+**Para que se te abra el grupo directamente**, guarda una vez el enlace de tu
+grupo en **Ajustes → Enlace del grupo de WhatsApp** (en WhatsApp: abre el
+grupo → toca su nombre → *Invitar por enlace* → *Copiar enlace*). A partir de
+ahí el botón dice **📋 Copiar y abrir el grupo**: se copia el mensaje, se abre
+tu grupo, y solo tienes que mantener pulsado y pegar.
+
+> WhatsApp no permite a ninguna app abrir un grupo con el mensaje ya escrito
+> —sus enlaces solo apuntan a números de teléfono, y su API oficial no publica
+> en grupos—, así que este par de toques es lo más corto que se puede hacer
+> sin arriesgar la cuenta con herramientas no oficiales.
+
+Si no configuras el grupo, el botón abre WhatsApp y eliges tú el chat. También
+puedes **copiar el mensaje** o **solo el enlace** para pegarlo donde quieras.
 
 Quien abra el enlace ve la clase, quiénes van ya, y escribe **su nombre y
 apellido** para anotarse. No pide contraseña ni descargar nada. Si se llena,
