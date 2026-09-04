@@ -10,6 +10,7 @@ y landing, debe apoyarse en estos documentos.
 | [`FAQ.md`](./FAQ.md) | Preguntas reales que llegan por WhatsApp/Instagram, con respuestas listas en la voz de la escuela. Es el corazón del bot. |
 | [`Bot-WhatsApp.md`](./Bot-WhatsApp.md) | Comportamiento del bot: tono, flujos de conversación, la escalera de ofertas, qué escala a humano y qué tiene prohibido hacer. |
 | [`Avatares.md`](./Avatares.md) | Los 3 perfiles de cliente (joven 18–21, adulto 30–40+, papá/mamá que decide), sus objeciones y ángulos de mensaje. Base para anuncios y para adaptar el tono del bot. |
+| [`Como-funciona-el-bot.md`](./Como-funciona-el-bot.md) | **Explicación para el equipo.** Cómo se reparten el trabajo GHL y Make, qué hace cada workflow, y los tags que encienden y apagan el bot. |
 | [`Prompt-Bot-WhatsApp.md`](./Prompt-Bot-WhatsApp.md) | **El prompt exacto** que corre en el módulo Cerebro de Make. Fuente de verdad: si se edita en Make, se actualiza acá. |
 | [`Prompt-Seguimiento.md`](./Prompt-Seguimiento.md) | El prompt del escenario de seguimiento automático (cada 4 h, máximo 3 intentos por lead). |
 | [`Credenciales.md`](./Credenciales.md) | **Dónde vive cada credencial** (PIT de GHL, conexiones de Make, webhooks) y cómo reponerla. No contiene valores: el repo es público. |
