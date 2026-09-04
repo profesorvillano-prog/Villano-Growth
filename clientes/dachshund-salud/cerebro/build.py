@@ -61,6 +61,7 @@ schema = {
 
 contexto = ("CANAL: {{1.canal}}\n"
             "NOMBRE EN EL PERFIL: {{replace(1.nombre; newline; \" \")}}\n"
+            "EVENTO: {{ifempty(1.evento; \"mensaje\")}}\n"
             "ORIGEN (CTA): {{1.fuente}}\n"
             "ESTADO ACTUAL: {{2.estado}}\n"
             "TURNOS: {{ifempty(2.turnos; 0)}}\n\n"
