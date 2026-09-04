@@ -121,6 +121,7 @@ completos, la persona que contesta a los 5 minutos queda sin respuesta.
   "adjuntos": "",
   "tags": "{{contact.tags}}",
   "nombre": "{{contact.first_name}}",
+  "pais": "{{contact.country}}",
   "email": "{{contact.email}}",
   "fuente": "{{contact.source}}"
 }
@@ -128,6 +129,52 @@ completos, la persona que contesta a los 5 minutos queda sin respuesta.
 
 En el workflow del iman cambian tres: `evento` a `lead_magnet`, `mensaje` vacio y
 `fuente` con el tema del iman.
+
+---
+
+## El cobro
+
+La Consulta existe como producto de GHL (`Video Consulta Diagnostica Dachshund`)
+con dos precios, porque **un enlace de pago no admite dos monedas**: GHL lo
+rechaza con "No se pueden seleccionar los productos de diferentes monedas".
+
+| Moneda | Precio | Link |
+|---|---|---|
+| USD | $89 | `https://link.fastpaydirect.com/payment-link/6a9a65b1a7f78e147447ed9b` |
+| CLP | $81.900 | `https://link.fastpaydirect.com/payment-link/6a9a66eda7f78e147447eda1` |
+
+Los dos checkouts ofrecen **PayPal y tarjeta** (tarjeta via Mercado Pago). O sea
+que el de USD sirve para todo el mundo, incluidos Espana y Costa Rica, donde
+Mercado Pago no opera.
+
+> **Ojo con el boton de PayPal en el link de CLP.** PayPal no opera en pesos
+> chilenos, asi que ese boton probablemente falle. Hay que probarlo: si falla,
+> conviene sacarlo de ese enlace. Un boton que revienta en la pantalla de pago
+> cuesta mas caro que no tenerlo.
+
+### Paula elige el link sola, sin preguntar
+
+El webhook manda `pais` con `{{contact.country}}`:
+
+- `CL` -> link en pesos
+- cualquier otro valor, **o vacio** -> link en dolares
+
+El caso vacio cae en USD, que funciona para todos. Si Instagram no informa el
+pais, no se rompe nada: solo se pierde la comodidad del peso chileno.
+
+**Paula nunca pregunta el metodo de pago ni menciona que existen dos links.**
+Elige uno y lo manda. En la pagina de pago la persona elige como pagar.
+
+### Pide el correo antes del link
+
+Los contactos de Instagram no traen email. Si la persona paga y pone uno que GHL
+no conoce, **el pago cae en un contacto nuevo**: el `pago-ok`, el cambio de etapa
+y el `bot-off` van a parar al registro equivocado, y Paula le sigue hablando a
+alguien que ya compro.
+
+Por eso Paula pide el correo justo antes de mandar el link. No es un turno
+desperdiciado: Marcelo lo necesita igual para el Google Meet y el formulario
+previo.
 
 ---
 
