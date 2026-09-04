@@ -106,10 +106,35 @@ workflows del calendario (CONSULTA 2 y 5). Nunca a mano, nunca desde otro sitio.
 | # | Nodo | Configuración |
 |---|---|---|
 | 1 | **Filtro del trigger** | No hace falta: el webhook configurado en Hotmart envía **solo** `PURCHASE_APPROVED` (confirmado por Ezequiel/Sebastián). Si algún día se le agregan más eventos a esa misma URL, hay que filtrar acá. |
-| 2 | **Crear/actualizar contacto** | Buscar por **email**, y si no hay, por teléfono. Mapear: `buyer.name` → nombre · `buyer.email` → email · `buyer.checkout_phone` → teléfono en **E.164** (§7.3) · `purchase.transaction` → campo `id_transaccion` (crear el campo) · `purchase.order_date` → `fecha_pago`. |
+| 2 | **Crear/actualizar contacto** | Buscar por **email**, y si no hay, por teléfono. Mapeo confirmado contra el payload de sandbox (04/09/2026) en el bloque de abajo. |
 | 3 | **If/Else — ¿ya tiene `compra-consulta`?** *(opcional)* | Sí → **End**. Hotmart reintenta la notificación si no recibe un 200, y ahí llega dos veces la misma compra. El riesgo es acotado: GHL no vuelve a disparar el activador *Etiqueta añadida* si la etiqueta ya estaba, así que un reintento no relanza CONSULTA 3. Es un seguro barato, no una urgencia. |
 | 4 | **Add Tag** | `compra-consulta` |
 | 5 | *(opcional)* **Crear oportunidad** | Pipeline de consulta, etapa "Consulta pagada". Deja la métrica de pagos ↔ agendas visible sin exportar nada. |
+
+**Mapeo del nodo 2** (rutas leídas del payload de sandbox de Hotmart, 04/09/2026):
+
+| Campo GHL | Ruta del webhook |
+|---|---|
+| First Name | `{{inboundWebhookRequest.data.buyer.first_name}}` |
+| Last Name | `{{inboundWebhookRequest.data.buyer.last_name}}` |
+| Email | `{{inboundWebhookRequest.data.buyer.email}}` |
+| Phone | `+{{…data.buyer.checkout_phone_code}}{{…data.buyer.checkout_phone}}` (ver §7.3) |
+| `id_transaccion` (campo nuevo, **texto**) | `{{inboundWebhookRequest.data.purchase.transaction}}` |
+| `UTM Campaign` (ya existe) | `{{inboundWebhookRequest.data.purchase.sckPaymentLink}}` — el parámetro `sck` del checkout, la vía estándar de Hotmart para pasar atribución |
+
+**Usar `first_name`, no `name`.** El payload trae ambos: `name` es el nombre
+completo ("Teste Comprador") y `first_name` solo el nombre. Con `name`, la
+plantilla de WhatsApp saluda "Hola Teste Comprador" en vez de "Hola Teste".
+
+**No mapear `purchase.order_date` a un campo de fecha:** viene en epoch de
+milisegundos (`1511783344000`). O va a un campo de texto, o se omite — la fecha de
+creación del contacto en GHL cumple la misma función acá.
+
+**Seguridad del webhook:** la cabecera `x-hotmart-hottok` es el token que prueba
+que el POST vino de Hotmart. La URL del webhook es pública: sin validarlo,
+cualquiera que la conozca puede inyectar compras falsas al CRM. Agregar al filtro
+del activador `headers.x-hotmart-hottok is <token>` (el token vive en Hotmart,
+**no** en este repo).
 
 > El `Wait` que hay hoy entre "Crear contacto" y "Add Tag" puede quedarse (2-3 min
 > ayuda a que el contacto termine de escribirse antes de disparar por etiqueta),
@@ -299,11 +324,21 @@ es el peor resultado posible (bloquea la agenda y quema el horario). Habilitar
 reprogramación — con CONSULTA 5 montado, una reprogramación se maneja sola.
 
 ### 7.3 · Teléfono en formato E.164  ← el arreglo más importante de CONSULTA 1
-Hotmart entrega el teléfono partido (código de país + número) y a veces con ceros
-o guiones. WhatsApp necesita `+549...`. Normalizar en el mapeo del webhook
-(CONSULTA 1, nodo 2). **Un teléfono mal formateado no da error visible**: el
-workflow sigue, el mensaje no llega, y la persona parece un ghost cuando en
-realidad nunca supo que tenía que agendar.
+Hotmart entrega el teléfono partido: `buyer.checkout_phone_code` (código de país)
+y `buyer.checkout_phone` (número local). WhatsApp necesita `+549…`, de ahí la
+concatenación con `+` del mapeo del nodo 2.
+
+**El payload de sandbox no sirve para validar esto** — trae relleno
+(`checkout_phone_code: "999999999"`). Hay que mirarlo con la primera compra real.
+Dos formas en que se rompe:
+
+- `checkout_phone` ya viene con el código de país incluido → queda `+5454911…`.
+- **Argentina:** el móvil en E.164 lleva un `9` después del `54` (`+549 11 …`). Si
+  Hotmart no lo manda, el número entra sin el 9 y WhatsApp no lo encuentra.
+
+**Un teléfono mal formateado no da error visible**: el workflow sigue en verde, el
+mensaje no llega, y la persona parece un ghost cuando en realidad nunca supo que
+tenía que agendar. Verificar en el contacto tras el primer pago real.
 
 ### 7.4 · Ventana de 24 h de WhatsApp
 Todos estos envíos son **plantillas** (correcto: fuera de la ventana de 24 h solo
