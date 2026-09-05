@@ -237,3 +237,67 @@ donde se quiera decir "ninguna de estas".
 Lo propuse para que Make tambien pudiera frenar y no es un valor personalizado
 valido: GHL responde `is not a valid expression`. El campo `tags` quedo fuera del
 webhook. La proteccion vive en la condicion del WF1.
+
+---
+
+## Las tres puertas de entrada
+
+Todo el trafico de Instagram entra a Paula por una de tres puertas. Las tres
+terminan en la misma conversacion y en la misma memoria; lo que cambia es quien
+habla primero.
+
+| Puerta | Workflow GHL | Escenario Make | Quien abre |
+|---|---|---|---|
+| DM espontaneo | `WF1 - Respuesta INSTAGRAM` | `7035201` | La persona |
+| Comentario en post | `WF4 - Respuesta Comentarios` | `7247435` | GHL, texto fijo |
+| Lead magnet | *pendiente* | `7035201` | Paula |
+
+### Por que el comentario no lo abre Paula
+
+Quien comenta nunca mando un DM, asi que **no hay ventana de 24 horas abierta**.
+El unico mensaje que Meta permite ahi es la *respuesta privada al comentario*, y
+solo la puede mandar GHL, que es quien tiene el ID del comentario. Make no puede:
+intentaria un DM normal y Meta lo rechaza.
+
+Por eso el primer DM sale de GHL con texto fijo (`Instagram interactive messenger`,
+tipo de respuesta **Reply to comment via DM**) y Paula entra recien cuando la
+persona responde. Para entonces ya conto su problema con sus palabras, que es
+mejor dato que cualquier `fuente`.
+
+### El escenario de apertura (`7247435`)
+
+Tres modulos y nada mas. **No llama a Claude y no manda ningun mensaje.**
+
+1. Webhook propio: `https://hook.eu1.make.com/h1m4n165mdt4mjqvwdqz18wbpblkciwy`
+2. `GetRecord` sobre `setter_marcelo`
+3. `AddRecord` con filtro `evento = apertura` **Y** `historial` vacio
+
+El filtro del paso 3 es el que evita el peor caso: si la persona ya venia
+conversando con Paula y comenta un post, sembrar memoria le **borraria** el
+historial. Con el filtro, no se toca nada.
+
+`turnos` se siembra en `0` a proposito. El escenario de seguimiento exige
+`turnos > 0`, asi que estos contactos quedan fuera de los seguimientos, que es lo
+correcto: nunca escribieron, no hay ventana de 24h, y el mensaje seria rechazado
+por Meta mientras Make lo registra como exito.
+
+### Webhook aparte, no una rama de `7035201`
+
+La apertura tiene su propio hook y su propio escenario en vez de ser una rama del
+principal. Asi `7035201` no se toca: cada reemplazo de blueprint de 31 KB es una
+oportunidad de romper el cerebro en silencio.
+
+El orden en WF4 tambien importa: **el webhook va antes del mensaje interactivo**.
+Si va despues, queda detras de la espera de paso y alguien que contesta en veinte
+segundos dispara WF1 antes de que exista la memoria: Paula se presenta dos veces.
+
+### `setter_marcelo` (`180176`)
+
+Data store propio, creado el 5 de septiembre. Antes los cuatro modulos apuntaban a
+`cooldrive_memoria` (`173778`), compartido con dos escenarios **vivos** de Cool
+Drive. El seguimiento de Cool Drive busca sobre ese store: los contactos de
+Marcelo entraban en su barrido y se les escribia con el token de la otra
+subcuenta.
+
+`7035204` y `7247435` ya apuntan a `setter_marcelo`. **En `7035201` falta cambiarlo
+a mano** en los dos modulos marcados `CAMBIAR a setter_marcelo`.
