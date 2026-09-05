@@ -11,3 +11,7 @@ credenciales.local.*
 # Basura de sistema y dependencias
 .DS_Store
 node_modules/
+
+# Datos personales de leads (el repo es publico): nunca versionar
+clientes/*/data/
+*.csv
