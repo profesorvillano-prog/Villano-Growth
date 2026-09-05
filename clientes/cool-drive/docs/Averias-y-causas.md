@@ -257,7 +257,7 @@ ejecuciones, y eso solo existe en el datastore de Make.
    nada todavía.
 2. Lee la memoria y **se guarda esa marca de tiempo** (módulo *Memoria y mi
    marca*).
-3. **Duerme 90 segundos.**
+3. **Duerme 45 segundos.**
 4. Vuelve a leer el datastore (*Sigo siendo el último?*).
 5. **Filtro de corte:** continúa solo si la marca guardada sigue siendo la
    misma. Si llegó otro mensaje después, esa ejecución la pisó y esta se apaga
@@ -287,6 +287,28 @@ pasar cuando la marca viene vacía. Si el datastore fallara, el bot vuelve al
 comportamiento anterior (responde de más) en vez de quedarse mudo. Entre
 duplicar y callar, siempre duplicar: el silencio es la falla cara.
 
+**Verificado en producción (5 sep, 16:47).** Cuatro mensajes del mismo lead en
+17 segundos, cuatro ejecuciones:
+
+| Hora | Operaciones | Qué hizo |
+|---|---|---|
+| 20:47:48 | 5 | se apagó en el filtro |
+| 20:47:53 | 5 | se apagó en el filtro |
+| 20:47:58 | 5 | se apagó en el filtro |
+| 20:48:05 | **13** | **respondió, una sola vez** |
+
+Las tres primeras ni llamaron al modelo: 1,1 KB de tráfico contra 24 KB de la
+que sí respondió. La respuesta única cubrió precio, promo, horarios y sábados.
+
+**Sobre la ventana de espera.** Se probó con 90 segundos y se bajó a **45**. La
+tanda real duró 17 segundos, así que 45 da margen de sobra sobre los 10-20
+segundos que tarda alguien en escribir sus preguntas, y reduce a la mitad lo
+que el lead percibe como demora.
+
+Criterio para ajustarla: la ventana tiene que ser **mayor que el hueco entre
+mensajes de una misma tanda**, no que la tanda completa. Si se acorta de más,
+vuelven las respuestas partidas.
+
 **Contrapartida aceptada:** el bot ya no responde al instante, se demora hasta
-90 segundos. Suma más de lo que resta — contestar en 4 segundos es de las cosas
+45 segundos. Suma más de lo que resta — contestar en 4 segundos es de las cosas
 que más delatan a un bot.
