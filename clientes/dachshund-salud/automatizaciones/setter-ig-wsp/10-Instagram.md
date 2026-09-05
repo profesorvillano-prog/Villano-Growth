@@ -299,5 +299,10 @@ Drive. El seguimiento de Cool Drive busca sobre ese store: los contactos de
 Marcelo entraban en su barrido y se les escribia con el token de la otra
 subcuenta.
 
-`7035204` y `7247435` ya apuntan a `setter_marcelo`. **En `7035201` falta cambiarlo
-a mano** en los dos modulos marcados `CAMBIAR a setter_marcelo`.
+Los tres escenarios de Marcelo (`7035201`, `7035204`, `7247435`) ya apuntan a
+`setter_marcelo`. Cool Drive se quedo solo con `cooldrive_memoria`: no hay ningun
+modulo compartido entre los dos clientes.
+
+El store nuevo arranca vacio. Las conversaciones de prueba que vivian en el store
+de Cool Drive no se migraron y no hacia falta: los tres escenarios estaban
+apagados y no habia ninguna conversacion real en curso.
