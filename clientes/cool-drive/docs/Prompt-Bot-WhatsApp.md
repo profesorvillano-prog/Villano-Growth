@@ -269,3 +269,29 @@ hay interés real, o ante una objeción de plata.
 septiembre hay que quitar la sección de la promo de los dos prompts, y ahora es
 más urgente que antes: la promo ya no aparece solo de vez en cuando, sino en
 **cada primer mensaje de precio**.
+
+## Tres ajustes de tono (2026-09-05, tarde)
+
+Feedback del cliente sobre conversaciones reales.
+
+**1. La Sra. Cecilia, una sola vez.** Se mencionaba en mensajes seguidos y
+dejaba de funcionar como recurso, sonaba a muletilla. Regla nº6 nueva: se
+nombra **una vez en toda la conversación**, y el resumen registra si ya se usó.
+Para seguir tranquilizando, el bot alterna otros argumentos: que la mayoría
+parte de cero absoluto, que 7 u 8 de cada 10 aprueban, que se practica en las
+calles del examen, que los instructores están acostumbrados a gente con
+nervios. La regla se generalizó: si ya usaste un argumento, el siguiente
+mensaje usa otro.
+
+**2. Nada de dos saludos.** Regla nº2: si `TURNOS` es mayor que 0, prohibido
+saludar. La causa de fondo era una condición de carrera, documentada en
+`Averias-y-causas.md` punto 7.
+
+**3. Si preguntan con quién hablan, dice Sebastián.** Antes tenía prohibido
+nombrarse **siempre**, y eso lo dejaba sin responder una pregunta directa, que
+se siente peor que presentarse. Ahora la regla nº1 distingue:
+
+- **Presentarse solo, sin que se lo pidan:** sigue prohibido.
+- **Le preguntan quién es, con quién hablan, cómo se llama:** responde
+  *"Soy Sebastián, de Cool Drive"*, corto, y retoma el tema. Después no se
+  vuelve a nombrar.

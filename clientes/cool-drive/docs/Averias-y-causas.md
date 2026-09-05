@@ -154,3 +154,40 @@ API; el motivo original de haberlos evitado no era real.
 
 **Regla:** un prompt se escribe como quieres que escriba el bot. Si el prompt
 está sucio, la salida sale sucia.
+
+---
+
+## 7. Mensajes duplicados y saludos repetidos: carrera de ejecuciones (5 sep 2026)
+
+**Síntomas:** a Carol le llegó **el mismo mensaje dos veces**, idéntico, a las
+03:20. Y a otro lead el bot le mandó tres mensajes seguidos empezando los tres
+con "Hola!".
+
+**Causa: condición de carrera, no el prompt.** El lead escribió tres mensajes
+en el mismo minuto (03:28). GHL disparó tres webhooks. El escenario estaba en
+modo **paralelo**, así que las tres ejecuciones arrancaron a la vez y las tres
+leyeron la memoria **antes** de que ninguna alcanzara a guardar. Resultado: las
+tres vieron `TURNOS = 0`, las tres creyeron ser el primer mensaje de la
+conversación, y las tres saludaron.
+
+Ninguna regla de prompt puede arreglar esto. El modelo respondió correctamente
+a la información que tenía; el problema es que las tres recibieron información
+idéntica y desactualizada.
+
+**Corrección:**
+1. **`sequential: true`** en el escenario. Ahora las ejecuciones se procesan
+   de a una, en orden. Cada una lee la memoria que dejó la anterior. Es la
+   corrección de fondo.
+2. **Delay de escritura más corto**, de máximo 22s a máximo 12s. Menos ventana
+   para que se acumulen mensajes y más natural en la conversación.
+3. **Regla de saludo en el prompt**, como segunda barrera: si `TURNOS` es mayor
+   que 0, prohibido saludar. Cinturón además de tirantes.
+
+**Contrapartida a vigilar.** En modo secuencial, si llegan muchos leads a la vez
+se forma cola en vez de atenderse en paralelo. Con el volumen actual y unos 10
+segundos por ejecución no es problema, pero si algún día la campaña escala
+fuerte hay que revisar si la cola crece.
+
+**Regla:** cuando el bot repite algo, primero descartar si dos ejecuciones
+corrieron sobre el mismo estado. Un síntoma de "el bot no recuerda" puede ser
+concurrencia, no memoria.
