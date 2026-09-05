@@ -94,10 +94,31 @@ solo grupo AND**. Lo mismo aplica a las ramas If/Else de GHL.
 
 ---
 
-## 5. Datastore compartido entre bots
+## 5. Memorias de clientes distintos en el mismo datastore
 
-El datastore `cooldrive_memoria` (id 173778) contiene registros de otro bot
-(campos `persona=`, `perro=`, `sintoma=`). Dos escenarios distintos escriben
-ahí. Si coincide un `contactId` se cruza la memoria entre clientes.
+**Riesgo:** si dos bots de clientes distintos comparten datastore y coincide un
+`contactId`, un lead recibe el contexto del otro negocio. Es la peor falla
+posible de cara al cliente.
 
-**Pendiente:** separar en datastores distintos.
+**Estado verificado (5 sep 2026):** los escenarios ya estaban bien apuntados.
+
+| Datastore | Lo usan |
+|---|---|
+| `cooldrive_memoria` (173778) | los 2 escenarios de Cool Drive, y solo esos |
+| `setter_marcelo` (180176) | los 3 escenarios de Marcelo, y solo esos |
+
+Lo que había en `cooldrive_memoria` eran **7 registros veterinarios residuales**
+del 2 y 3 de septiembre, de cuando el bot de Marcelo todavía apuntaba ahí,
+antes de que existiera `setter_marcelo`. Ningún escenario los leía, pero si un
+`contactId` de Cool Drive hubiera coincidido con uno de ellos, el bot le habría
+hablado de perros salchicha. Se eliminaron.
+
+**Pendiente, coupling menor:** los dos datastores comparten la misma
+`datastructureId` (552700). No cruza datos de leads — es solo la definición de
+campos — pero si alguien renombra o elimina un campo pensando en un cliente, se
+lo cambia al otro. Conviene duplicar la estructura y dejar una por cliente, en
+un horario sin conversaciones activas.
+
+**Regla:** un cliente, un datastore, una estructura. Antes de crear un bot
+nuevo, crear su datastore propio; nunca reutilizar el de otro cliente "por
+mientras", porque ese "por mientras" es el que deja los residuos.
