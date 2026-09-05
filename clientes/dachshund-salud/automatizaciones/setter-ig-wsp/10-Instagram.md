@@ -276,10 +276,15 @@ El filtro del paso 3 es el que evita el peor caso: si la persona ya venia
 conversando con Paula y comenta un post, sembrar memoria le **borraria** el
 historial. Con el filtro, no se toca nada.
 
-`turnos` se siembra en `0` a proposito. El escenario de seguimiento exige
-`turnos > 0`, asi que estos contactos quedan fuera de los seguimientos, que es lo
-correcto: nunca escribieron, no hay ventana de 24h, y el mensaje seria rechazado
-por Meta mientras Make lo registra como exito.
+`turnos` se siembra en **`1`**, no en `0`. Arranco sembrando 0 para que el
+escenario de seguimiento los saltee, y eso choco de frente con la regla del
+cerebro: *solo saludo cuando TURNOS es 0*. Con la semilla en 0, Paula se
+presentaba de nuevo en el mensaje siguiente al DM donde ya se habia presentado.
+
+El 0 nunca hizo falta para el seguimiento: ese filtro tambien exige
+`temperatura != frio`, y la semilla escribe `frio`. Con eso alcanza para
+excluirlos, que es lo correcto: nunca escribieron, no hay ventana de 24h, y el
+mensaje seria rechazado por Meta mientras Make lo registra como exito.
 
 ### Webhook aparte, no una rama de `7035201`
 
