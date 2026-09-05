@@ -122,3 +122,35 @@ un horario sin conversaciones activas.
 **Regla:** un cliente, un datastore, una estructura. Antes de crear un bot
 nuevo, crear su datastore propio; nunca reutilizar el de otro cliente "por
 mientras", porque ese "por mientras" es el que deja los residuos.
+
+---
+
+## 6. El bot escribía sin eñes ni tildes (5 sep 2026)
+
+**Síntoma:** el bot escribió "manana" en vez de "mañana". También venía
+escribiendo "Acuna" por "Acuña", "practicas", "teoria", "anos".
+
+**Causa:** los prompts de sistema estaban escritos **enteros sin eñes ni
+tildes**, para evitar problemas de escape al editarlos por API. El modelo imita
+la ortografía de sus instrucciones: si sus 200 líneas dicen "manana", escribe
+"manana".
+
+**Por qué no bastaba una regla.** Añadir "usa eñes y tildes" a un texto que no
+las usa es contradecirse. La demostración pesa más que la instrucción. Hubo que
+reescribir los dos prompts completos con ortografía correcta.
+
+**Corrección aplicada:**
+- Los dos prompts (bot y seguimiento) reescritos con eñes y tildes.
+- Regla explícita de ortografía con listas de palabras concretas: las que
+  llevan eñe y las que llevan tilde, incluyendo el error más caro — escribir
+  "ano" cuando se quiere decir "año".
+- Se mantiene la única excepción deliberada: no se usan los signos de apertura
+  `¿` ni `¡`, porque en WhatsApp casi nadie los escribe. Todo lo demás va con
+  su ortografía correcta.
+
+**Nota técnica.** Los caracteres acentuados se envían al blueprint como escapes
+unicode (`ñ` para ñ, `é` para é). No dan problema en Make ni en la
+API; el motivo original de haberlos evitado no era real.
+
+**Regla:** un prompt se escribe como quieres que escriba el bot. Si el prompt
+está sucio, la salida sale sucia.
