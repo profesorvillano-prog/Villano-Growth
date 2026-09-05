@@ -189,3 +189,51 @@ previo.
 3. La lista de lead magnets con su palabra clave y su tema.
 
 **Los dos escenarios quedan apagados.** Encenderlos es decision del usuario.
+
+---
+
+## Los workflows de GHL, como quedaron
+
+Solo tres, y los tres son del bot. Todo lo post-venta vive aparte, en el embudo
+de Marcelo, y no se mezcla.
+
+| Workflow | Disparador | Acciones |
+|---|---|---|
+| **WF1 - Bot Respuesta INSTAGRAM** | Cliente ha respondido, canal DM de Instagram | Espera 0.2 min -> condicion de etiquetas -> webhook a Make |
+| **WF2 - Aviso atencion humana** | Se agrega la etiqueta `atencion-humana` | Notificacion interna a Marcelo |
+| **WF3 - Pago Consulta - BOT Off** | Pago recibido del producto Video Consulta Diagnostica Dachshund | Agrega `bot-off` + mueve la oportunidad a *Pago Consulta* en `BOT Marce` con estado `won` |
+
+### Dos que se cayeron de la lista
+
+**El de "humano toma la conversacion".** No existe en GHL un disparador de mensaje
+saliente manual, y un workflow que solo agrega una etiqueta no hace nada que
+Marcelo no pueda hacer con dos clics desde el panel del contacto. Queda como
+convencion acordada: **antes de meterse a contestar, poner `bot-off`**.
+
+Se puede volver automatico desde Make: la conversacion de GHL expone
+`lastOutboundMessageAction` con valores `automated` o `manual`, y el campo viene
+en las 12 de 12 conversaciones que revise. Falta una sola prueba para confirmarlo:
+que Marcelo escriba un mensaje a mano y verificar que el valor cambie a `manual`.
+Si cambia, Make consulta la conversacion antes de responder y se calla solo.
+Cuesta una operacion extra por mensaje entrante.
+
+**El aviso de "quiere pagar".** Como notificacion era ruido. Su valor real es como
+disparador de recuperacion: **tiene `quiere-pagar` y no tiene `bot-off`** despues
+de unas horas es el lead mas caliente del embudo, y hoy se pierde en silencio.
+Se arma cuando el WF3 este probado.
+
+### La condicion del WF1, y la trampa que tiene
+
+En GHL, poner dos etiquetas en una sola fila de *Tags no incluye* significa
+**"alguna de las dos falta"**, no "faltan las dos". La propia ayuda de la interfaz
+lo dice. Con las dos juntas, un contacto con `bot-off` pasaba igual, porque le
+faltaba `lm-en-curso`: **el freno no frenaba, y sin dar ningun error.**
+
+Van en **dos filas separadas unidas con Y**. Vale para cualquier otro workflow
+donde se quiera decir "ninguna de estas".
+
+### `{{contact.tags}}` no existe
+
+Lo propuse para que Make tambien pudiera frenar y no es un valor personalizado
+valido: GHL responde `is not a valid expression`. El campo `tags` quedo fuera del
+webhook. La proteccion vive en la condicion del WF1.
