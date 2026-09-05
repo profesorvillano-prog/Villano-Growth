@@ -183,11 +183,55 @@ idéntica y desactualizada.
 3. **Regla de saludo en el prompt**, como segunda barrera: si `TURNOS` es mayor
    que 0, prohibido saludar. Cinturón además de tirantes.
 
-**Contrapartida a vigilar.** En modo secuencial, si llegan muchos leads a la vez
-se forma cola en vez de atenderse en paralelo. Con el volumen actual y unos 10
-segundos por ejecución no es problema, pero si algún día la campaña escala
-fuerte hay que revisar si la cola crece.
+**⚠️ ESTA CORRECCIÓN SE REVIRTIÓ EL MISMO DÍA. Ver punto 8.**
 
 **Regla:** cuando el bot repite algo, primero descartar si dos ejecuciones
 corrieron sobre el mismo estado. Un síntoma de "el bot no recuerda" puede ser
 concurrencia, no memoria.
+
+
+---
+
+## 8. El modo secuencial dejó el bot mudo 33 minutos (5 sep 2026)
+
+**Lo que pasó.** A las 19:50 activé `sequential: true` para arreglar los
+mensajes duplicados del punto 7. A partir de ese segundo el escenario **dejó de
+procesar**. Última ejecución 19:42, luego nada. Los leads escribían y no recibía
+respuesta nadie.
+
+Lo detectó el cliente, no yo, mirando su bandeja de entrada: cuatro
+conversaciones sin responder entre las 15:53 y las 16:04 hora de Chile.
+
+**Causa, en palabras del propio Make:**
+
+> *This scenario is not processing new executions because it is set to run
+> sequentially and has incomplete executions that must be resolved first.*
+
+El escenario arrastraba **4 ejecuciones incompletas** del bug de `or()` (punto
+2). En modo paralelo eran inofensivas, quedaban ahí sin molestar. En modo
+secuencial pasan a bloquear la cabeza de la cola: Make procesa estrictamente en
+orden y no arranca nada nuevo hasta resolverlas. Se acumularon 6 mensajes en la
+cola del webhook, sin atender.
+
+**Corrección: revertir a `sequential: false`.** A los 5 segundos del cambio
+arrancaron las 8 ejecuciones encoladas y la cola empezó a drenar.
+
+**El error de fondo no fue técnico, fue de secuencia.** Yo mismo había visto las
+4 ejecuciones incompletas horas antes y recomendé dejarlas sin tocar, con el
+argumento de que reintentarlas podía duplicar mensajes. Después activé el modo
+secuencial sin conectar las dos cosas. La deuda que decidí no pagar es
+exactamente la que tumbó el bot.
+
+**Antes de volver a activar el modo secuencial hay que, en este orden:**
+
+1. Vaciar *Incomplete Executions* hasta dejarlo en cero.
+2. Recién ahí activar `sequential: true`.
+3. Verificar a los dos minutos que `queueCount` del webhook esté en 0 y que
+   haya ejecuciones nuevas en el historial.
+
+Sin el paso 1, el paso 2 apaga el bot otra vez.
+
+**Regla:** después de cualquier cambio en el escenario, no basta con confirmar
+`isActive: true`. Hay que mirar **`queueCount` del webhook** y que existan
+ejecuciones posteriores al cambio. Un escenario puede estar encendido, sin
+errores y aun así no procesar nada.
