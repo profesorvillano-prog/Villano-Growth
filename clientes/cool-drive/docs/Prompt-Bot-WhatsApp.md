@@ -190,3 +190,44 @@ Para devolverle una conversación al bot, basta quitar los tags `bot-off` y
 `pausado` en el datastore ahora solo se activa con `derivar_humano` y
 `alumno_existente`, ya no con `cerrar_inscripcion`: quien pidió el link de pago
 sigue pudiendo conversar con el bot y sigue recibiendo seguimientos.
+
+## Regla nº3: la pregunta de la experiencia, una sola vez (2026-09-05)
+
+**Síntoma reportado por el cliente:** el bot preguntaba *"has manejado antes o
+partirías de cero?"* una y otra vez, incluso después de que el lead ya había
+contestado *"Partiría de cero"*.
+
+**Causa real, verificada en el datastore.** El registro del lead quedó así:
+
+```
+datos: curso= manejo= cuando=octubre nombre=Sebastián
+                 ↑ vacío, pese a que el lead ya había dicho "Partiría de cero"
+```
+
+El modelo estaba capturando **solo el dato del último mensaje** y devolviendo
+los demás campos vacíos. Al vaciar `manejo`, en el turno siguiente el bot ya no
+sabía la respuesta y volvía a preguntar. No era un problema de tono ni de
+instrucciones sobre repetir: era pérdida de dato en el campo `datos`.
+
+**Tres cambios en el prompt:**
+
+1. **Regla nº3 nueva.** La pregunta de la experiencia se hace **una sola vez en
+   toda la conversación**. Se da por respondida si `manejo` trae valor, si el
+   resumen dice que ya se preguntó (aunque `manejo` venga vacío), o si el lead
+   dijo cualquier variante de *de cero / nunca he manejado / sí he manejado /
+   un poco / tengo licencia*. Una vez respondida quedan prohibidas todas sus
+   reformulaciones, listadas explícitamente.
+
+2. **Antivaciado en el campo `datos`.** Se nombra el error de forma directa:
+   devolver solo el dato del último mensaje y vaciar el resto. Con el ejemplo
+   exacto de este caso — si el lead dice *octubre*, se devuelve `para_cuando`
+   **y además** `ha_manejado`, porque ya se sabía.
+
+3. **Variación obligatoria.** Cuando sí corresponde preguntarla (solo la
+   primera vez), se alterna entre cuatro formulaciones en vez de repetir
+   siempre la misma frase. Y se agrega la regla de no cerrar dos mensajes
+   seguidos con la misma pregunta.
+
+El resumen ahora también arrastra explícitamente **si ya se preguntó por la
+experiencia**, para que el dato sobreviva aunque `datos` venga incompleto. Es
+la red de seguridad: dos fuentes independientes para el mismo hecho.
