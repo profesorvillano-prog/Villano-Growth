@@ -231,3 +231,41 @@ instrucciones sobre repetir: era pérdida de dato en el campo `datos`.
 El resumen ahora también arrastra explícitamente **si ya se preguntó por la
 experiencia**, para que el dato sobreviva aunque `datos` venga incompleto. Es
 la red de seguridad: dos fuentes independientes para el mismo hecho.
+
+## Anzuelo de la promo junto al precio (2026-09-05)
+
+**Decisión del cliente.** Antes, el bot daba el precio normal y se detenía; la
+promo solo aparecía después, ante una objeción de plata o interés explícito.
+Sebastián pidió que al dar el precio ya se mencione que existe una promoción
+hasta el 17.
+
+**Cómo quedó, y por qué así.** La mención va **sin la cifra con descuento**:
+
+> El Curso Full sale $140.000 y el Avanzado $110.000, ambos con todo incluido
+> hasta el examen. Y hasta el 17 de septiembre tenemos una promo, si te
+> interesa te cuento. Has manejado algo antes?
+
+Es un anzuelo, no la oferta. Así se conservan las dos cosas:
+
+- **El ancla.** El precio normal sigue siendo el número que la persona escucha
+  primero. Si se suelta el descuento en el mismo mensaje, el precio de
+  referencia pasa a ser el bajo y el descuento deja de tener con qué comparar.
+- **La urgencia y el motivo de respuesta.** La fecha límite empuja, y el *si te
+  interesa te cuento* le da a la persona algo concreto que pedir. Convierte un
+  mensaje informativo en una invitación a seguir conversando.
+
+**El monto con descuento se da después:** cuando preguntan por la promo, cuando
+hay interés real, o ante una objeción de plata.
+
+**Reglas de apoyo que se agregaron:**
+- El resumen ahora arrastra si ya se mencionó la promo y si ya se dio la cifra,
+  para que el anzuelo no se repita dos veces (suena a insistencia).
+- Se corrigió la regla que prohibía juntar precio y urgencia, que quedaba en
+  contradicción. Ahora prohíbe juntar el **monto con descuento** y el cierre con
+  el precio normal; la mención sin cifra sí puede ir junto al precio.
+- Estado `oferta_anclada` se usa cuando ya se dio el monto con descuento.
+
+**OJO, esto tiene fecha de vencimiento.** El bot no sabe qué día es. El 18 de
+septiembre hay que quitar la sección de la promo de los dos prompts, y ahora es
+más urgente que antes: la promo ya no aparece solo de vez en cuando, sino en
+**cada primer mensaje de precio**.
