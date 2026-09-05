@@ -235,3 +235,58 @@ Sin el paso 1, el paso 2 apaga el bot otra vez.
 `isActive: true`. Hay que mirar **`queueCount` del webhook** y que existan
 ejecuciones posteriores al cambio. Un escenario puede estar encendido, sin
 errores y aun así no procesar nada.
+
+---
+
+## 9. Agrupar mensajes: el debounce (5 sep 2026)
+
+**El problema.** La gente no escribe un mensaje, escribe tandas: *"Hola"*,
+*"cuánto cuesta"*, *"y los sábados?"*, tres mensajes en veinte segundos. Cada
+uno disparaba una ejecución y el lead recibía tres respuestas, cada una
+saludando y preguntando por su cuenta. Ilegible, y delata al bot al instante.
+
+**Por qué NO sirve un Wait en GHL.** Cada mensaje entra al workflow por
+separado, así que los tres esperarían su minuto y dispararían igual. El Wait
+retrasa, no agrupa. Para agrupar hace falta estado compartido entre las
+ejecuciones, y eso solo existe en el datastore de Make.
+
+**El patrón implementado, un debounce clásico:**
+
+1. Llega un mensaje. Lo primero es **escribir `ultimo_mensaje_at = now`** en el
+   datastore (módulo *Marcar llegada*, `UpdateRecord` con upsert). No responde
+   nada todavía.
+2. Lee la memoria y **se guarda esa marca de tiempo** (módulo *Memoria y mi
+   marca*).
+3. **Duerme 90 segundos.**
+4. Vuelve a leer el datastore (*Sigo siendo el último?*).
+5. **Filtro de corte:** continúa solo si la marca guardada sigue siendo la
+   misma. Si llegó otro mensaje después, esa ejecución la pisó y esta se apaga
+   **en silencio, sin responder**. La última de la tanda es la única que sigue.
+
+**El que sobrevive ve la tanda completa.** Un módulo nuevo trae de GHL los
+últimos 8 mensajes de la conversación y filtra los entrantes:
+
+```
+join(map(43.data.messages.messages; "body"; "direction"; "inbound"); " // ")
+```
+
+Eso llega al modelo como *MENSAJES NUEVOS DEL LEAD*, del más reciente al más
+antiguo, con la instrucción de responderlos **todos en un solo mensaje**.
+
+**Qué se arregla de una sola vez:**
+
+- Se acaban las respuestas por goteo, una por mensaje.
+- **Se acaba la carrera de ejecuciones.** Solo una responde por tanda, así que
+  desaparecen los saludos triplicados y los mensajes idénticos duplicados. El
+  modo secuencial deja de ser necesario para esto.
+- El modelo pasa a ver los mensajes reales de GHL, no solo su propio resumen.
+- Cuesta menos: una llamada al modelo por tanda en vez de una por mensaje.
+
+**Diseño defensivo.** El filtro tiene una segunda condición en OR que deja
+pasar cuando la marca viene vacía. Si el datastore fallara, el bot vuelve al
+comportamiento anterior (responde de más) en vez de quedarse mudo. Entre
+duplicar y callar, siempre duplicar: el silencio es la falla cara.
+
+**Contrapartida aceptada:** el bot ya no responde al instante, se demora hasta
+90 segundos. Suma más de lo que resta — contestar en 4 segundos es de las cosas
+que más delatan a un bot.
