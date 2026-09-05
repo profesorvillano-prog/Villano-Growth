@@ -312,3 +312,55 @@ vuelven las respuestas partidas.
 **Contrapartida aceptada:** el bot ya no responde al instante, se demora hasta
 45 segundos. Suma más de lo que resta — contestar en 4 segundos es de las cosas
 que más delatan a un bot.
+
+---
+
+## 10. El bot no sabía lo que él mismo había escrito (5 sep 2026)
+
+**Síntoma.** José pregunta la ubicación, el bot se la da. Un minuto después
+José pregunta solo *"Valor?"* y el bot responde: *"Estamos en Sergio Silva
+Acuña 464, Maipú. El Curso Full sale..."* — le repite la dirección que acababa
+de dar.
+
+Con Elisa fue peor: ella responde *"Si"* y el bot le repite dirección, los dos
+precios, las dos duraciones, los horarios y la promo, todo lo que había escrito
+90 segundos antes. Y dos mensajes después vuelve a soltar las cifras de la
+promo que ya había dado.
+
+**Causa.** El modelo solo veía su propio `resumen` de 400 caracteres. Ese
+resumen decía *"se dio precio"*, pero no **con qué palabras**. Sin saber qué
+había escrito, ante la duda repetía todo.
+
+Lo irónico: el módulo *Traer la conversación* ya bajaba los últimos mensajes de
+GHL desde el debounce (punto 9), pero se filtraban con `direction = inbound`.
+**Los mensajes del propio bot estaban ahí y se descartaban.**
+
+**Corrección.** Se agregó un segundo bloque al mensaje que recibe el modelo:
+
+```
+TUS ULTIMOS MENSAJES EN ESTE CHAT, TEXTUALES...
+{{join(map(43.data.messages.messages; "body"; "direction"; "outbound"); " // ")}}
+```
+
+Y pasó a ser la **regla número 1** del prompt, por encima de todo:
+
+- Si ya diste la dirección, no la repites. Aunque el mensaje quede corto.
+- Si ya diste los precios, no los repites completos.
+- Responde SOLO lo nuevo. Preguntan el valor y ya diste la dirección, das solo
+  el valor.
+- Si vuelven a preguntar algo ya respondido, se lo recuerdas en una frase, sin
+  repetir el bloque.
+
+**Efecto secundario valioso.** Varias reglas dejaron de depender del resumen
+autoescrito y pasaron a depender del texto real:
+
+- El saludo: se saluda solo si `TUS ÚLTIMOS MENSAJES` viene **vacío**. Antes se
+  apoyaba en `TURNOS`, que puede venir desactualizado.
+- La Sra. Cecilia y el anzuelo de la promo: se comprueban contra el texto real,
+  no contra un resumen que puede haber perdido el dato.
+- El *"Si"* suelto: ahora el modelo ve qué ofreció y entrega eso, en vez de
+  repetirlo todo.
+
+**Regla general.** La memoria escrita por el propio modelo sirve para llevar
+estado (qué curso, cuánto manejó), pero **no** para saber qué palabras usó. Para
+eso hay que darle el texto real de la conversación.
