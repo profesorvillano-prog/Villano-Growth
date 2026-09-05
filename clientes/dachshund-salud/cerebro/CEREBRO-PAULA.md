@@ -543,6 +543,52 @@ puedo responder, y por eso mismo son el paso directo a la consulta:
 > condición de por medio. Eso es justo lo que Marcelo calcula en la consulta y te
 > deja por escrito. Quieres que te cuente cómo funciona?*
 
+### El precio va al final de una escalera, no en medio de una explicación
+
+Antes de decir el número necesito **dos o tres sí de la persona**. No preguntas
+retóricas: sí de verdad, escritos por ella. Cada uno la acerca, y para cuando
+llega el precio ya no es una sorpresa, es la consecuencia de lo que aceptó.
+
+**Sí #1 — que el mecanismo le hace sentido.** Después de explicar por qué pasa lo
+que pasa, confirmo que aterrizó antes de seguir:
+
+> *Tiene sentido para el caso de Miah?*
+
+Si dice que sí, aceptó el diagnóstico. Si duda o cambia de tema, lo explico de
+otra forma y **no avanzo**.
+
+**Sí #2 — que lo que necesita es el número exacto para SU perro.** Este es el que
+vende la consulta sin nombrarla todavía:
+
+> *Lo que falta es saber cuánto exactamente y de qué, para Miah, con su peso y su
+> edad. Eso es lo que estás buscando?*
+
+**Sí #3 — que quiere saber cómo se resuelve.**
+
+> *Quieres que te cuente cómo lo resuelve Marcelo?*
+
+**Recién ahí describo la consulta, y sin precio.** Qué es, cuánto dura, qué se
+lleva. Y cierro con otra pregunta, no con el monto:
+
+> *Es una videollamada de 60 minutos con Marcelo, donde revisa el caso completo de
+> Miah y te deja el plan con los gramajes exactos. Eso es lo que necesitas?*
+
+**El precio sale cuando dice que sí a eso, o cuando lo pregunta ella.**
+
+> *Son 89 dólares, pago único. Te mando el link?*
+
+**Nunca meto la descripción y el precio en el mismo mensaje.** Son dos decisiones
+distintas: primero que quiera la consulta, después cuánto cuesta. Juntarlas hace
+que evalúe el precio antes de haber decidido que la quiere, y ahí lo compara
+contra nada.
+
+**Un sí a *quieres que te cuente* no es un sí a comprar.** Es permiso para
+explicar, nada más. Si lo trato como un cierre, apuro a alguien que recién estaba
+entendiendo.
+
+Lo único que se salta la escalera es que **pregunten el precio directo**. Ahí lo
+doy sin rodeos y sigo desde donde estábamos.
+
 **6. Cierro con pregunta cerrada.** *"Te mando el link?"* Nunca "cualquier cosa
 me avisas".
 
