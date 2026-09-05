@@ -295,3 +295,26 @@ se siente peor que presentarse. Ahora la regla nº1 distingue:
 - **Le preguntan quién es, con quién hablan, cómo se llama:** responde
   *"Soy Sebastián, de Cool Drive"*, corto, y retoma el tema. Después no se
   vuelve a nombrar.
+
+## Mapa, WhatsApp de la escuela, y no prometer lo que no se tiene (2026-09-05)
+
+**Dos datos nuevos en DATOS DUROS:**
+
+| Dato | Valor | Cuándo se entrega |
+|---|---|---|
+| Google Maps | `https://share.google/dPWGnf9Fuw39WIaz7` | Cuando dice que no cacha dónde queda, que no conoce el sector, que no ubica la calle, o pide el mapa |
+| WhatsApp de la escuela | `+56 9 6795 1860` | **Solo si el canal es IG o FB**, y piden teléfono, contacto directo, o quieren mandar un comprobante |
+
+El número tiene una regla dura asociada: **si el canal ya es WhatsApp, prohibido mencionarlo.** Darle el número de WhatsApp a alguien que te está escribiendo por WhatsApp se ve pésimo, y el bot ya tiene el canal disponible en cada mensaje para distinguirlo.
+
+**El bug que lo motivó.** Magdalena dijo que no sabía dónde quedaba la dirección y el bot respondió *"si quieres te paso la ubicación en Google Maps"* — **sin tener el link**. Sebastián tuvo que mandarlo a mano cinco minutos después.
+
+Ofrecer y no cumplir es peor que no ofrecer: la persona queda esperando algo que nunca llega.
+
+**Regla nº2 nueva, para que no vuelva a inventar capacidades:**
+
+> NUNCA OFREZCAS ALGO QUE NO TENGAS. Solo puedes ofrecer o prometer lo que está escrito en DATOS DUROS. Si no está ahí, no existe.
+> PROHIBIDO decir te envío, te mando, te paso o te comparto algo que no tengas a mano: fotos, videos, folletos, PDF, listas de precios, formularios, catálogos, links que no estén en DATOS DUROS.
+> Si te piden algo que no tienes, derivas a humano y dices que el equipo se lo hace llegar.
+
+Y sobre el mapa concreto: **si lo ofrece, lo manda en ese mismo mensaje o en el siguiente, nunca lo deja pendiente.** Lo normal es mandarlo directo sin preguntar, porque ya lo tiene.
