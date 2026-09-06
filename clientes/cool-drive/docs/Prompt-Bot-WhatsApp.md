@@ -318,3 +318,79 @@ Ofrecer y no cumplir es peor que no ofrecer: la persona queda esperando algo que
 > Si te piden algo que no tienes, derivas a humano y dices que el equipo se lo hace llegar.
 
 Y sobre el mapa concreto: **si lo ofrece, lo manda en ese mismo mensaje o en el siguiente, nunca lo deja pendiente.** Lo normal es mandarlo directo sin preguntar, porque ya lo tiene.
+
+## Chilenismos, el mensaje más reciente de la tanda, y no afirmar lo que no dijeron (2026-09-06)
+
+**El caso Carla.** Escribió dos mensajes seguidos:
+
+1. `Soy cerca del templo` (13:13)
+2. `Igual me queda retirado` (13:14)
+
+Y el bot contestó:
+
+> *"Bacán que estés cerca, así te queda súper a mano venir..."*
+
+Justo lo contrario de lo que ella dijo. Tres fallas distintas en una sola respuesta.
+
+### Falla 1 — entendió al revés un chilenismo
+
+En Chile **"me queda retirado" significa lejos**. Es una objeción de distancia, la misma que ya estaba listada en OBJECIONES como *"me queda lejos"*. El modelo lo leyó como algo positivo.
+
+Se agregó un **glosario de comprensión** como regla nº1 del prompt. No es una regla de estilo de salida (esas ya existían), es para *entender* lo que llega:
+
+| Modismo | Significa |
+|---|---|
+| me queda retirado, es retirado | **lejos** (objeción de distancia) |
+| me pilla lejos, me queda a trasmano | lejos |
+| me queda a mano, me pilla cerca | cerca |
+| la pega, la chamba | el trabajo |
+| luca / lucas | mil pesos (140 lucas = $140.000) |
+| cachar, cachai | entender, saber |
+| al tiro, altiro | de inmediato |
+| harto, caleta | mucho |
+| fome | aburrido, malo |
+| me tinca | me gusta la idea |
+| filo | no importa |
+| me da lata | me da pereza |
+| ando pato, ando corto de plata | no tiene plata ahora (objeción de precio) |
+| se me complica | no puede (objeción) |
+| ya po, sipo, nopo | sí / no enfáticos |
+
+Cierra con: **si no entiendes algo con certeza, no adivines ni celebres.** Responde lo que sí entendiste.
+
+### Falla 2 — respondió al mensaje viejo de la tanda
+
+Con el debounce de 45 segundos el bot recibe la tanda completa, del **más reciente al más antiguo**. Carla se corrigió a sí misma en el segundo mensaje y el bot contestó el primero.
+
+Regla nº3 nueva: **en una tanda manda el mensaje más reciente.** Si el más reciente corrige, matiza o contradice a los anteriores, esa corrección es lo que se responde. Se agregó también la etiqueta explícita en el mensaje de usuario que arma Make:
+
+> `MENSAJES NUEVOS DEL LEAD. El PRIMERO de la lista es el MAS RECIENTE y es el que manda si corrige a los otros.`
+
+Y un ejemplo textual del caso Carla en la sección EJEMPLOS del prompt.
+
+### Falla 3 — celebró un hecho que nadie le confirmó
+
+Aunque hubiera entendido bien el modismo, el bot **no debería afirmar cosas sobre la situación de la persona que ella no dijo textual**. Regla nº2 nueva:
+
+> NO AFIRMES NADA SOBRE LA PERSONA QUE ELLA NO TE HAYA DICHO. Prohibido celebrar o dar por hecho que vive cerca, que tiene tiempo, que le acomoda el horario, que le alcanza la plata, que puede venir.
+> Es preferible no comentar su situación a comentarla mal.
+
+Esto es lo que hace que un bot se note bot: no es equivocarse en un dato, es celebrar algo que la persona nunca dijo.
+
+### Reordenamiento de reglas
+
+El prompt quedó con este orden de prioridad (las tres primeras son nuevas o subieron):
+
+1. Entiende bien antes de responder (glosario chileno)
+2. No afirmes nada que no te hayan dicho
+3. En una tanda manda el más reciente
+4. No repitas lo que ya dijiste
+5. Nunca ofrezcas algo que no tengas
+6. No interrogues
+7. No te presentas solo
+8. Saludo una vez por lead
+9. Ortografía con ñ y tildes
+10. La pregunta de la experiencia, una sola vez
+11. La Sra. Cecilia, una sola vez
+
+Aplicado al escenario **7130146**. Verificado después del cambio: `isActive: true`, `sequential: false`, `dlqCount: 4` (sin subir).
