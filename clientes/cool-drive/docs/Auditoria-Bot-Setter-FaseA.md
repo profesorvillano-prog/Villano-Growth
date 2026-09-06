@@ -1,6 +1,9 @@
 # Auditoría bot setter Cool Drive — Fase A (solo diagnóstico)
 
-Fecha de la lectura: 2026-09-06, ~04:00 UTC. Todo lo de abajo es lectura. No se ejecutó ninguna
+Fecha de la lectura: 2026-09-06, ~04:00-05:00 UTC. Segundo pase de análisis: cada hallazgo del
+primer pase fue re-verificado contra la evidencia y contra la semántica real de los handlers de
+error de Make; dos afirmaciones no resistieron la revisión y están corregidas (ver B.4 y V12), y
+se sumó un hilo más de evidencia (Felipe) con un hallazgo nuevo (D.7, dato inventado). Todo lo de abajo es lectura. No se ejecutó ninguna
 operación de escritura en Make ni en GoHighLevel.
 
 ---
@@ -35,6 +38,14 @@ operación de escritura en Make ni en GoHighLevel.
    hay operación de lectura de DLQ disponible.
 4. **Conversaciones anteriores al 2026-08-24.** El listado devuelve 40 hilos; los más antiguos son
    del 2026-08-24. Para la línea base histórica solo tengo esa ventana.
+
+### Correcciones del segundo pase
+
+1. **B.4 / V12 reescritos.** El primer pase atribuyó la quema del seguimiento a errores de la API de
+   Anthropic. Revisada la semántica de los handlers (`Ignore` descarta el bundle; `Resume` continúa
+   el flujo), el camino real de quema es el envío fallido en `M5`, no el error del modelo.
+2. **`enviar=false → fu_count=1` reclasificado** de fallo a decisión de diseño deliberada.
+3. Se agregó el hilo de Felipe como evidencia (C.3) y el hallazgo nuevo D.7.
 
 ### Nota de seguridad, fuera del alcance pedido pero no la puedo callar
 
@@ -99,8 +110,11 @@ El `switch` del módulo 12 está bien mapeado y el filtro `estado != estado ante
 
 - Elisa Mundaca: de "Tengo dudas sobre el curso..." a link de pago del Full en **11 minutos**,
   con la objeción "quiero pagar a fin de mes" resuelta con el argumento correcto de los 60 días.
-- Felipe Ferreira (`KrlxUMddhYQOhnrSFaNp`): estado `cierre_propuesto`, temperatura caliente,
-  curso Avanzado asignado con la regla correcta (ya manejó → Avanzado).
+- Felipe Ferreira (`KrlxUMddhYQOhnrSFaNp`): estado `cierre_propuesto`, temperatura caliente.
+  Verificado en el hilo: la regla de calificación operó bien — *"Hace un tiempo tome un curso pero
+  no lo pude terminar"* → *"Como ya manejaste algo antes, te conviene el Curso Avanzado"* — y el
+  cierre quedó agendado por el propio lead (*"te confirmare hoy la tarde"*). Los fallos de ese hilo
+  (C.3, D.7) son de forma; la conducción de venta fue correcta.
 - Carol Ormeño (`rgfUn70ZL7jF1FRAuKel`): 53 años, con miedo. El bot empatizó antes de informar,
   recomendó Full, y llegó a `oferta_anclada` con la cifra de promo. Que no cerrara no es un fallo
   del bot; llegó hasta donde se podía llegar.
@@ -226,7 +240,7 @@ M4  Router
 | V9 | `4.datos.*` vacío | `datos` se guarda como `curso= manejo= cuando= nombre=` | El modelo recibe un string con signos igual sueltos, no un "no sé". Se ve en 14 de 36 registros |
 | V10 | `M43` trae los últimos 10 mensajes sin recortar por la ráfaga | El join de `inbound` incluye mensajes que el bot **ya respondió** | Ver hallazgo 4.1 |
 | V11 | Registros heredados sin `temperatura` ni `turnos` (`U2eWgPg6...`, `kRTuoEj1...`) | El filtro de `SearchRecord` los evalúa contra campos ausentes | Quedan fuera del seguimiento para siempre |
-| V12 | `M6` del seguimiento no tiene filtro | Corre también cuando `M2` o `M3` fallaron y `3.enviar` viene vacío | `fu_count` pasa a 1 sin haber escrito nunca → **el lead quema su único seguimiento con un error de API** |
+| V12 | `M5` del seguimiento (envío) tiene `onerror Resume` y `M6` corre después sin filtro | Si el POST a GHL falla (4xx, ventana de Meta cerrada), `Resume` traga el error y `M6` registra igual | `fu_count` pasa a 1 **sin que el mensaje se haya entregado**: el lead quema su único seguimiento con un envío fallido. (Corrección del primer pase: un error del módulo Claude o del ParseJSON NO produce esto — sus handlers son `Ignore`, que descarta el bundle y `M6` no corre) |
 
 ---
 
@@ -360,14 +374,26 @@ por la ubicación y se enfrió, y el sistema decide no volver a hablarle nunca.
 **Impacto en la venta: el más alto de todo el informe.** Es facturación que se está dejando en la
 mesa de forma silenciosa.
 
-#### B.4 — Un error de la API de Anthropic quema el único seguimiento del lead
+#### B.4 — Un envío fallido quema el único seguimiento del lead (corregido en el segundo pase)
 
-El módulo 6 (`Registrar el seguimiento`) está en la ruta 2 del router **sin filtro**. Si `M2` falla
-(`M20 Ignore`) o `M3` no parsea (`M21 Ignore`), `3.enviar` llega vacío → `if(3.enviar; ...; 1)` →
-`fu_count = 1`. Con el filtro `fu_count < 1`, ese lead **nunca más entra al seguimiento**, sin que
-se le haya escrito una línea. Es un fallo silencioso: la ejecución termina en status 1 (éxito).
+**Corrección sobre el primer pase.** Se había afirmado que un error de la API de Anthropic o del
+ParseJSON quemaba el seguimiento. Es falso: los handlers de `M2` y `M3` son `Ignore`, y en Make
+`Ignore` **descarta el bundle** — `M5` y `M6` no corren, `fu_count` queda intacto y el lead se
+reintenta en la corrida siguiente. Ese camino está bien armado.
 
-**Capa: escenario de Make.** Aún no lo he visto materializado (no hay `ultimo_fu_at` en ningún
+El camino que sí quema el seguimiento es otro: `M5` (el POST a `/conversations/messages`) tiene
+`onerror Resume`. `Resume` traga el error y **continúa el flujo**, así que la ruta 2 corre y `M6`
+registra `fu_count = fu_count + 1` con `3.enviar = true`, aunque GHL haya rechazado el envío
+(token inválido, contacto bloqueado, o la ventana de 24 h de Meta cerrada en IG/FB — que con la
+condición `< 23 h` del filtro no debería ocurrir, pero un 4xx cualquiera sí). El lead queda
+registrado como "seguido" sin haber recibido nada, y con `fu_count < 1` nunca se reintenta.
+
+Nota aparte: cuando el modelo decide `enviar = false`, `M6` fija `fu_count = 1` a propósito para no
+volver a evaluar a ese lead. Eso es **diseño deliberado y razonable** (los casos de `false` del
+prompt son terminales: no le interesa, ya se inscribió en otra parte, pidió que no le escriban), no
+un fallo. Se reclasifica como decisión existente a respetar.
+
+**Capa: escenario de Make (handler de M5).** Aún no materializado (no hay `ultimo_fu_at` en ningún
 registro), pero está armado.
 
 ---
@@ -401,8 +427,24 @@ Dos respuestas, y la primera pregunta *"has manejado algo antes"* cuando la lead
 *"Tomé un auto un par de veces de chica"*. Es el fallo que el brief marca como el que más rompe la
 ilusión, y aquí es consecuencia directa de responder al primer mensaje de la ráfaga.
 
-**Nota de precisión:** en esa misma conversación hay dos mensajes idénticos a las 19:20:20 y
-19:20:22. **No es un doble envío**: comparten el mismo `altId` de Instagram, es el mismo mensaje
+#### C.3 — Ráfaga de dos, dos respuestas, y la pregunta de la experiencia dos veces en 22 segundos
+
+Conversación Felipe Ferreira, `qUGP35oUUGdyVdVhUoXv`, 2026-09-05 (una hora antes del arreglo):
+
+- 17:43:36 LEAD: `Así es` (respondiendo a "Andas viendo sacar la licencia?")
+- 17:43:40 LEAD: `Cual es el valor?`
+- 17:43:47 BOT: `Bacán! y has manejado algo antes o sería tu primera vez?`
+- 17:44:09 BOT: `El Curso Full sale $140.000 con 12 clases prácticas y el Avanzado $110.000 con 8... **Has manejado algo antes?**`
+
+Una respuesta por mensaje de la ráfaga, y la **misma pregunta dos veces en 22 segundos** — la
+pregunta que la regla 8 del prompt manda a hacer una sola vez en toda la conversación. Es la
+demostración más limpia de que el fallo de ráfaga y el de pregunta repetida eran el mismo fallo.
+En la misma conversación, `Para cuándo te gustaría partir?` sale además tres veces en 4 minutos
+(17:45:32, 17:46:47, 17:49:58), las dos últimas colgadas de respuestas a preguntas del lead
+(refuerza D.3 y D.4).
+
+**Nota de precisión:** en la conversación de Carol (C.2) hay dos mensajes idénticos a las 19:20:20
+y 19:20:22. **No es un doble envío**: comparten el mismo `altId` de Instagram, es el mismo mensaje
 registrado dos veces por GHL (una por la API, otra por el webhook de eco). No lo cuento como fallo.
 
 ---
@@ -470,6 +512,27 @@ Carol: 18:16:09, 18:20:43, 18:41:01, 19:16:45, 19:20:20, 19:35:43. Seis veces.
 conversación. No puedo determinar si la regla 9 existía a las 18:16. Lo dejo como caso de regresión
 a verificar, no como incumplimiento probado.
 
+#### D.7 — Dato inventado y recurrente: "las clases se agendan 2 o 3 veces por semana" (hallazgo nuevo del segundo pase)
+
+- Felipe, 17:46:47, ante `Cuantas veces a la semana?`: *"Las clases prácticas **normalmente se
+  agendan 2 o 3 veces por semana**, dependiendo de la disponibilidad de horario que tengas."*
+- Carol, 18:41:01, ante `Y cada cuanto son las 12 clases prácticas?`: *"**Se agendan más o menos
+  2 a 3 veces por semana** según disponibilidad, de 45 minutos cada una."*
+
+La cifra "2 a 3 veces por semana" **no existe en DATOS DUROS**. Dos hilos distintos, el mismo dato
+inventado, ante la misma pregunta. La regla 2 del prompt ("Solo puedes ofrecer o prometer lo que
+está escrito en DATOS DUROS") se rompe aquí no por desobediencia caprichosa sino por un **vacío de
+información**: la frecuencia semanal de las prácticas es una pregunta frecuente y el prompt no trae
+ni el dato ni la instrucción de derivarla. El modelo rellena el hueco con algo plausible — que es
+consistente con los plazos mínimos declarados (12 clases en 2 meses ≈ 1,5/semana... en realidad NO
+es consistente: a 2-3 por semana el Full terminaría en 4-6 semanas, contradiciendo el "mínimo 2
+meses" que el mismo bot informa). Es un compromiso operativo inventado que el equipo después tiene
+que honrar o desmentir.
+
+**Capa: system prompt (vacío de dato duro).** Causa raíz: pregunta frecuente sin respuesta
+autorizada. Regla de prevención: todo hueco que aparezca dos veces en conversaciones reales entra a
+DATOS DUROS con el dato verdadero, o entra a la lista de casos de `derivar_humano`.
+
 ---
 
 ### CAUSA E — Datos y estado mal formados
@@ -522,6 +585,7 @@ ejemplo de que las correcciones de dato duro sí pegan; las de estilo (D.1-D.3) 
 | 3 | `M7` reescribe `ultimo_mensaje_at` con el valor viejo | Escenario 7130146, mapeo M7 | V5 | El mensaje que el lead escribe mientras el modelo genera queda sin respuesta y sin rastro. Silencioso |
 | 4 | El filtro anti-ráfaga tiene dos vías de escape: rama `VACIO` y granularidad de segundo | Escenario 7130146, filtro M30 | V1, V2, V3, V4 | Un error transitorio del data store devuelve el sistema al comportamiento pre-arreglo (una respuesta por mensaje) sin que nadie se entere |
 | 5 | Las reglas de estilo del prompt no se cumplen: pregunta colgada, largo, frases prohibidas | System prompt | D.1, D.2, D.3, D.5 | Erosión constante de la sensación de "persona". No mata una venta por sí sola, pero es lo que hace que el lead baje el ritmo |
+| 5b | Vacíos de dato duro que el modelo rellena inventando ("2 a 3 clases por semana") | System prompt | D.7 | El bot contrae compromisos operativos que la escuela no definió, y que además contradicen sus propios plazos declarados |
 | 6 | El data store no tiene política de expiración ni migración de esquema | Estado entre turnos | E.1, E.2, E.3, B.1 | Los registros viejos van a seguir acumulándose y ocupando slots del seguimiento. En 3 meses el `limit: 15` va a estar 100% ocupado por zombis |
 | 7 | Credenciales en texto plano en el blueprint | Escenario (ambos) | — | Exposición del PIT de GHL y de la API key de Anthropic |
 

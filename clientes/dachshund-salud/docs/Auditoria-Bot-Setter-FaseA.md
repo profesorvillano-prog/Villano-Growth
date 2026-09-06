@@ -1,6 +1,9 @@
 # Auditoría bot setter Dr. Marcelo (Paula) — Fase A (solo diagnóstico)
 
-Fecha de la lectura: 2026-09-06, ~04:00 UTC. Todo lo de abajo es lectura. No se ejecutó ninguna
+Fecha de la lectura: 2026-09-06, ~04:00-05:00 UTC. Segundo pase de análisis: cada hallazgo del
+primer pase fue re-verificado contra la evidencia y contra la semántica real de los handlers de
+error de Make; una afirmación no resistió la revisión y está corregida (E.4), y se sumó un cuarto
+hilo de evidencia (Carola, `tnhu0lxJKOhlYtgc1ufS`) que confirma tres hallazgos con citas nuevas. Todo lo de abajo es lectura. No se ejecutó ninguna
 operación de escritura en Make ni en GoHighLevel.
 
 ---
@@ -40,6 +43,16 @@ operación de escritura en Make ni en GoHighLevel.
    permite medir frecuencia histórica.
 4. **Origen de los links `salchichapro.com` que aparecen en los hilos.** Ver 3.C.1: puedo demostrar
    que **no** los mandó el bot, pero no puedo leer qué producto son ni quién los configuró.
+
+### Correcciones del segundo pase
+
+1. **E.4 reescrito.** El primer pase atribuyó la quema de los seguimientos a errores de la API de
+   Anthropic; revisada la semántica de los handlers (`Ignore` descarta el bundle, `Resume`
+   continúa), el camino real es el envío fallido en `M5` contabilizado como enviado.
+2. **`enviar=false → fu_count=3` reclasificado** de fallo a decisión de diseño deliberada.
+3. Se agregó el hilo de Carola: tercer caso del doble saludo (B.2, ahora 3/3), segunda instancia de
+   descripción+precio en un mensaje (A.3, ahora 2/2) y la cita textual del lead frenado por plata
+   que el seguimiento nunca va a tocar (E.5).
 
 ### Nota de seguridad, fuera del alcance pedido
 
@@ -291,7 +304,15 @@ El prompt lo prohíbe explícitamente y explica por qué:
 Y el `Si por favor` de las 22:46:24 respondía a *"Quieres que te cuente cómo funciona la consulta
 con él?"*, que el propio prompt define como *"permiso para explicar, nada más"*.
 
-**Capa: prompt.** La regla está escrita, con su justificación, y no se cumple.
+**Capa: prompt.** La regla está escrita, con su justificación, y no se cumple. Y no es un caso
+aislado: en el hilo de Carola, 19:13:36, ante un `Si podes` que solo autorizaba a contar cómo
+funciona, salió *"Dale, te cuento. Es una videollamada de 60 minutos con Marcelo, donde revisa el
+caso completo de Carola y te dice exactamente qué darle y en qué cantidades. **Son 89 dólares.**
+Quieres que te pase el link?"* — descripción, precio y cierre en un solo mensaje. **2 de 2 hilos**
+donde la conversación llegó a la descripción de la consulta muestran la misma violación. El minuto
+siguiente la lead contestó `No puedo ahora, gracias igual`. No se puede probar que juntar precio y
+descripción causó el frenazo, pero es exactamente el mecanismo que la regla del prompt describe:
+*"ahí lo compara contra nada"*.
 
 ---
 
@@ -332,7 +353,21 @@ El escenario de apertura debía haber sembrado `turnos = 1`, y el prompt tiene u
 para este caso: *"contesta algo que ya le preguntaron → Soy Paula, del equipo del Dr. Marcelo.
 Cuéntame..."*, **sin "Hola"**. Salió con "Hola!".
 
-Dos explicaciones posibles y no puedo distinguirlas con lo que tengo:
+Tercer caso, idéntico (hilo Carola, `tnhu0lxJKOhlYtgc1ufS`, 2026-09-05):
+
+- 19:05:55 LEAD comenta `Salud` en el post
+- 19:06:04 **workflow**: `Hola! Vi tu comentario en el post 🐶...`
+- 19:06:27 LEAD: `El aliento`
+- 19:06:59 PAULA: `**Hola!** Soy Paula, del equipo del Dr. Marcelo. Cuéntame, hace cuánto que notas el mal aliento?`
+
+Con esto el patrón es **3 de 3** aperturas por comentario observadas (Sebastián, Reyes, Carola):
+siempre el saludo con presentación completa, que es exactamente el formato que el prompt pauta para
+`TURNOS: 0`. Si Paula recibiera `TURNOS: 1` y desobedeciera, se esperaría variación entre casos; la
+uniformidad apunta a que el modelo está recibiendo `TURNOS: 0`, es decir, a que la siembra de
+memoria no ocurrió a tiempo (o no ocurrió). Nótese además que en los tres casos el lead respondió
+al DM en menos de 2 minutos — la carrera es plausible sistemáticamente, no excepcionalmente.
+
+Dos explicaciones posibles y no puedo distinguirlas del todo con lo que tengo:
 (a) carrera — el webhook de apertura llegó después de que el lead ya había respondido, con lo que
 `M2` leyó un registro vacío y el modelo vio `TURNOS: 0`;
 (b) el modelo tenía `turnos = 1` y desobedeció.
@@ -561,17 +596,24 @@ consumieron **1 operación cada una** — solo el `SearchRecord`, sin resultados
 Esto es coherente con la ventana estrecha: en el momento de cada corrida no había ningún lead con
 entre 18 y 23 horas exactas de silencio.
 
-#### E.4 — Un error de la API quema los tres seguimientos de golpe
+#### E.4 — Un envío fallido registra el seguimiento como hecho (corregido en el segundo pase)
 
-Módulo 6, ruta 2 del router, **sin filtro**:
+**Corrección sobre el primer pase.** Se había afirmado que un error de la API de Anthropic o del
+ParseJSON fijaba `fu_count = 3` y excluía al lead para siempre. Es falso: los handlers de `M2` y
+`M3` son `Ignore`, y en Make `Ignore` **descarta el bundle** — ni `M5` ni `M6` corren, `fu_count`
+queda intacto y el lead se reintenta en la corrida siguiente. Ese camino está bien.
 
-```
-fu_count = {{if(3.enviar; ifempty(1.data.fu_count;0) + 1; 3)}}
-```
+El camino real es el del envío: `M5` (POST a `/conversations/messages`) tiene `onerror Resume`,
+que traga el error y deja continuar. Si GHL rechaza el envío — y en Instagram el rechazo típico es
+la **ventana de 24 h de Meta cerrada**, además de cualquier 4xx —, `M6` corre igual con
+`3.enviar = true` y registra `fu_count + 1` y el texto del seguimiento en `historial`, **sin que el
+mensaje haya llegado**. El "ÚNICO TIRO" del que habla el prompt puede gastarse contra un error HTTP
+y quedar contabilizado como enviado. Fallo silencioso: la ejecución termina en éxito.
 
-Si `M2` falla (`M20 Ignore`) o `M3` no parsea (`M21 Ignore`), `3.enviar` llega vacío → se evalúa como
-falso → `fu_count = 3` → con el filtro `fu_count < 3`, ese lead **queda excluido del seguimiento para
-siempre**, sin haber recibido nada. La ejecución termina en status 1 (éxito). Fallo silencioso.
+Aparte: cuando el modelo decide `enviar = false`, `M6` fija `fu_count = 3` a propósito. Los casos
+de `false` que el prompt autoriza son terminales (no le interesa, ya compró, pidió no ser
+contactado, urgencia derivada), así que cerrarle los tres intentos es **diseño deliberado y
+coherente**, no un fallo. Se reclasifica como decisión existente a respetar.
 
 #### E.5 — `temperatura != frio` deja fuera a quien más falta hace recuperar
 
@@ -579,8 +621,11 @@ Registro `MN3KecD9WoYAQhKyMp8V`: `estado: precio_dado`, `temperatura: frio`, res
 *"Le expliqué mecanismo y precio (89 dólares). **Dijo que no puede ahora, no quiso el link por el
 momento.** Quedé abierta a que retome cuando pueda."*
 
-Es un lead que llegó hasta el precio y se frenó por plata. El filtro del `SearchRecord`
-(`temperatura != "frio"`) lo excluye del seguimiento. El prompt del redactor tiene una estrategia
+Verificado en el hilo (`tnhu0lxJKOhlYtgc1ufS`): 19:14:35 LEAD `No puedo ahora, gracias igual` →
+19:15:02 PAULA `Ningún problema! Cuando quieras retomamos, aquí quedo atenta` — un cierre elegante,
+correcto. Pero "quedo atenta" es mentira estructural: es un lead que llegó hasta el precio y se
+frenó por plata, y el filtro del `SearchRecord` (`temperatura != "frio"`) lo excluye del
+seguimiento. El prompt del redactor tiene una estrategia
 específica para este caso (*"Intento 2: aportas algo útil que todavía no le habías dicho"*) que nunca
 se va a ejecutar.
 
@@ -593,7 +638,7 @@ Lo mismo con los 4 registros en `nuevo / frio` que solo recibieron el primer DM.
 | # | Causa raíz | Capa | Fallos que explica | Riesgo de dejarla como está |
 |---|---|---|---|---|
 | 1 | **No hay agrupación de ráfagas ni historial de chat**: `M1→M2→M3` directo con `{{1.mensaje}}` | Escenario 7035201 | A.1, A.2, y agrava B.2 y E.1 | Es el problema número uno del brief y en este proyecto está sin resolver del todo. Cada mensaje corto del lead gasta una respuesta, y Paula repite lo que ya dijo porque literalmente no lo sabe. Ocurre en el momento del cierre |
-| 2 | **El seguimiento no puede funcionar**: ventana 18-23 h contra espaciado de 12 h, más exclusión de `frio` | Escenario 7035204 | E.3, E.4, E.5 | 0 seguimientos enviados en 28 leads. En un ciclo de venta largo y orgánico, sin seguimiento la mitad del embudo se pierde. Los intentos 2 y 3 que el prompt describe no existen |
+| 2 | **El seguimiento no puede funcionar**: ventana 18-23 h contra espaciado de 12 h, exclusión de `frio`, y el envío fallido se contabiliza como enviado | Escenario 7035204 | E.3, E.4, E.5 | 0 seguimientos enviados en 28 leads. En un ciclo de venta largo y orgánico, sin seguimiento la mitad del embudo se pierde. Los intentos 2 y 3 que el prompt describe no existen |
 | 3 | **El bot vende un solo producto y el negocio tiene tres**, sin reglas de asignación | Prompt + schema de salida | C.1 | Cada lead que califica para asesoría o para ebooks necesita que entre una persona. Se ve en 3 de los 30 hilos listados. Es la diferencia entre un setter y un contestador |
 | 4 | **La apertura por comentario no verifica si ya hay conversación**, porque el guardarraíl está en Make y el DM lo manda GHL | GHL workflow (guard mal ubicado en Make 7247435) | B.1, B.2 | Leads activos reciben un mensaje de bienvenida genérico que borra el trabajo de calificación. Doble saludo en leads nuevos |
 | 5 | **`turnos` se corrupta a string por concatenación** | Escenario 7035201, mapeo M7 | E.1 | 10 de 28 registros afectados. Cuatro leads están armados para recibir un segundo saludo completo. Los filtros numéricos del seguimiento evalúan strings |
