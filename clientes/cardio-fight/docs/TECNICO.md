@@ -110,6 +110,30 @@ guarda el enlace de invitación del grupo (validado contra
 al portapapeles **dentro del gesto del usuario** —requisito de Safari e iOS—
 y deja que el `<a href>` navegue al grupo. Dos toques: tocar y pegar.
 
+## Finanzas: el mes como unidad
+
+`cf_admin_finance(token, mes, n_meses)` devuelve en una sola llamada todo lo que
+pinta la pestaña Pagos: las cifras del mes que se está mirando, el estado de
+cobro **de hoy** (que no depende del mes elegido) y el histórico mes a mes.
+
+- La ventana del histórico arranca en el mes del primer pago, así que no
+  arrastra una cola de meses vacíos cuando el gimnasio lleva poco tiempo.
+- El vencimiento no se guarda como estado: se deriva de
+  `max(covers_to) < hoy`. No hay nada que «reiniciar» ni ningún proceso
+  programado que pueda fallar; el día que se pasa la fecha, el alumno aparece
+  vencido solo.
+- El periodo se calcula en el navegador (`periodoDe`) y se puede editar: el
+  inicio es `paid_until` si el plan sigue vigente y hoy si no, y el fin es el
+  mismo día del mes siguiente con ajuste de fin de mes (31 ene + 1 mes = 28 feb).
+  Encadenar desde `paid_until` evita a la vez los huecos y la deriva que
+  produce sumar 30 días.
+
+El histórico sigue la guía de visualización del proyecto: una serie, un color
+(el rojo de marca, validado contra la superficie `#16161a`), barras finas
+ancladas a la izquierda, el importe como texto en tinta normal y no en el color
+de la serie, y el mes seleccionado marcado con la superficie, nunca con otro
+color de barra (eso sería codificar el rango en el tono).
+
 ## Fechas y horas
 
 Las clases se guardan como `date` + `time` **locales del gimnasio**, no como

@@ -159,6 +159,23 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 .cifra.dinero{grid-column:span 3;text-align:left;padding:16px}
 .cifra.dinero .v{font-size:32px}
 
+/* ---------- histórico mensual ---------- */
+.mesnav{display:flex;align-items:center;gap:8px;margin:0 0 16px}
+.mesnav .titulo{flex:1;text-align:center;font-size:16px;font-weight:700;letter-spacing:-.01em}
+.hist{display:flex;flex-direction:column;gap:2px}
+.hist button{display:block;width:100%;text-align:left;background:none;border:0;
+  padding:9px 10px;border-radius:10px;cursor:pointer;color:inherit}
+.hist button:hover{background:var(--card)}
+.hist button[aria-current="true"]{background:var(--card);
+  box-shadow:inset 0 0 0 1px var(--line)}
+.hist .fila{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.hist .mes{font-size:13px;color:var(--muted);
+  flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hist .cifra{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+.hist .cifra.cero{color:var(--muted);font-weight:400}
+.hist .barra{height:6px;border-radius:3px;background:var(--accent);min-width:3px}
+.hist .riel{height:6px;border-radius:3px;background:var(--card-2)}
+
 /* ---------- navegación de la agenda ---------- */
 .seg{display:inline-flex;background:var(--card-2);border:1px solid var(--line);
   border-radius:11px;padding:3px;gap:3px}
@@ -349,11 +366,20 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
       <div class="btn-row" style="margin-bottom:18px">
         <button class="btn primary grow" data-act="nuevo-pago">＋ Registrar pago</button>
       </div>
+      <div class="mesnav">
+        <button class="nav" data-mes="-1" aria-label="Mes anterior">‹</button>
+        <div class="titulo" id="pagos-mes"></div>
+        <button class="nav" data-mes="1" aria-label="Mes siguiente">›</button>
+      </div>
       <div id="pagos-cifras"></div>
       <div class="section" id="pagos-pendientes"></div>
       <div class="section">
-        <h2>Últimos pagos</h2>
+        <h2 id="pagos-titulo">Pagos del mes</h2>
         <div id="pagos-lista"></div>
+      </div>
+      <div class="section">
+        <h2>Histórico mes a mes</h2>
+        <div id="pagos-historico"></div>
       </div>
     </div>
 
@@ -442,6 +468,18 @@ const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov"
 const aDate = iso => { const [y,m,d] = iso.split("-").map(Number); return new Date(y, m-1, d); };
 const isoDe = dt => `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,"0")}-${String(dt.getDate()).padStart(2,"0")}`;
 const sumaDias = (iso, n) => { const t = aDate(iso); t.setDate(t.getDate()+n); return isoDe(t); };
+/** Mismo día del mes siguiente. El 31 de enero + 1 mes es el 28/29 de febrero. */
+const sumaMeses = (iso, n) => {
+  const [y, m, d] = iso.split("-").map(Number);
+  const t = new Date(y, m - 1 + n, 1);
+  const ultimo = new Date(t.getFullYear(), t.getMonth() + 1, 0).getDate();
+  t.setDate(Math.min(d, ultimo));
+  return isoDe(t);
+};
+const mesDe = iso => iso.slice(0, 8) + "01";
+const nombreMes = iso => { const t = aDate(iso);
+  const m = MES_LARGO[t.getMonth()];
+  return `${m[0].toUpperCase()}${m.slice(1)} ${t.getFullYear()}`; };
 
 function fecha(iso, hoy) {
   if (iso === hoy) return "Hoy";
@@ -528,7 +566,7 @@ const S = {
   token: localStorage.getItem("cf_token") || null,
   role: null, nombre: null, plan: null, gym: "Cardio Fight",
   vista: null, alumnos: [], hoy: null, cancelHoras: 3,
-  agenda: [], agendaDia: null, agendaModo: "dia",
+  agenda: [], agendaDia: null, agendaModo: "dia", mes: null,
   fPlan: "todos", fPago: "todos"
 };
 
@@ -1090,27 +1128,41 @@ function pintarAlumnos() {
 $("#busca-alumno").addEventListener("input", pintarAlumnos);
 
 /* ==========================================================================
-   VISTA DEL PROFE — PAGOS
+   VISTA DEL PROFE — PAGOS Y FINANZAS
+   El mes es la unidad: la pantalla se mira mes a mes y guarda el histórico.
    ========================================================================== */
 async function verPagos() {
   cargando("#pagos-lista");
   $("#pagos-cifras").innerHTML = ""; $("#pagos-pendientes").innerHTML = "";
-  const r = await pedir("cf_admin_payments", { p_token: S.token });
+  $("#pagos-historico").innerHTML = "";
+  const r = await pedir("cf_admin_finance", { p_token: S.token, p_month: S.mes, p_months: 12 });
   if (!r) { $("#pagos-lista").innerHTML = ""; return; }
-  S.hoy = r.today;
+  S.hoy = r.today; S.mes = r.month;
 
-  const mes = MES_LARGO[aDate(r.today).getMonth()];
+  const h = r.history || [];
+  const mesActual = mesDe(r.today);
+  const masViejo  = h.length ? h[h.length - 1].month : mesActual;
+  const esteMes   = r.month === mesActual;
+  $("#pagos-mes").textContent = nombreMes(r.month) + (esteMes ? " · este mes" : "");
+  // Las flechas se mueven por el mismo rango que muestra el histórico.
+  $('[data-mes="1"]').disabled  = r.month >= mesActual;
+  $('[data-mes="-1"]').disabled = r.month <= masViejo;
+  $("#pagos-titulo").textContent = esteMes ? "Pagos de este mes"
+                                           : "Pagos de " + nombreMes(r.month);
+
+  /* ---- cifras del mes que se está mirando ---- */
   $("#pagos-cifras").innerHTML = `<div class="cifras">
     <div class="cifra dinero">
-      <div class="k" style="margin:0 0 4px">Ganado en ${esc(mes)}</div>
+      <div class="k" style="margin:0 0 4px">Ganado en ${esc(nombreMes(r.month))}</div>
       <div class="v">${dinero(r.month_total)}</div>
-      <div class="k" style="margin-top:6px">${r.month_count} pago${r.month_count === 1 ? "" : "s"} registrado${r.month_count === 1 ? "" : "s"}</div>
+      <div class="k" style="margin-top:6px">${r.month_count} pago${r.month_count === 1 ? "" : "s"} de ${r.month_students} alumno${r.month_students === 1 ? "" : "s"}</div>
     </div>
-    <div class="cifra ok"><div class="v">${r.al_dia}</div><div class="k">Al día</div></div>
-    <div class="cifra bad"><div class="v">${r.pendientes}</div><div class="k">Pendientes</div></div>
+    <div class="cifra ok"><div class="v">${r.al_dia}</div><div class="k">Al día hoy</div></div>
+    <div class="cifra bad"><div class="v">${r.pendientes}</div><div class="k">Por cobrar</div></div>
     <div class="cifra"><div class="v">${r.al_dia + r.pendientes}</div><div class="k">Alumnos</div></div>
   </div>`;
 
+  /* ---- a quién hay que cobrarle hoy ---- */
   const deudores = r.deudores || [], porVencer = r.por_vencer || [];
   $("#pagos-pendientes").innerHTML = deudores.length
     ? `<h2>Por cobrar (${deudores.length})</h2>` + deudores.map(a => {
@@ -1123,7 +1175,7 @@ async function verPagos() {
             <span class="avatar">${esc(iniciales(a.full_name))}</span>
             <div class="grow" style="min-width:0">
               <div class="truncate strong">${esc(a.full_name)}</div>
-              <div class="small muted">${venc ? `Venció el ${esc(fecha(a.paid_until))}` : "Nunca ha pagado"}${a.active ? "" : " · pausado"}</div>
+              <div class="small muted">${venc ? `Se le acabó el ${esc(fecha(a.paid_until))}` : "Nunca ha pagado"}${a.active ? "" : " · pausado"}</div>
             </div>
             <span class="chip ${venc ? "bad" : ""}">${venc ? "Vencido" : "Sin pago"}</span>
           </div>
@@ -1137,10 +1189,11 @@ async function verPagos() {
 
   if (porVencer.length) {
     $("#pagos-pendientes").innerHTML += `<div class="note" style="margin-top:12px">
-      Vencen esta semana: ${porVencer.map(a => `${esc(a.full_name)} (${esc(fecha(a.paid_until))})`).join(", ")}.
+      Se les acaba esta semana: ${porVencer.map(a => `${esc(a.full_name)} (${esc(fecha(a.paid_until))})`).join(", ")}.
     </div>`;
   }
 
+  /* ---- pagos del mes ---- */
   const pagos = r.payments || [];
   $("#pagos-lista").innerHTML = pagos.length ? pagos.map(p => `
     <div class="card">
@@ -1158,7 +1211,30 @@ async function verPagos() {
         </div>
       </div>
     </div>`).join("")
-    : vacio("💵", "Todavía no has registrado ningún pago.");
+    : vacio("💵", esteMes ? "Todavía no has registrado pagos este mes."
+                          : "Ese mes no tuvo pagos registrados.");
+
+  /* ---- histórico: una barra por mes, todas del mismo color ---- */
+  const tope = Math.max(...h.map(m => Number(m.total)), 1);
+  $("#pagos-historico").innerHTML = `
+    <div class="card" style="padding:10px 8px">
+      <div class="hist">${h.map(m => {
+        const total = Number(m.total);
+        const pct = total > 0 ? Math.max(3, Math.round(total / tope * 100)) : 0;
+        return `<button data-vermes="${m.month}" aria-current="${m.month === r.month}"
+            title="${esc(nombreMes(m.month))}: ${m.count} pago${m.count === 1 ? "" : "s"}">
+          <div class="fila">
+            <span class="mes">${esc(nombreMes(m.month))}</span>
+            <span class="cifra${total ? "" : " cero"}">${total ? dinero(total) : "—"}</span>
+          </div>
+          <div class="riel">${pct ? `<div class="barra" style="width:${pct}%"></div>` : ""}</div>
+        </button>`;
+      }).join("")}</div>
+    </div>
+    <div class="row" style="margin-top:12px;padding:0 4px">
+      <span class="small muted grow">Total de ${h.length} mes${h.length === 1 ? "" : "es"}</span>
+      <span class="strong">${dinero(r.history_total)}</span>
+    </div>`;
 }
 
 /* ==========================================================================
@@ -1296,9 +1372,21 @@ function hojaPin(nombre, tel, pin, esNuevo) {
 }
 
 /* ------------------------------------------------------------- pago */
+/** El plan es mensual: empieza donde acabó el anterior si sigue vigente,
+    y si no, hoy. Termina el mismo día del mes siguiente. */
+function periodoDe(alumnoId) {
+  const hoy = S.hoy || isoDe(new Date());
+  const a = S.alumnos.find(x => x.id === alumnoId);
+  const vigente = a && a.paid_until && a.paid_until >= hoy;
+  const desde = vigente ? a.paid_until : hoy;
+  return { desde, hasta: sumaMeses(desde, 1), renueva: !!vigente,
+           vencio: a && a.paid_until && a.paid_until < hoy ? a.paid_until : null };
+}
+
 function formPago(alumnoId) {
   if (!S.alumnos.length) { aviso("Primero da de alta a un alumno.", true); return; }
   const hoy = S.hoy || isoDe(new Date());
+  const inicial = periodoDe(alumnoId || S.alumnos[0].id);
   abrirHoja("Registrar pago", `
     <form id="f-pago">
       <label class="f"><span>Alumno</span>
@@ -1317,10 +1405,11 @@ function formPago(alumnoId) {
       </div>
       <div class="grid2">
         <label class="f"><span>El plan cubre desde</span>
-          <input name="desde" type="date" required value="${hoy}"></label>
+          <input name="desde" type="date" required value="${inicial.desde}"></label>
         <label class="f"><span>hasta</span>
-          <input name="hasta" type="date" required value="${sumaDias(hoy, 30)}"></label>
+          <input name="hasta" type="date" required value="${inicial.hasta}"></label>
       </div>
+      <p class="tiny muted" id="pg-nota" style="margin:-6px 0 16px"></p>
       <label class="f"><span>Nota (opcional)</span>
         <input name="nota" maxlength="200" placeholder="Ej: pagó la mitad ahora"></label>
       <div class="btn-row">
@@ -1329,6 +1418,20 @@ function formPago(alumnoId) {
       </div>
     </form>`, hoja => {
       $('[data-x="no"]', hoja).onclick = cerrarHoja;
+      const sel = $('[name="alumno"]', hoja), dDesde = $('[name="desde"]', hoja),
+            dHasta = $('[name="hasta"]', hoja), nota = $("#pg-nota", hoja);
+      /* Un mes exacto: al elegir alumno o cambiar el inicio, la fecha de fin se recalcula. */
+      const recalcular = (tocaFechas) => {
+        const p = periodoDe(sel.value);
+        if (tocaFechas) { dDesde.value = p.desde; dHasta.value = p.hasta; }
+        nota.textContent = p.renueva
+          ? `Renovación: su plan actual llega al ${fecha(p.desde)}, así que el nuevo mes arranca ahí.`
+          : (p.vencio ? `Se le venció el ${fecha(p.vencio)}. El mes nuevo empieza hoy.`
+                      : "Un mes contado desde hoy.");
+      };
+      sel.onchange = () => recalcular(true);
+      dDesde.onchange = () => { dHasta.value = sumaMeses(dDesde.value, 1); };
+      recalcular(false);
       $("#f-pago", hoja).onsubmit = async e => {
         e.preventDefault();
         const f = e.target, btn = $('button[type="submit"]', f), txt = btn.textContent;
@@ -1528,13 +1631,15 @@ document.addEventListener("click", async e => {
     "[data-sacar],[data-anotar],[data-editar-clase],[data-borrar-clase]," +
     "[data-pagar],[data-editar-alumno],[data-pausar],[data-borrar-alumno],[data-borrar-pago]," +
     "[data-modo],[data-mover],[data-hoy],[data-dia],[data-fplan],[data-fpago]," +
-    "[data-compartir],[data-asignar],[data-confirmar]");
+    "[data-compartir],[data-asignar],[data-confirmar],[data-mes],[data-vermes]");
   if (!t) return;
   const d = t.dataset;
 
   if (d.ir) return irA(d.ir);
 
   /* ---- agenda: día / semana ---- */
+  if (d.vermes) { S.mes = d.vermes; return verPagos(); }
+  if (d.mes) { S.mes = sumaMeses(mesDe(S.mes || S.hoy), Number(d.mes)); return verPagos(); }
   if (d.fplan) { S.fPlan = d.fplan; return pintarAlumnos(); }
   if (d.fpago) { S.fPago = d.fpago; return pintarAlumnos(); }
   if (d.modo)  { S.agendaModo = d.modo; return pintarAgenda(); }
