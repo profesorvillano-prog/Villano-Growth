@@ -5,6 +5,9 @@
 | Pieza | Qué es |
 |---|---|
 | `index.html` | Toda la app: un archivo, sin build, sin dependencias, sin CDN. |
+| `logo-original.png` | El logo tal cual lo entregó el cliente. **Ya venía con transparencia** (PNG en modo P con alfa por paleta): lo que se veía blanco era el visor. |
+| `logo.png` y demás | Derivados generados desde el original: logo transparente (560 px), `favicon.png`, `icono-192/512.png`, `apple-touch-icon.png` y `og.png` (1200×630). Los iconos llevan el fondo `#0b0b0d` horneado porque iOS convierte la transparencia en negro. Todo cuantizado a paleta: 276 KB en total. |
+| `manifest.json` | Permite «Añadir a pantalla de inicio» con el logo y a pantalla completa. |
 | Supabase | Postgres + PostgREST. Proyecto `Cardio Fight` (`boxbmbhuarhasgblozvk`, región `sa-east-1`). |
 | Vercel | Sirve el HTML como sitio estático. |
 

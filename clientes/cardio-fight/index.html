@@ -5,7 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0b0d">
 <title>Cardio Fight</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#129354;</text></svg>">
+<link rel="icon" href="favicon.png" sizes="32x32">
+<link rel="icon" href="icono-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-title" content="Cardio Fight">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="Reserva tu clase de kickboxing y boxeo en Cardio Fight, Pichilemu.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cardio Fight">
+<meta property="og:title" content="Cardio Fight — Kickboxing y Boxeo">
+<meta property="og:description" content="Toca para ver la clase y anotarte. Solo tu nombre, sin registro.">
+<meta property="og:image" content="https://cardio-fight.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://cardio-fight.vercel.app/">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 :root{
   --bg:#0b0b0d; --card:#16161a; --card-2:#1d1d22; --line:#2a2a31;
@@ -98,10 +113,8 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 
 /* ---------- página pública del enlace ---------- */
 .publica{max-width:460px;margin:0 auto;padding:28px 20px 60px;min-height:100svh}
-.publica .marca{text-align:center;margin-bottom:24px}
-.publica .marca .glove{font-size:40px}
-.publica .marca h1{font-size:20px;font-weight:800;letter-spacing:.1em;margin-top:6px}
-.publica .marca h1 b{color:var(--accent)}
+.publica .marca{text-align:center;margin-bottom:22px}
+.publica .marca img{width:min(190px,52vw);height:auto;display:block;margin:0 auto}
 .clase-hero{background:var(--card);border:1px solid var(--line);border-radius:18px;
   padding:22px;text-align:center;margin-bottom:20px}
 .clase-hero .tit{font-size:24px;font-weight:800;letter-spacing:-.02em}
@@ -230,11 +243,9 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 /* ---------- login ---------- */
 .login{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
   max-width:400px;margin:0 auto;padding:32px 20px}
-.login .logo{text-align:center;margin-bottom:32px}
-.login .logo .glove{font-size:46px}
-.login .logo h1{font-size:26px;font-weight:800;letter-spacing:-.02em;margin-top:8px}
-.login .logo h1 b{color:var(--accent)}
-.login .logo p{color:var(--muted);font-size:14px;margin:6px 0 0}
+.login .logo{text-align:center;margin-bottom:28px}
+.login .logo img{width:min(230px,62vw);height:auto;display:block;margin:0 auto}
+.login .logo p{color:var(--muted);font-size:14px;margin:14px 0 0}
 </style>
 </head>
 <body>
@@ -242,9 +253,8 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 <!-- ============================ ENTRAR ============================ -->
 <div id="screen-login" class="login">
   <div class="logo">
-    <div class="glove">🥊</div>
-    <h1>CARDIO <b>FIGHT</b></h1>
-    <p>Reserva tus clases</p>
+    <img src="logo.png" alt="Cardio Fight — Kickboxing y Boxeo, Pichilemu" width="462" height="560">
+    <p>Entra para gestionar tus clases</p>
   </div>
   <form id="form-login" class="stack" novalidate>
     <label class="f">
@@ -614,8 +624,8 @@ async function verEnlace() {
   caja.innerHTML = '<div class="spin"></div>';
   const r = await api("cf_link_class", { p_share: SHARE });
 
-  const marca = g => `<div class="marca"><div class="glove">🥊</div>
-    <h1>${esc((g || "CARDIO FIGHT").toUpperCase())}</h1></div>`;
+  const marca = g => `<div class="marca">
+    <img src="logo.png" alt="${esc(g || "Cardio Fight")}" width="462" height="560"></div>`;
 
   if (!r || !r.ok) {
     caja.innerHTML = marca() + `<div class="note bad">${esc((r && r.error) || "No se pudo abrir el enlace.")}</div>`;

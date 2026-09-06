@@ -11,8 +11,12 @@ de quién no está al día.
   ve quién va a cada una y registra los pagos.
 - **Todos los demás** solo tocan un enlace y escriben su nombre.
 
-Todo cabe en un archivo: [`index.html`](index.html). Los datos viven en
-Supabase (plan gratuito).
+Todo cabe en un archivo: [`index.html`](index.html), más el logo y los iconos.
+Los datos viven en Supabase (plan gratuito).
+
+**Para tenerla como una app en el móvil:** abre la web, y en el menú del
+navegador toca *Añadir a pantalla de inicio*. Queda con el logo de Cardio
+Fight y se abre a pantalla completa, sin barra de direcciones.
 
 **Dónde vive:** proyecto Vercel `cardio-fight`, enlazado a este repositorio
 con la carpeta raíz `clientes/cardio-fight`. Cada push despliega solo.
