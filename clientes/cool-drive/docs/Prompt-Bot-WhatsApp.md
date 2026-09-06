@@ -394,3 +394,68 @@ El prompt quedó con este orden de prioridad (las tres primeras son nuevas o sub
 11. La Sra. Cecilia, una sola vez
 
 Aplicado al escenario **7130146**. Verificado después del cambio: `isActive: true`, `sequential: false`, `dlqCount: 4` (sin subir).
+
+## El bot aprende a callarse, y aprende a cerrar (2026-09-06)
+
+Dos conversaciones del mismo día mostraron los dos extremos del mismo problema: el bot habla cuando no debe y se queda callado cuando debería empujar.
+
+### Caso Myriam — habló de más
+
+Ella cerró la conversación dos veces y recibió dos respuestas casi idénticas:
+
+| Hora | Quién | Mensaje |
+|---|---|---|
+| 06:01 | Myriam | Ok gracias |
+| 06:02 | Bot | De nada! cualquier cosa que necesites me escribes |
+| 06:03 | Myriam | Ok gracias |
+| 06:04 | Bot | De nada Myriam, cualquier cosa me escribes por acá no más |
+
+El debounce de 45 segundos no las agrupó porque pasaron dos minutos entre una y otra. El problema real es de diseño: **el bot estaba obligado a mandar siempre algo**. No tenía forma de decidir que lo correcto era no escribir.
+
+**La solución: una acción nueva, `no_responder`.**
+
+- Se agregó al enum de `accion` del schema.
+- El módulo 5 (*Enviar mensaje*) ahora lleva filtro **Solo si hay algo nuevo que decir**: `accion ≠ no_responder` **Y** el mensaje no viene vacío.
+- El módulo 7 (*Guardar memoria*) igual corre, así que los turnos y el resumen se actualizan aunque no se escriba.
+
+Y la regla nº4 se extendió:
+
+> SI LO ÚNICO QUE SE TE OCURRE ES UNA VARIANTE DE LO QUE YA ESCRIBISTE, NO MANDES NADA. El silencio es mil veces mejor que un mensaje repetido: dos de nada seguidos, o dos veces la misma despedida con otras palabras, es la señal más clara de que hay un bot al otro lado.
+> CASO TÍPICO: la persona cierra con ok gracias, listo, dale. La PRIMERA vez respondes corto y cálido. Si manda OTRA cortesía igual y ya te despediste, devuelves no_responder.
+
+### Caso Brenda — habló de menos
+
+Brenda venía caliente y el bot la dejó enfriarse:
+
+| Hora | Quién | Mensaje |
+|---|---|---|
+| 05:53 | Brenda | Desde cero / Valor |
+| 05:54 | Bot | Precios + anzuelo de la promo |
+| 05:56 | Brenda | **Me interesa** |
+| 05:57 | Bot | La promo deja el Full en $119.990... |
+| 05:58 | Brenda | **Forma de pago y que incluye** |
+| 05:59 | Bot | Lista lo que incluye y los medios de pago. **Y ahí termina.** |
+
+Dos señales de compra explícitas y el bot no propuso nada. Informó perfecto y perdió la venta con buenos modales.
+
+La causa era una regla propia: la nº6, *NO INTERROGUES*, que limita las preguntas a una de cada tres respuestas. Buena regla contra el interrogatorio, pero estaba también apagando el cierre.
+
+**Regla nº12 nueva, con excepción explícita dentro de la nº6:**
+
+> CUANDO HAY SEÑALES DE COMPRA, CIERRAS. Si la persona está caliente y tú solo entregas datos y te quedas callado, el lead se enfría y se va.
+
+Señales de compra reconocidas: *me interesa, me tinca, lo quiero hacer, cómo pago, forma de pago, medios de pago, dónde pago, qué incluye cuando ya sabe el precio, cuándo parte, cuándo puedo empezar, puedo ir hoy, cuánto queda con la promo, tengo la plata, si pago ahora.*
+
+Ante una señal, el mensaje responde **y** termina con una propuesta de cierre, alternando entre cuatro fórmulas (*si quieres lo dejamos pagado hoy con el precio de septiembre* / *te tinca que avancemos con el Full* / *lo dejamos tomado ahora y partes cuando te acomode* / *te paso el link*). Ante **dos señales seguidas** pasa directo a `cerrar_inscripcion` con el link.
+
+Con esto, a Brenda le habría respondido:
+
+> Incluye la teoría online, 8 pruebas, 2 psicotécnicas, las 12 prácticas y el acompañamiento el día del examen. Puedes pagar por transferencia, débito, cuotas o link. **Si quieres lo dejamos pagado hoy con el precio de septiembre**
+
+La regla aclara que esto no es presionar: se ofrece el siguiente paso **una** vez, y si dice que lo va a pensar, se baja el ritmo.
+
+### Detalle de implementación
+
+Al reescribir el filtro del módulo 8 (*Avisar a Sebastián*) hubo que tener cuidado. Era `accion ≠ responder`, lo que incluía `cerrar_inscripcion`: cuando el bot manda el link de pago, etiqueta `bot-off` + `atencion-humana` y le pasa el lead a una persona. Al agregar `no_responder` ese filtro habría empezado a etiquetar los silencios. Quedó como un OR explícito de las tres acciones que sí escalan — `derivar_humano`, `alumno_existente`, `cerrar_inscripcion` — y `no_responder` no toca ningún tag.
+
+Verificado tras el cambio: `isActive: true`, `sequential: false`, `dlqCount: 4` (sin subir).
