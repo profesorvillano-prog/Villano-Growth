@@ -49,3 +49,39 @@ horas y ninguna corrida se la salta.
 5. Su último mensaje tiene menos de 23 horas, o sea sigue dentro de la
    ventana de Meta.
 
+
+## Seguimientos enganchados a la conversación real (2026-09-06)
+
+**El problema.** El seguimiento a Felipe decía:
+
+> *Felipe, te dejo el dato para que lo tengas claro, si pagas ahora el Avanzado queda en 90.000 en vez de 110.000 por la promo hasta el 17 de septiembre, y tienes hasta 60 días para partir así que no hay drama si al final no es la otra semana. Los bloques tarde-noche son los que primero se llenan, cualquier cosa me dices y te reservo el cupo.*
+
+Tres cosas mal:
+
+1. **No engancha con nada concreto.** Felipe había dicho *"me gustaría partir la próxima semana, te confirmaré hoy en la tarde"*. El seguimiento natural abre por ahí y no lo hace.
+2. **Es largo.** Junta promo, plazo, horarios y cierre en un solo bloque. Se lee como publicidad.
+3. **Promete algo que no existe:** *"te reservo el cupo"*. El prompt del bot principal prohíbe inventar cupos; este prompt nunca heredó esa regla.
+
+**Causa de fondo, la misma del punto 10 de `Averias-y-causas.md`:** el escenario solo veía el `historial` autoescrito, nunca la conversación real. Sin el texto, no puede encontrar el cabo suelto.
+
+**Corrección — mismo tratamiento que el bot principal:**
+
+Dos módulos nuevos antes de Claude, ambos detrás del filtro de horario para no gastar operaciones en leads que no califican:
+
+- **Buscar la conversación** → obtiene el `conversationId` desde GHL.
+- **Traer la conversación real** → baja los últimos 12 mensajes.
+
+Al modelo le llegan ahora separados: lo que escribió el lead, y lo que escribió el bot.
+
+**Cuatro reglas nuevas, en orden de prioridad:**
+
+1. **Máximo 200 caracteres**, reforzado con `maxLength` en el JSON schema. Una idea por mensaje. Si no cabe todo, se sacan datos, nunca el enganche.
+2. **Engancha con el cabo suelto.** Si dijo que iba a confirmar, se abre por ahí. Si nombró una fecha, se nombra. Si dejó una pregunta a medias, se retoma. Prohibidas las fórmulas de call center (*"te escribo para hacer seguimiento"*, *"sigues interesado"*, *"te dejo el dato para que lo tengas claro"*).
+3. **No repetir lo ya dicho**, verificado contra sus propios mensajes.
+4. **Nunca prometer lo que no existe:** ni cupos guardados, ni horarios apartados, ni extensiones de la promo.
+
+**Cómo debería quedar el de Felipe:**
+
+> *Felipe, quedaste en confirmarme ayer en la tarde, cómo va eso? si partes la próxima semana alcanzas con el precio de septiembre.*
+
+126 caracteres, abre por lo que él mismo dijo, y da una razón para responder hoy.
