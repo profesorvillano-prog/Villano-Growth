@@ -126,17 +126,36 @@ generas, la app te da un botón para mandárselo por WhatsApp.
 
 ### 4. Cobrar — pestaña **Pagos**
 
-Nada más entrar ves lo importante:
+La pestaña funciona **por meses**, como cobras tú. Arriba tienes las flechas
+‹ › para moverte entre meses; abre siempre en el mes en curso.
 
-- **Ganado en el mes** y cuántos pagos llevas registrados.
-- **Al día** y **Pendientes**: cuántos alumnos hay en cada situación.
-- **Por cobrar**: la lista de quién debe, con si se le venció el plan o si
-  nunca ha pagado, y un botón **💬 Cobrar** que le abre WhatsApp con el
-  mensaje ya escrito.
-- Abajo, el historial de **últimos pagos**.
+- **Ganado en el mes** que estés mirando, con cuántos pagos y de cuántos alumnos.
+- **Al día hoy** y **Por cobrar**: en cuántos alumnos estás en cada situación.
+  Estas dos cifras son siempre de hoy, no del mes que mires.
+- **Por cobrar**: quién debe, si se le acabó el plan o si nunca ha pagado, y un
+  botón **💬 Cobrar** que abre WhatsApp con el mensaje ya escrito.
+- **Pagos del mes**: lo cobrado en ese mes.
+- **Histórico mes a mes**: una barra por mes con lo ganado. Toca cualquier mes
+  para verlo en detalle. Empieza en tu primer pago y va creciendo solo.
 
-Para registrar uno, pon el monto, cómo te pagó y **hasta qué fecha le cubre el
-plan**. De ahí sale todo lo anterior. Registrar un pago **reactiva
+#### El plan dura un mes y se vence
+
+Al registrar un pago, la app calcula el fin **un mes exacto** después, no 30
+días (que se van corriendo mes a mes). Y encadena bien las renovaciones:
+
+| Situación | Desde | Hasta |
+|---|---|---|
+| Primer pago, hoy 6 de septiembre | 6 sep | 6 oct |
+| Renueva el 1 de octubre, con plan hasta el 6 | 6 oct | 6 nov |
+| Paga tarde el 20 de octubre, se le venció el 6 | 20 oct | 20 nov |
+
+Si renueva antes de que se le acabe, **no pierde los días que le quedaban**: el
+mes nuevo empieza donde terminaba el anterior. Si paga tarde, empieza el día
+que paga. La app te dice debajo de las fechas de dónde sale ese periodo, y
+puedes cambiarlas a mano si un caso concreto lo pide.
+
+Cuando pasa la fecha de fin, el alumno aparece solo como **Vencido** en Pagos y
+en Alumnos, y sale en la lista de **Por cobrar**. Registrar un pago **reactiva
 automáticamente** a un alumno que estaba pausado.
 
 ### 4b. Encontrar a alguien — pestaña **Alumnos**
