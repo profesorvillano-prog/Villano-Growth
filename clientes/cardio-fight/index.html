@@ -30,7 +30,8 @@
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
      font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
 [hidden]{display:none!important}
@@ -61,7 +62,8 @@ h1,h2,h3{margin:0;line-height:1.2;letter-spacing:-.01em}
 .small{font-size:13px}
 .tiny{font-size:12px}
 .strong{font-weight:700}
-.truncate{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.truncate{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.card{overflow-wrap:anywhere}
 
 /* ---------- botones ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
@@ -74,20 +76,23 @@ h1,h2,h3{margin:0;line-height:1.2;letter-spacing:-.01em}
 .btn.ghost{background:transparent}
 .btn.danger{color:var(--bad);border-color:#43242a}
 .btn.block{width:100%}
-.btn.sm{min-height:36px;padding:0 12px;font-size:13px;border-radius:9px}
+.btn.sm{min-height:40px;padding:0 13px;font-size:13px;border-radius:9px}
+@media (max-width:359px){ .btn.sm{padding:0 10px;font-size:12px} }
 .btn-row{display:flex;gap:8px;flex-wrap:wrap}
 
 /* ---------- formularios ---------- */
 label.f{display:block;margin-bottom:12px}
 label.f > span{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
-input,select,textarea{width:100%;background:var(--card-2);border:1px solid var(--line);
-  border-radius:11px;padding:12px 14px;min-height:46px;outline:none}
+input,select,textarea{width:100%;min-width:0;max-width:100%;background:var(--card-2);
+  border:1px solid var(--line);border-radius:11px;padding:12px 14px;min-height:46px;outline:none}
 input:focus,select,textarea:focus{border-color:#4a4a55}
 select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),
   linear-gradient(135deg,var(--muted) 50%,transparent 50%);
   background-position:calc(100% - 20px) 21px,calc(100% - 14px) 21px;
   background-size:6px 6px;background-repeat:no-repeat;padding-right:40px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.grid2 > *{min-width:0}
+@media (max-width:379px){ .grid2{grid-template-columns:1fr} }
 .pin{letter-spacing:.5em;text-align:center;font-size:22px;font-weight:700}
 
 /* ---------- chips / etiquetas ---------- */
@@ -147,13 +152,14 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 .filtros{display:flex;flex-direction:column;gap:8px;margin:0 0 16px}
 .seg.wrap{display:flex;width:100%;overflow-x:auto;scrollbar-width:none}
 .seg.wrap::-webkit-scrollbar{display:none}
-.seg.wrap button{flex:1 0 auto;white-space:nowrap;padding:8px 14px;font-size:13px}
-.cifras{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 22px}
+.seg.wrap button{flex:1 0 auto;white-space:nowrap;padding:0 14px;font-size:13px}
+.cifras{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 22px}
 .cifra{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   padding:14px 12px;text-align:center}
 .cifra .v{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
-.cifra .k{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
-  color:var(--muted);margin-top:5px}
+.cifra .k{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+  color:var(--muted);margin-top:5px;overflow-wrap:anywhere}
+@media (max-width:359px){ .cifra{padding:12px 6px} .cifra .v{font-size:22px} .cifra .k{font-size:10px} }
 .cifra.ok  .v{color:var(--ok)}
 .cifra.bad .v{color:var(--bad)}
 .cifra.dinero{grid-column:span 3;text-align:left;padding:16px}
@@ -180,13 +186,14 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 .seg{display:inline-flex;background:var(--card-2);border:1px solid var(--line);
   border-radius:11px;padding:3px;gap:3px}
 .seg button{border:0;background:none;color:var(--muted);font-weight:600;font-size:14px;
-  padding:8px 18px;border-radius:8px;cursor:pointer}
+  min-height:40px;padding:0 18px;border-radius:8px;cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
 .navrow{display:flex;align-items:center;gap:10px;margin:0 0 12px}
 .strip-wrap{display:flex;align-items:center;gap:6px;margin:0 0 16px}
 .strip{display:flex;gap:8px;overflow-x:auto;scroll-behavior:smooth;
-  scroll-snap-type:x proximity;padding:2px 0 6px;flex:1;
-  scrollbar-width:none;-ms-overflow-style:none}
+  scroll-snap-type:x proximity;padding:2px 0 6px;flex:1;min-width:0;
+  scrollbar-width:none;-ms-overflow-style:none;
+  overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
 .strip::-webkit-scrollbar{display:none}
 .nav{flex:none;width:34px;height:52px;border-radius:10px;border:1px solid var(--line);
   background:var(--card-2);color:var(--muted);font-size:19px;line-height:1;cursor:pointer}
@@ -216,6 +223,14 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 .day.today{color:var(--accent)}
 .klass{display:flex;gap:14px;align-items:flex-start}
 .klass > .act{flex:none}
+/* En pantallas estrechas el botón baja a su propia línea y el título recupera el ancho. */
+@media (max-width:359px){
+  .klass{flex-wrap:wrap}
+  .klass > .act{width:100%;margin-top:10px}
+  .klass > .act .btn{width:100%}
+  #mis-plan .row{flex-wrap:wrap;gap:6px}
+  #mis-plan .chip{margin-left:0}
+}
 .klass .time{font-variant-numeric:tabular-nums;font-weight:800;font-size:18px;
   line-height:1.2;min-width:52px}
 .klass .time small{display:block;font-size:12px;font-weight:500;color:var(--muted)}
@@ -231,7 +246,8 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 /* ---------- modal ---------- */
 .veil{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.6);
   display:flex;align-items:flex-end;justify-content:center;padding:0}
-.sheet{background:var(--card);width:100%;max-width:640px;max-height:92vh;overflow:auto;
+.sheet{background:var(--card);width:100%;max-width:640px;max-height:92dvh;overflow:auto;
+  overscroll-behavior:contain;
   border-radius:20px 20px 0 0;border:1px solid var(--line);border-bottom:0;
   padding:20px var(--pad) calc(24px + env(safe-area-inset-bottom));
   animation:up .18s ease-out}
@@ -305,12 +321,26 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 
     <!-- ---------- vista ALUMNO ---------- -->
     <div class="view" id="v-mis" hidden>
+      <div id="mis-plan"></div>
       <div class="section">
         <h2>Mis clases reservadas</h2>
         <div id="mis-reservas"></div>
       </div>
       <div class="section">
         <h2>Horarios disponibles</h2>
+        <div class="navrow">
+          <div class="seg" id="mis-modo">
+            <button data-modo="dia" aria-pressed="true">Día</button>
+            <button data-modo="semana" aria-pressed="false">Semana</button>
+          </div>
+          <button class="btn sm ghost" data-hoy style="margin-left:auto">Hoy</button>
+        </div>
+        <div class="strip-wrap">
+          <button class="nav" data-mover="-1" aria-label="Anterior">‹</button>
+          <div class="strip" id="mis-strip"></div>
+          <button class="nav" data-mover="1" aria-label="Siguiente">›</button>
+        </div>
+        <div class="cabecera" id="mis-cabecera"></div>
         <div id="mis-horarios"></div>
       </div>
     </div>
@@ -567,6 +597,7 @@ const S = {
   role: null, nombre: null, plan: null, gym: "Cardio Fight",
   vista: null, alumnos: [], hoy: null, cancelHoras: 3,
   agenda: [], agendaDia: null, agendaModo: "dia", mes: null,
+  clases: [], aluDia: null, aluModo: "dia", plan: null,
   fPlan: "todos", fPago: "todos"
 };
 
@@ -744,29 +775,69 @@ async function verEnlace() {
    VISTA DEL ALUMNO
    ========================================================================== */
 async function verMis() {
-  cargando("#mis-reservas"); $("#mis-horarios").innerHTML = "";
-  const r = await pedir("cf_student_home", { p_token: S.token });
+  cargando("#mis-reservas");
+  $("#mis-horarios").innerHTML = ""; $("#mis-plan").innerHTML = "";
+  const r = await pedir("cf_student_home", { p_token: S.token, p_days: DIAS_VISIBLES });
   if (!r) return;
 
   S.hoy = r.today; S.cancelHoras = r.cancel_hours;
-  const clases = r.classes || [];
-  const mias   = clases.filter(c => c.my_booking_id);
-  const libres = clases.filter(c => !c.my_booking_id);
+  S.clases = r.classes || [];
+  S.plan = r.me;
+  if (!S.aluDia || S.aluDia < S.hoy) S.aluDia = S.hoy;
+  pintarMis();
+}
 
-  const pago = r.me.paid_until;
-  const avisoPago = !pago
-    ? `<div class="note" style="margin-bottom:16px">Aún no tienes pagos registrados. Habla con el profe.</div>`
-    : (pago < r.today
-        ? `<div class="note bad" style="margin-bottom:16px">Tu plan venció el ${fecha(pago)}. Renuévalo con el profe.</div>`
-        : "");
+/** Estado del plan del alumno, con la fecha en la que se le acaba. */
+function tarjetaPlan(me) {
+  const hasta = me.paid_until;
+  let cls, titulo, detalle;
+  if (!hasta) {
+    cls = ""; titulo = "Sin pagos registrados";
+    detalle = "Habla con el profe para activar tu plan.";
+  } else if (hasta < S.hoy) {
+    cls = "bad"; titulo = "Plan vencido";
+    detalle = `Se te acabó el ${fecha(hasta)}. Renuévalo con el profe.`;
+  } else if (hasta <= sumaDias(S.hoy, 5)) {
+    cls = "warn"; titulo = "Se te acaba pronto";
+    detalle = `Tu plan llega hasta el ${fecha(hasta)}.`;
+  } else {
+    cls = "ok"; titulo = "Plan al día";
+    detalle = `Estás cubierto hasta el ${fecha(hasta)}.`;
+  }
+  return `<div class="card" style="margin-bottom:22px">
+    <div class="row">
+      <div class="grow" style="min-width:0">
+        <div class="strong">${esc(titulo)}</div>
+        <div class="small muted">${esc(detalle)}</div>
+      </div>
+      <span class="chip ${cls}"><i class="dot"></i>${esc(PLAN[me.plan] || "")}</span>
+    </div>
+  </div>`;
+}
 
-  $("#mis-reservas").innerHTML = avisoPago + (mias.length
-    ? mias.map(c => tarjetaClase(c, "alumno")).join("")
-    : vacio("🗓️", "Todavía no tienes clases reservadas. Elige un horario abajo."));
+function pintarMis() {
+  $("#mis-plan").innerHTML = tarjetaPlan(S.plan);
+
+  const mias = S.clases.filter(c => c.my_booking_id);
+  $("#mis-reservas").innerHTML = mias.length
+    ? `<div class="stack">${mias.map(c => tarjetaClase(c, "alumno", true)).join("")}</div>`
+    : vacio("🗓️", "Todavía no tienes clases reservadas. Elige un horario abajo.");
+
+  const { ini, fin, semana } = pintarTira("mis", S.clases, S.aluDia, S.aluModo);
+  const libres = S.clases.filter(c =>
+    !c.my_booking_id && c.class_date >= ini && c.class_date <= fin);
+  const t = aDate(ini);
+
+  $("#mis-cabecera").innerHTML = semana
+    ? `<h2>Semana del ${t.getDate()} ${MESES[t.getMonth()]}</h2>
+       <span class="n">${libres.length} clase${libres.length === 1 ? "" : "s"}</span>`
+    : `<h2>${ini === S.hoy ? "Hoy" : DIA_LARGO[t.getDay()]}, ${t.getDate()} de ${MES_LARGO[t.getMonth()]}</h2>`;
 
   $("#mis-horarios").innerHTML = libres.length
-    ? porDias(libres, c => tarjetaClase(c, "alumno"))
-    : vacio("🥊", "No hay horarios publicados para los próximos días.");
+    ? (semana ? porDias(libres, c => tarjetaClase(c, "alumno"))
+              : `<div class="stack">${libres.map(c => tarjetaClase(c, "alumno")).join("")}</div>`)
+    : vacio("🥊", semana ? "No quedan clases libres esta semana."
+                         : "No hay clases este día. Prueba con otro.");
 }
 
 /** Agrupa una lista de clases por fecha y las pinta bajo un encabezado de día. */
@@ -782,7 +853,7 @@ function porDias(clases, pintar) {
      <div class="stack">${g.cs.map(pintar).join("")}</div>`).join("");
 }
 
-function tarjetaClase(c, modo) {
+function tarjetaClase(c, modo, conFecha) {
   const libres = c.capacity - c.taken;
   const lleno  = libres <= 0;
   const pct    = Math.min(100, Math.round((c.taken / c.capacity) * 100));
@@ -804,7 +875,7 @@ function tarjetaClase(c, modo) {
       <div class="grow">
         <div class="truncate strong">${esc(titulo)}</div>
         <div class="small muted" style="margin-top:2px">
-          ${esc(tipo)} · ${c.my_booking_id ? "cupo reservado ✓"
+          ${conFecha ? esc(fecha(c.class_date, S.hoy)) + " · " : ""}${esc(tipo)} · ${c.my_booking_id ? "cupo reservado ✓"
             : (lleno ? "sin cupos" : `${libres} de ${c.capacity} libres`)}
         </div>
         <div class="meter${lleno ? " full" : ""}"><i style="width:${pct}%"></i></div>
@@ -815,13 +886,54 @@ function tarjetaClase(c, modo) {
 }
 
 /* ==========================================================================
-   VISTA DEL PROFE — AGENDA (día a día, con vista de semana)
+   NAVEGACIÓN POR DÍAS  — la usan igual el profe y el alumno
    ========================================================================== */
 const DIAS_VISIBLES = 42;                       // 6 semanas de margen hacia delante
 const lunesDe = iso => { const t = aDate(iso); t.setDate(t.getDate() - ((t.getDay() + 6) % 7)); return isoDe(t); };
 const MES_LARGO = ["enero","febrero","marzo","abril","mayo","junio","julio",
                    "agosto","septiembre","octubre","noviembre","diciembre"];
 const DIA_LARGO = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+
+/** Pinta la tira de días y devuelve el rango elegido. */
+function pintarTira(prefijo, clases, dia, modo) {
+  const semana = modo === "semana";
+  const ini = semana ? lunesDe(dia) : dia;
+  const fin = semana ? sumaDias(ini, 6) : ini;
+  const conClase = new Set(clases.map(c => c.class_date));
+
+  $$(`#${prefijo}-modo button`).forEach(b =>
+    b.setAttribute("aria-pressed", String((b.dataset.modo === "semana") === semana)));
+
+  $(`#${prefijo}-strip`).innerHTML = Array.from({ length: DIAS_VISIBLES }, (_, i) => {
+    const d = sumaDias(S.hoy, i), t = aDate(d);
+    const dentro = d >= ini && d <= fin;
+    const clase = ["dia", d === S.hoy ? "hoy" : "",
+      dentro ? (semana ? "sem" : "sel") : "",
+      semana && d === dia ? "sel" : ""].filter(Boolean).join(" ");
+    return `<button class="${clase}" data-dia="${d}">
+      <span class="dw">${DIAS[t.getDay()]}</span>
+      <span class="dn">${t.getDate()}</span>
+      <span class="pt${conClase.has(d) ? "" : " off"}"></span></button>`;
+  }).join("");
+
+  const sel = $(`#${prefijo}-strip [data-dia="${dia}"]`);
+  if (sel) sel.scrollIntoView({ block: "nearest", inline: "center" });
+
+  const limite = sumaDias(S.hoy, DIAS_VISIBLES - 1);
+  $(`#${prefijo}-strip`).parentNode.querySelector('[data-mover="-1"]').disabled = ini <= S.hoy;
+  $(`#${prefijo}-strip`).parentNode.querySelector('[data-mover="1"]').disabled  = fin >= limite;
+  return { ini, fin, semana };
+}
+
+/** Qué vista está usando la tira ahora mismo. */
+const NAV = {
+  agenda: { pre: "agenda", get dia() { return S.agendaDia; }, set dia(v) { S.agendaDia = v; },
+            get modo() { return S.agendaModo; }, set modo(v) { S.agendaModo = v; },
+            pintar: () => pintarAgenda() },
+  mis:    { pre: "mis",    get dia() { return S.aluDia; },    set dia(v) { S.aluDia = v; },
+            get modo() { return S.aluModo; },    set modo(v) { S.aluModo = v; },
+            pintar: () => pintarMis() }
+};
 
 async function verAgenda() {
   cargando("#agenda-lista");
@@ -844,35 +956,7 @@ function diasDelRango() {
 }
 
 function pintarAgenda() {
-  const semana = S.agendaModo === "semana";
-  const ini = semana ? lunesDe(S.agendaDia) : S.agendaDia;
-  const fin = semana ? sumaDias(ini, 6) : ini;
-
-  $$("#agenda-modo button").forEach(b =>
-    b.setAttribute("aria-pressed", String((b.dataset.modo === "semana") === semana)));
-
-  // --- tira de días ---
-  $("#agenda-strip").innerHTML = diasDelRango().map(({ d, hay }) => {
-    const t = aDate(d);
-    const dentro = d >= ini && d <= fin;
-    const clase = ["dia",
-      d === S.hoy ? "hoy" : "",
-      dentro ? (semana ? "sem" : "sel") : "",
-      semana && d === S.agendaDia ? "sel" : ""].filter(Boolean).join(" ");
-    return `<button class="${clase}" data-dia="${d}">
-      <span class="dw">${DIAS[t.getDay()]}</span>
-      <span class="dn">${t.getDate()}</span>
-      <span class="pt${hay ? "" : " off"}"></span></button>`;
-  }).join("");
-
-  const sel = $(`#agenda-strip [data-dia="${S.agendaDia}"]`);
-  if (sel) sel.scrollIntoView({ block: "nearest", inline: "center" });
-
-  const limite = sumaDias(S.hoy, DIAS_VISIBLES - 1);
-  $('[data-mover="-1"]').disabled = ini <= S.hoy;
-  $('[data-mover="1"]').disabled  = fin >= limite;
-
-  // --- clases del rango elegido ---
+  const { ini, fin, semana } = pintarTira("agenda", S.agenda, S.agendaDia, S.agendaModo);
   const clases = S.agenda.filter(c => c.class_date >= ini && c.class_date <= fin);
   const gente  = clases.reduce((t, c) => t + c.roster.length, 0);
   const t = aDate(ini);
@@ -1637,22 +1721,26 @@ document.addEventListener("click", async e => {
 
   if (d.ir) return irA(d.ir);
 
-  /* ---- agenda: día / semana ---- */
+  /* ---- finanzas y filtros ---- */
   if (d.vermes) { S.mes = d.vermes; return verPagos(); }
   if (d.mes) { S.mes = sumaMeses(mesDe(S.mes || S.hoy), Number(d.mes)); return verPagos(); }
   if (d.fplan) { S.fPlan = d.fplan; return pintarAlumnos(); }
   if (d.fpago) { S.fPago = d.fpago; return pintarAlumnos(); }
-  if (d.modo)  { S.agendaModo = d.modo; return pintarAgenda(); }
-  if (d.dia)   { S.agendaDia = d.dia;   return pintarAgenda(); }
-  if (d.hoy !== undefined) { S.agendaDia = S.hoy; return pintarAgenda(); }
-  if (d.mover) {
-    const paso = Number(d.mover) * (S.agendaModo === "semana" ? 7 : 1);
-    const tope = sumaDias(S.hoy, DIAS_VISIBLES - 1);
-    let destino = sumaDias(S.agendaDia, paso);
-    if (destino < S.hoy) destino = S.hoy;
-    if (destino > tope)  destino = tope;
-    S.agendaDia = destino;
-    return pintarAgenda();
+  /* La tira de días la comparten la agenda del profe y la vista del alumno. */
+  const nav = NAV[S.vista];
+  if (nav) {
+    if (d.modo) { nav.modo = d.modo; return nav.pintar(); }
+    if (d.dia)  { nav.dia  = d.dia;  return nav.pintar(); }
+    if (d.hoy !== undefined) { nav.dia = S.hoy; return nav.pintar(); }
+    if (d.mover) {
+      const paso = Number(d.mover) * (nav.modo === "semana" ? 7 : 1);
+      const tope = sumaDias(S.hoy, DIAS_VISIBLES - 1);
+      let destino = sumaDias(nav.dia, paso);
+      if (destino < S.hoy) destino = S.hoy;
+      if (destino > tope)  destino = tope;
+      nav.dia = destino;
+      return nav.pintar();
+    }
   }
 
   if (d.act) {

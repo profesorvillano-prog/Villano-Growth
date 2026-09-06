@@ -134,6 +134,31 @@ ancladas a la izquierda, el importe como texto en tinta normal y no en el color
 de la serie, y el mes seleccionado marcado con la superficie, nunca con otro
 color de barra (eso sería codificar el rango en el tono).
 
+## Móvil y responsive
+
+La app es de uso telefónico, así que se verifica con medidas, no a ojo:
+`scratchpad/responsive.mjs` recorre siete tamaños (320, 360, 390, 430, 768,
+1280 y móvil en horizontal) y siete pantallas en cada uno, y falla si
+encuentra desplazamiento horizontal de la página, un elemento que se sale del
+viewport, una zona de toque por debajo de 40 px o texto cortado en vertical.
+
+Lo que hizo falta arreglar para llegar a cero:
+
+- `min-width:0` en `.strip` y en los hijos de `.grid2`: un elemento flex o de
+  rejilla no baja de su tamaño de contenido por defecto, así que el carrusel de
+  días y los dos campos de fecha empujaban la página a lo ancho. A 320 px el
+  campo «hasta» quedaba fuera de la pantalla.
+- `overflow-x:clip` en `html` y `body` como red de seguridad.
+- Botones segmentados y `.btn.sm` a 40 px de alto.
+- Por debajo de 380 px, `.grid2` pasa a una columna; por debajo de 360, el botón
+  de una clase baja a su propia línea para que el título no se trunque.
+- `max-height:92dvh` en las hojas modales, que respeta la barra del navegador
+  móvil (`vh` no lo hace).
+
+La tira de días la comparten la agenda del profe y la vista del alumno
+(`pintarTira` + el objeto `NAV`), así que las dos se comportan igual y solo hay
+un sitio que tocar.
+
 ## Fechas y horas
 
 Las clases se guardan como `date` + `time` **locales del gimnasio**, no como
