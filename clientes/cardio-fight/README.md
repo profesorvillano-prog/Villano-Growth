@@ -37,6 +37,13 @@ contraseñas largas. Queda la sesión abierta: no tendrás que entrar cada día.
 **Truco:** en el móvil, abre la app en el navegador y usa
 *«Añadir a pantalla de inicio»*. Te queda como una app normal.
 
+### La vista del alumno
+
+Si le das PIN a alguien, al entrar ve **su estado de plan** arriba del todo
+(al día, se acaba pronto, vencido o sin pagos, con la fecha), sus clases
+reservadas, y los horarios con **la misma tira de días** que usas tú: desliza
+al lado, flechas ‹ ›, botón **Hoy** e interruptor **Día / Semana**.
+
 ### 1. Publicar tus horarios — pestaña **Agenda**
 
 La agenda se ve **un día a la vez**. Arriba tienes la tira de días: deslízala
