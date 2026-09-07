@@ -459,3 +459,53 @@ La regla aclara que esto no es presionar: se ofrece el siguiente paso **una** ve
 Al reescribir el filtro del módulo 8 (*Avisar a Sebastián*) hubo que tener cuidado. Era `accion ≠ responder`, lo que incluía `cerrar_inscripcion`: cuando el bot manda el link de pago, etiqueta `bot-off` + `atencion-humana` y le pasa el lead a una persona. Al agregar `no_responder` ese filtro habría empezado a etiquetar los silencios. Quedó como un OR explícito de las tres acciones que sí escalan — `derivar_humano`, `alumno_existente`, `cerrar_inscripcion` — y `no_responder` no toca ningún tag.
 
 Verificado tras el cambio: `isActive: true`, `sequential: false`, `dlqCount: 4` (sin subir).
+
+## Quiere inscribirse lo declara el lead, no el bot (2026-09-07)
+
+**El caso Dani.** El equipo preguntó *"Cuándo desea inscribirse?"* y ella respondió **"Mañana podria inscribirme"**. El bot contestó bien:
+
+> Buenísimo Dani! mañana mismo lo puedes dejar tomado con el precio de septiembre. Te paso el link o prefieres transferencia?
+
+Y movió el pipeline. Pero lo movió a **Cierre propuesto**, no a **🔥 Quiere inscribirse**.
+
+### El error conceptual
+
+Las dos etapas se estaban confundiendo porque el prompt solo decía *"cierre_propuesto apenas le propusiste cerrar"* y no definía `quiere_inscribirse` en absoluto. El modelo, al ver que su propio mensaje contenía una propuesta de cierre, se quedó con esa.
+
+La distinción correcta es de **quién** hace el movimiento:
+
+| Estado | Quién lo genera |
+|---|---|
+| `cierre_propuesto` | **Tú** propusiste cerrar y ella todavía no dice nada |
+| `quiere_inscribirse` | **Ella** declaró que se inscribe o que viene |
+
+Y `quiere_inscribirse` **pesa más**: si ella ya declaró, ése es el estado aunque el bot le esté proponiendo algo en el mismo mensaje.
+
+### Qué cuenta como declaración
+
+El prompt ahora lista los gatillos explícitos, y aclara que **un "podría", un "creo que" o un "quizás" no lo bajan de categoría**:
+
+> mañana podría inscribirme · mañana me inscribo · mañana paso · voy mañana · paso el viernes · voy a ir a la escuela · esta semana me inscribo · ya me decidí · voy a pagar · me quedo con el Full · a qué hora los pillo mañana · cuándo puedo ir a pagar
+
+Y de forma explícita: **si dice que va a ir a la escuela un día concreto, cuenta, aunque no use la palabra inscribirse.**
+
+### Sin apagar el bot antes de tiempo
+
+Un detalle importante de implementación. `cerrar_inscripcion` entrega los datos de pago **y etiqueta `bot-off` + `atencion-humana`**, o sea apaga el bot. Un *"mañana podría inscribirme"* no debe apagarlo: la persona todavía va a escribir mañana y necesita respuesta.
+
+Por eso quedaron separados el estado y la acción:
+
+- *"Mañana podría inscribirme"* → estado `quiere_inscribirse` (pipeline en 🔥) + acción **`responder`** (el bot sigue vivo).
+- *"El link"* / *"quiero pagar"* → acción `cerrar_inscripcion` (datos de pago + traspaso a humano).
+
+### De paso, tres cosas más
+
+**`curso_interes` se estaba quedando vacío.** La oportunidad de Dani quedó valorizada en **$0** porque ese campo alimenta el `monetaryValue`. Ahora el prompt dice que se llena apenas la persona elige un curso **y también cuando el bot se lo recomendó y ella no lo rechazó**, siempre como `full`, `avanzado` o `solo_practicas`.
+
+**Mensajes del equipo mezclados en el hilo.** En esta conversación el equipo escribió a mano mientras el bot conversaba, y ambos se cruzaron. El bot ahora sabe que en TUS ÚLTIMOS MENSAJES pueden venir mensajes escritos por personas del equipo: los trata como cosas que el lead ya leyó, **no los contradice**, y si el tema excede DATOS DUROS deriva a humano en vez de desmentir a un colega.
+
+**Descuento por dos.** Dani preguntó por promoción para dos personas. El bot respondió correctamente que la promo es individual — pero el equipo, a mano, le ofreció *"un descuento por dos, tendría que autorizarlo el dueño"*. Se agregó a DATOS DUROS que la promo es individual y que ante una petición de descuento grupal se deriva a humano en vez de negociar.
+
+También se agregó `los pillo / a qué hora los pillo` al glosario de chilenismos.
+
+Verificado tras el cambio: `isActive: true`, `sequential: false`, `dlqCount: 4`. La oportunidad de Dani se movió a mano a 🔥 Quiere inscribirse.
