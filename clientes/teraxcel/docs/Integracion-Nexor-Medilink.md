@@ -61,6 +61,30 @@ Teraxcel queda así — dos renombres y dos columnas nuevas, el resto no se toca
 | No Interesado | No Interesado | — terminal: dijo que no, o expectativa de precio incompatible, o no tomó tratamiento tras evaluarse. Siempre con motivo |
 | Descartado | Descartado | — terminal: nunca fue un lead real (spam, duplicado, número equivocado, jamás respondió) |
 
+### Configuración de columnas: probabilidad y color
+
+La *probability* es "chance de llegar a tratamiento desde aquí" — alimenta el
+forecast del pipeline, así que decrece hacia atrás del embudo. Valores
+iniciales (sin línea base; **recalibrar a las 4–6 semanas** con las tasas
+reales):
+
+| Etapa | Probability | Color | Lógica |
+|---|---|---|---|
+| Nuevo | 5 % | Gris azulado | Nada demostrado aún |
+| Contactado | 10 % | Azul | El bot escribió, sin respuesta |
+| En Conversación | 15 % | Azul claro | ~50 % calificará |
+| Calificado | 30 % | Azul oscuro / teal | Doble filtro ok; ~85 % agenda |
+| Evaluación Agendada | 35 % | Morado | Asistencia ~70 % × cierre ~50 % |
+| Evaluación Realizada | 50 % | Verde claro | En la silla; ~50 % toma tratamiento |
+| Pasó a Tratamiento | 100 % | Verde oscuro | Ganado |
+| No Asistió | 10 % | Naranja | Recuperable vía reagenda |
+| No Interesado | 0 % | Rojo | Terminal con motivo — **sí** aparece en reportes |
+| Descartado | 0 % | Gris oscuro | Ruido — **apagar "show in reports"** |
+
+Colores en lógica semáforo: azules = proceso, morado = comprometido con cita,
+verdes = llegó/ganó, naranja = alerta recuperable, rojo = perdido honesto,
+gris = ruido excluido.
+
 **La distinción entre las tres columnas "negativas" importa** porque cada una
 manda a un lugar distinto:
 
