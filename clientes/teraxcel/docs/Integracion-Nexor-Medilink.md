@@ -58,8 +58,8 @@ Teraxcel queda así — dos renombres y dos columnas nuevas, el resto no se toca
 | Completado | **Evaluación Realizada** | ✏️ renombre — llegó presencial a la clínica |
 | — | **Pasó a Tratamiento** | ➕ nueva — **la columna del objetivo.** Sin ella, el tablero mide agendas, que es el error de la agencia anterior |
 | — | **No Asistió** | ➕ nueva — agendó y no llegó. **No es terminal:** el bot reagenda (3 intentos / 10 días) y la tarjeta vuelve a *Evaluación Agendada* o cae a terminal |
-| No Interesado | No Interesado | — terminal: dijo que no, o expectativa de precio incompatible, o no tomó tratamiento tras evaluarse. Siempre con motivo |
-| Descartado | Descartado | — terminal: nunca fue un lead real (spam, duplicado, número equivocado, jamás respondió) |
+| No Interesado | No Interesado | — terminal: el "no" nació en la conversación con Nexor o después (descalificado por el bot, se enfrió, no-show agotado, no tomó tratamiento). Siempre con motivo |
+| Descartado | Descartado | — terminal: murió antes de conversar (spam, número inválido, duplicado, jamás respondió, o **rechazado por el formulario**) |
 
 ### Configuración de columnas: probabilidad y color
 
@@ -96,16 +96,16 @@ manda a un lugar distinto:
   usa como cajón de sastre para los "no", el desglose de motivos muere — regla:
   ahí solo va lo que nunca fue un lead.
 
-**El criterio en una línea:** *Descartado = nunca hubo una persona real
-decidiendo (ruido). No Interesado = hubo una persona real y hubo un "no"
-(dato).* La tabla de decisión, caso a caso:
+**El criterio en una línea:** *el límite es la conversación con Nexor.
+Descartado = murió antes de conversar (ruido y filtro previo). No Interesado =
+el "no" nació en la conversación o después, siempre con motivo.* La tabla de
+decisión, caso a caso:
 
 | Caso | Columna | Motivo |
 |---|---|---|
-| Spam / broma / busca trabajo / competencia | Descartado | — |
-| Número inválido o duplicado | Descartado | — |
+| Spam / número inválido / duplicado | Descartado | — |
 | **Jamás respondió ningún mensaje** (tras la secuencia de intentos) | Descartado | — |
-| **Formulario lo rechaza** (los valores no le calzan) | No Interesado | Expectativa de precio |
+| **Formulario lo rechaza** (los valores no le calzan) | Descartado | — no pasa por el bot |
 | Nexor descalifica: precio incompatible | No Interesado | Expectativa de precio |
 | Nexor descalifica: sin intención real | No Interesado | Sin intención real |
 | Nexor descalifica: sin disponibilidad | No Interesado | Sin disponibilidad horaria |
@@ -117,14 +117,16 @@ decidiendo (ruido). No Interesado = hubo una persona real y hubo un "no"
 Tres consecuencias operativas:
 
 - **El rechazado por el formulario no pasa por el bot** — para eso existe el
-  filtro. Entra directo a *No Interesado* con su motivo y queda como audiencia
-  de retargeting/nutrición. Es una persona real que decidió: es dato, no ruido.
+  filtro — y cae a *Descartado*. Como Descartado está fuera de los reportes,
+  la efectividad del filtro de precio del formulario **se mide en GHL con el
+  campo `resultado_formulario`** (aprobados ÷ enviados), no con el desglose de
+  motivos del tablero.
 - **La línea fina del silencio:** cero respuestas en toda la vida del lead =
   *Descartado*; respondió al menos una vez y se cayó = *No Interesado* con
   motivo `No responde`. Así el "jamás contestó" (calidad del canal) no se
   mezcla con el "se enfrió" (calidad de la conversación).
 - **No Interesado es la lista reactivable** (cambios de precio, campañas de
-  cupos); a un *Descartado* no se le vuelve a escribir nunca.
+  cupos); a un *Descartado* no se le vuelve a escribir.
 
 Con esto el tablero queda **calcado 1:1 al contrato de estados** de abajo:
 `calificado` = Calificado, `agendado` = Evaluación Agendada, `asistió` =
