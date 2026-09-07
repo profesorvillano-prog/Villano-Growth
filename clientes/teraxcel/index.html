@@ -119,36 +119,6 @@
   .btn-primary.on-dark{background:var(--teal); color:var(--ink); border-color:var(--teal); box-shadow:0 10px 30px -12px rgba(79,180,198,0.5);}
   .btn-primary.on-dark:hover{background:var(--teal-light); border-color:var(--teal-light);}
 
-  /* Botón secundario que deriva al formulario oficial de la clínica */
-  .btn-ghost{
-    display:inline-flex; align-items:center; justify-content:center; gap:10px;
-    width:100%;
-    background:transparent; color:var(--teal-light);
-    font-family:var(--font-title); font-weight:600; font-size:15.5px;
-    padding:15px 26px; border-radius:100px;
-    border:1px solid rgba(143,216,222,0.55);
-    cursor:pointer; text-align:center;
-    transition:background .25s ease, color .25s ease, border-color .25s ease, transform .25s ease;
-  }
-  .btn-ghost:hover{background:var(--teal-light); color:var(--ink); border-color:var(--teal-light); transform:translateY(-2px);}
-  .btn-ghost svg{transition:transform .25s ease;}
-  .btn-ghost:hover svg{transform:translateX(3px);}
-
-  .form-divider{
-    display:flex; align-items:center; gap:12px;
-    margin:20px 0 16px;
-    font-family:var(--font-body); font-size:11.5px; letter-spacing:.08em;
-    text-transform:uppercase; color:rgba(255,255,255,0.45);
-  }
-  .form-divider::before,.form-divider::after{
-    content:''; flex:1; height:1px; background:rgba(255,255,255,0.16);
-  }
-  .form-alt-note{
-    margin:10px 0 0; font-size:12.5px; line-height:1.5;
-    color:rgba(255,255,255,0.5); text-align:center;
-  }
-  .lead-form-success .btn-ghost{margin-top:22px;}
-
   .eyebrow{
     display:flex; align-items:center; gap:12px;
     font-family:var(--font-body);
@@ -228,6 +198,10 @@
     font-size:clamp(28px,3.5vw,36px); color:var(--white); line-height:1;
   }
   .hero-stats .num small{font-size:.45em; color:var(--teal-light);}
+  .hero-stats .num-word{
+    font-size:clamp(22px,2.6vw,28px); color:var(--teal-light);
+    letter-spacing:-0.01em; text-transform:uppercase; padding-top:6px;
+  }
   .hero-stats .lbl{
     margin-top:8px; font-family:var(--font-body);
     font-size:11.5px; letter-spacing:.04em; color:rgba(255,255,255,0.6); text-transform:uppercase;
@@ -378,10 +352,13 @@
   .who-card li .note{
     display:block; margin-top:6px; font-style:italic; font-size:13.5px; color:var(--gray);
   }
-  .who-check{
-    width:20px; height:20px; flex-shrink:0; margin-top:3px;
-    border:1.5px solid var(--teal); border-radius:4px;
-    background:transparent;
+  .who-x{
+    width:24px; height:24px; flex-shrink:0; margin-top:1px;
+    border-radius:50%;
+    border:1.5px solid rgba(212,74,74,0.35);
+    background:rgba(212,74,74,0.08);
+    color:#C24141;
+    display:flex; align-items:center; justify-content:center;
   }
   .who-callout{
     margin-top:22px; padding:22px 26px; border-radius:16px;
@@ -435,41 +412,15 @@
     text-align:left;
   }
 
-  .lead-form{width:100%;}
-  .lead-form .field{margin-bottom:14px;}
-  .lead-form label{
-    display:block; font-family:var(--font-body); font-size:11.5px;
-    letter-spacing:.04em; text-transform:uppercase; color:rgba(255,255,255,0.65); margin-bottom:7px;
+  .form-card .cta-lead{
+    margin:0 0 22px; font-size:16px; line-height:1.6;
+    color:rgba(255,255,255,0.78); text-align:center;
   }
-  .lead-form input{
-    width:100%; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.18);
-    border-radius:12px; padding:14px 16px; font-family:var(--font-body); font-size:15.5px;
-    color:var(--white); outline:none;
-    transition:border-color .2s ease, background .2s ease, box-shadow .2s ease;
+  .form-card .btn-primary{width:100%; justify-content:center;}
+  .form-card .cta-note{
+    margin:16px 0 0; font-size:12.5px; line-height:1.5;
+    color:rgba(255,255,255,0.5); text-align:center;
   }
-  .lead-form input::placeholder{color:rgba(255,255,255,0.4);}
-  .lead-form input:focus{
-    border-color:var(--teal); background:rgba(255,255,255,0.09);
-    box-shadow:0 0 0 3px rgba(79,180,198,0.18);
-  }
-  .lead-form input.error{border-color:#F87171; box-shadow:0 0 0 3px rgba(248,113,113,0.15);}
-  .lead-form .field-error{display:none; font-size:12.5px; color:#FCA5A5; margin-top:6px;}
-  .lead-form .field-error.show{display:block;}
-  .lead-form .btn-submit{width:100%; margin-top:8px; justify-content:center;}
-  .lead-form .form-note{margin:14px 0 0; font-size:12.5px; line-height:1.5; color:rgba(255,255,255,0.5); text-align:center;}
-  .lead-form.is-hidden{display:none;}
-  .lead-form-success{
-    display:none; padding:36px 28px;
-    border:1px solid rgba(143,216,222,0.35); border-radius:18px; background:rgba(79,180,198,0.08);
-  }
-  .lead-form-success.show{display:block;}
-  .lead-form-success .ok-mark{
-    width:48px; height:48px; margin:0 auto 18px; border-radius:50%;
-    border:1.5px solid var(--teal-light); display:flex; align-items:center; justify-content:center;
-    color:var(--teal-light); font-size:22px;
-  }
-  .lead-form-success h3{font-size:22px; margin-bottom:10px; color:var(--white); text-align:center;}
-  .lead-form-success p{color:rgba(255,255,255,0.74); font-size:15.5px; line-height:1.55; margin:0; text-align:center;}
 
   .trust-line{
     display:flex; align-items:flex-start; justify-content:center; gap:12px;
@@ -555,8 +506,8 @@
         <div class="lbl">Tiempo máx.</div>
       </div>
       <div class="stat-item reveal">
-        <div class="num">1</div>
-        <div class="lbl">Método exclusivo LATAM</div>
+        <div class="num num-word">Único</div>
+        <div class="lbl">Método en Latinoamérica</div>
       </div>
     </div>
   </div>
@@ -775,8 +726,8 @@
         <h3>Con uno basta</h3>
         <p class="sub">Tu caso pasa a ser evaluación prioritaria</p>
         <ul>
-          <li><span class="who-check" aria-hidden="true"></span><span>Ya tuviste una cirugía y sigues con dolor.</span></li>
-          <li><span class="who-check" aria-hidden="true"></span><span>Ya te hicieron un bloqueo facetario en pabellón, sin buen resultado.</span></li>
+          <li><span class="who-x" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span>Ya tuviste una cirugía y sigues con dolor.</span></li>
+          <li><span class="who-x" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span>Ya te hicieron un bloqueo facetario en pabellón, sin buen resultado.</span></li>
         </ul>
       </div>
     </div>
@@ -804,50 +755,12 @@
     <h2 class="reveal">Agenda tu diseño de tratamiento.</h2>
 
     <div class="form-card reveal">
-      <form id="leadForm" class="lead-form" novalidate>
-        <div class="field">
-          <label for="leadNombre">Nombre</label>
-          <input type="text" id="leadNombre" name="nombre" autocomplete="name" placeholder="Tu nombre completo" required>
-          <div class="field-error" data-error-for="leadNombre">Ingresa tu nombre.</div>
-        </div>
-        <div class="field">
-          <label for="leadCorreo">Correo</label>
-          <input type="email" id="leadCorreo" name="correo" autocomplete="email" placeholder="tu@correo.com" required>
-          <div class="field-error" data-error-for="leadCorreo">Ingresa un correo válido.</div>
-        </div>
-        <div class="field">
-          <label for="leadTelefono">Teléfono</label>
-          <input type="tel" id="leadTelefono" name="telefono" autocomplete="tel" placeholder="+56 9 1234 5678" required>
-          <div class="field-error" data-error-for="leadTelefono">Ingresa tu teléfono.</div>
-        </div>
-        <button type="submit" class="btn-primary on-dark btn-submit">
-          Solicita inicio de tu tratamiento
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <p class="form-note">Tus datos se usarán solo para contactarte por tu evaluación. (Demo — sin envío al servidor.)</p>
-      </form>
-
-      <!-- Botón que deriva al formulario oficial de la clínica -->
-      <div class="form-divider" id="formAltDivider">o</div>
-      <a class="btn-ghost" id="formAltCta"
-         href="https://clinica.teraxcel.cl/formulario"
-         target="_blank" rel="noopener">
-        Completa el formulario de evaluación
+      <p class="cta-lead">Completa el formulario de evaluación y nuestro equipo médico revisará tu caso.</p>
+      <a class="btn-primary on-dark" href="https://clinica.teraxcel.cl/formulario" target="_blank" rel="noopener">
+        Solicita inicio de tu tratamiento
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <p class="form-alt-note">Te lleva al formulario oficial de Clínica teraXcel.</p>
-
-      <div id="leadSuccess" class="lead-form-success" role="status" aria-live="polite">
-        <div class="ok-mark">✓</div>
-        <h3>Solicitud registrada</h3>
-        <p>Gracias. Completa el formulario de evaluación para que el equipo teraXcel pueda revisar tu caso.</p>
-        <a class="btn-ghost"
-           href="https://clinica.teraxcel.cl/formulario"
-           target="_blank" rel="noopener">
-          Ir al formulario de evaluación
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
+      <p class="cta-note">Tus datos se usarán solo para contactarte por tu evaluación.</p>
     </div>
 
     <div class="trust-line reveal">
@@ -885,57 +798,6 @@
     revealEls.forEach(el => el.classList.add('in'));
   }
 
-  (function () {
-    const form = document.getElementById('leadForm');
-    const success = document.getElementById('leadSuccess');
-    if (!form || !success) return;
-
-    const altDivider = document.getElementById('formAltDivider');
-    const altCta = document.getElementById('formAltCta');
-    const altNote = document.querySelector('.form-alt-note');
-
-    const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-
-    function setError(input, show) {
-      input.classList.toggle('error', show);
-      const err = form.querySelector('[data-error-for="' + input.id + '"]');
-      if (err) err.classList.toggle('show', show);
-    }
-
-    function validate() {
-      let ok = true;
-      const nombreEmpty = !form.nombre.value.trim();
-      setError(form.nombre, nombreEmpty);
-      if (nombreEmpty) ok = false;
-      const correoBad = !emailOk(form.correo.value.trim());
-      setError(form.correo, correoBad);
-      if (correoBad) ok = false;
-      const telEmpty = !form.telefono.value.trim();
-      setError(form.telefono, telEmpty);
-      if (telEmpty) ok = false;
-      return ok;
-    }
-
-    form.querySelectorAll('input').forEach((input) => {
-      input.addEventListener('input', () => setError(input, false));
-    });
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!validate()) return;
-      const payload = {
-        nombre: form.nombre.value.trim(),
-        correo: form.correo.value.trim(),
-        telefono: form.telefono.value.trim()
-      };
-      console.log('[demo] lead form payload', payload);
-      form.classList.add('is-hidden');
-      // Al pasar al estado de éxito, el CTA alternativo se oculta:
-      // el botón hacia el formulario oficial vive dentro del bloque de éxito.
-      [altDivider, altCta, altNote].forEach(el => { if (el) el.hidden = true; });
-      success.classList.add('show', 'in');
-    });
-  })();
 </script>
 </body>
 </html>
