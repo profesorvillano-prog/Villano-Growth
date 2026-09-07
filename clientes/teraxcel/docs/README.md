@@ -7,7 +7,8 @@ del bot de Nexor y la pauta deben apoyarse en estos documentos.
 |---|---|
 | [`Pipeline-CRM.md`](./Pipeline-CRM.md) | **El pipeline.** Un pipeline en GHL con 8 etapas, la doble calificación, los cuatro canales de entrada, campos personalizados, etiquetas, motivos de pérdida, métricas y el orden de implementación. |
 | [`Integracion-Nexor-Medilink.md`](./Integracion-Nexor-Medilink.md) | El stack GHL ↔ Nexor ↔ Medilink: el contrato de estados que Nexor devuelve, los webhooks, los eventos a Meta y el checklist de las tres guías de Nexor. |
-| [`Criterios-Calificacion-Bot.md`](./Criterios-Calificacion-Bot.md) | La especificación para Nexor: los tres criterios exactos de calificación (intención, precio, disponibilidad), el valor mencionable ($700.000 aprox.) y la regla de decisión del bot. |
+| [`Criterios-Calificacion-Bot.md`](./Criterios-Calificacion-Bot.md) | Los criterios exactos de calificación: el doble filtro (respuestas del formulario que aprueban/rechazan + los tres criterios de la conversación), el valor de referencia ($700.000 aprox.), la regla de decisión y las notas internas que no van a Nexor. |
+| [`Formulario-Calificador.md`](./Formulario-Calificador.md) | Transcripción del formulario calificador de dolor lumbar (10 preguntas en 4 pasos), el primer filtro del embudo. |
 
 **Fuentes:** resumen de estrategia conversado con Joaquín (sep/2026) y las tres
 guías de Nexor — *Guía 1: conexión de canales (WhatsApp, correo, teléfono)*,
