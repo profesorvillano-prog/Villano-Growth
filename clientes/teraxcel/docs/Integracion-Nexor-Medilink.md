@@ -40,7 +40,44 @@ hay un bug que reportar — no una tarjeta que corregir.
 
 ---
 
-## 2. El contrato de estados (lo que le pedimos a Nexor)
+## 2. El tablero de Nexor y el contrato de estados
+
+### El tablero: de las etapas genéricas a las de Teraxcel
+
+Nexor trae un tablero por defecto (*Nuevo · Contactado · En Conversación ·
+Calificado · Reunión Agendada · Completado · No Interesado · Descartado*). Para
+Teraxcel queda así — dos renombres y dos columnas nuevas, el resto no se toca:
+
+| Etapa actual en Nexor | Queda como | Cambio |
+|---|---|---|
+| Nuevo | Nuevo | — |
+| Contactado | Contactado | — (el bot abrió conversación, aún sin respuesta) |
+| En Conversación | En Conversación | — (calificando: intención, precio, disponibilidad) |
+| Calificado | Calificado | — (doble filtro aprobado, ofreciendo horas de Medilink) |
+| Reunión Agendada | **Evaluación Agendada** | ✏️ renombre — cita creada en Medilink |
+| Completado | **Evaluación Realizada** | ✏️ renombre — llegó presencial a la clínica |
+| — | **Pasó a Tratamiento** | ➕ nueva — **la columna del objetivo.** Sin ella, el tablero mide agendas, que es el error de la agencia anterior |
+| — | **No Asistió** | ➕ nueva — agendó y no llegó. **No es terminal:** el bot reagenda (3 intentos / 10 días) y la tarjeta vuelve a *Evaluación Agendada* o cae a terminal |
+| No Interesado | No Interesado | — terminal: dijo que no, o expectativa de precio incompatible, o no tomó tratamiento tras evaluarse. Siempre con motivo |
+| Descartado | Descartado | — terminal: nunca fue un lead real (spam, duplicado, número equivocado, jamás respondió) |
+
+**La distinción entre las tres columnas "negativas" importa** porque cada una
+manda a un lugar distinto:
+
+- **No Asistió** → todavía es plata invertida recuperable: el bot lo trabaja.
+- **No Interesado** → un "no" honesto de una persona real: alimenta el desglose
+  de motivos (¿precio? ¿intención? ¿no tomó tratamiento?) con el que se ajusta
+  pauta y formulario, y la secuencia de reactivación futura.
+- **Descartado** → ruido: se excluye de todas las métricas. Si "Descartado" se
+  usa como cajón de sastre para los "no", el desglose de motivos muere — regla:
+  ahí solo va lo que nunca fue un lead.
+
+Con esto el tablero queda **calcado 1:1 al contrato de estados** de abajo:
+`calificado` = Calificado, `agendado` = Evaluación Agendada, `asistió` =
+Evaluación Realizada, `pasó a tratamiento` = Pasó a Tratamiento, y
+`no calificado` = No Interesado o Descartado según el caso.
+
+### El contrato de estados (lo que le pedimos a Nexor)
 
 Es la petición central a Nexor: que el bot devuelva **estados claros y
 discretos**, no prosa. Cinco estados, cada uno con su efecto en GHL y en Meta:
@@ -49,9 +86,9 @@ discretos**, no prosa. Cinco estados, cada uno con su efecto en GHL y en Meta:
 |---|---|---|---|
 | `calificado` | 3 · Calificado · por agendar | `expectativa_precio`, `disponibilidad_declarada`, `tratamiento_interes` | — (todavía no) |
 | `no calificado` | `Lost` + `motivo_perdida` | El motivo, de la lista cerrada de `Pipeline-CRM.md` §4 | — |
-| `agendado` | 4 · Agendado en Medilink | `fecha_cita`, `id_cita_medilink` | ✅ `Schedule` — **el evento de optimización** |
-| `asistió` | 7 · Asistió a evaluación | fecha real de asistencia | ✅ evento custom `EvaluacionAsistida` |
-| `pasó a tratamiento` | 8 · Won | `monto_tratamiento` si lo tiene | ✅ `Purchase` con monto |
+| `agendado` | 4 · Evaluación Agendada | `fecha_cita`, `id_cita_medilink` | ✅ `Schedule` — **el evento de optimización** |
+| `asistió` | 7 · Evaluación Realizada | fecha real de asistencia | ✅ evento custom `EvaluacionAsistida` |
+| `pasó a tratamiento` | 8 · Pasó a Tratamiento (Won) | `monto_tratamiento` si lo tiene | ✅ `Purchase` con monto |
 
 Y dos señales operativas que no son estados del contrato pero que Nexor maneja
 en la capa de asistencia:

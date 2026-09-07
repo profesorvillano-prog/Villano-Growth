@@ -23,11 +23,11 @@ se mida donde ocurre: en la silla de la clínica.
   (4 canales)  →   (bot: intención,     →   por agendar                ┃
                     precio, agenda)              │                     ┃
                         │                        ↓                     ┃
-                        ↓                   4 · Agendado → 5 · Confirmó┃
+                        ↓             4 · Ev. Agendada → 5 · Confirmó  ┃
                    No calificado                 │              │      ┃
                    (Perdido + motivo)            ↓              ↓      ┃
-                                            6 · No asistió → 7 · Asistió → 8 · Pasó a
-                                            · recuperar                ┃   tratamiento
+                                       6 · No asistió → 7 · Ev. Realizada → 8 · Pasó a
+                                       · recuperar                     ┃   Tratamiento
                                                                        ┃      │
                                                         línea de traspaso     ↓
                                                                        ┃  bots internos
@@ -95,11 +95,19 @@ dispara el dato de la clínica.
 | 1 | **Nuevo · sin calificar** | 🤖 | Lead creado: formulario enviado, mensaje entrante de WA/IG, o derivación | → 2 cuando el bot abre conversación · → Perdido a las 72 h sin respuesta |
 | 2 | **En calificación (Nexor)** | 🤖 | El bot está conversando: intención real, expectativa de precio, disponibilidad | → 3 si `calificado` · → Perdido si `no calificado` (con motivo) |
 | 3 | **Calificado · por agendar** | 🤖 | Nexor marcó `calificado`; ofrece horas de Medilink | → 4 al crearse la cita · nudges 1 h / 24 h / 48 h |
-| 4 | **Agendado en Medilink** | 🤖 | Cita creada en Medilink | → 5 al confirmar · → 6 si avisa que no puede |
+| 4 | **Evaluación Agendada** | 🤖 | Cita creada en Medilink | → 5 al confirmar · → 6 si avisa que no puede |
 | 5 | **Confirmó asistencia** | 🤖 | Respondió la confirmación previa (24–48 h antes) | → 7 si asiste · → 6 si no llega |
 | 6 | **No asistió · recuperar** | 🤖 | No-show, o avisó que no podía llegar | → 4 si reagenda · → Perdido a los 10 días / 3 intentos |
-| 7 | **Asistió a evaluación** | 🤖 | Nexor marcó `asistió` (dato desde Medilink o la clínica) | → 8 si toma tratamiento · → Perdido con motivo |
-| 8 | **Pasó a tratamiento** | 🏥 clínica / 🤖 | Pago o inicio de tratamiento registrado | Estado **Ganado** + traspaso a bots internos de Medilink |
+| 7 | **Evaluación Realizada** | 🤖 | Nexor marcó `asistió` (dato desde Medilink o la clínica) | → 8 si toma tratamiento · → Perdido con motivo |
+| 8 | **Pasó a Tratamiento** | 🏥 clínica / 🤖 | Pago o inicio de tratamiento registrado | Estado **Ganado** + traspaso a bots internos de Medilink |
+
+> **Mismos nombres en los dos tableros.** Las etapas 4, 7 y 8 usan exactamente
+> los nombres del tablero de Nexor (*Evaluación Agendada*, *Evaluación
+> Realizada*, *Pasó a Tratamiento* — ver
+> [`Integracion-Nexor-Medilink.md`](./Integracion-Nexor-Medilink.md) §2), para
+> que nadie tenga que traducir entre sistemas. Las columnas terminales de Nexor
+> (*No Interesado*, *Descartado*) no son etapas en GHL: son `Lost` con su
+> `motivo_perdida`.
 
 **Estados de la oportunidad (`status` de GHL, no etapas):**
 
@@ -116,7 +124,7 @@ directo a la **etapa 3** con etiqueta `derivacion-medica` y `medico_derivador`
 lleno, y el bot solo agenda, confirma y recuerda. **Pero no salta la capa de
 asistencia:** derivado que no confirma se trata igual que cualquiera.
 
-### Por qué "Confirmó asistencia" es etapa aparte de "Agendado"
+### Por qué "Confirmó asistencia" es etapa aparte de "Evaluación Agendada"
 
 El criterio de siempre: dos grupos que reciben mensajes distintos son etapas
 distintas. Al agendado hay que pedirle confirmación; al confirmado solo
