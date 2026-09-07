@@ -96,6 +96,36 @@ manda a un lugar distinto:
   usa como cajón de sastre para los "no", el desglose de motivos muere — regla:
   ahí solo va lo que nunca fue un lead.
 
+**El criterio en una línea:** *Descartado = nunca hubo una persona real
+decidiendo (ruido). No Interesado = hubo una persona real y hubo un "no"
+(dato).* La tabla de decisión, caso a caso:
+
+| Caso | Columna | Motivo |
+|---|---|---|
+| Spam / broma / busca trabajo / competencia | Descartado | — |
+| Número inválido o duplicado | Descartado | — |
+| **Jamás respondió ningún mensaje** (tras la secuencia de intentos) | Descartado | — |
+| **Formulario lo rechaza** (los valores no le calzan) | No Interesado | Expectativa de precio |
+| Nexor descalifica: precio incompatible | No Interesado | Expectativa de precio |
+| Nexor descalifica: sin intención real | No Interesado | Sin intención real |
+| Nexor descalifica: sin disponibilidad | No Interesado | Sin disponibilidad horaria |
+| Conversó y desapareció a mitad de camino | No Interesado | No responde |
+| No asistió y se agotaron los 3 intentos | No Interesado | No asistió (3 intentos) |
+| Se evaluó y no tomó tratamiento | No Interesado | No tomó — precio / lo va a pensar |
+| Se fue a otra clínica | No Interesado | Se fue a otra clínica |
+
+Tres consecuencias operativas:
+
+- **El rechazado por el formulario no pasa por el bot** — para eso existe el
+  filtro. Entra directo a *No Interesado* con su motivo y queda como audiencia
+  de retargeting/nutrición. Es una persona real que decidió: es dato, no ruido.
+- **La línea fina del silencio:** cero respuestas en toda la vida del lead =
+  *Descartado*; respondió al menos una vez y se cayó = *No Interesado* con
+  motivo `No responde`. Así el "jamás contestó" (calidad del canal) no se
+  mezcla con el "se enfrió" (calidad de la conversación).
+- **No Interesado es la lista reactivable** (cambios de precio, campañas de
+  cupos); a un *Descartado* no se le vuelve a escribir nunca.
+
 Con esto el tablero queda **calcado 1:1 al contrato de estados** de abajo:
 `calificado` = Calificado, `agendado` = Evaluación Agendada, `asistió` =
 Evaluación Realizada, `pasó a tratamiento` = Pasó a Tratamiento, y
