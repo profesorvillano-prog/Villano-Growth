@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Eres candidato? — TeraXcel</title>
+  <meta name="description" content="Responde 5 preguntas y descubre tu siguiente paso para tratar tu dolor lumbar en TeraXcel." />
+  <meta name="robots" content="noindex" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0B2239; --navy2: #123453; --ice: #EAF3F8;
+      --teal: #14B8A6; --teal-d: #0E9384; --teal-soft: #E4F7F4;
+      --bg: #F6F9FB; --white: #FFFFFF;
+      --tm: #132A3D; --ts: #3E5A70; --tf: #6B8296;
+      --br: #D9E5EC; --err: #C0392B; --warn: #B7791F;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--tm); min-height: 100vh; overflow-x: hidden; }
+
+    .header { background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 100%); padding: 22px 24px 26px; text-align: center; }
+    .header-brand { display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:12px; }
+    .header-logo { font-family:'Sora',sans-serif; font-weight:800; font-size:14px; color:#fff; letter-spacing:0.02em; }
+    .header-dot { width:4px; height:4px; border-radius:50%; background:var(--teal); }
+    .header-sub { font-size:11.5px; color:rgba(255,255,255,0.55); }
+    .header h1 { font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(20px, 5.5vw, 26px); line-height:1.25; color:#fff; max-width:520px; margin-inline:auto; }
+    .header h1 em { font-style:normal; color:var(--teal); }
+    .header p { margin-top:8px; font-size:13px; color:rgba(255,255,255,0.75); }
+
+    .main { padding: 0 20px 90px; position: relative; z-index: 2; }
+    .container { max-width: 580px; margin: 0 auto; }
+
+    .step-ind { padding: 22px 0 0; }
+    .step-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:11px; }
+    .step-pill { font-size:11px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; padding:6px 13px; border-radius:20px; background:var(--teal-soft); color:var(--teal-d); }
+    .step-count { font-size:12px; font-weight:600; color:var(--tf); }
+    .step-bar { height:5px; background:var(--br); border-radius:4px; overflow:hidden; }
+    .step-fill { height:100%; background:var(--teal); border-radius:4px; transition:width .4s ease; width:50%; }
+
+    .card { background:var(--white); border:1.5px solid var(--br); border-radius:18px; padding:26px 22px; margin-top:16px; box-shadow:0 4px 24px rgba(11,34,57,0.06); animation:fadeUp .35s ease both; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    .q-meta { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+    .q-num { width:28px; height:28px; border-radius:8px; background:var(--navy); color:#fff; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .q-area { font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--tf); }
+    .q-text { font-family:'Sora',sans-serif; font-size:16.5px; font-weight:700; color:var(--tm); line-height:1.4; margin-bottom:8px; }
+    .q-hint { font-size:13px; color:var(--tf); line-height:1.55; margin-bottom:18px; }
+
+    .opts { display:flex; flex-direction:column; gap:10px; }
+    .opt { display:flex; align-items:flex-start; gap:12px; border:1.5px solid var(--br); border-radius:12px; padding:14px 15px; cursor:pointer; background:var(--white); transition:border-color .15s, background .15s; user-select:none; }
+    .opt:hover { border-color:var(--teal); }
+    .opt.sel { border-color:var(--teal); background:var(--teal-soft); }
+    .opt input { position:absolute; opacity:0; pointer-events:none; }
+    .opt-mark { width:20px; height:20px; border-radius:50%; border:2px solid var(--br); flex-shrink:0; margin-top:1px; display:flex; align-items:center; justify-content:center; transition:all .15s; }
+    .opt.multi .opt-mark { border-radius:6px; }
+    .opt.sel .opt-mark { border-color:var(--teal); background:var(--teal); }
+    .opt.sel .opt-mark::after { content:''; width:7px; height:7px; border-radius:50%; background:#fff; }
+    .opt.multi.sel .opt-mark::after { width:10px; height:6px; border-radius:0; background:transparent; border-left:2.5px solid #fff; border-bottom:2.5px solid #fff; transform:rotate(-45deg) translate(1px,-1px); }
+    .opt-body { flex:1; }
+    .opt-label { display:block; font-size:14.5px; font-weight:600; color:var(--tm); line-height:1.4; }
+    .opt-sub { display:block; font-size:12.5px; color:var(--tf); line-height:1.45; margin-top:3px; }
+
+    .fields { display:flex; flex-direction:column; gap:15px; }
+    .field label { display:block; font-size:13px; font-weight:700; color:var(--ts); margin-bottom:6px; }
+    .field input { width:100%; border:1.5px solid var(--br); border-radius:11px; padding:14px 15px; font-family:'Inter',sans-serif; font-size:15px; color:var(--tm); background:var(--white); outline:none; transition:border-color .15s; }
+    .field input:focus { border-color:var(--teal); }
+    .field input.bad { border-color:var(--err); }
+    .field-hint { font-size:11.5px; color:var(--tf); margin-top:5px; }
+
+    .nav { display:flex; gap:10px; margin-top:22px; }
+    .btn { font-family:'Sora',sans-serif; font-size:14.5px; font-weight:800; padding:15px 26px; border-radius:12px; cursor:pointer; border:none; transition:transform .15s, opacity .15s; }
+    .btn:active { transform:scale(0.98); }
+    .btn-next { flex:1; background:var(--navy); color:#fff; }
+    .btn-next:hover { opacity:0.92; }
+    .btn-back { background:var(--ice); color:var(--ts); }
+    .btn-submit { flex:1; background:var(--teal); color:var(--navy); box-shadow:0 6px 20px rgba(20,184,166,0.3); }
+    .err-msg { display:none; font-size:13px; font-weight:600; color:var(--err); margin-top:12px; }
+    .err-msg.show { display:block; }
+
+    .privacy { text-align:center; font-size:11.5px; color:var(--tf); margin-top:16px; line-height:1.5; }
+
+    .result { text-align:center; padding:34px 24px; }
+    .result-icon { width:74px; height:74px; border-radius:50%; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; }
+    .result-icon.ok { background:var(--teal-soft); }
+    .result-icon.mid { background:#FDF3E3; }
+    .result-icon.no { background:#FDEBEA; }
+    .result-tag { display:inline-block; font-size:11px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; padding:6px 14px; border-radius:20px; margin-bottom:14px; }
+    .result-tag.ok { background:var(--teal-soft); color:var(--teal-d); }
+    .result-tag.mid { background:#FDF3E3; color:var(--warn); }
+    .result-tag.no { background:#FDEBEA; color:var(--err); }
+    .result h2 { font-family:'Sora',sans-serif; font-size:24px; font-weight:800; line-height:1.25; color:var(--tm); margin-bottom:12px; }
+    .result p { font-size:14.5px; line-height:1.7; color:var(--ts); max-width:440px; margin:0 auto 10px; }
+    .result-box { background:var(--ice); border:1.5px solid var(--br); border-radius:14px; padding:18px; margin:20px auto 6px; max-width:440px; text-align:left; }
+    .result-box-row { display:flex; gap:10px; align-items:flex-start; padding:7px 0; }
+    .result-box-row svg { flex-shrink:0; margin-top:2px; }
+    .result-box-row span { font-size:13.5px; line-height:1.5; color:var(--ts); }
+    .result-box-row strong { color:var(--tm); }
+    .btn-cta { display:inline-flex; align-items:center; justify-content:center; gap:9px; background:var(--teal); color:var(--navy); font-family:'Sora',sans-serif; font-size:15px; font-weight:800; padding:17px 34px; border-radius:12px; text-decoration:none; margin-top:22px; box-shadow:0 8px 26px rgba(20,184,166,0.35); transition:transform .18s; }
+    .btn-cta:hover { transform:translateY(-2px); }
+    .btn-cta.wa { background:#25D366; color:#0B2E1B; box-shadow:0 8px 26px rgba(37,211,102,0.3); }
+    .result-note { font-size:12px; color:var(--tf); margin-top:14px; }
+
+    .hidden { display:none !important; }
+
+    footer { text-align:center; padding:26px 20px 40px; font-size:12px; color:var(--tf); }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER CORTO ============ -->
+  <header class="header">
+    <div class="header-brand">
+      <span class="header-logo">TeraXcel</span>
+      <span class="header-dot"></span>
+      <span class="header-sub">Fisioterapeutas y equipo médico · Puerto Varas</span>
+    </div>
+    <h1>¿Eres candidato al tratamiento que va <em>al origen de tu dolor lumbar</em>?</h1>
+    <p>Responde 5 preguntas — menos de 2 minutos — y te decimos tu siguiente paso.</p>
+  </header>
+
+  <main class="main">
+    <div class="container">
+
+      <div class="step-ind" id="stepInd">
+        <div class="step-row">
+          <span class="step-pill" id="stepPill">Tu caso</span>
+          <span class="step-count" id="stepCount">1 de 2</span>
+        </div>
+        <div class="step-bar"><div class="step-fill" id="stepFill"></div></div>
+      </div>
+
+      <!-- ============ PASO 1 · TU CASO ============ -->
+      <section id="step1">
+        <div class="card">
+          <div class="q-meta"><div class="q-num">1</div><div class="q-area">Tu diagnóstico</div></div>
+          <div class="q-text">¿Tienes una resonancia magnética u otro examen de imagen de tu columna, relacionado con este dolor, de los últimos 8 meses?</div>
+          <div class="q-hint">Si no la tienes, no te preocupes: nuestro equipo médico puede gestionarla.</div>
+          <div class="opts" data-q="diagnostico" data-type="single">
+            <label class="opt"><input type="radio" name="diagnostico" value="vigente"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Sí, tengo un examen de los últimos 8 meses</span></span></label>
+            <label class="opt"><input type="radio" name="diagnostico" value="antiguo"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Tengo exámenes, pero son más antiguos</span></span></label>
+            <label class="opt"><input type="radio" name="diagnostico" value="sin_examen"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">No me he hecho exámenes</span></span></label>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="q-meta"><div class="q-num">2</div><div class="q-area">Tu decisión</div></div>
+          <div class="q-text">Si en la consulta se confirma que eres candidato, ¿cuándo te gustaría iniciar tu ciclo de tratamiento?</div>
+          <div class="opts" data-q="urgencia" data-type="single">
+            <label class="opt"><input type="radio" name="urgencia" value="ya"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Lo antes posible, quiero resolver esto ya</span></span></label>
+            <label class="opt"><input type="radio" name="urgencia" value="2_4_semanas"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Dentro de las próximas 2 a 4 semanas</span></span></label>
+            <label class="opt"><input type="radio" name="urgencia" value="averiguando" data-dq="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Más adelante, por ahora solo estoy averiguando</span></span></label>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="q-meta"><div class="q-num">3</div><div class="q-area">Tu decisión</div></div>
+          <div class="q-text">Un ciclo de tratamiento médico de esta especialidad es una inversión importante en tu salud. ¿Cuál de estas alternativas se acerca más a tu caso?</div>
+          <div class="q-hint">El valor exacto se cotiza de forma personalizada después de tu consulta, según tu caso.</div>
+          <div class="opts" data-q="forma_pago" data-type="single">
+            <label class="opt"><input type="radio" name="forma_pago" value="pago_directo"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Podría pagarlo directamente</span><span class="opt-sub">Transferencia o tarjeta</span></span></label>
+            <label class="opt"><input type="radio" name="forma_pago" value="isapre_seguro"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Usaría reembolso de Isapre o seguro complementario</span></span></label>
+            <label class="opt"><input type="radio" name="forma_pago" value="financiamiento"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Necesitaría alguna alternativa de financiamiento</span></span></label>
+            <label class="opt"><input type="radio" name="forma_pago" value="no_podria" data-dq="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Hoy no podría costear un tratamiento médico particular</span></span></label>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="q-meta"><div class="q-num">4</div><div class="q-area">Tu ubicación</div></div>
+          <div class="q-text">¿Dónde te encuentras?</div>
+          <div class="q-hint">Nuestra clínica está en Puerto Varas y atendemos de lunes a viernes.</div>
+          <div class="opts" data-q="ubicacion" data-type="single">
+            <label class="opt"><input type="radio" name="ubicacion" value="puerto_varas"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">En Puerto Varas o alrededores</span><span class="opt-sub">Puerto Montt, Llanquihue, Frutillar</span></span></label>
+            <label class="opt"><input type="radio" name="ubicacion" value="region_los_lagos"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">En otra ciudad de la Región de Los Lagos</span></span></label>
+            <label class="opt"><input type="radio" name="ubicacion" value="otra_region_viaja"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">En otra región, y puedo viajar a Puerto Varas</span></span></label>
+            <label class="opt"><input type="radio" name="ubicacion" value="otra_region_no_viaja" data-dq="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">En otra región, y no podría viajar</span></span></label>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="q-meta"><div class="q-num">5</div><div class="q-area">Tu salud</div></div>
+          <div class="q-text">¿Alguna de estas situaciones aplica a ti actualmente?</div>
+          <div class="q-hint">Es importante para tu seguridad. Marca todas las que apliquen.</div>
+          <div class="opts" data-q="condiciones" data-type="multi">
+            <label class="opt multi"><input type="checkbox" name="condiciones" value="cancer_activo" data-flag="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Cáncer activo en tratamiento</span></span></label>
+            <label class="opt multi"><input type="checkbox" name="condiciones" value="fiebre" data-flag="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Fiebre en los últimos días</span></span></label>
+            <label class="opt multi"><input type="checkbox" name="condiciones" value="perdida_fuerza" data-flag="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Pérdida de fuerza progresiva en brazos o piernas</span></span></label>
+            <label class="opt multi"><input type="checkbox" name="condiciones" value="psiquiatrico" data-flag="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Condición psiquiátrica en tratamiento no estabilizado</span></span></label>
+            <label class="opt multi" data-exclusive="1"><input type="checkbox" name="condiciones" value="ninguna"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Ninguna de las anteriores</span></span></label>
+          </div>
+        </div>
+
+        <div class="err-msg" id="err1">Por favor responde todas las preguntas para continuar.</div>
+        <div class="nav">
+          <button class="btn btn-next" onclick="nextStep()">Continuar →</button>
+        </div>
+      </section>
+
+      <!-- ============ PASO 2 · TUS DATOS ============ -->
+      <section class="hidden" id="step2">
+        <div class="card">
+          <div class="q-meta"><div class="q-num">✓</div><div class="q-area">Último paso</div></div>
+          <div class="q-text">¿A dónde te enviamos el resultado?</div>
+          <div class="q-hint">Si calificas, podrás reservar de inmediato uno de los cupos prioritarios de la semana.</div>
+          <div class="fields">
+            <div class="field">
+              <label for="f_nombre">Nombre y apellido</label>
+              <input type="text" id="f_nombre" autocomplete="name" placeholder="Ej: María González" />
+            </div>
+            <div class="field">
+              <label for="f_whatsapp">WhatsApp</label>
+              <input type="tel" id="f_whatsapp" autocomplete="tel" inputmode="tel" placeholder="+56 9 1234 5678" />
+              <div class="field-hint">Te contactaremos solo por tu calificación. Sin spam.</div>
+            </div>
+            <div class="field">
+              <label for="f_email">Correo electrónico</label>
+              <input type="email" id="f_email" autocomplete="email" placeholder="tucorreo@email.com" />
+            </div>
+          </div>
+        </div>
+        <div class="err-msg" id="err2">Revisa tu nombre, WhatsApp y correo antes de continuar.</div>
+        <div class="nav">
+          <button class="btn btn-back" onclick="prevStep()">←</button>
+          <button class="btn btn-submit" id="btnSubmit" onclick="submitForm()">Ver mi resultado →</button>
+        </div>
+        <div class="privacy">Al enviar aceptas que TeraXcel te contacte por WhatsApp, teléfono o correo respecto a tu solicitud. Tus datos no se comparten con terceros.</div>
+      </section>
+
+      <!-- ============ RESULTADOS ============ -->
+
+      <section class="hidden" id="resDiseno">
+        <div class="card result">
+          <div class="result-icon ok"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="result-tag ok">Calificas · Cupo prioritario</div>
+          <h2>Tu perfil es compatible con nuestro tratamiento</h2>
+          <p>Por tu examen vigente, tu siguiente paso es el <strong>Diseño de Tratamiento</strong>: una sesión de trabajo con un fisioterapeuta entrenado en nuestra metodología, donde identificamos tu generador de dolor y definimos tu ciclo de tratamiento personalizado.</p>
+          <div class="result-box">
+            <div class="result-box-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round"/></svg><span><strong>Valor: $25.000</strong> — se descuenta íntegro si inicias tu ciclo de tratamiento.</span></div>
+            <div class="result-box-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round"/></svg><span>Recibes tu <strong>plan y presupuesto el mismo día</strong>.</span></div>
+            <div class="result-box-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round"/></svg><span>Trae tu resonancia o exámenes a la cita.</span></div>
+          </div>
+          <a class="btn-cta" id="ctaDiseno" href="#">Reservar mi Diseño de Tratamiento →</a>
+          <div class="result-note">Cupos limitados: agenda de lunes a viernes, 8:30 a 19:30 hrs.</div>
+        </div>
+      </section>
+
+      <section class="hidden" id="resConsulta">
+        <div class="card result">
+          <div class="result-icon ok"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="result-tag ok">Calificas · Cupo prioritario</div>
+          <h2>Tu perfil es compatible: partamos por tu diagnóstico</h2>
+          <p>Tu caso califica, pero necesitamos un examen vigente para ubicar con precisión tu generador de dolor. Tu siguiente paso es una <strong>Consulta Médica</strong> con nuestro equipo médico especialista en columna, que además gestiona la resonancia si la necesitas.</p>
+          <div class="result-box">
+            <div class="result-box-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round"/></svg><span><strong>Valor: $35.000</strong> — consulta con médico especialista en columna.</span></div>
+            <div class="result-box-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round"/></svg><span>Si te faltan exámenes, <strong>los gestionamos por ti</strong>.</span></div>
+            <div class="result-box-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round"/></svg><span>Con el diagnóstico listo, pasas directo al diseño de tu ciclo de tratamiento.</span></div>
+          </div>
+          <a class="btn-cta" id="ctaConsulta" href="#">Reservar mi Consulta Médica →</a>
+          <div class="result-note">Cupos limitados: agenda de lunes a viernes, 8:30 a 19:30 hrs.</div>
+        </div>
+      </section>
+
+      <section class="hidden" id="resRevision">
+        <div class="card result">
+          <div class="result-icon mid"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#B7791F" stroke-width="2.5"/><path d="M12 8v5M12 16h.01" stroke="#B7791F" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+          <div class="result-tag mid">Revisión clínica</div>
+          <h2>Tu caso lo revisará primero nuestro equipo clínico</h2>
+          <p>Por la situación de salud que indicaste, tu caso no sigue la vía estándar: <strong>nuestro equipo clínico lo revisará personalmente</strong> y te contactará por WhatsApp para indicarte el camino seguro para ti.</p>
+          <a class="btn-cta wa" id="ctaWhatsApp" href="#" target="_blank" rel="noopener">Escribirnos por WhatsApp ahora</a>
+          <div class="result-note">Si prefieres, adelántate y cuéntanos tu caso directamente.</div>
+        </div>
+      </section>
+
+      <section class="hidden" id="resNoCalifica">
+        <div class="card result">
+          <div class="result-icon no"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#C0392B" stroke-width="2.5"/><path d="M9 9l6 6M15 9l-6 6" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+          <div class="result-tag no">Por ahora no calificas</div>
+          <h2>Gracias por tu interés — por ahora no es el momento</h2>
+          <p>Nuestro tratamiento está diseñado para un perfil muy específico de paciente y con tus respuestas hoy no podemos asegurarte el resultado que buscamos ofrecer.</p>
+          <p>Guardaremos tus datos y, si tu situación cambia, escríbenos: será un gusto reevaluar tu caso.</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    TeraXcel · Fisioterapeutas y equipo médico · Puerto Varas, Chile
+  </footer>
+
+  <script>
+    /* ============================================================
+       CONFIGURACIÓN — completar antes de publicar
+       ============================================================ */
+    const CONFIG = {
+      // Webhook entrante de GoHighLevel (o Make) que recibe el lead con categoría y ruta
+      WEBHOOK_URL: '',
+      // Calendario GHL para pacientes CON diagnóstico vigente (Diseño de Tratamiento $25.000)
+      URL_AGENDA_DISENO: '#',
+      // Calendario GHL para pacientes SIN diagnóstico vigente (Consulta Médica $35.000)
+      URL_AGENDA_CONSULTA: '#',
+      // WhatsApp que gestiona Nexor (formato internacional sin +)
+      WHATSAPP: '56900000000',
+      WHATSAPP_MSG: 'Hola, completé el formulario de calificación de TeraXcel y quiero orientación sobre mi caso.',
+    };
+
+    /* ============================================================
+       Lógica de decisión (sin puntaje, reglas puras)
+       - Descarta (data-dq): "solo estoy averiguando" (P2),
+         "no podría costear" (P3), "no puedo viajar" (P4)
+       - Bandera médica (data-flag, P5): no descarta → revisión clínica humana
+       - Ruta del calificado (P1): examen vigente → Diseño de Tratamiento;
+         antiguo o sin examen → Consulta Médica
+       - "Necesitaría financiamiento" califica y se marca expectativa_ajustada
+       ============================================================ */
+
+    function showStep(n) {
+      document.getElementById('step1').classList.toggle('hidden', n !== 1);
+      document.getElementById('step2').classList.toggle('hidden', n !== 2);
+      document.getElementById('stepPill').textContent = n === 1 ? 'Tu caso' : 'Tus datos';
+      document.getElementById('stepCount').textContent = n + ' de 2';
+      document.getElementById('stepFill').style.width = (n / 2 * 100) + '%';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextStep() {
+      const groups = document.querySelectorAll('#step1 .opts');
+      const err = document.getElementById('err1');
+      for (const g of groups) {
+        if (!g.querySelector('input:checked')) { err.classList.add('show'); return; }
+      }
+      err.classList.remove('show');
+      showStep(2);
+    }
+
+    function prevStep() { showStep(1); }
+
+    // Selección visual + exclusividad de "Ninguna de las anteriores"
+    document.querySelectorAll('.opts').forEach(group => {
+      group.addEventListener('change', e => {
+        const input = e.target;
+        if (group.dataset.type === 'single') {
+          group.querySelectorAll('.opt').forEach(o => o.classList.remove('sel'));
+          input.closest('.opt').classList.add('sel');
+        } else {
+          const opt = input.closest('.opt');
+          const isExclusive = opt.dataset.exclusive === '1';
+          if (input.checked && isExclusive) {
+            group.querySelectorAll('input').forEach(i => { if (i !== input) i.checked = false; });
+            group.querySelectorAll('.opt').forEach(o => o.classList.remove('sel'));
+          } else if (input.checked) {
+            group.querySelectorAll('.opt[data-exclusive="1"] input').forEach(i => { i.checked = false; i.closest('.opt').classList.remove('sel'); });
+          }
+          opt.classList.toggle('sel', input.checked);
+        }
+        const err = group.closest('section').querySelector('.err-msg');
+        if (err) err.classList.remove('show');
+      });
+    });
+
+    function collectAnswers() {
+      const answers = {};
+      let disqualified = false;
+      let medicalFlag = false;
+      document.querySelectorAll('.opts').forEach(group => {
+        const q = group.dataset.q;
+        const checked = [...group.querySelectorAll('input:checked')];
+        if (group.dataset.type === 'single') {
+          const i = checked[0];
+          answers[q] = i ? i.value : null;
+          if (i && i.dataset.dq === '1') disqualified = true;
+        } else {
+          answers[q] = checked.map(i => i.value);
+          checked.forEach(i => { if (i.dataset.flag === '1') medicalFlag = true; });
+        }
+      });
+      return { answers, disqualified, medicalFlag };
+    }
+
+    function getUTMs() {
+      const p = new URLSearchParams(location.search);
+      const utms = {};
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'].forEach(k => {
+        if (p.get(k)) utms[k] = p.get(k);
+      });
+      return utms;
+    }
+
+    function validPhone(v) { return v.replace(/[^0-9]/g, '').length >= 8; }
+    function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+    async function submitForm() {
+      const nombre = document.getElementById('f_nombre');
+      const whatsapp = document.getElementById('f_whatsapp');
+      const email = document.getElementById('f_email');
+      const err = document.getElementById('err2');
+
+      let ok = true;
+      [[nombre, nombre.value.trim().length >= 3], [whatsapp, validPhone(whatsapp.value)], [email, validEmail(email.value)]].forEach(([el, valid]) => {
+        el.classList.toggle('bad', !valid);
+        if (!valid) ok = false;
+      });
+      if (!ok) { err.classList.add('show'); return; }
+      err.classList.remove('show');
+
+      const btn = document.getElementById('btnSubmit');
+      btn.disabled = true;
+      btn.textContent = 'Procesando…';
+
+      const { answers, disqualified, medicalFlag } = collectAnswers();
+
+      let categoria, ruta, resultId;
+      if (disqualified) {
+        categoria = 'descartado'; ruta = 'ninguna'; resultId = 'resNoCalifica';
+      } else if (medicalFlag) {
+        categoria = 'revision_clinica'; ruta = 'revision_humana'; resultId = 'resRevision';
+      } else if (answers.diagnostico === 'vigente') {
+        categoria = 'calificado'; ruta = 'diseno_tratamiento'; resultId = 'resDiseno';
+      } else {
+        categoria = 'calificado'; ruta = 'consulta_medica'; resultId = 'resConsulta';
+      }
+
+      const payload = {
+        nombre: nombre.value.trim(),
+        whatsapp: whatsapp.value.trim(),
+        email: email.value.trim(),
+        ...answers,
+        categoria,
+        ruta,
+        expectativa_ajustada: answers.forma_pago === 'financiamiento',
+        ...getUTMs(),
+        pagina: location.href,
+        fecha: new Date().toISOString(),
+      };
+
+      if (CONFIG.WEBHOOK_URL) {
+        try {
+          await fetch(CONFIG.WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+        } catch (e) { /* no bloquear el resultado si el webhook falla */ }
+      }
+
+      document.getElementById('ctaDiseno').href = CONFIG.URL_AGENDA_DISENO;
+      document.getElementById('ctaConsulta').href = CONFIG.URL_AGENDA_CONSULTA;
+      document.getElementById('ctaWhatsApp').href =
+        'https://wa.me/' + CONFIG.WHATSAPP + '?text=' + encodeURIComponent(CONFIG.WHATSAPP_MSG);
+
+      document.getElementById('stepInd').classList.add('hidden');
+      document.getElementById('step1').classList.add('hidden');
+      document.getElementById('step2').classList.add('hidden');
+      document.getElementById(resultId).classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
