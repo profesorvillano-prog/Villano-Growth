@@ -33,6 +33,11 @@ abre nada.
 
 Otras defensas:
 
+- El profe se identifica con un **usuario o un teléfono**: `cf_login` compara
+  primero la entrada tal cual (recortada y en minúsculas) contra
+  `teacher_phone`, y si no, los dígitos normalizados. Los alumnos siempre por
+  teléfono. El campo del formulario no fuerza teclado numérico, o no se podría
+  escribir un usuario desde el móvil.
 - PIN guardado con `bcrypt` (`extensions.crypt` / `gen_salt('bf', 10)`).
 - **Bloqueo tras 5 intentos fallidos**, 15 minutos, por alumno y para el profe.
 - Error de login **genérico** (`Teléfono o PIN incorrecto`) para no revelar qué

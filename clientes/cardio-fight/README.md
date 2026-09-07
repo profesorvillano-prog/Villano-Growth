@@ -27,12 +27,18 @@ con la carpeta raíz `clientes/cardio-fight`. Cada push despliega solo.
 
 ### Entrar
 
-Abre la app y escribe **tu teléfono** y **tu PIN**. Nada de correos ni
+Abre la app y escribe **tu usuario o teléfono** y **tu PIN**. Nada de correos ni
 contraseñas largas. Queda la sesión abierta: no tendrás que entrar cada día.
 
-> **Lo primero que debes hacer:** ve a **Ajustes**, cambia el teléfono por el
-> tuyo de verdad, y luego pulsa **Cambiar mi PIN**. El teléfono y el PIN que te
-> entregamos al principio son provisionales.
+El profe puede entrar con un **usuario** (por ejemplo `Admin`, sin distinguir
+mayúsculas) o con su teléfono. Los alumnos, si tienen PIN, siempre con su
+teléfono. Ambas cosas se cambian en **Ajustes**.
+
+> **Sobre el PIN:** es la única llave de una app que está en internet y que
+> guarda los teléfonos de tus alumnos, el dinero y el botón de borrar. Un PIN
+> obvio (`1234`, `0000`, tu año de nacimiento) se adivina al primer intento.
+> El bloqueo por intentos fallidos no sirve de nada contra eso. Cámbialo por
+> algo que solo sepas tú en **Ajustes → Cambiar mi PIN**.
 
 **Truco:** en el móvil, abre la app en el navegador y usa
 *«Añadir a pantalla de inicio»*. Te queda como una app normal.
