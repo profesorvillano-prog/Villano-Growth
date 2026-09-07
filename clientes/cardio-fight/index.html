@@ -291,8 +291,9 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
   </div>
   <form id="form-login" class="stack" novalidate>
     <label class="f">
-      <span>Tu teléfono</span>
-      <input id="li-user" type="tel" inputmode="numeric" autocomplete="username"
+      <span>Tu teléfono o usuario</span>
+      <input id="li-user" type="text" inputmode="text" autocomplete="username"
+             autocapitalize="off" autocorrect="off" spellcheck="false"
              placeholder="9 1234 5678" required>
     </label>
     <label class="f">
@@ -423,8 +424,9 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
               <input id="aj-gym" maxlength="60" required></label>
             <label class="f"><span>Tu nombre</span>
               <input id="aj-name" maxlength="60"></label>
-            <label class="f"><span>Tu teléfono (con el que entras)</span>
-              <input id="aj-phone" type="tel" inputmode="numeric" required></label>
+            <label class="f"><span>Tu teléfono o usuario (con el que entras)</span>
+              <input id="aj-phone" type="text" inputmode="text" required
+                     autocapitalize="off" autocorrect="off" spellcheck="false"></label>
             <div class="grid2">
               <label class="f"><span>Zona horaria</span>
                 <select id="aj-tz"></select></label>
