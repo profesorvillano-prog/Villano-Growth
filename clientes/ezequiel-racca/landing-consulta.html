@@ -9,8 +9,27 @@
      Pegar TAL CUAL en GoHighLevel: elemento "Custom Code / HTML".
      Antes de publicar, revisa el bloque STA = { ... } del final.
      =================================================================== -->
+<!-- Conexiones y precargas: van primero para que el navegador empiece a
+     resolver el video y las fuentes apenas llega a este bloque.
+     Los dos preconnect a fast.wistia.com son a propósito: el player clásico
+     no usa CORS y el módulo sí, y cada modo abre su propia conexión. -->
+<link rel="preconnect" href="https://fast.wistia.com">
+<link rel="preconnect" href="https://fast.wistia.com" crossorigin>
+<link rel="preconnect" href="https://fast.wistia.net" crossorigin>
+<link rel="preconnect" href="https://embed-ssl.wistia.com" crossorigin>
+<link rel="preconnect" href="https://embedwistia-a.akamaihd.net" crossorigin>
+<link rel="dns-prefetch" href="https://distillery.wistia.net">
+<link rel="preload" as="image" fetchpriority="high" href="https://fast.wistia.com/embed/medias/59aympjyvi/swatch">
+<link rel="preload" as="script" href="https://fast.wistia.com/player.js">
+<link rel="modulepreload" href="https://fast.wistia.com/embed/59aympjyvi.js" crossorigin>
+
+<!-- Fuentes por <link> en vez de @import: el @import obliga al navegador a
+     descargar el CSS y recién después la fuente, uno detrás del otro. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
 #sta-lp{
   /* ── Paleta clínica: azul profundo, verde-azulado y blancos fríos ── */
   --deep:  #0E2E3E;   /* azul clínico profundo */
@@ -371,12 +390,12 @@
     <h1>Antes de sanar, necesitás entender <span class="mark">qué está pasando de verdad en tu cuerpo</span>.</h1>
     <p class="lead">Ese es el primer gran paso, y casi nadie te lo da. En 45 minutos revisamos tu caso completo: tu historia, lo que comés, lo que tomás y tus análisis. Salís sabiendo qué te está pasando, por qué, y qué tenés que cambiar a partir de mañana.</p>
 
-    <!-- VSL · para cambiar el video, reemplaza las 4 apariciones del media-id -->
+    <!-- VSL · para cambiar el video, reemplaza las 6 apariciones del media-id -->
     <div class="vsl">
       <div class="vsl-frame">
         <script src="https://fast.wistia.com/player.js" async></script>
         <script src="https://fast.wistia.com/embed/59aympjyvi.js" async type="module"></script>
-        <wistia-player media-id="59aympjyvi" aspect="1.7777777777777777"></wistia-player>
+        <wistia-player media-id="59aympjyvi" aspect="1.7777777777777777" preload="auto"></wistia-player>
       </div>
       <p class="vsl-cap">Por qué tu enfermedad no mejora, y cuál es el primer paso real.</p>
     </div>

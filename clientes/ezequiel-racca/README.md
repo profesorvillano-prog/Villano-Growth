@@ -83,8 +83,14 @@ Todo se edita en el bloque `var STA = { ... }` al final del archivo:
   cierre y barra móvil `Reservar mi consulta`.
 - ~~`VSL_EMBED` + `VSL_POSTER`~~ — el VSL ya está montado con el reproductor
   de **Wistia** (`media-id` `59aympjyvi`), embebido directo en el HTML. Para
-  cambiar el video hay que reemplazar las 4 apariciones de ese id. Se quitaron
-  la portada con botón de play y su lógica de carga diferida.
+  cambiar el video hay que reemplazar las **6** apariciones de ese id. Se
+  quitaron la portada con botón de play y su lógica de carga diferida.
+
+  Para que aparezca cuanto antes, el bloque abre con `preconnect` a los cinco
+  dominios de Wistia, `preload` de la miniatura con `fetchpriority="high"`,
+  `preload`/`modulepreload` de los dos scripts, y el player lleva
+  `preload="auto"`. Las fuentes pasaron de `@import` a `<link>`, que evita
+  descargar el CSS y la fuente uno detrás del otro.
 - `TESTIMONIOS_IMG` / `TESTIMONIO_VIDEO_EMBED` — la sección de testimonios
   aparece sola cuando se carga al menos uno.
 - `META_PIXEL_ID` / `GA4_ID` — píxeles (opcionales). El clic en cualquier botón
