@@ -714,6 +714,10 @@ var STA = {
   // Precio mostrado en todos los botones. Déjalo vacío ('') para no mostrarlo.
   PRECIO: 'USD $60',
 
+  // Velocidad de reproducción del VSL. 1 = normal, 1.15 = 15% más rápido.
+  // Ponlo en 1 (o en null) para dejar la velocidad original.
+  VSL_VELOCIDAD: 1.15,
+
 
   // Testimonios. La sección aparece sola cuando cargas al menos uno.
   TESTIMONIO_VIDEO_EMBED: '',                         // ← cuando esté el video
@@ -814,6 +818,35 @@ var STA = {
     if (hay) sec.style.display = '';
   }
 
+  /* ---- 4b. Velocidad de reproducción del VSL ---- */
+  function velocidadVSL() {
+    var v = STA.VSL_VELOCIDAD;
+    if (!v || v === 1) return;
+
+    var el = d.querySelector('#sta-lp wistia-player');
+    if (!el) return;
+    var id = el.getAttribute('media-id') || '';
+
+    // API clásica de Wistia: funciona con cualquier forma de embed
+    if (id) {
+      window._wq = window._wq || [];
+      window._wq.push({ id: id, onReady: function (video) {
+        try { video.playbackRate(v); } catch (e) {}
+      }});
+    }
+
+    // El web component además expone playbackRate como propiedad
+    if (!window.customElements || !customElements.whenDefined) return;
+    customElements.whenDefined('wistia-player').then(function () {
+      var aplicar = function () { try { el.playbackRate = v; } catch (e) {} };
+      aplicar();
+      // Algunos navegadores reinician la velocidad al cargar la fuente, así que
+      // se vuelve a fijar en el primer play. Solo una vez: si después la persona
+      // la cambia desde los controles, se respeta.
+      el.addEventListener('play', aplicar, { once: true });
+    }).catch(function () {});
+  }
+
   /* ---- 5. Medición de clics en los CTA ---- */
   function track(evento, extra) {
     var data = extra || {};
@@ -855,7 +888,7 @@ var STA = {
     }
   }
 
-  function init() { precios(); enlaces(); barra(); testimonios(); revelar(); clics(); pixeles(); }
+  function init() { precios(); enlaces(); barra(); testimonios(); revelar(); velocidadVSL(); clics(); pixeles(); }
 
   if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', init);
   else init();

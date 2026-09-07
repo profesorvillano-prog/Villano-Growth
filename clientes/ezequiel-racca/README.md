@@ -78,6 +78,10 @@ Landing Consulta  ← landing-consulta.html
 Todo se edita en el bloque `var STA = { ... }` al final del archivo:
 
 - `PAGO_URL` — checkout de Hotmart. **Ya configurado.**
+- `VSL_VELOCIDAD` — velocidad de reproducción del VSL (hoy `1.15`). `1` o `null`
+  deja la velocidad original. Se aplica por la API clásica de Wistia y por la
+  propiedad del web component, y se vuelve a fijar en el primer play por si el
+  navegador la reinicia. Si la persona la cambia desde los controles, se respeta.
 - `PRECIO` — texto del precio en los 4 botones (hoy `USD $60`). Vacío lo oculta.
   Etiquetas actuales: hero `Agendar mi llamada`, medio `Quiero entender mi caso`,
   cierre y barra móvil `Reservar mi consulta`.
