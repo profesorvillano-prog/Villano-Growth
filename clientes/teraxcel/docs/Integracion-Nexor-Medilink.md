@@ -70,8 +70,8 @@ reales):
 
 | Etapa | Probability | Color | Lógica |
 |---|---|---|---|
-| Nuevo | 5 % | Gris azulado | Nada demostrado aún |
-| Contactado | 10 % | Azul | El bot escribió, sin respuesta |
+| Nuevo | 5 % | Gris claro | Nada demostrado aún — neutro a propósito |
+| Contactado | 10 % | Celeste / cian | El bot escribió, sin respuesta |
 | En Conversación | 15 % | Azul claro | ~50 % calificará |
 | Calificado | 30 % | Azul oscuro / teal | Doble filtro ok; ~85 % agenda |
 | Evaluación Agendada | 35 % | Morado | Asistencia ~70 % × cierre ~50 % |
