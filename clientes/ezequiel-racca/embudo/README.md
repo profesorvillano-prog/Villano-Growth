@@ -24,8 +24,13 @@ GoHighLevel. Todos comparten el branding clínico de la landing: azul profundo
 
 ## Decisiones de copy
 
+- **Voseo argentino** y **45 minutos** de consulta, igual que la landing
+  (corrección de Ezequiel, 07/09).
+- Lo que se entrega al final es **una guía de alimentación** (PDF general con
+  proteínas, grasas, carbohidratos y lista de permitidos y no permitidos), no un
+  plan personalizado ni una guía de 14 días.
 - Sin guiones largos, igual que en la landing.
-- El paso 3 se redujo a barra, encabezado y tres datos (`1 hora`,
+- El paso 3 se redujo a barra, encabezado y tres datos (`45 minutos`,
   `Uno a uno`, `Por videollamada`). La lista de "ve preparando" y la nota de
   horarios se quitaron de ahí porque ya viven en el paso 4, después de que la
   persona reservó, que es cuando le sirven.

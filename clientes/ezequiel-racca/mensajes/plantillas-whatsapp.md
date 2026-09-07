@@ -8,6 +8,7 @@ en autoinmunes no hace falta el trabajo previo de ficha que sí requiere un perr
 ## Reglas aplicadas
 
 - **Nunca "Dr."**: Ezequiel es odontólogo, no médico. Firma como *Ezequiel*.
+- **Voseo argentino** y **45 minutos** de consulta, igual que la landing.
 - Sin pedir datos por chat. La preparación se sugiere, no se exige.
 - Sin guiones largos, igual que la landing.
 - Género neutro (los avatares son mayoritariamente mujeres, pero no siempre).
@@ -30,9 +31,9 @@ Hola {{1}}, soy Ezequiel 👋
 
 Tu Consulta de Evaluación Autoinmune quedó agendada para {{2}}.
 
-Es una hora, uno a uno, por videollamada. El enlace te llega por correo y te lo recuerdo por aquí.
+Son 45 minutos, uno a uno, por videollamada. El enlace te llega por correo y te lo recuerdo por acá.
 
-Si tienes análisis recientes, déjalos a mano ese día. No hace falta que prepares nada más.
+Si tenés análisis recientes, dejalos a mano ese día. No hace falta que prepares nada más.
 
 Nos vemos.
 ```
@@ -51,7 +52,7 @@ Te doy la bienvenida a la Asesoría. Tu primera sesión quedó agendada para {{2
 
 Por aquí vamos a acompañarte durante todo el proceso, no solo en las sesiones.
 
-Si antes te surge cualquier duda, escríbeme por este mismo chat.
+Si antes te surge cualquier duda, escribime por este mismo chat.
 
 Empecemos.
 ```
@@ -66,13 +67,13 @@ Empecemos.
 ```
 Hola {{1}}, soy Ezequiel 👋
 
-Recibí tu pago de la Consulta de Evaluación Autoinmune, pero veo que todavía no eliges tu horario.
+Recibí tu pago de la Consulta de Evaluación Autoinmune, pero veo que todavía no elegiste tu horario.
 
 Tu cupo está reservado y no vence.
 
-Cuando quieras tomarlo, es aquí: [URL-AGENDA-CONSULTA]
+Cuando quieras tomarlo, es acá: [URL-AGENDA-CONSULTA]
 
-Y si prefieres que te sugiera un horario, dime qué días te acomodan y lo agendo por ti.
+Y si preferís que te sugiera un horario, decime qué días te acomodan y lo agendo por vos.
 ```
 
 ---
@@ -87,9 +88,9 @@ Hola {{1}}, soy Ezequiel 👋
 
 Tu cupo en la Asesoría está pagado y guardado, pero falta que elijas la hora de tu primera sesión.
 
-Puedes tomarla aquí: [URL-AGENDA-ASESORIA]
+Podés tomarla acá: [URL-AGENDA-ASESORIA]
 
-Si ninguno de los horarios te sirve, dime qué días te acomodan y lo vemos.
+Si ninguno de los horarios te sirve, decime qué días te acomodan y lo vemos.
 ```
 
 ---
@@ -114,12 +115,12 @@ Nos vemos mañana.
 
 > Cambio respecto a la versión de Marcelo: se quita el "si surge un imprevisto lo
 > movemos". Recordar que se puede reagendar, justo antes de la sesión, invita a
-> hacerlo. En su lugar, una línea que prepara para aprovechar la hora.
+> hacerlo. En su lugar, una línea que prepara para aprovechar la sesión.
 
 ```
-Hola {{1}}, ¿cómo vas? Hoy a las {{2}} nos vemos.
+Hola {{1}}, ¿cómo andás? Hoy a las {{2}} nos vemos.
 
-Búscate un rato tranquilo y con buena señal, que la hora se pasa rápido.
+Buscate un rato tranquilo y con buena señal, que los 45 minutos se pasan rápido.
 ```
 
 ---
@@ -132,7 +133,7 @@ Búscate un rato tranquilo y con buena señal, que la hora se pasa rápido.
 ```
 Hola {{1}}, en una hora nos vemos.
 
-Entras por aquí: {{2}}
+Entrás por acá: {{2}}
 
 Te espero.
 ```

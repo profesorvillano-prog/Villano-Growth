@@ -31,6 +31,12 @@ intestino y la alimentación.
   que se abren, y micro-interacciones en el botón (elevación, brillo y avance
   de la flecha). Todo se desactiva con `prefers-reduced-motion`.
 
+  **Registro: voseo argentino.** La consulta dura **45 minutos** y lo que se
+  entrega al final es **una guía de alimentación** (PDF general: qué proteínas,
+  grasas y carbohidratos comer, lista de permitidos y no permitidos, y una
+  visión general del camino que sigue). No es un plan personalizado por escrito
+  ni una guía de 14 días: prometerlo sería algo que no se cumple.
+
   **Ángulo del copy: situación actual → situación deseada.** El foco está en
   el punto de partida de la persona y en adónde puede llegar; la consulta se
   posiciona como **el primer gran paso: entender tu caso completo y saber qué
