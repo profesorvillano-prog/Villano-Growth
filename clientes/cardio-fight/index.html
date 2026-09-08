@@ -1075,42 +1075,80 @@ async function formCompartir(claseId) {
   if (!d) return;
   const url = location.origin + location.pathname + "?c=" + d.share_token;
   const msg = mensajeClase(d, url);
-
   const grupo = d.wa_group_url;
-  abrirHoja("Compartir la clase", `
+
+  /* Dos pasos a propósito: WhatsApp no deja abrir un grupo con el mensaje ya
+     escrito, así que primero se copia (y se ve la confirmación) y solo después
+     se abre el grupo. Si se hiciera de un tirón, el navegador salta a WhatsApp
+     antes de que dé tiempo a leer que el mensaje quedó copiado. */
+  const paso1 = `
     <p class="muted small" style="margin:0 0 14px">
-      Mándalo al grupo de WhatsApp. Quien quiera ir toca el enlace, escribe su nombre y queda anotado.
+      WhatsApp no deja mandar el mensaje solo, así que van dos toques:
+      <b>copiar</b> y <b>pegar</b> en el grupo.
     </p>
     <div class="card" style="white-space:pre-wrap;font-size:14px;line-height:1.5;margin-bottom:16px"
          id="cp-msg">${esc(msg)}</div>
-    ${grupo ? `
-      <a class="btn primary block" id="cp-grupo" href="${esc(grupo)}" target="_blank" rel="noopener"
-         style="margin-bottom:8px">📋 Copiar y abrir el grupo</a>
-      <p class="tiny muted" style="text-align:center;margin:0 0 14px">
-        Se copia el mensaje y se abre el grupo: solo tienes que <b>mantener pulsado y pegar</b>.</p>` : ""}
-    <a class="btn ${grupo ? "" : "primary"} block" id="cp-wa"
-       href="https://wa.me/?text=${encodeURIComponent(msg)}"
-       target="_blank" rel="noopener" style="margin-bottom:10px">💬 ${grupo ? "Enviar a otro chat" : "Enviar por WhatsApp"}</a>
-    ${grupo ? "" : `<p class="tiny muted" style="text-align:center;margin:-4px 0 14px">
-      Si guardas el enlace de tu grupo en <b>Ajustes</b>, te lo abro directamente.</p>`}
+    <button class="btn primary block" id="cp-copiar" style="margin-bottom:10px">
+      📋 Paso 1 · Copiar el mensaje</button>
     <div class="btn-row" style="margin-bottom:10px">
-      <button class="btn grow" data-copiar="msg">Copiar mensaje</button>
-      <button class="btn grow" data-copiar="url">Copiar solo el enlace</button>
+      <a class="btn grow" id="cp-wa" href="https://wa.me/?text=${encodeURIComponent(msg)}"
+         target="_blank" rel="noopener">💬 O mandarlo a otro chat</a>
+      <button class="btn" data-copiar="url">Solo el enlace</button>
     </div>
-    <button class="btn ghost block" data-x="no">Cerrar</button>`, hoja => {
-      $('[data-x="no"]', hoja).onclick = cerrarHoja;
-      const btnGrupo = $("#cp-grupo", hoja);
-      if (btnGrupo) btnGrupo.onclick = () => {
-        // El copiado tiene que ocurrir dentro del toque; luego el enlace navega solo.
-        try { navigator.clipboard.writeText(msg); aviso("Mensaje copiado: pégalo en el grupo"); }
-        catch (e) { aviso("No pude copiar; usa «Copiar mensaje».", true); }
+    <button class="btn ghost block" data-x="no">Cerrar</button>`;
+
+  const paso2 = `
+    <div class="note ok" style="margin-bottom:16px">
+      <b>Mensaje copiado ✓</b><br>
+      Ahora ábrelo y <b>mantén pulsado</b> en el cuadro de texto del grupo →
+      <b>Pegar</b> → enviar.
+    </div>
+    ${grupo ? `<a class="btn primary block" href="${esc(grupo)}" target="_blank" rel="noopener"
+         style="margin-bottom:10px">💬 Paso 2 · Abrir el grupo y pegar</a>`
+            : `<a class="btn primary block" href="https://wa.me/" target="_blank" rel="noopener"
+         style="margin-bottom:10px">💬 Paso 2 · Abrir WhatsApp y pegar</a>
+       <p class="tiny muted" style="text-align:center;margin:-4px 0 12px">
+         Guarda el enlace de tu grupo en <b>Ajustes</b> y te lo abro directo.</p>`}
+    <button class="btn block" id="cp-otra">📋 Copiar otra vez</button>
+    <button class="btn ghost block" data-x="no" style="margin-top:10px">Cerrar</button>`;
+
+  const manual = `
+    <div class="note bad" style="margin-bottom:16px">
+      Tu navegador no dejó copiar solo. Selecciona el texto de arriba,
+      cópialo a mano y pégalo en el grupo.
+    </div>
+    ${grupo ? `<a class="btn primary block" href="${esc(grupo)}" target="_blank" rel="noopener"
+         style="margin-bottom:10px">💬 Abrir el grupo</a>` : ""}
+    <button class="btn ghost block" data-x="no">Cerrar</button>`;
+
+  abrirHoja("Compartir la clase", paso1, hoja => {
+    const cerrar = () => $$('[data-x="no"]', hoja).forEach(b => b.onclick = cerrarHoja);
+    const zona = () => {
+      cerrar();
+      const otra = $("#cp-otra", hoja);
+      if (otra) otra.onclick = copiar;
+      const soloUrl = $('[data-copiar="url"]', hoja);
+      if (soloUrl) soloUrl.onclick = async () => {
+        try { await navigator.clipboard.writeText(url); aviso("Enlace copiado"); }
+        catch (e) { aviso("Tu navegador no deja copiar.", true); }
       };
-      $$("[data-copiar]", hoja).forEach(b => b.onclick = async () => {
-        const texto = b.dataset.copiar === "url" ? url : msg;
-        try { await navigator.clipboard.writeText(texto); aviso("Copiado"); }
-        catch (e) { aviso("Tu navegador no deja copiar; mantén pulsado el texto.", true); }
-      });
-    });
+    };
+    async function copiar() {
+      try {
+        await navigator.clipboard.writeText(msg);
+        $(".sheet", hoja.parentNode || document).innerHTML =
+          `<h3>Compartir la clase</h3>` + paso2;
+      } catch (e) {
+        $(".sheet", hoja.parentNode || document).innerHTML =
+          `<h3>Compartir la clase</h3>
+           <div class="card" style="white-space:pre-wrap;font-size:14px;line-height:1.5;margin-bottom:16px"
+                id="cp-msg">${esc(msg)}</div>` + manual;
+      }
+      zona();
+    }
+    $("#cp-copiar", hoja).onclick = copiar;
+    zona();
+  });
 }
 
 /* ---------- asignar una inscripción suelta a un alumno ---------- */

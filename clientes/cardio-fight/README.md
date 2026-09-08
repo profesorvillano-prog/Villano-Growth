@@ -98,11 +98,22 @@ de quién es. El saludo cambia solo según la hora (buenos días / buenas tardes
 buenas noches), y dice **hoy**, **mañana** o **el jueves 10** según toque. Los
 cupos no van en el mensaje: se ven al abrir el enlace.
 
-**Para que se te abra el grupo directamente**, guarda una vez el enlace de tu
-grupo en **Ajustes → Enlace del grupo de WhatsApp** (en WhatsApp: abre el
-grupo → toca su nombre → *Invitar por enlace* → *Copiar enlace*). A partir de
-ahí el botón dice **📋 Copiar y abrir el grupo**: se copia el mensaje, se abre
-tu grupo, y solo tienes que mantener pulsado y pegar.
+Son **dos toques, y hay que pegar**:
+
+1. **📋 Paso 1 · Copiar el mensaje** — te confirma en pantalla que se copió.
+2. **💬 Paso 2 · Abrir el grupo y pegar** — se abre tu grupo; mantén pulsado en
+   el cuadro de texto → **Pegar** → enviar.
+
+> **WhatsApp no deja que ninguna app escriba el mensaje por ti en un grupo.**
+> Puede abrirte el grupo, nada más. Por eso el paso de pegar no se puede
+> quitar, y por eso la app te confirma que el mensaje está copiado antes de
+> mandarte a WhatsApp: si hiciera las dos cosas de golpe, saltarías al grupo
+> sin haber visto que ya lo tienes copiado.
+
+Para que el paso 2 abra **tu** grupo, guarda una vez su enlace en
+**Ajustes → Enlace del grupo de WhatsApp** (en WhatsApp: abre el grupo → toca
+su nombre → *Invitar por enlace* → *Copiar enlace*). Puedes pegarlo tal cual,
+con los parámetros que WhatsApp añade: se limpian solos.
 
 > WhatsApp no permite a ninguna app abrir un grupo con el mensaje ya escrito
 > —sus enlaces solo apuntan a números de teléfono, y su API oficial no publica
