@@ -564,3 +564,63 @@ Lo que sigue **prohibido** es que el bot confirme él que el pago llegó o que l
 `derivar_humano` etiqueta `bot-off`, así que **después de la bienvenida el bot se calla para ese contacto**. Eso es correcto — el pago lo confirma una persona — pero significa que la promesa *"el equipo te confirma por acá"* la tiene que cumplir el equipo. El bot ya no va a insistir, y el seguimiento automático tampoco lo toca porque queda `pausado`.
 
 Verificado tras el cambio: `isActive: true`, `sequential: false`, `dlqCount: 4`.
+
+## Prohibido pasarle la pelota al equipo (2026-09-08)
+
+Ayer la regla nº13 permitía derivar siempre que el bot dijera **quién sigue y cuándo**. Sebastián lo probó en producción y el veredicto fue directo: *"Evita eso del equipo, porque ahí no pasa nada."*
+
+El mensaje que lo gatilló, a una persona que había pagado y no se sintió preparada para el examen:
+
+> Lamento mucho que te haya pasado eso... Si quieres **te dejo con el equipo para que revisen tu caso** con más detalle
+
+Un reclamo que termina así es un cliente perdido y, con suerte, una mala reseña en Google.
+
+### La regla nº13 se dio vuelta
+
+Ya no es *"deriva bien"*. Ahora es **jamás menciones al equipo**, sin excepciones. Quedaron prohibidas todas las variantes: *lo veo con el equipo, te dejo con el equipo, le aviso al equipo, el equipo te responde, te contactamos, alguien te escribe, lo derivo, lo consulto y te aviso.*
+
+En su lugar el prompt abre con una frase de identidad:
+
+> **TÚ ERES LA ESCUELA.** No eres un intermediario ni una recepción que toma el recado. Lo que tú no resuelves, no se resuelve.
+
+Y cuando de verdad no tiene el dato, en vez de derivar:
+
+1. Responde lo que sí sabe — casi todo está en DATOS DUROS.
+2. Si no lo tiene, lo dice derecho y ofrece **lo único real que depende de la persona**: pasar por la escuela, con dirección y horario. En IG o FB, el WhatsApp.
+3. Cierra **abriendo la puerta**, nunca despidiendo hacia otra parte.
+
+### Regla nº15 — los reclamos se resuelven, no se transfieren
+
+Nueva, específica para gente molesta: empatizar en una frase sin párrafos de disculpas, **aclarar el dato concreto** que deshace la confusión, y preguntar qué necesita o invitarla a verlo en persona.
+
+Para el caso que motivó todo se agregó a DATOS DUROS el argumento que faltaba: *las prácticas no son una sola semana, se agendan 2 o 3 veces por semana durante varias semanas, y el acompañamiento llega hasta el día del examen con vehículo incluido.*
+
+La respuesta correcta al mismo mensaje queda así:
+
+> Lamento que te haya pasado eso, se entiende la frustración. Las prácticas no son una sola semana, se agendan 2 o 3 veces por semana y te acompañamos hasta el día del examen con el vehículo incluido. **Cuéntame qué te faltó y vemos cómo lo resolvemos**
+
+### El cambio estructural: `bot-off` fuera
+
+Esto es lo que hacía el daño de verdad. `derivar_humano` y `cerrar_inscripcion` etiquetaban `bot-off`, así que el bot **se apagaba** justo después de prometer un traspaso que nadie atendía. El lead quedaba muerto: sin bot, sin equipo, y sin seguimiento automático (que también excluye `bot-off`).
+
+Se sacó `bot-off` del módulo de marcado. Ahora:
+
+| | Antes | Ahora |
+|---|---|---|
+| Tags que pone | `bot-off` + `atencion-humana` | solo `atencion-humana` |
+| El bot después | mudo para siempre | sigue conversando |
+| `pausado` (bloquea follow-ups) | `derivar_humano` y `alumno_existente` | solo `alumno_existente` |
+
+`atencion-humana` pasa a ser una **marca de visibilidad** para que Sebastián filtre, no un interruptor. El módulo se renombró de *"Avisar a Sebastián"* a *"Marcar para Sebastián"*, que es lo que de verdad hace.
+
+Consecuencia importante y buscada: si alguien manda el comprobante después de recibir el link, **el bot ahora sí le responde**. Antes `cerrar_inscripcion` lo había dejado mudo, que era exactamente el caso del "pago sin respuesta".
+
+El tag `bot-off` sigue existiendo y sigue silenciando al bot — pero ahora solo lo pone una persona a mano, cuando de verdad toma la conversación.
+
+### Regla nº14 sin el equipo
+
+La bienvenida al que paga se reescribió en primera persona: **ya me llegó tu comprobante** (que es verdad), bienvenida, el siguiente paso real, y *cualquier cosa me escribes por acá*. Sigue prohibido declarar el pago como acreditado.
+
+> Buenísimo Camila, ya me llegó tu comprobante. Bienvenida a Cool Drive 🚗 el curso parte el lunes y la teoría la haces online desde tu casa. La ficha y el convenio los firmas acá en la escuela. Cualquier cosa me escribes por acá
+
+Verificado tras el cambio: `isActive: true`, `sequential: false`, `dlqCount: 4`.
