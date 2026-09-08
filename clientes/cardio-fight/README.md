@@ -88,14 +88,15 @@ En cualquier clase de la agenda, **📤 Compartir por WhatsApp**. Te prepara el
 mensaje con el nombre de la clase, el día, la hora, los cupos que quedan y el
 enlace:
 
-> 🥊 **CARDIO FIGHT**
-> **Kickboxing**
-> Lunes 8 de septiembre
-> ⏰ 19:00 a 20:00
-> 👥 Quedan 8 de 12 cupos
+> Buenas tardes a todos y todas, hoy boxeo 19 horas 🥊
 >
-> Anótate aquí 👇
+> Confirmar aquí 👇
 > `https://cardio-fight.vercel.app/?c=...`
+
+Está escrito como lo mandas tú al grupo, sin cabecera de gimnasio: ahí ya saben
+de quién es. El saludo cambia solo según la hora (buenos días / buenas tardes /
+buenas noches), y dice **hoy**, **mañana** o **el jueves 10** según toque. Los
+cupos no van en el mensaje: se ven al abrir el enlace.
 
 **Para que se te abra el grupo directamente**, guarda una vez el enlace de tu
 grupo en **Ajustes → Enlace del grupo de WhatsApp** (en WhatsApp: abre el
