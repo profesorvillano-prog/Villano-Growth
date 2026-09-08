@@ -509,3 +509,58 @@ Por eso quedaron separados el estado y la acción:
 También se agregó `los pillo / a qué hora los pillo` al glosario de chilenismos.
 
 Verificado tras el cambio: `isActive: true`, `sequential: false`, `dlqCount: 4`. La oportunidad de Dani se movió a mano a 🔥 Quiere inscribirse.
+
+## Nunca dejar un mensaje que no lleva a nada, y bienvenida obligatoria al que paga (2026-09-08)
+
+Dos problemas reportados juntos, y son el mismo problema visto desde dos lados: **el bot cerraba conversaciones sin dejar nada en pie.**
+
+### Regla nº13 — prohibido el "lo reviso con el equipo" pelado
+
+Hubo dos casos donde el bot dijo que lo iba a revisar con el equipo y después **no hubo ningún mensaje más**. La persona queda esperando algo que quizás nunca llega, y esa es la peor forma de terminar una conversación.
+
+La regla nueva ataca las dos mitades del problema:
+
+**Primero, derivar menos.** Antes de derivar, el bot tiene que revisar DATOS DUROS. Horarios, dirección, precios, duración, requisitos, edad, medios de pago y cómo funciona el curso los responde **él siempre**. Derivar dejó de ser el atajo para no pensar.
+
+**Segundo, derivar bien.** Cuando de verdad corresponde, el mensaje lleva tres cosas en una o dos líneas:
+
+1. Lo que **sí** puede responder ahora, aunque sea parte de la pregunta.
+2. **Quién sigue y cuándo**, concreto.
+3. Algo que la persona pueda ir haciendo mientras, si aplica.
+
+El único plazo que puede prometer es que responden **por este mismo chat**: hoy si está en horario de atención, a primera hora del día hábil siguiente si escribió fuera. Para eso el prompt ahora recibe **la hora y el día actual en Santiago** en cada mensaje, así no promete "hoy mismo" un domingo a medianoche.
+
+Quedaron prohibidas como frase suelta: *lo reviso con el equipo, lo consulto y te aviso, lo veo y te digo, déjame averiguar.*
+
+### Regla nº14 — el que paga recibe bienvenida, siempre
+
+Alguien que acaba de transferir plata y recibe un *"lo reviso"* — o peor, silencio — se asusta. Es el momento más importante de toda la conversación y era el peor atendido.
+
+Ahora, ante un comprobante, una foto de transferencia o un *ya pagué / ya transferí / ahí va el pago*, el bot manda **un solo mensaje con tres cosas**:
+
+1. **Agradece y da la bienvenida**, por su nombre. Es una alegría para la escuela y se tiene que notar.
+2. Dice que **el equipo confirma el pago** por este mismo chat, hoy o a primera hora mañana.
+3. **Adelanta el siguiente paso real**: los cursos parten los lunes, la teoría es online desde la casa, y el equipo le hace llegar la ficha y el convenio de alumno.
+
+Ejemplo que quedó en el prompt:
+
+> Buenísimo Camila, bienvenida a Cool Drive 🚗 el equipo te confirma el pago por acá hoy mismo y te hace llegar la ficha y el convenio. El curso parte el lunes y la teoría la haces online desde tu casa
+
+Devuelve `derivar_humano` + estado `quiere_inscribirse` + temperatura `caliente`.
+
+Lo que sigue **prohibido** es que el bot confirme él que el pago llegó o que la persona quedó inscrita. Eso lo hace el equipo; el bot solo da la bienvenida y explica lo que viene.
+
+### Cambios de apoyo
+
+- **`no_responder` acotado.** Se agregó explícito que es solo para cortesías ya devueltas y repeticiones — **jamás** ante una pregunta, un pago o una petición de ayuda. El silencio no puede convertirse en la nueva forma de dejar colgada a la gente.
+- **Nuevo bloque en DATOS DUROS: LO QUE PASA DESPUÉS DE PAGAR.** El bot no tenía de dónde sacar el siguiente paso; ahora sí.
+- **Imágenes.** Un mensaje vacío o un *Unsupported message received* puede ser un comprobante. Si el contexto lo sugiere, se aplica la regla 14 en vez de pedir que lo escriban en texto.
+- **Alumnos existentes.** Si su pregunta se responde con DATOS DUROS (el horario, la dirección), el bot la responde de paso en vez de mandarla entera al equipo.
+- **Chilenismos**: se agregó *ahí va / te mando el compro* = te está enviando el comprobante.
+- El horario de atención quedó anotado también como el horario en que el equipo responde por chat.
+
+### El límite honesto de esto
+
+`derivar_humano` etiqueta `bot-off`, así que **después de la bienvenida el bot se calla para ese contacto**. Eso es correcto — el pago lo confirma una persona — pero significa que la promesa *"el equipo te confirma por acá"* la tiene que cumplir el equipo. El bot ya no va a insistir, y el seguimiento automático tampoco lo toca porque queda `pausado`.
+
+Verificado tras el cambio: `isActive: true`, `sequential: false`, `dlqCount: 4`.
