@@ -253,10 +253,45 @@
 
   /* Testimonios en video */
   .vtest-section{background:var(--bone);}
-  .vtest-grid{
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:20px;
+  .vtest-carousel{position:relative;}
+  .vtest-track{
+    display:flex; gap:20px;
+    overflow-x:auto; overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding:4px 4px 18px;
+    margin:-4px -4px 0;
+  }
+  .vtest-track::-webkit-scrollbar{display:none;}
+  .vtest-track > .vtest-card{
+    flex:0 0 300px; width:300px;
+    scroll-snap-align:center;
+  }
+  .vtest-nav{
+    position:absolute; top:calc(50% - 40px); transform:translateY(-50%);
+    width:46px; height:46px; border-radius:50%;
+    background:var(--white); border:1px solid var(--line);
+    color:var(--ink); cursor:pointer; z-index:3;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 12px 26px -14px rgba(8,15,58,0.45);
+    transition:background .2s ease, opacity .2s ease, transform .2s ease;
+  }
+  .vtest-nav:hover{background:var(--ink); color:var(--white);}
+  .vtest-nav[disabled]{opacity:0; pointer-events:none;}
+  .vtest-nav.prev{left:-10px;}
+  .vtest-nav.next{right:-10px;}
+  .vtest-dots{display:flex; justify-content:center; gap:8px; margin-top:6px;}
+  .vtest-dots button{
+    width:8px; height:8px; padding:0; border-radius:50%;
+    border:0; background:rgba(8,15,58,0.18); cursor:pointer;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .vtest-dots button.active{background:var(--teal); transform:scale(1.35);}
+  .vtest-hint{
+    margin-top:12px; text-align:center;
+    font-family:var(--font-body); font-size:12px; color:var(--gray); letter-spacing:.02em;
   }
   .vtest-card{
     background:var(--white); border:1px solid var(--line); border-radius:18px;
@@ -498,7 +533,7 @@
       background:var(--ink); color:var(--white);
     }
     .who-grid{grid-template-columns:minmax(0,1fr);}
-    .vtest-grid{grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px;}
+    .vtest-nav{display:none;}
   }
   @media (max-width:560px){
     :root{--pad:18px; --header-h:62px;}
@@ -525,7 +560,8 @@
     .who-card{padding:24px 20px;}
     .who-card h3{font-size:20px;}
     .who-callout{padding:20px; font-size:15.5px;}
-    .vtest-grid{grid-template-columns:minmax(0,1fr); max-width:360px; margin-left:auto; margin-right:auto;}
+    .vtest-track{gap:14px; padding-bottom:14px;}
+    .vtest-track > .vtest-card{flex-basis:min(78vw,300px); width:min(78vw,300px);}
     .vtest-body{padding:18px 18px 20px;}
     .trust-line{gap:10px;}
     footer{padding:32px 0;}
@@ -624,8 +660,12 @@
       <h2>No son promesas. Son pacientes reales.</h2>
       <p>Grabados en la clínica, sin guion. Dale play a cualquiera.</p>
     </div>
-    <div class="vtest-grid">
-      <article class="vtest-card reveal">
+    <div class="vtest-carousel reveal">
+      <button class="vtest-nav prev" type="button" aria-label="Testimonio anterior" disabled>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="vtest-track" id="vtestTrack" tabindex="0" role="group" aria-label="Carrusel de testimonios en video">
+      <article class="vtest-card">
         <div class="vtest-media">
           <iframe src="https://www.loom.com/embed/adb07fe4b2a24cb6a67210e934981d74?hide_owner=true&amp;hide_share=true&amp;hide_title=true&amp;hideEmbedTopBar=true"
                   title="Testimonio en video: paciente con dolor lumbar, segundo día de tratamiento"
@@ -639,7 +679,7 @@
           <div class="vtest-meta">PACIENTE · DOLOR LUMBAR — SEGUNDO DÍA DE TRATAMIENTO</div>
         </div>
       </article>
-      <article class="vtest-card reveal">
+      <article class="vtest-card">
         <div class="vtest-media">
           <iframe src="https://www.loom.com/embed/db126c7fa3794f4387b5b8d40b4b8129?hide_owner=true&amp;hide_share=true&amp;hide_title=true&amp;hideEmbedTopBar=true"
                   title="Testimonio en video: paciente con dolor irradiado a la pierna"
@@ -653,7 +693,7 @@
           <div class="vtest-meta">PACIENTE · DOLOR LUMBAR IRRADIADO A LA PIERNA — 2 SESIONES</div>
         </div>
       </article>
-      <article class="vtest-card reveal">
+      <article class="vtest-card">
         <div class="vtest-media">
           <iframe src="https://www.loom.com/embed/06c13d6147d84cfda0997beb8dac6b06?hide_owner=true&amp;hide_share=true&amp;hide_title=true&amp;hideEmbedTopBar=true"
                   title="Testimonio en video de Sergio, dolor de espalda de varios años"
@@ -667,7 +707,7 @@
           <div class="vtest-meta">SERGIO · DOLOR DE ESPALDA DE VARIOS AÑOS</div>
         </div>
       </article>
-      <article class="vtest-card reveal">
+      <article class="vtest-card">
         <div class="vtest-media">
           <iframe src="https://www.loom.com/embed/a8883d93746c4de4a81b232e1c814081?hide_owner=true&amp;hide_share=true&amp;hide_title=true&amp;hideEmbedTopBar=true"
                   title="Testimonio en video de Victoria, más de un año con dolor lumbar"
@@ -681,7 +721,7 @@
           <div class="vtest-meta">VICTORIA · MÁS DE UN AÑO CON DOLOR LUMBAR</div>
         </div>
       </article>
-      <article class="vtest-card reveal">
+      <article class="vtest-card">
         <div class="vtest-media">
           <iframe src="https://www.loom.com/embed/b8d2a07509074efc8cda422a020d2f10?hide_owner=true&amp;hide_share=true&amp;hide_title=true&amp;hideEmbedTopBar=true"
                   title="Testimonio en video de Josefina, hernia lumbar L4-L5"
@@ -695,7 +735,7 @@
           <div class="vtest-meta">JOSEFINA · HERNIA LUMBAR L4-L5</div>
         </div>
       </article>
-      <article class="vtest-card reveal">
+      <article class="vtest-card">
         <div class="vtest-media">
           <iframe src="https://www.loom.com/embed/ddad588871824949800776e3d1cad5de?hide_owner=true&amp;hide_share=true&amp;hide_title=true&amp;hideEmbedTopBar=true"
                   title="Testimonio en video: paciente que llegó sin poder caminar por el dolor"
@@ -709,6 +749,12 @@
           <div class="vtest-meta">PACIENTE · DOLOR LUMBAR INCAPACITANTE</div>
         </div>
       </article>
+      </div>
+      <button class="vtest-nav next" type="button" aria-label="Testimonio siguiente">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="vtest-dots" id="vtestDots" aria-label="Ir al testimonio"></div>
+      <p class="vtest-hint">Desliza para ver los 6 testimonios</p>
     </div>
     <p class="caption-mono">Testimonios grabados por pacientes reales del Método teraXcel. Los resultados pueden variar según cada caso clínico.</p>
   </div>
@@ -964,6 +1010,48 @@
   navLinks.addEventListener('click', (e) => { if (e.target.closest('a')) closeNav(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
   window.addEventListener('resize', () => { if (window.innerWidth > 920) closeNav(); }, { passive: true });
+
+  /* Carrusel de testimonios */
+  const vtrack = document.getElementById('vtestTrack');
+  if (vtrack) {
+    const carousel = vtrack.closest('.vtest-carousel');
+    const prevBtn = carousel.querySelector('.vtest-nav.prev');
+    const nextBtn = carousel.querySelector('.vtest-nav.next');
+    const dotsBox = document.getElementById('vtestDots');
+    const slides = Array.from(vtrack.children);
+
+    slides.forEach((slide, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', 'Ver testimonio ' + (i + 1) + ' de ' + slides.length);
+      dot.addEventListener('click', () => {
+        vtrack.scrollTo({ left: slide.offsetLeft - vtrack.offsetLeft, behavior: 'smooth' });
+      });
+      dotsBox.appendChild(dot);
+    });
+    const dots = Array.from(dotsBox.children);
+
+    const step = () => (slides[0] ? slides[0].getBoundingClientRect().width + 20 : 320);
+    prevBtn.addEventListener('click', () => vtrack.scrollBy({ left: -step(), behavior: 'smooth' }));
+    nextBtn.addEventListener('click', () => vtrack.scrollBy({ left: step(), behavior: 'smooth' }));
+
+    const syncCarousel = () => {
+      const max = vtrack.scrollWidth - vtrack.clientWidth;
+      prevBtn.disabled = vtrack.scrollLeft <= 4;
+      nextBtn.disabled = vtrack.scrollLeft >= max - 4;
+      const center = vtrack.scrollLeft + vtrack.clientWidth / 2;
+      let active = 0, best = Infinity;
+      slides.forEach((slide, i) => {
+        const mid = slide.offsetLeft - vtrack.offsetLeft + slide.offsetWidth / 2;
+        const d = Math.abs(mid - center);
+        if (d < best) { best = d; active = i; }
+      });
+      dots.forEach((d, i) => d.classList.toggle('active', i === active));
+    };
+    vtrack.addEventListener('scroll', syncCarousel, { passive: true });
+    window.addEventListener('resize', syncCarousel, { passive: true });
+    syncCarousel();
+  }
 
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
