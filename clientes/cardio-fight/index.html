@@ -1049,16 +1049,25 @@ function tarjetaAgenda(c) {
   </div>`;
 }
 
-/* ---------- compartir la clase por WhatsApp ---------- */
+/* ---------- compartir la clase por WhatsApp ----------
+   Escrito como lo manda el profe al grupo: un saludo, la clase y la hora.
+   Sin cabecera de marca: en su grupo ya saben de qué gimnasio es. */
 function mensajeClase(d, url) {
+  const hora = new Date().getHours();
+  const saludo = hora < 12 ? "Buenos días" : (hora < 20 ? "Buenas tardes" : "Buenas noches");
+
   const t = aDate(d.class_date);
-  const libres = d.capacity - d.taken;
-  return `🥊 *${d.gym_name.toUpperCase()}*\n\n` +
-    `*${d.title || (d.kind === "personalizado" ? "Personalizado" : "Clase grupal")}*\n` +
-    `${DIA_LARGO[t.getDay()]} ${t.getDate()} de ${MES_LARGO[t.getMonth()]}\n` +
-    `⏰ ${d.start_time} a ${d.end_time}\n` +
-    `👥 ${libres > 0 ? `Quedan ${libres} de ${d.capacity} cupos` : "Sin cupos"}\n\n` +
-    `Anótate aquí 👇\n${url}`;
+  const cuando = d.class_date === S.hoy ? "hoy"
+    : d.class_date === sumaDias(S.hoy, 1) ? "mañana"
+    : `el ${DIA_LARGO[t.getDay()].toLowerCase()} ${t.getDate()}`;
+
+  const [hh, mm] = d.start_time.split(":");
+  const aLas = mm === "00" ? `${Number(hh)} horas` : `${Number(hh)}:${mm}`;
+
+  const clase = (d.title || (d.kind === "personalizado" ? "personalizado" : "la clase")).toLowerCase();
+
+  return `${saludo} a todos y todas, ${cuando} ${clase} ${aLas} 🥊\n\n` +
+         `Confirmar aquí 👇\n${url}`;
 }
 
 async function formCompartir(claseId) {
