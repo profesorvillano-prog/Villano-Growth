@@ -393,15 +393,13 @@
   }
 
   /* Candidate */
-  .who-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px;}
   .who-card{border-radius:20px; padding:32px; border:1px solid var(--line); background:var(--white); min-width:0;}
+  .who-card .who-badge{background:var(--ink); color:var(--white);}
   .who-badge{
     display:inline-block; font-family:var(--font-body); font-size:11.5px;
     letter-spacing:.06em; text-transform:uppercase;
     padding:6px 12px; border-radius:100px; margin-bottom:14px;
   }
-  .who-card.yes .who-badge{background:var(--ink); color:var(--white);}
-  .who-card.priority .who-badge{background:transparent; border:1px solid var(--teal); color:var(--teal);}
   .who-card h3{font-size:22px; margin-bottom:8px;}
   .who-card .sub{font-size:14.5px; color:var(--gray); margin-bottom:18px;}
   .who-card ul{list-style:none;}
@@ -418,16 +416,24 @@
   .who-card li .note{
     display:block; margin-top:6px; font-style:italic; font-size:13.5px; color:var(--gray);
   }
-  .who-x{
-    width:24px; height:24px; flex-shrink:0; margin-top:1px;
-    border-radius:50%;
-    border:1.5px solid rgba(212,74,74,0.35);
-    background:rgba(212,74,74,0.08);
-    color:#C24141;
-    display:flex; align-items:center; justify-content:center;
+  /* Lista única de criterios */
+  .crit-card{max-width:760px; margin:0 auto;}
+  .crit-card .sub{max-width:600px;}
+  .crit-text{display:block;}
+  .crit-flag{
+    display:inline-block; vertical-align:baseline;
+    font-family:var(--font-body); font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--teal); border:1px solid var(--teal); border-radius:100px;
+    padding:3px 9px; margin-right:8px; white-space:nowrap;
   }
+  .who-card li.is-priority .n{background:var(--teal); color:var(--ink); font-weight:600;}
+  .who-card .note mark{
+    background:linear-gradient(180deg, transparent 58%, rgba(79,180,198,0.45) 58%);
+    color:var(--ink); padding:0 2px;
+  }
+
   .who-callout{
-    margin-top:22px; padding:22px 26px; border-radius:16px;
+    max-width:760px; margin:22px auto 0; padding:22px 26px; border-radius:16px;
     background:var(--ink); color:rgba(255,255,255,0.9);
     font-size:16px; line-height:1.55; text-align:center;
   }
@@ -532,8 +538,7 @@
       text-align:center; font-size:14px; padding:14px 18px;
       background:var(--ink); color:var(--white);
     }
-    .who-grid{grid-template-columns:minmax(0,1fr);}
-    .vtest-nav{display:none;}
+      .vtest-nav{display:none;}
   }
   @media (max-width:560px){
     :root{--pad:18px; --header-h:62px;}
@@ -895,41 +900,40 @@
       <h2>Antes de solicitar, revisa si aplica a ti.</h2>
       <p>No es para todo el mundo. El filtro protege tu tiempo — y el de la clínica.</p>
     </div>
-    <div class="who-grid">
-      <div class="who-card yes reveal">
-        <span class="who-badge mono">Es para ti si</span>
-        <h3>Debes cumplir los 3</h3>
-        <p class="sub">— criterios obligatorios</p>
-        <ul>
-          <li>
+    <div class="who-card crit-card reveal">
+      <span class="who-badge mono">Criterios</span>
+      <h3>Algunos criterios a evaluar</h3>
+      <p class="sub">No necesitas cumplirlos todos. Los marcados como <strong>prioritarios</strong> son los que más peso tienen: mientras más criterios cumplas, mejor califica tu caso.</p>
+      <ul>
+          <li class="is-priority">
             <span class="n">01</span>
-            <span>Ya has hecho kinesiología o fisioterapia convencional.</span>
+            <span class="crit-text"><span class="crit-flag">Prioritario</span>Ya tuviste una cirugía de columna y sigues con dolor.</span>
           </li>
-          <li>
+          <li class="is-priority">
             <span class="n">02</span>
-            <span>
-              Cuentas con una resonancia magnética y un diagnóstico confirmado por un médico.
-              <span class="note">(Si no cuentas, evalúate con nuestro equipo médico.)</span>
-            </span>
+            <span class="crit-text"><span class="crit-flag">Prioritario</span>Ya te hicieron un bloqueo facetario en pabellón, sin buen resultado.</span>
           </li>
           <li>
             <span class="n">03</span>
-            <span>Ya te mencionaron la cirugía como posible tratamiento, porque el camino convencional no funcionó.</span>
+            <span class="crit-text">Cuentas con una resonancia magnética de los últimos 8 meses y un diagnóstico confirmado por un médico.
+              <span class="note"><mark>Si no la tienes, evalúate con nuestro equipo médico.</mark></span></span>
           </li>
-        </ul>
-      </div>
-      <div class="who-card priority reveal">
-        <span class="who-badge mono">Prioridad</span>
-        <h3>Con uno basta</h3>
-        <p class="sub">Tu caso pasa a ser evaluación prioritaria</p>
-        <ul>
-          <li><span class="who-x" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span>Ya tuviste una cirugía y sigues con dolor.</span></li>
-          <li><span class="who-x" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span>Ya te hicieron un bloqueo facetario en pabellón, sin buen resultado.</span></li>
-        </ul>
-      </div>
+          <li>
+            <span class="n">04</span>
+            <span class="crit-text">Ya hiciste kinesiología o fisioterapia convencional y no obtuviste el resultado esperado.</span>
+          </li>
+          <li>
+            <span class="n">05</span>
+            <span class="crit-text">Ya te mencionaron la cirugía como posible tratamiento, porque el camino convencional no funcionó.</span>
+          </li>
+          <li>
+            <span class="n">06</span>
+            <span class="crit-text">Quieres empezar lo antes posible, no dentro de varios meses.</span>
+          </li>
+      </ul>
     </div>
     <div class="who-callout reveal">
-      Si cumples estrictamente con estos criterios, el Método teraXcel te puede servir.
+      Si te reconoces en varios de estos criterios, el Método teraXcel te puede servir.
     </div>
   </div>
 </section>
@@ -949,7 +953,7 @@
 <section class="offer" id="oferta">
   <div class="wrap offer-inner">
     <div class="offer-flag reveal"><i class="dot"></i>Evaluación prioritaria — cupos de lanzamiento</div>
-    <h2 class="reveal">Agenda tu diseño de tratamiento.</h2>
+    <h2 class="reveal">Comencemos.</h2>
 
     <div class="form-card reveal">
       <p class="cta-lead">Completa el formulario de evaluación y nuestro equipo médico revisará tu caso.</p>
