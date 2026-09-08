@@ -5,8 +5,9 @@ enfermedades autoinmunes** (dermatitis/eczema, psoriasis, vitíligo, lupus, Croh
 colitis ulcerosa), separado de su otro proyecto "Una vida sin medicamentos"
 (diabetes e hipertensión).
 
-La marca se trabaja como **dúo**: **Ezequiel Racca** (odontólogo, nutrición y
-medicina funcional) + **Dra. Catalina Klimboski** (médica, medicina funcional).
+La marca se trabaja como **dúo**: **Ezequiel Racca** (Health Coach en Nutrición
+Moderna y odontólogo) + **Dra. Catalina Clembosky** (médica clínica con enfoque
+en medicina integrativa).
 Nombre de marca: **Sana tu Autoinmune**.
 
 Producto principal: **Método Piel en Calma** (nombre provisional) — acompañamiento
@@ -100,8 +101,10 @@ Todo se edita en el bloque `var STA = { ... }` al final del archivo:
 - `META_PIXEL_ID` / `GA4_ID` — píxeles (opcionales). El clic en cualquier botón
   dispara el evento `ClicPago` con su ubicación (`hero`, `consulta`, `cierre`,
   `barra`).
-- Confirmar la **grafía exacta** del apellido de Catalina (viene de
-  transcripción: "Klimboski").
+- Apellido de Catalina: **Clembosky** (confirmado por Ezequiel, 08/09/2026).
+- Cargos confirmados por Ezequiel (08/09/2026): él, "Health Coach en Nutrición
+  Moderna y Odontólogo"; ella, "Médica Clínica con enfoque en Medicina
+  Integrativa". La tiroiditis de Hashimoto se quitó de la lista de condiciones.
 
 ## Estado y pendientes (de la reunión de onboarding 08/06/2026)
 
@@ -119,7 +122,7 @@ marcadores `TODO` / `[...]`:
 
 > ⚠️ **Compliance:** Ezequiel es odontólogo, no médico — se declara de forma
 > explícita en la landing. La parte clínica la cubre la **Dra. Catalina
-> Klimboski**. El enfoque complementa (no reemplaza) al médico tratante. Nunca
+> Clembosky**. El enfoque complementa (no reemplaza) al médico tratante. Nunca
 > sugerir abandonar medicación sin supervisión, ni prometer cura. Mantener estos
 > límites en todo el copy.
 
