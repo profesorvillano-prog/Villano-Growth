@@ -253,10 +253,11 @@
 
   /* Testimonios en video */
   .vtest-section{background:var(--bone);}
-  .vtest-row{display:grid; gap:20px; margin-bottom:20px;}
-  .vtest-row.two{grid-template-columns:repeat(2,minmax(0,1fr));}
-  .vtest-row.vertical{grid-template-columns:repeat(2,minmax(0,1fr)); max-width:680px; margin-left:auto; margin-right:auto;}
-  .vtest-row.wide{grid-template-columns:repeat(2,minmax(0,1fr)); max-width:960px; margin-left:auto; margin-right:auto;}
+  .vtest-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:20px;
+  }
   .vtest-card{
     background:var(--white); border:1px solid var(--line); border-radius:18px;
     overflow:hidden; display:flex; flex-direction:column; min-width:0;
@@ -265,65 +266,15 @@
   .vtest-card:hover{transform:translateY(-4px); box-shadow:0 22px 40px -24px rgba(8,15,58,0.25);}
   .vtest-media{
     position:relative; width:100%;
-    aspect-ratio:var(--ar, 16/9);
-    background:linear-gradient(145deg, #142368 0%, var(--ink) 55%, #050A29 100%);
+    aspect-ratio:9/16;
+    background:#050A29;
     overflow:hidden;
   }
-  .vtest-media iframe{position:absolute; inset:0; width:100%; height:100%;}
-  .vtest-facade{
-    position:absolute; inset:0; width:100%; height:100%;
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
-    background:transparent; border:0; cursor:pointer; color:var(--white);
-    font-family:var(--font-body); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
-    padding:16px;
-  }
-  .vtest-facade::after{
-    content:''; position:absolute; inset:0; z-index:0;
-    background:radial-gradient(ellipse at 30% 20%, rgba(79,180,198,0.28), transparent 60%);
-  }
-  .vtest-facade .play{
-    position:relative; z-index:1;
-    width:64px; height:64px; border-radius:50%;
-    background:rgba(255,255,255,0.12); border:1px solid rgba(143,216,222,0.7);
-    display:flex; align-items:center; justify-content:center;
-    transition:transform .25s ease, background .25s ease;
-  }
-  .vtest-facade:hover .play{transform:scale(1.06); background:rgba(143,216,222,0.25);}
-  .vtest-facade .play svg{margin-left:3px;}
-  .vtest-facade .play-label{position:relative; z-index:1; color:rgba(143,216,222,0.95); text-align:center; line-height:1.4;}
+  .vtest-media iframe{position:absolute; inset:0; width:100%; height:100%; display:block;}
   .vtest-body{padding:22px 22px 24px; display:flex; flex-direction:column; gap:14px; flex:1;}
   .vtest-quote{font-size:15.5px; line-height:1.6; color:var(--ink);}
   .vtest-divider{height:1px; background:var(--line);}
   .vtest-meta{font-family:var(--font-body); font-size:11px; letter-spacing:.04em; color:var(--gray); line-height:1.5; margin-top:auto;}
-
-  /* Cases */
-  .cases-section{background:var(--bone);}
-  .cases-grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px;}
-  .case-card{
-    background:var(--white); border:1px solid var(--line); border-radius:18px;
-    overflow:hidden; transition:transform .3s ease, box-shadow .3s ease; min-width:0;
-  }
-  .case-card:hover{transform:translateY(-4px); box-shadow:0 22px 40px -24px rgba(8,15,58,0.25);}
-  .case-media{
-    aspect-ratio:4/3;
-    background:linear-gradient(145deg, #142368 0%, var(--ink) 55%, #050A29 100%);
-    display:flex; align-items:center; justify-content:center;
-    position:relative;
-  }
-  .case-media::after{
-    content:''; position:absolute; inset:0;
-    background:radial-gradient(ellipse at 30% 20%, rgba(79,180,198,0.25), transparent 55%);
-  }
-  .case-letter{
-    position:relative; z-index:1;
-    font-family:var(--font-title); font-weight:600;
-    font-size:clamp(64px,8vw,88px); line-height:1;
-    color:rgba(143,216,222,0.92); letter-spacing:-0.04em;
-  }
-  .case-body{padding:24px 26px 28px;}
-  .case-quote{font-size:16px; line-height:1.6; color:var(--ink); margin-bottom:18px;}
-  .case-divider{height:1px; background:var(--line); margin-bottom:16px;}
-  .case-meta{font-family:var(--font-body); font-size:11px; letter-spacing:.04em; color:var(--gray); line-height:1.5;}
 
   /* El problema — dark */
   .problem-section{
@@ -546,15 +497,8 @@
       text-align:center; font-size:14px; padding:14px 18px;
       background:var(--ink); color:var(--white);
     }
-    .cases-grid{grid-template-columns:minmax(0,1fr); max-width:420px; margin:0 auto;}
     .who-grid{grid-template-columns:minmax(0,1fr);}
-    .vtest-row.two{grid-template-columns:minmax(0,1fr); max-width:520px; margin-left:auto; margin-right:auto;}
-    .vtest-row.wide{grid-template-columns:minmax(0,1fr); max-width:560px;}
-    .vtest-row.vertical{max-width:520px;}
-  }
-  @media (max-width:640px){
-    .vtest-row.vertical{grid-template-columns:minmax(0,1fr); max-width:340px;}
-    .vtest-row{gap:16px; margin-bottom:16px;}
+    .vtest-grid{grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px;}
   }
   @media (max-width:560px){
     :root{--pad:18px; --header-h:62px;}
@@ -581,10 +525,8 @@
     .who-card{padding:24px 20px;}
     .who-card h3{font-size:20px;}
     .who-callout{padding:20px; font-size:15.5px;}
-    .case-body{padding:20px 20px 24px;}
-    .case-quote{font-size:15.5px;}
+    .vtest-grid{grid-template-columns:minmax(0,1fr); max-width:360px; margin-left:auto; margin-right:auto;}
     .vtest-body{padding:18px 18px 20px;}
-    .vtest-facade .play{width:54px; height:54px;}
     .trust-line{gap:10px;}
     footer{padding:32px 0;}
     footer .wrap{flex-direction:column; align-items:flex-start; text-align:left;}
@@ -617,7 +559,6 @@
       <span class="bars" aria-hidden="true"></span>
     </button>
     <nav class="nav-links" id="navLinks" aria-label="Secciones">
-      <a href="#casos">Casos</a>
       <a href="#testimonios">Testimonios</a>
       <a href="#problema">El problema</a>
       <a href="#metodo">Método</a>
@@ -675,62 +616,22 @@
   </div>
 </section>
 
-<!-- 3. CASOS -->
-<section class="cases-section" id="casos">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow"><span class="rule"></span> Casos reales</div>
-      <h2>No son promesas. Son resultados reales.</h2>
-    </div>
-    <div class="cases-grid">
-      <article class="case-card reveal">
-        <div class="case-media"><span class="case-letter">M.</span></div>
-        <div class="case-body">
-          <p class="case-quote">“Después de tres años con dolor lumbar crónico, volví a caminar sin molestias a las pocas semanas del tratamiento.”</p>
-          <div class="case-divider"></div>
-          <div class="case-meta">PACIENTE · 54 AÑOS — DOLOR LUMBAR CRÓNICO</div>
-        </div>
-      </article>
-      <article class="case-card reveal">
-        <div class="case-media"><span class="case-letter">R.</span></div>
-        <div class="case-body">
-          <p class="case-quote">“Había probado kinesiología y medicamentos sin resultados. El procedimiento fue rápido y la recuperación, mucho más simple de lo que esperaba.”</p>
-          <div class="case-divider"></div>
-          <div class="case-meta">PACIENTE · 47 AÑOS — HERNIA DISCAL LUMBAR</div>
-        </div>
-      </article>
-      <article class="case-card reveal">
-        <div class="case-media"><span class="case-letter">C.</span></div>
-        <div class="case-body">
-          <p class="case-quote">“La precisión del procedimiento guiado por ecografía marcó la diferencia. Sentí cambios desde la primera visita.”</p>
-          <div class="case-divider"></div>
-          <div class="case-meta">PACIENTE · 61 AÑOS — DOLOR LUMBAR PERSISTENTE</div>
-        </div>
-      </article>
-    </div>
-    <p class="caption-mono" style="margin-top:18px;">Testimonios de pacientes reales. Usamos iniciales para proteger su identidad y privacidad.</p>
-  </div>
-</section>
-
-<!-- 3b. TESTIMONIOS EN VIDEO -->
+<!-- 3. TESTIMONIOS EN VIDEO -->
 <section class="vtest-section" id="testimonios">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="rule"></span> Testimonios en video</div>
-      <h2>Escúchalo de nuestros propios pacientes.</h2>
-      <p>Grabados en la clínica, sin guion. Toca cada video para reproducirlo.</p>
+      <h2>No son promesas. Son pacientes reales.</h2>
+      <p>Grabados en la clínica, sin guion. Dale play a cualquiera.</p>
     </div>
-
-    <div class="vtest-row two">
+    <div class="vtest-grid">
       <article class="vtest-card reveal">
-        <div class="vtest-media" style="--ar:16/9;">
-          <button class="vtest-facade" type="button" data-loom="adb07fe4b2a24cb6a67210e934981d74" data-title="Testimonio en video: paciente con dolor lumbar, segundo día de tratamiento">
-            <span class="play" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6.5 4.2v11.6L16 10 6.5 4.2z" fill="currentColor"/></svg>
-            </span>
-            <span class="play-label">Ver testimonio · 1:05</span>
-            <span class="sr-only">Reproducir testimonio en video de paciente con dolor lumbar, segundo día de tratamiento</span>
-          </button>
+        <div class="vtest-media">
+          <iframe src="https://www.loom.com/embed/adb07fe4b2a24cb6a67210e934981d74?hide_owner=true&amp;hide_share=true&amp;hide_title=true&amp;hideEmbedTopBar=true"
+                  title="Testimonio en video: paciente con dolor lumbar, segundo día de tratamiento"
+                  loading="lazy"
+                  allow="fullscreen; picture-in-picture"
+                  allowfullscreen></iframe>
         </div>
         <div class="vtest-body">
           <p class="vtest-quote">“Llegué con un dolor intenso, sobre todo en las mañanas. En el segundo día de tratamiento esa intensidad ya bajó: tengo mayor movilidad y he podido caminar mejor.”</p>
@@ -738,16 +639,13 @@
           <div class="vtest-meta">PACIENTE · DOLOR LUMBAR — SEGUNDO DÍA DE TRATAMIENTO</div>
         </div>
       </article>
-
       <article class="vtest-card reveal">
-        <div class="vtest-media" style="--ar:16/9;">
-          <button class="vtest-facade" type="button" data-loom="db126c7fa3794f4387b5b8d40b4b8129" data-title="Testimonio en video: paciente con dolor irradiado a la pierna">
-            <span class="play" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6.5 4.2v11.6L16 10 6.5 4.2z" fill="currentColor"/></svg>
-            </span>
-            <span class="play-label">Ver testimonio · 0:45</span>
-            <span class="sr-only">Reproducir testimonio en video de paciente con dolor irradiado a la pierna</span>
-          </button>
+        <div class="vtest-media">
+          <iframe src="https://www.loom.com/embed/db126c7fa3794f4387b5b8d40b4b8129?hide_owner=true&amp;hide_share=true&amp;hide_title=true&amp;hideEmbedTopBar=true"
+                  title="Testimonio en video: paciente con dolor irradiado a la pierna"
+                  loading="lazy"
+                  allow="fullscreen; picture-in-picture"
+                  allowfullscreen></iframe>
         </div>
         <div class="vtest-body">
           <p class="vtest-quote">“Llegué con un dolor de 8: me tomaba toda la pierna hasta la planta del pie y no podía hacer mis cosas. En dos sesiones el dolor se me pasó prácticamente al 100%.”</p>
@@ -755,18 +653,13 @@
           <div class="vtest-meta">PACIENTE · DOLOR LUMBAR IRRADIADO A LA PIERNA — 2 SESIONES</div>
         </div>
       </article>
-    </div>
-
-    <div class="vtest-row vertical">
       <article class="vtest-card reveal">
-        <div class="vtest-media" style="--ar:9/16;">
-          <button class="vtest-facade" type="button" data-loom="06c13d6147d84cfda0997beb8dac6b06" data-title="Testimonio en video de Sergio, dolor de espalda de años">
-            <span class="play" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6.5 4.2v11.6L16 10 6.5 4.2z" fill="currentColor"/></svg>
-            </span>
-            <span class="play-label">Ver testimonio · 0:35</span>
-            <span class="sr-only">Reproducir testimonio en video de Sergio</span>
-          </button>
+        <div class="vtest-media">
+          <iframe src="https://www.loom.com/embed/06c13d6147d84cfda0997beb8dac6b06?hide_owner=true&amp;hide_share=true&amp;hide_title=true&amp;hideEmbedTopBar=true"
+                  title="Testimonio en video de Sergio, dolor de espalda de varios años"
+                  loading="lazy"
+                  allow="fullscreen; picture-in-picture"
+                  allowfullscreen></iframe>
         </div>
         <div class="vtest-body">
           <p class="vtest-quote">“Tenía un problema en la espalda hace muchos años y lo dejé estar bastante tiempo. Desde la primera sesión ya se sintió un cambio, y de ahí en adelante mucho mejor.”</p>
@@ -774,16 +667,13 @@
           <div class="vtest-meta">SERGIO · DOLOR DE ESPALDA DE VARIOS AÑOS</div>
         </div>
       </article>
-
       <article class="vtest-card reveal">
-        <div class="vtest-media" style="--ar:9/16;">
-          <button class="vtest-facade" type="button" data-loom="a8883d93746c4de4a81b232e1c814081" data-title="Testimonio en video de Victoria, más de un año con dolor lumbar">
-            <span class="play" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6.5 4.2v11.6L16 10 6.5 4.2z" fill="currentColor"/></svg>
-            </span>
-            <span class="play-label">Ver testimonio · 0:55</span>
-            <span class="sr-only">Reproducir testimonio en video de Victoria</span>
-          </button>
+        <div class="vtest-media">
+          <iframe src="https://www.loom.com/embed/a8883d93746c4de4a81b232e1c814081?hide_owner=true&amp;hide_share=true&amp;hide_title=true&amp;hideEmbedTopBar=true"
+                  title="Testimonio en video de Victoria, más de un año con dolor lumbar"
+                  loading="lazy"
+                  allow="fullscreen; picture-in-picture"
+                  allowfullscreen></iframe>
         </div>
         <div class="vtest-body">
           <p class="vtest-quote">“Llevaba más de un año con dolor de espalda al agacharme, al sentarme o después de caminar un rato. A la semana ya casi no sentía dolor: de un 5 o 6 pasé a un 1.”</p>
@@ -791,18 +681,13 @@
           <div class="vtest-meta">VICTORIA · MÁS DE UN AÑO CON DOLOR LUMBAR</div>
         </div>
       </article>
-    </div>
-
-    <div class="vtest-row wide">
       <article class="vtest-card reveal">
-        <div class="vtest-media" style="--ar:2.163/1;">
-          <button class="vtest-facade" type="button" data-loom="b8d2a07509074efc8cda422a020d2f10" data-title="Testimonio en video de Josefina, hernia lumbar L4-L5">
-            <span class="play" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6.5 4.2v11.6L16 10 6.5 4.2z" fill="currentColor"/></svg>
-            </span>
-            <span class="play-label">Ver testimonio · 0:50</span>
-            <span class="sr-only">Reproducir testimonio en video de Josefina</span>
-          </button>
+        <div class="vtest-media">
+          <iframe src="https://www.loom.com/embed/b8d2a07509074efc8cda422a020d2f10?hide_owner=true&amp;hide_share=true&amp;hide_title=true&amp;hideEmbedTopBar=true"
+                  title="Testimonio en video de Josefina, hernia lumbar L4-L5"
+                  loading="lazy"
+                  allow="fullscreen; picture-in-picture"
+                  allowfullscreen></iframe>
         </div>
         <div class="vtest-body">
           <p class="vtest-quote">“Tengo una hernia L4-L5 y ya había hecho varios tratamientos sin éxito a largo plazo. Después de la primera sesión el dolor disminuyó considerablemente; hoy prácticamente no siento dolor y llevo dos noches durmiendo bien.”</p>
@@ -810,16 +695,13 @@
           <div class="vtest-meta">JOSEFINA · HERNIA LUMBAR L4-L5</div>
         </div>
       </article>
-
       <article class="vtest-card reveal">
-        <div class="vtest-media" style="--ar:2.163/1;">
-          <button class="vtest-facade" type="button" data-loom="ddad588871824949800776e3d1cad5de" data-title="Testimonio en video: paciente que llegó sin poder caminar por el dolor">
-            <span class="play" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6.5 4.2v11.6L16 10 6.5 4.2z" fill="currentColor"/></svg>
-            </span>
-            <span class="play-label">Ver testimonio · 0:20</span>
-            <span class="sr-only">Reproducir testimonio en video de paciente que llegó sin poder caminar por el dolor</span>
-          </button>
+        <div class="vtest-media">
+          <iframe src="https://www.loom.com/embed/ddad588871824949800776e3d1cad5de?hide_owner=true&amp;hide_share=true&amp;hide_title=true&amp;hideEmbedTopBar=true"
+                  title="Testimonio en video: paciente que llegó sin poder caminar por el dolor"
+                  loading="lazy"
+                  allow="fullscreen; picture-in-picture"
+                  allowfullscreen></iframe>
         </div>
         <div class="vtest-body">
           <p class="vtest-quote">“Llegué llorando de dolor, prácticamente sin poder caminar, y salí llorando pero de felicidad, porque puedo caminar y sin dolor.”</p>
@@ -828,7 +710,6 @@
         </div>
       </article>
     </div>
-
     <p class="caption-mono">Testimonios grabados por pacientes reales del Método teraXcel. Los resultados pueden variar según cada caso clínico.</p>
   </div>
 </section>
@@ -1083,21 +964,6 @@
   navLinks.addEventListener('click', (e) => { if (e.target.closest('a')) closeNav(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
   window.addEventListener('resize', () => { if (window.innerWidth > 920) closeNav(); }, { passive: true });
-
-  /* Testimonios en video: carga diferida del iframe de Loom al hacer click */
-  document.querySelectorAll('.vtest-facade').forEach((facade) => {
-    facade.addEventListener('click', () => {
-      const media = facade.parentElement;
-      const iframe = document.createElement('iframe');
-      iframe.src = 'https://www.loom.com/embed/' + facade.dataset.loom + '?autoplay=1&hide_owner=true&hide_share=true&hideEmbedTopBar=true';
-      iframe.title = facade.dataset.title || 'Testimonio en video';
-      iframe.allow = 'autoplay; fullscreen; picture-in-picture';
-      iframe.setAttribute('allowfullscreen', '');
-      iframe.setAttribute('loading', 'lazy');
-      media.appendChild(iframe);
-      facade.remove();
-    });
-  });
 
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
