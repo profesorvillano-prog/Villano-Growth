@@ -719,3 +719,65 @@ viejas, que al cliente le gustaron.
 
 Verificado tras el cambio: `isActive: true`, `dlqCount: 4`, blueprint en
 producción idéntico byte a byte al preparado.
+
+---
+
+## El número de alumnos, y el mensaje que le llegó a alguien que ya pagó (2026-09-09)
+
+### El WhatsApp de alumnos quedó cargado
+
+El número que faltaba para el ajuste 4 ya está en DATOS DUROS. El bot se lo da a
+quien ya es alumno y ahí cierra la conversación, porque esa derivación es a un
+canal real y atendido: es la **única derivación que el bot sí anuncia**. Quedó
+prohibido dárselo a un lead que todavía no se inscribe — a ése le corresponde el
+WhatsApp de la escuela, y solo si el canal es Instagram o Facebook.
+
+### Antonia: le preguntaron si le interesaba el curso, cuatro días después de pagar
+
+Antonia pagó, la movieron a **Inscritos** y la marcaron **won** el 7 de
+septiembre. El 9 le llegó esto:
+
+> Hola Antonia, cómo estás? Aún te interesa saber sobre el curso y nuestra
+> escuela?
+
+Es el peor mensaje posible para alguien que ya transfirió plata: la hace dudar de
+que su pago llegó.
+
+**No fue Make.** El mensaje trae `source: "workflow"` en la API, y el contacto ya
+tenía las etiquetas `alumno` y `bot-off`, que el seguimiento automático excluye
+desde el 6 de septiembre. Salió de un **Workflow de GHL** — el mismo origen del
+caso Javiera, y el mismo pendiente que sigue abierto en la UI de GoHighLevel.
+
+### Lo que sí se blindó de nuestro lado
+
+Aunque el escenario de Make era inocente, se le agregó el candado igual, porque
+esta clase de error no puede volver a salir de nuestra infraestructura:
+
+- **Filtro nuevo en el módulo 33**, *No es un cliente ya cerrado ganado*: si la
+  oportunidad del contacto viene con `status: won`, o está en la etapa
+  **Inscritos**, el seguimiento se detiene antes de gastar un token.
+- **Regla nueva en el prompt del seguimiento**: si en la conversación aparece un
+  comprobante, un ya pagué, un ya me inscribí, o una bienvenida escrita por el
+  bot, esa venta ya está hecha y devuelve `enviar: false`. El prompt lo dice con
+  todas sus letras: *preguntarle si todavía le interesa el curso a alguien que ya
+  pagó la hace dudar de que su plata llegó*.
+- De paso, el seguimiento heredó la misma prohibición de muletillas que el bot
+  principal.
+
+Son dos candados para lo mismo, a propósito: el filtro corta por dato duro (el
+CRM) y el prompt corta por lectura de la conversación. Si uno falla, el otro
+sostiene.
+
+Verificado: `isActive: true`, `dlqCount: 0`.
+
+### Lo que sigue pendiente en GHL, y ahora con un caso más
+
+Los workflows `[SEGUIMIENTO] Fuera de ventana` y `[REACTIVACIÓN] Leads antiguos`
+siguen sin filtro. Hay que agregarles un If/Else al principio que corte cuando:
+
+- el contacto tenga `alumno`, `bot-off` o `atencion-humana`, **o**
+- la oportunidad esté en estado **Won**, **o**
+- la oportunidad esté en la etapa **Inscritos**.
+
+Mientras eso no exista, cada persona que paga queda expuesta a recibir el mensaje
+de Antonia.
