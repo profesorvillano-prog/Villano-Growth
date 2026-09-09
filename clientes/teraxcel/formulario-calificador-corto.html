@@ -144,9 +144,9 @@
           <div class="q-text">¿Cuál de estas situaciones describe tu caso?</div>
           <div class="q-hint">Marca todas las que apliquen.</div>
           <div class="opts" data-q="criterios_clinicos" data-type="multi">
-            <label class="opt multi"><input type="checkbox" name="criterios_clinicos" value="procedimiento_pabellon" data-cat="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Ya me hicieron un procedimiento en pabellón por este dolor</span><span class="opt-sub">Bloqueo facetario o cirugía de columna</span></span></label>
-            <label class="opt multi"><input type="checkbox" name="criterios_clinicos" value="probo_tratamientos" data-cat="2"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Ya probé tratamientos sin el resultado esperado</span><span class="opt-sub">Terapias, fármacos, infiltraciones</span></span></label>
-            <label class="opt multi"><input type="checkbox" name="criterios_clinicos" value="dolor_3_meses" data-cat="3"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Convivo con este dolor hace más de 3 meses</span></span></label>
+            <label class="opt multi"><input type="checkbox" name="criterios_clinicos" value="procedimiento_pabellon" data-cat="1" data-score="3"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Ya me hicieron un procedimiento en pabellón por este dolor</span><span class="opt-sub">Bloqueo facetario o cirugía de columna</span></span></label>
+            <label class="opt multi"><input type="checkbox" name="criterios_clinicos" value="probo_tratamientos" data-cat="2" data-score="2"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Ya probé tratamientos sin el resultado esperado</span><span class="opt-sub">Terapias, fármacos, infiltraciones</span></span></label>
+            <label class="opt multi"><input type="checkbox" name="criterios_clinicos" value="dolor_3_meses" data-cat="3" data-score="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Convivo con este dolor hace más de 3 meses</span></span></label>
             <label class="opt multi" data-exclusive="1"><input type="checkbox" name="criterios_clinicos" value="ninguna"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Ninguna de las anteriores</span></span></label>
           </div>
         </div>
@@ -156,7 +156,7 @@
           <div class="q-text">¿Tienes una resonancia magnética u otro examen de imagen de tu columna, relacionado con este dolor, de los últimos 8 meses?</div>
           <div class="q-hint">Si no la tienes, no te preocupes: nuestro equipo médico puede gestionarla.</div>
           <div class="opts" data-q="diagnostico" data-type="single">
-            <label class="opt"><input type="radio" name="diagnostico" value="vigente"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Sí, tengo un examen de los últimos 8 meses</span></span></label>
+            <label class="opt"><input type="radio" name="diagnostico" value="vigente" data-score="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Sí, tengo un examen de los últimos 8 meses</span></span></label>
             <label class="opt"><input type="radio" name="diagnostico" value="antiguo"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Tengo exámenes, pero son más antiguos</span></span></label>
             <label class="opt"><input type="radio" name="diagnostico" value="sin_examen"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">No me he hecho exámenes</span></span></label>
           </div>
@@ -166,8 +166,8 @@
           <div class="q-meta"><div class="q-num">3</div><div class="q-area">Tu decisión</div></div>
           <div class="q-text">Si en la consulta se confirma que eres candidato, ¿cuándo te gustaría iniciar tu ciclo de tratamiento?</div>
           <div class="opts" data-q="urgencia" data-type="single">
-            <label class="opt"><input type="radio" name="urgencia" value="ya"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Lo antes posible, quiero resolver esto ya</span></span></label>
-            <label class="opt"><input type="radio" name="urgencia" value="2_4_semanas"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Dentro de las próximas 2 a 4 semanas</span></span></label>
+            <label class="opt"><input type="radio" name="urgencia" value="ya" data-score="2"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Lo antes posible, quiero resolver esto ya</span></span></label>
+            <label class="opt"><input type="radio" name="urgencia" value="2_4_semanas" data-score="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Dentro de las próximas 2 a 4 semanas</span></span></label>
             <label class="opt"><input type="radio" name="urgencia" value="averiguando" data-dq="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Más adelante, por ahora solo estoy averiguando</span></span></label>
           </div>
         </div>
@@ -177,10 +177,10 @@
           <div class="q-text">Sumando consultas, exámenes, terapias y medicamentos, ¿cuánto has invertido aproximadamente hasta hoy en buscar una solución?</div>
           <div class="q-hint">Una estimación sirve. Nos ayuda a entender tu recorrido.</div>
           <div class="opts" data-q="inversion_previa" data-type="single">
-            <label class="opt"><input type="radio" name="inversion_previa" value="menos_100k"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Menos de $100.000</span></span></label>
-            <label class="opt"><input type="radio" name="inversion_previa" value="100_350k"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Entre $100.000 y $350.000</span></span></label>
-            <label class="opt"><input type="radio" name="inversion_previa" value="350_700k"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Entre $350.000 y $700.000</span></span></label>
-            <label class="opt"><input type="radio" name="inversion_previa" value="mas_700k"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Más de $700.000</span></span></label>
+            <label class="opt"><input type="radio" name="inversion_previa" value="menos_100k" data-dq="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Menos de $100.000</span></span></label>
+            <label class="opt"><input type="radio" name="inversion_previa" value="100_350k" data-score="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Entre $100.000 y $350.000</span></span></label>
+            <label class="opt"><input type="radio" name="inversion_previa" value="350_700k" data-score="2"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Entre $350.000 y $700.000</span></span></label>
+            <label class="opt"><input type="radio" name="inversion_previa" value="mas_700k" data-score="3"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">Más de $700.000</span></span></label>
           </div>
         </div>
 
@@ -189,8 +189,8 @@
           <div class="q-text">¿Dónde te encuentras?</div>
           <div class="q-hint">Nuestra clínica está en Puerto Varas y atendemos de lunes a viernes.</div>
           <div class="opts" data-q="ubicacion" data-type="single">
-            <label class="opt"><input type="radio" name="ubicacion" value="puerto_varas"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">En Puerto Varas o alrededores</span><span class="opt-sub">Puerto Montt, Llanquihue, Frutillar</span></span></label>
-            <label class="opt"><input type="radio" name="ubicacion" value="region_los_lagos"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">En otra ciudad de la Región de Los Lagos</span></span></label>
+            <label class="opt"><input type="radio" name="ubicacion" value="puerto_varas" data-score="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">En Puerto Varas o alrededores</span><span class="opt-sub">Puerto Montt, Llanquihue, Frutillar</span></span></label>
+            <label class="opt"><input type="radio" name="ubicacion" value="region_los_lagos" data-score="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">En otra ciudad de la Región de Los Lagos</span></span></label>
             <label class="opt"><input type="radio" name="ubicacion" value="otra_region_viaja"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">En otra región, y puedo viajar a Puerto Varas</span></span></label>
             <label class="opt"><input type="radio" name="ubicacion" value="otra_region_no_viaja" data-dq="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-label">En otra región, y no podría viajar</span></span></label>
           </div>
@@ -344,19 +344,28 @@
     const CONFIG = {
       // Webhook entrante de GoHighLevel que recibe el lead con categoría y ruta
       WEBHOOK_URL: 'https://services.leadconnectorhq.com/hooks/yivQnN9Zd8scHJmY0B16/webhook-trigger/e869d680-49c9-41b5-ac1a-8319609080f6',
+      // Umbrales del puntaje (máx. 10)
+      UMBRAL_CALIFICA: 4,     // bajo esto → descartado por puntaje
+      UMBRAL_PRIORIDAD_A: 7,  // desde esto → calificado prioridad A
     };
 
     /* ============================================================
-       Lógica de decisión (sin puntaje, reglas puras)
-       - Descarta (data-dq): "solo estoy averiguando" (P3),
-         "no puedo viajar" (P5)
-       - Bandera médica (data-flag, P6): no descarta → revisión clínica humana
+       Lógica de decisión: descartes duros + puntaje 0–10
+       1) Descarte directo (data-dq): "solo estoy averiguando" (P3),
+          inversión previa < $100.000 (P4), "no puedo viajar" (P5)
+       2) Bandera médica (data-flag, P6): no descarta → revisión clínica
+       3) Puntaje (data-score, máx. 10):
+          · Historial clínico P1 (cuenta el mayor): pabellón 3 ·
+            probó tratamientos 2 · dolor +3 meses 1
+          · Inversión previa P4: +$700k 3 · $350–700k 2 · $100–350k 1
+          · Inicio P3: lo antes posible 2 · 2–4 semanas 1
+          · Examen vigente P2: 1
+          · Ubicación P5: Región de Los Lagos 1 · otra región que viaja 0
+          → ≥7 calificado prioridad A · 4–6 calificado prioridad B ·
+            ≤3 descartado por puntaje
        - Ruta del calificado (P2): examen vigente → Diseño de Tratamiento;
          antiguo o sin examen → Consulta Médica
-       - Categoría clínica (P1, data-cat, gana la menor = mejor calificado):
-         1 procedimiento en pabellón · 2 probó tratamientos · 3 dolor +3 meses
-       - Inversión previa (P4): señal de capacidad anclada al valor del ciclo
-         ($700.000); no descarta, se envía al CRM para el manejo de Nexor
+       - categoria_clinica (P1, data-cat, gana la menor): prioridad de Nexor
        ============================================================ */
 
     function showStep(n) {
@@ -408,25 +417,32 @@
       let disqualified = false;
       let medicalFlag = false;
       let categoriaClinica = null; // 1 = mejor calificado
+      let score = 0;
       document.querySelectorAll('.opts').forEach(group => {
         const q = group.dataset.q;
         const checked = [...group.querySelectorAll('input:checked')];
         if (group.dataset.type === 'single') {
           const i = checked[0];
           answers[q] = i ? i.value : null;
-          if (i && i.dataset.dq === '1') disqualified = true;
+          if (i) {
+            if (i.dataset.dq === '1') disqualified = true;
+            score += parseInt(i.dataset.score || 0, 10);
+          }
         } else {
           answers[q] = checked.map(i => i.value);
+          let best = 0; // en el historial clínico cuenta solo el criterio mayor
           checked.forEach(i => {
             if (i.dataset.flag === '1') medicalFlag = true;
             if (i.dataset.cat) {
               const c = parseInt(i.dataset.cat, 10);
               if (categoriaClinica === null || c < categoriaClinica) categoriaClinica = c;
             }
+            if (i.dataset.score) best = Math.max(best, parseInt(i.dataset.score, 10));
           });
+          score += best;
         }
       });
-      return { answers, disqualified, medicalFlag, categoriaClinica };
+      return { answers, disqualified, medicalFlag, categoriaClinica, score };
     }
 
     function getUTMs() {
@@ -482,6 +498,7 @@
         const motivos = [];
         if (answers.urgencia === 'averiguando') motivos.push('Los cupos prioritarios son para quienes pueden iniciar su ciclo de tratamiento dentro de las próximas semanas, y por ahora solo estás averiguando');
         if (answers.ubicacion === 'otra_region_no_viaja') motivos.push('El tratamiento requiere atención presencial en nuestra clínica de Puerto Varas, e indicaste que no podrías viajar');
+        if (answers.inversion_previa === 'menos_100k') motivos.push('Nuestro tratamiento está indicado para pacientes que ya recorrieron tratamientos previos buscando una solución, y tu recorrido aún es inicial');
         if (!motivos.length) motivos.push('Tus respuestas no coinciden hoy con el perfil de paciente para el que está diseñado el tratamiento');
         addRows('motivosNo', ICON_NO, motivos);
       }
@@ -528,17 +545,23 @@
       btn.disabled = true;
       btn.textContent = 'Procesando…';
 
-      const { answers, disqualified, medicalFlag, categoriaClinica } = collectAnswers();
+      const { answers, disqualified, medicalFlag, categoriaClinica, score } = collectAnswers();
 
-      let categoria, ruta, resultId;
+      let categoria, ruta, resultId, prioridad = '', descartePor = '';
       if (disqualified) {
         categoria = 'descartado'; ruta = 'ninguna'; resultId = 'resNoCalifica';
+        if (answers.urgencia === 'averiguando') descartePor = 'sin_urgencia';
+        else if (answers.ubicacion === 'otra_region_no_viaja') descartePor = 'no_viaja';
+        else if (answers.inversion_previa === 'menos_100k') descartePor = 'inversion';
       } else if (medicalFlag) {
         categoria = 'revision_clinica'; ruta = 'revision_humana'; resultId = 'resRevision';
-      } else if (answers.diagnostico === 'vigente') {
-        categoria = 'calificado'; ruta = 'diseno_tratamiento'; resultId = 'resDiseno';
+      } else if (score >= CONFIG.UMBRAL_CALIFICA) {
+        categoria = 'calificado';
+        prioridad = score >= CONFIG.UMBRAL_PRIORIDAD_A ? 'A' : 'B';
+        if (answers.diagnostico === 'vigente') { ruta = 'diseno_tratamiento'; resultId = 'resDiseno'; }
+        else { ruta = 'consulta_medica'; resultId = 'resConsulta'; }
       } else {
-        categoria = 'calificado'; ruta = 'consulta_medica'; resultId = 'resConsulta';
+        categoria = 'descartado'; ruta = 'ninguna'; resultId = 'resNoCalifica'; descartePor = 'puntaje_bajo';
       }
 
       const payload = {
@@ -555,6 +578,9 @@
         categoria,
         ruta,
         categoria_clinica: categoriaClinica === null ? '' : String(categoriaClinica),
+        puntaje: String(score),
+        prioridad,
+        descarte_por: descartePor,
         ...getUTMs(),
         pagina: location.href,
         fecha: new Date().toISOString(),
