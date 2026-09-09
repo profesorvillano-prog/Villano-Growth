@@ -22,6 +22,7 @@
     .header { background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 100%); padding: 22px 24px 26px; text-align: center; }
     .header-brand { display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:12px; }
     .header-logo { font-family:'Sora',sans-serif; font-weight:800; font-size:14px; color:#fff; letter-spacing:0.02em; }
+    .header-logo-img { height:34px; width:auto; display:block; }
     .header-dot { width:4px; height:4px; border-radius:50%; background:var(--teal); }
     .header-sub { font-size:11.5px; color:rgba(255,255,255,0.55); }
     .header h1 { font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(20px, 5.5vw, 26px); line-height:1.25; color:#fff; max-width:520px; margin-inline:auto; }
@@ -110,7 +111,8 @@
   <!-- ============ HEADER CORTO ============ -->
   <header class="header">
     <div class="header-brand">
-      <span class="header-logo">TeraXcel</span>
+      <img class="header-logo-img" src="https://assets.cdn.filesafe.space/yivQnN9Zd8scHJmY0B16/media/6aa08073bfc1456f8c6f3ee9.png" alt="TeraXcel" onerror="this.hidden=true; document.getElementById('logoTextFallback').hidden=false;" />
+      <span class="header-logo" id="logoTextFallback" hidden>TeraXcel</span>
       <span class="header-dot"></span>
       <span class="header-sub">Fisioterapeutas y equipo médico · Puerto Varas</span>
     </div>

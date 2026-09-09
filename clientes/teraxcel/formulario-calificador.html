@@ -22,6 +22,7 @@
 
     .topbar { background: var(--navy); padding: 13px 24px; display: flex; align-items: center; justify-content: center; gap: 9px; }
     .topbar-logo { font-family:'Sora',sans-serif; font-weight:800; font-size:15px; color:#fff; letter-spacing:0.02em; }
+    .topbar-logo-img { height:34px; width:auto; display:block; }
     .topbar-dot { width:4px; height:4px; border-radius:50%; background:var(--teal); }
     .topbar-sub { font-size:12px; color:rgba(255,255,255,0.55); letter-spacing:0.03em; }
 
@@ -120,7 +121,8 @@
 <body>
 
   <div class="topbar">
-    <span class="topbar-logo">TeraXcel</span>
+    <img class="topbar-logo-img" src="https://assets.cdn.filesafe.space/yivQnN9Zd8scHJmY0B16/media/6aa08073bfc1456f8c6f3ee9.png" alt="TeraXcel" onerror="this.hidden=true; document.getElementById('logoTextFallback').hidden=false;" />
+    <span class="topbar-logo" id="logoTextFallback" hidden>TeraXcel</span>
     <span class="topbar-dot"></span>
     <span class="topbar-sub">Fisioterapeutas y equipo médico · Puerto Varas</span>
   </div>
