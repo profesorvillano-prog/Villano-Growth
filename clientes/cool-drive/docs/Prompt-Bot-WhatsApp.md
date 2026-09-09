@@ -624,3 +624,98 @@ La bienvenida al que paga se reescribió en primera persona: **ya me llegó tu c
 > Buenísimo Camila, ya me llegó tu comprobante. Bienvenida a Cool Drive 🚗 el curso parte el lunes y la teoría la haces online desde tu casa. La ficha y el convenio los firmas acá en la escuela. Cualquier cosa me escribes por acá
 
 Verificado tras el cambio: `isActive: true`, `sequential: false`, `dlqCount: 4`.
+
+---
+
+## Los siete ajustes de la reunión con el cliente (2026-09-08)
+
+Sebastián Berríos y Javier Donoso dejaron una lista de siete ajustes después de las
+reuniones del 7 de septiembre. Seis se implementaron en el bot; el séptimo es la
+reactivación de leads antiguos, que queda en espera hasta que los otros seis
+respondan finos en producción.
+
+### 1. El escalamiento ahora deja rastro
+
+El bot marcaba `atencion-humana` y nadie miraba esa etiqueta. Ahora, cada vez que
+usa la salida de escalamiento, también deja **`pendiente-equipo`**, que es la
+etiqueta pensada para colgarle un workflow de notificación en GHL. La marca sigue
+siendo interna: el bot nunca le anuncia a la persona que la está derivando.
+
+Se cargaron además las dos respuestas estándar de los casos reales del lunes:
+
+- **Devoluciones y cambio de sede.** No hay devolución de dinero. El bot lo dice
+  con amabilidad y ofrece lo que sí existe: los 60 días de plazo para empezar,
+  que casi siempre permiten reagendar en vez de anular. Si la persona insiste,
+  marca `derivar_humano` en silencio.
+- **Descuento por dos personas.** El cliente decidió manejarlo caso a caso, así
+  que el bot **no improvisa ningún precio**. Dice que la promo es individual y
+  marca `derivar_humano` para que quede en la cola.
+
+### 2. Después del pago la conversación no se corta
+
+La regla nº14 pasó de tres pasos a cuatro. El mensaje de bienvenida ahora **pide
+los datos de la ficha en la misma frase**: nombre completo, RUT, teléfono y
+correo. Sin eso Felipe no puede crear la ficha del alumno, así que el prompt lo
+marca como algo que nunca se posterga. Y el paso siguiente dejó de ser una
+generalidad: pasar por la escuela dentro de la semana a retirar la ficha, que es
+obligatoria.
+
+> Buenísimo Camila, ya me llegó tu comprobante y tu cupo quedó reservado.
+> Bienvenida a Cool Drive 🚗 para crear tu ficha necesito tu nombre completo,
+> RUT, teléfono y correo. El curso parte el lunes y la teoría la haces online
+> desde tu casa, y esta semana te acercas a la escuela a retirar tu ficha de
+> alumno, que es obligatoria.
+
+Cuando la persona manda los datos, el bot los devuelve en un campo nuevo,
+`datos_alumno`, que queda guardado en la memoria del contacto.
+
+### 3. Al que dice que va a ir, se le reserva el cupo
+
+Ésta es la fuga más cara del embudo: mucha gente dice *voy a ir a la escuela a
+inscribirme* — desconfianza normal, quieren ver que la escuela existe — y ahí se
+pierden el compromiso y el origen del lead. La regla nº16 nueva obliga al bot a
+ofrecer la reserva y a pedir nombre y día:
+
+> Perfecto, te esperamos. Atendemos de 9:00 a 13:00 y de 16:30 a 21:00. Quieres
+> que te reserve un cupo para mañana? dime tu nombre y a qué hora piensas llegar
+
+La reserva no cuesta nada y no compromete plata: el valor es psicológico, la
+persona se siente esperada. El día queda en el campo `fecha_visita` y el contacto
+se etiqueta **`visita-agendada`**, que es la lista que se puede cruzar después con
+la planilla de alumnos.
+
+### 4. El alumno actual no es cliente del bot
+
+El bot atiende solo a clientes nuevos. Un alumno actual lo atiende Felipe por el
+WhatsApp de alumnos, que es otro número. Antes el bot intentaba resolverle cosas
+que no tiene, y ahora lo deriva a un canal real y atendido — que es la única
+derivación permitida, justamente porque al otro lado sí hay alguien.
+
+**Falta el número.** Mientras DATOS DUROS diga `PENDIENTE`, el bot no inventa
+ningún número y usa la escuela como alternativa.
+
+### 5. El bot deja de hablar como amigo
+
+Feedback textual del cliente: el bot a veces contesta con exceso de confianza, el
+dueño no le hablaría así a un cliente. Se cambió la calibración de tono. El
+glosario chileno de la regla nº1 se mantiene intacto, pero ahora lleva una línea
+explícita encima: **es para entender, no para escribir**.
+
+Quedaron prohibidas al escribir: *sí po, si po, ya po, po, sipo, cachai, bacán,
+filo, fome, la pega, weón, altiro, pucha, oye*. Siguen permitidas con moderación:
+*buenísimo, perfecto, súper, harto, dale*. Y la referencia de calibración quedó
+escrita en el prompt como una prueba concreta: *si una frase tuya no se la dirías
+a un cliente que acaba de pagar $140.000, no la escribes*.
+
+Se mantienen el retardo de 45 segundos y el seguimiento que retoma conversaciones
+viejas, que al cliente le gustaron.
+
+### 6. Estructura
+
+- Esquema del cerebro: dos campos nuevos, `fecha_visita` y `datos_alumno`.
+- Memoria (módulo 7): guarda `visita=` y `ficha=` junto a los datos de siempre.
+- Módulo 8: etiqueta `pendiente-equipo` en los escalamientos y `visita-agendada`
+  cuando hay una visita comprometida, y su filtro se abrió para incluir ese caso.
+
+Verificado tras el cambio: `isActive: true`, `dlqCount: 4`, blueprint en
+producción idéntico byte a byte al preparado.
