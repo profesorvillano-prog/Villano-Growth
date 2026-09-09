@@ -67,6 +67,12 @@
     .field input:focus { border-color:var(--teal); }
     .field input.bad { border-color:var(--err); }
     .field-hint { font-size:11.5px; color:var(--tf); margin-top:5px; }
+    .field-row { display:flex; gap:10px; }
+    .field-row .field { flex:1; }
+    .phone-row { display:flex; gap:8px; }
+    .phone-row select { border:1.5px solid var(--br); border-radius:11px; padding:14px 10px; font-family:'Inter',sans-serif; font-size:15px; color:var(--tm); background:var(--white); outline:none; flex-shrink:0; cursor:pointer; }
+    .phone-row select:focus { border-color:var(--teal); }
+    .phone-row input { flex:1; }
 
     .nav { display:flex; gap:10px; margin-top:22px; }
     .btn { font-family:'Sora',sans-serif; font-size:14.5px; font-weight:800; padding:15px 26px; border-radius:12px; cursor:pointer; border:none; transition:transform .15s, opacity .15s; }
@@ -216,13 +222,31 @@
           <div class="q-text">¿A dónde te enviamos el resultado?</div>
           <div class="q-hint">Si calificas, podrás reservar de inmediato uno de los cupos prioritarios de la semana.</div>
           <div class="fields">
-            <div class="field">
-              <label for="f_nombre">Nombre y apellido</label>
-              <input type="text" id="f_nombre" autocomplete="name" placeholder="Ej: María González" />
+            <div class="field-row">
+              <div class="field">
+                <label for="f_nombre">Nombre</label>
+                <input type="text" id="f_nombre" autocomplete="given-name" placeholder="Ej: María" />
+              </div>
+              <div class="field">
+                <label for="f_apellido">Apellido</label>
+                <input type="text" id="f_apellido" autocomplete="family-name" placeholder="Ej: González" />
+              </div>
             </div>
             <div class="field">
               <label for="f_whatsapp">WhatsApp</label>
-              <input type="tel" id="f_whatsapp" autocomplete="tel" inputmode="tel" placeholder="+56 9 1234 5678" />
+              <div class="phone-row">
+                <select id="f_codigo" aria-label="Código de país">
+                  <option value="56" selected>🇨🇱 +56</option>
+                  <option value="54">🇦🇷 +54</option>
+                  <option value="51">🇵🇪 +51</option>
+                  <option value="591">🇧🇴 +591</option>
+                  <option value="57">🇨🇴 +57</option>
+                  <option value="52">🇲🇽 +52</option>
+                  <option value="34">🇪🇸 +34</option>
+                  <option value="1">🇺🇸 +1</option>
+                </select>
+                <input type="tel" id="f_whatsapp" autocomplete="tel-national" inputmode="tel" placeholder="9 1234 5678" />
+              </div>
               <div class="field-hint">Te contactaremos solo por tu calificación. Sin spam.</div>
             </div>
             <div class="field">
@@ -231,7 +255,7 @@
             </div>
           </div>
         </div>
-        <div class="err-msg" id="err2">Revisa tu nombre, WhatsApp y correo antes de continuar.</div>
+        <div class="err-msg" id="err2">Revisa tus datos: nombre, apellido, WhatsApp (9 dígitos, ej: 9 1234 5678) y correo.</div>
         <div class="nav">
           <button class="btn btn-back" onclick="prevStep()">←</button>
           <button class="btn btn-submit" id="btnSubmit" onclick="submitForm()">Ver mi resultado →</button>
@@ -409,17 +433,33 @@
       return utms;
     }
 
-    function validPhone(v) { return v.replace(/[^0-9]/g, '').length >= 8; }
     function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+    // Devuelve el número en formato internacional (+56912345678) o null si es inválido
+    function normalizePhone(codigo, valor) {
+      let d = valor.replace(/[^0-9]/g, '');
+      d = d.replace(/^0+/, '');                      // quita ceros iniciales
+      if (d.startsWith(codigo) && d.length > 9) d = d.slice(codigo.length); // pegó el +56 de nuevo
+      if (codigo === '56') {
+        if (d.length === 8) d = '9' + d;             // escribió solo los 8 dígitos del celular
+        if (d.length !== 9 || d[0] !== '9') return null; // celular chileno: 9 dígitos empezando en 9
+      } else {
+        if (d.length < 7 || d.length > 12) return null;
+      }
+      return '+' + codigo + d;
+    }
 
     async function submitForm() {
       const nombre = document.getElementById('f_nombre');
+      const apellido = document.getElementById('f_apellido');
       const whatsapp = document.getElementById('f_whatsapp');
+      const codigo = document.getElementById('f_codigo');
       const email = document.getElementById('f_email');
       const err = document.getElementById('err2');
 
+      const telefono = normalizePhone(codigo.value, whatsapp.value);
       let ok = true;
-      [[nombre, nombre.value.trim().length >= 3], [whatsapp, validPhone(whatsapp.value)], [email, validEmail(email.value)]].forEach(([el, valid]) => {
+      [[nombre, nombre.value.trim().length >= 2], [apellido, apellido.value.trim().length >= 2], [whatsapp, telefono !== null], [email, validEmail(email.value)]].forEach(([el, valid]) => {
         el.classList.toggle('bad', !valid);
         if (!valid) ok = false;
       });
@@ -445,7 +485,8 @@
 
       const payload = {
         nombre: nombre.value.trim(),
-        whatsapp: whatsapp.value.trim(),
+        apellido: apellido.value.trim(),
+        whatsapp: telefono,
         email: email.value.trim(),
         criterios_clinicos: (answers.criterios_clinicos || []).join(', '),
         diagnostico: answers.diagnostico,
