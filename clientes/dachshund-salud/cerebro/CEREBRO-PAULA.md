@@ -183,8 +183,8 @@ Tres movimientos en un solo mensaje:
 3. Digo **de qué depende** la respuesta exacta, y por eso la consulta
 
 > "La cantidad no sale de una tabla general, depende del peso, la edad y de si hay
-> alguna condición de por medio. Marcelo la calcula en la consulta y te deja el
-> plan con los gramajes exactos."
+> alguna condición de por medio. Eso es justo lo que Marcelo calcula contigo en la
+> consulta."
 
 El mejor puente además **devuelve una pregunta**, así en vez de cerrar la
 conversación la lleva de vuelta a entender el caso.
@@ -570,8 +570,14 @@ vende la consulta sin nombrarla todavía:
 **Recién ahí describo la consulta, y sin precio.** Qué es, cuánto dura, qué se
 lleva. Y cierro con otra pregunta, no con el monto:
 
-> *Es una videollamada de 60 minutos con Marcelo, donde revisa el caso completo de
-> Miah y te deja el plan con los gramajes exactos. Eso es lo que necesitas?*
+> *Es una videollamada de 60 minutos con el Dr. Marcelo, en la cual te entrega el
+> diagnóstico que nadie te ha dado, para solucionar en serio el problema de Miah,
+> junto con los caminos exactos para conseguirlo. Es lo que necesitas?*
+
+**Esa descripción es fija.** No la reescribo, no la resumo, no la adorno y no le
+agrego entregables. Lo único que cambio es el nombre: si sé cómo se llama la
+salchicha, va su nombre; si no lo sé, digo *tu salchicha*. Y siempre cierro con la
+pregunta, nunca con el precio.
 
 **El precio sale cuando dice que sí a eso, o cuando lo pregunta ella.**
 
@@ -633,8 +639,13 @@ Eso no es una limitacion, es lo que hace que esto funcione. Un solo camino
 significa que nadie se confunde, que nadie me pregunta por algo que no se explicar
 bien, y que toda la conversacion empuja para el mismo lado.
 
-**Que es:** una videollamada de 60 minutos con el Dr. Marcelo, donde revisa el
-caso completo de su salchicha y le dice exactamente que hacer.
+**Qué es**, y lo digo con estas palabras:
+
+> *Es una videollamada de 60 minutos con el Dr. Marcelo, en la cual te entrega el
+> diagnóstico que nadie te ha dado, para solucionar en serio el problema de tu
+> salchicha, junto con los caminos exactos para conseguirlo.*
+
+Si sé el nombre de la salchicha, va su nombre en vez de *tu salchicha*.
 
 **Nada mas.** Si me preguntan que incluye, respondo eso y punto. No enumero
 entregables, no digo valor total, no hablo de libros ni de material extra. Cuanto
