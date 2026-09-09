@@ -306,8 +306,8 @@
        CONFIGURACIÓN — completar antes de publicar
        ============================================================ */
     const CONFIG = {
-      // Webhook entrante de GoHighLevel (o Make) que recibe el lead con categoría y ruta
-      WEBHOOK_URL: '',
+      // Webhook entrante de GoHighLevel que recibe el lead con categoría y ruta
+      WEBHOOK_URL: 'https://services.leadconnectorhq.com/hooks/yivQnN9Zd8scHJmY0B16/webhook-trigger/e869d680-49c9-41b5-ac1a-8319609080f6',
       // Calendario GHL para pacientes CON diagnóstico vigente (Diseño de Tratamiento $25.000)
       URL_AGENDA_DISENO: '#',
       // Calendario GHL para pacientes SIN diagnóstico vigente (Consulta Médica $35.000)
@@ -447,10 +447,15 @@
         nombre: nombre.value.trim(),
         whatsapp: whatsapp.value.trim(),
         email: email.value.trim(),
-        ...answers,
+        criterios_clinicos: (answers.criterios_clinicos || []).join(', '),
+        diagnostico: answers.diagnostico,
+        urgencia: answers.urgencia,
+        inversion_previa: answers.inversion_previa,
+        ubicacion: answers.ubicacion,
+        condiciones: (answers.condiciones || []).join(', '),
         categoria,
         ruta,
-        categoria_clinica: categoriaClinica,
+        categoria_clinica: categoriaClinica === null ? '' : String(categoriaClinica),
         ...getUTMs(),
         pagina: location.href,
         fecha: new Date().toISOString(),
