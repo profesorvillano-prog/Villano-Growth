@@ -352,8 +352,11 @@
        Lógica de decisión: descartes duros + puntaje 0–10
        1) Descarte directo (data-dq): "solo estoy averiguando" (P3),
           inversión previa < $100.000 (P4), "no puedo viajar" (P5)
-       2) Bandera médica (data-flag, P6): no descarta → revisión clínica
-       3) Puntaje (data-score, máx. 10):
+       2) Puntaje insuficiente (< UMBRAL_CALIFICA) → descartado
+       3) Bandera médica (data-flag, P6): solo llega aquí quien calificaría
+          en todo lo demás (inversión, urgencia y puntaje aprobados) →
+          revisión clínica con chequeo presencial
+       4) Puntaje (data-score, máx. 10):
           · Historial clínico P1 (cuenta el mayor): pabellón 3 ·
             probó tratamientos 2 · dolor +3 meses 1
           · Inversión previa P4: +$700k 3 · $350–700k 2 · $100–350k 1
@@ -551,14 +554,15 @@
         if (answers.urgencia === 'averiguando') descartePor = 'sin_urgencia';
         else if (answers.ubicacion === 'otra_region_no_viaja') descartePor = 'no_viaja';
         else if (answers.inversion_previa === 'menos_100k') descartePor = 'inversion';
+      } else if (score < CONFIG.UMBRAL_CALIFICA) {
+        categoria = 'descartado'; ruta = 'ninguna'; resultId = 'resNoCalifica'; descartePor = 'puntaje_bajo';
       } else if (medicalFlag) {
+        // Calificaría en todo lo demás: solo lo separa la pregunta de salud
         categoria = 'revision_clinica'; ruta = 'revision_humana'; resultId = 'resRevision';
-      } else if (score >= CONFIG.UMBRAL_CALIFICA) {
+      } else {
         categoria = 'calificado';
         if (answers.diagnostico === 'vigente') { ruta = 'diseno_tratamiento'; resultId = 'resDiseno'; }
         else { ruta = 'consulta_medica'; resultId = 'resConsulta'; }
-      } else {
-        categoria = 'descartado'; ruta = 'ninguna'; resultId = 'resNoCalifica'; descartePor = 'puntaje_bajo';
       }
 
       const payload = {
