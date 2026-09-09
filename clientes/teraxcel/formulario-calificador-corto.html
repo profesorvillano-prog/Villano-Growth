@@ -307,12 +307,12 @@
         <div class="card result">
           <div class="result-icon mid"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#B7791F" stroke-width="2.5"/><path d="M12 8v5M12 16h.01" stroke="#B7791F" stroke-width="2.5" stroke-linecap="round"/></svg></div>
           <div class="result-tag mid">Revisión clínica</div>
-          <h2>Tu caso lo revisará primero nuestro equipo clínico</h2>
-          <p>Tu perfil puede ser compatible con el tratamiento, pero por protocolo médico tu caso debe revisarlo personalmente nuestro equipo clínico antes de asignarte una hora.</p>
+          <h2>Tu caso necesita un chequeo presencial en nuestra clínica</h2>
+          <p>Tu perfil puede ser compatible con el tratamiento, pero por protocolo médico primero debes <strong>chequearte presencialmente con nuestro equipo clínico</strong> en la clínica de Puerto Varas.</p>
           <div class="result-box" id="motivosRevision">
-            <div class="result-box-title mid">Por qué pasa a revisión</div>
+            <div class="result-box-title mid">Por qué necesitas este chequeo</div>
           </div>
-          <p><strong>Nuestro equipo te contactará al WhatsApp que nos dejaste</strong> para indicarte el camino seguro para ti.</p>
+          <p><strong>Nuestro equipo te contactará al WhatsApp que nos dejaste</strong> para coordinar tu visita.</p>
           <div class="result-note">No necesitas hacer nada más por ahora.</div>
         </div>
       </section>
@@ -344,9 +344,8 @@
     const CONFIG = {
       // Webhook entrante de GoHighLevel que recibe el lead con categoría y ruta
       WEBHOOK_URL: 'https://services.leadconnectorhq.com/hooks/yivQnN9Zd8scHJmY0B16/webhook-trigger/e869d680-49c9-41b5-ac1a-8319609080f6',
-      // Umbrales del puntaje (máx. 10)
-      UMBRAL_CALIFICA: 4,     // bajo esto → descartado por puntaje
-      UMBRAL_PRIORIDAD_A: 7,  // desde esto → calificado prioridad A
+      // Umbral del puntaje (máx. 10): bajo esto → descartado por puntaje
+      UMBRAL_CALIFICA: 4,
     };
 
     /* ============================================================
@@ -361,8 +360,7 @@
           · Inicio P3: lo antes posible 2 · 2–4 semanas 1
           · Examen vigente P2: 1
           · Ubicación P5: Región de Los Lagos 1 · otra región que viaja 0
-          → ≥7 calificado prioridad A · 4–6 calificado prioridad B ·
-            ≤3 descartado por puntaje
+          → ≥4 calificado · ≤3 descartado por puntaje
        - Ruta del calificado (P2): examen vigente → Diseño de Tratamiento;
          antiguo o sin examen → Consulta Médica
        - categoria_clinica (P1, data-cat, gana la menor): prioridad de Nexor
@@ -505,7 +503,7 @@
       if (resultId === 'resRevision') {
         const motivos = [];
         (answers.condiciones || []).forEach(v => { if (LABEL_CONDICIONES[v]) motivos.push(LABEL_CONDICIONES[v]); });
-        motivos.push('Por protocolo médico, esta situación debe evaluarla nuestro equipo clínico antes de asignarte una hora');
+        motivos.push('Por protocolo médico, esta situación requiere un chequeo presencial con nuestro equipo clínico antes de continuar');
         addRows('motivosRevision', ICON_MID, motivos);
       }
     }
@@ -547,7 +545,7 @@
 
       const { answers, disqualified, medicalFlag, categoriaClinica, score } = collectAnswers();
 
-      let categoria, ruta, resultId, prioridad = '', descartePor = '';
+      let categoria, ruta, resultId, descartePor = '';
       if (disqualified) {
         categoria = 'descartado'; ruta = 'ninguna'; resultId = 'resNoCalifica';
         if (answers.urgencia === 'averiguando') descartePor = 'sin_urgencia';
@@ -557,7 +555,6 @@
         categoria = 'revision_clinica'; ruta = 'revision_humana'; resultId = 'resRevision';
       } else if (score >= CONFIG.UMBRAL_CALIFICA) {
         categoria = 'calificado';
-        prioridad = score >= CONFIG.UMBRAL_PRIORIDAD_A ? 'A' : 'B';
         if (answers.diagnostico === 'vigente') { ruta = 'diseno_tratamiento'; resultId = 'resDiseno'; }
         else { ruta = 'consulta_medica'; resultId = 'resConsulta'; }
       } else {
@@ -579,7 +576,6 @@
         ruta,
         categoria_clinica: categoriaClinica === null ? '' : String(categoriaClinica),
         puntaje: String(score),
-        prioridad,
         descarte_por: descartePor,
         ...getUTMs(),
         pagina: location.href,
