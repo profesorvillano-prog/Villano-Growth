@@ -30,8 +30,22 @@
 |---|---|---|
 | GHL → Nexor | Lead nuevo + respuestas del formulario + `canal_origen` | A configurar (Guía 3) |
 | Nexor → GHL | Los **5 estados** (§2) + `expectativa_precio`, `disponibilidad_declarada`, `id_cita_medilink` | A configurar (Guía 3) |
-| Nexor ↔ Medilink | Crear cita en horas disponibles · leer asistencia | La monta Nexor; confirmar alcance con ellos |
-| GHL o Medilink → Meta | Eventos de conversión calificados | **Decisión abierta** — ver §4 |
+| Nexor ↔ Medilink | Crear paciente y cita · leer citas finalizadas, no asistidas y tratamientos aceptados | **Confirmado por Medilink (sep/2026):** depende 100 % de Nexor vía su API pública — `POST /pacientes` y `POST /citas` (docs: api.medilink2.healthatom.com/docs). El flujo de estados se cierra con Camila (adopción); KAM: Francisca Morales |
+| GHL → Meta | Eventos de conversión calificados | **Resuelto: salen desde GHL** (el "plan B" de §4). Medilink no dispara eventos; entrega los estados y GHL emite |
+
+Los **4 estados que Nexor debe leer de Medilink** y reflejar en GHL:
+
+| Dato en Medilink | Estado Nexor | Etapa GHL |
+|---|---|---|
+| Cita creada | `agendado` | Evaluación Agendada |
+| Cita finalizada | `asistió` | Evaluación Realizada |
+| Cita no asistida | señal → reagenda | No Asistió |
+| Tratamiento aceptado | `pasó a tratamiento` | Pasó a Tratamiento (Won) |
+
+> Definición pendiente con Camila (Medilink): cómo se exponen por API "cita
+> finalizada / no asistida" y "tratamiento aceptado" — webhook o consulta
+> periódica — y el identificador de cita para conciliar reagendamientos sin
+> duplicar (`id_cita_medilink`).
 
 **Regla de dirección única:** el estado de cada lead lo declara **Nexor** y el
 CRM lo refleja. Nadie mueve tarjetas a mano en las etapas 1–7 (la 8 puede entrar
