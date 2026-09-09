@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Sana tu Autoinmune · Consulta de Evaluación Autoinmune | Nutrición funcional para enfermedades autoinmunes</title>
+<meta name="description" content="Sana tu Autoinmune ofrece la Consulta de Evaluación Autoinmune: una sesión individual de 45 minutos, 100% online, de orientación nutricional y de hábitos para personas con enfermedades autoinmunes. Servicio complementario, no sustituye al médico tratante.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sana tu Autoinmune · Consulta de Evaluación Autoinmune | Nutrición funcional para enfermedades autoinmunes">
+<meta property="og:description" content="Sana tu Autoinmune ofrece la Consulta de Evaluación Autoinmune: una sesión individual de 45 minutos, 100% online, de orientación nutricional y de hábitos para personas con enfermedades autoinmunes. Servicio complementario, no sustituye al médico tratante.">
+<meta property="og:locale" content="es_LA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --deep:#0E2E3E; --deep2:#144155; --teal:#0E7C8B; --teal2:#128FA0;
+  --cta1:#0C7382; --cta2:#0A6270; --tealw:#E8F4F6; --mint:#2F9E7C; --mintw:#E9F5F0;
+  --ground:#F5F8F9; --tint:#EEF4F6; --wh:#FFFFFF;
+  --t0:#0D2029; --t1:#2E4650; --t2:#55707B; --t3:#6B858F;
+  --br:#DCE7EB; --br2:#EAF1F3; --red:#B4483C;
+  --r:10px; --r-lg:14px;
+  --display:'Instrument Sans','IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --body:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:78px}
+body{font-family:var(--body);background:var(--ground);color:var(--t1);line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-wrap:break-word;
+  -webkit-tap-highlight-color:rgba(14,124,139,.14)}
+img{max-width:100%;display:block}
+a{color:var(--teal);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.18;letter-spacing:-.02em;color:var(--t0);font-weight:700;text-wrap:balance}
+h1{font-size:clamp(1.75rem,5.4vw,2.7rem)}
+h2{font-size:clamp(1.4rem,4.2vw,2rem)}
+h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:600}
+h4{font-size:1rem;font-weight:600}
+.wrap{width:100%;max-width:1010px;margin:0 auto;padding:0 22px}
+.wrap-n{width:100%;max-width:760px;margin:0 auto;padding:0 22px}
+.sec{padding:56px 0}
+@media(min-width:760px){.sec{padding:78px 0}}
+.sec-alt{background:var(--tint);border-top:1px solid var(--br);border-bottom:1px solid var(--br)}
+.sec-dark{background:var(--deep);color:#CFE1E7}
+.sec-dark h2,.sec-dark h3{color:#fff}
+.center{text-align:center}
+.mark{color:var(--teal)}
+.eyebrow{font-family:var(--display);font-size:.7rem;font-weight:600;letter-spacing:.19em;
+  text-transform:uppercase;color:var(--teal);display:block;margin-bottom:12px}
+.lead{font-size:clamp(1rem,2.5vw,1.07rem);color:var(--t2)}
+.sec-dark .lead{color:#B9D2DA}
+
+/* Barra superior */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--br);padding-top:var(--sat)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:64px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+.brand{display:inline-flex;align-items:center;gap:10px}
+.brand:hover{text-decoration:none}
+.brand-mk{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--teal);display:grid;place-items:center;flex:none}
+.brand-mk svg{width:14px;height:14px;stroke:var(--teal);fill:none;stroke-width:2.2;stroke-linecap:round}
+.logo-txt{font-family:var(--display);font-weight:700;font-size:1.04rem;letter-spacing:.05em;
+  color:var(--deep);text-transform:uppercase}
+.logo-txt b{color:var(--teal)}
+.nav-links{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+.nav-links a{font-size:.88rem;color:var(--t2);font-weight:500}
+.nav-links a:hover,.nav-links a[aria-current="page"]{color:var(--teal);text-decoration:none}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:linear-gradient(180deg,var(--cta1),var(--cta2));color:#fff;border-radius:var(--r);
+  padding:16px 26px;font-family:var(--display);font-weight:700;font-size:1rem;
+  box-shadow:0 14px 30px -14px rgba(14,124,139,.6),inset 0 1px 0 rgba(255,255,255,.16);
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.btn:hover{transform:translateY(-2px);text-decoration:none;
+  box-shadow:0 20px 40px -16px rgba(14,124,139,.7),inset 0 1px 0 rgba(255,255,255,.2)}
+.btn:focus-visible{outline:2px solid var(--deep);outline-offset:3px}
+.btn .price{font-weight:600;opacity:.85;font-variant-numeric:tabular-nums}
+.btn-ghost{background:var(--wh);color:var(--deep);border:1px solid var(--br);box-shadow:none}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal);box-shadow:none}
+.sec-dark .btn{background:var(--wh);color:var(--deep)}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.center .btn-row{justify-content:center}
+.note{font-size:.83rem;color:var(--t2);margin-top:12px}
+.sec-dark .note{color:#93B3BD}
+
+/* Hero */
+.hero{padding:52px 0 44px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-140px 0 auto;height:520px;pointer-events:none;
+  background:radial-gradient(ellipse 62% 100% at 50% 0%,rgba(14,124,139,.12) 0%,transparent 70%)}
+.hero>*{position:relative}
+.hero .lead{margin-top:16px;max-width:60ch}
+.center .lead{margin-left:auto;margin-right:auto}
+
+/* Tarjetas */
+.grid{display:grid;gap:16px;margin-top:30px}
+.g2{grid-template-columns:1fr}
+.g3{grid-template-columns:1fr}
+@media(min-width:700px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);padding:24px 22px;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
+.card:hover{transform:translateY(-2px);border-color:#C3D8DE;box-shadow:0 18px 40px -28px rgba(13,32,41,.55)}
+.card h3{margin-bottom:8px}
+.card p{font-size:.95rem;color:var(--t2)}
+.card .num{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:var(--tealw);
+  color:var(--teal);font-family:var(--display);font-weight:700;font-size:.78rem;margin-bottom:13px}
+
+/* Ficha de servicio */
+.ficha{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);overflow:hidden;margin-top:30px}
+.ficha-top{padding:24px 22px;border-bottom:1px solid var(--br2);display:flex;flex-wrap:wrap;
+  gap:16px;align-items:flex-start;justify-content:space-between}
+.ficha-price{font-family:var(--display);font-weight:700;font-size:1.7rem;color:var(--deep);
+  font-variant-numeric:tabular-nums;line-height:1.2}
+.ficha-price b{font-weight:700}
+.ficha-price span{display:block;font-size:.72rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--t3);margin-top:6px}
+.ficha dl{display:grid;grid-template-columns:1fr;border-top:1px solid var(--br2)}
+@media(min-width:640px){.ficha dl{grid-template-columns:repeat(2,1fr)}}
+.ficha .row{padding:15px 22px;border-bottom:1px solid var(--br2);display:flex;gap:12px;flex-wrap:wrap}
+.ficha dt{font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--t3);
+  min-width:150px;font-family:var(--display);padding-top:2px}
+.ficha dd{font-size:.95rem;color:var(--t1);flex:1;min-width:180px}
+
+/* Listas de comprobación */
+.checks{display:grid;gap:10px;margin-top:26px}
+@media(min-width:700px){.checks.c2{grid-template-columns:1fr 1fr}}
+.check{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;background:var(--wh);
+  border:1px solid var(--br);border-radius:var(--r);padding:15px 16px}
+.check svg{width:22px;height:22px;stroke:var(--mint);fill:none;stroke-width:2.3;stroke-linecap:round;
+  stroke-linejoin:round;margin-top:2px}
+.check p{font-size:.96rem;color:var(--t1)}
+.check p b{color:var(--t0);font-weight:600}
+.check.no svg{stroke:var(--red)}
+
+/* Equipo */
+.team{display:grid;gap:18px;margin-top:30px}
+@media(min-width:760px){.team{grid-template-columns:1fr 1fr;gap:22px}}
+.member{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);overflow:hidden;
+  display:flex;flex-direction:column}
+.member>img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 22%;background:var(--tint)}
+.member-body{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.member-role{font-family:var(--display);font-weight:600;font-size:.68rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--teal)}
+.member-body p{font-size:.94rem;color:var(--t2)}
+.creds{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:14px}
+.creds span{background:var(--tealw);border:1px solid #CFE4E9;color:#0B5F6B;font-size:.72rem;
+  border-radius:5px;padding:5px 10px}
+.creds span.mn{background:var(--mintw);border-color:#CFE6DC;color:#1F6E56;font-weight:600}
+
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:24px}
+.chips span{background:var(--wh);border:1px solid var(--br);border-radius:6px;padding:8px 14px;
+  font-size:.84rem;color:var(--t1)}
+
+/* Aviso */
+.aviso{margin-top:26px;background:var(--wh);border:1px solid var(--br);border-left:3px solid var(--teal);
+  border-radius:var(--r);padding:18px 20px;font-size:.92rem;color:var(--t2)}
+.aviso b{color:var(--t0);font-weight:600}
+
+/* FAQ */
+.faq{margin-top:26px;display:grid;gap:8px}
+.faq details{background:var(--wh);border:1px solid var(--br);border-radius:var(--r);overflow:hidden}
+.faq details[open]{border-color:var(--teal)}
+.faq summary{list-style:none;cursor:pointer;padding:16px 48px 16px 18px;position:relative;
+  font-family:var(--display);font-weight:600;font-size:.98rem;color:var(--t0)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after,.faq summary::before{content:"";position:absolute;right:19px;top:50%;width:11px;
+  height:1.8px;background:var(--teal);border-radius:2px;transition:transform .25s var(--ease)}
+.faq summary::before{transform:translateY(-50%) rotate(90deg)}
+.faq summary::after{transform:translateY(-50%)}
+.faq details[open] summary::before{transform:translateY(-50%) rotate(0)}
+.faq .a{padding:0 18px 18px;font-size:.94rem;color:var(--t2)}
+
+/* Contacto */
+.datos{display:grid;gap:12px;margin-top:26px}
+@media(min-width:700px){.datos{grid-template-columns:1fr 1fr}}
+.dato{background:var(--wh);border:1px solid var(--br);border-radius:var(--r);padding:16px 18px}
+.dato b{display:block;font-family:var(--display);font-size:.68rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--t3);margin-bottom:5px;font-weight:600}
+.dato span,.dato a{font-size:.95rem;color:var(--t1)}
+
+/* Documentos legales */
+.doc{padding:44px 0 60px}
+.doc h1{margin-bottom:10px}
+.doc .fecha{font-size:.86rem;color:var(--t3);margin-bottom:26px}
+.doc .box{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);padding:26px 24px}
+@media(min-width:760px){.doc .box{padding:38px 40px}}
+.doc h2{font-size:clamp(1.12rem,3vw,1.3rem);margin:32px 0 10px;padding-top:22px;border-top:1px solid var(--br2)}
+.doc .box>h2:first-child{margin-top:0;padding-top:0;border-top:0}
+.doc h3{margin:20px 0 8px}
+.doc p,.doc li{font-size:.96rem;color:var(--t1)}
+.doc p+p{margin-top:12px}
+.doc ul,.doc ol{margin:12px 0 0 22px;display:grid;gap:8px}
+.doc li{padding-left:2px}
+.doc table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.9rem;display:block;overflow-x:auto}
+.doc th,.doc td{border:1px solid var(--br);padding:10px 12px;text-align:left;vertical-align:top}
+.doc th{background:var(--tint);font-family:var(--display);font-weight:600;color:var(--t0)}
+.doc .destacado{background:var(--tealw);border:1px solid #CFE4E9;border-radius:var(--r);
+  padding:16px 18px;margin-top:16px;font-size:.94rem;color:#0B5F6B}
+.doc .destacado b{color:#08505B}
+.toc{background:var(--tint);border:1px solid var(--br);border-radius:var(--r);padding:18px 20px;margin-bottom:26px}
+.toc b{display:block;font-family:var(--display);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--t3);margin-bottom:10px}
+.toc ol{margin:0 0 0 18px;display:grid;gap:5px}
+.toc li{font-size:.9rem}
+
+/* Pie */
+.ftr{background:var(--wh);border-top:1px solid var(--br);padding:40px 0 calc(34px + var(--sab))}
+.ftr-grid{display:grid;gap:26px}
+@media(min-width:760px){.ftr-grid{grid-template-columns:1.3fr 1fr 1fr}}
+.ftr h4{font-family:var(--display);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--t3);margin-bottom:11px;font-weight:600}
+.ftr p,.ftr li,.ftr address{font-size:.85rem;color:var(--t2);font-style:normal}
+.ftr ul{display:grid;gap:7px}
+.ftr a{color:var(--t2)}
+.ftr a:hover{color:var(--teal)}
+.ftr .empresa{font-family:var(--display);font-weight:700;font-size:1rem;color:var(--deep);margin-bottom:8px}
+.ftr-legal{margin-top:28px;padding-top:20px;border-top:1px solid var(--br2);font-size:.78rem;color:var(--t3)}
+.ftr-legal p+p{margin-top:10px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="./index.html">
+      <span class="brand-mk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></span>
+      <span class="logo-txt">Sana tu <b>Autoinmune</b></span>
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="./index.html#servicio" aria-current="page">El servicio</a>
+      <a href="./index.html#como-funciona">Cómo funciona</a>
+      <a href="./index.html#equipo">Equipo</a>
+      <a href="./index.html#contacto">Contacto</a>
+      <a href="./politica-de-privacidad.html">Privacidad</a>
+      <a href="./terminos-y-condiciones.html">Términos</a>
+      <a href="./politica-de-reembolso.html">Reembolsos</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================== HERO ============================== -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Consulta de evaluación en enfermedades autoinmunes</span>
+    <h1>Acompañamiento nutricional y funcional para personas con enfermedades autoinmunes</h1>
+    <p class="lead">Sana tu Autoinmune es un servicio de consultoría en nutrición funcional, 100&nbsp;% online,
+    para personas que conviven con una enfermedad autoinmune (psoriasis, dermatitis atópica, vitíligo, lupus,
+    colitis ulcerosa, enfermedad de Crohn, artritis reumatoide, entre otras) y quieren entender su caso y
+    ordenar su alimentación junto a un equipo con respaldo médico.</p>
+    <p class="lead" style="margin-top:14px"><b>No somos un servicio médico ni un reemplazo de tu médico
+    tratante.</b> Trabajamos sobre la alimentación y los hábitos, en complemento del tratamiento que ya
+    llevás adelante con tu profesional de la salud.</p>
+    <div class="btn-row">
+      <a class="btn" data-pago href="#servicio" target="_blank" rel="noopener">
+        <span>Contratar la consulta</span><span class="price" data-precio>USD $60</span></a>
+      <a class="btn btn-ghost" href="#servicio">Ver qué incluye</a>
+    </div>
+    <p class="note">Servicio 100&nbsp;% online · Pago único · Sin suscripciones ni cargos recurrentes</p>
+  </div>
+</section>
+
+<!-- ============================= SERVICIO ============================ -->
+<section class="sec sec-alt" id="servicio">
+  <div class="wrap">
+    <span class="eyebrow">Qué ofrecemos</span>
+    <h2>Consulta de Evaluación Autoinmune</h2>
+    <p class="lead" style="margin-top:12px;max-width:66ch">Una sesión individual por videollamada, de 45 minutos,
+    en la que se revisa tu historia clínica declarada, tu alimentación actual, la medicación que tomás y los
+    análisis que ya tengas, para elaborar una orientación nutricional y de hábitos adaptada a tu caso.
+    Al finalizar recibís por correo una guía de alimentación en PDF.</p>
+
+    <div class="ficha">
+      <div class="ficha-top">
+        <div>
+          <h3 style="font-size:1.2rem">Consulta de Evaluación Autoinmune</h3>
+          <p style="font-size:.93rem;color:var(--t2);margin-top:6px">Servicio de consultoría en nutrición
+          funcional y hábitos. Prestado por Ezequiel Racca, con supervisión clínica de la Dra. Catalina Clembosky.</p>
+        </div>
+        <div class="ficha-price"><b data-precio>USD $60</b><span>Pago único · IVA/impuestos según país</span></div>
+      </div>
+      <dl>
+        <div class="row"><dt>Formato</dt><dd>Videollamada individual (1 a 1), 100&nbsp;% online</dd></div>
+        <div class="row"><dt>Duración</dt><dd>45 minutos</dd></div>
+        <div class="row"><dt>Idioma</dt><dd>Español</dd></div>
+        <div class="row"><dt>Disponibilidad</dt><dd>Desde cualquier país con conexión a internet</dd></div>
+        <div class="row"><dt>Entrega incluida</dt><dd>Guía de alimentación en PDF (documento general, no personalizado), enviada por correo electrónico al finalizar la consulta</dd></div>
+        <div class="row"><dt>Plazo de entrega</dt><dd>La sesión se agenda tras la compra, según disponibilidad; el PDF se envía dentro de las 48&nbsp;horas hábiles posteriores a la consulta</dd></div>
+        <div class="row"><dt>Medio de pago</dt><dd>Plataforma Hotmart (tarjeta de crédito y débito, y medios locales según el país)</dd></div>
+        <div class="row"><dt>Reembolso</dt><dd>7 días corridos según nuestra <a href="./politica-de-reembolso.html">Política de reembolso</a></dd></div>
+      </dl>
+    </div>
+
+    <h3 style="margin-top:38px">Qué incluye</h3>
+    <div class="checks c2">
+      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Revisión previa de tu caso.</b> Antes de la sesión completás un cuestionario con tu diagnóstico, tu historia, tu alimentación, tu medicación y tus análisis disponibles.</p></div>
+      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>45 minutos de sesión individual.</b> Videollamada dedicada exclusivamente a tu caso, con espacio para preguntas.</p></div>
+      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Orientación nutricional concreta.</b> Qué alimentos priorizar y cuáles reducir o retirar, y en qué orden, según lo declarado en tu cuestionario.</p></div>
+      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Orientación sobre estudios.</b> Sugerencias de qué análisis conversar con tu médico tratante, para que él los indique y los interprete.</p></div>
+      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Guía de alimentación en PDF.</b> Documento general con grupos de alimentos, listado de permitidos y no permitidos y una visión del proceso.</p></div>
+      <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><p><b>Resumen escrito por correo.</b> Los puntos principales de la consulta, enviados junto con la guía.</p></div>
+    </div>
+
+    <h3 style="margin-top:34px">Qué no incluye</h3>
+    <div class="checks c2">
+      <div class="check no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg><p><b>No incluye diagnóstico médico.</b> No diagnosticamos enfermedades ni confirmamos o descartamos diagnósticos previos.</p></div>
+      <div class="check no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg><p><b>No incluye prescripción ni ajuste de medicación.</b> Ninguna indicación de este servicio sustituye a tu médico ni habilita a modificar un tratamiento.</p></div>
+      <div class="check no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg><p><b>No incluye estudios de laboratorio.</b> No solicitamos, procesamos ni cubrimos el costo de análisis clínicos.</p></div>
+      <div class="check no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg><p><b>No incluye seguimiento posterior.</b> Es una consulta única; el seguimiento continuo es un servicio distinto que se contrata aparte.</p></div>
+      <div class="check no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg><p><b>No incluye atención de urgencias.</b> No brindamos atención médica de urgencia ni acompañamiento clínico permanente.</p></div>
+      <div class="check no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg><p><b>No garantiza resultados.</b> Los resultados dependen de cada persona, su condición de base y su adherencia.</p></div>
+    </div>
+
+    <div class="btn-row">
+      <a class="btn" data-pago href="#" target="_blank" rel="noopener">
+        <span>Contratar la consulta</span><span class="price" data-precio>USD $60</span></a>
+    </div>
+    <p class="note">Al contratar aceptás los <a href="./terminos-y-condiciones.html">Términos y condiciones</a>,
+    la <a href="./politica-de-privacidad.html">Política de privacidad</a> y la
+    <a href="./politica-de-reembolso.html">Política de reembolso</a>.</p>
+  </div>
+</section>
+
+<!-- =========================== CÓMO FUNCIONA ========================= -->
+<section class="sec" id="como-funciona">
+  <div class="wrap">
+    <span class="eyebrow">Cómo funciona</span>
+    <h2>El proceso, paso a paso</h2>
+    <div class="grid g2">
+      <div class="card"><span class="num">01</span><h3>Contratación y pago</h3>
+        <p>Contratás la consulta desde este sitio. El pago se procesa en la plataforma Hotmart, que emite el comprobante y gestiona los medios de pago disponibles en tu país.</p></div>
+      <div class="card"><span class="num">02</span><h3>Agenda y cuestionario</h3>
+        <p>Recibís por correo el enlace para elegir día y horario, junto con un cuestionario sobre tu diagnóstico, tu alimentación, tu medicación y tus estudios. Completarlo es necesario para aprovechar la sesión.</p></div>
+      <div class="card"><span class="num">03</span><h3>La consulta</h3>
+        <p>45 minutos por videollamada. Se revisa tu caso, se explica el enfoque nutricional y se define qué cambios de alimentación y hábitos proponemos, siempre en complemento de tu tratamiento médico.</p></div>
+      <div class="card"><span class="num">04</span><h3>Entrega y cierre</h3>
+        <p>Dentro de las 48&nbsp;horas hábiles recibís por correo la guía de alimentación en PDF y un resumen escrito de la consulta. Con eso finaliza el servicio contratado.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PARA QUIÉN ========================== -->
+<section class="sec sec-alt">
+  <div class="wrap center">
+    <span class="eyebrow">Para quién es</span>
+    <h2>Condiciones que acompañamos</h2>
+    <p class="lead" style="margin-top:12px;max-width:60ch;margin-left:auto;margin-right:auto">
+    Trabajamos con personas mayores de 18 años que ya cuentan con un diagnóstico realizado por un profesional
+    médico y siguen un tratamiento con su médico tratante.</p>
+    <div class="chips">
+      <span>Psoriasis</span><span>Dermatitis atópica / eczema</span><span>Vitíligo</span><span>Lupus</span>
+      <span>Enfermedad de Crohn</span><span>Colitis ulcerosa</span><span>Artritis reumatoide</span>
+      <span>Tiroiditis de Hashimoto</span><span>Otras enfermedades autoinmunes</span>
+    </div>
+    <div class="aviso" style="text-align:left;max-width:760px;margin-left:auto;margin-right:auto">
+      <b>No aceptamos</b> consultas de menores de 18 años, personas cursando un brote agudo o una urgencia
+      médica, embarazadas o personas en lactancia sin autorización expresa de su médico, ni personas que
+      busquen suspender su medicación. Si tu caso requiere otro tipo de abordaje, te lo comunicamos y
+      corresponde la devolución del importe abonado según nuestra
+      <a href="./politica-de-reembolso.html">Política de reembolso</a>.
+    </div>
+  </div>
+</section>
+
+<!-- ============================== EQUIPO ============================= -->
+<section class="sec" id="equipo">
+  <div class="wrap">
+    <span class="eyebrow">Nosotros</span>
+    <h2>El equipo detrás de Sana tu Autoinmune</h2>
+    <p class="lead" style="margin-top:12px;max-width:64ch">Sana tu Autoinmune es la marca comercial bajo la
+    que <span data-llc>[<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>MBRE-LEGAL-LLC]</span> presta sus servicios de consultoría en nutrición funcional.
+    El servicio lo llevan adelante dos profesionales, ambos residentes en Argentina.</p>
+
+    <div class="team">
+      <article class="member">
+        <img src="https://assets.cdn.filesafe.space/KG0HeFXOJjAdf0BYP6oy/media/6a9f7f2e968770b81c58d618.png"
+             alt="Retrato de Ezequiel Racca, health coach en nutrición funcional y odontólogo, socio fundador"
+             loading="lazy" width="1080" height="1350">
+        <div class="member-body">
+          <h3>Ezequiel Racca</h3>
+          <p class="member-role">Socio fundador · Health Coach en Nutrición Funcional · Odontólogo</p>
+          <p>Ezequiel Racca es odontólogo de profesión y health coach especializado en nutrición funcional
+          aplicada a enfermedades autoinmunes. Se formó durante varios años en nutrición y medicina funcional,
+          incluyendo estancias de formación en clínicas de los Estados Unidos dedicadas a pacientes autoinmunes.</p>
+          <p>Es el responsable de conducir la Consulta de Evaluación Autoinmune y de elaborar los lineamientos
+          nutricionales del servicio. <b>Ezequiel no es médico y así lo aclara en todas sus comunicaciones:</b>
+          su trabajo es nutricional y de hábitos, complementario al tratamiento indicado por el médico tratante
+          de cada persona.</p>
+          <div class="creds">
+            <span>Odontólogo</span><span>Nutrición funcional</span><span>Formación en clínicas de EE.&nbsp;UU.</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member">
+        <img src="https://assets.cdn.filesafe.space/KG0HeFXOJjAdf0BYP6oy/media/6a9af9109a2eb1d7808afac3.png"
+             alt="Retrato de la Dra. Catalina Clembosky, médica clínica con enfoque en medicina integrativa"
+             loading="lazy" width="1080" height="1350">
+        <div class="member-body">
+          <h3>Dra. Catalina Clembosky</h3>
+          <p class="member-role">Supervisión clínica · Médica clínica · Medicina integrativa</p>
+          <p>Médica clínica en ejercicio en Argentina, con enfoque en medicina integrativa.
+          <b>Matrícula Nacional MN 171999.</b> Llegó a este enfoque como paciente: revirtió su propia colitis
+          ulcerosa trabajando sobre la alimentación y los hábitos junto a su tratamiento médico.</p>
+          <p>Aporta la supervisión clínica del servicio: revisa los criterios y materiales nutricionales para
+          que ninguna recomendación interfiera con los tratamientos médicos de las personas atendidas y para
+          que los casos que requieren derivación se identifiquen a tiempo.</p>
+          <div class="creds">
+            <span class="mn">MN 171999</span><span>Médica clínica</span><span>Medicina integrativa</span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="aviso">
+      <b>Alcance de cada rol.</b> La consulta la conduce Ezequiel Racca en su carácter de health coach en
+      nutrición funcional. La Dra. Clembosky cumple un rol de supervisión clínica de los criterios y
+      materiales del servicio; su participación no implica una consulta médica individual, ni la apertura de
+      una historia clínica, ni la emisión de diagnósticos, órdenes de estudios o prescripciones para las
+      personas que contratan este servicio.
+    </div>
+  </div>
+</section>
+
+<!-- =========================== AVISO MÉDICO ========================== -->
+<section class="sec sec-dark" id="aviso-medico">
+  <div class="wrap-n">
+    <span class="eyebrow" style="color:#6FC4CF">Aviso médico</span>
+    <h2>Lo que este servicio es y lo que no es</h2>
+    <p class="lead" style="margin-top:14px">Sana tu Autoinmune ofrece educación y orientación en nutrición y
+    hábitos. La información de este sitio, la consulta y los materiales entregados <b>no constituyen consejo
+    médico, diagnóstico, tratamiento ni prescripción</b>, y no crean una relación médico-paciente entre vos y
+    ninguna persona del equipo.</p>
+    <p class="lead" style="margin-top:14px">No suspendas, inicies ni modifiques ninguna medicación por tu
+    cuenta ni a partir de lo que leas aquí: cualquier cambio de tratamiento debe ser evaluado y decidido por
+    tu médico tratante. Si tenés una urgencia médica, comunicate de inmediato con el servicio de emergencias
+    de tu país.</p>
+    <p class="lead" style="margin-top:14px">Las enfermedades autoinmunes son condiciones crónicas y complejas.
+    <b>No prometemos ni garantizamos la cura, la remisión ni ningún resultado clínico.</b> Los resultados
+    varían según la condición de partida, el tratamiento médico en curso, la adherencia y la respuesta
+    individual de cada persona.</p>
+  </div>
+</section>
+
+<!-- =============================== FAQ ============================== -->
+<section class="sec">
+  <div class="wrap-n">
+    <span class="eyebrow">Preguntas frecuentes</span>
+    <h2>Antes de contratar</h2>
+    <div class="faq">
+      <details><summary>¿Quién me atiende en la consulta?</summary><div class="a">La consulta la conduce
+        <b>Ezequiel Racca</b>, odontólogo y health coach en nutrición funcional. No es médico, y su trabajo es
+        nutricional y de hábitos. La Dra. Catalina Clembosky (MN 171999) supervisa clínicamente los criterios y
+        materiales del servicio, pero no realiza consultas médicas individuales dentro de este servicio.</div></details>
+      <details><summary>¿Esto reemplaza a mi médico?</summary><div class="a">No. Es un servicio complementario.
+        Te pedimos que continúes con tu médico tratante y con tu tratamiento. Nunca te vamos a pedir que
+        abandones una medicación por tu cuenta.</div></details>
+      <details><summary>¿Necesito tener análisis previos?</summary><div class="a">No es obligatorio. Si los
+        tenés, los revisamos durante la consulta. Si consideramos que falta algún estudio, te sugerimos cuál
+        conversar con tu médico, que es quien debe indicarlo e interpretarlo.</div></details>
+      <details><summary>¿Cuánto cuesta y qué medios de pago hay?</summary><div class="a">El precio es
+        <b><span data-precio>USD $60</span></b>, en un pago único. El cobro lo procesa la plataforma Hotmart,
+        que muestra los medios de pago disponibles en tu país y emite el comprobante correspondiente. No hay
+        suscripciones ni cargos recurrentes.</div></details>
+      <details><summary>¿Puedo pedir un reembolso?</summary><div class="a">Sí. Contás con <b>7 días corridos</b>
+        desde la compra para solicitar la devolución total, según las condiciones detalladas en nuestra
+        <a href="./politica-de-reembolso.html">Política de reembolso</a>.</div></details>
+      <details><summary>¿Desde qué países puedo contratarlo?</summary><div class="a">Desde cualquier país, siempre
+        que tengas conexión a internet y seas mayor de 18 años. La consulta es por videollamada y se dicta en
+        español.</div></details>
+      <details><summary>¿Qué pasa con mis datos de salud?</summary><div class="a">Los datos que compartís en el
+        cuestionario y en la consulta se tratan de forma confidencial y se usan únicamente para prestar el
+        servicio. El detalle está en la <a href="./politica-de-privacidad.html">Política de privacidad</a>, que
+        incluye cómo ejercer tus derechos de acceso, rectificación y supresión.</div></details>
+      <details><summary>¿Puedo reprogramar mi consulta?</summary><div class="a">Sí, avisando con al menos 24 horas
+        de anticipación, por los canales de contacto que figuran al pie de este sitio. Las condiciones de
+        reprogramación e inasistencia están en los
+        <a href="./terminos-y-condiciones.html">Términos y condiciones</a>.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CONTACTO =========================== -->
+<section class="sec sec-alt" id="contacto">
+  <div class="wrap-n">
+    <span class="eyebrow">Contacto</span>
+    <h2>Cómo comunicarte con nosotros</h2>
+    <p class="lead" style="margin-top:12px">Para consultas sobre el servicio, la facturación, un reembolso o
+    el ejercicio de tus derechos sobre tus datos personales, escribinos. Respondemos dentro de los
+    2 días hábiles.</p>
+    <div class="datos">
+      <div class="dato"><b>Razón social</b><span data-llc>[<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>MBRE-LEGAL-LLC]</span></div>
+      <div class="dato"><b>Domicilio principal</b><span data-direccion>1000 Brickell Avenue, Suite #715, PMB 153, Miami, Florida 33131, Estados Unidos</span></div>
+      <div class="dato"><b>Correo electrónico</b><a data-email-link href="mailto:[EMAIL-SOPORTE]"><span data-email>[EMAIL-SOPORTE]</span></a></div>
+      <div class="dato"><b>WhatsApp</b><a data-wa-link href="#"><span data-wa>[WHATSAPP-SOPORTE]</span></a></div>
+      <div class="dato"><b>Horario de atención</b><span>Lunes a viernes, 9 a 18 h (GMT-3)</span></div>
+      <div class="dato"><b>Sitio web</b><span data-sitio>[DOMINIO]</span></div>
+    </div>
+    <div class="btn-row">
+      <a class="btn" data-pago href="#" target="_blank" rel="noopener">
+        <span>Contratar la consulta</span><span class="price" data-precio>USD $60</span></a>
+    </div>
+  </div>
+</section>
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div>
+        <p class="empresa" data-llc>Una Vida Sin Medicamentos LLC</p>
+        <h4>Domicilio principal</h4>
+        <address data-direccion>1000 Brickell Avenue, Suite #715, PMB 153, Miami, Florida 33131, Estados Unidos</address>
+        <p style="margin-top:10px">Marca comercial: Sana tu Autoinmune</p>
+      </div>
+      <div>
+        <h4>Legales</h4>
+        <ul>
+          <li><a href="./politica-de-privacidad.html">Política de privacidad</a></li>
+          <li><a href="./terminos-y-condiciones.html">Términos y condiciones</a></li>
+          <li><a href="./politica-de-reembolso.html">Política de reembolso</a></li>
+          <li><a href="./index.html#aviso-medico">Aviso médico</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><a data-email-link href="mailto:[EMAIL-SOPORTE]"><span data-email>[EMAIL-SOPORTE]</span></a></li>
+          <li><a data-wa-link href="#"><span data-wa>[WHATSAPP-SOPORTE]</span></a></li>
+          <li>Atención: lunes a viernes, 9 a 18 h (GMT-3)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr-legal">
+      <p>&copy; <span data-anio>2026</span> <span data-llc>Una Vida Sin Medicamentos LLC</span>. Todos los derechos reservados.
+      Sana tu Autoinmune es una marca comercial de <span data-llc>Una Vida Sin Medicamentos LLC</span>, sociedad de responsabilidad
+      limitada constituida en el estado de <span data-estado>Wyoming</span>, Estados Unidos.</p>
+      <p><b>Aviso médico:</b> el contenido de este sitio y los servicios que se ofrecen tienen carácter educativo
+      y nutricional. No constituyen diagnóstico, tratamiento ni prescripción médica, no crean una relación
+      médico-paciente y no reemplazan la consulta con tu médico tratante. Nunca inicies, modifiques ni
+      suspendas una medicación por tu cuenta. Ante una urgencia, acudí al servicio de emergencias de tu país.
+      Los resultados son individuales y varían según cada persona; no se garantizan resultados.</p>
+      <p>Este sitio no está afiliado, patrocinado ni administrado por Meta Platforms, Inc. (Facebook, Instagram),
+      Google LLC ni ninguna otra plataforma publicitaria.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================================
+   DATOS DE LA EMPRESA · EDITÁ SOLO ESTE BLOQUE
+   Se completan automáticamente en el pie de página y en los documentos legales.
+   ========================================================================== */
+var EMPRESA = {
+  LLC:       'Una Vida Sin Medicamentos LLC',
+  DIRECCION: '1000 Brickell Avenue, Suite #715, PMB 153, Miami, Florida 33131, Estados Unidos',
+  ESTADO:    'Wyoming',
+  EMAIL:     '[EMAIL-SOPORTE]',                    // ej. 'soporte@sanatuautoinmune.com'
+  WHATSAPP:  '[WHATSAPP-SOPORTE]',                 // ej. '+54 9 11 0000 0000'
+  SITIO:     '[DOMINIO]',                          // ej. 'www.sanatuautoinmune.com'
+  PRECIO:    'USD $60',
+  PAGO_URL:  'https://pay.hotmart.com/P107408158S',
+  ACTUALIZADO: '9 de septiembre de 2026'
+};
+
+(function(){
+  var d = document;
+  function set(attr, valor){
+    Array.prototype.forEach.call(d.querySelectorAll('['+attr+']'), function(n){
+      if (valor) n.textContent = valor;
+    });
+  }
+  set('data-llc', EMPRESA.LLC);
+  set('data-direccion', EMPRESA.DIRECCION);
+  set('data-estado', EMPRESA.ESTADO);
+  set('data-email', EMPRESA.EMAIL);
+  set('data-wa', EMPRESA.WHATSAPP);
+  set('data-sitio', EMPRESA.SITIO);
+  set('data-precio', EMPRESA.PRECIO);
+  set('data-fecha', EMPRESA.ACTUALIZADO);
+
+  Array.prototype.forEach.call(d.querySelectorAll('[data-email-link]'), function(a){
+    if (EMPRESA.EMAIL.indexOf('@') > -1) a.setAttribute('href', 'mailto:' + EMPRESA.EMAIL);
+  });
+  Array.prototype.forEach.call(d.querySelectorAll('[data-wa-link]'), function(a){
+    var n = (EMPRESA.WHATSAPP || '').replace(/[^0-9]/g, '');
+    if (n) a.setAttribute('href', 'https://wa.me/' + n);
+  });
+  Array.prototype.forEach.call(d.querySelectorAll('[data-pago]'), function(a){
+    if (EMPRESA.PAGO_URL) a.setAttribute('href', EMPRESA.PAGO_URL);
+  });
+  var y = d.querySelector('[data-anio]');
+  if (y) y.textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
