@@ -98,6 +98,9 @@
     .result h2 { font-family:'Sora',sans-serif; font-size:24px; font-weight:800; line-height:1.25; color:var(--tm); margin-bottom:12px; }
     .result p { font-size:14.5px; line-height:1.7; color:var(--ts); max-width:440px; margin:0 auto 10px; }
     .result-box { background:var(--ice); border:1.5px solid var(--br); border-radius:14px; padding:18px; margin:20px auto 6px; max-width:440px; text-align:left; }
+    .result-box-title { font-size:11px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-d); margin-bottom:8px; }
+    .result-box-title.no { color:var(--err); }
+    .result-box-title.mid { color:var(--warn); }
     .result-box-row { display:flex; gap:10px; align-items:flex-start; padding:7px 0; }
     .result-box-row svg { flex-shrink:0; margin-top:2px; }
     .result-box-row span { font-size:13.5px; line-height:1.5; color:var(--ts); }
@@ -271,6 +274,9 @@
           <div class="result-tag ok">Calificas · Cupo prioritario</div>
           <h2>Tu perfil es compatible con nuestro tratamiento</h2>
           <p>Por tu examen vigente, tu siguiente paso es el <strong>Diseño de Tratamiento</strong>: una sesión de trabajo con un fisioterapeuta entrenado en nuestra metodología, donde identificamos tu generador de dolor y definimos tu ciclo de tratamiento personalizado.</p>
+          <div class="result-box" id="cumplesDiseno">
+            <div class="result-box-title">Los criterios que cumples</div>
+          </div>
           <div class="result-box">
             <div class="result-box-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round"/></svg><span><strong>Valor: $25.000</strong> — se descuenta íntegro si inicias tu ciclo de tratamiento.</span></div>
             <div class="result-box-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round"/></svg><span>Recibes tu <strong>plan y presupuesto el mismo día</strong>.</span></div>
@@ -287,6 +293,9 @@
           <div class="result-tag ok">Calificas · Cupo prioritario</div>
           <h2>Tu perfil es compatible: partamos por tu diagnóstico</h2>
           <p>Tu caso califica, pero necesitamos un examen vigente para ubicar con precisión tu generador de dolor. Tu siguiente paso es una <strong>Consulta Médica</strong> con nuestro equipo médico especialista en columna, que además gestiona la resonancia si la necesitas.</p>
+          <div class="result-box" id="cumplesConsulta">
+            <div class="result-box-title">Los criterios que cumples</div>
+          </div>
           <div class="result-box">
             <div class="result-box-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round"/></svg><span><strong>Valor: $35.000</strong> — consulta con médico especialista en columna.</span></div>
             <div class="result-box-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round"/></svg><span>Si te faltan exámenes, <strong>los gestionamos por ti</strong>.</span></div>
@@ -302,9 +311,12 @@
           <div class="result-icon mid"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#B7791F" stroke-width="2.5"/><path d="M12 8v5M12 16h.01" stroke="#B7791F" stroke-width="2.5" stroke-linecap="round"/></svg></div>
           <div class="result-tag mid">Revisión clínica</div>
           <h2>Tu caso lo revisará primero nuestro equipo clínico</h2>
-          <p>Por la situación de salud que indicaste, tu caso no sigue la vía estándar: <strong>nuestro equipo clínico lo revisará personalmente</strong> y te contactará por WhatsApp para indicarte el camino seguro para ti.</p>
-          <a class="btn-cta wa" id="ctaWhatsApp" href="#" target="_blank" rel="noopener">Escribirnos por WhatsApp ahora</a>
-          <div class="result-note">Si prefieres, adelántate y cuéntanos tu caso directamente.</div>
+          <p>Tu perfil puede ser compatible con el tratamiento, pero por protocolo médico tu caso debe revisarlo personalmente nuestro equipo clínico antes de asignarte una hora.</p>
+          <div class="result-box" id="motivosRevision">
+            <div class="result-box-title mid">Por qué pasa a revisión</div>
+          </div>
+          <p><strong>Nuestro equipo te contactará al WhatsApp que nos dejaste</strong> para indicarte el camino seguro para ti.</p>
+          <div class="result-note">No necesitas hacer nada más por ahora.</div>
         </div>
       </section>
 
@@ -313,8 +325,11 @@
           <div class="result-icon no"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#C0392B" stroke-width="2.5"/><path d="M9 9l6 6M15 9l-6 6" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"/></svg></div>
           <div class="result-tag no">Por ahora no calificas</div>
           <h2>Gracias por tu interés — por ahora no es el momento</h2>
-          <p>Nuestro tratamiento está diseñado para un perfil muy específico de paciente y con tus respuestas hoy no podemos asegurarte el resultado que buscamos ofrecer.</p>
-          <p>Guardaremos tus datos y, si tu situación cambia, escríbenos: será un gusto reevaluar tu caso.</p>
+          <p>Nuestro tratamiento está diseñado para un perfil muy específico de paciente y hoy tu caso no cumple con estos criterios:</p>
+          <div class="result-box" id="motivosNo">
+            <div class="result-box-title no">Lo que no se cumple hoy</div>
+          </div>
+          <p>Guardaremos tus datos y, si tu situación cambia, será un gusto reevaluar tu caso.</p>
         </div>
       </section>
 
@@ -336,9 +351,6 @@
       URL_AGENDA_DISENO: '#',
       // Calendario GHL para pacientes SIN diagnóstico vigente (Consulta Médica $35.000)
       URL_AGENDA_CONSULTA: '#',
-      // WhatsApp que gestiona Nexor (formato internacional sin +)
-      WHATSAPP: '56900000000',
-      WHATSAPP_MSG: 'Hola, completé el formulario de calificación de TeraXcel y quiero orientación sobre mi caso.',
     };
 
     /* ============================================================
@@ -435,6 +447,59 @@
 
     function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
 
+    // ---- Detalle de criterios en las pantallas de resultado ----
+    const ICON_OK = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round"/></svg>';
+    const ICON_NO = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"/></svg>';
+    const ICON_MID = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#B7791F" stroke-width="2.2"/><path d="M12 8v5M12 16h.01" stroke="#B7791F" stroke-width="2.2" stroke-linecap="round"/></svg>';
+
+    const LABEL_CRITERIOS = {
+      procedimiento_pabellon: 'Ya pasaste por un procedimiento en pabellón (bloqueo facetario o cirugía) y sigues con dolor',
+      probo_tratamientos: 'Ya probaste tratamientos sin el resultado esperado',
+      dolor_3_meses: 'Convives con dolor lumbar hace más de 3 meses',
+    };
+    const LABEL_CONDICIONES = {
+      cancer_activo: 'Indicaste cáncer activo en tratamiento',
+      fiebre: 'Indicaste fiebre en los últimos días',
+      perdida_fuerza: 'Indicaste pérdida de fuerza progresiva en brazos o piernas',
+      psiquiatrico: 'Indicaste una condición psiquiátrica en tratamiento no estabilizado',
+    };
+
+    function addRows(boxId, icon, items) {
+      const box = document.getElementById(boxId);
+      items.forEach(t => {
+        const row = document.createElement('div');
+        row.className = 'result-box-row';
+        row.innerHTML = icon + '<span>' + t + '</span>';
+        box.appendChild(row);
+      });
+    }
+
+    function renderResultDetails(resultId, answers) {
+      if (resultId === 'resDiseno' || resultId === 'resConsulta') {
+        const cumples = [];
+        (answers.criterios_clinicos || []).forEach(v => { if (LABEL_CRITERIOS[v]) cumples.push(LABEL_CRITERIOS[v]); });
+        if (answers.diagnostico === 'vigente') cumples.push('Tienes un examen de imagen vigente (últimos 8 meses)');
+        if (answers.urgencia === 'ya') cumples.push('Quieres iniciar tu ciclo de tratamiento lo antes posible');
+        if (answers.urgencia === '2_4_semanas') cumples.push('Puedes iniciar tu ciclo de tratamiento dentro de las próximas semanas');
+        if (answers.ubicacion === 'otra_region_viaja') cumples.push('Puedes viajar a nuestra clínica de Puerto Varas');
+        else cumples.push('Puedes atenderte en nuestra clínica de Puerto Varas');
+        addRows(resultId === 'resDiseno' ? 'cumplesDiseno' : 'cumplesConsulta', ICON_OK, cumples);
+      }
+      if (resultId === 'resNoCalifica') {
+        const motivos = [];
+        if (answers.urgencia === 'averiguando') motivos.push('Los cupos prioritarios son para quienes pueden iniciar su ciclo de tratamiento dentro de las próximas semanas, y por ahora solo estás averiguando');
+        if (answers.ubicacion === 'otra_region_no_viaja') motivos.push('El tratamiento requiere atención presencial en nuestra clínica de Puerto Varas, e indicaste que no podrías viajar');
+        if (!motivos.length) motivos.push('Tus respuestas no coinciden hoy con el perfil de paciente para el que está diseñado el tratamiento');
+        addRows('motivosNo', ICON_NO, motivos);
+      }
+      if (resultId === 'resRevision') {
+        const motivos = [];
+        (answers.condiciones || []).forEach(v => { if (LABEL_CONDICIONES[v]) motivos.push(LABEL_CONDICIONES[v]); });
+        motivos.push('Por protocolo médico, esta situación debe evaluarla nuestro equipo clínico antes de asignarte una hora');
+        addRows('motivosRevision', ICON_MID, motivos);
+      }
+    }
+
     // Devuelve el número en formato internacional (+56912345678) o null si es inválido
     function normalizePhone(codigo, valor) {
       let d = valor.replace(/[^0-9]/g, '');
@@ -514,8 +579,9 @@
 
       document.getElementById('ctaDiseno').href = CONFIG.URL_AGENDA_DISENO;
       document.getElementById('ctaConsulta').href = CONFIG.URL_AGENDA_CONSULTA;
-      document.getElementById('ctaWhatsApp').href =
-        'https://wa.me/' + CONFIG.WHATSAPP + '?text=' + encodeURIComponent(CONFIG.WHATSAPP_MSG);
+
+      // Listas dinámicas de criterios en las pantallas de resultado
+      renderResultDetails(resultId, answers);
 
       document.getElementById('stepInd').classList.add('hidden');
       document.getElementById('step1').classList.add('hidden');
