@@ -105,9 +105,6 @@
     .result-box-row svg { flex-shrink:0; margin-top:2px; }
     .result-box-row span { font-size:13.5px; line-height:1.5; color:var(--ts); }
     .result-box-row strong { color:var(--tm); }
-    .btn-cta { display:inline-flex; align-items:center; justify-content:center; gap:9px; background:var(--teal); color:var(--navy); font-family:'Sora',sans-serif; font-size:15px; font-weight:800; padding:17px 34px; border-radius:12px; text-decoration:none; margin-top:22px; box-shadow:0 8px 26px rgba(20,184,166,0.35); transition:transform .18s; }
-    .btn-cta:hover { transform:translateY(-2px); }
-    .btn-cta.wa { background:#25D366; color:#0B2E1B; box-shadow:0 8px 26px rgba(37,211,102,0.3); }
     .result-note { font-size:12px; color:var(--tf); margin-top:14px; }
 
     .hidden { display:none !important; }
@@ -223,7 +220,7 @@
         <div class="card">
           <div class="q-meta"><div class="q-num">✓</div><div class="q-area">Último paso</div></div>
           <div class="q-text">¿A dónde te enviamos el resultado?</div>
-          <div class="q-hint">Si calificas, podrás reservar de inmediato uno de los cupos prioritarios de la semana.</div>
+          <div class="q-hint">Si calificas, te contactaremos por WhatsApp para reservar uno de los cupos prioritarios de la semana.</div>
           <div class="fields">
             <div class="field-row">
               <div class="field">
@@ -282,8 +279,8 @@
             <div class="result-box-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round"/></svg><span>Recibes tu <strong>plan y presupuesto el mismo día</strong>.</span></div>
             <div class="result-box-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round"/></svg><span>Trae tu resonancia o exámenes a la cita.</span></div>
           </div>
-          <a class="btn-cta" id="ctaDiseno" href="#">Reservar mi Diseño de Tratamiento →</a>
-          <div class="result-note">Cupos limitados: agenda de lunes a viernes, 8:30 a 19:30 hrs.</div>
+          <p><strong>Nuestro equipo te contactará por WhatsApp</strong> para reservar tu hora prioritaria de Diseño de Tratamiento.</p>
+          <div class="result-note">Cupos limitados: atendemos de lunes a viernes, 8:30 a 19:30 hrs.</div>
         </div>
       </section>
 
@@ -301,8 +298,8 @@
             <div class="result-box-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round"/></svg><span>Si te faltan exámenes, <strong>los gestionamos por ti</strong>.</span></div>
             <div class="result-box-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0E9384" stroke-width="3" stroke-linecap="round"/></svg><span>Con el diagnóstico listo, pasas directo al diseño de tu ciclo de tratamiento.</span></div>
           </div>
-          <a class="btn-cta" id="ctaConsulta" href="#">Reservar mi Consulta Médica →</a>
-          <div class="result-note">Cupos limitados: agenda de lunes a viernes, 8:30 a 19:30 hrs.</div>
+          <p><strong>Nuestro equipo te contactará por WhatsApp</strong> para reservar tu hora prioritaria de Consulta Médica.</p>
+          <div class="result-note">Cupos limitados: atendemos de lunes a viernes, 8:30 a 19:30 hrs.</div>
         </div>
       </section>
 
@@ -347,10 +344,6 @@
     const CONFIG = {
       // Webhook entrante de GoHighLevel que recibe el lead con categoría y ruta
       WEBHOOK_URL: 'https://services.leadconnectorhq.com/hooks/yivQnN9Zd8scHJmY0B16/webhook-trigger/e869d680-49c9-41b5-ac1a-8319609080f6',
-      // Calendario GHL para pacientes CON diagnóstico vigente (Diseño de Tratamiento $25.000)
-      URL_AGENDA_DISENO: '#',
-      // Calendario GHL para pacientes SIN diagnóstico vigente (Consulta Médica $35.000)
-      URL_AGENDA_CONSULTA: '#',
     };
 
     /* ============================================================
@@ -576,9 +569,6 @@
           });
         } catch (e) { /* no bloquear el resultado si el webhook falla */ }
       }
-
-      document.getElementById('ctaDiseno').href = CONFIG.URL_AGENDA_DISENO;
-      document.getElementById('ctaConsulta').href = CONFIG.URL_AGENDA_CONSULTA;
 
       // Listas dinámicas de criterios en las pantallas de resultado
       renderResultDetails(resultId, answers);
