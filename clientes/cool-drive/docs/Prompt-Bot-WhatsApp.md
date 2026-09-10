@@ -781,3 +781,83 @@ siguen sin filtro. Hay que agregarles un If/Else al principio que corte cuando:
 
 Mientras eso no exista, cada persona que paga queda expuesta a recibir el mensaje
 de Antonia.
+
+---
+
+## Jean: el bot le impuso un día que Jean acababa de soltar (2026-09-10)
+
+Esta conversación es el mejor ejemplo de qué delata a un bot, y no es lo que uno
+esperaría. No fue una palabra rara ni un error de ortografía: fue no escuchar.
+
+```
+BOT   te espero mañana viernes
+JEAN  Mañana no es viernes
+JEAN  Mañana es jueves
+BOT   Cierto, disculpa la confusión con el día, entonces te espero mañana jueves
+      saliendo del trabajo
+JEAN  Yo te diré el día que me conviene
+BOT   Perfecto Jean, quedas tú mismo definiendo el día que más te acomode.
+      Para mañana jueves te espero saliendo del trabajo, ahí vemos lo del Curso
+      Avanzado con el precio de septiembre
+```
+
+El último mensaje hace tres cosas mal a la vez, y las tres juntas gritan que hay
+una máquina:
+
+1. **Le dice que él decide y en la misma frase le vuelve a imponer el jueves.**
+   Jean acababa de retirar ese compromiso. Una persona lo habría soltado.
+2. **Repite textual lo que ya había dicho** dos mensajes antes — *te espero
+   mañana jueves saliendo del trabajo* — palabra por palabra.
+3. **Le mete el curso y la promo** que Jean ya conocía, cuando lo único que dijo
+   fue que él avisaba. Eso se lee como presión.
+
+Y antes de todo eso, el bot se había equivocado en qué día era mañana.
+
+### Regla nº17: si la persona suelta un acuerdo, tú lo sueltas también
+
+Señales: *yo te digo, yo te aviso, yo veo, yo te diré el día que me conviene,
+déjame ver, te confirmo, mejor lo vemos después, todavía no sé*.
+
+Cuando aparecen, **el día o la hora que habían hablado se cae completo**, no
+queda de respaldo. El bot acepta en corto que ella maneja los tiempos, sin volver
+a nombrar el día, deja una frase de puerta abierta y se calla. Nada de precio, ni
+promo, ni curso, ni horario: ya los sabe, y meterlos ahí es apurar.
+
+> Dale Jean, tú manejas los tiempos. Cuando lo tengas claro me avisas y te dejo
+> el cupo tomado
+
+La misma regla cubre las correcciones: se reconoce en una palabra, se corrige y
+se sigue. Nada de párrafos de disculpa.
+
+### Regla nº4: el acuerdo ya cerrado no se vuelve a anunciar
+
+Se le agregó el caso explícito. Si en TUS ÚLTIMOS MENSAJES ya dijiste *te espero
+mañana* o *quedamos el jueves*, eso ya está dicho y ella ya lo leyó. Una persona
+real no le confirma dos veces seguidas la misma cita a nadie.
+
+### Y el bot ya no adivina qué día es mañana
+
+Antes recibía la hora de Santiago y el día de hoy, pero **nada le decía qué día
+era mañana**, así que lo deducía y se equivocaba. Ahora el mensaje le llega con
+las dos fechas calculadas y en español:
+
+```
+HOY ES {{formatDate(now; "dddd"; "America/Santiago"; "es")}} ...
+MANANA ES {{formatDate(addDays(now; 1); "dddd"; "America/Santiago"; "es")}} ...
+```
+
+Equivocarse en qué día es mañana teniendo el dato al frente quedó en la lista de
+prohibidos.
+
+Los tres ejemplos nuevos del prompt incluyen, a propósito, el mensaje malo de
+Jean marcado como **MAL**, con la explicación de por qué. Un contraejemplo
+concreto enseña más que tres reglas abstractas.
+
+Verificado: `isActive: true`, `dlqCount: 4`, blueprint idéntico byte a byte.
+
+### Del lado de GHL
+
+Sebastián creó el workflow que corta el follow up cuando el lead está en
+**Inscritos** y **Won**. Con eso el caso Antonia queda cerrado por los dos lados:
+GHL ya no dispara, y el seguimiento de Make tiene su propio filtro por
+oportunidad ganada desde el 9 de septiembre.
