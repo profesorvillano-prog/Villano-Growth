@@ -10,9 +10,9 @@ tres documentos legales exigidos.
 | Archivo | Contenido |
 |---|---|
 | `index.html` | Inicio: servicio detallado + precio, qué incluye y qué **no** incluye, cómo funciona, para quién es, **Nosotros / Equipo** (nombre, foto y descripción de cada socio), aviso médico, FAQ y contacto. |
-| `politica-de-privacidad.html` | Datos recopilados, tratamiento de **datos de salud** (categoría especial), cookies, píxel de Meta y Google, proveedores, transferencias internacionales, plazos y derechos (RGPD, Ley 25.326, CCPA). |
-| `terminos-y-condiciones.html` | 20 secciones: alcance, aviso médico, requisitos, pago, agenda e inasistencia, reembolsos, propiedad intelectual, ausencia de garantía de resultados, limitación de responsabilidad, ley aplicable (Wyoming). |
-| `politica-de-reembolso.html` | Derecho de arrepentimiento de 7 días, casos con reembolso garantizado, supuestos excluidos, procedimiento, plazos y contracargos. |
+| `politicas-privacidad.html` | Datos recopilados, tratamiento de **datos de salud** (categoría especial), cookies, píxel de Meta y Google, proveedores, transferencias internacionales, plazos y derechos (RGPD, Ley 25.326, CCPA). |
+| `terminos-condiciones.html` | 20 secciones: alcance, aviso médico, requisitos, pago, agenda e inasistencia, reembolsos, propiedad intelectual, ausencia de garantía de resultados, limitación de responsabilidad, ley aplicable (Wyoming). |
+| `politicas-de-reembolso.html` | Derecho de arrepentimiento de 7 días, casos con reembolso garantizado, supuestos excluidos, procedimiento, plazos y contracargos. |
 
 Las cuatro páginas comparten cabecera, pie y estética (paleta clínica azul/verde
 azulado, Instrument Sans + IBM Plex Sans), la misma del embudo *Sana tu Autoinmune*.
@@ -27,25 +27,39 @@ azulado, Instrument Sans + IBM Plex Sans), la misma del embudo *Sana tu Autoinmu
 | Nombre de la LLC en el pie | `Una Vida Sin Medicamentos LLC` |
 | Dirección física registrada en el pie | `1000 Brickell Avenue, Suite #715, PMB 153, Miami, Florida 33131, Estados Unidos` (domicilio principal de la LLC) |
 
-## Antes de publicar: completar 3 datos
+## Dónde vive cada página
 
-Al final de **cada** archivo `.html` hay un bloque `var EMPRESA = { ... }`.
-Editalo (los cuatro archivos tienen el mismo bloque) y se completa solo el pie,
-la sección de contacto y los documentos legales:
+Los archivos llevan el nombre del slug final y todos los enlaces internos son
+absolutos al dominio del cliente, así funcionan igual pegados en GoHighLevel:
+
+| Archivo | URL final |
+|---|---|
+| `index.html` | https://ezequielracca.com/ |
+| `politicas-privacidad.html` | https://ezequielracca.com/politicas-privacidad |
+| `terminos-condiciones.html` | https://ezequielracca.com/terminos-condiciones |
+| `politicas-de-reembolso.html` | https://ezequielracca.com/politicas-de-reembolso |
+
+## Datos cargados
+
+Al final de cada `.html` hay un bloque `var EMPRESA = { ... }` con los datos que
+se inyectan en el pie, el contacto y los documentos legales:
 
 ```js
-EMAIL:    '[EMAIL-SOPORTE]',      // correo de soporte y de ejercicio de derechos
-WHATSAPP: '[WHATSAPP-SOPORTE]',   // teléfono de atención (se convierte en enlace wa.me)
-SITIO:    '[DOMINIO]',            // dominio final, ej. www.sanatuautoinmune.com
+LLC:       'Una Vida Sin Medicamentos LLC',
+DIRECCION: '1000 Brickell Avenue, Suite #715, PMB 153, Miami, Florida 33131, Estados Unidos',
+ESTADO:    'Wyoming',                     // estado de constitución
+EMAIL:     'ezequielracca1984@gmail.com',
+WHATSAPP:  '+54 9 336 400-7472',
+SITIO:     'ezequielracca.com',
+PRECIO:    'USD $60',
+PAGO_URL:  'https://pay.hotmart.com/P107408158S'
 ```
 
-Los datos de la LLC (nombre, domicilio principal en Miami y estado de constitución,
-Wyoming) ya están cargados,
-tanto en el HTML como en el bloque de configuración. También se pueden ajustar
-ahí `PRECIO` y `PAGO_URL` (hoy, USD $60 y el checkout de Hotmart).
+Si cambia alguno, editalo en los cuatro archivos (el bloque es idéntico) y el
+resto de la página se actualiza solo.
 
-Buscá `[EMAIL-SOPORTE]`, `[WHATSAPP-SOPORTE]` y `[DOMINIO]` para confirmar que no
-queda ninguno sin reemplazar.
+Los datos de la LLC aparecen **solo en el pie** y en los textos legales: la
+sección de contacto muestra correo, WhatsApp, horario y sitio web.
 
 ## Criterios de compliance sostenidos en todo el copy
 
