@@ -36,7 +36,7 @@ otro, como botón, al final del documento:
 
 | Archivo | URL final |
 |---|---|
-| `index.html` | https://ezequielracca.com/inicio |
+| `index.html` | https://ezequielracca.com/consultasanaautoinmune |
 | `politicas-privacidad.html` | https://ezequielracca.com/politicas-privacidad |
 | `terminos-condiciones.html` | https://ezequielracca.com/terminos-condiciones |
 | `politicas-de-reembolso.html` | https://ezequielracca.com/politicas-de-reembolso |
@@ -49,6 +49,8 @@ enlazar directo desde la landing VSL:
 - `ghl/ghl-politicas-privacidad.html`
 - `ghl/ghl-terminos-condiciones.html`
 - `ghl/ghl-politicas-de-reembolso.html`
+- `ghl/pie-landing-vsl.html` — pie de la landing VSL: reemplaza el `<footer class="ftr">`
+  de la landing por uno con la razón social, el domicilio y los tres enlaces legales.
 
 Diferencias con las de la raíz:
 
