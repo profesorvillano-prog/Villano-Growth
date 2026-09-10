@@ -30,11 +30,13 @@ azulado, Instrument Sans + IBM Plex Sans), la misma del embudo *Sana tu Autoinmu
 ## Dónde vive cada página
 
 Los archivos llevan el nombre del slug final y todos los enlaces internos son
-absolutos al dominio del cliente, así funcionan igual pegados en GoHighLevel:
+absolutos al dominio del cliente, así funcionan igual pegados en GoHighLevel.
+Las tres páginas legales llevan un enlace "Volver al inicio" arriba del título y
+otro, como botón, al final del documento:
 
 | Archivo | URL final |
 |---|---|
-| `index.html` | https://ezequielracca.com/ |
+| `index.html` | https://ezequielracca.com/inicio |
 | `politicas-privacidad.html` | https://ezequielracca.com/politicas-privacidad |
 | `terminos-condiciones.html` | https://ezequielracca.com/terminos-condiciones |
 | `politicas-de-reembolso.html` | https://ezequielracca.com/politicas-de-reembolso |

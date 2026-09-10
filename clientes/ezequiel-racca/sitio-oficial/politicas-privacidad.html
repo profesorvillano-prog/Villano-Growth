@@ -81,6 +81,8 @@ h4{font-size:1rem;font-weight:600}
 .btn .price{font-weight:600;opacity:.85;font-variant-numeric:tabular-nums}
 .btn-ghost{background:var(--wh);color:var(--deep);border:1px solid var(--br);box-shadow:none}
 .btn-ghost:hover{border-color:var(--teal);color:var(--teal);box-shadow:none}
+.btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn{white-space:nowrap}
 .sec-dark .btn{background:var(--wh);color:var(--deep)}
 .btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
 .center .btn-row{justify-content:center}
@@ -220,21 +222,28 @@ h4{font-size:1rem;font-weight:600}
 .ftr .empresa{font-family:var(--display);font-weight:700;font-size:1rem;color:var(--deep);margin-bottom:8px}
 .ftr-legal{margin-top:28px;padding-top:20px;border-top:1px solid var(--br2);font-size:.78rem;color:var(--t3)}
 .ftr-legal p+p{margin-top:10px}
+
+.volver{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:600;
+  font-size:.85rem;color:var(--teal);margin-bottom:20px}
+.volver:hover{text-decoration:none;color:var(--deep)}
+.volver svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.volver-pie{margin-top:30px;padding-top:26px;border-top:1px solid var(--br);text-align:center}
+.volver-pie p{font-size:.88rem;color:var(--t2);margin-bottom:14px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="https://ezequielracca.com/">
+    <a class="brand" href="https://ezequielracca.com/inicio">
       <span class="brand-mk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></span>
       <span class="logo-txt">Sana tu <b>Autoinmune</b></span>
     </a>
     <nav class="nav-links" aria-label="Principal">
-      <a href="https://ezequielracca.com/#servicio">El servicio</a>
-      <a href="https://ezequielracca.com/#como-funciona">Cómo funciona</a>
-      <a href="https://ezequielracca.com/#equipo">Equipo</a>
-      <a href="https://ezequielracca.com/#contacto">Contacto</a>
+      <a href="https://ezequielracca.com/inicio#servicio">El servicio</a>
+      <a href="https://ezequielracca.com/inicio#como-funciona">Cómo funciona</a>
+      <a href="https://ezequielracca.com/inicio#equipo">Equipo</a>
+      <a href="https://ezequielracca.com/inicio#contacto">Contacto</a>
       <a href="https://ezequielracca.com/politicas-privacidad" aria-current="page">Privacidad</a>
       <a href="https://ezequielracca.com/terminos-condiciones">Términos</a>
       <a href="https://ezequielracca.com/politicas-de-reembolso">Reembolsos</a>
@@ -244,6 +253,7 @@ h4{font-size:1rem;font-weight:600}
 
 <main class="doc">
   <div class="wrap-n">
+    <a class="volver" href="https://ezequielracca.com/inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H6M11 5l-7 7 7 7"/></svg>Volver al inicio</a>
     <h1>Política de privacidad</h1>
     <p class="fecha">Última actualización: <span data-fecha>9 de septiembre de 2026</span> · Vigente desde esa fecha.</p>
 
@@ -437,6 +447,10 @@ h4{font-size:1rem;font-weight:600}
       <p>Ante cualquier duda sobre esta política, escribinos a
       <a data-email-link href="mailto:ezequielracca1984@gmail.com"><span data-email>ezequielracca1984@gmail.com</span></a>.</p>
     </div>
+    <div class="volver-pie">
+      <p>¿Terminaste de leer? Volvé a la página principal para ver el servicio.</p>
+      <a class="btn btn-ghost" href="https://ezequielracca.com/inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H6M11 5l-7 7 7 7"/></svg>Volver al inicio</a>
+    </div>
   </div>
 </main>
 <footer class="ftr">
@@ -454,7 +468,7 @@ h4{font-size:1rem;font-weight:600}
           <li><a href="https://ezequielracca.com/politicas-privacidad">Política de privacidad</a></li>
           <li><a href="https://ezequielracca.com/terminos-condiciones">Términos y condiciones</a></li>
           <li><a href="https://ezequielracca.com/politicas-de-reembolso">Política de reembolso</a></li>
-          <li><a href="https://ezequielracca.com/#aviso-medico">Aviso médico</a></li>
+          <li><a href="https://ezequielracca.com/inicio#aviso-medico">Aviso médico</a></li>
         </ul>
       </div>
       <div>
