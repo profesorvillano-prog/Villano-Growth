@@ -1,0 +1,509 @@
+<!-- ===================================================================
+     SANA TU AUTOINMUNE · Política de reembolso
+     Página legal para enlazar desde la landing (VSL). Sin menú de
+     navegación: solo el logo, el documento y el pie con los datos de la LLC.
+     Pegar TAL CUAL en GoHighLevel: elemento "Custom Code / HTML".
+     Antes de publicar, revisá el bloque LEGAL = { ... } del final.
+     =================================================================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+#sta-legal{
+  --deep:#0E2E3E; --deep2:#144155; --teal:#0E7C8B; --teal2:#128FA0;
+  --cta1:#0C7382; --cta2:#0A6270; --tealw:#E8F4F6; --mint:#2F9E7C; --mintw:#E9F5F0;
+  --ground:#F5F8F9; --tint:#EEF4F6; --wh:#FFFFFF;
+  --t0:#0D2029; --t1:#2E4650; --t2:#55707B; --t3:#6B858F;
+  --br:#DCE7EB; --br2:#EAF1F3; --red:#B4483C;
+  --r:10px; --r-lg:14px;
+  --display:'Instrument Sans','IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --body:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
+}
+#sta-legal *,#sta-legal *::before,#sta-legal *::after{margin:0;padding:0;box-sizing:border-box}
+#sta-legal{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:78px}
+#sta-legal{font-family:var(--body);background:var(--ground);color:var(--t1);line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-wrap:break-word;
+  -webkit-tap-highlight-color:rgba(14,124,139,.14)}
+#sta-legal img{max-width:100%;display:block}
+#sta-legal a{color:var(--teal);text-decoration:none}
+#sta-legal a:hover{text-decoration:underline}
+#sta-legal h1,#sta-legal h2,#sta-legal h3,#sta-legal h4{font-family:var(--display);line-height:1.18;letter-spacing:-.02em;color:var(--t0);font-weight:700;text-wrap:balance}
+#sta-legal h1{font-size:clamp(1.75rem,5.4vw,2.7rem)}
+#sta-legal h2{font-size:clamp(1.4rem,4.2vw,2rem)}
+#sta-legal h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:600}
+#sta-legal h4{font-size:1rem;font-weight:600}
+#sta-legal .wrap{width:100%;max-width:1010px;margin:0 auto;padding:0 22px}
+#sta-legal .wrap-n{width:100%;max-width:760px;margin:0 auto;padding:0 22px}
+#sta-legal .sec{padding:56px 0}
+@media(min-width:760px){#sta-legal .sec{padding:78px 0}}
+#sta-legal .sec-alt{background:var(--tint);border-top:1px solid var(--br);border-bottom:1px solid var(--br)}
+#sta-legal .sec-dark{background:var(--deep);color:#CFE1E7}
+#sta-legal .sec-dark h2,#sta-legal .sec-dark h3{color:#fff}
+#sta-legal .center{text-align:center}
+#sta-legal .mark{color:var(--teal)}
+#sta-legal .eyebrow{font-family:var(--display);font-size:.7rem;font-weight:600;letter-spacing:.19em;
+  text-transform:uppercase;color:var(--teal);display:block;margin-bottom:12px}
+#sta-legal .lead{font-size:clamp(1rem,2.5vw,1.07rem);color:var(--t2)}
+#sta-legal .sec-dark .lead{color:#B9D2DA}
+
+#sta-legal /* Barra superior */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--br);padding-top:var(--sat)}
+#sta-legal .nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:64px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+#sta-legal .brand{display:inline-flex;align-items:center;gap:10px}
+#sta-legal .brand:hover{text-decoration:none}
+#sta-legal .brand-mk{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--teal);display:grid;place-items:center;flex:none}
+#sta-legal .brand-mk svg{width:14px;height:14px;stroke:var(--teal);fill:none;stroke-width:2.2;stroke-linecap:round}
+#sta-legal .logo-txt{font-family:var(--display);font-weight:700;font-size:1.04rem;letter-spacing:.05em;
+  color:var(--deep);text-transform:uppercase}
+#sta-legal .logo-txt b{color:var(--teal)}
+#sta-legal .nav-links{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+#sta-legal .nav-links a{font-size:.88rem;color:var(--t2);font-weight:500}
+#sta-legal .nav-links a:hover,#sta-legal .nav-links a[aria-current="page"]{color:var(--teal);text-decoration:none}
+
+#sta-legal /* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:linear-gradient(180deg,var(--cta1),var(--cta2));color:#fff;border-radius:var(--r);
+  padding:16px 26px;font-family:var(--display);font-weight:700;font-size:1rem;
+  box-shadow:0 14px 30px -14px rgba(14,124,139,.6),inset 0 1px 0 rgba(255,255,255,.16);
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+#sta-legal .btn:hover{transform:translateY(-2px);text-decoration:none;
+  box-shadow:0 20px 40px -16px rgba(14,124,139,.7),inset 0 1px 0 rgba(255,255,255,.2)}
+#sta-legal .btn:focus-visible{outline:2px solid var(--deep);outline-offset:3px}
+#sta-legal .btn .price{font-weight:600;opacity:.85;font-variant-numeric:tabular-nums}
+#sta-legal .btn-ghost{background:var(--wh);color:var(--deep);border:1px solid var(--br);box-shadow:none}
+#sta-legal .btn-ghost:hover{border-color:var(--teal);color:var(--teal);box-shadow:none}
+#sta-legal .btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+#sta-legal .btn{white-space:nowrap}
+#sta-legal .sec-dark .btn{background:var(--wh);color:var(--deep)}
+#sta-legal .btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+#sta-legal .center .btn-row{justify-content:center}
+#sta-legal .note{font-size:.83rem;color:var(--t2);margin-top:12px}
+#sta-legal .sec-dark .note{color:#93B3BD}
+
+#sta-legal /* Hero */
+.hero{padding:52px 0 44px;position:relative;overflow:hidden}
+#sta-legal .hero::before{content:"";position:absolute;inset:-140px 0 auto;height:520px;pointer-events:none;
+  background:radial-gradient(ellipse 62% 100% at 50% 0%,rgba(14,124,139,.12) 0%,transparent 70%)}
+#sta-legal .hero>*{position:relative}
+#sta-legal .hero .lead{margin-top:16px;max-width:60ch}
+#sta-legal .center .lead{margin-left:auto;margin-right:auto}
+
+#sta-legal /* Tarjetas */
+.grid{display:grid;gap:16px;margin-top:30px}
+#sta-legal .g2{grid-template-columns:1fr}
+#sta-legal .g3{grid-template-columns:1fr}
+@media(min-width:700px){#sta-legal .g2{grid-template-columns:1fr 1fr}#sta-legal .g3{grid-template-columns:repeat(3,1fr)}}
+#sta-legal .card{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);padding:24px 22px;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
+#sta-legal .card:hover{transform:translateY(-2px);border-color:#C3D8DE;box-shadow:0 18px 40px -28px rgba(13,32,41,.55)}
+#sta-legal .card h3{margin-bottom:8px}
+#sta-legal .card p{font-size:.95rem;color:var(--t2)}
+#sta-legal .card .num{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:var(--tealw);
+  color:var(--teal);font-family:var(--display);font-weight:700;font-size:.78rem;margin-bottom:13px}
+
+#sta-legal /* Ficha de servicio */
+.ficha{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);overflow:hidden;margin-top:30px}
+#sta-legal .ficha-top{padding:24px 22px;border-bottom:1px solid var(--br2);display:flex;flex-wrap:wrap;
+  gap:16px;align-items:flex-start;justify-content:space-between}
+#sta-legal .ficha-price{font-family:var(--display);font-weight:700;font-size:1.7rem;color:var(--deep);
+  font-variant-numeric:tabular-nums;line-height:1.2}
+#sta-legal .ficha-price b{font-weight:700}
+#sta-legal .ficha-price span{display:block;font-size:.72rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--t3);margin-top:6px}
+#sta-legal .ficha dl{display:grid;grid-template-columns:1fr;border-top:1px solid var(--br2)}
+@media(min-width:640px){#sta-legal .ficha dl{grid-template-columns:repeat(2,1fr)}}
+#sta-legal .ficha .row{padding:15px 22px;border-bottom:1px solid var(--br2);display:flex;gap:12px;flex-wrap:wrap}
+#sta-legal .ficha dt{font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--t3);
+  min-width:150px;font-family:var(--display);padding-top:2px}
+#sta-legal .ficha dd{font-size:.95rem;color:var(--t1);flex:1;min-width:180px}
+
+#sta-legal /* Listas de comprobación */
+.checks{display:grid;gap:10px;margin-top:26px}
+@media(min-width:700px){#sta-legal .checks.c2{grid-template-columns:1fr 1fr}}
+#sta-legal .check{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;background:var(--wh);
+  border:1px solid var(--br);border-radius:var(--r);padding:15px 16px}
+#sta-legal .check svg{width:22px;height:22px;stroke:var(--mint);fill:none;stroke-width:2.3;stroke-linecap:round;
+  stroke-linejoin:round;margin-top:2px}
+#sta-legal .check p{font-size:.96rem;color:var(--t1)}
+#sta-legal .check p b{color:var(--t0);font-weight:600}
+#sta-legal .check.no svg{stroke:var(--red)}
+
+#sta-legal /* Equipo */
+.team{display:grid;gap:18px;margin-top:30px}
+@media(min-width:760px){#sta-legal .team{grid-template-columns:1fr 1fr;gap:22px}}
+#sta-legal .member{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);overflow:hidden;
+  display:flex;flex-direction:column}
+#sta-legal .member>img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 22%;background:var(--tint)}
+#sta-legal .member-body{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}
+#sta-legal .member-role{font-family:var(--display);font-weight:600;font-size:.68rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--teal)}
+#sta-legal .member-body p{font-size:.94rem;color:var(--t2)}
+#sta-legal .creds{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:14px}
+#sta-legal .creds span{background:var(--tealw);border:1px solid #CFE4E9;color:#0B5F6B;font-size:.72rem;
+  border-radius:5px;padding:5px 10px}
+#sta-legal .creds span.mn{background:var(--mintw);border-color:#CFE6DC;color:#1F6E56;font-weight:600}
+
+#sta-legal /* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:24px}
+#sta-legal .chips span{background:var(--wh);border:1px solid var(--br);border-radius:6px;padding:8px 14px;
+  font-size:.84rem;color:var(--t1)}
+
+#sta-legal /* Aviso */
+.aviso{margin-top:26px;background:var(--wh);border:1px solid var(--br);border-left:3px solid var(--teal);
+  border-radius:var(--r);padding:18px 20px;font-size:.92rem;color:var(--t2)}
+#sta-legal .aviso b{color:var(--t0);font-weight:600}
+
+#sta-legal /* FAQ */
+.faq{margin-top:26px;display:grid;gap:8px}
+#sta-legal .faq details{background:var(--wh);border:1px solid var(--br);border-radius:var(--r);overflow:hidden}
+#sta-legal .faq details[open]{border-color:var(--teal)}
+#sta-legal .faq summary{list-style:none;cursor:pointer;padding:16px 48px 16px 18px;position:relative;
+  font-family:var(--display);font-weight:600;font-size:.98rem;color:var(--t0)}
+#sta-legal .faq summary::-webkit-details-marker{display:none}
+#sta-legal .faq summary::after,#sta-legal .faq summary::before{content:"";position:absolute;right:19px;top:50%;width:11px;
+  height:1.8px;background:var(--teal);border-radius:2px;transition:transform .25s var(--ease)}
+#sta-legal .faq summary::before{transform:translateY(-50%) rotate(90deg)}
+#sta-legal .faq summary::after{transform:translateY(-50%)}
+#sta-legal .faq details[open] summary::before{transform:translateY(-50%) rotate(0)}
+#sta-legal .faq .a{padding:0 18px 18px;font-size:.94rem;color:var(--t2)}
+
+#sta-legal /* Contacto */
+.datos{display:grid;gap:12px;margin-top:26px}
+@media(min-width:700px){#sta-legal .datos{grid-template-columns:1fr 1fr}}
+#sta-legal .dato{background:var(--wh);border:1px solid var(--br);border-radius:var(--r);padding:16px 18px}
+#sta-legal .dato b{display:block;font-family:var(--display);font-size:.68rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--t3);margin-bottom:5px;font-weight:600}
+#sta-legal .dato span,#sta-legal .dato a{font-size:.95rem;color:var(--t1)}
+
+#sta-legal /* Documentos legales */
+.doc{padding:44px 0 60px}
+#sta-legal .doc h1{margin-bottom:10px}
+#sta-legal .doc .fecha{font-size:.86rem;color:var(--t3);margin-bottom:26px}
+#sta-legal .doc .box{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);padding:26px 24px}
+@media(min-width:760px){#sta-legal .doc .box{padding:38px 40px}}
+#sta-legal .doc h2{font-size:clamp(1.12rem,3vw,1.3rem);margin:32px 0 10px;padding-top:22px;border-top:1px solid var(--br2)}
+#sta-legal .doc .box>h2:first-child{margin-top:0;padding-top:0;border-top:0}
+#sta-legal .doc h3{margin:20px 0 8px}
+#sta-legal .doc p,#sta-legal .doc li{font-size:.96rem;color:var(--t1)}
+#sta-legal .doc p+p{margin-top:12px}
+#sta-legal .doc ul,#sta-legal .doc ol{margin:12px 0 0 22px;display:grid;gap:8px}
+#sta-legal .doc li{padding-left:2px}
+#sta-legal .doc table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.9rem;display:block;overflow-x:auto}
+#sta-legal .doc th,#sta-legal .doc td{border:1px solid var(--br);padding:10px 12px;text-align:left;vertical-align:top}
+#sta-legal .doc th{background:var(--tint);font-family:var(--display);font-weight:600;color:var(--t0)}
+#sta-legal .doc .destacado{background:var(--tealw);border:1px solid #CFE4E9;border-radius:var(--r);
+  padding:16px 18px;margin-top:16px;font-size:.94rem;color:#0B5F6B}
+#sta-legal .doc .destacado b{color:#08505B}
+#sta-legal .toc{background:var(--tint);border:1px solid var(--br);border-radius:var(--r);padding:18px 20px;margin-bottom:26px}
+#sta-legal .toc b{display:block;font-family:var(--display);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--t3);margin-bottom:10px}
+#sta-legal .toc ol{margin:0 0 0 18px;display:grid;gap:5px}
+#sta-legal .toc li{font-size:.9rem}
+
+#sta-legal /* Pie */
+.ftr{background:var(--wh);border-top:1px solid var(--br);padding:40px 0 calc(34px + var(--sab))}
+#sta-legal .ftr-grid{display:grid;gap:26px}
+@media(min-width:760px){#sta-legal .ftr-grid{grid-template-columns:1.3fr 1fr 1fr}}
+#sta-legal .ftr h4{font-family:var(--display);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--t3);margin-bottom:11px;font-weight:600}
+#sta-legal .ftr p,#sta-legal .ftr li,#sta-legal .ftr address{font-size:.85rem;color:var(--t2);font-style:normal}
+#sta-legal .ftr ul{display:grid;gap:7px}
+#sta-legal .ftr a{color:var(--t2)}
+#sta-legal .ftr a:hover{color:var(--teal)}
+#sta-legal .ftr .empresa{font-family:var(--display);font-weight:700;font-size:1rem;color:var(--deep);margin-bottom:8px}
+#sta-legal .ftr-legal{margin-top:28px;padding-top:20px;border-top:1px solid var(--br2);font-size:.78rem;color:var(--t3)}
+#sta-legal .ftr-legal p+p{margin-top:10px}
+
+#sta-legal .volver{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:600;
+  font-size:.85rem;color:var(--teal);margin-bottom:20px}
+#sta-legal .volver:hover{text-decoration:none;color:var(--deep)}
+#sta-legal .volver svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+#sta-legal .volver-pie{margin-top:30px;padding-top:26px;border-top:1px solid var(--br);text-align:center}
+#sta-legal .volver-pie p{font-size:.88rem;color:var(--t2);margin-bottom:14px}
+@media(prefers-reduced-motion:reduce){#sta-legal *{animation:none!important;transition:none!important}#sta-legal{scroll-behavior:auto}}
+
+#sta-legal .lgl-hdr{background:var(--wh);border-bottom:1px solid var(--br);padding:calc(18px + var(--sat)) 0 18px}
+#sta-legal .lgl-hdr .brand{display:inline-flex;align-items:center;gap:10px}
+#sta-legal .lgl-hdr .brand:hover{text-decoration:none}
+#sta-legal .brand-mk{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--teal);
+  display:grid;place-items:center;flex:none}
+#sta-legal .brand-mk svg{width:14px;height:14px;stroke:var(--teal);fill:none;stroke-width:2.2;stroke-linecap:round}
+#sta-legal .logo-txt{font-family:var(--display);font-weight:700;font-size:1.04rem;letter-spacing:.05em;
+  color:var(--deep);text-transform:uppercase}
+#sta-legal .logo-txt b{color:var(--teal)}
+
+/* El bloque ocupa el ancho completo aunque GHL lo meta en su contenedor */
+#sta-legal{position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
+  overflow-x:hidden;isolation:isolate;padding-bottom:0}
+/* Blindaje contra los estilos propios de GHL */
+#sta-legal,#sta-legal *{box-sizing:border-box}
+#sta-legal a{text-decoration:none;color:var(--teal)}
+#sta-legal a:hover{text-decoration:underline}
+#sta-legal ul,#sta-legal ol{list-style:none}
+#sta-legal .doc ul li{position:relative;padding-left:18px}
+#sta-legal .doc ul li::before{content:"";position:absolute;left:0;top:11px;width:5px;height:5px;
+  border-radius:50%;background:var(--teal);opacity:.7}
+#sta-legal .doc ol{counter-reset:paso}
+#sta-legal .doc ol li{position:relative;padding-left:26px;counter-increment:paso}
+#sta-legal .doc ol li::before{content:counter(paso) ".";position:absolute;left:0;top:0;
+  font-family:var(--display);font-weight:600;color:var(--teal);font-size:.9rem}
+#sta-legal .toc ol li::before{content:counter(paso) "."}
+#sta-legal h1,#sta-legal h2,#sta-legal h3{text-transform:none}
+#sta-legal .doc{padding-top:38px}
+</style>
+
+<div id="sta-legal">
+  <header class="lgl-hdr">
+    <div class="wrap-n">
+      <a class="brand" href="https://ezequielracca.com/inicio">
+        <span class="brand-mk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></span>
+        <span class="logo-txt">Sana tu <b>Autoinmune</b></span>
+      </a>
+    </div>
+  </header>
+<main class="doc">
+  <div class="wrap-n">
+    <a class="volver" data-inicio href="https://ezequielracca.com/inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H6M11 5l-7 7 7 7"/></svg>Volver al inicio</a>
+    <h1>Política de reembolso</h1>
+    <p class="fecha">Última actualización: <span data-fecha>9 de septiembre de 2026</span> · Vigente desde esa fecha.</p>
+
+    <div class="toc">
+      <b>Contenido</b>
+      <ol>
+        <li><a href="#r1">Resumen</a></li>
+        <li><a href="#r2">Derecho de arrepentimiento: 7 días</a></li>
+        <li><a href="#r3">Reembolso después de la consulta</a></li>
+        <li><a href="#r4">Casos con reembolso íntegro garantizado</a></li>
+        <li><a href="#r5">Supuestos sin derecho a reembolso</a></li>
+        <li><a href="#r6">Cómo solicitar un reembolso</a></li>
+        <li><a href="#r7">Plazos y forma de devolución</a></li>
+        <li><a href="#r8">Contracargos y disputas</a></li>
+        <li><a href="#r9">Cancelación por parte de la Empresa</a></li>
+        <li><a href="#r10">Contacto</a></li>
+      </ol>
+    </div>
+
+    <div class="box">
+      <h2 id="r1">1. Resumen</h2>
+      <p>Esta Política de reembolso regula la devolución del importe abonado por la <b>Consulta de Evaluación
+      Autoinmune</b> comercializada por <b><span data-llc>Una Vida Sin Medicamentos LLC</span></b> bajo la marca
+      <b>Sana tu Autoinmune</b>, y forma parte de los
+      <a data-url-terminos href="https://ezequielracca.com/terminos-condiciones">Términos y condiciones</a>.</p>
+      <div class="destacado"><b>En una línea:</b> contás con <b>7 días corridos</b> desde la compra para pedir la
+      devolución total del importe, escribiendo a
+      <a data-email-link href="mailto:ezequielracca1984@gmail.com"><span data-email>ezequielracca1984@gmail.com</span></a>. Si la consulta
+      todavía no se realizó, el reembolso es automático y sin explicaciones.</div>
+
+      <h2 id="r2">2. Derecho de arrepentimiento: 7 días</h2>
+      <p>El Cliente puede solicitar la devolución <b>total</b> del importe abonado dentro de los <b>7 días
+      corridos</b> posteriores a la confirmación del pago, sin necesidad de justificar el motivo, siempre que la
+      consulta aún no se haya realizado.</p>
+      <p>Este plazo es compatible con el derecho de arrepentimiento que reconocen las normas de defensa del
+      consumidor de varios países de la región y con las condiciones de la plataforma de pago
+      (<b>Hotmart</b>), que también admite la solicitud de reembolso dentro de los 7 días desde la compra a través
+      de su propio panel.</p>
+
+      <h2 id="r3">3. Reembolso después de la consulta</h2>
+      <p>Si la consulta ya se realizó dentro de esos 7 días, el servicio se considera prestado, porque su valor se
+      entrega íntegramente en la sesión y en los materiales enviados. Aun así, si el Cliente considera que el
+      servicio no se ajustó a lo descrito en el sitio, puede escribirnos dentro de ese mismo plazo de <b>7 días
+      corridos desde la compra</b> explicando qué ocurrió: revisamos cada caso de forma individual y, cuando el
+      reclamo es fundado, devolvemos el importe total. La devolución se resuelve siempre a favor del Cliente en
+      los supuestos de la sección 4.</p>
+
+      <h2 id="r4">4. Casos con reembolso íntegro garantizado</h2>
+      <p>Devolvemos el 100&nbsp;% del importe, sin condiciones y sin límite de plazo, cuando:</p>
+      <ul>
+        <li>La Empresa <b>no acepta el caso</b> por exceder el alcance del servicio (por ejemplo, personas menores de 18 años, urgencias o brotes agudos, embarazo o lactancia sin autorización médica expresa, o casos que requieren otro tipo de abordaje).</li>
+        <li>La consulta <b>no puede realizarse por causa imputable a la Empresa</b> (problemas técnicos de nuestra parte, imposibilidad del profesional, falta de disponibilidad de agenda) y el Cliente no desea reprogramarla.</li>
+        <li>Se produjo un <b>cobro duplicado</b> o un cobro por un importe distinto al publicado.</li>
+        <li>Se detecta un <b>uso no autorizado</b> del medio de pago, debidamente acreditado.</li>
+      </ul>
+
+      <h2 id="r5">5. Supuestos sin derecho a reembolso</h2>
+      <ul>
+        <li>Solicitudes presentadas <b>después de los 7 días corridos</b> desde la compra, salvo los casos de la sección 4.</li>
+        <li><b>Inasistencia sin aviso</b> a la sesión agendada, o aviso con menos de 24 horas de anticipación, tras haber agotado las reprogramaciones previstas en los Términos y condiciones.</li>
+        <li>Falta de agenda o de realización de la consulta dentro de los <b>90 días corridos</b> desde la compra por causas ajenas a la Empresa.</li>
+        <li>Insatisfacción basada exclusivamente en la <b>ausencia de resultados clínicos</b>: el servicio es una consulta de orientación nutricional y, tal como se advierte en todo el sitio, no promete ni garantiza resultados de salud.</li>
+        <li>Incumplimiento por parte del Cliente de las pautas conversadas, o decisión de no aplicarlas.</li>
+        <li>Información falsa u omitida por el Cliente que haya impedido prestar correctamente el servicio.</li>
+        <li>Uso indebido de los materiales entregados (reventa, difusión o publicación no autorizada).</li>
+      </ul>
+
+      <h2 id="r6">6. Cómo solicitar un reembolso</h2>
+      <ol>
+        <li>Escribí a <a data-email-link href="mailto:ezequielracca1984@gmail.com"><span data-email>ezequielracca1984@gmail.com</span></a> con el asunto «Solicitud de reembolso».</li>
+        <li>Indicá tu nombre y apellido, el correo con el que realizaste la compra, la fecha de compra y el número de transacción o de pedido que figura en el comprobante de la plataforma de pago.</li>
+        <li>Contanos brevemente el motivo (no es obligatorio dentro de los 7 días si la consulta no se realizó).</li>
+        <li>Recibirás la confirmación de recepción dentro de los <b>2 días hábiles</b> y la resolución dentro de los <b>5 días hábiles</b>.</li>
+      </ol>
+      <p>También podés solicitar el reembolso directamente desde el panel de compras de <b>Hotmart</b>, con la
+      cuenta de correo utilizada en la compra.</p>
+
+      <h2 id="r7">7. Plazos y forma de devolución</h2>
+      <p>El reembolso se realiza <b>por el mismo medio de pago</b> utilizado en la compra y por el importe
+      efectivamente abonado. Una vez aprobado, la plataforma de pago procesa la devolución; el plazo de
+      acreditación depende del emisor de la tarjeta o del medio de pago y suele ubicarse entre <b>5 y 30 días
+      hábiles</b>.</p>
+      <p>Las diferencias por tipo de cambio, impuestos, retenciones o comisiones aplicadas por el emisor del
+      medio de pago o por la autoridad fiscal del país del Cliente son ajenas a la Empresa y pueden no ser
+      reintegrables por ella.</p>
+
+      <h2 id="r8">8. Contracargos y disputas</h2>
+      <p>Antes de iniciar un contracargo ante tu banco, escribinos: la mayoría de las situaciones se resuelven de
+      forma directa y más rápida. Si aun así se inicia una disputa, colaboraremos con la plataforma de pago y con
+      la entidad emisora aportando la documentación de la operación.</p>
+
+      <h2 id="r9">9. Cancelación por parte de la Empresa</h2>
+      <p>La Empresa puede cancelar una contratación cuando el caso exceda el alcance del servicio, cuando el
+      Cliente incumpla los <a data-url-terminos href="https://ezequielracca.com/terminos-condiciones">Términos y condiciones</a> o ante conductas
+      agresivas u ofensivas hacia el equipo. Si la cancelación ocurre antes de la sesión, se reintegra el
+      100&nbsp;% del importe abonado.</p>
+
+      <h2 id="r10">10. Contacto</h2>
+      <p><span data-llc>Una Vida Sin Medicamentos LLC</span><br>
+      <span data-direccion>1000 Brickell Avenue, Suite #715, PMB 153, Miami, Florida 33131, Estados Unidos</span><br>
+      <a data-email-link href="mailto:ezequielracca1984@gmail.com"><span data-email>ezequielracca1984@gmail.com</span></a> ·
+      <span data-wa>+54 9 336 400-7472</span><br>
+      Atención: lunes a viernes, 9 a 18 h (GMT-3).</p>
+    </div>
+    <div class="volver-pie">
+      <p>¿Terminaste de leer? Volvé a la página principal para ver el servicio.</p>
+      <a class="btn btn-ghost" data-inicio href="https://ezequielracca.com/inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H6M11 5l-7 7 7 7"/></svg>Volver al inicio</a>
+    </div>
+  </div>
+</main>
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div>
+        <p class="empresa" data-llc>Una Vida Sin Medicamentos LLC</p>
+        <h4>Domicilio principal</h4>
+        <address data-direccion>1000 Brickell Avenue, Suite #715, PMB 153, Miami, Florida 33131, Estados Unidos</address>
+        <p style="margin-top:10px">Marca comercial: Sana tu Autoinmune</p>
+      </div>
+      <div>
+        <h4>Legales</h4>
+        <ul>
+          <li><a data-url-privacidad href="https://ezequielracca.com/politicas-privacidad">Política de privacidad</a></li>
+          <li><a data-url-terminos href="https://ezequielracca.com/terminos-condiciones">Términos y condiciones</a></li>
+          <li><a data-url-reembolso href="https://ezequielracca.com/politicas-de-reembolso">Política de reembolso</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><a data-email-link href="mailto:ezequielracca1984@gmail.com"><span data-email>ezequielracca1984@gmail.com</span></a></li>
+          <li><a data-wa-link href="https://wa.me/5493364007472" target="_blank" rel="noopener"><span data-wa>+54 9 336 400-7472</span></a></li>
+          <li>Atención: lunes a viernes, 9 a 18 h (GMT-3)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr-legal">
+      <p>&copy; <span data-anio>2026</span> <span data-llc>Una Vida Sin Medicamentos LLC</span>. Todos los derechos reservados.
+      Sana tu Autoinmune es una marca comercial de <span data-llc>Una Vida Sin Medicamentos LLC</span>, sociedad de responsabilidad
+      limitada constituida en el estado de <span data-estado>Wyoming</span>, Estados Unidos.</p>
+      <p><b>Aviso médico:</b> el contenido de este sitio y los servicios que se ofrecen tienen carácter educativo
+      y nutricional. No constituyen diagnóstico, tratamiento ni prescripción médica, no crean una relación
+      médico-paciente y no reemplazan la consulta con tu médico tratante. Nunca inicies, modifiques ni
+      suspendas una medicación por tu cuenta. Ante una urgencia, acudí al servicio de emergencias de tu país.
+      Los resultados son individuales y varían según cada persona; no se garantizan resultados.</p>
+      <p>Este sitio no está afiliado, patrocinado ni administrado por Meta Platforms, Inc. (Facebook, Instagram),
+      Google LLC ni ninguna otra plataforma publicitaria.</p>
+    </div>
+  </div>
+</footer>
+</div>
+
+<script>
+/* ==========================================================================
+   SANA TU AUTOINMUNE · Datos de la empresa
+   👉 EDITÁ SOLO ESTE BLOQUE (es el mismo en las tres páginas legales).
+   ========================================================================== */
+var LEGAL = {
+  LLC:       'Una Vida Sin Medicamentos LLC',
+  DIRECCION: '1000 Brickell Avenue, Suite #715, PMB 153, Miami, Florida 33131, Estados Unidos',
+  ESTADO:    'Wyoming',
+  EMAIL:     'ezequielracca1984@gmail.com',
+  WHATSAPP:  '+54 9 336 400-7472',
+  SITIO:     'ezequielracca.com',
+  ACTUALIZADO: '9 de septiembre de 2026',
+
+  // Adónde vuelve la persona desde esta página.
+  INICIO_URL: 'https://ezequielracca.com/inicio',
+
+  // URLs de las otras dos páginas legales (para los enlaces del pie).
+  URL_PRIVACIDAD: 'https://ezequielracca.com/politicas-privacidad',
+  URL_TERMINOS:   'https://ezequielracca.com/terminos-condiciones',
+  URL_REEMBOLSO:  'https://ezequielracca.com/politicas-de-reembolso'
+};
+
+(function () {
+  'use strict';
+  var d = document;
+  var raiz = d.getElementById('sta-legal');
+  if (!raiz) return;
+
+  function set(attr, valor) {
+    Array.prototype.forEach.call(raiz.querySelectorAll('[' + attr + ']'), function (n) {
+      if (valor) n.textContent = valor;
+    });
+  }
+  set('data-llc', LEGAL.LLC);
+  set('data-direccion', LEGAL.DIRECCION);
+  set('data-estado', LEGAL.ESTADO);
+  set('data-email', LEGAL.EMAIL);
+  set('data-wa', LEGAL.WHATSAPP);
+  set('data-sitio', LEGAL.SITIO);
+  set('data-fecha', LEGAL.ACTUALIZADO);
+
+  Array.prototype.forEach.call(raiz.querySelectorAll('[data-email-link]'), function (a) {
+    if (LEGAL.EMAIL.indexOf('@') > -1) a.setAttribute('href', 'mailto:' + LEGAL.EMAIL);
+  });
+  Array.prototype.forEach.call(raiz.querySelectorAll('[data-wa-link]'), function (a) {
+    var n = (LEGAL.WHATSAPP || '').replace(/[^0-9]/g, '');
+    if (n) a.setAttribute('href', 'https://wa.me/' + n);
+  });
+
+  var rutas = { 'data-inicio': 'INICIO_URL', 'data-url-privacidad': 'URL_PRIVACIDAD',
+                'data-url-terminos': 'URL_TERMINOS', 'data-url-reembolso': 'URL_REEMBOLSO' };
+  Object.keys(rutas).forEach(function (attr) {
+    Array.prototype.forEach.call(raiz.querySelectorAll('[' + attr + ']'), function (a) {
+      if (LEGAL[rutas[attr]]) a.setAttribute('href', LEGAL[rutas[attr]]);
+    });
+  });
+
+  var y = raiz.querySelector('[data-anio]');
+  if (y) y.textContent = new Date().getFullYear();
+})();
+
+/* --- GHL: quita el relleno y el fondo de los contenedores que lo envuelven --- */
+(function () {
+  function ajustar() {
+    var n = document.getElementById('sta-legal');
+    if (!n) return;
+    var p = n.parentElement;
+    while (p && p !== document.body) {
+      p.style.setProperty('padding', '0', 'important');
+      p.style.setProperty('margin-top', '0', 'important');
+      p.style.setProperty('margin-bottom', '0', 'important');
+      p.style.setProperty('background', 'transparent', 'important');
+      p.style.setProperty('border', '0', 'important');
+      p = p.parentElement;
+    }
+    document.body.style.setProperty('margin', '0', 'important');
+    document.body.style.setProperty('background-color', '#F5F8F9', 'important');
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ajustar);
+  else ajustar();
+  window.addEventListener('load', ajustar);
+  setTimeout(ajustar, 400);
+  setTimeout(ajustar, 1500);
+})();
+</script>

@@ -41,6 +41,28 @@ otro, como botón, al final del documento:
 | `terminos-condiciones.html` | https://ezequielracca.com/terminos-condiciones |
 | `politicas-de-reembolso.html` | https://ezequielracca.com/politicas-de-reembolso |
 
+## Versión para pegar en GoHighLevel (`ghl/`)
+
+Las mismas tres páginas legales, pero **sin menú de navegación**, pensadas para
+enlazar directo desde la landing VSL:
+
+- `ghl/ghl-politicas-privacidad.html`
+- `ghl/ghl-terminos-condiciones.html`
+- `ghl/ghl-politicas-de-reembolso.html`
+
+Diferencias con las de la raíz:
+
+- No son documentos completos: son un bloque para pegar tal cual en un elemento
+  **Custom Code / HTML** de GoHighLevel (sin `<!DOCTYPE>`, `<head>` ni `<body>`).
+- Todo el CSS está acotado a `#sta-legal`, así los estilos de la plantilla de GHL
+  no los tocan ni ellos tocan al resto de la página. Probado contra una plantilla
+  con tipografía, colores y viñetas propias.
+- Arriba llevan solo el logo (enlazado al inicio) y el enlace «Volver al inicio»;
+  abajo, el mismo pie con la LLC, el domicilio y los avisos legales.
+- Al final de cada archivo hay un bloque `var LEGAL = { ... }` donde se editan los
+  datos de la empresa y, sobre todo, `INICIO_URL` y las URLs de las otras dos
+  páginas legales, para el caso de que la landing viva en otra ruta.
+
 ## Datos cargados
 
 Al final de cada `.html` hay un bloque `var EMPRESA = { ... }` con los datos que

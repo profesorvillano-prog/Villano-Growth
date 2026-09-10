@@ -1,0 +1,598 @@
+<!-- ===================================================================
+     SANA TU AUTOINMUNE · Política de privacidad
+     Página legal para enlazar desde la landing (VSL). Sin menú de
+     navegación: solo el logo, el documento y el pie con los datos de la LLC.
+     Pegar TAL CUAL en GoHighLevel: elemento "Custom Code / HTML".
+     Antes de publicar, revisá el bloque LEGAL = { ... } del final.
+     =================================================================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+#sta-legal{
+  --deep:#0E2E3E; --deep2:#144155; --teal:#0E7C8B; --teal2:#128FA0;
+  --cta1:#0C7382; --cta2:#0A6270; --tealw:#E8F4F6; --mint:#2F9E7C; --mintw:#E9F5F0;
+  --ground:#F5F8F9; --tint:#EEF4F6; --wh:#FFFFFF;
+  --t0:#0D2029; --t1:#2E4650; --t2:#55707B; --t3:#6B858F;
+  --br:#DCE7EB; --br2:#EAF1F3; --red:#B4483C;
+  --r:10px; --r-lg:14px;
+  --display:'Instrument Sans','IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --body:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
+}
+#sta-legal *,#sta-legal *::before,#sta-legal *::after{margin:0;padding:0;box-sizing:border-box}
+#sta-legal{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:78px}
+#sta-legal{font-family:var(--body);background:var(--ground);color:var(--t1);line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-wrap:break-word;
+  -webkit-tap-highlight-color:rgba(14,124,139,.14)}
+#sta-legal img{max-width:100%;display:block}
+#sta-legal a{color:var(--teal);text-decoration:none}
+#sta-legal a:hover{text-decoration:underline}
+#sta-legal h1,#sta-legal h2,#sta-legal h3,#sta-legal h4{font-family:var(--display);line-height:1.18;letter-spacing:-.02em;color:var(--t0);font-weight:700;text-wrap:balance}
+#sta-legal h1{font-size:clamp(1.75rem,5.4vw,2.7rem)}
+#sta-legal h2{font-size:clamp(1.4rem,4.2vw,2rem)}
+#sta-legal h3{font-size:clamp(1.02rem,2.6vw,1.16rem);font-weight:600}
+#sta-legal h4{font-size:1rem;font-weight:600}
+#sta-legal .wrap{width:100%;max-width:1010px;margin:0 auto;padding:0 22px}
+#sta-legal .wrap-n{width:100%;max-width:760px;margin:0 auto;padding:0 22px}
+#sta-legal .sec{padding:56px 0}
+@media(min-width:760px){#sta-legal .sec{padding:78px 0}}
+#sta-legal .sec-alt{background:var(--tint);border-top:1px solid var(--br);border-bottom:1px solid var(--br)}
+#sta-legal .sec-dark{background:var(--deep);color:#CFE1E7}
+#sta-legal .sec-dark h2,#sta-legal .sec-dark h3{color:#fff}
+#sta-legal .center{text-align:center}
+#sta-legal .mark{color:var(--teal)}
+#sta-legal .eyebrow{font-family:var(--display);font-size:.7rem;font-weight:600;letter-spacing:.19em;
+  text-transform:uppercase;color:var(--teal);display:block;margin-bottom:12px}
+#sta-legal .lead{font-size:clamp(1rem,2.5vw,1.07rem);color:var(--t2)}
+#sta-legal .sec-dark .lead{color:#B9D2DA}
+
+#sta-legal /* Barra superior */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--br);padding-top:var(--sat)}
+#sta-legal .nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:64px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+#sta-legal .brand{display:inline-flex;align-items:center;gap:10px}
+#sta-legal .brand:hover{text-decoration:none}
+#sta-legal .brand-mk{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--teal);display:grid;place-items:center;flex:none}
+#sta-legal .brand-mk svg{width:14px;height:14px;stroke:var(--teal);fill:none;stroke-width:2.2;stroke-linecap:round}
+#sta-legal .logo-txt{font-family:var(--display);font-weight:700;font-size:1.04rem;letter-spacing:.05em;
+  color:var(--deep);text-transform:uppercase}
+#sta-legal .logo-txt b{color:var(--teal)}
+#sta-legal .nav-links{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+#sta-legal .nav-links a{font-size:.88rem;color:var(--t2);font-weight:500}
+#sta-legal .nav-links a:hover,#sta-legal .nav-links a[aria-current="page"]{color:var(--teal);text-decoration:none}
+
+#sta-legal /* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:linear-gradient(180deg,var(--cta1),var(--cta2));color:#fff;border-radius:var(--r);
+  padding:16px 26px;font-family:var(--display);font-weight:700;font-size:1rem;
+  box-shadow:0 14px 30px -14px rgba(14,124,139,.6),inset 0 1px 0 rgba(255,255,255,.16);
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+#sta-legal .btn:hover{transform:translateY(-2px);text-decoration:none;
+  box-shadow:0 20px 40px -16px rgba(14,124,139,.7),inset 0 1px 0 rgba(255,255,255,.2)}
+#sta-legal .btn:focus-visible{outline:2px solid var(--deep);outline-offset:3px}
+#sta-legal .btn .price{font-weight:600;opacity:.85;font-variant-numeric:tabular-nums}
+#sta-legal .btn-ghost{background:var(--wh);color:var(--deep);border:1px solid var(--br);box-shadow:none}
+#sta-legal .btn-ghost:hover{border-color:var(--teal);color:var(--teal);box-shadow:none}
+#sta-legal .btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+#sta-legal .btn{white-space:nowrap}
+#sta-legal .sec-dark .btn{background:var(--wh);color:var(--deep)}
+#sta-legal .btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+#sta-legal .center .btn-row{justify-content:center}
+#sta-legal .note{font-size:.83rem;color:var(--t2);margin-top:12px}
+#sta-legal .sec-dark .note{color:#93B3BD}
+
+#sta-legal /* Hero */
+.hero{padding:52px 0 44px;position:relative;overflow:hidden}
+#sta-legal .hero::before{content:"";position:absolute;inset:-140px 0 auto;height:520px;pointer-events:none;
+  background:radial-gradient(ellipse 62% 100% at 50% 0%,rgba(14,124,139,.12) 0%,transparent 70%)}
+#sta-legal .hero>*{position:relative}
+#sta-legal .hero .lead{margin-top:16px;max-width:60ch}
+#sta-legal .center .lead{margin-left:auto;margin-right:auto}
+
+#sta-legal /* Tarjetas */
+.grid{display:grid;gap:16px;margin-top:30px}
+#sta-legal .g2{grid-template-columns:1fr}
+#sta-legal .g3{grid-template-columns:1fr}
+@media(min-width:700px){#sta-legal .g2{grid-template-columns:1fr 1fr}#sta-legal .g3{grid-template-columns:repeat(3,1fr)}}
+#sta-legal .card{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);padding:24px 22px;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
+#sta-legal .card:hover{transform:translateY(-2px);border-color:#C3D8DE;box-shadow:0 18px 40px -28px rgba(13,32,41,.55)}
+#sta-legal .card h3{margin-bottom:8px}
+#sta-legal .card p{font-size:.95rem;color:var(--t2)}
+#sta-legal .card .num{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:var(--tealw);
+  color:var(--teal);font-family:var(--display);font-weight:700;font-size:.78rem;margin-bottom:13px}
+
+#sta-legal /* Ficha de servicio */
+.ficha{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);overflow:hidden;margin-top:30px}
+#sta-legal .ficha-top{padding:24px 22px;border-bottom:1px solid var(--br2);display:flex;flex-wrap:wrap;
+  gap:16px;align-items:flex-start;justify-content:space-between}
+#sta-legal .ficha-price{font-family:var(--display);font-weight:700;font-size:1.7rem;color:var(--deep);
+  font-variant-numeric:tabular-nums;line-height:1.2}
+#sta-legal .ficha-price b{font-weight:700}
+#sta-legal .ficha-price span{display:block;font-size:.72rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--t3);margin-top:6px}
+#sta-legal .ficha dl{display:grid;grid-template-columns:1fr;border-top:1px solid var(--br2)}
+@media(min-width:640px){#sta-legal .ficha dl{grid-template-columns:repeat(2,1fr)}}
+#sta-legal .ficha .row{padding:15px 22px;border-bottom:1px solid var(--br2);display:flex;gap:12px;flex-wrap:wrap}
+#sta-legal .ficha dt{font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--t3);
+  min-width:150px;font-family:var(--display);padding-top:2px}
+#sta-legal .ficha dd{font-size:.95rem;color:var(--t1);flex:1;min-width:180px}
+
+#sta-legal /* Listas de comprobación */
+.checks{display:grid;gap:10px;margin-top:26px}
+@media(min-width:700px){#sta-legal .checks.c2{grid-template-columns:1fr 1fr}}
+#sta-legal .check{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;background:var(--wh);
+  border:1px solid var(--br);border-radius:var(--r);padding:15px 16px}
+#sta-legal .check svg{width:22px;height:22px;stroke:var(--mint);fill:none;stroke-width:2.3;stroke-linecap:round;
+  stroke-linejoin:round;margin-top:2px}
+#sta-legal .check p{font-size:.96rem;color:var(--t1)}
+#sta-legal .check p b{color:var(--t0);font-weight:600}
+#sta-legal .check.no svg{stroke:var(--red)}
+
+#sta-legal /* Equipo */
+.team{display:grid;gap:18px;margin-top:30px}
+@media(min-width:760px){#sta-legal .team{grid-template-columns:1fr 1fr;gap:22px}}
+#sta-legal .member{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);overflow:hidden;
+  display:flex;flex-direction:column}
+#sta-legal .member>img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 22%;background:var(--tint)}
+#sta-legal .member-body{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}
+#sta-legal .member-role{font-family:var(--display);font-weight:600;font-size:.68rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--teal)}
+#sta-legal .member-body p{font-size:.94rem;color:var(--t2)}
+#sta-legal .creds{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:14px}
+#sta-legal .creds span{background:var(--tealw);border:1px solid #CFE4E9;color:#0B5F6B;font-size:.72rem;
+  border-radius:5px;padding:5px 10px}
+#sta-legal .creds span.mn{background:var(--mintw);border-color:#CFE6DC;color:#1F6E56;font-weight:600}
+
+#sta-legal /* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:24px}
+#sta-legal .chips span{background:var(--wh);border:1px solid var(--br);border-radius:6px;padding:8px 14px;
+  font-size:.84rem;color:var(--t1)}
+
+#sta-legal /* Aviso */
+.aviso{margin-top:26px;background:var(--wh);border:1px solid var(--br);border-left:3px solid var(--teal);
+  border-radius:var(--r);padding:18px 20px;font-size:.92rem;color:var(--t2)}
+#sta-legal .aviso b{color:var(--t0);font-weight:600}
+
+#sta-legal /* FAQ */
+.faq{margin-top:26px;display:grid;gap:8px}
+#sta-legal .faq details{background:var(--wh);border:1px solid var(--br);border-radius:var(--r);overflow:hidden}
+#sta-legal .faq details[open]{border-color:var(--teal)}
+#sta-legal .faq summary{list-style:none;cursor:pointer;padding:16px 48px 16px 18px;position:relative;
+  font-family:var(--display);font-weight:600;font-size:.98rem;color:var(--t0)}
+#sta-legal .faq summary::-webkit-details-marker{display:none}
+#sta-legal .faq summary::after,#sta-legal .faq summary::before{content:"";position:absolute;right:19px;top:50%;width:11px;
+  height:1.8px;background:var(--teal);border-radius:2px;transition:transform .25s var(--ease)}
+#sta-legal .faq summary::before{transform:translateY(-50%) rotate(90deg)}
+#sta-legal .faq summary::after{transform:translateY(-50%)}
+#sta-legal .faq details[open] summary::before{transform:translateY(-50%) rotate(0)}
+#sta-legal .faq .a{padding:0 18px 18px;font-size:.94rem;color:var(--t2)}
+
+#sta-legal /* Contacto */
+.datos{display:grid;gap:12px;margin-top:26px}
+@media(min-width:700px){#sta-legal .datos{grid-template-columns:1fr 1fr}}
+#sta-legal .dato{background:var(--wh);border:1px solid var(--br);border-radius:var(--r);padding:16px 18px}
+#sta-legal .dato b{display:block;font-family:var(--display);font-size:.68rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--t3);margin-bottom:5px;font-weight:600}
+#sta-legal .dato span,#sta-legal .dato a{font-size:.95rem;color:var(--t1)}
+
+#sta-legal /* Documentos legales */
+.doc{padding:44px 0 60px}
+#sta-legal .doc h1{margin-bottom:10px}
+#sta-legal .doc .fecha{font-size:.86rem;color:var(--t3);margin-bottom:26px}
+#sta-legal .doc .box{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);padding:26px 24px}
+@media(min-width:760px){#sta-legal .doc .box{padding:38px 40px}}
+#sta-legal .doc h2{font-size:clamp(1.12rem,3vw,1.3rem);margin:32px 0 10px;padding-top:22px;border-top:1px solid var(--br2)}
+#sta-legal .doc .box>h2:first-child{margin-top:0;padding-top:0;border-top:0}
+#sta-legal .doc h3{margin:20px 0 8px}
+#sta-legal .doc p,#sta-legal .doc li{font-size:.96rem;color:var(--t1)}
+#sta-legal .doc p+p{margin-top:12px}
+#sta-legal .doc ul,#sta-legal .doc ol{margin:12px 0 0 22px;display:grid;gap:8px}
+#sta-legal .doc li{padding-left:2px}
+#sta-legal .doc table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.9rem;display:block;overflow-x:auto}
+#sta-legal .doc th,#sta-legal .doc td{border:1px solid var(--br);padding:10px 12px;text-align:left;vertical-align:top}
+#sta-legal .doc th{background:var(--tint);font-family:var(--display);font-weight:600;color:var(--t0)}
+#sta-legal .doc .destacado{background:var(--tealw);border:1px solid #CFE4E9;border-radius:var(--r);
+  padding:16px 18px;margin-top:16px;font-size:.94rem;color:#0B5F6B}
+#sta-legal .doc .destacado b{color:#08505B}
+#sta-legal .toc{background:var(--tint);border:1px solid var(--br);border-radius:var(--r);padding:18px 20px;margin-bottom:26px}
+#sta-legal .toc b{display:block;font-family:var(--display);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--t3);margin-bottom:10px}
+#sta-legal .toc ol{margin:0 0 0 18px;display:grid;gap:5px}
+#sta-legal .toc li{font-size:.9rem}
+
+#sta-legal /* Pie */
+.ftr{background:var(--wh);border-top:1px solid var(--br);padding:40px 0 calc(34px + var(--sab))}
+#sta-legal .ftr-grid{display:grid;gap:26px}
+@media(min-width:760px){#sta-legal .ftr-grid{grid-template-columns:1.3fr 1fr 1fr}}
+#sta-legal .ftr h4{font-family:var(--display);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--t3);margin-bottom:11px;font-weight:600}
+#sta-legal .ftr p,#sta-legal .ftr li,#sta-legal .ftr address{font-size:.85rem;color:var(--t2);font-style:normal}
+#sta-legal .ftr ul{display:grid;gap:7px}
+#sta-legal .ftr a{color:var(--t2)}
+#sta-legal .ftr a:hover{color:var(--teal)}
+#sta-legal .ftr .empresa{font-family:var(--display);font-weight:700;font-size:1rem;color:var(--deep);margin-bottom:8px}
+#sta-legal .ftr-legal{margin-top:28px;padding-top:20px;border-top:1px solid var(--br2);font-size:.78rem;color:var(--t3)}
+#sta-legal .ftr-legal p+p{margin-top:10px}
+
+#sta-legal .volver{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:600;
+  font-size:.85rem;color:var(--teal);margin-bottom:20px}
+#sta-legal .volver:hover{text-decoration:none;color:var(--deep)}
+#sta-legal .volver svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+#sta-legal .volver-pie{margin-top:30px;padding-top:26px;border-top:1px solid var(--br);text-align:center}
+#sta-legal .volver-pie p{font-size:.88rem;color:var(--t2);margin-bottom:14px}
+@media(prefers-reduced-motion:reduce){#sta-legal *{animation:none!important;transition:none!important}#sta-legal{scroll-behavior:auto}}
+
+#sta-legal .lgl-hdr{background:var(--wh);border-bottom:1px solid var(--br);padding:calc(18px + var(--sat)) 0 18px}
+#sta-legal .lgl-hdr .brand{display:inline-flex;align-items:center;gap:10px}
+#sta-legal .lgl-hdr .brand:hover{text-decoration:none}
+#sta-legal .brand-mk{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--teal);
+  display:grid;place-items:center;flex:none}
+#sta-legal .brand-mk svg{width:14px;height:14px;stroke:var(--teal);fill:none;stroke-width:2.2;stroke-linecap:round}
+#sta-legal .logo-txt{font-family:var(--display);font-weight:700;font-size:1.04rem;letter-spacing:.05em;
+  color:var(--deep);text-transform:uppercase}
+#sta-legal .logo-txt b{color:var(--teal)}
+
+/* El bloque ocupa el ancho completo aunque GHL lo meta en su contenedor */
+#sta-legal{position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
+  overflow-x:hidden;isolation:isolate;padding-bottom:0}
+/* Blindaje contra los estilos propios de GHL */
+#sta-legal,#sta-legal *{box-sizing:border-box}
+#sta-legal a{text-decoration:none;color:var(--teal)}
+#sta-legal a:hover{text-decoration:underline}
+#sta-legal ul,#sta-legal ol{list-style:none}
+#sta-legal .doc ul li{position:relative;padding-left:18px}
+#sta-legal .doc ul li::before{content:"";position:absolute;left:0;top:11px;width:5px;height:5px;
+  border-radius:50%;background:var(--teal);opacity:.7}
+#sta-legal .doc ol{counter-reset:paso}
+#sta-legal .doc ol li{position:relative;padding-left:26px;counter-increment:paso}
+#sta-legal .doc ol li::before{content:counter(paso) ".";position:absolute;left:0;top:0;
+  font-family:var(--display);font-weight:600;color:var(--teal);font-size:.9rem}
+#sta-legal .toc ol li::before{content:counter(paso) "."}
+#sta-legal h1,#sta-legal h2,#sta-legal h3{text-transform:none}
+#sta-legal .doc{padding-top:38px}
+</style>
+
+<div id="sta-legal">
+  <header class="lgl-hdr">
+    <div class="wrap-n">
+      <a class="brand" href="https://ezequielracca.com/inicio">
+        <span class="brand-mk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></span>
+        <span class="logo-txt">Sana tu <b>Autoinmune</b></span>
+      </a>
+    </div>
+  </header>
+<main class="doc">
+  <div class="wrap-n">
+    <a class="volver" data-inicio href="https://ezequielracca.com/inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H6M11 5l-7 7 7 7"/></svg>Volver al inicio</a>
+    <h1>Política de privacidad</h1>
+    <p class="fecha">Última actualización: <span data-fecha>9 de septiembre de 2026</span> · Vigente desde esa fecha.</p>
+
+    <div class="toc">
+      <b>Contenido</b>
+      <ol>
+        <li><a href="#p1">Quiénes somos y cómo contactarnos</a></li>
+        <li><a href="#p2">Alcance de esta política</a></li>
+        <li><a href="#p3">Qué datos recopilamos</a></li>
+        <li><a href="#p4">Datos de salud: tratamiento y consentimiento</a></li>
+        <li><a href="#p5">Para qué usamos tus datos y con qué base legal</a></li>
+        <li><a href="#p6">Cookies y tecnologías de seguimiento</a></li>
+        <li><a href="#p7">Publicidad en Meta, Google y otras plataformas</a></li>
+        <li><a href="#p8">Con quién compartimos tus datos</a></li>
+        <li><a href="#p9">Transferencias internacionales</a></li>
+        <li><a href="#p10">Durante cuánto tiempo conservamos tus datos</a></li>
+        <li><a href="#p11">Seguridad de la información</a></li>
+        <li><a href="#p12">Tus derechos</a></li>
+        <li><a href="#p13">Menores de edad</a></li>
+        <li><a href="#p14">Enlaces y servicios de terceros</a></li>
+        <li><a href="#p15">Cambios en esta política</a></li>
+      </ol>
+    </div>
+
+    <div class="box">
+      <h2 id="p1">1. Quiénes somos y cómo contactarnos</h2>
+      <p>Esta Política de privacidad describe cómo <b><span data-llc>Una Vida Sin Medicamentos LLC</span></b> (en adelante,
+      «la Empresa», «nosotros»), sociedad de responsabilidad limitada (<i>limited liability company</i>)
+      constituida bajo las leyes del estado de <span data-estado>Wyoming</span>, Estados Unidos de América, con
+      domicilio principal en <span data-direccion>1000 Brickell Avenue, Suite #715, PMB 153, Miami, Florida 33131, Estados Unidos</span>, recopila, usa,
+      comparte y protege la información personal de las personas que visitan el sitio
+      <span data-sitio>ezequielracca.com</span> y de quienes contratan sus servicios bajo la marca comercial
+      <b>Sana tu Autoinmune</b>.</p>
+      <p>La Empresa actúa como responsable del tratamiento de los datos personales descritos en esta política.
+      Para cualquier consulta sobre privacidad o para ejercer tus derechos, escribinos a
+      <a data-email-link href="mailto:ezequielracca1984@gmail.com"><span data-email>ezequielracca1984@gmail.com</span></a> o a la dirección postal
+      indicada más arriba.</p>
+
+      <h2 id="p2">2. Alcance de esta política</h2>
+      <p>Esta política se aplica al sitio web <span data-sitio>ezequielracca.com</span>, a las páginas de captación y
+      agenda asociadas, a nuestros canales de contacto (correo electrónico y WhatsApp) y a la prestación de la
+      <b>Consulta de Evaluación Autoinmune</b> y de cualquier otro servicio que ofrezcamos.</p>
+      <p>No se aplica a los sitios y servicios de terceros que puedan estar enlazados desde nuestras páginas,
+      que se rigen por sus propias políticas.</p>
+
+      <h2 id="p3">3. Qué datos recopilamos</h2>
+      <table>
+        <thead><tr><th>Categoría</th><th>Datos</th><th>Origen</th></tr></thead>
+        <tbody>
+          <tr><td>Identificación y contacto</td><td>Nombre y apellido, correo electrónico, número de teléfono o WhatsApp, país y ciudad de residencia, fecha de nacimiento o edad.</td><td>Los proporcionás vos en formularios, la compra o el contacto.</td></tr>
+          <tr><td>Datos de la contratación</td><td>Servicio contratado, fecha y hora de la sesión, importe, moneda, estado del pago, identificador de la transacción y comprobantes.</td><td>Vos y la plataforma de pago (Hotmart).</td></tr>
+          <tr><td>Datos de pago</td><td><b>No recibimos ni almacenamos los datos completos de tu tarjeta.</b> El cobro lo procesa la plataforma de pago, que nos informa únicamente el resultado de la operación y datos de facturación.</td><td>Plataforma de pago.</td></tr>
+          <tr><td>Datos de salud (categoría especial)</td><td>Diagnóstico declarado, síntomas, antecedentes, medicación y suplementos, hábitos alimentarios, resultados de análisis que decidas compartir y todo lo que relates durante la consulta.</td><td>Los proporcionás vos en el cuestionario previo y durante la sesión.</td></tr>
+          <tr><td>Datos técnicos y de uso</td><td>Dirección IP, tipo de dispositivo y navegador, sistema operativo, idioma, páginas vistas, tiempo de permanencia, origen del tráfico y parámetros de campaña (UTM).</td><td>Recogidos automáticamente mediante cookies y tecnologías similares.</td></tr>
+          <tr><td>Comunicaciones</td><td>Mensajes que nos envíes por correo, WhatsApp o formularios, y nuestras respuestas.</td><td>Vos y nosotros.</td></tr>
+        </tbody>
+      </table>
+      <div class="destacado"><b>Grabaciones:</b> las consultas <b>no se graban</b> de forma predeterminada. Si en
+      algún caso resultara útil grabarla, te lo pediremos expresamente antes de comenzar y podés negarte sin que
+      eso afecte la prestación del servicio.</div>
+
+      <h2 id="p4">4. Datos de salud: tratamiento y consentimiento</h2>
+      <p>Para prestar el servicio necesitamos información sobre tu estado de salud, que constituye una
+      <b>categoría especial de datos personales</b> (datos sensibles) conforme a normativas como el Reglamento
+      General de Protección de Datos de la Unión Europea (RGPD) y la Ley 25.326 de Protección de los Datos
+      Personales de la República Argentina.</p>
+      <p>Al completar el cuestionario previo y al participar de la consulta, prestás tu <b>consentimiento libre,
+      expreso e informado</b> para que tratemos esos datos con la única finalidad de brindarte la orientación
+      nutricional y de hábitos contratada. Podés revocar ese consentimiento en cualquier momento escribiéndonos;
+      la revocación no afecta la licitud del tratamiento previo, y puede impedir la prestación del servicio si
+      ocurre antes de la consulta.</p>
+      <p>Nunca vendemos ni cedemos datos de salud a terceros con fines comerciales o publicitarios, ni los
+      utilizamos para segmentar anuncios ni para crear audiencias publicitarias.</p>
+
+      <h2 id="p5">5. Para qué usamos tus datos y con qué base legal</h2>
+      <table>
+        <thead><tr><th>Finalidad</th><th>Datos utilizados</th><th>Base legal</th></tr></thead>
+        <tbody>
+          <tr><td>Prestar la consulta contratada, elaborar la orientación nutricional y enviarte la guía y el resumen.</td><td>Identificación, contratación y salud.</td><td>Ejecución del contrato y consentimiento expreso para los datos de salud.</td></tr>
+          <tr><td>Gestionar el cobro, la facturación y eventuales reembolsos.</td><td>Identificación y contratación.</td><td>Ejecución del contrato y obligaciones legales y contables.</td></tr>
+          <tr><td>Coordinar agenda, recordatorios y soporte de la sesión.</td><td>Identificación y contratación.</td><td>Ejecución del contrato.</td></tr>
+          <tr><td>Responder consultas y brindar atención al cliente.</td><td>Identificación y comunicaciones.</td><td>Interés legítimo y ejecución del contrato.</td></tr>
+          <tr><td>Enviarte comunicaciones comerciales sobre nuestros servicios.</td><td>Identificación y contacto.</td><td>Consentimiento (podés darte de baja en cualquier momento desde el enlace de cada envío).</td></tr>
+          <tr><td>Medir el rendimiento del sitio y de nuestras campañas publicitarias.</td><td>Datos técnicos y de uso.</td><td>Consentimiento para cookies no esenciales; interés legítimo para métricas agregadas.</td></tr>
+          <tr><td>Cumplir obligaciones legales, fiscales y responder requerimientos de autoridades.</td><td>Los que correspondan.</td><td>Obligación legal.</td></tr>
+          <tr><td>Prevenir fraudes y usos indebidos del servicio.</td><td>Datos técnicos y de contratación.</td><td>Interés legítimo.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="p6">6. Cookies y tecnologías de seguimiento</h2>
+      <p>Utilizamos cookies propias y de terceros, junto con tecnologías similares (píxeles, almacenamiento local
+      y etiquetas), para que el sitio funcione, recordar tus preferencias y medir el rendimiento de nuestras
+      campañas.</p>
+      <ul>
+        <li><b>Cookies necesarias:</b> imprescindibles para la navegación, la seguridad y el proceso de compra. No requieren consentimiento.</li>
+        <li><b>Cookies analíticas:</b> nos permiten entender de forma agregada cómo se usa el sitio (por ejemplo, Google Analytics).</li>
+        <li><b>Cookies publicitarias:</b> permiten medir conversiones y mostrar anuncios en plataformas como Meta (Facebook e Instagram) y Google.</li>
+      </ul>
+      <p>Podés aceptar o rechazar las cookies no esenciales desde el aviso de cookies del sitio, cuando esté
+      disponible, y en cualquier momento desde la configuración de tu navegador. Bloquear cookies necesarias
+      puede impedir el funcionamiento correcto del sitio.</p>
+
+      <h2 id="p7">7. Publicidad en Meta, Google y otras plataformas</h2>
+      <p>Promocionamos nuestros servicios mediante publicidad en plataformas de terceros, entre ellas Meta
+      Platforms, Inc. (Facebook e Instagram) y Google LLC. Para medir resultados podemos instalar en el sitio
+      herramientas de medición como el píxel de Meta o etiquetas de Google, que recogen datos técnicos y de
+      navegación asociados a un identificador.</p>
+      <div class="destacado"><b>Compromiso publicitario:</b> no compartimos con plataformas publicitarias datos
+      de salud, diagnósticos ni ninguna información que permita inferir tu condición médica, y no creamos
+      audiencias basadas en datos de salud. Nuestros anuncios no afirman ni sugieren que conocemos el estado de
+      salud de la persona que los ve.</div>
+      <p>Podés gestionar la publicidad personalizada desde la configuración de anuncios de cada plataforma
+      (por ejemplo, en las preferencias de anuncios de tu cuenta de Facebook o Instagram, o en la configuración
+      de anuncios de Google).</p>
+      <p>Este sitio no está afiliado, patrocinado ni administrado por Meta Platforms, Inc., Google LLC ni ninguna
+      otra plataforma publicitaria.</p>
+
+      <h2 id="p8">8. Con quién compartimos tus datos</h2>
+      <p>No vendemos tus datos personales. Los compartimos únicamente con proveedores que nos ayudan a prestar el
+      servicio, en la medida necesaria y bajo obligaciones de confidencialidad:</p>
+      <ul>
+        <li><b>Plataforma de pago y facturación</b> (Hotmart): procesamiento del cobro, comprobantes y reembolsos.</li>
+        <li><b>Plataforma de marketing, formularios y agenda</b> (por ejemplo, GoHighLevel): gestión de contactos, envío de correos y coordinación de turnos.</li>
+        <li><b>Proveedores de correo electrónico y almacenamiento en la nube</b>: envío de comunicaciones y resguardo de la documentación del caso.</li>
+        <li><b>Proveedor de videollamadas</b>: realización de la sesión.</li>
+        <li><b>Proveedores de analítica y publicidad</b> (Google, Meta): medición del sitio y de las campañas, con los límites descritos en la sección 7.</li>
+        <li><b>Asesores profesionales</b> (contables y legales) y <b>autoridades competentes</b>, cuando exista una obligación legal o sea necesario para ejercer o defender derechos.</li>
+      </ul>
+      <p>El equipo profesional que interviene en el servicio (Ezequiel Racca y, en su rol de supervisión clínica,
+      la Dra. Catalina Clembosky, MN 171999) accede a la información de tu caso bajo deber de confidencialidad y
+      solo con la finalidad de prestar el servicio.</p>
+
+      <h2 id="p9">9. Transferencias internacionales</h2>
+      <p>La Empresa está constituida en los Estados Unidos y su equipo profesional reside en la República
+      Argentina, por lo que tus datos pueden ser tratados y almacenados en esos países y en aquellos donde
+      operan nuestros proveedores de servicios tecnológicos. Cuando la normativa aplicable lo exige, estas
+      transferencias se realizan con las garantías correspondientes, como las cláusulas contractuales tipo o
+      decisiones de adecuación.</p>
+
+      <h2 id="p10">10. Durante cuánto tiempo conservamos tus datos</h2>
+      <ul>
+        <li><b>Datos de la consulta y de salud:</b> hasta 5 años desde la prestación del servicio, para poder responder consultas posteriores y ante eventuales reclamos, salvo que solicites antes su supresión.</li>
+        <li><b>Datos de facturación y pago:</b> por el plazo que exijan las obligaciones fiscales y contables aplicables (habitualmente entre 5 y 10 años).</li>
+        <li><b>Datos de contacto para comunicaciones comerciales:</b> hasta que solicites la baja.</li>
+        <li><b>Datos técnicos y de cookies:</b> según el plazo de vida de cada cookie, informado en el aviso de cookies.</li>
+      </ul>
+      <p>Cumplidos los plazos, los datos se eliminan o se anonimizan de forma irreversible.</p>
+
+      <h2 id="p11">11. Seguridad de la información</h2>
+      <p>Aplicamos medidas técnicas y organizativas razonables para proteger tus datos: conexiones cifradas
+      (HTTPS), control de accesos, contraseñas robustas con verificación en dos pasos, acceso limitado a las
+      personas que intervienen en el servicio y proveedores con estándares de seguridad reconocidos. Ningún
+      sistema es infalible, por lo que no podemos garantizar una seguridad absoluta. Si ocurriera un incidente
+      que afecte significativamente tus datos, te lo notificaremos y daremos aviso a las autoridades cuando la
+      ley lo requiera.</p>
+
+      <h2 id="p12">12. Tus derechos</h2>
+      <p>Según la normativa que te resulte aplicable, podés ejercer los siguientes derechos:</p>
+      <ul>
+        <li><b>Acceso:</b> saber qué datos tuyos tratamos y obtener una copia.</li>
+        <li><b>Rectificación:</b> corregir datos inexactos o incompletos.</li>
+        <li><b>Supresión:</b> solicitar la eliminación de tus datos cuando ya no sean necesarios.</li>
+        <li><b>Oposición y limitación:</b> oponerte a determinados tratamientos o pedir que se limiten.</li>
+        <li><b>Portabilidad:</b> recibir tus datos en un formato estructurado y de uso común.</li>
+        <li><b>Revocación del consentimiento:</b> retirar en cualquier momento el consentimiento prestado, incluido el referido a datos de salud y a comunicaciones comerciales.</li>
+        <li><b>No venta ni compartición de datos personales:</b> si residís en California u otro estado con normativa equivalente, tenés derecho a solicitar que no se vendan ni compartan tus datos y a no sufrir un trato discriminatorio por ejercerlo. Aclaramos que no vendemos datos personales.</li>
+      </ul>
+      <p>Para ejercerlos, escribinos a <a data-email-link href="mailto:ezequielracca1984@gmail.com"><span data-email>ezequielracca1984@gmail.com</span></a>
+      indicando tu solicitud. Podemos pedirte que acredites tu identidad. Respondemos dentro de los 10 días
+      hábiles y, en todo caso, en los plazos que fije la normativa aplicable.</p>
+      <p>Si considerás que no atendimos correctamente tu solicitud, podés reclamar ante la autoridad de control
+      de tu país. En la República Argentina, la <b>Agencia de Acceso a la Información Pública</b> es el órgano de
+      control de la Ley 25.326 y tiene la atribución de atender denuncias y reclamos por la violación de las
+      normas sobre protección de datos personales.</p>
+
+      <h2 id="p13">13. Menores de edad</h2>
+      <p>Nuestros servicios están dirigidos exclusivamente a personas mayores de 18 años. No recopilamos de forma
+      consciente datos de menores. Si detectamos que recibimos datos de un menor sin autorización de quien ejerce
+      su responsabilidad parental, los eliminaremos. Si sos madre, padre o tutor y creés que un menor nos
+      proporcionó datos, escribinos y procederemos a su supresión.</p>
+
+      <h2 id="p14">14. Enlaces y servicios de terceros</h2>
+      <p>El sitio puede contener enlaces a plataformas de terceros (por ejemplo, la pasarela de pago, la
+      herramienta de agenda o redes sociales). No somos responsables de sus prácticas de privacidad; te
+      recomendamos leer sus políticas antes de proporcionarles información.</p>
+
+      <h2 id="p15">15. Cambios en esta política</h2>
+      <p>Podemos actualizar esta política para reflejar cambios legales, técnicos o de nuestro servicio. La
+      versión vigente es siempre la publicada en esta página, con su fecha de última actualización. Si el cambio
+      es sustancial, lo comunicaremos por correo electrónico o mediante un aviso destacado en el sitio.</p>
+      <p>Ante cualquier duda sobre esta política, escribinos a
+      <a data-email-link href="mailto:ezequielracca1984@gmail.com"><span data-email>ezequielracca1984@gmail.com</span></a>.</p>
+    </div>
+    <div class="volver-pie">
+      <p>¿Terminaste de leer? Volvé a la página principal para ver el servicio.</p>
+      <a class="btn btn-ghost" data-inicio href="https://ezequielracca.com/inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H6M11 5l-7 7 7 7"/></svg>Volver al inicio</a>
+    </div>
+  </div>
+</main>
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div>
+        <p class="empresa" data-llc>Una Vida Sin Medicamentos LLC</p>
+        <h4>Domicilio principal</h4>
+        <address data-direccion>1000 Brickell Avenue, Suite #715, PMB 153, Miami, Florida 33131, Estados Unidos</address>
+        <p style="margin-top:10px">Marca comercial: Sana tu Autoinmune</p>
+      </div>
+      <div>
+        <h4>Legales</h4>
+        <ul>
+          <li><a data-url-privacidad href="https://ezequielracca.com/politicas-privacidad">Política de privacidad</a></li>
+          <li><a data-url-terminos href="https://ezequielracca.com/terminos-condiciones">Términos y condiciones</a></li>
+          <li><a data-url-reembolso href="https://ezequielracca.com/politicas-de-reembolso">Política de reembolso</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><a data-email-link href="mailto:ezequielracca1984@gmail.com"><span data-email>ezequielracca1984@gmail.com</span></a></li>
+          <li><a data-wa-link href="https://wa.me/5493364007472" target="_blank" rel="noopener"><span data-wa>+54 9 336 400-7472</span></a></li>
+          <li>Atención: lunes a viernes, 9 a 18 h (GMT-3)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr-legal">
+      <p>&copy; <span data-anio>2026</span> <span data-llc>Una Vida Sin Medicamentos LLC</span>. Todos los derechos reservados.
+      Sana tu Autoinmune es una marca comercial de <span data-llc>Una Vida Sin Medicamentos LLC</span>, sociedad de responsabilidad
+      limitada constituida en el estado de <span data-estado>Wyoming</span>, Estados Unidos.</p>
+      <p><b>Aviso médico:</b> el contenido de este sitio y los servicios que se ofrecen tienen carácter educativo
+      y nutricional. No constituyen diagnóstico, tratamiento ni prescripción médica, no crean una relación
+      médico-paciente y no reemplazan la consulta con tu médico tratante. Nunca inicies, modifiques ni
+      suspendas una medicación por tu cuenta. Ante una urgencia, acudí al servicio de emergencias de tu país.
+      Los resultados son individuales y varían según cada persona; no se garantizan resultados.</p>
+      <p>Este sitio no está afiliado, patrocinado ni administrado por Meta Platforms, Inc. (Facebook, Instagram),
+      Google LLC ni ninguna otra plataforma publicitaria.</p>
+    </div>
+  </div>
+</footer>
+</div>
+
+<script>
+/* ==========================================================================
+   SANA TU AUTOINMUNE · Datos de la empresa
+   👉 EDITÁ SOLO ESTE BLOQUE (es el mismo en las tres páginas legales).
+   ========================================================================== */
+var LEGAL = {
+  LLC:       'Una Vida Sin Medicamentos LLC',
+  DIRECCION: '1000 Brickell Avenue, Suite #715, PMB 153, Miami, Florida 33131, Estados Unidos',
+  ESTADO:    'Wyoming',
+  EMAIL:     'ezequielracca1984@gmail.com',
+  WHATSAPP:  '+54 9 336 400-7472',
+  SITIO:     'ezequielracca.com',
+  ACTUALIZADO: '9 de septiembre de 2026',
+
+  // Adónde vuelve la persona desde esta página.
+  INICIO_URL: 'https://ezequielracca.com/inicio',
+
+  // URLs de las otras dos páginas legales (para los enlaces del pie).
+  URL_PRIVACIDAD: 'https://ezequielracca.com/politicas-privacidad',
+  URL_TERMINOS:   'https://ezequielracca.com/terminos-condiciones',
+  URL_REEMBOLSO:  'https://ezequielracca.com/politicas-de-reembolso'
+};
+
+(function () {
+  'use strict';
+  var d = document;
+  var raiz = d.getElementById('sta-legal');
+  if (!raiz) return;
+
+  function set(attr, valor) {
+    Array.prototype.forEach.call(raiz.querySelectorAll('[' + attr + ']'), function (n) {
+      if (valor) n.textContent = valor;
+    });
+  }
+  set('data-llc', LEGAL.LLC);
+  set('data-direccion', LEGAL.DIRECCION);
+  set('data-estado', LEGAL.ESTADO);
+  set('data-email', LEGAL.EMAIL);
+  set('data-wa', LEGAL.WHATSAPP);
+  set('data-sitio', LEGAL.SITIO);
+  set('data-fecha', LEGAL.ACTUALIZADO);
+
+  Array.prototype.forEach.call(raiz.querySelectorAll('[data-email-link]'), function (a) {
+    if (LEGAL.EMAIL.indexOf('@') > -1) a.setAttribute('href', 'mailto:' + LEGAL.EMAIL);
+  });
+  Array.prototype.forEach.call(raiz.querySelectorAll('[data-wa-link]'), function (a) {
+    var n = (LEGAL.WHATSAPP || '').replace(/[^0-9]/g, '');
+    if (n) a.setAttribute('href', 'https://wa.me/' + n);
+  });
+
+  var rutas = { 'data-inicio': 'INICIO_URL', 'data-url-privacidad': 'URL_PRIVACIDAD',
+                'data-url-terminos': 'URL_TERMINOS', 'data-url-reembolso': 'URL_REEMBOLSO' };
+  Object.keys(rutas).forEach(function (attr) {
+    Array.prototype.forEach.call(raiz.querySelectorAll('[' + attr + ']'), function (a) {
+      if (LEGAL[rutas[attr]]) a.setAttribute('href', LEGAL[rutas[attr]]);
+    });
+  });
+
+  var y = raiz.querySelector('[data-anio]');
+  if (y) y.textContent = new Date().getFullYear();
+})();
+
+/* --- GHL: quita el relleno y el fondo de los contenedores que lo envuelven --- */
+(function () {
+  function ajustar() {
+    var n = document.getElementById('sta-legal');
+    if (!n) return;
+    var p = n.parentElement;
+    while (p && p !== document.body) {
+      p.style.setProperty('padding', '0', 'important');
+      p.style.setProperty('margin-top', '0', 'important');
+      p.style.setProperty('margin-bottom', '0', 'important');
+      p.style.setProperty('background', 'transparent', 'important');
+      p.style.setProperty('border', '0', 'important');
+      p = p.parentElement;
+    }
+    document.body.style.setProperty('margin', '0', 'important');
+    document.body.style.setProperty('background-color', '#F5F8F9', 'important');
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ajustar);
+  else ajustar();
+  window.addEventListener('load', ajustar);
+  setTimeout(ajustar, 400);
+  setTimeout(ajustar, 1500);
+})();
+</script>
