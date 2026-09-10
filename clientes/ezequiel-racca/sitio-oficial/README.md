@@ -29,17 +29,18 @@ azulado, Instrument Sans + IBM Plex Sans), la misma del embudo *Sana tu Autoinmu
 
 ## Dónde vive cada página
 
-Los archivos llevan el nombre del slug final y todos los enlaces internos son
+Los nombres de archivo vienen de los primeros slugs previstos; las URLs reales
+en GoHighLevel son las de la tabla. Todos los enlaces internos son
 absolutos al dominio del cliente, así funcionan igual pegados en GoHighLevel.
 Las tres páginas legales llevan un enlace "Volver al inicio" arriba del título y
 otro, como botón, al final del documento:
 
 | Archivo | URL final |
 |---|---|
-| `index.html` | https://ezequielracca.com/consultasanaautoinmune |
-| `politicas-privacidad.html` | https://ezequielracca.com/politicas-privacidad |
-| `terminos-condiciones.html` | https://ezequielracca.com/terminos-condiciones |
-| `politicas-de-reembolso.html` | https://ezequielracca.com/politicas-de-reembolso |
+| `index.html` | https://ezequielracca.com/consultasanaautoinmune (la landing VSL hace de inicio) |
+| `politicas-privacidad.html` | https://ezequielracca.com/politicas-de-privacidad |
+| `terminos-condiciones.html` | https://ezequielracca.com/terminos-y-condiciones |
+| `politicas-de-reembolso.html` | https://ezequielracca.com/politicas-de-reembolso-7493 |
 
 ## Versión para pegar en GoHighLevel (`ghl/`)
 
