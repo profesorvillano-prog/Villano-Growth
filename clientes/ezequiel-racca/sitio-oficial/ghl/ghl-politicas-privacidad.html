@@ -10,8 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 
 <style>
-#sta-legal{
-  --deep:#0E2E3E; --deep2:#144155; --teal:#0E7C8B; --teal2:#128FA0;
+#sta-legal{--deep:#0E2E3E; --deep2:#144155; --teal:#0E7C8B; --teal2:#128FA0;
   --cta1:#0C7382; --cta2:#0A6270; --tealw:#E8F4F6; --mint:#2F9E7C; --mintw:#E9F5F0;
   --ground:#F5F8F9; --tint:#EEF4F6; --wh:#FFFFFF;
   --t0:#0D2029; --t1:#2E4650; --t2:#55707B; --t3:#6B858F;
@@ -20,8 +19,7 @@
   --display:'Instrument Sans','IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
   --body:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --ease:cubic-bezier(.22,.61,.36,1);
-  --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
-}
+  --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);}
 #sta-legal *,#sta-legal *::before,#sta-legal *::after{margin:0;padding:0;box-sizing:border-box}
 #sta-legal{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:78px}
 #sta-legal{font-family:var(--body);background:var(--ground);color:var(--t1);line-height:1.65;
@@ -37,23 +35,6 @@
 #sta-legal h4{font-size:1rem;font-weight:600}
 #sta-legal .wrap{width:100%;max-width:1010px;margin:0 auto;padding:0 22px}
 #sta-legal .wrap-n{width:100%;max-width:760px;margin:0 auto;padding:0 22px}
-#sta-legal .sec{padding:56px 0}
-@media(min-width:760px){#sta-legal .sec{padding:78px 0}}
-#sta-legal .sec-alt{background:var(--tint);border-top:1px solid var(--br);border-bottom:1px solid var(--br)}
-#sta-legal .sec-dark{background:var(--deep);color:#CFE1E7}
-#sta-legal .sec-dark h2,#sta-legal .sec-dark h3{color:#fff}
-#sta-legal .center{text-align:center}
-#sta-legal .mark{color:var(--teal)}
-#sta-legal .eyebrow{font-family:var(--display);font-size:.7rem;font-weight:600;letter-spacing:.19em;
-  text-transform:uppercase;color:var(--teal);display:block;margin-bottom:12px}
-#sta-legal .lead{font-size:clamp(1rem,2.5vw,1.07rem);color:var(--t2)}
-#sta-legal .sec-dark .lead{color:#B9D2DA}
-
-#sta-legal /* Barra superior */
-.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--br);padding-top:var(--sat)}
-#sta-legal .nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;
-  min-height:64px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
 #sta-legal .brand{display:inline-flex;align-items:center;gap:10px}
 #sta-legal .brand:hover{text-decoration:none}
 #sta-legal .brand-mk{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--teal);display:grid;place-items:center;flex:none}
@@ -61,12 +42,7 @@
 #sta-legal .logo-txt{font-family:var(--display);font-weight:700;font-size:1.04rem;letter-spacing:.05em;
   color:var(--deep);text-transform:uppercase}
 #sta-legal .logo-txt b{color:var(--teal)}
-#sta-legal .nav-links{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
-#sta-legal .nav-links a{font-size:.88rem;color:var(--t2);font-weight:500}
-#sta-legal .nav-links a:hover,#sta-legal .nav-links a[aria-current="page"]{color:var(--teal);text-decoration:none}
-
-#sta-legal /* Botones */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+#sta-legal .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
   background:linear-gradient(180deg,var(--cta1),var(--cta2));color:#fff;border-radius:var(--r);
   padding:16px 26px;font-family:var(--display);font-weight:700;font-size:1rem;
   box-shadow:0 14px 30px -14px rgba(14,124,139,.6),inset 0 1px 0 rgba(255,255,255,.16);
@@ -74,114 +50,11 @@
 #sta-legal .btn:hover{transform:translateY(-2px);text-decoration:none;
   box-shadow:0 20px 40px -16px rgba(14,124,139,.7),inset 0 1px 0 rgba(255,255,255,.2)}
 #sta-legal .btn:focus-visible{outline:2px solid var(--deep);outline-offset:3px}
-#sta-legal .btn .price{font-weight:600;opacity:.85;font-variant-numeric:tabular-nums}
 #sta-legal .btn-ghost{background:var(--wh);color:var(--deep);border:1px solid var(--br);box-shadow:none}
 #sta-legal .btn-ghost:hover{border-color:var(--teal);color:var(--teal);box-shadow:none}
 #sta-legal .btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 #sta-legal .btn{white-space:nowrap}
-#sta-legal .sec-dark .btn{background:var(--wh);color:var(--deep)}
-#sta-legal .btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-#sta-legal .center .btn-row{justify-content:center}
-#sta-legal .note{font-size:.83rem;color:var(--t2);margin-top:12px}
-#sta-legal .sec-dark .note{color:#93B3BD}
-
-#sta-legal /* Hero */
-.hero{padding:52px 0 44px;position:relative;overflow:hidden}
-#sta-legal .hero::before{content:"";position:absolute;inset:-140px 0 auto;height:520px;pointer-events:none;
-  background:radial-gradient(ellipse 62% 100% at 50% 0%,rgba(14,124,139,.12) 0%,transparent 70%)}
-#sta-legal .hero>*{position:relative}
-#sta-legal .hero .lead{margin-top:16px;max-width:60ch}
-#sta-legal .center .lead{margin-left:auto;margin-right:auto}
-
-#sta-legal /* Tarjetas */
-.grid{display:grid;gap:16px;margin-top:30px}
-#sta-legal .g2{grid-template-columns:1fr}
-#sta-legal .g3{grid-template-columns:1fr}
-@media(min-width:700px){#sta-legal .g2{grid-template-columns:1fr 1fr}#sta-legal .g3{grid-template-columns:repeat(3,1fr)}}
-#sta-legal .card{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);padding:24px 22px;
-  transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
-#sta-legal .card:hover{transform:translateY(-2px);border-color:#C3D8DE;box-shadow:0 18px 40px -28px rgba(13,32,41,.55)}
-#sta-legal .card h3{margin-bottom:8px}
-#sta-legal .card p{font-size:.95rem;color:var(--t2)}
-#sta-legal .card .num{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:var(--tealw);
-  color:var(--teal);font-family:var(--display);font-weight:700;font-size:.78rem;margin-bottom:13px}
-
-#sta-legal /* Ficha de servicio */
-.ficha{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);overflow:hidden;margin-top:30px}
-#sta-legal .ficha-top{padding:24px 22px;border-bottom:1px solid var(--br2);display:flex;flex-wrap:wrap;
-  gap:16px;align-items:flex-start;justify-content:space-between}
-#sta-legal .ficha-price{font-family:var(--display);font-weight:700;font-size:1.7rem;color:var(--deep);
-  font-variant-numeric:tabular-nums;line-height:1.2}
-#sta-legal .ficha-price b{font-weight:700}
-#sta-legal .ficha-price span{display:block;font-size:.72rem;font-weight:600;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--t3);margin-top:6px}
-#sta-legal .ficha dl{display:grid;grid-template-columns:1fr;border-top:1px solid var(--br2)}
-@media(min-width:640px){#sta-legal .ficha dl{grid-template-columns:repeat(2,1fr)}}
-#sta-legal .ficha .row{padding:15px 22px;border-bottom:1px solid var(--br2);display:flex;gap:12px;flex-wrap:wrap}
-#sta-legal .ficha dt{font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--t3);
-  min-width:150px;font-family:var(--display);padding-top:2px}
-#sta-legal .ficha dd{font-size:.95rem;color:var(--t1);flex:1;min-width:180px}
-
-#sta-legal /* Listas de comprobación */
-.checks{display:grid;gap:10px;margin-top:26px}
-@media(min-width:700px){#sta-legal .checks.c2{grid-template-columns:1fr 1fr}}
-#sta-legal .check{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;background:var(--wh);
-  border:1px solid var(--br);border-radius:var(--r);padding:15px 16px}
-#sta-legal .check svg{width:22px;height:22px;stroke:var(--mint);fill:none;stroke-width:2.3;stroke-linecap:round;
-  stroke-linejoin:round;margin-top:2px}
-#sta-legal .check p{font-size:.96rem;color:var(--t1)}
-#sta-legal .check p b{color:var(--t0);font-weight:600}
-#sta-legal .check.no svg{stroke:var(--red)}
-
-#sta-legal /* Equipo */
-.team{display:grid;gap:18px;margin-top:30px}
-@media(min-width:760px){#sta-legal .team{grid-template-columns:1fr 1fr;gap:22px}}
-#sta-legal .member{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);overflow:hidden;
-  display:flex;flex-direction:column}
-#sta-legal .member>img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 22%;background:var(--tint)}
-#sta-legal .member-body{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}
-#sta-legal .member-role{font-family:var(--display);font-weight:600;font-size:.68rem;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--teal)}
-#sta-legal .member-body p{font-size:.94rem;color:var(--t2)}
-#sta-legal .creds{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:14px}
-#sta-legal .creds span{background:var(--tealw);border:1px solid #CFE4E9;color:#0B5F6B;font-size:.72rem;
-  border-radius:5px;padding:5px 10px}
-#sta-legal .creds span.mn{background:var(--mintw);border-color:#CFE6DC;color:#1F6E56;font-weight:600}
-
-#sta-legal /* Chips */
-.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:24px}
-#sta-legal .chips span{background:var(--wh);border:1px solid var(--br);border-radius:6px;padding:8px 14px;
-  font-size:.84rem;color:var(--t1)}
-
-#sta-legal /* Aviso */
-.aviso{margin-top:26px;background:var(--wh);border:1px solid var(--br);border-left:3px solid var(--teal);
-  border-radius:var(--r);padding:18px 20px;font-size:.92rem;color:var(--t2)}
-#sta-legal .aviso b{color:var(--t0);font-weight:600}
-
-#sta-legal /* FAQ */
-.faq{margin-top:26px;display:grid;gap:8px}
-#sta-legal .faq details{background:var(--wh);border:1px solid var(--br);border-radius:var(--r);overflow:hidden}
-#sta-legal .faq details[open]{border-color:var(--teal)}
-#sta-legal .faq summary{list-style:none;cursor:pointer;padding:16px 48px 16px 18px;position:relative;
-  font-family:var(--display);font-weight:600;font-size:.98rem;color:var(--t0)}
-#sta-legal .faq summary::-webkit-details-marker{display:none}
-#sta-legal .faq summary::after,#sta-legal .faq summary::before{content:"";position:absolute;right:19px;top:50%;width:11px;
-  height:1.8px;background:var(--teal);border-radius:2px;transition:transform .25s var(--ease)}
-#sta-legal .faq summary::before{transform:translateY(-50%) rotate(90deg)}
-#sta-legal .faq summary::after{transform:translateY(-50%)}
-#sta-legal .faq details[open] summary::before{transform:translateY(-50%) rotate(0)}
-#sta-legal .faq .a{padding:0 18px 18px;font-size:.94rem;color:var(--t2)}
-
-#sta-legal /* Contacto */
-.datos{display:grid;gap:12px;margin-top:26px}
-@media(min-width:700px){#sta-legal .datos{grid-template-columns:1fr 1fr}}
-#sta-legal .dato{background:var(--wh);border:1px solid var(--br);border-radius:var(--r);padding:16px 18px}
-#sta-legal .dato b{display:block;font-family:var(--display);font-size:.68rem;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--t3);margin-bottom:5px;font-weight:600}
-#sta-legal .dato span,#sta-legal .dato a{font-size:.95rem;color:var(--t1)}
-
-#sta-legal /* Documentos legales */
-.doc{padding:44px 0 60px}
+#sta-legal .doc{padding:44px 0 60px}
 #sta-legal .doc h1{margin-bottom:10px}
 #sta-legal .doc .fecha{font-size:.86rem;color:var(--t3);margin-bottom:26px}
 #sta-legal .doc .box{background:var(--wh);border:1px solid var(--br);border-radius:var(--r-lg);padding:26px 24px}
@@ -204,9 +77,7 @@
   color:var(--t3);margin-bottom:10px}
 #sta-legal .toc ol{margin:0 0 0 18px;display:grid;gap:5px}
 #sta-legal .toc li{font-size:.9rem}
-
-#sta-legal /* Pie */
-.ftr{background:var(--wh);border-top:1px solid var(--br);padding:40px 0 calc(34px + var(--sab))}
+#sta-legal .ftr{background:var(--wh);border-top:1px solid var(--br);padding:40px 0 calc(34px + var(--sab))}
 #sta-legal .ftr-grid{display:grid;gap:26px}
 @media(min-width:760px){#sta-legal .ftr-grid{grid-template-columns:1.3fr 1fr 1fr}}
 #sta-legal .ftr h4{font-family:var(--display);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
@@ -218,14 +89,14 @@
 #sta-legal .ftr .empresa{font-family:var(--display);font-weight:700;font-size:1rem;color:var(--deep);margin-bottom:8px}
 #sta-legal .ftr-legal{margin-top:28px;padding-top:20px;border-top:1px solid var(--br2);font-size:.78rem;color:var(--t3)}
 #sta-legal .ftr-legal p+p{margin-top:10px}
-
 #sta-legal .volver{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:600;
   font-size:.85rem;color:var(--teal);margin-bottom:20px}
 #sta-legal .volver:hover{text-decoration:none;color:var(--deep)}
 #sta-legal .volver svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 #sta-legal .volver-pie{margin-top:30px;padding-top:26px;border-top:1px solid var(--br);text-align:center}
 #sta-legal .volver-pie p{font-size:.88rem;color:var(--t2);margin-bottom:14px}
-@media(prefers-reduced-motion:reduce){#sta-legal *{animation:none!important;transition:none!important}#sta-legal{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){#sta-legal *{animation:none!important;transition:none!important}
+#sta-legal{scroll-behavior:auto}}
 
 #sta-legal .lgl-hdr{background:var(--wh);border-bottom:1px solid var(--br);padding:calc(18px + var(--sat)) 0 18px}
 #sta-legal .lgl-hdr .brand{display:inline-flex;align-items:center;gap:10px}
