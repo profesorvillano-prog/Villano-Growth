@@ -50,7 +50,8 @@ enlazar directo desde la landing VSL:
 - `ghl/ghl-politicas-privacidad.html`
 - `ghl/ghl-terminos-condiciones.html`
 - `ghl/ghl-politicas-de-reembolso.html`
-- `ghl/pie-landing-vsl.html` — pie de la landing VSL: reemplaza el `<footer class="ftr">`
+- `ghl/landing-vsl.html` — la landing VSL completa, ya con el pie nuevo integrado.
+- `ghl/pie-landing-vsl.html` — solo el pie, si preferís reemplazarlo a mano: reemplaza el `<footer class="ftr">`
   de la landing por uno con la razón social, el domicilio y los tres enlaces legales.
 
 Diferencias con las de la raíz:
