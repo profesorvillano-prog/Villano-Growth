@@ -4,16 +4,12 @@ Arma el cuerpo de la peticion a Anthropic que va pegado en el modulo 3
 del escenario [SETTER] Marcelo de Make.
 
 Uso:
-    python3 build.py                          -> Paula + Opus 5 (recomendado)
-    python3 build.py paula claude-haiku-4-5   -> Paula + Haiku (5x mas barato)
-    python3 build.py marcelo                  -> el bot habla como Marcelo
-    python3 build.py completo                 -> Marcelo + fuentes crudas
+    python3 build.py                            -> Opus 5
+    python3 build.py marcelo claude-sonnet-5    -> el que esta en produccion
+    python3 build.py completo                   -> ademas mete fuentes/ crudas
 
-Personas:
-    paula    CEREBRO-PAULA.md    asistente que califica y agenda. No responde
-                                 preguntas tecnicas: las usa de puente a la consulta.
-    marcelo  CEREBRO-MARCELO.md  el bot es Marcelo en primera persona.
-    completo Marcelo + todo el texto de fuentes/ (libros y transcripciones).
+El cerebro vive en CEREBRO-MARCELO.md: primera persona, sin presentarse, sin
+decir nunca que es Marcelo. Lleva a la pagina de la consulta, no al link de pago.
 
 Genera:
     salida/cuerpo-modulo3.json  -> se copia entero al campo "Request content"
@@ -22,11 +18,12 @@ Genera:
 import json, os, sys, glob
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-MODO = (sys.argv[1] if len(sys.argv) > 1 else "paula").lower()
+MODO = (sys.argv[1] if len(sys.argv) > 1 else "marcelo").lower()
 MODELO = sys.argv[2] if len(sys.argv) > 2 else "claude-opus-5"
 
 ESTADOS = ["nuevo", "calificando", "mecanismo_explicado", "fotos_pedidas",
-           "precio_dado", "cierre_propuesto", "quiere_agendar", "derivado_humano", "frio"]
+           "pagina_enviada", "precio_dado", "cierre_propuesto", "quiere_agendar",
+           "derivado_humano", "frio"]
 ACCIONES = ["responder", "cerrar_consulta", "derivar_humano"]
 CAMPOS = ["nombre_persona", "nombre_perro", "edad_perro", "sintoma", "come_hoy", "ya_intento"]
 
@@ -34,7 +31,7 @@ def leer(p):
     with open(p, encoding="utf-8") as f:
         return f.read().strip()
 
-ARCHIVO = "CEREBRO-PAULA.md" if MODO == "paula" else "CEREBRO-MARCELO.md"
+ARCHIVO = "CEREBRO-MARCELO.md"
 system = leer(os.path.join(BASE, ARCHIVO))
 
 if MODO == "completo":

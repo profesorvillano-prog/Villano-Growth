@@ -311,3 +311,87 @@ modulo compartido entre los dos clientes.
 El store nuevo arranca vacio. Las conversaciones de prueba que vivian en el store
 de Cool Drive no se migraron y no hacia falta: los tres escenarios estaban
 apagados y no habia ninguna conversacion real en curso.
+
+---
+
+## El bot dejo de ser Paula (11 sep 2026)
+
+Marcelo pidio sacar la persona de Paula: la gente quiere hablar con **el**, y una
+asistente que se presenta en cada conversacion le restaba. El cerebro pasa a
+**primera persona, como el veterinario**, con tres reglas que no se pueden tocar:
+
+1. **Nunca se presenta.** Ni con TURNOS en 0. Nada de *soy*, nada de *del equipo
+   de*. Abre por el caso, o con un Hola pelado si la persona saludo.
+2. **Nunca afirma ser Marcelo.** No escribe *soy Marcelo*, no firma con su nombre,
+   no dice *te habla el doctor*.
+3. **Si le preguntan directo, no miente.** Ante un *hablo con el doctor?* o un
+   *eres un bot?* contesta en una linea que los mensajes los lleva el equipo y que
+   el caso lo ve Marcelo en la videollamada, y sigue con el caso.
+
+La tercera es la que protege el negocio. Dejar que alguien crea que hablo con el
+veterinario y descubrirlo despues de pagar es lo unico que no se arregla.
+
+El archivo se llama ahora **`CEREBRO-MARCELO.md`** (antes `CEREBRO-PAULA.md`). El
+`CEREBRO-MARCELO.md` viejo, que tenia el catalogo completo de productos de 27 a
+497 dolares, quedo archivado en `cerebro/archivo/` porque contradice la estrategia
+de un solo producto.
+
+## El CTA dejo de ser el link de pago y paso a ser la pagina
+
+El bot no estaba cerrando tickets. El link de pago llegaba demasiado pronto y
+demasiado seco. Ahora la escalera termina en la pagina:
+
+**https://salchichapro.com/consultadachshund**
+
+El orden completo, y no se salta ningun paso:
+
+| Paso | Que pasa |
+|---|---|
+| Si #1 | El mecanismo le hace sentido |
+| Si #2 | Lo que necesita es el numero exacto para SU perro |
+| Si #3 | Quiere saber como se resuelve |
+| Descripcion | La consulta, en primera persona y **sin precio** |
+| **Pagina** | El link, amarrado a SU problema y mandando al video |
+| ~1 hora | El cierre, si no contesto |
+| Link de pago | Solo despues de un si claro |
+
+**La pagina nunca va sola.** Va con tres partes en dos lineas: el problema de esa
+persona con sus palabras, que vea el video primero, y el link. Un *aca tienes la
+info* a secas es lo mismo que no mandarla.
+
+**El precio ya no lo dice el bot salvo que se lo pregunten.** Esta en la pagina.
+
+## El cierre a la hora: escenario `7371151`
+
+Pieza nueva. Corre **cada 15 minutos** y busca en `setter_marcelo` los registros
+que cumplen todo esto a la vez:
+
+- `estado` = `pagina_enviada`
+- `pausado` = false
+- `pagina_enviada_at` entre 35 minutos y 3 horas atras
+- `ultimo_mensaje_at` de hace mas de 35 minutos (si contesto recien, no entra)
+- `ultimo_mensaje_at` de hace menos de 23 horas (ventana de Meta)
+
+Claude escribe un mensaje de cierre que retoma el caso, menciona el video **sin
+volver a mandar el link**, y hace una sola pregunta. Despues marca el registro
+como `cierre_propuesto`, que es lo que evita que se dispare dos veces.
+
+Nunca manda el link de pago: ese sale en la conversacion en vivo, cuando dicen
+que si.
+
+**Esta creado y apagado.** Hay que encenderlo a mano en Make.
+
+### Lo que hubo que tocar para que esto funcione
+
+| Donde | Cambio |
+|---|---|
+| Estructura de datos `552700` | Campo nuevo `pagina_enviada_at` (fecha) |
+| `7035201` modulo 7 | Guarda `pagina_enviada_at` la primera vez que el estado es `pagina_enviada`, y despues lo conserva |
+| `7035201` modulo 12 | `pagina_enviada` mueve el trato a la etapa de propuesta |
+| `7035201` modulo 30 | El mensaje seguro pasa a primera persona |
+| `build.py` | Estado nuevo `pagina_enviada` en el esquema, y el modo `paula` ya no existe |
+| `7035204` | El seguimiento de 18-23h tambien habla en primera persona |
+
+La estructura `552700` la comparte el data store de Cool Drive (`173778`), asi que
+el campo se agrego **sumando**, sin tocar nada de lo que ya habia. Los registros
+siguen separados, que era lo importante.
