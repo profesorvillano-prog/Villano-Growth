@@ -12,6 +12,13 @@
 
 ---
 
+> **Arquitectura objetivo:** las 17 fallas de este documento tienen su arreglo
+> asignado en [`Rediseno-Workflows-v2.md`](./Rediseno-Workflows-v2.md)
+> (26 workflows → 11, origen de la lead como campo del contacto, pipeline nuevo
+> del closer, Slack por función y métricas por origen).
+
+---
+
 ## 1. Inventario de workflows (26)
 
 ### Familia A — Pipeline Closer (creados 25-08, sesión "pipeline unificado" con Anaís)

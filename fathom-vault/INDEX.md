@@ -1,16 +1,16 @@
 # Fathom Vault — Índice
 
-**242 transcripciones** de clases, mentorías y sesiones de estrategia de Sebastián Escudero (Profesor Villano).
+**243 transcripciones** de clases, mentorías y sesiones de estrategia de Sebastián Escudero (Profesor Villano).
 
-**Periodo:** 1 de septiembre de 2025 → 31 de agosto de 2026 (12 meses).
+**Periodo:** 1 de septiembre de 2025 → 4 de septiembre de 2026.
 **Fuente:** grabaciones de Fathom.
 
 | Categoría | Transcripciones |
 |---|---|
 | [Clases y lives grupales](#clases-grupales) | 42 |
 | [Mentorías 1-a-1 con alumnos](#mentorias-alumnos) | 72 |
-| [Sesiones de estrategia con clientes](#sesiones-clientes) | 128 |
-| **Total** | **242** |
+| [Sesiones de estrategia con clientes](#sesiones-clientes) | 129 |
+| **Total** | **243** |
 
 Además se revisaron y descartaron **170 grabaciones** que no son clases (ver `EXCLUIDOS.md`).
 
@@ -201,10 +201,14 @@ Sesiones individuales recurrentes enseñando marketing y negocio a un alumno (Gi
 ---
 
 <a id="sesiones-clientes"></a>
-## Sesiones de estrategia con clientes  ·  128 transcripciones
+## Sesiones de estrategia con clientes  ·  129 transcripciones
 
 Trabajo de estrategia de marketing con clientes de la agencia: médicos, coaches y emprendedores.
 
+
+### 2026-09
+
+- **2026-09-04** — [Japi Eaters — Dos números de WhatsApp y reasignación del guion de mensajes](sesiones-clientes/2026-09-04--japi-dos-numeros-y-guion-de-whatsapp.md)
 
 ### 2026-08
 
