@@ -861,3 +861,69 @@ Sebastián creó el workflow que corta el follow up cuando el lead está en
 **Inscritos** y **Won**. Con eso el caso Antonia queda cerrado por los dos lados:
 GHL ya no dispara, y el seguimiento de Make tiene su propio filtro por
 oportunidad ganada desde el 9 de septiembre.
+
+---
+
+## El follow up que le escribía a los que ya habían pagado (2026-09-13)
+
+Tres clientes en cinco días recibieron el mismo mensaje después de pagar:
+
+> Hola [nombre], cómo estás? Aún te interesa saber sobre el curso y nuestra escuela?
+
+Antonia el 9, Mati el 11, Alex el 13. Alex contestó *"Ya está inscrito gracias"* —
+el cliente corrigiendo al sistema.
+
+**No era el bot.** Los tres mensajes traen `source: "workflow"` en la API, y los
+tres salieron exactamente 48 horas después del último mensaje entrante. Era el
+workflow de GHL `[SEGUIMIENTO] Fuera de ventana`.
+
+### La causa real no era el filtro que faltaba, era dónde estaba
+
+El workflow sí tenía un filtro de etiquetas. Estaba **antes** del Wait de 48
+horas:
+
+```
+Condition          ← lee las etiquetas AQUÍ
+   ↓
+Esperar 48h
+   ↓
+Enviar Follow Up   ← manda sin volver a mirar
+```
+
+GHL evalúa la condición cuando el contacto entra, no cuando sale el mensaje. Alex
+entró el 11 a las 11:57 siendo un lead normal, pasó el filtro, y **mientras
+esperaba las 48 horas pagó**. El 13 a las 11:57 el mensaje salió igual, porque la
+revisión ya se había hecho dos días antes.
+
+La corrección fue mover la condición **debajo** del Wait. Ahí lee las etiquetas
+del momento en que el mensaje va a salir, no las de hace dos días.
+
+### AND, no OR
+
+La otra trampa. Las condiciones están escritas en negativo — *Does not include
+bot-off*, *Does not include alumno* — y la rama lleva a Enviar. Con esa forma,
+el conector correcto es **AND**.
+
+Con OR, alguien que tiene solo `bot-off` cumpliría *"no tiene atencion-humana"* y
+*"no tiene alumno"*, y bastaría una verdadera para que el mensaje saliera. El OR
+ahí no pregunta si tiene alguna de las malas: pregunta si le falta alguna, y a
+casi todos les falta alguna.
+
+La regla: **con condiciones en negativo, el AND es el que aprieta.** Es al revés
+de la intuición. Sumar condiciones con AND suma requisitos y resta gente.
+
+La lógica *"tiene bot-off O tiene alumno → no le hablo"* también es válida, pero
+exige operadores en positivo (*Does include*) y la rama yendo a END, con el *None*
+enviando. Las dos son correctas; la combinación que rompe todo es **Does not
+include + OR**.
+
+### Cómo quedó
+
+Las cuatro etiquetas — `bot-off`, `atencion-humana`, `alumno`, `pendiente-equipo`
+— en **un solo segmento**, unidas con AND. Segmentos separados no sirven: GHL une
+los segmentos entre sí con OR, así que separarlas reintroduce el mismo error.
+
+### Lo que queda
+
+`[REACTIVACIÓN] Leads antiguos` necesita el mismo tratamiento, y es el que va a
+mover 600 contactos. Condición **después** del wait, no antes.
