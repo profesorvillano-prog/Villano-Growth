@@ -5,9 +5,10 @@
 > rediseño: segundo número de WhatsApp, Slack multi-participante y métricas.
 >
 > **Alcance:** la API pública de GHL expone la lista de workflows (nombre,
-> estado, versión, fechas) pero **no los pasos internos** (triggers, mensajes,
-> esperas, condiciones). Los pasos hay que capturarlos desde la interfaz — ver
-> la sección [Pendiente: captura de pasos internos](#pendiente-captura-de-pasos-internos).
+> estado, versión, fechas) pero **no los pasos internos**. Los pasos de los 17
+> workflows de las carpetas `[ADS]` y `[ORG]` están en
+> **`Workflows-Pasos-Internos.md`** (relevamiento Cowork del 24-08). El cruce
+> entre ambos documentos está en §6 (fallas) y §8 (deltas y verificaciones).
 
 ---
 
@@ -175,16 +176,20 @@ cada cambio de proveedor de envío habría que hacerlo en 3+ workflows.*
 ### 🔴 F-2 · Ventana de confirmación rota por la regla de 24h de WhatsApp
 Falla confirmada por el equipo (sesión 25-08, Anaís): *"si alguien hace clic
 en confirmar luego de cierto tiempo, ya no se activan las automatizaciones"*.
-El botón de confirmar/cancelar deja de disparar el workflow cuando la sesión
-de WhatsApp expira. Hoy se parcha con insistencia manual de Anaís. El diseño
-acordado (timeout ~30-60 min + follow-up "aprieta el botón") depende de pasos
-internos que hay que verificar en B3/C3.
+**Mecanismo confirmado en los pasos:** `[ADS] 3` y `[ORG] 3` envían la
+plantilla `v2_confirmar_jose` con branches (`Confirmar` / `Time Out` /
+`Undelivered`); en Time Out se etiqueta `sin-confirmar` y se avisa a Slack,
+y un clic tardío en "Confirmar" ya no dispara la rama. Hoy se parcha con
+insistencia manual de Anaís.
 
-### 🟠 F-3 · `4.1 Cita Cancelada → frenar` congelado desde el 26-06
-Toda la cadena se retocó el 25-08 menos los dos `4.1` (ADS y ORG). Si la
-unificación cambió etapas o tags, el freno de cancelación puede estar apuntando
-a etapas del pipeline viejo → riesgo de **seguir enviando recordatorios a
-citas canceladas** (la falla más visible para la lead).
+### 🟠 F-3 · `4.1 Cita Cancelada → frenar` solo frena los recordatorios
+Los pasos muestran que ambos `4.1` hacen una sola cosa: sacar al contacto del
+workflow `4 · Recordatorios`. **No frenan la cadena de confirmación, no
+mueven la oportunidad ni etiquetan la cancelación** → una cita cancelada queda
+en su etapa activa (`Nueva Agenda` / `Pre-Llamada`) hasta que alguien la mueva
+a mano. Además difieren entre sí: `[ADS] 4.1` filtra `Event type = Any` y
+`[ORG] 4.1` filtra `Normal`. Siguen congelados desde el 26-06 mientras el
+resto de la cadena se editó el 25-08.
 
 ### 🟠 F-4 · `Asignación Anaís/Rafa [Pipelines]` anteriores a la unificación
 Creados en mayo contra la estructura de pipelines vieja, sin tocar desde el
@@ -217,6 +222,58 @@ Dos páginas de destino distintas tras agendar (ver §5). Si es intencional
 conviven con los nuevos. Riesgo de que un workflow viejo escriba en uno y los
 reportes lean del otro.
 
+### Fallas adicionales confirmadas con los pasos internos (relevamiento 24-08)
+
+### 🔴 F-10 · Nodo con error en `[ADS] 1`: oportunidad sin etapa de destino
+El nodo `Crear en Descalificada` (rama "No invierte") crea la oportunidad en
+el pipeline `②` con el campo *pipeline stage* **vacío** y marcado con error en
+el canvas. Los equivalentes orgánicos sí apuntan a `Descalificada`. `[ADS] 1`
+se editó el 25-08 (v53) después del relevamiento → **verificar si se corrigió**.
+
+### 🔴 F-11 · Esperas de 9999 días reteniendo 215 contactos
+`Envío [Schedule]` (206 activos) y `Envío [Purchase]` (9 activos) terminan en
+`Wait 9999 days`: los contactos quedan dentro para siempre. Consecuencia
+práctica: si el workflow no permite re-entrada, una lead que re-agenda y
+re-confirma **no vuelve a emitir el evento Schedule a Meta** — la campaña
+optimiza con datos incompletos. Reemplazar por Remove from workflow / Goal.
+
+### 🔴 F-12 · `[ORG] 2 · Agenda + Ghost` sin disparador `tier-bronce`
+El de ADS dispara con silver, gold **y bronce**; el orgánico solo con silver y
+gold. Los leads bronce orgánicos **nunca entran al seguimiento ghost** — se
+califican, se les crea la oportunidad y nadie les escribe si no agendan.
+
+### 🟠 F-13 · Copy de ADS en el flujo orgánico
+`[ORG] 2` envía la plantilla `ghost_agenda_ads`, la misma del flujo de pago.
+Si el mensaje menciona el anuncio o el contexto de ads, a la lead orgánica le
+llega un mensaje incoherente con su recorrido.
+
+### 🟠 F-14 · Rama "No toma decisión" duplicada y sin efecto
+En `[ADS] 3` y `[ORG] 3`, las ramas `Branch` ("decide sola") y `None` del
+if/else `No toma decisión` ejecutan **secuencias idénticas con la misma
+plantilla**. La pregunta del survey sobre quién decide no cambia nada del
+flujo, y el tag `decisor-tercero` existe en la subcuenta pero **ningún
+workflow lo escribe**. O se diferencia el tratamiento (el motivo original de
+la rama) o se elimina la duplicación.
+
+### 🟠 F-15 · El handoff borra todas las oportunidades del pipeline de origen
+`[Handoff] 5` (ex `[ADS] 5`) y el difunto `[ORG] 5` crean la oportunidad del
+closer y luego **borran todas las oportunidades del contacto** en el pipeline
+setter. Se pierde el rastro del recorrido pre-closer y, como advierte el
+relevamiento, el borrado corre igual aunque se renombre o reordene el pipeline.
+Con las métricas que quieres montar, este borrado destruye el histórico de
+conversión por etapa.
+
+### 🟡 F-16 · Purchase a Meta con valor fijo
+`Envío [Purchase]` manda `value: 1.500 USD` hardcodeado, sin leer
+`contact.monto_propuesto` ni el valor real de la oportunidad. Meta optimiza
+con un ticket ficticio (hay ventas de distinto monto y cuotas).
+
+### 🟡 F-17 · Filtros asimétricos en confirmación
+`[ADS] 3` exige tag `lead-ads` además del calendario; `[ORG] 3` y ambos `4`
+filtran solo por calendario. El enrutamiento real depende de qué link de
+calendario recibió la lead — funciona, pero cualquier lead que agende por el
+calendario "equivocado" ejecuta el flujo del otro origen sin aviso.
+
 ---
 
 ## 7. Insumos para el rediseño planeado
@@ -233,14 +290,22 @@ reportes lean del otro.
   mezcladas en el mismo hilo de GHL).
 
 ### Slack multi-participante
-- Hoy solo `[Handoff] 5` notifica a Slack (v31, muy iterado — es el corazón
-  operativo). Con la llegada del director comercial (Seba Cachele) y la
-  estructura Valen/Rafa/Anaís, los candidatos a notificación son:
-  nueva agenda (por origen), no-show, reserva pagada, pago fallido, y el
-  resumen del lead al pasar a closer (`contact.resumen_lead`).
-- Diseño sugerido: un workflow de notificación por evento apuntando a
-  canales por función (#ventas-agendas, #ventas-cierres, #alertas-pagos) en
-  vez de mensajes a personas, para que escalar participantes no requiera
+- Slack ya está integrado en casi toda la cadena (cuenta `Japi Eaters -
+  japieaters`). Canales en uso según los pasos: `1-leads-bronce`,
+  `2-leads-silver`, `3-leads-gold`, `4-nuevas-agendas`,
+  `5-llamadas-preparacion`, `6-confirmaciones-llamadas`,
+  `5-confirmaciones-llamadas`, `1-leads-conflicto`, `leads-conflictos`,
+  más **DMs directos** a la setter y al closer.
+- Problemas para multi-participante: hay **dos pares de canales duplicados o
+  casi** (`1-leads-conflicto` privado vs `leads-conflictos` público;
+  `6-confirmaciones-llamadas` público vs `5-confirmaciones-llamadas` privado
+  — este último era del difunto `[ORG] 5`), mezcla de canales públicos y
+  privados para lo mismo, y los avisos críticos al closer van por **DM**
+  (35 min antes de la llamada), que no escala a un equipo con director
+  comercial: nadie más lo ve.
+- Rediseño sugerido: consolidar a un set único de canales por función,
+  eliminar los duplicados, y convertir los DMs en menciones dentro de canal
+  para que Seba (director comercial) y quien se sume tengan visibilidad sin
   tocar workflows.
 
 ### Métricas
@@ -254,26 +319,38 @@ reportes lean del otro.
 
 ---
 
-## Pendiente: captura de pasos internos
+## 8. Deltas entre el relevamiento (24-08) y el estado actual (13-09)
 
-La API no expone los pasos; hay que capturarlos desde la interfaz de GHL con
-Cowork (sesión local con navegador). Prompt sugerido:
+El relevamiento de pasos es **un día anterior** a la unificación del pipeline
+con Anaís (25-08). Cruzando IDs contra la API de hoy:
 
-> Entra a Go High Level, subcuenta Japi Eaters, sección Automation. Para cada
-> workflow publicado (son 25), documenta en markdown: (1) trigger(s) exactos
-> con sus filtros, (2) cada paso en orden — tipo de acción, canal/proveedor de
-> envío, texto completo de mensajes, duración de esperas, condiciones de cada
-> rama if/else, etiquetas/campos que escribe, movimientos de pipeline con
-> etapa exacta, webhooks con URL, (3) configuración de re-entrada (allow
-> re-entry) y stop-on-response. Presta atención especial a: `[ADS] 3` y
-> `[ORG] 3` (botón confirmar/cancelar y su timeout), los dos `4.1` (a qué
-> etapas apuntan), `Asignación Anaís/Rafa` (si referencian el pipeline
-> obsoleto) y `[Handoff] 5` (canal y formato de Slack). Guarda el resultado
-> como `clientes/japi-eaters/docs/Workflows-Pasos-Internos.md` en el repo
-> Villano-Growth.
+| Cambio | Detalle |
+|---|---|
+| **Renombrado** | `[ADS] 5 · Mover de Setter-ADS → Closer + Slack` es hoy `[Handoff] 5 · Mover de Whatsapp -> Closer + Slack` (mismo ID `8ab3d347…`, v23→v31: se editó bastante tras el relevamiento) |
+| **Eliminado** | `[ORG] 5 · Mover de Setter-ADS → Closer + Slack` (`c0eead4d…`) ya **no existe**. Presumiblemente `[Handoff] 5` absorbió el caso orgánico |
+| **Creados después (sin pasos documentados)** | `1 · Asistió`, `2 · No-Show + recuperación`, `3 · Re-agendada`, `4 · Reserva pagada`, `IG – Nuevo Seguidor (ManyChat Webhook)` — todos del 25-08 — y el draft del 02-09 |
+| **Nunca relevados** | `Asignación Anaís/Rafa [Pipelines]`, `Envío de Onboarding - Venta High Ticket`, `[General] WF-01 Entrega de Regalo` (este quedó fuera de alcance a propósito) |
+| **Editados después del relevamiento** | `[ADS] 1/3/4`, `[ORG] 1/2/3/4`, `[SETTER-ORG] 1`, `[Handoff] 5`, los 4 de CAPI — los pasos documentados pueden haber cambiado en los puntos que tocó la unificación |
 
-Cuando ese archivo exista, cruzarlo con esta auditoría cierra el diagnóstico
-completo (pasos + fallas) y habilita el rediseño.
+**Cobertura actual: 16 de los 25 workflows publicados tienen pasos
+documentados** (con la salvedad de las ediciones posteriores).
+
+## 9. Verificaciones pendientes (sesión Cowork corta y dirigida)
+
+Ya no hace falta relevar todo de nuevo — solo esto:
+
+1. **F-10**: ¿el nodo `Crear en Descalificada` de `[ADS] 1` sigue sin etapa
+   (el edit del 25-08 lo arregló o no)?
+2. **[Handoff] 5** (8 versiones nuevas): ¿sus triggers ahora incluyen el caso
+   orgánico (reemplazo del difunto `[ORG] 5`)? ¿Sigue borrando todas las
+   oportunidades del pipeline de origen (F-15)?
+3. **¿Los flujos `[ORG]` siguen escribiendo en el pipeline `[SETTER - ORG]
+   Formación`** o ya se repuntearon al pipeline `②` unificado? (En la sesión
+   del 25-08 ya entraban leads org al pipeline nuevo.)
+4. **Los 9 workflows sin pasos**: relevar Familia A (los 4 del closer),
+   `IG – Nuevo Seguidor`, `Asignación Anaís/Rafa`, `Envío de Onboarding` y
+   `WF-01 Regalo` con el mismo formato de `Workflows-Pasos-Internos.md`.
+5. **El draft del 02-09**: abrirlo, ver qué es, nombrarlo o borrarlo (F-6).
 
 ---
 
