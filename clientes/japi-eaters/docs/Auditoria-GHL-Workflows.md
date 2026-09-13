@@ -281,6 +281,60 @@ filtran solo por calendario. El enrutamiento real depende de qué link de
 calendario recibió la lead — funciona, pero cualquier lead que agende por el
 calendario "equivocado" ejecuta el flujo del otro origen sin aviso.
 
+### 🔴 F-18 · Tráfico pagado entrando por la encuesta orgánica → Meta no recibe la conversión
+
+**Verificado con datos el 13-09 vía API.** Las tres encuestas están separadas,
+pero el tráfico no: la encuesta `[SURVEY - ORG]` (`99dHSXOPhwj6kFpE7TOy`),
+alojada en `japieaters.app/postulacionexitoenalimentacion`, recibe tráfico de
+anuncios.
+
+De las **60 postulaciones** de esa encuesta (14-08 → 13-09):
+
+| Señal | Cantidad |
+|---|---|
+| Con `utm_source=Facebook` en la sesión | **20** |
+| Con huella de campaña (`utm_campaign`/`utm_id`/`fbclid`) | **38** |
+| Sin ninguna huella de Facebook | **0** |
+
+Campañas identificadas en esas postulaciones: `[CBO] Escalado ÉxiTO` (12),
+`[ABO] Testeo ADS Éxito` (6), `[CBO] RMKT Pixel Web - IG - FB` (2).
+
+*(La encuesta de ADS sí se usa y funciona: 297 postulaciones, todas desde
+`japieaters.app/postulacionexito-884187`. El problema no es que falte la
+encuesta de ads, es que la orgánica también recibe pagado.)*
+
+**Por qué cuesta dinero, no solo reportes:** esas leads quedan con `lead-org` y
+sin `lead-ads`. Los cuatro workflows de Meta CAPI filtran por `lead-ads` /
+`survey-ads` → **Meta nunca recibe sus eventos** `Lead`, `Schedule` ni
+`Purchase`. La campaña optimiza sobre una fracción de las conversiones reales y
+el CPA reportado está inflado. Además esas leads entran al pipeline obsoleto
+`[SETTER - ORG] Formación` en vez del unificado, y el rendimiento del orgánico
+se ve mejor de lo que es a costa del de anuncios.
+
+**Arreglo:** el campo `origen` se deriva de la **atribución UTM primero** y de
+la encuesta después, y los workflows de CAPI pasan a filtrar por `origen = ads`
+(ver `Rediseno-Workflows-v2.md` §2.1 y workflow `09`). En paralelo, revisar por
+qué las campañas mandan tráfico a la página de postulación orgánica.
+
+### 🔴 F-5 (confirmado con datos) · Oportunidades huérfanas en el pipeline obsoleto
+
+Consultado el 13-09: hay **4 oportunidades abiertas** en la etapa
+`Llamada Confirmada` del pipeline obsoleto `[SETTER - ORG] Formación`, dos de
+ellas con `reserva-pagada`. Tres de las cuatro tienen el tag `en-closer`, o sea
+**sí llegaron al closer y quedaron duplicadas en dos pipelines**: el borrado que
+hacía `[ORG] 5` desapareció con ese workflow y `[Handoff] 5` borra únicamente en
+el pipeline `②`. Cualquier métrica agregada las cuenta dos veces.
+
+La cuarta (`Mikaela A.`) tiene `reserva-pagada` y `asistio` pero **no** tiene
+`en-closer`: es el caso a revisar a mano — pagó reserva sin pasar por el handoff.
+
+Dos hallazgos laterales del mismo dato:
+- Una misma contacta acumula tags contradictorios (`tier-bronce` **y**
+  `tier-silver`, `lead-org` **y** `lead-setter-org`), porque al recalificarse
+  nadie quita el tier anterior.
+- Todas muestran `effectiveProbability: 72.73` — la probabilidad placeholder de
+  F-7, en una etapa que debería valer ~85 %.
+
 ---
 
 ## 7. Insumos para el rediseño planeado
@@ -348,9 +402,11 @@ Ya no hace falta relevar todo de nuevo — solo esto:
 
 1. **F-10**: ¿el nodo `Crear en Descalificada` de `[ADS] 1` sigue sin etapa
    (el edit del 25-08 lo arregló o no)?
-2. **[Handoff] 5** (8 versiones nuevas): ¿sus triggers ahora incluyen el caso
-   orgánico (reemplazo del difunto `[ORG] 5`)? ¿Sigue borrando todas las
-   oportunidades del pipeline de origen (F-15)?
+2. ~~**[Handoff] 5**: ¿cubre el caso orgánico?~~ **Respondido con datos
+   (13-09):** sí lo cubre —las leads orgánicas confirmadas reciben `en-closer`—
+   pero **no limpia el pipeline de origen**, así que quedan duplicadas (ver F-5
+   confirmado). Queda por ver en la interfaz si el borrado sigue apuntando solo
+   al pipeline `②`.
 3. **¿Los flujos `[ORG]` siguen escribiendo en el pipeline `[SETTER - ORG]
    Formación`** o ya se repuntearon al pipeline `②` unificado? (En la sesión
    del 25-08 ya entraban leads org al pipeline nuevo.)

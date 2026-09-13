@@ -41,28 +41,49 @@ cambia (canal de Slack y responsable).
 
 ### 2.1 El campo que define quién es quién
 
-**Campo nuevo:** `contact.origen` — tipo *Single Options*.
+**Campo creado** (13-09-2026): `contact.origen` — *Single Options*, ID
+`6BPeLlDeqrGMVxki3Q3c`, opciones `ads` · `org-bio` · `org-setter`.
 
-| Valor | Significa | Se escribe cuando |
-|---|---|---|
-| `ads` | Vino de anuncios de Meta | Envía `[SURVEY - ADS] Postulación ÉxiTO` |
-| `org-bio` | Orgánico del link de la biografía (sin intervención humana) | Envía `[SURVEY - ORG] Postulación ÉxiTO` |
-| `org-setter` | Orgánico seteado por DM (Valen) | Envía `[SURVEY - ORG SETTER] Postulación ÉxiTO` |
+⚠️ **No se puede derivar de la encuesta.** Era el plan original, pero los datos
+lo desmienten: la encuesta `[SURVEY - ORG]` recibe tráfico pagado (ver **F-18**
+en la auditoría — al menos 20 de 60 postulaciones del último mes llegaron con
+`utm_source=Facebook`, y 38 traen huella de campaña). Si el origen se dedujera
+de la encuesta, un tercio de los leads de anuncios seguiría contándose como
+orgánico — que es exactamente lo que pasa hoy.
 
-Las tres encuestas **ya existen y ya están separadas** — la señal del origen ya
-es limpia en la entrada; lo que faltaba era guardarla en el contacto. Reglas:
+**Regla de derivación (en este orden, en el workflow `01`):**
 
+1. Si `contact.utm_source` contiene `Facebook`/`Instagram`/`fb`/`ig`
+   **o** `contact.utm_campaign` no está vacío → **`ads`**
+   *(manda la atribución, no la encuesta)*
+2. Si no, y la encuesta es `[SURVEY - ORG SETTER]` → **`org-setter`**
+3. Si no → **`org-bio`**
+
+Los campos `contact.utm_source` y `contact.utm_campaign` **ya existen** en la
+subcuenta, así que la regla se puede armar sin crear nada más.
+
+Reglas de uso:
 - Se escribe **una sola vez**, en el workflow `01`. Ningún otro workflow lo toca.
 - Es el campo que responde "¿quién agenda desde bio, desde seteo y desde
   anuncios?" en cualquier reporte, filtro o smart list.
+- **Los workflows de Meta CAPI (`09`) pasan a filtrar por `origen = ads`**, no
+  por el tag `lead-ads`. Ese cambio es lo que cierra la fuga de conversiones.
 - Los tags `lead-ads` / `lead-org` / `lead-setter-org` se mantienen **solo como
-  espejo para segmentos y para la API de Meta**, nunca como fuente de verdad, y
-  **ya nadie los quita**.
+  espejo para segmentos**, nunca como fuente de verdad, y **ya nadie los quita**.
 
-**Campo nuevo:** `contact.canal_wa` — *Single Options*: `verde` | `morado`.
+**Campo creado** (13-09-2026): `contact.canal_whatsapp` — *Single Options*, ID
+`2m5LCiZU1GdyVH8eHrFz`, opciones `verde` · `morado`.
 Marca qué número tiene la conversación en cada momento. Lo escribe el
 workflow `04` al hacer el handoff. Sirve para que ningún workflow mande por el
 número equivocado y para que Anaís sepa de un vistazo dónde contestar.
+
+### IDs de las tres encuestas
+
+| Encuesta | ID |
+|---|---|
+| `[SURVEY - ADS] Postulación ÉxiTO en Alimentación` | `fB7k42z4Jr8ZRNmG3WX1` |
+| `[SURVEY - ORG] Postulación ÉxiTO en Alimentación` | `99dHSXOPhwj6kFpE7TOy` |
+| `[SURVEY - ORG SETTER] Postulación ÉxiTO en Alimentación` | `kwuMWA1b5FXattZtwLu0` |
 
 ### 2.2 Etiquetas, ordenadas por prefijo
 
@@ -79,7 +100,7 @@ obliga a repuntear cada workflow que lo usa). El orden es por prefijo:
 | **Agenda** | `agenda-ads`, `agenda-org`, `ghost-agenda`, `sin-confirmar`, `confirmada`, `re-agendada` | `02`, `03`, `06` |
 | **Llamada** | `video-enviado`, `en-closer`, `asistio`, `no-show` | `04`, `08` |
 | **Venta** | `reserva-pagada` | `08` |
-| **Canal** | `wa-verde`, `wa-morado` | `04` |
+| **Canal** | `wa-verde` (`ZzEvvvEHxz7qoDHDCTaJ`), `wa-morado` (`USXBlhuA3Gft3Ifhr0sy`) — **creados 13-09** | `04` |
 
 Cambios concretos:
 - `bronce+ revisar` **se elimina** (nadie lo escribe, nombre con espacio).
@@ -114,8 +135,9 @@ recorrido, sin prefijo de origen.
 **Reemplaza:** `[ADS] 1`, `[ORG] 1`, `[SETTER-ORG] 1` *(v53 / v26 / v17)*
 **Disparadores:** los 3 *Survey submitted*, uno por encuesta.
 **Pasos:**
-1. Según la encuesta: escribe `origen` (`ads` / `org-bio` / `org-setter`) + el
-   tag espejo + `survey-*`.
+1. **Deriva `origen` con la regla de §2.1** (primero la atribución UTM, después
+   la encuesta) y escribe el tag espejo + `survey-*`. Nunca al revés: la
+   encuesta sola miente en un tercio de los casos (F-18).
 2. **Asigna responsable:** `org-setter` → Valen; los otros dos → Anaís.
    *(Absorbe los workflows `Asignación Anaís/Rafa`, que apuntan a la estructura
    vieja de mayo — F-4.)*
@@ -233,7 +255,12 @@ los pasos.*
 **Pasos:** un workflow, cuatro disparadores, un if/else por evento —
 `InitiateCheckout` (survey calificado), `Lead` (agenda), `Schedule`
 (confirmación), `Purchase` (venta).
-**Dos correcciones obligatorias:**
+**Tres correcciones obligatorias:**
+- **Filtrar por `origen = ads`, no por el tag `lead-ads`** (F-18). Hoy los leads
+  pagados que entran por la encuesta orgánica quedan sin tag `lead-ads` y
+  **Meta nunca recibe su conversión**: la campaña optimiza sobre una fracción de
+  los resultados reales y el CPA que se reporta está inflado. Es la corrección
+  con más impacto económico de toda la lista.
 - **Fuera los `Wait 9999 days`** (hoy retienen 215 contactos dentro de los
   workflows; si no permiten re-entrada, una lead que re-agenda ya no vuelve a
   emitir `Schedule` y la campaña optimiza con datos incompletos — F-11).
@@ -364,8 +391,11 @@ Se construye en paralelo a lo que está vivo y se corta por tramos. Nada se
 borra hasta que su reemplazo corre.
 
 **Tramo 0 · Preparar (no rompe nada)**
-- [ ] Crear campos `origen` y `canal_wa`.
+- [x] **Crear campos `origen` y `canal_whatsapp`** — hechos vía API el 13-09
+      (IDs en el apéndice).
+- [x] **Crear los tags `wa-verde` y `wa-morado`** — hechos vía API el 13-09.
 - [ ] Crear el pipeline `③ Llamadas · Closer` nuevo con sus 7 etapas.
+      *(La API de GHL es de solo lectura para pipelines: va a mano o con Cowork.)*
 - [ ] Crear las 3 plantillas `v3_equipo_ghost_*` y enviarlas a aprobación
       (WhatsApp tarda; es el camino crítico).
 - [ ] Conectar el número morado en GHL y verificar que envía texto libre.
@@ -431,3 +461,87 @@ confirmadas que no aparecen en el pipeline del closer.
 | Números de WhatsApp | 1 (plantillas para todo) | 2 (verde automático / morado libre) |
 | Origen de la lead | implícito en el workflow y el calendario | **campo del contacto** |
 | Fallas abiertas | 17 | 0 (las 17 tienen su arreglo asignado arriba) |
+
+---
+
+## Apéndice · Referencia de IDs (para construir sin buscar nada)
+
+Extraído de la API el 13-09-2026. Subcuenta `kdmmFxEbJjSpgMtbaZ6F`.
+
+### Campos de contacto
+
+| Campo | `fieldKey` | ID |
+|---|---|---|
+| **Origen** *(nuevo)* | `contact.origen` | `6BPeLlDeqrGMVxki3Q3c` |
+| **Canal WhatsApp** *(nuevo)* | `contact.canal_whatsapp` | `2m5LCiZU1GdyVH8eHrFz` |
+| Tier Score | `contact.tier_score` | `ZpyBSzUwLysbwhKkF6ww` |
+| Producto Recomendado | `contact.producto_recomendado` | `JnAAbkVyXU4frtCtbAWR` |
+| Monto Propuesto | `contact.monto_propuesto` | `Fb2CCt2anNsBx2ESfAEb` |
+| Resumen Lead | `contact.resumen_lead` | `KEKLIuzK50uXmwTmPen2` |
+| UTM Source | `contact.utm_source` | `4WclkU2LKhl1XocdWvET` |
+| UTM Campaign | `contact.utm_campaign` | `82tBJ6RMlUerPKSPh52K` |
+| Usuario Instagram | `contact.usuario_instagram` | `39e2cfOnKICfdNm5zWYR` |
+
+### Preguntas del survey (para los if/else)
+
+| Pregunta | ID |
+|---|---|
+| ¿Cuál es tu profesión? | `GnqxLlgs46jSBMT0rQsJ` |
+| ¿Cuánto tienes pensado invertir? | `KhN6Lbj24y9ru2GGtkFd` |
+| ¿Quién debe estar contigo en la reunión? | `TjRDcKidBqPeykkkWhPo` |
+| ¿Con qué situación te identificas más hoy? *(define la pregunta M4)* | `oSC7ggX3Sr9iQ6dQzKGT` |
+| ¿Qué es lo que más buscas lograr? | `XwPIBvpxo5qZImKTsnce` |
+| ¿Estás lista para invertir? | `eofAKe7GCo8o0UW1iXTV` |
+| ¿Puedes confirmar lo anterior? | `nbNt7jUS21t8xqDIJSCs` |
+| Cuéntanos más de tu caso *(texto libre)* | `4nUxQ3qviHjMFinq3Dfq` |
+
+### Pipeline `② Agenda · WhatsApp` — `puyQKiA3cuYzADHpbgcr`
+
+| Etapa | ID |
+|---|---|
+| Calificada (Formulario) | `00332a6b-f818-4b9f-8bab-259e627e9f98` |
+| Sin Agendar (Ghost) | `69e32901-a38d-4591-a3f6-0b0c3cdab940` |
+| Follow Up 1 | `a08578c7-9aa5-4c87-9ca6-aa259135f421` |
+| Follow Up 2 | `5f928413-b941-45aa-aa3a-3ec5b31f13d8` |
+| Follow Up 3 | `26d49032-199d-4fd2-9fcd-1b5e572faad5` |
+| Nueva Agenda | `f0a84d2b-8df8-4c34-b91d-e3a104d89b32` |
+| Sin Confirmar (Agenda) | `73ddbd14-0743-4740-8d01-3aaa4723193c` |
+| Confirmada (Agenda) | `65cf36f2-b55f-40e6-81c1-ac653dfa94a2` |
+| Diagnóstico | `c7a609f0-4169-439a-a016-addba89e519a` |
+| Pre-Llamada (Preparación) | `5a9b20ca-6ddb-4ac6-9591-f33801908379` |
+| Llamada Confirmada | `6414b758-a8fd-4795-91f1-de4f0a147bcb` |
+| Re-Agendar (Cancelada) | `e9f50af0-17e8-475d-8c76-32289aaba4c3` |
+| Re-Contacto (Interesada) | `2828cf59-fe10-463f-972a-1159afcd89de` |
+
+### Otros pipelines
+
+| Pipeline | ID |
+|---|---|
+| ① Instagram · Setter | `ZJbdlB7FnM3V5YY5BiDG` |
+| ③ Llamadas · Closer *(el viejo, se reemplaza)* | `J61MmwBX4mGAl7W1jCpz` |
+| ④ [VENTAS] Cobros | `vpq6pgz5Ht93tdBMImOC` |
+| [SETTER - ORG] Formación *(a apagar)* | `XoejslKD0GHwUWSxujbs` |
+
+### Calendarios y páginas
+
+| Recurso | ID / URL |
+|---|---|
+| Calendario `[A]` (ads) | `NwjgigzvJK9qcrjizbFn` |
+| Calendario `[ORG]` | `MiDJPvkZrUk3nhVrrYvw` |
+| Calendario `Curso Avanzado` | `f6zX7ITk863lH93BqBJ9` |
+| Landing de postulación ADS | `japieaters.app/postulacionexito-884187` |
+| Landing de postulación ORG | `japieaters.app/postulacionexitoenalimentacion` ⚠️ recibe pagado (F-18) |
+
+### Meta
+
+| Recurso | Valor |
+|---|---|
+| Dataset / Pixel ID | `1372444847951383` |
+| Campañas activas vistas en atribución | `[CBO] Escalado ÉxiTO`, `[ABO] Testeo ADS Éxito`, `[CBO] RMKT Pixel Web - IG - FB` |
+
+### Plantillas de WhatsApp en uso (número verde)
+
+`ghost_agenda_ads` · `v2_confirmar_jose` · `wa_confirmacion_agenda_organica` ·
+`wa_recordatorio_24h` · `wa_recordatorio_8h` · `wa_recordatorio_1h`
+
+**A crear:** `v3_equipo_ghost_1`, `v3_equipo_ghost_2`, `v3_equipo_ghost_3`
