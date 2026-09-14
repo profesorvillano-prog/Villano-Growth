@@ -20,14 +20,24 @@
 
 ## La restricción que manda sobre todo
 
-**El vídeo queda congelado dentro de la plantilla.** Se sube una sola vez, al
-crear `v3_confirma_hora`, y le llega igual a todas. Cambiarlo obliga a crear
-una plantilla nueva y volver a pasar por aprobación de Meta.
+**El mismo vídeo le llega a todas.** No se personaliza: se sube al crear
+`v3_confirma_hora` y sale igual para cada lead.
 
 Por lo tanto, **nada de**: nombres, fechas, "esta semana", precios, cupos
 numerados, nombres del equipo que pueden rotar (el closer cambia), ni
 referencias a la convocatoria actual. Todo lo que caduca va en los mensajes de
 texto, que sí se editan.
+
+> **Matiz sobre reemplazarlo** *(corrige una versión anterior de este documento,
+> que decía que quedaba congelado y que cambiarlo obligaba a re-aprobar).*
+> En WhatsApp, el archivo que se sube al crear la plantilla es la **muestra**
+> para la revisión de Meta; el archivo que se envía se puede indicar en cada
+> envío. Si el nodo de envío de GHL permite fijar el media de la cabecera,
+> **el vídeo se puede reemplazar sin volver a aprobar la plantilla**.
+>
+> Hay que verificarlo en GHL antes de darlo por hecho. Si funciona, se puede
+> iterar el vídeo con lo que se aprenda de las primeras semanas, y la primera
+> grabación no tiene que salir perfecta.
 
 ## Formato
 
