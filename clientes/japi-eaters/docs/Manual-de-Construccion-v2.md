@@ -97,6 +97,61 @@ la señal de enrutamiento y pasa a ser solo dónde se agenda:
 
 ---
 
+## El link de agenda: una plantilla, el link correcto
+
+El seguimiento de ghost manda un link de calendario, y no es el mismo para
+todas: las de anuncios van al calendario `[A]` y las orgánicas al `[ORG]`.
+Duplicar las plantillas por origen sería volver al problema de siempre.
+
+**La solución es que el link viaje en el contacto, no en el workflow.**
+
+### Las tres piezas
+
+**1. Dos Custom Values** en `Settings → Custom Values` — ahí viven las URLs, y
+si mañana cambia un calendario se edita en un solo lugar:
+
+| Custom Value | Valor |
+|---|---|
+| `link_agenda_ads` | la URL del calendario `[A]` (`NwjgigzvJK9qcrjizbFn`) |
+| `link_agenda_org` | la URL del calendario `[ORG]` (`MiDJPvkZrUk3nhVrrYvw`) |
+
+**2. Un campo de contacto** — creado el 14-09: **`Link Agenda`**
+(`contact.link_agenda`, ID `3QLBrZLptlGstgyTUfxM`). Guarda cuál de las dos le
+toca a esta persona.
+
+**3. Un nodo en cada entrada** que lo rellena:
+
+| Entrada | `Link Agenda` = |
+|---|---|
+| `01a` ADS | `{{custom_values.link_agenda_ads}}` |
+| `01b` ORG Bio | `{{custom_values.link_agenda_org}}` |
+| `01c` ORG Setter | `{{custom_values.link_agenda_org}}` |
+
+Después, en el nodo de envío de WhatsApp, la variable `{{2}}` de las tres
+plantillas de ghost se mapea a **`{{contact.link_agenda}}`**. Una sola
+plantilla, el link siempre correcto.
+
+### Por qué así y no con un if/else en el ghost
+
+Ramificar dentro de `02` por origen significa duplicar los tres nodos de envío
+—seis— y volver a duplicarlos si mañana aparece un cuarto origen. Con el campo,
+`02` no sabe ni le importa de dónde vino la lead: manda `{{contact.link_agenda}}`
+y listo.
+
+Y el campo sirve para más de una plantilla: `v3_cancelo_reagenda` también manda
+el link, y usa exactamente el mismo.
+
+### El cuidado obligatorio
+
+**Si `Link Agenda` está vacío, el envío falla en silencio.** Por eso el nodo va
+en las tres entradas, antes de cualquier envío, y conviene que la rama `None`
+de cualquier if/else también lo escriba con el link orgánico como respaldo.
+
+Para comprobarlo: postular de prueba por cada encuesta y mirar el contacto
+**antes** de que salga el primer mensaje — el campo tiene que estar lleno.
+
+---
+
 ## `01a · Entrada ADS`
 
 **Disparador:** *Survey Submitted* → `[SURVEY - ADS] Postulación ÉxiTO en Alimentación` (`fB7k42z4Jr8ZRNmG3WX1`)
@@ -105,8 +160,9 @@ la señal de enrutamiento y pasa a ser solo dónde se agenda:
 |---|---|---|
 | 1 | Update Contact Field | `UTM Source` ← `{{contact.attributionSource.utmSource}}` · `UTM Campaign` ← `{{contact.attributionSource.campaign}}` *(para reportar por campaña: hoy esos campos están vacíos)* |
 | 2 | Update Contact Field | **`Origen` = `ads`** |
-| 3 | Add Contact Tag | `survey-ads`, `lead-ads` |
-| 4 | Add to Workflow | `01 · Motor de Calificación` |
+| 3 | Update Contact Field | **`Link Agenda` = `{{custom_values.link_agenda_ads}}`** |
+| 4 | Add Contact Tag | `survey-ads`, `lead-ads` |
+| 5 | Add to Workflow | `01 · Motor de Calificación` |
 
 ## `01b · Entrada ORG Bio`
 
@@ -116,10 +172,11 @@ la señal de enrutamiento y pasa a ser solo dónde se agenda:
 |---|---|---|
 | 1 | Update Contact Field | igual que en `01a` |
 | 2 | Update Contact Field | **`Origen` = `org-bio`** |
-| 3 | Add Contact Tag | `survey-org`, `lead-org` |
-| 4 | **If/Else — `¿Vino de un anuncio?`** | `UTM Source` *contains* `Facebook` **OR** *contains* `Instagram` |
-| 5 | [SÍ] Add Contact Tag + Slack | Tag `revisar-origen` · aviso a `#leads-conflictos`: *"Postulación orgánica con UTM de anuncio — revisar a qué página apunta la campaña {{contact.utm_campaign}}"* |
-| 6 | Add to Workflow *(las dos ramas)* | `01 · Motor de Calificación` |
+| 3 | Update Contact Field | **`Link Agenda` = `{{custom_values.link_agenda_org}}`** |
+| 4 | Add Contact Tag | `survey-org`, `lead-org` |
+| 5 | **If/Else — `¿Vino de un anuncio?`** | `UTM Source` *contains* `Facebook` **OR** *contains* `Instagram` |
+| 6 | [SÍ] Add Contact Tag + Slack | Tag `revisar-origen` · aviso a `#leads-conflictos`: *"Postulación orgánica con UTM de anuncio — revisar a qué página apunta la campaña {{contact.utm_campaign}}"* |
+| 7 | Add to Workflow *(las dos ramas)* | `01 · Motor de Calificación` |
 
 **El origen no cambia en la rama SÍ.** Sigue siendo `org-bio`. El aviso existe
 para arreglar el anuncio, no para reclasificar la lead.
@@ -128,8 +185,8 @@ para arreglar el anuncio, no para reclasificar la lead.
 
 **Disparador:** *Survey Submitted* → `[SURVEY - ORG SETTER]` (`kwuMWA1b5FXattZtwLu0`)
 
-Idéntico a `01b` con `Origen` = **`org-setter`** y tags `survey-org`,
-`lead-setter-org`.
+Idéntico a `01b` con `Origen` = **`org-setter`**, `Link Agenda` =
+`{{custom_values.link_agenda_org}}` y tags `survey-org`, `lead-setter-org`.
 
 ## `01 · Motor de Calificación`
 
@@ -247,6 +304,8 @@ rediseño). La API de GHL no crea pipelines: va a mano.
 **Ola 1 — hoy**
 - [ ] Crear carpeta `ÉxiTO v2`
 - [x] Crear el tag `revisar-origen` — hecho vía API el 14-09 (`ULClzegm6PU1f6yMAriA`)
+- [x] Crear el campo `Link Agenda` — hecho vía API el 14-09 (`3QLBrZLptlGstgyTUfxM`)
+- [ ] Crear los Custom Values `link_agenda_ads` y `link_agenda_org`
 - [ ] `01a · Entrada ADS`
 - [ ] `01b · Entrada ORG Bio`
 - [ ] `01c · Entrada ORG Setter`

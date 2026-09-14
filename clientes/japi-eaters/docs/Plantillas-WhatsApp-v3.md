@@ -33,9 +33,15 @@ link: siempre hay una línea de cierre después. *(Corregido el 14-09 tras el
 rechazo de `v3_ghost_1`.)*
 
 **Si el campo viene vacío en GHL, el envío falla.** Cada variable es un punto
-de falla silencioso. Si el link de agenda fuera siempre el mismo, conviene
-escribirlo fijo en el texto y borrar `{{2}}` de las tres de seguimiento: tres
-variables menos que mapear y tres fallas menos posibles.
+de falla silencioso.
+
+**El `{{2}}` se queda, porque el link cambia según el origen.** Las de anuncios
+van al calendario `[A]` y las orgánicas al `[ORG]`. En vez de duplicar las
+plantillas, la variable se mapea a **`{{contact.link_agenda}}`**, un campo que
+los workflows de entrada rellenan con el link que le toca a cada una. Una sola
+plantilla, el link siempre correcto — el mecanismo completo está en
+[`Manual-de-Construccion-v2.md`](./Manual-de-Construccion-v2.md), sección *El
+link de agenda*.
 
 ---
 
