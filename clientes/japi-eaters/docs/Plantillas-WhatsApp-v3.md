@@ -24,6 +24,19 @@ es un problema: se usa igual.
 cita existente. Nada de vender, ni de cupos, ni de "aprovecha". Esa diferencia
 está respetada abajo.
 
+## Dos reglas del gestor que hacen rebotar plantillas
+
+**El body no puede empezar ni terminar con una variable.** Meta lo rechaza con
+*"Your body can't start or end with a variable. Add text before or after it"*.
+Por eso todas abren con una palabra —"Hola", "Ojo"— y ninguna termina en el
+link: siempre hay una línea de cierre después. *(Corregido el 14-09 tras el
+rechazo de `v3_ghost_1`.)*
+
+**Si el campo viene vacío en GHL, el envío falla.** Cada variable es un punto
+de falla silencioso. Si el link de agenda fuera siempre el mismo, conviene
+escribirlo fijo en el texto y borrar `{{2}}` de las tres de seguimiento: tres
+variables menos que mapear y tres fallas menos posibles.
+
 ---
 
 ## Bloque 1 · Seguimiento de postulación sin agenda (3)
@@ -41,28 +54,34 @@ Vimos que completaste tu postulación al programa ÉxiTO en Alimentación Infant
 ¿Pasó algo o simplemente se te cerró la página?
 
 Te dejamos el link acá 👉 {{2}}
+
+Cualquier duda, respóndenos por acá 💜
 ```
 
 ### `v3_ghost_2` · MARKETING
 **Variables:** `{{1}}` nombre · `{{2}}` link de agenda
 
 ```
-{{1}}, estamos atentos para ayudarte en lo que necesites 🙌
+Hola {{1}}, estamos atentos para ayudarte en lo que necesites 🙌
 
 ¿No te acomodan los horarios disponibles?
 
-👉 {{2}}
+Acá te dejamos el link de nuevo 👉 {{2}}
+
+Elige el horario que más te sirva 💜
 ```
 
 ### `v3_ghost_3` · MARKETING
 **Variables:** `{{1}}` nombre · `{{2}}` link de agenda
 
 ```
-{{1}}, cuéntanos si finalmente deseas agendar tu reunión 💜
+Hola {{1}}, cuéntanos si finalmente deseas agendar tu reunión 💜
 
 Ya liberamos varias horas para esta semana y quedan pocos cupos por convocatoria.
 
-👉 {{2}}
+Puedes elegir la tuya acá 👉 {{2}}
+
+Si este no es tu momento también está bien: avísanos y cerramos tu postulación 🙌
 ```
 
 ---
@@ -84,7 +103,7 @@ Toca "Ver vídeo" para enviártelas 🙌
 **Variables:** `{{1}}` nombre
 
 ```
-{{1}}, ojo 👀
+Ojo {{1}} 👀
 
 Si no tocas "Ver vídeo", tu hora queda sin confirmar y se libera automáticamente.
 
@@ -131,7 +150,7 @@ Supeer {{1}}! Ahora te va a escribir mi equipo y desde ahora en adelante por aqu
 **Botón:** `Confirmo mi asistencia` (Quick reply) — **uno solo, sin "reagendar"**
 
 ```
-{{1}}, recuerda que nos vemos {{2}} 🙌
+Hola {{1}}, recuerda que nos vemos {{2}} 🙌
 
 ¿Nos confirmas por aquí si podrás asistir?
 ```
