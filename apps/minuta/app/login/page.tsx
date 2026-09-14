@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { hasSupabaseEnv } from "@/lib/supabase/env";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -42,6 +43,14 @@ export default function LoginPage() {
           Tu pauta nutricional por porciones de intercambio.
         </p>
       </div>
+
+      {!hasSupabaseEnv && (
+        <p className="mb-6 rounded-xl border border-line bg-surface px-4 py-3 text-xs leading-relaxed text-muted">
+          Falta conectar la base de datos: agrega{" "}
+          <span className="text-ink">NEXT_PUBLIC_SUPABASE_URL</span> y{" "}
+          <span className="text-ink">NEXT_PUBLIC_SUPABASE_ANON_KEY</span> en Vercel.
+        </p>
+      )}
 
       <form onSubmit={onSubmit} className="flex flex-col gap-3">
         <label className="text-xs font-medium text-muted" htmlFor="email">
