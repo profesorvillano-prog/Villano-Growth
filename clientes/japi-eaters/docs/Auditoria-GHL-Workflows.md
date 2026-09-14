@@ -288,20 +288,42 @@ pero el tráfico no: la encuesta `[SURVEY - ORG]` (`99dHSXOPhwj6kFpE7TOy`),
 alojada en `japieaters.app/postulacionexitoenalimentacion`, recibe tráfico de
 anuncios.
 
-De las **60 postulaciones** de esa encuesta (14-08 → 13-09):
+**Son dos páginas, no una:** `/postulacionexitoenalimentacion` lleva la encuesta
+`[SURVEY - ORG]` y `/exitoenalimentacion` lleva la `[SURVEY - ORG SETTER]`.
+**Las dos reciben tráfico pagado.** La encuesta de ADS sí funciona bien por su
+lado (297 postulaciones, todas desde `japieaters.app/postulacionexito-884187`).
 
-| Señal | Cantidad |
-|---|---|
-| Con `utm_source=Facebook` en la sesión | **20** |
-| Con huella de campaña (`utm_campaign`/`utm_id`/`fbclid`) | **38** |
-| Sin ninguna huella de Facebook | **0** |
+Campañas identificadas: `[CBO] Escalado ÉxiTO`, `[ABO] Testeo ADS Éxito`,
+`[CBO] RMKT Pixel Web - IG - FB`.
 
-Campañas identificadas en esas postulaciones: `[CBO] Escalado ÉxiTO` (12),
-`[ABO] Testeo ADS Éxito` (6), `[CBO] RMKT Pixel Web - IG - FB` (2).
+### Magnitud real, medida en el embudo
 
-*(La encuesta de ADS sí se usa y funciona: 297 postulaciones, todas desde
-`japieaters.app/postulacionexito-884187`. El problema no es que falte la
-encuesta de ads, es que la orgánica también recibe pagado.)*
+Sobre las 100 oportunidades más recientes del pipeline `②` (03-09 → 13-09),
+contando solo las que traen `utmSource = Facebook` en su atribución:
+
+| Evento | Meta lo ve | Meta NO lo ve | Perdido |
+|---|---|---|---|
+| Postuló | 59 | 8 | 12 % |
+| Quedó calificada | 36 | 8 | 18 % |
+| Agendó → evento `Lead` | 15 | 4 | **21 %** |
+| Confirmó → evento `Schedule` | 12 | 4 | **25 %** |
+| Asistió | 3 | 0 | — |
+| Reserva pagada → `Purchase` | 0 | 0 | — |
+
+**El porcentaje perdido crece con la profundidad del evento** — y los eventos
+profundos son los que Meta usa para optimizar. En esta ventana no hay ventas
+perdidas (ninguna de estas leads recientes ha pagado aún): lo perdido son
+agendas y confirmaciones.
+
+Consecuencias: el **CPA real es mejor** que el reportado (si Meta cuenta 12
+confirmaciones y hubo 16, el costo por confirmación real es ~25 % más bajo); el
+algoritmo **no aprende** de esas personas y eso no se recupera hacia atrás; y el
+orgánico se ve mejor de lo que es porque esas 8 se cuentan ahí.
+
+**Caso testigo:** `Jimena G. F.` (13-09) — `source` = `[SURVEY - ORG SETTER]`,
+`attributionSource.utmSource` = Facebook, campaña `[CBO] Escalado ÉxiTO`,
+anuncio `ADS 1 - TO hace 5 años [G]`, tags `lead-setter-org` + `confirmada`.
+Lead de anuncios que confirmó llamada y cuyo `Schedule` Meta nunca recibió.
 
 **Por qué cuesta dinero, no solo reportes:** esas leads quedan con `lead-org` y
 sin `lead-ads`. Los cuatro workflows de Meta CAPI filtran por `lead-ads` /
@@ -311,8 +333,9 @@ el CPA reportado está inflado. Además esas leads entran al pipeline obsoleto
 `[SETTER - ORG] Formación` en vez del unificado, y el rendimiento del orgánico
 se ve mejor de lo que es a costa del de anuncios.
 
-**Arreglo:** el campo `origen` se deriva de la **atribución UTM primero** y de
-la encuesta después, y los workflows de CAPI pasan a filtrar por `origen = ads`
+**Arreglo:** el campo `origen` se deriva de la **atribución nativa
+`attributionSource` primero** (copiándola a los campos, que hoy están vacíos) y
+de la encuesta después, y los workflows de CAPI pasan a filtrar por `origen = ads`
 (ver `Rediseno-Workflows-v2.md` §2.1 y workflow `09`). En paralelo, revisar por
 qué las campañas mandan tráfico a la página de postulación orgánica.
 

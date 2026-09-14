@@ -22,6 +22,7 @@ emails y nuevos productos.
 | [`Auditoria-GHL-Workflows.md`](./Auditoria-GHL-Workflows.md) | Radiografía de la subcuenta en GoHighLevel: los 26 workflows con sus IDs, los 5 pipelines con sus etapas, 31 tags, 21 custom fields, 3 calendarios, **17 fallas detectadas** y los deltas entre el relevamiento del 24-08 y la API del 13-09. |
 | [`Workflows-Pasos-Internos.md`](./Workflows-Pasos-Internos.md) | Pasos internos de los 17 workflows de las carpetas `[ADS]` y `[ORG]`: disparadores con filtros, cada acción en orden, plantillas de WhatsApp, canales de Slack, esperas y ramas. Relevamiento de solo lectura del 24-08-2026. |
 | [`Guion-WhatsApp-Dos-Numeros.md`](./Guion-WhatsApp-Dos-Numeros.md) | El copy de cada mensaje, de la postulación a la llamada, asignado a los dos números (verde automático con plantillas / morado libre) y marcado como automático o manual. Versión posterior a la reunión del 04-09. |
+| [`Manual-de-Construccion-v2.md`](./Manual-de-Construccion-v2.md) | Cómo construirlo en GHL, en orden de dependencia: 4 olas, la primera sin depender de nada externo. Incluye `01a/b/c` + motor nodo por nodo, los 4 ajustes de Meta CAPI y las pruebas de aceptación. |
 | [`Rediseno-Workflows-v2.md`](./Rediseno-Workflows-v2.md) | Arquitectura objetivo: **26 workflows → 11**, el origen de la lead como campo del contacto (ads / bio / setter), pipeline nuevo del closer, Slack por función, métricas por origen y orden de implementación por tramos. |
 
 ## Fuentes

@@ -1,7 +1,7 @@
 # Rediseño de automatización v2 — dos números, un solo camino
 
 > Arquitectura objetivo para la subcuenta **Japi Eaters** (`kdmmFxEbJjSpgMtbaZ6F`).
-> Consolida los **26 workflows actuales en 11**, resuelve las 17 fallas de la
+> Consolida los **26 workflows actuales en 14** (11 piezas, de las cuales `01` son 3 entradas mínimas + 1 motor), resuelve las 17 fallas de la
 > auditoría e incorpora los tres cambios pedidos: **segundo número de WhatsApp**,
 > **Slack con varios participantes** y **métricas por origen y por rol**.
 >
@@ -51,16 +51,23 @@ en la auditoría — al menos 20 de 60 postulaciones del último mes llegaron co
 de la encuesta, un tercio de los leads de anuncios seguiría contándose como
 orgánico — que es exactamente lo que pasa hoy.
 
-**Regla de derivación (en este orden, en el workflow `01`):**
+**Regla de derivación (en este orden, en los workflows de entrada):**
 
-1. Si `contact.utm_source` contiene `Facebook`/`Instagram`/`fb`/`ig`
-   **o** `contact.utm_campaign` no está vacío → **`ads`**
-   *(manda la atribución, no la encuesta)*
+0. **Copiar primero la atribución nativa a los campos:**
+   `UTM Source` ← `{{contact.attributionSource.utmSource}}` y
+   `UTM Campaign` ← `{{contact.attributionSource.campaign}}`.
+1. Si `UTM Source` contiene `Facebook`/`Instagram` **o** `UTM Campaign` no está
+   vacío → **`ads`** *(manda la atribución, no la encuesta)*
 2. Si no, y la encuesta es `[SURVEY - ORG SETTER]` → **`org-setter`**
 3. Si no → **`org-bio`**
 
-Los campos `contact.utm_source` y `contact.utm_campaign` **ya existen** en la
-subcuenta, así que la regla se puede armar sin crear nada más.
+⚠️ **El paso 0 no es opcional.** Verificado el 14-09 en un contacto real: los
+campos `contact.utm_source` y `contact.utm_campaign` **existen pero están
+vacíos** — nadie los rellena. La atribución real vive en el objeto nativo
+`attributionSource` (que sí trae `utmSource`, `campaign`, `utmContent`,
+`sessionSource`, `fbclid`, `fbc`, `fbp`). Ramificar directo sobre los campos
+personalizados daría siempre "no es de pago". Copiarlos primero además arregla
+los reportes por campaña, que hoy no existen.
 
 Reglas de uso:
 - Se escribe **una sola vez**, en el workflow `01`. Ningún otro workflow lo toca.
@@ -131,9 +138,19 @@ ejecute el flujo del origen equivocado.
 De 26 a 11. Nomenclatura: `NN · Nombre [canal]`, numerada por orden del
 recorrido, sin prefijo de origen.
 
-### `01 · Calificación (Survey → Tier + Origen)`
+### `01 · Calificación (Survey → Tier + Origen)` — 3 entradas + 1 motor
 **Reemplaza:** `[ADS] 1`, `[ORG] 1`, `[SETTER-ORG] 1` *(v53 / v26 / v17)*
-**Disparadores:** los 3 *Survey submitted*, uno por encuesta.
+
+⚠️ **Son 4 workflows, no 1.** Un workflow con los tres disparadores de encuesta
+no puede saber **cuál** se disparó (GHL no ofrece esa condición en un if/else).
+Por eso: **`01a/01b/01c`** — tres entradas mínimas de 4 nodos que solo resuelven
+el origen — y **`01`**, el motor compartido con toda la lógica de tier,
+oportunidad, asignación y Slack. La lógica de calificación vive **una sola vez**,
+que es el objetivo. Nodo por nodo en
+[`Manual-de-Construccion-v2.md`](./Manual-de-Construccion-v2.md).
+
+**Disparadores:** una encuesta por entrada; el motor no tiene disparador (se
+entra por *Add to Workflow*).
 **Pasos:**
 1. **Deriva `origen` con la regla de §2.1** (primero la atribución UTM, después
    la encuesta) y escribe el tag espejo + `survey-*`. Nunca al revés: la
@@ -387,6 +404,11 @@ movimientos de etapa, y CRM y campañas cuentan lo mismo.
 
 ## 7. Orden de implementación
 
+> **El orden bueno es por dependencia, no por embudo.** Está desarrollado en
+> [`Manual-de-Construccion-v2.md`](./Manual-de-Construccion-v2.md): 4 olas, donde
+> la Ola 1 (medición) no depende de nada externo y se puede construir hoy. Los
+> tramos de abajo quedan como vista de conjunto.
+
 Se construye en paralelo a lo que está vivo y se corta por tramos. Nada se
 borra hasta que su reemplazo corre.
 
@@ -453,7 +475,7 @@ confirmadas que no aparecen en el pipeline del closer.
 
 | | Antes | Después |
 |---|---|---|
-| Workflows | 26 (25 publicados + 1 draft) | 11 |
+| Workflows | 26 (25 publicados + 1 draft) | 14 (11 + las 3 entradas de `01`) |
 | Cadenas paralelas | 3 (ADS / ORG / SETTER) | 1, con ramas por `origen` |
 | Pipelines | 5 (uno obsoleto y vivo) | 4 |
 | Calendarios | 2 idénticos con destinos distintos | 1 |
