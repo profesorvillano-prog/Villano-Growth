@@ -14,6 +14,7 @@
 | **Dejar natural el botón de confirmar** | Justo después aparecen `Sí, confirmo` / `Cancelar`. El vídeo tiene que terminar apuntando ahí. |
 | **Bajar el no-show** | Es el KPI que mira el director comercial, y el problema real: el closer se presentaba a llamadas que no ocurrían. |
 | **Transferir la confianza del equipo a la persona** | Hasta acá le habló "el equipo". Este es el primer momento en que ve y oye a Josefina. |
+| **Dejar claro que la reunión es con el equipo de admisión** | Josefina no toma las llamadas. Si el vídeo hace creer que sí, la lead llega esperando otra cosa y la reunión arranca con una decepción. |
 | **Preparar el terreno de la inversión sin dar precio** | El precio no se da por WhatsApp. Pero si en la llamada aparece de sorpresa, se cae. |
 | **Traer a quien decide** | El survey pregunta *"¿quién debe estar contigo en la reunión para poder tomar la decisión?"*. Si decide con su pareja y viene sola, la llamada no cierra. |
 
@@ -41,10 +42,13 @@ texto, que sí se editan.
 
 ## Tono
 
-Cálido y directo, tuteo chileno neutro (entienden en Chile, Argentina y
-Uruguay). Habla como colega, no como vendedora: ella también es TO. Sin
-tecnicismos de marketing, sin "cupos que vuelan", sin urgencia impostada — la
-escasez ya está en el calendario y se nombra una sola vez, como un hecho.
+**Como si le estuviera mandando un audio a una colega.** Frases cortas, tuteo
+chileno neutro (entienden en Chile, Argentina y Uruguay), pausas naturales.
+Habla como par, no como vendedora: ella también es TO.
+
+Sin tecnicismos de marketing, sin "cupos que vuelan", sin urgencia impostada —
+la escasez ya está en el calendario y se nombra una sola vez, como un hecho.
+Y sin sonar institucional: "mi equipo", no "nuestro equipo de admisión".
 
 ---
 
@@ -52,59 +56,63 @@ escasez ya está en el calendario y se nombra una sola vez, como un hecho.
 
 **Apertura — 10 segundos**
 
-> Hola! Soy Josefina, fundadora de Japi Eaters y terapeuta ocupacional, igual
-> que tú. Qué bueno que postulaste. Antes de que nos juntemos te quiero dejar
-> tres cosas claras, así llegas tranquila y aprovechamos bien los 45 minutos.
+> Hola! Soy Josefina. Yo soy la que está detrás de Japi Eaters y también soy
+> terapeuta ocupacional, igual que tú. Me puse a grabarte esto porque quiero
+> que llegues tranquila a tu reunión. Son tres cosas cortitas.
 
-*(Se presenta como par, no como autoridad. Nombra los 45 minutos desde el
-principio: fija la expectativa de que es una reunión de verdad.)*
+*(Se presenta como par. "Me puse a grabarte esto" hace que se lea como un
+mensaje y no como un video institucional.)*
 
-**Indicación 1 — cómo es la reunión — 25 segundos**
+**Indicación 1 — con quién es y cómo es — 25 segundos**
 
-> Primero: esto es una entrevista de admisión, no una clase ni una charla de
-> ventas. Nos vamos a sentar a mirar tu caso: qué tipo de niños estás
-> atendiendo, dónde te estás trabando, y qué necesitarías para resolverlo.
-> Al final de esos 45 minutos vas a tener claridad de si la formación es para
-> ti o no — y si no lo es, te lo voy a decir. Vamos a hablar también de la
-> inversión y de cómo funciona, para que salgas con toda la información.
+> La primera: esta reunión es con mi equipo de admisión. Son ellas las que
+> revisan las postulaciones conmigo, y las que te van a escuchar.
+> No es una clase ni te van a hacer una presentación. Te van a preguntar por
+> tus casos, dónde te estás trabando, qué has intentado. Son 45 minutos, y
+> sales sabiendo si esto es para ti o no. Si no lo es, te lo van a decir.
+> Y sí, te van a hablar de la inversión y de cómo funciona el programa, porque
+> quiero que tengas toda la información antes de decidir.
 
-*(Hace tres trabajos a la vez: reencuadra la llamada, baja la ansiedad de "me
-van a vender", y deja anunciado que se habla de plata sin decir el número.)*
+*(Lo primero que aclara es con quién va a hablar: así no llega esperando a
+Josefina. "Revisan las postulaciones conmigo" mantiene a Josefina adentro sin
+mentir. Y de paso deja anunciado que se habla de plata, sin decir el número.)*
 
 **Indicación 2 — qué tener a mano — 25 segundos**
 
-> Segundo: conéctate desde el computador, no desde el teléfono. Vamos a
-> compartir pantalla y en el celular no se ve bien. Busca un lugar tranquilo,
-> con buena señal, donde puedas hablar sin interrupciones.
-> Y ten en mente un caso concreto: uno de esos que te da vueltas en la cabeza.
-> Sobre ese vamos a trabajar.
-> Una cosa más: si esta decisión la tomas con alguien —tu pareja, tu familia,
-> el centro donde trabajas— que esté contigo en la llamada. Así no tienes que
-> explicar todo de nuevo después.
+> La segunda: conéctate del computador, no del teléfono. Van a compartir
+> pantalla y en el celular no se ve nada. Busca un rato tranquilo, donde nadie
+> te interrumpa.
+> Y piensa en un caso antes de entrar. Uno de esos que te da vueltas en la
+> cabeza de noche. Ese es el que quiero que lleves.
+> Ah, y si esto lo decides con alguien más —tu pareja, tu familia, el centro
+> donde trabajas— que esté contigo. Es mucho más fácil que andar explicando
+> todo después.
 
-*(Computador y lugar tranquilo repiten lo que dice el recordatorio del día, así
-que llega dos veces. El caso concreto hace que llegue preparada y que la
-conversación sea sobre ella. Y la última línea es la que resuelve el
-`decisor-tercero` antes de que sea un problema.)*
+*(Computador y lugar tranquilo repiten el recordatorio del día, así llega dos
+veces. El caso concreto hace que llegue preparada. Y la última línea resuelve
+el `decisor-tercero` antes de que sea un problema.)*
 
 **Indicación 3 — el compromiso — 20 segundos**
 
-> Y tercero: al tomar esa hora bloqueaste 45 minutos de mi agenda a tu nombre.
-> Abrimos pocos cupos por convocatoria y hay terapeutas esperando. Si por
-> cualquier motivo no puedes, avísame con 24 horas y lo movemos sin problema.
+> Y la tercera, que es la que más te pido: cuando tomaste esa hora, bloqueaste
+> 45 minutos de la agenda de mi equipo, a tu nombre. Abrimos pocos cupos cada
+> convocatoria y hay terapeutas esperando por uno.
+> Si no puedes, no pasa nada: avísanos con un día de anticipación y lo movemos.
 > Lo único que te pido es que no desaparezcas.
 
-*(Es literalmente lo que ya dice el calendario al agendar, así que no es una
-amenaza nueva: es coherencia. "No desaparezcas" es más humano que la política
-escrita y funciona mejor.)*
+*(La agenda es del equipo, no de ella. Es lo mismo que ya dice el calendario al
+agendar, así que no es una amenaza nueva: es coherencia. "No desaparezcas" es
+más humano que la política escrita y funciona mejor.)*
 
 **Cierre — 10 segundos**
 
-> Eso es todo. Ahora te va a llegar un mensaje para que confirmes tu hora:
-> tócalo y listo, nos vemos.
+> Eso era todo. Ahora te va a llegar un mensajito para confirmar tu hora:
+> apriétalo y listo.
+> Que te vaya lindo en la reunión. Yo voy a estar por acá mirando tu caso.
 
-*(El cierre existe solo para que el botón que aparece después no salga de la
-nada.)*
+*(El cierre existe para que el botón que aparece después no salga de la nada.
+Y la última línea la deja presente sin prometer que estará en la llamada —
+además engancha con el vídeo personalizado que le llega el día antes.)*
 
 ---
 
@@ -117,12 +125,18 @@ nada.)*
   que se va a hablar de la inversión es más honesto y funciona mejor.
 - **Leerlo.** Que se note guionado rompe todo lo que el vídeo viene a construir.
   Mejor que se sepa las tres indicaciones y las diga con sus palabras.
-- **Nombrar al closer.** Cambia. El vídeo no.
+- **Nombrar al closer.** Cambia. El vídeo no. Siempre "mi equipo de admisión".
+- **Hacer creer que la llamada es con Josefina.** Llega esperando a la
+  fundadora, se encuentra con otra persona, y la reunión arranca con una
+  decepción que el closer tiene que remontar.
+- **Sonar institucional.** "Nuestro equipo de admisión se pondrá en contacto"
+  mata todo lo que el vídeo viene a construir. Es ella hablándole a una colega.
 
 ## Antes de subirlo
 
 - [ ] Dura menos de 90 segundos
 - [ ] Se entienden las tres indicaciones sin sonido
 - [ ] No dice ninguna fecha, nombre ni precio
+- [ ] Deja claro que la reunión es con el equipo, no con ella
 - [ ] Termina apuntando al botón de confirmar
 - [ ] Se ve bien en un teléfono, en vertical
