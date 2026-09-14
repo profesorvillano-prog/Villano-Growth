@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { hasSupabaseEnv } from "@/lib/supabase/env";
+import { hasSupabaseEnv, missingSupabaseEnv } from "@/lib/supabase/env";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -47,8 +47,8 @@ export default function LoginPage() {
       {!hasSupabaseEnv && (
         <p className="mb-6 rounded-xl border border-line bg-surface px-4 py-3 text-xs leading-relaxed text-muted">
           Falta conectar la base de datos: agrega{" "}
-          <span className="text-ink">NEXT_PUBLIC_SUPABASE_URL</span> y{" "}
-          <span className="text-ink">NEXT_PUBLIC_SUPABASE_ANON_KEY</span> en Vercel.
+          <span className="text-ink">{missingSupabaseEnv.join(" y ")}</span> en Vercel y haz
+          Redeploy.
         </p>
       )}
 
