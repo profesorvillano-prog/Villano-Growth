@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { hasSupabaseEnv } from "@/lib/supabase/env";
 import type {
   Entry,
   Food,
@@ -32,6 +33,7 @@ const EMPTY_TARGETS: Targets = {
 
 /** Pauta + catálogo. Si el usuario no tiene pauta, se le instala la base. */
 export async function loadPlanBundle(): Promise<PlanBundle | null> {
+  if (!hasSupabaseEnv) return null;
   const supabase = await createClient();
   const {
     data: { user },
