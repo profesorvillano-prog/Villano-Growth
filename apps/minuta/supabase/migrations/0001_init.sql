@@ -96,6 +96,7 @@ create table if not exists minuta_entries (
   created_at timestamptz not null default now()
 );
 create index if not exists minuta_entries_user_fecha_idx on minuta_entries (user_id, fecha);
+create index if not exists minuta_entries_batch_idx on minuta_entries (batch_id);
 
 -- ------------------------------------------------------------ hidratación
 create table if not exists minuta_water (
