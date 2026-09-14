@@ -14,6 +14,9 @@ export function PautaView() {
   const supabase = useMemo(() => createClient(), []);
   const [local, setLocal] = useState<Targets>(targets);
   const [saved, setSaved] = useState(false);
+  const [pwOpen, setPwOpen] = useState(false);
+  const [pw, setPw] = useState("");
+  const [pwMsg, setPwMsg] = useState<string | null>(null);
 
   const macros = targetMacros(local, groups);
 
@@ -25,6 +28,22 @@ export function PautaView() {
     setSaved(true);
     setTimeout(() => setSaved(false), 1800);
     router.refresh();
+  }
+
+  async function changePassword() {
+    if (pw.length < 8) {
+      setPwMsg("Usa al menos 8 caracteres.");
+      return;
+    }
+    const { error } = await supabase.auth.updateUser({ password: pw });
+    setPwMsg(error ? error.message : "Contraseña actualizada ✓");
+    if (!error) {
+      setPw("");
+      setTimeout(() => {
+        setPwOpen(false);
+        setPwMsg(null);
+      }, 1500);
+    }
   }
 
   async function signOut() {
@@ -174,6 +193,35 @@ export function PautaView() {
             </ul>
           </section>
         )}
+
+        <section className="card px-4 py-3">
+          <button
+            onClick={() => setPwOpen((v) => !v)}
+            className="flex w-full items-center justify-between text-sm font-semibold"
+          >
+            Cambiar contraseña
+            <span className="text-muted">{pwOpen ? "−" : "+"}</span>
+          </button>
+          {pwOpen && (
+            <div className="mt-3 space-y-2">
+              <input
+                type="password"
+                value={pw}
+                onChange={(e) => setPw(e.target.value)}
+                autoComplete="new-password"
+                placeholder="Nueva contraseña"
+                className="h-11 w-full rounded-xl border border-line bg-surface px-4 text-base outline-none focus:border-gold"
+              />
+              <button
+                onClick={changePassword}
+                className="h-11 w-full rounded-xl bg-gold text-sm font-semibold text-black"
+              >
+                Guardar
+              </button>
+              {pwMsg && <p className="text-xs text-muted">{pwMsg}</p>}
+            </div>
+          )}
+        </section>
 
         <button
           onClick={signOut}
