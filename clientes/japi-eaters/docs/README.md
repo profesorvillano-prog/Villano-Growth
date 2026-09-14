@@ -26,6 +26,7 @@ emails y nuevos productos.
 | [`Plantillas-WhatsApp-v3.md`](./Plantillas-WhatsApp-v3.md) | Las 9 plantillas nuevas del número verde listas para enviar a aprobación de Meta, con categoría, variables y botones. |
 | [`Prompt-IA-GHL-Motor.md`](./Prompt-IA-GHL-Motor.md) | Prompt para la IA del constructor de GHL. **Probado y descartado para el motor**: no arma bien una estructura de treinta nodos. Se conserva para workflows chicos. |
 | [`Manual-de-Construccion-v2.md`](./Manual-de-Construccion-v2.md) | Cómo construirlo en GHL, en orden de dependencia: 4 olas, la primera sin depender de nada externo. Incluye `01a/b/c` + motor nodo por nodo, los 4 ajustes de Meta CAPI y las pruebas de aceptación. |
+| [`Construccion-Workflows-02-08.md`](./Construccion-Workflows-02-08.md) | Los diez workflows que van después de la Ola 1, nodo por nodo y con el nombre de cada paso: `02` ghost, `03`/`03b`/`03c` bienvenida y confirmación, `04` handoff al morado, `05`/`05b` recordatorios, `06` cancelación, `07` handoff al closer y `08` post-llamada. Incluye el prompt para construirlos con Cowork. |
 | [`Rediseno-Workflows-v2.md`](./Rediseno-Workflows-v2.md) | Arquitectura objetivo: **26 workflows → 11**, el origen de la lead como campo del contacto (ads / bio / setter), pipeline nuevo del closer, Slack por función, métricas por origen y orden de implementación por tramos. |
 
 ## Fuentes

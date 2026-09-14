@@ -271,6 +271,10 @@ Si las tres pasan, se pausan los tres workflows viejos de calificación
 
 ---
 
+> **Los workflows `02` a `08`, nodo por nodo:**
+> [`Construccion-Workflows-02-08.md`](./Construccion-Workflows-02-08.md) ·
+> página operativa: https://claude.ai/code/artifact/56a5c1ee-e067-4327-9565-44f7a23312e8
+
 # OLA 2 · Verde  ·  `02` y `03`
 
 **Bloqueada hasta que Meta apruebe las 13 plantillas de**
