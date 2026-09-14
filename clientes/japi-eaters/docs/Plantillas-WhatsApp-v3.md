@@ -267,8 +267,14 @@ una hora tarde.
 1:00 de la madrugada. Conviene anclar el envío a una hora fija de la mañana en
 vez de restar horas, o ponerle un piso para que nunca salga de noche.
 
-*(De paso: en el workflow actual el nodo se llama "WhatsApp 4 hrs" pero manda
-la plantilla `wa_recordatorio_8h`. Uno de los dos nombres miente.)*
+**Desajuste conocido y aceptado:** la plantilla se llama `v3_recordatorio_8h`
+pero **el flujo la manda 4 horas antes**. El nombre se queda así porque la
+plantilla ya está enviada a aprobación; renombrarla obligaría a crear otra.
+Queda anotado acá para que a nadie le extrañe después.
+
+Con 4 horas de anticipación, ojo igual con las citas temprano: 4 h antes de una
+reunión de las 9:00 son las 5:00 de la mañana. Conviene ponerle un piso horario
+al envío.
 
 ## Cuidado con solapar el verde y el morado
 

@@ -44,11 +44,34 @@ texto, que sí se editan.
 - **Duración: 60 a 90 segundos.** Más largo y no lo terminan; más corto y no
   alcanza para las tres indicaciones.
 - **Vertical (9:16)**, se ve en el teléfono dentro del chat.
-- **MP4**, lo más liviano posible — verificar el tope que acepta el gestor de
-  plantillas al subirlo.
+- **MP4, máximo 16 MB.** Es el tope del gestor de plantillas, y es la
+  restricción real: un vídeo vertical de 90 segundos grabado con un teléfono en
+  calidad alta lo pasa fácil. Ver abajo cómo exportarlo.
 - Josefina a cámara, en un espacio que se lea como su consulta o su escritorio.
 - **Audio limpio**: se ve en el teléfono, muchas veces sin audífonos.
 - Subtítulos quemados. Buena parte lo va a ver sin sonido.
+
+### Cómo que entre en los 16 MB
+
+16 MB para 90 segundos son unos **1,4 Mbps en total**, que es poco. Para no
+tener que regrabar:
+
+- Apuntar a **60-75 segundos** en vez de 90. Es el margen más barato.
+- Exportar en **720 × 1280** (no 1080). En un chat de WhatsApp no se nota la
+  diferencia y pesa menos de la mitad.
+- **30 fps**, no 60.
+- Vídeo a ~1,2 Mbps y audio a 128 kbps deja unos 15 MB para 90 segundos y
+  bastante menos para 70.
+- Comprimir **después** de grabar. Grabar en buena calidad y bajar al exportar
+  da mejor resultado que grabar en calidad baja.
+
+### Al crear la plantilla
+
+- El vídeo **hay que subirlo primero**: el gestor pide elegirlo del Media
+  Storage o subirlo antes de poder crear `v3_confirma_hora`.
+- **Cambiar el idioma a Spanish.** El formulario viene con English (US) por
+  defecto.
+- El nombre solo admite minúsculas y guiones bajos: `v3_confirma_hora`.
 
 ## Tono
 
