@@ -115,9 +115,15 @@ Por eso las de seguimiento son **dos juegos** (`_ads` y `_org`) y no uno.
 
 | Rama | Qué manda |
 |---|---|
-| `Origen is ads` | `v3_ghost_1_ads` → `_2_ads` → `_3_ads` |
-| `Origen is org-bio` | `v3_ghost_1_org` → `_2_org` → `_3_org` |
+| `Origen is ads` | `v3_ghost_1_ads` → `v3_ghost_2` → `v3_ghost_3` |
+| `Origen is org-bio` | `v3_ghost_1_org` → `v3_ghost_2` → `v3_ghost_3` |
 | `Origen is org-setter` | **nada** — sale del flujo, Valen lo trabaja por DM |
+
+**El link va solo en el primer mensaje.** Por eso únicamente ese tiene dos
+versiones; el 2 y el 3 son la misma plantilla en las dos ramas. A esa altura de
+la conversación el link ya está en el chat y lo que se busca es una respuesta,
+no un clic — una respuesta además abre la ventana de 24 h y deja que Anaís
+conteste libre.
 
 **`03` hace lo mismo en un solo punto:** al tocar "Cancelar", elige entre
 `v3_cancelo_reagenda_ads` y `v3_cancelo_reagenda_org`.
@@ -130,7 +136,7 @@ Ninguna otra parte del recorrido se ramifica por origen.
 enviar —el modo de falla más silencioso de GHL—, y Meta revisa la plantilla
 viendo el link real, que es menos probable que rebote.
 
-**Se paga:** seis plantillas de seguimiento en vez de tres, y seis nodos de
+**Se paga:** cuatro plantillas de seguimiento en vez de tres, y seis nodos de
 envío en `02` en vez de tres. Es un costo de una sola vez, en un workflow que
 después no se toca.
 
@@ -261,7 +267,7 @@ Si las tres pasan, se pausan los tres workflows viejos de calificación
 
 # OLA 2 · Verde  ·  `02` y `03`
 
-**Bloqueada hasta que Meta apruebe las 13 plantillas de**
+**Bloqueada hasta que Meta apruebe las 11 plantillas de**
 [`Plantillas-WhatsApp-v3.md`](./Plantillas-WhatsApp-v3.md). Mandarlas **antes**
 de empezar la Ola 1, para que la aprobación corra en paralelo.
 
@@ -303,7 +309,7 @@ rediseño). La API de GHL no crea pipelines: va a mano.
 - [ ] Editar los 4 de CAPI (origen, waits, valor real)
 - [ ] Las 3 pruebas de aceptación
 - [ ] Pausar los 3 workflows viejos de calificación
-- [ ] **En paralelo:** mandar las **13 plantillas** a aprobación
+- [ ] **En paralelo:** mandar las **11 plantillas** a aprobación
       ([`Plantillas-WhatsApp-v3.md`](./Plantillas-WhatsApp-v3.md)) y repuntear
       en Meta los anuncios que apuntan a las dos páginas orgánicas
 

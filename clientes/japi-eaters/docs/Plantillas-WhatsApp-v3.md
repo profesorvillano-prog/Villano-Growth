@@ -1,6 +1,6 @@
 # Plantillas de WhatsApp v3 — para enviar a aprobación
 
-> Las 13 plantillas nuevas del número **verde** (`+52`, WhatsApp Business API),
+> Las 11 plantillas nuevas del número **verde** (`+52`, WhatsApp Business API),
 > con el link de agenda **escrito directo en el texto**. El número morado es
 > texto libre y **no necesita plantillas**.
 >
@@ -18,15 +18,16 @@
 | `ads` | `https://www.japieaters.app/agendatullamada` |
 | `org-bio` y `org-setter` | `https://www.japieaters.app/or/agendatullamada` |
 
-Bio y setter comparten calendario, así que son **dos juegos de plantillas de
-seguimiento, no tres**.
+Bio y setter comparten calendario. Y como el link va **solo en el primer
+mensaje**, solo ese primero tiene dos versiones: los otros dos son uno solo.
 
 ## Qué implica llevar el link escrito
 
-Al no ser variable, **`02 · Ghost` necesita un if/else por origen**: la rama ADS
-manda las tres `_ads`, la rama ORG manda las tres `_org`, y los `org-setter`
-salen sin ghost (Valen los trabaja por DM). Lo mismo en `03` para elegir cuál
-de los dos `cancelo_reagenda` sale.
+Al no ser variable, **`02 · Ghost` abre con un if/else por origen** solo para el
+primer mensaje: rama ADS manda `v3_ghost_1_ads`, rama ORG manda
+`v3_ghost_1_org`, y los `org-setter` salen sin ghost (Valen los trabaja por DM).
+Después las dos ramas siguen con `v3_ghost_2` y `v3_ghost_3`, que son las mismas
+para todos. Lo mismo en `03` para elegir cuál de los dos `cancelo_reagenda` sale.
 
 A cambio desaparece el punto de falla: ninguna variable puede llegar vacía y
 dejar un mensaje sin enviar, y Meta revisa la plantilla viendo el link real.
@@ -42,16 +43,16 @@ porque deja el dato a la vista en la ficha del contacto.)*
 Por eso todas abren con una palabra —"Hola", "Ojo"— y ninguna termina en el
 link: siempre hay una línea de cierre después.
 
-**Si el campo viene vacío en GHL, el envío falla.** Quedan solo tres plantillas
-con una segunda variable —`{{2}}` como fecha y hora—, así que son tres
+**Si el campo viene vacío en GHL, el envío falla.** Quedan solo dos plantillas
+con una segunda variable —`{{2}}` como fecha y hora—, así que son dos
 puntos de falla en vez de siete.
 
 ## Cómo enviarlas
 
-Enviar **las 13 juntas**. La aprobación tarda y es el camino crítico de toda la
+Enviar **las 11 juntas**. La aprobación tarda y es el camino crítico de toda la
 Ola 2: mientras Meta revisa, se construye la Ola 1.
 
-**Sobre la categoría:** las seis de seguimiento son `MARKETING`. Las que hablan
+**Sobre la categoría:** las cuatro de seguimiento son `MARKETING`. Las que hablan
 de una reunión que la persona **ya tiene agendada** van como `UTILITY`
 (entregan mejor y cuestan menos). Meta recategoriza por su cuenta si no está de
 acuerdo; si alguna vuelve como MARKETING se usa igual.
@@ -61,11 +62,13 @@ cita existente. Nada de vender, ni de cupos, ni de "aprovecha".
 
 ---
 
-## Bloque 1 · Seguimiento sin agenda · ADS (3)
+## Bloque 1 · Seguimiento sin agenda (4)
 
-Link: `https://www.japieaters.app/agendatullamada` · Voz de **equipo**, tercera persona del plural.
+**El link va solo en el primer mensaje.** Es el único que cambia según el
+calendario; los otros dos son iguales para todos, porque el link ya quedó en el
+chat y a esa altura lo que se busca es una respuesta, no un clic.
 
-### `v3_ghost_1_ads` · MARKETING · `{{1}}` nombre
+### `v3_ghost_1_ads` · MARKETING · `{{1}}` nombre · origen `ads`
 
 ```
 Hola {{1}}! Somos del equipo de Japi Eaters 🙌
@@ -79,37 +82,7 @@ Te dejamos el link acá 👉 https://www.japieaters.app/agendatullamada
 Cualquier duda, respóndenos por acá.
 ```
 
-### `v3_ghost_2_ads` · MARKETING · `{{1}}` nombre
-
-```
-Hola {{1}}, estamos atentos para ayudarte en lo que necesites 🙌
-
-¿No te acomodan los horarios disponibles?
-
-Acá te dejamos el link de nuevo 👉 https://www.japieaters.app/agendatullamada
-
-Elige el horario que más te sirva.
-```
-
-### `v3_ghost_3_ads` · MARKETING · `{{1}}` nombre
-
-```
-Hola {{1}}, cuéntanos si finalmente deseas agendar tu reunión.
-
-Ya liberamos varias horas para esta semana y quedan pocos cupos por convocatoria.
-
-Puedes elegir la tuya acá 👉 https://www.japieaters.app/agendatullamada
-
-Si este no es tu momento también está bien: avísanos y cerramos tu postulación 🙌
-```
-
----
-
-## Bloque 2 · Seguimiento sin agenda · ORG (3)
-
-Link: `https://www.japieaters.app/or/agendatullamada` · Mismo texto, solo cambia el link. Sirve para bio y para setter.
-
-### `v3_ghost_1_org` · MARKETING · `{{1}}` nombre
+### `v3_ghost_1_org` · MARKETING · `{{1}}` nombre · origen `org-bio` y `org-setter`
 
 ```
 Hola {{1}}! Somos del equipo de Japi Eaters 🙌
@@ -123,33 +96,29 @@ Te dejamos el link acá 👉 https://www.japieaters.app/or/agendatullamada
 Cualquier duda, respóndenos por acá.
 ```
 
-### `v3_ghost_2_org` · MARKETING · `{{1}}` nombre
+### `v3_ghost_2` · MARKETING · `{{1}}` nombre · sirve para los dos
 
 ```
-Hola {{1}}, estamos atentos para ayudarte en lo que necesites 🙌
+Hola {{1}}, seguimos atentos por si necesitas algo 🙌
 
 ¿No te acomodan los horarios disponibles?
 
-Acá te dejamos el link de nuevo 👉 https://www.japieaters.app/or/agendatullamada
-
-Elige el horario que más te sirva.
+Cuéntanos por acá y te ayudamos. El link para elegir tu hora te quedó en el mensaje anterior.
 ```
 
-### `v3_ghost_3_org` · MARKETING · `{{1}}` nombre
+### `v3_ghost_3` · MARKETING · `{{1}}` nombre · sirve para los dos · último toque
 
 ```
 Hola {{1}}, cuéntanos si finalmente deseas agendar tu reunión.
 
 Ya liberamos varias horas para esta semana y quedan pocos cupos por convocatoria.
 
-Puedes elegir la tuya acá 👉 https://www.japieaters.app/or/agendatullamada
-
-Si este no es tu momento también está bien: avísanos y cerramos tu postulación 🙌
+Si este no es tu momento también está bien: respóndenos y cerramos tu postulación 🙌
 ```
 
 ---
 
-## Bloque 3 · Bienvenida de Josefina y confirmación (6)
+## Bloque 2 · Bienvenida de Josefina y confirmación (6)
 
 ### `v3_bienvenida_jose` · UTILITY · **con botón**
 **Variables:** `{{1}}` nombre · **Botón:** `Ver vídeo` (quick reply)
@@ -217,7 +186,7 @@ Supeer {{1}}! Ahora te va a escribir mi equipo y desde ahora en adelante por aqu
 
 ---
 
-## Bloque 4 · Recordatorio de 24 h (1)
+## Bloque 3 · Recordatorio de 24 h (1)
 
 ### `v3_recordatorio_24h` · UTILITY · **con un solo botón**
 **Variables:** `{{1}}` nombre · `{{2}}` fecha y hora
@@ -241,11 +210,9 @@ Hola {{1}}, recuerda que nos vemos {{2}} 🙌
 | Plantilla | Categoría | Variables | Botones / media |
 |---|---|---|---|
 | `v3_ghost_1_ads` | MARKETING | 1 | — |
-| `v3_ghost_2_ads` | MARKETING | 1 | — |
-| `v3_ghost_3_ads` | MARKETING | 1 | — |
 | `v3_ghost_1_org` | MARKETING | 1 | — |
-| `v3_ghost_2_org` | MARKETING | 1 | — |
-| `v3_ghost_3_org` | MARKETING | 1 | — |
+| `v3_ghost_2` | MARKETING | 1 | — |
+| `v3_ghost_3` | MARKETING | 1 | — |
 | `v3_bienvenida_jose` | UTILITY | 1 | botón `Ver vídeo` |
 | `v3_bienvenida_nudge` | UTILITY | 1 | — |
 | `v3_confirma_hora` | UTILITY | 2 | vídeo + `Sí, confirmo` / `Cancelar` |
