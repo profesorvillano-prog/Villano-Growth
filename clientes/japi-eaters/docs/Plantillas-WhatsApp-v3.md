@@ -196,12 +196,28 @@ Supeer {{1}}! Ahora te va a escribir mi equipo y desde ahora en adelante por aqu
 Hola {{1}}, recuerda que nos vemos {{2}} 🙌
 
 ¿Nos confirmas por aquí si podrás asistir?
+
+Y si te surgió algo, escríbenos por acá y lo movemos sin problema.
 ```
 
-> **Por qué un solo botón.** Pedir confirmación no siembra la cancelación;
-> ofrecer el botón de reagendar sí. Quien no toca el botón entra a seguimiento
-> manual del morado. Queda pendiente la opinión de Seba, pero conviene mandarla
-> así: agregar un botón después obliga a re-aprobar, quitarlo no.
+### Por qué un solo botón y la salida por texto
+
+**La asimetría es a propósito.** Confirmar cuesta un toque; avisar que no puede
+cuesta escribir una línea. No es para atraparla: ese pequeño esfuerzo filtra.
+Quien de verdad no puede, escribe. Quien solo está dudando no se molesta y
+termina yendo. Un botón de cancelar convierte la duda en cancelación.
+
+**Pero la salida tiene que existir.** Un no-show quema 45 minutos del equipo;
+una cancelación con 24 horas de aviso libera el cupo. Por eso la última línea
+invita a escribir.
+
+**Y una respuesta vale más que un toque.** Quien escribe *"no puedo, se me
+complicó"* se puede rescatar a un nuevo horario ahí mismo, y además abre la
+ventana de 24 h para que Anaís conteste libre desde el verde. Quien toca
+"Cancelar" se va sin conversación.
+
+Queda pendiente la opinión de Seba, pero conviene mandarla así igual: agregar
+un botón después obliga a re-aprobar la plantilla, quitarlo no.
 
 ---
 

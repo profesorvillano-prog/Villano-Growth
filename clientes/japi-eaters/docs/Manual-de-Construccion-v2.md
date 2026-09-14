@@ -282,6 +282,23 @@ Tres cosas que ya se pueden dejar decididas:
   `_ads` o `_org` (ver arriba).
 - `02` se salta a los `org-setter` (Valen los trabaja a mano por DM).
 
+### `05` · las tres salidas del recordatorio de 24 h
+
+El recordatorio tiene un botón y una salida por texto, así que el workflow
+tiene que distinguir tres casos:
+
+| Qué hace la lead | Qué hace `05` |
+|---|---|
+| **Toca `Confirmo mi asistencia`** | Tag `confirmada-24h`. Los recordatorios siguen su curso normal. |
+| **Responde con texto** | **Pausa los recordatorios automáticos** y avisa al morado con tarea + Slack. Un humano decide si se mueve o se mantiene. |
+| **No hace nada en 3 h** | Aviso al morado para que Anaís escriba a mano. Es lo que hoy hace a pulso: *"si no confirmas hoy día, cancelamos tu agenda"*. |
+
+**La pausa del segundo caso no es opcional.** Si alguien escribe "no voy a
+poder" y a la mañana siguiente igual le llega *"hoy es nuestra llamada"*, el
+sistema queda peor que sin automatización.
+
+---
+
 # OLA 3 · Morado  ·  `04`, `05`, `06`
 
 **Bloqueada hasta que el número morado esté conectado en GHL.** Confirmar
