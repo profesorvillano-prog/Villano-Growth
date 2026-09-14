@@ -395,3 +395,32 @@ que si.
 La estructura `552700` la comparte el data store de Cool Drive (`173778`), asi que
 el campo se agrego **sumando**, sin tocar nada de lo que ya habia. Los registros
 siguen separados, que era lo importante.
+
+## El nombre del perro ya no se pregunta (14 sep 2026)
+
+Marcelo lo marco como el tic mas insistente del bot: preguntaba el nombre de la
+salchicha en practicamente todas las conversaciones, y eso es lo primero que
+delata un formulario.
+
+**Regla nueva: no se pregunta nunca**, ni aunque el campo `nombre_perro` este
+vacio. El campo sigue existiendo y se sigue guardando, pero **se llena solo si la
+persona lo dice sola**.
+
+- Si lo dicen, se usa en cada mensaje a partir de ahi.
+- Si no lo dicen, se dice *tu salchicha*, *tu perrita*, *tu perrito*, o *ella* o
+  *el*. Se puede calificar, explicar el mecanismo y mandar la pagina sin saberlo.
+- La unica forma en que puede aparecer es **pegado a algo que ella mostro**, por
+  ejemplo despues de una foto: *se ve regalona, como se llama?*. Y si no contesta
+  eso, se acabo el tema.
+
+Lo que cambio en concreto:
+
+| Donde | Cambio |
+|---|---|
+| `CEREBRO-MARCELO.md` | Seccion nueva `## El nombre del perro no lo pregunto`, con la tabla de que nunca escribir |
+| `CEREBRO-MARCELO.md` | El orden de datos pasa a 4 puntos y el nombre sale de la lista, queda la edad |
+| `CEREBRO-MARCELO.md` | En DATOS, la excepcion: un campo vacio se puede preguntar **salvo el nombre del perro** |
+| `CEREBRO-SEGUIMIENTO.md` y `7035204` | `NUNCA PREGUNTES EL NOMBRE DEL PERRO` |
+| `7371151` | Lo mismo, en la lista de lo que nunca hace el cierre |
+
+Los tres escenarios quedaron con el texto nuevo. El `7371151` sigue apagado.
