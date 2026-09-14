@@ -1,6 +1,6 @@
 # Plantillas de WhatsApp v3 — para enviar a aprobación
 
-> Las 11 plantillas nuevas del número **verde** (`+52`, WhatsApp Business API),
+> Las 13 plantillas nuevas del número **verde** (`+52`, WhatsApp Business API),
 > con el link de agenda **escrito directo en el texto**. El número morado es
 > texto libre y **no necesita plantillas**.
 >
@@ -49,7 +49,7 @@ puntos de falla en vez de siete.
 
 ## Cómo enviarlas
 
-Enviar **las 11 juntas**. La aprobación tarda y es el camino crítico de toda la
+Enviar **las 13 juntas**. La aprobación tarda y es el camino crítico de toda la
 Ola 2: mientras Meta revisa, se construye la Ola 1.
 
 **Sobre la categoría:** las cuatro de seguimiento son `MARKETING`. Las que hablan
@@ -186,7 +186,7 @@ Supeer {{1}}! Ahora te va a escribir mi equipo y desde ahora en adelante por aqu
 
 ---
 
-## Bloque 3 · Recordatorio de 24 h (1)
+## Bloque 3 · Recordatorios (3)
 
 ### `v3_recordatorio_24h` · UTILITY · **con un solo botón**
 **Variables:** `{{1}}` nombre · `{{2}}` fecha y hora
@@ -219,7 +219,72 @@ ventana de 24 h para que Anaís conteste libre desde el verde. Quien toca
 Queda pendiente la opinión de Seba, pero conviene mandarla así igual: agregar
 un botón después obliga a re-aprobar la plantilla, quitarlo no.
 
----
+### `v3_recordatorio_8h` · UTILITY
+**Variables:** `{{1}}` nombre → `{{contact.first_name}}` · `{{2}}` hora → `{{appointment.only_start_time}}`
+
+```
+Hola {{1}}, tu reunión con el equipo de admisión es hoy a las {{2}} 🙌
+
+Conéctate desde el computador si puedes: van a compartir pantalla y en el teléfono no se ve bien.
+
+Busca un lugar tranquilo, con buena señal y sin interrupciones.
+
+Nos vemos en un rato.
+```
+
+> **Cambia de categoría y eso importa.** La actual es MARKETING por una sola
+> línea: *"puedas conocer el Programa ÉxiTO… y ver si es para ti"*. Eso es
+> promoción. Sacándola, la plantilla habla solo de la cita existente y califica
+> como UTILITY: entrega mejor y cuesta menos.
+
+### `v3_recordatorio_1h` · UTILITY
+**Variables:** `{{1}}` nombre → `{{contact.first_name}}` · `{{2}}` enlace → `{{appointment.meeting_location}}`
+
+```
+Hola {{1}}, en una hora comenzamos 🙌
+
+Acá está el enlace para entrar: {{2}}
+
+Conéctate unos minutos antes y desde el computador, así partimos puntuales y aprovechan los 45 minutos completos.
+
+Nos vemos.
+```
+
+> La actual abre con `Enlace: {{1}}` en seco. Poner primero una línea humana y
+> el enlace después se lee mucho mejor, y de paso reincorpora el computador,
+> que es la última oportunidad de recordarlo.
+
+## Dos trampas de los recordatorios
+
+**La zona horaria.** Hay leads en Chile, Argentina y Uruguay, que no están en la
+misma hora. La plantilla vieja lo resolvía escribiendo *"de Chile (GMT-4)"* a
+mano. Antes de publicar hay que verificar en qué zona renderiza
+`{{appointment.only_start_time}}`: si es la del contacto, no hay que agregar
+nada; si es la de la cuenta, hay que nombrarla o una lead argentina se conecta
+una hora tarde.
+
+**Las llamadas temprano.** "8 horas antes" de una reunión de las 9:00 cae a la
+1:00 de la madrugada. Conviene anclar el envío a una hora fija de la mañana en
+vez de restar horas, o ponerle un piso para que nunca salga de noche.
+
+*(De paso: en el workflow actual el nodo se llama "WhatsApp 4 hrs" pero manda
+la plantilla `wa_recordatorio_8h`. Uno de los dos nombres miente.)*
+
+## Cuidado con solapar el verde y el morado
+
+Con estas tres plantillas el verde cubre 24 h, la mañana y 1 h antes. Si el
+morado además manda el saludo de la mañana y el del cuarto de hora, la lead
+recibe **cinco o seis recordatorios** en un día.
+
+Hay que decidir qué canal se queda con cada momento. La repartición que
+recomiendo:
+
+| Momento | Canal | Por qué |
+|---|---|---|
+| 24 h antes | 🟩 verde | Es el momento de confirmar, y necesita botón |
+| Mañana del día | 🟩 verde | Automático, no aporta que sea humano |
+| 1 h antes | 🟩 verde | Lleva el enlace |
+| A la hora | 🟪 morado, manual | *"Ya estoy por aquí, te espero adentro"* — el único toque humano, y el que más sube el show |
 
 ## Resumen para el gestor
 
@@ -236,10 +301,13 @@ un botón después obliga a re-aprobar la plantilla, quitarlo no.
 | `v3_cancelo_reagenda_org` | UTILITY | 1 | — |
 | `v3_traspaso_equipo` | UTILITY | 1 | — |
 | `v3_recordatorio_24h` | UTILITY | 2 | botón `Confirmo mi asistencia` |
+| `v3_recordatorio_8h` | UTILITY | 2 | — |
+| `v3_recordatorio_1h` | UTILITY | 2 | — |
 
 ## Plantillas actuales
 
-`wa_recordatorio_8h` y `wa_recordatorio_1h` se mantienen tal cual.
+`wa_recordatorio_8h` y `wa_recordatorio_1h` quedan reemplazadas por sus
+versiones v3. La de 8 h además cambia de MARKETING a UTILITY.
 
 `ghost_agenda_ads`, `v2_confirmar_jose` y `wa_confirmacion_agenda_organica`
 quedan **en desuso** cuando la Ola 2 se publique. No se borran.

@@ -267,7 +267,7 @@ Si las tres pasan, se pausan los tres workflows viejos de calificación
 
 # OLA 2 · Verde  ·  `02` y `03`
 
-**Bloqueada hasta que Meta apruebe las 11 plantillas de**
+**Bloqueada hasta que Meta apruebe las 13 plantillas de**
 [`Plantillas-WhatsApp-v3.md`](./Plantillas-WhatsApp-v3.md). Mandarlas **antes**
 de empezar la Ola 1, para que la aprobación corra en paralelo.
 
@@ -326,7 +326,7 @@ rediseño). La API de GHL no crea pipelines: va a mano.
 - [ ] Editar los 4 de CAPI (origen, waits, valor real)
 - [ ] Las 3 pruebas de aceptación
 - [ ] Pausar los 3 workflows viejos de calificación
-- [ ] **En paralelo:** mandar las **11 plantillas** a aprobación
+- [ ] **En paralelo:** mandar las **13 plantillas** a aprobación
       ([`Plantillas-WhatsApp-v3.md`](./Plantillas-WhatsApp-v3.md)) y repuntear
       en Meta los anuncios que apuntan a las dos páginas orgánicas
 
