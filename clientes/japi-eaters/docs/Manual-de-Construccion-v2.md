@@ -157,7 +157,7 @@ link en el DM y porque deja el dato a la vista en la ficha del contacto.)*
 |---|---|---|
 | 1 | Update Contact Field | `UTM Source` ← `{{contact.attributionSource.utmSource}}` · `UTM Campaign` ← `{{contact.attributionSource.campaign}}` *(para reportar por campaña: hoy esos campos están vacíos)* |
 | 2 | Update Contact Field | **`Origen` = `ads`** |
-| 3 | Update Contact Field | `Link Agenda` = `https://www.japieaters.app/agendatullamada` *(para la ficha y el DM de Valen; las plantillas ya no lo usan)* |
+| 3 | Update Contact Field | `Link Agenda` = `https://www.japieaters.app/agendatullamada` *(opcional: para la ficha y el DM de Valen; las plantillas ya no lo usan)* |
 | 4 | Add Contact Tag | `survey-ads`, `lead-ads` |
 | 5 | Add to Workflow | `01 · Motor de Calificación` |
 
@@ -204,7 +204,7 @@ re-entry activado**. Primer nodo: *Remove Contact Tag* `sys-calificar`.
 | 10 | *(las 3 ramas que califican)* Create Opportunity | Pipeline `②` · etapa `Calificada (Formulario)` · status `open` · **source = `{{contact.source}}`** · `Monto Propuesto` según tier |
 | 11 | **If/Else — `¿Decide sola?`** | `¿Quién debe estar contigo…?` (`TjRDcKidBqPeykkkWhPo`) → si **no** es `Solo yo, tomo la decisión por mi cuenta.` → Add Tag **`decisor-tercero`** |
 | 12 | **Assign User** | Si `Origen` = `org-setter` → Valen. Si no → Anaís. *(Reemplaza los workflows `Asignación Anaís/Rafa`, de mayo.)* |
-| 13 | Add Contact Tag | `wa-verde` + Update Field `Canal WhatsApp` = `verde` |
+
 | 14 | Slack | Un mensaje al canal del tier, **con el origen en el texto** |
 | 15 | *(rama None de cualquier if/else)* | Tag `lead-revisar` + Slack a `#leads-conflictos` → FIN |
 

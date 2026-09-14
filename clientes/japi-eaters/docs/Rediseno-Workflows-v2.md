@@ -84,11 +84,17 @@ Reglas de uso:
 - Los tags `lead-ads` / `lead-org` / `lead-setter-org` se mantienen como espejo
   para segmentos, y **ya nadie los quita**.
 
-**Campo creado** (13-09-2026): `contact.canal_whatsapp` — *Single Options*, ID
-`2m5LCiZU1GdyVH8eHrFz`, opciones `verde` · `morado`.
-Marca qué número tiene la conversación en cada momento. Lo escribe el
-workflow `04` al hacer el handoff. Sirve para que ningún workflow mande por el
-número equivocado y para que Anaís sepa de un vistazo dónde contestar.
+**Campo descartado** (14-09-2026): `contact.canal_whatsapp` y los tags
+`wa-verde` / `wa-morado`. Se crearon el 13-09 para marcar qué número tiene la
+conversación, pero **era información duplicada**: todo lo anterior a la
+confirmación es verde y todo lo posterior es morado, así que el tag
+`confirmada` y la etapa del pipeline ya lo dicen. Un dato duplicado es un dato
+que algún día se contradice — el mismo error que `lead-ads` duplicando a
+`origen`.
+
+Quedan creados en la subcuenta pero **ningún workflow los escribe ni los lee**.
+Si en la Ola 3 aparece un workflow que de verdad necesite ramificar por canal,
+se retoman ahí con un motivo concreto.
 
 ### IDs de las tres encuestas
 
@@ -113,7 +119,7 @@ obliga a repuntear cada workflow que lo usa). El orden es por prefijo:
 | **Agenda** | `agenda-ads`, `agenda-org`, `ghost-agenda`, `sin-confirmar`, `confirmada`, `re-agendada` | `02`, `03`, `06` |
 | **Llamada** | `video-enviado`, `en-closer`, `asistio`, `no-show` | `04`, `08` |
 | **Venta** | `reserva-pagada` | `08` |
-| **Canal** | `wa-verde` (`ZzEvvvEHxz7qoDHDCTaJ`), `wa-morado` (`USXBlhuA3Gft3Ifhr0sy`) — **creados 13-09** | `04` |
+| ~~**Canal**~~ | ~~`wa-verde`, `wa-morado`~~ — **descartados el 14-09**, ver §2.1 | — |
 
 Cambios concretos:
 - `bronce+ revisar` **se elimina** (nadie lo escribe, nombre con espacio).
