@@ -1,5 +1,5 @@
 import { loadPlanBundle } from "@/lib/data";
-import { hasSupabaseEnv } from "@/lib/supabase/env";
+import { hasSupabaseEnv, missingSupabaseEnv } from "@/lib/supabase/env";
 import { PlanProvider } from "@/components/plan-context";
 import { BottomNav } from "@/components/bottom-nav";
 
@@ -15,7 +15,7 @@ export default async function MainLayout({ children }: { children: React.ReactNo
         <p className="mt-2 text-sm text-muted">
           {hasSupabaseEnv
             ? "Revisa la conexión con Supabase y vuelve a intentar."
-            : "Agrega NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY en Vercel y vuelve a desplegar."}
+            : `Falta ${missingSupabaseEnv.join(" y ")} en Vercel. Agrégala y haz Redeploy: estas variables se incrustan al compilar.`}
         </p>
       </main>
     );
