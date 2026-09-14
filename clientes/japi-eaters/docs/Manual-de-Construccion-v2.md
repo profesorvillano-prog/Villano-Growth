@@ -37,6 +37,9 @@ costando plata hoy.
 
 # OLA 1 · Medición
 
+> **Guía de construcción nodo por nodo, con checklist:**
+> https://claude.ai/code/artifact/c795dfb1-3031-4ff6-b3df-e592208182cf
+
 ## La regla de origen (decisión del 14-09)
 
 **El origen es la encuesta que llenó.** Punto. Las tres encuestas ya
