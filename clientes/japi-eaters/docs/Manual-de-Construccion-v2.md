@@ -173,7 +173,7 @@ link en el DM y porque deja el dato a la vista en la ficha del contacto.)*
 | 4 | Add Contact Tag | `survey-org`, `lead-org` |
 | 5 | **If/Else — `¿Vino de un anuncio?`** | `UTM Source` *contains* `Facebook` **OR** *contains* `Instagram` |
 | 6 | [SÍ] Add Contact Tag + Slack | Tag `revisar-origen` · aviso a `#leads-conflictos`: *"Postulación orgánica con UTM de anuncio — revisar a qué página apunta la campaña {{contact.utm_campaign}}"* |
-| 7 | Add to Workflow *(las dos ramas)* | `01 · Motor de Calificación` |
+| 7 | Add Contact Tag *(las dos ramas)* | **`sys-calificar`** |
 
 **El origen no cambia en la rama SÍ.** Sigue siendo `org-bio`. El aviso existe
 para arreglar el anuncio, no para reclasificar la lead.
@@ -187,8 +187,8 @@ orgánico y tags `survey-org`, `lead-setter-org`.
 
 ## `01 · Motor de Calificación`
 
-**Disparador:** ninguno. Se entra solo por *Add to Workflow* desde `01a/b/c`.
-*(En GHL: dejarlo sin trigger y con "Allow Re-entry" desactivado.)*
+**Disparador:** *Contact Tag → Tag added → `sys-calificar`*, con **Allow
+re-entry activado**. Primer nodo: *Remove Contact Tag* `sys-calificar`.
 
 | # | Acción | Configuración |
 |---|---|---|
