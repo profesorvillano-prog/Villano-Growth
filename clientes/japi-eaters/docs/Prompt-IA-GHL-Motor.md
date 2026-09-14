@@ -1,9 +1,13 @@
 # Prompt para la IA de GoHighLevel — `01 · Motor de Calificación`
 
-> Pegar tal cual en el chat del constructor de workflows. Después **verificar a
-> mano** las tres cosas que la IA suele errar: los textos exactos de las
-> opciones (con acentos y barras), la etapa de la oportunidad, y que la rama
-> `None` de cada condición exista.
+> ⚠️ **Probado el 14-09: el resultado quedó mal.** La IA del constructor no
+> arma bien una estructura de este tamaño (dos condiciones anidadas, ocho
+> ramas, treinta nodos). El motor **se construye a mano**, siguiendo la guía
+> paso a paso:
+> https://claude.ai/code/artifact/54b39d1b-4171-4b93-aee4-4ad44693f5bf
+>
+> Este prompt se conserva por si sirve para workflows más chicos —una entrada,
+> un flujo lineal— donde el margen de error es menor.
 
 ---
 

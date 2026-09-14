@@ -39,6 +39,9 @@ costando plata hoy.
 
 > **Guía de construcción nodo por nodo, con checklist:**
 > https://claude.ai/code/artifact/c795dfb1-3031-4ff6-b3df-e592208182cf
+>
+> **El motor, bloque por bloque en el orden real de los clics:**
+> https://claude.ai/code/artifact/54b39d1b-4171-4b93-aee4-4ad44693f5bf
 
 ## La regla de origen (decisión del 14-09)
 
