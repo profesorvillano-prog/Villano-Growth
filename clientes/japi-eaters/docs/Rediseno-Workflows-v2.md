@@ -44,39 +44,45 @@ cambia (canal de Slack y responsable).
 **Campo creado** (13-09-2026): `contact.origen` — *Single Options*, ID
 `6BPeLlDeqrGMVxki3Q3c`, opciones `ads` · `org-bio` · `org-setter`.
 
-⚠️ **No se puede derivar de la encuesta.** Era el plan original, pero los datos
-lo desmienten: la encuesta `[SURVEY - ORG]` recibe tráfico pagado (ver **F-18**
-en la auditoría — al menos 20 de 60 postulaciones del último mes llegaron con
-`utm_source=Facebook`, y 38 traen huella de campaña). Si el origen se dedujera
-de la encuesta, un tercio de los leads de anuncios seguiría contándose como
-orgánico — que es exactamente lo que pasa hoy.
+### La regla: el origen es la encuesta que llenó
 
-**Regla de derivación (en este orden, en los workflows de entrada):**
+| Valor | Encuesta | Canal real |
+|---|---|---|
+| `ads` | `[SURVEY - ADS]` (`fB7k42z4Jr8ZRNmG3WX1`) | Anuncios de Meta |
+| `org-bio` | `[SURVEY - ORG]` (`99dHSXOPhwj6kFpE7TOy`) | Link de la biografía de Instagram |
+| `org-setter` | `[SURVEY - ORG SETTER]` (`kwuMWA1b5FXattZtwLu0`) | DM de Instagram, seteado por Valen |
 
-0. **Copiar primero la atribución nativa a los campos:**
-   `UTM Source` ← `{{contact.attributionSource.utmSource}}` y
-   `UTM Campaign` ← `{{contact.attributionSource.campaign}}`.
-1. Si `UTM Source` contiene `Facebook`/`Instagram` **o** `UTM Campaign` no está
-   vacío → **`ads`** *(manda la atribución, no la encuesta)*
-2. Si no, y la encuesta es `[SURVEY - ORG SETTER]` → **`org-setter`**
-3. Si no → **`org-bio`**
+**Decisión del cliente (14-09):** *bio y setter son orgánicas de Instagram, por
+lo tanto no se envía conversión a Meta por ellas.* Aunque la persona haya
+tocado un anuncio en algún momento, si llegó por el link de la bio o por DM, la
+venta no se le atribuye a la campaña. Es una política de atribución de primer
+toque orgánico, y es la que manda sobre cualquier señal de UTM.
 
-⚠️ **El paso 0 no es opcional.** Verificado el 14-09 en un contacto real: los
-campos `contact.utm_source` y `contact.utm_campaign` **existen pero están
-vacíos** — nadie los rellena. La atribución real vive en el objeto nativo
-`attributionSource` (que sí trae `utmSource`, `campaign`, `utmContent`,
-`sessionSource`, `fbclid`, `fbc`, `fbp`). Ramificar directo sobre los campos
-personalizados daría siempre "no es de pago". Copiarlos primero además arregla
-los reportes por campaña, que hoy no existen.
+En consecuencia: **solo `origen = ads` dispara eventos a Meta** (workflow `09`).
+
+### El UTM no enruta: avisa
+
+Los UTM de Facebook que aparecen en postulaciones de bio y setter **no cambian
+el origen**. Son el síntoma de un problema de plumbing —un anuncio apuntando a
+una página orgánica— y se arreglan en Meta, no en el workflow. Distorsionar la
+atribución para compensar un anuncio mal apuntado sería tapar el problema.
+
+Lo que sí hace el workflow es **avisar**: si una postulación de bio o setter
+llega con `attributionSource.utmSource` = Facebook, se le pone el tag
+`revisar-origen` y se manda un aviso a `#leads-conflictos`. Así el anuncio mal
+apuntado se detecta el mismo día, en vez de descubrirse en una auditoría.
+
+*(Contexto de por qué importa: al 13-09, dos páginas orgánicas estaban
+recibiendo tráfico pagado — ver F-18 en la auditoría. El arreglo es repuntear
+esos anuncios; el tag es el detector para que no vuelva a pasar sin que nadie
+se entere.)*
 
 Reglas de uso:
-- Se escribe **una sola vez**, en el workflow `01`. Ningún otro workflow lo toca.
+- Se escribe **una sola vez**, en el workflow de entrada. Ningún otro lo toca.
 - Es el campo que responde "¿quién agenda desde bio, desde seteo y desde
   anuncios?" en cualquier reporte, filtro o smart list.
-- **Los workflows de Meta CAPI (`09`) pasan a filtrar por `origen = ads`**, no
-  por el tag `lead-ads`. Ese cambio es lo que cierra la fuga de conversiones.
-- Los tags `lead-ads` / `lead-org` / `lead-setter-org` se mantienen **solo como
-  espejo para segmentos**, nunca como fuente de verdad, y **ya nadie los quita**.
+- Los tags `lead-ads` / `lead-org` / `lead-setter-org` se mantienen como espejo
+  para segmentos, y **ya nadie los quita**.
 
 **Campo creado** (13-09-2026): `contact.canal_whatsapp` — *Single Options*, ID
 `2m5LCiZU1GdyVH8eHrFz`, opciones `verde` · `morado`.
@@ -152,9 +158,9 @@ que es el objetivo. Nodo por nodo en
 **Disparadores:** una encuesta por entrada; el motor no tiene disparador (se
 entra por *Add to Workflow*).
 **Pasos:**
-1. **Deriva `origen` con la regla de §2.1** (primero la atribución UTM, después
-   la encuesta) y escribe el tag espejo + `survey-*`. Nunca al revés: la
-   encuesta sola miente en un tercio de los casos (F-18).
+1. **Escribe `origen` según la encuesta que disparó** (§2.1) + el tag espejo +
+   `survey-*`. Si es bio o setter y trae UTM de Facebook, además tag
+   `revisar-origen` y aviso a Slack — pero el origen **no cambia**.
 2. **Asigna responsable:** `org-setter` → Valen; los otros dos → Anaís.
    *(Absorbe los workflows `Asignación Anaís/Rafa`, que apuntan a la estructura
    vieja de mayo — F-4.)*
@@ -273,11 +279,10 @@ los pasos.*
 `InitiateCheckout` (survey calificado), `Lead` (agenda), `Schedule`
 (confirmación), `Purchase` (venta).
 **Tres correcciones obligatorias:**
-- **Filtrar por `origen = ads`, no por el tag `lead-ads`** (F-18). Hoy los leads
-  pagados que entran por la encuesta orgánica quedan sin tag `lead-ads` y
-  **Meta nunca recibe su conversión**: la campaña optimiza sobre una fracción de
-  los resultados reales y el CPA que se reporta está inflado. Es la corrección
-  con más impacto económico de toda la lista.
+- **Filtrar por `origen = ads`**, no por el tag `lead-ads`. Un solo campo
+  decide qué va a Meta y qué no, en vez de un tag que hoy se agrega y se quita
+  en cuatro workflows distintos. Bio y setter **nunca** emiten eventos, por
+  decisión de atribución (§2.1).
 - **Fuera los `Wait 9999 days`** (hoy retienen 215 contactos dentro de los
   workflows; si no permiten re-entrada, una lead que re-agenda ya no vuelve a
   emitir `Schedule` y la campaña optimiza con datos incompletos — F-11).

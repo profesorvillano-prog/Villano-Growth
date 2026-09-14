@@ -37,89 +37,99 @@ costando plata hoy.
 
 # OLA 1 · Medición
 
-## Antes de construir: corrección al diseño
+## La regla de origen (decisión del 14-09)
 
-Verificado el 14-09 en un contacto real: **los campos `UTM Source` y
-`UTM Campaign` del contacto están vacíos.** Nadie los rellena. La atribución
-real vive en el objeto **nativo** de GHL `attributionSource`, que sí trae todo:
+**El origen es la encuesta que llenó.** Punto. Las tres encuestas ya
+corresponden una a una con los tres canales, así que la señal es limpia y no
+hay nada que deducir:
 
-```
-attributionSource.utmSource     → "Facebook"
-attributionSource.campaign      → "[cbo] Escalado Éxito"
-attributionSource.utmContent    → "ADS 1 - TO hace 5 años [G]"
-attributionSource.sessionSource → "Paid Social"
-attributionSource.fbclid / fbc / fbp → presentes
-```
+| Encuesta | `Origen` | Conversión a Meta |
+|---|---|---|
+| `[SURVEY - ADS]` `fB7k42z4Jr8ZRNmG3WX1` | `ads` | **Sí** |
+| `[SURVEY - ORG]` `99dHSXOPhwj6kFpE7TOy` | `org-bio` | No |
+| `[SURVEY - ORG SETTER]` `kwuMWA1b5FXattZtwLu0` | `org-setter` | No |
 
-Así que la regla de origen **no puede leer los campos personalizados
-directamente**: primero hay que copiar la atribución nativa a los campos, y
-después ramificar. Eso además rellena los dos campos que hoy están vacíos, con
-lo cual los reportes por campaña empiezan a existir.
+Bio y setter son orgánicas de Instagram: no se le atribuyen a la campaña aunque
+la persona haya tocado un anuncio antes.
 
-### El caso que lo demuestra
+**El UTM no enruta, avisa.** Si una postulación de bio o setter llega con
+`attributionSource.utmSource` = Facebook, significa que hay un anuncio apuntando
+a una página orgánica. Eso se arregla **en Meta**, repunteando el anuncio, no en
+el workflow. El workflow solo pone el tag `revisar-origen` y avisa por Slack
+para que se detecte el mismo día.
 
-`Jimena G. Fernández` (13-09): `source` = `[SURVEY - ORG SETTER]`,
-`attributionSource.utmSource` = **Facebook**, campaña **`[CBO] Escalado ÉxiTO`**,
-anuncio **`ADS 1 - TO hace 5 años [G]`**, aterrizó en
-`japieaters.app/exitoenalimentacion`. Tags: `lead-setter-org`, `confirmada`.
-Es una lead **de anuncios, que confirmó llamada, y Meta nunca recibió su
-`Schedule`**.
+> Esto simplifica mucho la entrada: ya no hay if/else de UTM ni hace falta
+> copiar la atribución a los campos para decidir. (Copiarla igual sigue siendo
+> útil, pero para **reportar por campaña**, no para enrutar — ver `01a` paso 1.)
 
-> ⚠️ **Y son dos páginas, no una.** `/exitoenalimentacion` lleva la encuesta
-> **ORG SETTER**, y `/postulacionexitoenalimentacion` lleva la encuesta **ORG**.
-> Las dos reciben tráfico pagado. Al repuntear anuncios hay que mirar ambas.
+## Lo que realmente cambia según el origen
 
-## Por qué son tres entradas y un motor
+De todo el recorrido, **solo tres cosas dependen del canal**. El resto es
+idéntico para las tres, y hoy está mantenido por triplicado:
 
-Un solo workflow con los tres disparadores de encuesta no puede saber **cuál**
-de los tres se disparó: GHL no ofrece esa condición en un if/else. Por eso la
-estructura es:
+| | ADS | ORG BIO | ORG SETTER |
+|---|---|---|---|
+| Evento a Meta | **sí** | no | no |
+| Ghost automático si no agenda | sí | sí | **no** (Valen lo hace por DM) |
+| Responsable y canal de Slack | Anaís | Anaís | Valen |
+| Tier, oportunidad, bienvenida de Josefina, confirmación, recordatorios, handoff, post-llamada | ← **idéntico** → | | |
 
-- **3 entradas mínimas** (una por encuesta), que solo resuelven el origen.
-- **1 motor compartido**, que tiene toda la lógica de tiers, oportunidad y Slack.
+Ese cuadro es el argumento entero del rediseño: tres diferencias no justifican
+tres cadenas completas.
 
-Son 4 workflows en vez de 3 cadenas completas duplicadas: la lógica de
-calificación vive **una sola vez**, que es lo que importa.
+### Dato que lo confirma
+
+Los workflows de ghost disparan con los tags de tier, que se los pone cualquier
+origen. Por eso `[ORG] 2 · Agenda + Ghost` lleva **430 inscripciones** cuando
+como mucho hubo ~117 postulaciones orgánicas: entran todas las de ads también y
+el primer nodo (`¿Es ORG?`) las expulsa. Lo mismo al revés en `[ADS] 2` (505).
+En la cadena única eso desaparece: se entra una vez y se ramifica por `Origen`.
+
+## Los dos calendarios se quedan
+
+No hay que unificarlos. Con el origen en el contacto, el calendario deja de ser
+la señal de enrutamiento y pasa a ser solo dónde se agenda:
+
+- Los workflows de confirmación y recordatorios disparan con **cualquiera de los
+  dos calendarios**, y ramifican por `Origen` si hace falta.
+- Desaparece el modo de falla actual, en el que una lead que recibe el link del
+  calendario "equivocado" ejecuta el flujo del otro origen.
 
 ---
 
 ## `01a · Entrada ADS`
 
-**Disparador:** *Survey Submitted* → Survey is `[SURVEY - ADS] Postulación ÉxiTO en Alimentación` (`fB7k42z4Jr8ZRNmG3WX1`)
+**Disparador:** *Survey Submitted* → `[SURVEY - ADS] Postulación ÉxiTO en Alimentación` (`fB7k42z4Jr8ZRNmG3WX1`)
 
 | # | Acción | Configuración |
 |---|---|---|
-| 1 | Update Contact Field | `UTM Source` ← `{{contact.attributionSource.utmSource}}` · `UTM Campaign` ← `{{contact.attributionSource.campaign}}` |
+| 1 | Update Contact Field | `UTM Source` ← `{{contact.attributionSource.utmSource}}` · `UTM Campaign` ← `{{contact.attributionSource.campaign}}` *(para reportar por campaña: hoy esos campos están vacíos)* |
 | 2 | Update Contact Field | **`Origen` = `ads`** |
 | 3 | Add Contact Tag | `survey-ads`, `lead-ads` |
 | 4 | Add to Workflow | `01 · Motor de Calificación` |
 
 ## `01b · Entrada ORG Bio`
 
-**Disparador:** *Survey Submitted* → `[SURVEY - ORG] Postulación ÉxiTO en Alimentación` (`99dHSXOPhwj6kFpE7TOy`)
+**Disparador:** *Survey Submitted* → `[SURVEY - ORG]` (`99dHSXOPhwj6kFpE7TOy`)
 
 | # | Acción | Configuración |
 |---|---|---|
-| 1 | Update Contact Field | igual que en `01a` (copia la atribución) |
-| 2 | **If/Else — `¿Vino de pago?`** | Rama `SÍ`: `UTM Source` *contains* `Facebook` **OR** *contains* `Instagram` **OR** `UTM Campaign` *is not empty* |
-| 3 | [SÍ] Update Contact Field | **`Origen` = `ads`** |
-| 4 | [SÍ] Add Contact Tag | `survey-org`, **`lead-ads`** ← el espejo correcto |
-| 5 | [NO] Update Contact Field | **`Origen` = `org-bio`** |
-| 6 | [NO] Add Contact Tag | `survey-org`, `lead-org` |
-| 7 | Add to Workflow *(las dos ramas)* | `01 · Motor de Calificación` |
+| 1 | Update Contact Field | igual que en `01a` |
+| 2 | Update Contact Field | **`Origen` = `org-bio`** |
+| 3 | Add Contact Tag | `survey-org`, `lead-org` |
+| 4 | **If/Else — `¿Vino de un anuncio?`** | `UTM Source` *contains* `Facebook` **OR** *contains* `Instagram` |
+| 5 | [SÍ] Add Contact Tag + Slack | Tag `revisar-origen` · aviso a `#leads-conflictos`: *"Postulación orgánica con UTM de anuncio — revisar a qué página apunta la campaña {{contact.utm_campaign}}"* |
+| 6 | Add to Workflow *(las dos ramas)* | `01 · Motor de Calificación` |
+
+**El origen no cambia en la rama SÍ.** Sigue siendo `org-bio`. El aviso existe
+para arreglar el anuncio, no para reclasificar la lead.
 
 ## `01c · Entrada ORG Setter`
 
-**Disparador:** *Survey Submitted* → `[SURVEY - ORG SETTER] Postulación ÉxiTO en Alimentación` (`kwuMWA1b5FXattZtwLu0`)
+**Disparador:** *Survey Submitted* → `[SURVEY - ORG SETTER]` (`kwuMWA1b5FXattZtwLu0`)
 
-Idéntico a `01b`, cambiando la rama `NO`: `Origen` = **`org-setter`** y tags
-`survey-org`, `lead-setter-org`.
-
-> **La prioridad es la atribución, no la encuesta.** Si la lead trae UTM de
-> Facebook, es `ads` aunque haya llenado la encuesta orgánica. Ese único cambio
-> es el que cierra la fuga.
-
----
+Idéntico a `01b` con `Origen` = **`org-setter`** y tags `survey-org`,
+`lead-setter-org`.
 
 ## `01 · Motor de Calificación`
 
@@ -172,7 +182,7 @@ toda la lista. En cada uno:
 | Workflow | Cambio |
 |---|---|
 | `Envío [Initiate Checkout]…` (`b24e3f47…`) | El if/else pasa de `Tags includes survey-ads + tier-gold/silver` a **`Origen is ads`** + tier gold/silver |
-| `Envío [Lead]…` (`c3e365ba…`) | Añadir condición **`Origen is ads`** (hoy no filtra origen: dispara con cualquier agenda del calendario `[A]`) |
+| `Envío [Lead]…` (`c3e365ba…`) | Añadir condición **`Origen is ads`**. Hoy no filtra origen — dispara con cualquier agenda del calendario `[A]`, así que una lead orgánica que agende ahí emite conversión sin deberla |
 | `Envío [Schedule]…` (`9f8d6a2c…`) | Cambiar `Tags includes lead-ads` por **`Origen is ads`** · **borrar los dos `Wait 9999 days`** y poner *Remove from Workflow* |
 | `Envío [Purchase]…` (`b32d69b5…`) | Cambiar `Tag equals lead-ads` por **`Origen is ads`** · **valor dinámico** `{{contact.monto_propuesto}}` en vez de `1.500` fijo · borrar el `Wait 9999 days` |
 
@@ -184,30 +194,31 @@ toda la lista. En cada uno:
 
 ## Prueba de aceptación de la Ola 1
 
-Antes de dar por buena la ola, tres postulaciones de prueba (contacto propio,
-teléfono propio):
+Tres postulaciones de prueba con contacto propio:
 
-1. **Entrar a `japieaters.app/postulacionexito-884187` con UTMs de ads pegados a
-   mano** y postular con respuestas Gold → esperar: `Origen = ads`, tags
+1. **Encuesta de ADS**, respuestas Gold → esperar `Origen = ads`, tags
    `lead-ads` + `tier-gold`, oportunidad en `Calificada (Formulario)`, Slack en
    `#leads-gold`, y **el evento `InitiateCheckout` visible en el Events Manager
    de Meta**.
-2. **Entrar a `japieaters.app/postulacionexitoenalimentacion` sin UTMs** y
-   postular Silver → esperar: `Origen = org-bio`, `lead-org`, **sin** evento en
-   Meta.
-3. **Entrar a esa misma página CON UTMs de Facebook** → esperar:
-   `Origen = ads`, `lead-ads`, **y evento en Meta**. Esta es la prueba que
-   demuestra que la fuga quedó tapada.
+2. **Encuesta de BIO sin UTMs**, respuestas Silver → esperar `Origen = org-bio`,
+   `lead-org`, **sin** evento en Meta, sin tag `revisar-origen`.
+3. **Encuesta de BIO con UTMs de Facebook pegados a mano en la URL** → esperar
+   `Origen = org-bio` *(no cambia)*, **sin** evento en Meta, **con** tag
+   `revisar-origen` y el aviso en `#leads-conflictos`.
 
-Si la 3 pasa, la Ola 1 está lista y se pueden pausar los tres workflows viejos
-de calificación (`834de977…`, `c98e6ba6…`, `8439135d…`).
+La 3 es la que prueba las dos decisiones a la vez: que el orgánico no manda
+conversión aunque traiga UTM, y que el anuncio mal apuntado se detecta solo.
+
+Si las tres pasan, se pausan los tres workflows viejos de calificación
+(`834de977…`, `c98e6ba6…`, `8439135d…`).
 
 ---
 
 # OLA 2 · Verde  ·  `02` y `03`
 
-**Bloqueada hasta que Meta apruebe** `v3_equipo_ghost_1/2/3`. Mandarlas a
-aprobación **antes** de empezar la Ola 1, para que corran en paralelo.
+**Bloqueada hasta que Meta apruebe las 9 plantillas de**
+[`Plantillas-WhatsApp-v3.md`](./Plantillas-WhatsApp-v3.md). Mandarlas **antes**
+de empezar la Ola 1, para que la aprobación corra en paralelo.
 
 Estructura y copy: `02` y `03` en `Rediseno-Workflows-v2.md` §3, textos en
 [`Guion-WhatsApp-Dos-Numeros.md`](./Guion-WhatsApp-Dos-Numeros.md) fases 0 y 1.
@@ -235,6 +246,7 @@ rediseño). La API de GHL no crea pipelines: va a mano.
 
 **Ola 1 — hoy**
 - [ ] Crear carpeta `ÉxiTO v2`
+- [x] Crear el tag `revisar-origen` — hecho vía API el 14-09 (`ULClzegm6PU1f6yMAriA`)
 - [ ] `01a · Entrada ADS`
 - [ ] `01b · Entrada ORG Bio`
 - [ ] `01c · Entrada ORG Setter`
@@ -242,8 +254,9 @@ rediseño). La API de GHL no crea pipelines: va a mano.
 - [ ] Editar los 4 de CAPI (origen, waits, valor real)
 - [ ] Las 3 pruebas de aceptación
 - [ ] Pausar los 3 workflows viejos de calificación
-- [ ] **En paralelo:** repuntear en Meta los anuncios que apuntan a las dos
-      páginas orgánicas, y mandar las 3 plantillas a aprobación
+- [ ] **En paralelo:** mandar las **9 plantillas** a aprobación
+      ([`Plantillas-WhatsApp-v3.md`](./Plantillas-WhatsApp-v3.md)) y repuntear
+      en Meta los anuncios que apuntan a las dos páginas orgánicas
 
 **Después**
 - [ ] Ola 2 · `02`, `03`
