@@ -180,9 +180,14 @@ los `¿Agendó?` son la red de seguridad por si eso falla.
 
 **Texto del nodo 5:**
 ```
-📅 {{contact.first_name}} {{contact.last_name}} · {{contact.origen}} · {{contact.tier_score}}
-{{appointment.start_time}}
-https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
+📅 Nueva agenda · {{contact.origen}} · {{contact.tier_score}}
+
+👤 [Contact Full Name]
+📱 [Contact Phone]
+🕒 {{appointment.start_time}}
+
+Ya le salió la bienvenida de Josefina. Falta que confirme.
+🔗 https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
 ```
 
 **Se elimina el if/else `No toma decisión`** cuyas dos ramas ejecutaban
@@ -263,9 +268,14 @@ Hola {{contact.first_name}}! Te quedó pendiente confirmar tu hora del {{appoint
 
 **Texto del nodo 5:**
 ```
-✅ Confirmada · {{contact.first_name}} {{contact.last_name}} · {{contact.tier_score}}
-{{appointment.start_time}}
-https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
+✅ Confirmada · {{contact.origen}} · {{contact.tier_score}}
+
+👤 [Contact Full Name]
+📱 [Contact Phone]
+🕒 {{appointment.start_time}}
+
+Chat del morado abierto. Toca el levantamiento M3-M6 y pegar el Resumen Lead.
+🔗 https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
 ```
 
 *(La situación que define la pregunta M4 va en la descripción de la tarea de
@@ -310,8 +320,13 @@ La pregunta M4 se elige según lo que marcó en "¿Con qué situación te identi
 
 **Texto del nodo 3:**
 ```
-🎥 Grabar vídeo · {{contact.first_name}} {{contact.last_name}} · mañana {{appointment.start_time}}
-https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
+🎥 Grabar vídeo personalizado · {{contact.tier_score}}
+
+👤 [Contact Full Name]
+🕒 Llamada mañana {{appointment.start_time}}
+
+El resumen de la lead está en la ficha, en Resumen Lead.
+🔗 https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
 ```
 
 > ⚠️ **Lo único de todo este documento que hay que verificar en el builder:**
@@ -347,10 +362,14 @@ sistema queda peor que sin automatización.
 
 **Texto del nodo 6:**
 ```
-⏰ En 35 min · {{contact.first_name}} {{contact.last_name}} · {{contact.tier_score}}
-{{appointment.meeting_location}}
-https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
-@closer
+⏰ En 35 min · {{contact.tier_score}} · {{contact.origen}}
+
+👤 [Contact Full Name]
+📱 [Contact Phone]
+🔴 {{appointment.meeting_location}}
+
+@closer el Resumen Lead está en la ficha.
+🔗 https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
 ```
 
 > **El nombre de la plantilla `v3_recordatorio_8h` está mal y se queda así:**
@@ -407,9 +426,15 @@ todavía viva. Por eso llevan congelados desde el 26-06.
 
 **Texto del nodo 4:**
 ```
-🎯 Lista para el closer · {{contact.first_name}} {{contact.last_name}} · {{contact.tier_score}} · {{contact.monto_propuesto}}
-{{appointment.start_time}}
-https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
+🎯 Lista para el closer · {{contact.tier_score}} · {{contact.origen}}
+
+👤 [Contact Full Name]
+📱 [Contact Phone]
+🕒 {{appointment.start_time}}
+💵 {{contact.monto_propuesto}}
+
+Ya está creada en el pipeline del closer.
+🔗 https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
 ```
 
 > ⚠️ **El nodo 2 es la corrección de F-15.** Hoy `[Handoff] 5` **borra todas**
@@ -518,26 +543,53 @@ Nada se borra. Se pausa, y si algo sale mal se vuelve a publicar en un clic.
 
 ---
 
-## La regla de los mensajes de Slack
+## El formato de los avisos de Slack
 
-**Slack avisa, GHL detalla.** Dos o tres líneas, y la última es siempre el link
-al contacto:
+Tomado del mensaje que ya usaban los workflows viejos, que funciona:
 
 ```
-https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
+🥉 Nuevo lead BRONCE · {{contact.origen}}
+
+👤 [Contact Full Name]
+📱 [Contact Phone]
+📧 [Contact Email]
+
+Esperar respuesta del WhatsApp automático y ver si agenda.
+🔗 https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
 ```
 
-La primera versión de estos mensajes llevaba hasta siete líneas con respuestas
-de survey completas. Con veinte postulaciones al día eso es un muro que nadie
-lee, y todo ese detalle ya está en la ficha, a un clic. **Sin el link no
-funciona recortar** — por eso el link es la parte que no se negocia, y hay que
-verificar que el token `{{contact.id}}` exista en el selector del nodo de Slack
-antes de quitar nada del texto.
+**Cuatro partes.** Encabezado con emoji, qué pasó y de dónde viene. Campos uno
+por línea con su emoji. **Una línea de qué hacer** — es la que hace la
+diferencia: sin ella, quien lee el canal sabe que pasó algo pero no si le toca
+a él. Y el link a la ficha, que es lo que permite que el mensaje sea corto.
 
-El tier no va escrito en los avisos del motor porque cada tier tiene su propio
-canal. La única excepción a las tres líneas es el aviso de 35 minutos antes:
-lleva también `{{appointment.meeting_location}}`, porque el closer entra a la
-reunión desde Slack sin pasar por la ficha.
+**Lo que no va nunca:** las respuestas completas del survey. Son frases largas
+y con veinte postulaciones al día convierten el canal en un muro. El detalle
+está en la ficha, a un clic.
+
+**El tier va escrito a mano donde es fijo.** En el motor, dentro de la rama
+Bronce, se escribe `BRONCE` con 🥉 — no hay riesgo de que salga mal. Del `03` en
+adelante el workflow ya no sabe en qué rama estuvo, así que ahí sale el token
+`{{contact.tier_score}}`, que se imprime como `tier-3-bronce`. Se lee a máquina,
+pero un campo nuevo con el tier en limpio sería un dato duplicado más que
+mantener y por una palabra no lo vale.
+
+**Los campos se insertan con el selector de tokens**, no escritos: quedan como
+los chips azules de los mensajes actuales. Y hay que verificar que exista
+`{{contact.id}}` para armar el link — si no está, dejar teléfono y email, que es
+lo que permite encontrar a la persona a mano.
+
+### Los otros seis avisos
+
+| Workflow → canal | Encabezado y línea de acción |
+|---|---|
+| `01 · Motor`, ramas `None` → `#leads-conflictos` | `⚠️ Postulación fuera de flujo · {{contact.origen}}` · *"No calificó por ningún camino: revisar qué respondió en el formulario."* |
+| `03c` → `#leads-conflictos` | `🟠 Agendó y no confirmó · {{contact.origen}}` · *"A los 45 min le escribe el morado solo. Si tampoco responde, va a mano."* |
+| `05`, sin confirmar en 3 h → `#leads-conflictos` | `🟠 No confirmó el recordatorio de 24 h · {{contact.origen}}` · *"Confirmar a mano por el morado antes de que se pierda el cupo."* |
+| `06` → `#leads-conflictos` | `❌ Canceló la cita · {{contact.origen}}` · *"Recordatorios frenados y oportunidad movida a Re-Agendar."* |
+| `08` Asistió → `#confirmaciones-llamadas` | `🟢 Asistió · {{contact.tier_score}} · {{contact.origen}}` · sin línea de acción |
+| `08` No-Show → `#leads-conflictos` | `🔴 No-show · {{contact.tier_score}} · {{contact.origen}}` · *"El morado le escribe en 30 min. Si no responde en 24 h, va a mano."* |
+| `08` Reserva → `#cierres` | `💸 Reserva pagada · {{contact.tier_score}} · {{contact.origen}}` + `💵 {{contact.monto_propuesto}}` · *"Onboarding disparado."* |
 
 ---
 

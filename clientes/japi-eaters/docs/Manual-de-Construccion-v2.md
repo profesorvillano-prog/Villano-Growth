@@ -216,15 +216,27 @@ re-entry activado**. Primer nodo: *Remove Contact Tag* `sys-calificar`.
 ### El mensaje de Slack (mismo formato para los tres tiers)
 
 ```
-🥕 {{contact.first_name}} {{contact.last_name}} · {{contact.origen}} · {{contact.phone}}
-https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
+🥉 Nuevo lead BRONCE · {{contact.origen}}
+
+👤 [Contact Full Name]
+📱 [Contact Phone]
+📧 [Contact Email]
+
+Esperar respuesta del WhatsApp automático y ver si agenda.
+🔗 https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
 ```
 
-**Dos líneas, y la segunda es el link a la ficha.** El tier no va en el texto
-porque cada tier tiene su propio canal. La campaña, la profesión, la situación y
-la respuesta de inversión tampoco: son frases largas que convierten el canal en
-un muro y ya están en la ficha. Verificar que el token `{{contact.id}}` exista
-en el selector antes de quitar el detalle.
+Silver: 🥈 `SILVER`. Gold: 🥇 `GOLD`, y la última línea cambia a *"Presupuesto
+alto. Si no agenda hoy, vale la pena un toque manual."*
+
+**El tier va escrito a mano en cada rama** porque dentro de la rama es un dato
+fijo; **el origen sí es token**, porque el mismo motor sirve a los tres canales.
+
+La campaña, la profesión, la situación y la respuesta de inversión no van: son
+frases largas que convierten el canal en un muro y ya están en la ficha, a un
+clic. Los campos se insertan con el selector de tokens, no escritos. Verificar
+que exista `{{contact.id}}` antes de quitar el detalle — sin el link no funciona
+recortar.
 
 **Diferencias con `[ADS] 1` actual, a propósito:**
 - La oportunidad de descalificadas **sí lleva etapa** (hoy el nodo está en error, F-10).
