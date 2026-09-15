@@ -19,6 +19,7 @@ emails y nuevos productos.
 | [`FAQ.md`](./FAQ.md) | Preguntas frecuentes reales con respuestas en la voz de la marca. Ideal para web y bot/setter. |
 | [`Voz-y-Marca.md`](./Voz-y-Marca.md) | Tono, frases marca registrada, palabras prohibidas, paleta de color, historia y autoridad de Josefina. |
 | [`Operaciones-y-Embudo.md`](./Operaciones-y-Embudo.md) | Funnel, onboarding, plataforma Skool (niveles), mentorías, equipo, stack tecnológico, modelo 2026 y datos de audiencias. |
+| [`SOP-Deduplicacion-IG-Formulario.md`](./SOP-Deduplicacion-IG-Formulario.md) | Cómo evitar contactos y oportunidades duplicadas en Go High Level cuando la Setter abre la conversación en Instagram y luego la lead rellena el formulario de postulación. |
 
 ## Fuentes
 
