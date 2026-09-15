@@ -927,3 +927,51 @@ los segmentos entre sí con OR, así que separarlas reintroduce el mismo error.
 
 `[REACTIVACIÓN] Leads antiguos` necesita el mismo tratamiento, y es el que va a
 mover 600 contactos. Condición **después** del wait, no antes.
+
+---
+
+## La promo se extiende hasta el 30, y el bot lo cuenta como buena noticia (2026-09-15)
+
+El cliente decidió extender la promoción más allá del 17 de septiembre. El motivo
+es real y da para contarlo: mucha gente consultó sin alcanzar, y septiembre es el
+mes de la Chilenidad — mes de celebración y de familia. Si la promo ayuda a que
+alguien se decida, bienvenida sea.
+
+La promo pasa a llamarse **PROMOCIÓN DEL MES DE LA CHILENIDAD**, vigente hasta el
+**30 de septiembre** inclusive. Los montos no cambian: Full $119.990, Avanzado
+$90.000.
+
+### El detalle que importa: qué hace el bot con los que ya sabían del 17
+
+Mucha gente tiene en su chat un mensaje del bot que dice *hasta el 17*. Si el bot
+ahora dice 30 sin explicar, queda como que se contradice. Y si evita el tema,
+queda peor.
+
+La regla nueva es explícita: **no lo escondas, y no te disculpes.**
+
+> Te tengo una buena, extendimos la promo hasta el 30 así que todavía alcanzas.
+
+Una frase, dicha como lo que es. Una extensión de plazo no es un error que
+corregir, es una noticia que dar. Y para un lead que se quedó en la objeción de
+plata, es la mejor excusa que existe para retomar la conversación.
+
+El prompt también carga el porqué, por si alguien pregunta, y es verdadero: *mucha
+gente nos pidió alcanzar, así que la dejamos hasta fin de mes.*
+
+### Barrido de fechas
+
+Se cambiaron las ocho menciones al 17 repartidas por el prompt — la sección de la
+promo, las dos fórmulas del anzuelo, y seis ejemplos. Verificado: cero menciones
+al 17 en el prompt vivo.
+
+`Desde el 18 de septiembre la promo no existe` pasó a **`Desde el 1 de octubre la
+promo no existe`**.
+
+### Lo que queda con fecha
+
+- **1 de octubre**: sacar la promo del prompt, o extenderla otra vez con una
+  fecha nueva. Lo que no puede pasar es que el bot ofrezca en octubre un precio
+  que ya no existe.
+- El prompt del **seguimiento automático** (escenario 7131746) todavía dice 17.
+  Está apagado desde el 15 de septiembre, así que no hace daño, pero hay que
+  corregirlo antes de volver a encenderlo.
