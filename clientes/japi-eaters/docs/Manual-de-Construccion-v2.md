@@ -162,7 +162,8 @@ link en el DM y porque deja el dato a la vista en la ficha del contacto.)*
 | 2 | Update Contact Field | **`Origen` = `ads`** |
 | 3 | Update Contact Field | `Link Agenda` = `https://www.japieaters.app/agendatullamada` *(opcional: para la ficha y el DM de Valen; las plantillas ya no lo usan)* |
 | 4 | Add Contact Tag | `survey-ads`, `lead-ads` |
-| 5 | Add to Workflow | `01 · Motor de Calificación` |
+| 5 | Assign to User | **Anaís**, sin condición |
+| 6 | Add to Workflow | `01 · Motor de Calificación` |
 
 ## `01b · Entrada ORG Bio`
 
@@ -176,7 +177,8 @@ link en el DM y porque deja el dato a la vista en la ficha del contacto.)*
 | 4 | Add Contact Tag | `survey-org`, `lead-org` |
 | 5 | **If/Else — `¿Vino de un anuncio?`** | `UTM Source` *contains* `Facebook` **OR** *contains* `Instagram` |
 | 6 | [SÍ] Add Contact Tag + Slack | Tag `revisar-origen` · aviso a `#leads-conflictos`: *"Postulación orgánica con UTM de anuncio — revisar a qué página apunta la campaña {{contact.utm_campaign}}"* |
-| 7 | Add Contact Tag *(las dos ramas)* | **`sys-calificar`** |
+| 7 | Assign to User *(las dos ramas)* | **Anaís** |
+| 8 | Add to Workflow *(las dos ramas)* | `01 · Motor de Calificación` |
 
 **El origen no cambia en la rama SÍ.** Sigue siendo `org-bio`. El aviso existe
 para arreglar el anuncio, no para reclasificar la lead.
@@ -186,7 +188,7 @@ para arreglar el anuncio, no para reclasificar la lead.
 **Disparador:** *Survey Submitted* → `[SURVEY - ORG SETTER]` (`kwuMWA1b5FXattZtwLu0`)
 
 Idéntico a `01b` con `Origen` = **`org-setter`**, el mismo `Link Agenda`
-orgánico y tags `survey-org`, `lead-setter-org`.
+orgánico, tags `survey-org` + `lead-setter-org` y **Assign to User → Valen**.
 
 ## `01 · Motor de Calificación`
 
@@ -206,7 +208,7 @@ re-entry activado**. Primer nodo: *Remove Contact Tag* `sys-calificar`.
 | 9 | [Gold · $1.000-2.000] | `tier-1-gold` · mismo producto · tags `tier-gold`, `prospecto-exito`, `presupuesto-alto` |
 | 10 | *(las 3 ramas que califican)* Create Opportunity | Pipeline `②` · etapa `Calificada (Formulario)` · status `open` · **source = `{{contact.source}}`** · `Monto Propuesto` según tier |
 | 11 | **If/Else — `¿Decide sola?`** | `¿Quién debe estar contigo…?` (`TjRDcKidBqPeykkkWhPo`) → si **no** es `Solo yo, tomo la decisión por mi cuenta.` → Add Tag **`decisor-tercero`** |
-| 12 | **Assign User** | Si `Origen` = `org-setter` → Valen. Si no → Anaís. *(Reemplaza los workflows `Asignación Anaís/Rafa`, de mayo.)* |
+| 12 | ~~Assign User~~ | **Movido a las entradas** (`01a`/`01b` → Anaís, `01c` → Valen). En el motor caería después de las ramas de tier, y como las ramas de GHL no se vuelven a juntar habría que repetirlo tres veces con su if/else. En la entrada es un nodo sin condición. *(Sigue reemplazando a los workflows `Asignación Anaís/Rafa`, de mayo.)* |
 
 | 14 | Slack | Un mensaje al canal del tier, **con el origen en el texto** |
 | 15 | *(rama None de cualquier if/else)* | Tag `lead-revisar` + Slack a `#leads-conflictos` → FIN |
