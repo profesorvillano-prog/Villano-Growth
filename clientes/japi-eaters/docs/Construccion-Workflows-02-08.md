@@ -166,7 +166,7 @@ los `¿Agendó?` son la red de seguridad por si eso falla.
 | 1 | `Sale del ghost` | Remove from Workflow | `02 · Ghost de agenda` |
 | 2 | `Marca agendada` | Add Contact Tag | `agendada` |
 | 3 | `Limpia estados viejos` | Remove Contact Tag | `confirmada`, `confirmada-24h`, `sin-confirmar`, `ghost-agenda`, `re-agendada` |
-| 4 | `Mover a Nueva Agenda` | Create/Update Opportunity | ② · `Nueva Agenda` `f0a84d2b-8df8-4c34-b91d-e3a104d89b32` · status `open` |
+| 4 | `Mover a Nueva Agenda` | Create/Update Opportunity | ② · `Nueva Agenda` `f0a84d2b-8df8-4c34-b91d-e3a104d89b32` · status `open` · **`Allow opportunity to move to any previous stage` ENCENDIDO** — ver abajo |
 | 5 | `Aviso nueva agenda` | Slack | `#nuevas-agendas` — ver texto abajo |
 | 6 | `¿Primera vez o re-agenda?` | If/Else | Rama `RE-AGENDA`: *Tags includes* `video-enviado` → nodo 10 · Rama `None` (primera vez) → nodo 7 |
 | 7 | `A1 · Bienvenida Josefina` | WhatsApp 🟩 | `v3_bienvenida_jose` · `{{1}}` = `{{contact.first_name}}` · **branches ON** · **Time Out 2 min** |
@@ -540,6 +540,31 @@ Nada se borra. Se pausa, y si algo sale mal se vuelve a publicar en un clic.
 | `07` | `[Handoff] 5` |
 | `08` | `1 · Asistió` · `2 · No-Show` · `3 · Re-agendada` · `4 · Reserva pagada` |
 | — | `Asignación Anaís` · `Asignación Rafa` *(los absorbe el motor `01`)* |
+
+
+### El toggle de "mover a una etapa anterior"
+
+En el panel de oportunidad hay un `Allow opportunity to move to any previous
+stage in pipeline`, **apagado por defecto**. En los nodos que *crean* da igual;
+en los que *mueven* una oportunidad existente, decide si el movimiento ocurre.
+
+**Donde muerde es en `03`.** Una lead que canceló está en `Re-Agendar
+(Cancelada)`, la etapa 12 del pipeline ②. `Nueva Agenda` es la 6. Ese movimiento
+es hacia atrás, así que con el toggle apagado **no pasa nada**: la lead vuelve a
+agendar, recibe la bienvenida y los recordatorios, y la oportunidad se queda en
+"Cancelada" para siempre. El workflow sigue corriendo normal y el pipeline
+miente.
+
+Regla: **encendido en todo nodo que mueva una oportunidad existente**, apagado
+en los que crean.
+
+### `Opportunity Source` va con el origen
+
+GHL avisa bajo el campo que, si queda vacío, la oportunidad hereda el *contact
+source* — el nombre del formulario, no el canal. Ponerlo en `{{contact.origen}}`
+en **todos** los nodos de oportunidad, incluidas las descalificadas: la primera
+tasa del embudo es *postulaciones con tier ≠ out sobre postulaciones*, y sin
+origen en las perdidas esa tasa no se puede cortar por canal.
 
 ---
 

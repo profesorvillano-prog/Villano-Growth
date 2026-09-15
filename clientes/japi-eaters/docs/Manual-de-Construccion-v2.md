@@ -206,7 +206,7 @@ re-entry activado**. Primer nodo: *Remove Contact Tag* `sys-calificar`.
 | 7 | [Bronce · $200-500] | `Tier Score` = `tier-3-bronce` · `Producto Recomendado` = `exito-alimentacion` · tags `tier-bronce`, `prospecto-exito` |
 | 8 | [Silver · $500-1.000] | `tier-2-silver` · mismo producto · tags `tier-silver`, `prospecto-exito` |
 | 9 | [Gold · $1.000-2.000] | `tier-1-gold` · mismo producto · tags `tier-gold`, `prospecto-exito`, `presupuesto-alto` |
-| 10 | *(las 3 ramas que califican)* Create Opportunity | Pipeline `②` · etapa `Calificada (Formulario)` · status `open` · **source = `{{contact.source}}`** · `Monto Propuesto` según tier |
+| 10 | *(las 3 ramas que califican)* Create Opportunity | Pipeline `②` · etapa `Calificada (Formulario)` · status `open` · **`Opportunity Source` = `{{contact.origen}}`** — también en las dos de descalificadas, si no la tasa de calificación no se puede cortar por canal |
 | 11 | **If/Else — `¿Decide sola?`** | `¿Quién debe estar contigo…?` (`TjRDcKidBqPeykkkWhPo`) → si **no** es `Solo yo, tomo la decisión por mi cuenta.` → Add Tag **`decisor-tercero`** |
 | 12 | ~~Assign User~~ | **Movido a las entradas** (`01a`/`01b` → Anaís, `01c` → Valen). En el motor caería después de las ramas de tier, y como las ramas de GHL no se vuelven a juntar habría que repetirlo tres veces con su if/else. En la entrada es un nodo sin condición. *(Sigue reemplazando a los workflows `Asignación Anaís/Rafa`, de mayo.)* |
 
