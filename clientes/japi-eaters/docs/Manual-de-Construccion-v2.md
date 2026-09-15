@@ -175,7 +175,7 @@ link en el DM y porque deja el dato a la vista en la ficha del contacto.)*
 | 2 | Update Contact Field | **`Origen` = `org-bio`** |
 | 3 | Update Contact Field | `Link Agenda` = `https://www.japieaters.app/or/agendatullamada` |
 | 4 | Add Contact Tag | `survey-org`, `lead-org` |
-| 5 | **If/Else — `¿Vino de un anuncio?`** | `UTM Source` *contains* `Facebook` **OR** *contains* `Instagram` |
+| 5 | **If/Else — `¿Vino de un anuncio?`** | `UTM Campaign` ***is not empty*** — ver abajo por qué no es `UTM Source` |
 | 6 | [SÍ] Add Contact Tag + Slack | Tag `revisar-origen` · aviso a `#leads-conflictos`: *"Postulación orgánica con UTM de anuncio — revisar a qué página apunta la campaña {{contact.utm_campaign}}"* |
 | 7 | Assign to User *(las dos ramas)* | **Anaís** |
 | 8 | Add to Workflow *(las dos ramas)* | `01 · Motor de Calificación` |
@@ -187,8 +187,57 @@ para arreglar el anuncio, no para reclasificar la lead.
 
 **Disparador:** *Survey Submitted* → `[SURVEY - ORG SETTER]` (`kwuMWA1b5FXattZtwLu0`)
 
-Idéntico a `01b` con `Origen` = **`org-setter`**, el mismo `Link Agenda`
-orgánico, tags `survey-org` + `lead-setter-org` y **Assign to User → Valen**.
+Idéntico a `01a` con `Origen` = **`org-setter`**, el `Link Agenda` orgánico,
+tags `survey-org` + `lead-setter-org` y **Assign to User → Valen**.
+
+**No lleva el detector de anuncios.** De los 20 contactos `lead-setter-org` más
+recientes, **20 traen `utmSource` y `campaign` vacíos**: Valen manda el link por
+DM, así que no hay parámetros en la URL ni cadena de referrer. Esos dos nodos
+ahí serían decoración.
+
+
+### Por qué el detector mira la campaña y no el origen
+
+Medido por API el 15-09 sobre los 20 contactos `lead-org` más recientes:
+
+| `UTM Source` | `UTM Campaign` | Referrer | Cuántos |
+|---|---|---|---|
+| `ig` | vacío | `l.instagram.com` | 6 |
+| vacío | vacío | `l.instagram.com` o nada | 7 |
+| **`Facebook`** | **`[cbo] Escalado Éxito` · `[abo] Testeo Ads Éxito` · `[cbo] Rmkt Pixel Web`** | `instagram.com` | **6** |
+| vacío | vacío | whatsapp | 1 |
+
+**La condición `contains Instagram` no matchearía nunca.** El orgánico de la bio
+llega como `ig`, en minúscula y de dos letras. Y el arreglo obvio al ver ese
+dato —cambiarla a `contains ig`— **marcaría el 100 % de las leads legítimas de
+la bio**: la alarma se vuelve ruido en un día y nadie vuelve a mirar el canal.
+
+**La señal limpia es la campaña.** Los 6 pagados traen nombre de campaña; los 14
+orgánicos, ninguno. Un `utm_campaign` solo existe si la persona hizo clic en un
+anuncio. Si el desplegable de GHL no ofrece *is not empty*, la alternativa es
+`UTM Source` *contains* `Facebook`, que en esta muestra separa igual de bien.
+
+**Y el problema sigue vivo:** 6 de 20 —el 30 %— de las leads de la bio son
+tráfico pagado. La auditoría del 13-09 había medido 20 de 60. Mismo porcentaje
+tres semanas después: nadie repunteó esos anuncios todavía.
+
+### `Allow re-entry` va encendido en las tres entradas
+
+Con re-entry apagado, un contacto que ya entró y salió **no puede volver a
+entrar nunca**. Una lead que ghosteó y vuelve a postular meses después no
+dispara nada: sin oportunidad, sin Slack, sin ghost. Desaparece y nadie se
+entera — y es justo el perfil de alguien que ya conoce el programa.
+
+Con re-entry encendido, lo peor que pasa si alguien manda el formulario dos
+veces seguidas es **un aviso de Slack repetido**: el origen se reescribe al
+mismo valor, los tags ya están, y la oportunidad no se duplica porque eso lo
+frena el toggle `Allow duplicate opportunities` **dentro del nodo** de
+oportunidad, que es otra cosa que el `Allow multiple opportunities` de Settings.
+
+Re-entry apagado tampoco protegía el origen, que era el argumento original: solo
+bloquea la re-entrada al *mismo* workflow, y el único caso donde el origen
+cambiaría de verdad —que llene otra de las tres encuestas— pasa por otro
+workflow.
 
 ## `01 · Motor de Calificación`
 
