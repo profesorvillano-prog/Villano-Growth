@@ -424,3 +424,49 @@ Lo que cambio en concreto:
 | `7371151` | Lo mismo, en la lista de lo que nunca hace el cierre |
 
 Los tres escenarios quedaron con el texto nuevo. El `7371151` sigue apagado.
+
+## El CTA de la pagina, con fuerza (14 sep 2026)
+
+Marcelo trajo el dato que ordena todo esto: **la unica persona que compro reviso
+la pagina completa y el video entero.** No le paso por encima. Asi que el CTA
+dejo de ser un link amable y paso a ser una peticion.
+
+Tres excepciones que solo existen en ese mensaje:
+
+1. **Puede ser largo.** Tres o cuatro lineas, cuando el resto de la conversacion
+   son dos. Pedir algo a media voz es lo mismo que no pedirlo.
+2. **Puede llevar mayusculas de enfasis**, una o dos palabras: NI TE LO IMAGINAS,
+   EN SERIO. En cualquier otro mensaje seria gritar.
+3. **Puede terminar sin pregunta.** Lo que se pide es que abra la pagina, y una
+   pregunta despues del link le da algo mas facil que hacer que abrirlo.
+
+La estructura, cinco partes:
+
+1. Que la vea completa, y el video sobre todo, como algo que necesito
+2. Que no se imagina lo que hay ahi dentro
+3. Que la hice para ella, para que entienda de donde viene el problema
+4. Su problema concreto, con sus palabras
+5. Que quiero ayudarla de verdad, y **el link al final**
+
+> *Necesito que veas la pagina completa, y sobre todo el video, porque NI TE LO
+> IMAGINAS lo que hay ahi. La hice para que entiendas de donde viene de verdad lo
+> de la piel de Miah, y no vas a encontrar a nadie que te lo explique asi de
+> exacto y completo. Porque quiero ayudarte EN SERIO:
+> https://salchichapro.com/consultadachshund*
+
+**El link va al final, nunca al medio**: si va antes, deja de leer y hace clic sin
+haber entendido para que entra.
+
+### La linea que no se cruza
+
+El FOMO sale de que **esto lo hizo el y no se encuentra en otro lado**, no de un
+reloj falso. Queda escrito en el cerebro que **nunca** invente que quedan cupos,
+que el precio sube, que la oferta se acaba o que hay poca disponibilidad. Nada de
+eso es cierto hoy, y el dia que alguien lo compruebe se pierde mucho mas de lo que
+se gana. Si algun dia hay cupos limitados de verdad, se agrega y se puede decir.
+
+### El cierre a la hora tambien cambio
+
+El `7371151` ya no pregunta si le llego el link. Pregunta **si la vio completa o
+si la dejo a medias**, que es la pregunta que de verdad predice la compra. Y puede
+usar una sola palabra en mayusculas (COMPLETO, ENTERA).
