@@ -61,15 +61,15 @@ contexto = ("CANAL: {{1.canal}}\n"
             "EVENTO: {{ifempty(1.evento; \"mensaje\")}}\n"
             "ORIGEN (CTA): {{1.fuente}}\n"
             "PAIS: {{1.pais}}\n"
-            "ESTADO ACTUAL: {{2.estado}}\n"
-            "TURNOS: {{ifempty(2.turnos; 0)}}\n\n"
+            "ESTADO ACTUAL: {{42.estado}}\n"
+            "TURNOS: {{ifempty(42.turnos; 0)}}\n\n"
             "DATOS QUE YA TENGO (lo que esta lleno aca NO se vuelve a preguntar):\n"
-            "{{replace(2.datos; newline; \" \")}}\n\n"
+            "{{replace(42.datos; newline; \" \")}}\n\n"
             "RESUMEN DE LO QUE YA CONVERSARON (tu memoria, escrita por ti en el turno anterior):\n"
-            "{{replace(2.historial; newline; \" \")}}\n\n"
+            "{{replace(42.historial; newline; \" \")}}\n\n"
             "ADJUNTOS QUE MANDO: {{1.adjuntos}}\n\n"
-            "MENSAJE NUEVO DEL LEAD:\n"
-            "{{replace(1.mensaje; newline; \" \")}}")
+            "MENSAJE NUEVO DEL LEAD (puede traer varios mensajes seguidos, se contestan juntos):\n"
+            "{{ifempty(replace(42.buffer; newline; \" \"); replace(1.mensaje; newline; \" \"))}}")
 
 output_config = {"format": {"type": "json_schema", "schema": schema}}
 if not MODELO.startswith("claude-haiku"):

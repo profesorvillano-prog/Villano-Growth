@@ -500,3 +500,82 @@ precio dado a gente que solo habia recibido el link.
 La justificacion que quedo escrita en el cerebro, para que no se lea como esquivar
 el precio: *una pregunta por el precio es una senal de compra, y la respuesta
 correcta a una senal de compra es la pagina, no un numero suelto en un chat.*
+
+## Nada se coordina antes del pago (15 sep 2026)
+
+En la conversacion de Joce el bot le pidio el correo, le prometio el link de la
+videollamada y el formulario, y le dijo *coordinamos el horario de manana*, todo
+**antes de que pagara**. Marcelo: eso jamas.
+
+El problema no es solo la promesa. Cuando alguien siente que su hora ya esta
+arreglada, el pago deja de ser urgente. Y si al final no paga, quedamos
+comprometidos con algo que no va a pasar.
+
+**Regla nueva, sin excepciones: hasta que el pago no esta hecho no existe ni el
+horario, ni el dia, ni el link de la videollamada, ni el formulario, ni el
+correo.**
+
+| Nunca antes del pago |
+|---|
+| Coordinamos el horario de manana |
+| Pasame tu correo y te mando el link de la videollamada |
+| Te mando el formulario antes de la consulta |
+| Que dia te acomoda? |
+| Te dejo el cupo tomado |
+
+**Se elimino el paso de pedir el correo.** Cuando dicen que si, lo unico que sale
+es el link de pago. El correo lo pide la pagina de pago, asi que preguntarlo por
+DM era un tramite de mas entre el si y el pago.
+
+**Lo que esto cuesta, y hay que cubrirlo:** ese correo era lo que amarraba el pago
+a la conversacion. Sin el, cuando alguien paga, el sistema puede no reconocer que
+es la misma persona y el bot le sigue hablando como si nada. La cobertura es que
+el trigger de la orden en GHL etiquete el contacto y lo saque del bot. **Eso sigue
+pendiente de verificar.**
+
+## Una pausa antes de contestar, y no contestar cuatro veces lo mismo
+
+Con Ross el bot contesto **cada mensaje por separado**: un gracias, un emoji, un
+recíproco, otro gracias, y cuatro respuestas casi identicas despidiendose. Eso es
+lo que mas delata un bot.
+
+Se arreglo por los dos lados.
+
+### El lado del escenario: se espera antes de responder
+
+`7035201` ahora tiene tres modulos nuevos entre la memoria y el cerebro:
+
+| Modulo | Que hace |
+|---|---|
+| **40** Anotar el mensaje | Suma el texto al campo `buffer` y se marca como el ultimo en `ultimo_texto` |
+| **41** Esperar | Duerme **15 segundos** |
+| **42** Releer | Vuelve a leer el registro |
+
+El cerebro (modulo 3) solo corre **si `ultimo_texto` sigue siendo el mensaje de
+esta ejecucion**. Si mientras dormia llego otro mensaje, esa ejecucion se apaga
+sola y contesta la ultima, que ya tiene los dos textos juntos en el `buffer`.
+
+El modulo 3 lee el `buffer`, no `1.mensaje`, asi que **la persona recibe una sola
+respuesta a todo lo que escribio**. El modulo 7 guarda con `overwrite`, que de
+paso deja el buffer vacio para la proxima.
+
+Dos cosas que hubo que cambiar para que esto funcione:
+
+- **`sequential` pasa a `false`.** Con las ejecuciones en fila la segunda no podia
+  avisarle a la primera que ya no era la ultima.
+- **El tiempo de escritura (modulo 10) bajo** de 5-22s a 3-12s, porque ya se
+  esperaron 15 antes.
+
+**Falla hacia el lado seguro:** la comparacion usa `ifempty`, asi que si la
+relectura viniera vacia el filtro da igual y se contesta. En el peor caso el
+comportamiento vuelve a ser el de antes, nunca un bot mudo.
+
+### El lado del cerebro: a veces no se contesta
+
+Regla nueva: a un *gracias*, un *ok* o un emoji suelto **se contesta una vez**. Si
+vuelven a agradecer o mandan otro emoji, el cerebro devuelve `mensajes` con una
+**cadena vacia** y el modulo 10 filtra por largo mayor que cero, asi que **no se
+envia nada**. La conversacion queda cerrada, que es como tiene que quedar.
+
+La cadena vacia es solo para eso: si preguntan algo, cuentan algo del perro o
+retoman el tema, se contesta siempre.
