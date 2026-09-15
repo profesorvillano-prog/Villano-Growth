@@ -523,6 +523,62 @@ Nada se borra. Se pausa, y si algo sale mal se vuelve a publicar en un clic.
 
 ---
 
+## Los tres ajustes de Settings
+
+No se ven en el canvas y son los que rompen flujos enteros sin dejar rastro.
+Van en **Settings**, arriba a la derecha del builder, y **aplican a todo el
+workflow** — no son por nodo.
+
+### El que rompe todo: `Stop on Response` mata los botones
+
+Un clic en un botón de plantilla —`Ver vídeo`, `Sí, confirmo`, `Confirmo mi
+asistencia`— **le llega a GHL como un mensaje entrante**, igual que si la lead
+escribiera. Con `Stop on Response` activado, ese clic **detiene el workflow
+antes de que la rama del botón se resuelva**: la lead toca el botón, el flujo se
+muere ahí, y el vídeo de Josefina no sale nunca. Sin error y sin aviso.
+
+Por eso en `03`, `03b` y `05` va **apagado**.
+
+| Workflow | Re-Entry | Multiple Opp. | Stop on Response |
+|---|---|---|---|
+| `01a` `01b` `01c` | **OFF** — es lo que hace cumplir "el origen se escribe una sola vez" | OFF | OFF |
+| `01 · Motor` | **ON** — se entra por *Add to Workflow* desde tres lados | **OFF** — acá se crea la oportunidad | OFF |
+| `02 · Ghost` | OFF | OFF | **ON** — si responde V1 preguntando el precio, V2 y V3 no pueden salir encima de Anaís |
+| `03 · Bienvenida` | **ON** — las re-agendas vuelven a entrar | OFF | **OFF** — tiene botones |
+| `03b · Confirmación` | ON | OFF | **OFF** — tiene botones |
+| `03c · Rescate` | ON | OFF | **ON** — si ya contestó algo, el "te quedó pendiente confirmar" sobra |
+| `04 · Handoff morado` | ON | OFF | **OFF** — si contesta M1, M2 igual tiene que salir |
+| `05 · Recordatorios` | ON | OFF | **OFF** — tiene botón |
+| `05b · Día de la llamada` | ON | OFF | **ON** — si escribió "no voy a poder", se cortan los recordatorios del día |
+| `06 · Cancelación` | ON | OFF | **OFF** — es limpieza, no puede frenarse |
+| `07 · Handoff Closer` | ON | **OFF** — re-entra sin duplicar la oportunidad | OFF |
+| `08 · Post-llamada` | **ON** — obligatorio: la etapa cambia varias veces y con OFF solo dispara la primera | OFF | **ON** — si responde la recuperación de no-show, el segundo mensaje no sale |
+| Los 4 de Meta CAPI | **ON** — una lead que re-agenda tiene que volver a emitir `Schedule` | OFF | OFF |
+
+### `Allow Multiple Opportunities` va en OFF en todos, sin excepción
+
+Es el ajuste que evita que la misma lead termine con dos oportunidades abiertas.
+Ya pasó: en el pipeline obsoleto `[SETTER - ORG] Formación` quedaron cuatro
+huérfanas duplicadas (F-5), y mientras existan, cualquier tasa de conversión
+cuenta doble.
+
+Con OFF, si un workflow re-entra y vuelve a pasar por un *Create Opportunity*,
+actualiza la que ya existe en vez de crear otra. Por eso `01 · Motor` puede
+tener Re-Entry en ON sin riesgo.
+
+### La ventana horaria también va acá
+
+En las tablas de arriba aparece "ventana 09:00–21:00" dentro de varios nodos
+*Wait*. Se puede, pero el **`Time Window` de Settings es mejor**: aplica a todos
+los envíos del workflow de una vez, en vez de acordarse nodo por nodo.
+
+Ponlo en `02` —una postulación de las 23:40 recibiría V1 a las 23:50 y V2 a las
+3:50—, en `05b` —4 h antes de una reunión de las 9:00 son las 5:00 de la
+mañana— y en `08`. Y revisa la zona horaria de la cuenta: hay leads en Chile,
+Argentina y Uruguay.
+
+---
+
 ## Prompt para construirlos con Cowork
 
 Cowork sí puede manejar el navegador y hacer los clics. Este prompt le da las
