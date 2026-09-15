@@ -470,3 +470,33 @@ se gana. Si algun dia hay cupos limitados de verdad, se agrega y se puede decir.
 El `7371151` ya no pregunta si le llego el link. Pregunta **si la vio completa o
 si la dejo a medias**, que es la pregunta que de verdad predice la compra. Y puede
 usar una sola palabra en mayusculas (COMPLETO, ENTERA).
+
+## El precio nunca viaja con el link (15 sep 2026)
+
+En la conversacion de Pablo el bot hizo exactamente lo que no queremos: le
+preguntaron el precio y contesto **89 dolares y la pagina en el mismo mensaje**.
+El numero al lado del link hace que decidan mirando el monto en vez de mirar lo
+que hay adentro, que es justo lo que convirtio a la unica que compro.
+
+El papel ya decia *nunca mando la pagina y el precio en el mismo mensaje*, pero
+dos lineas mas abajo decia *si lo pregunta directo, se lo doy sin rodeos*. El
+modelo resolvio la contradiccion haciendo las dos cosas a la vez. **La puerta
+quedo cerrada.**
+
+El orden, sin excepciones:
+
+| Momento | Que hace |
+|---|---|
+| Preguntan el precio y **no** tienen la pagina | Manda la pagina, **sin el numero**, diciendo que ahi esta el detalle con el valor incluido |
+| Insisten antes de la pagina | Sigue sin escribir el monto. La pagina es la respuesta |
+| Preguntan el precio y **ya** tienen la pagina | Ahi si: *Son 89 dolares, pago unico*, y **sin link al lado** |
+
+**El link y el monto no van juntos jamas.**
+
+Tambien se ajusto `precio_dado`: ese estado se marca **solo si escribio el
+numero**, no cuando mando la pagina. Antes el pipeline mostraba como
+precio dado a gente que solo habia recibido el link.
+
+La justificacion que quedo escrita en el cerebro, para que no se lea como esquivar
+el precio: *una pregunta por el precio es una senal de compra, y la respuesta
+correcta a una senal de compra es la pagina, no un numero suelto en un chat.*
