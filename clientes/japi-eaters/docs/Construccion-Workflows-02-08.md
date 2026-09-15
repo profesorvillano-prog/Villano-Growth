@@ -180,10 +180,9 @@ los `¿Agendó?` son la red de seguridad por si eso falla.
 
 **Texto del nodo 5:**
 ```
-📅 Nueva agenda
-{{contact.first_name}} {{contact.last_name}} · {{contact.phone}}
-Origen: {{contact.origen}}  ·  Tier: {{contact.tier_score}}
-Hora: {{appointment.start_time}}
+📅 {{contact.first_name}} {{contact.last_name}} · {{contact.origen}} · {{contact.tier_score}}
+{{appointment.start_time}}
+https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
 ```
 
 **Se elimina el if/else `No toma decisión`** cuyas dos ramas ejecutaban
@@ -264,12 +263,13 @@ Hola {{contact.first_name}}! Te quedó pendiente confirmar tu hora del {{appoint
 
 **Texto del nodo 5:**
 ```
-✅ Confirmada y pasada al morado
-{{contact.first_name}} {{contact.last_name}} · {{contact.phone}}
-Origen: {{contact.origen}}  ·  Tier: {{contact.tier_score}}
-Llamada: {{appointment.start_time}}
-Situación (define la pregunta M4): {{contact.con_qu_situacin_te_identificas_ms_hoy}}
+✅ Confirmada · {{contact.first_name}} {{contact.last_name}} · {{contact.tier_score}}
+{{appointment.start_time}}
+https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
 ```
+
+*(La situación que define la pregunta M4 va en la descripción de la tarea de
+abajo, no en Slack: es una frase larga y convierte el canal en un muro.)*
 
 **Descripción del nodo 6:**
 ```
@@ -310,10 +310,8 @@ La pregunta M4 se elige según lo que marcó en "¿Con qué situación te identi
 
 **Texto del nodo 3:**
 ```
-🎥 Grabar vídeo personalizado — llamada mañana
-{{contact.first_name}} {{contact.last_name}} — {{appointment.start_time}}
-Origen: {{contact.origen}}  ·  Tier: {{contact.tier_score}}
-Resumen: {{contact.resumen_lead}}
+🎥 Grabar vídeo · {{contact.first_name}} {{contact.last_name}} · mañana {{appointment.start_time}}
+https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
 ```
 
 > ⚠️ **Lo único de todo este documento que hay que verificar en el builder:**
@@ -349,10 +347,9 @@ sistema queda peor que sin automatización.
 
 **Texto del nodo 6:**
 ```
-⏰ En 35 min — {{contact.first_name}} {{contact.last_name}}
-{{appointment.start_time}}  ·  Origen: {{contact.origen}}  ·  Tier: {{contact.tier_score}}
-Resumen: {{contact.resumen_lead}}
-Link: {{appointment.meeting_location}}
+⏰ En 35 min · {{contact.first_name}} {{contact.last_name}} · {{contact.tier_score}}
+{{appointment.meeting_location}}
+https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
 @closer
 ```
 
@@ -410,11 +407,9 @@ todavía viva. Por eso llevan congelados desde el 26-06.
 
 **Texto del nodo 4:**
 ```
-🎯 Lead lista para el closer
-{{contact.first_name}} {{contact.last_name}} · {{contact.phone}}
-Origen: {{contact.origen}}  ·  Tier: {{contact.tier_score}}  ·  Monto: {{contact.monto_propuesto}}
-Llamada: {{appointment.start_time}}
-Resumen: {{contact.resumen_lead}}
+🎯 Lista para el closer · {{contact.first_name}} {{contact.last_name}} · {{contact.tier_score}} · {{contact.monto_propuesto}}
+{{appointment.start_time}}
+https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
 ```
 
 > ⚠️ **El nodo 2 es la corrección de F-15.** Hoy `[Handoff] 5` **borra todas**
@@ -520,6 +515,29 @@ Nada se borra. Se pausa, y si algo sale mal se vuelve a publicar en un clic.
 | `07` | `[Handoff] 5` |
 | `08` | `1 · Asistió` · `2 · No-Show` · `3 · Re-agendada` · `4 · Reserva pagada` |
 | — | `Asignación Anaís` · `Asignación Rafa` *(los absorbe el motor `01`)* |
+
+---
+
+## La regla de los mensajes de Slack
+
+**Slack avisa, GHL detalla.** Dos o tres líneas, y la última es siempre el link
+al contacto:
+
+```
+https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
+```
+
+La primera versión de estos mensajes llevaba hasta siete líneas con respuestas
+de survey completas. Con veinte postulaciones al día eso es un muro que nadie
+lee, y todo ese detalle ya está en la ficha, a un clic. **Sin el link no
+funciona recortar** — por eso el link es la parte que no se negocia, y hay que
+verificar que el token `{{contact.id}}` exista en el selector del nodo de Slack
+antes de quitar nada del texto.
+
+El tier no va escrito en los avisos del motor porque cada tier tiene su propio
+canal. La única excepción a las tres líneas es el aviso de 35 minutos antes:
+lleva también `{{appointment.meeting_location}}`, porque el closer entra a la
+reunión desde Slack sin pasar por la ficha.
 
 ---
 

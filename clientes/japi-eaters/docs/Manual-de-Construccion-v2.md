@@ -216,14 +216,15 @@ re-entry activado**. Primer nodo: *Remove Contact Tag* `sys-calificar`.
 ### El mensaje de Slack (mismo formato para los tres tiers)
 
 ```
-🥕 Nueva postulación {{contact.tier_score}}
-{{contact.first_name}} {{contact.last_name}} · {{contact.phone}}
-Origen: {{contact.origen}}  ·  Campaña: {{contact.utm_campaign}}
-Profesión: {{contact.solo_acompaamos_a_profesionales_de_la_salud...}}
-Situación: {{contact.cules_son_tus_principales_desafos...}}
-Invierte: {{contact.para_recomendarte_la_mejor_opcin...}}
-Decide: {{contact.si_al_finalizar_la_llamada...}}
+🥕 {{contact.first_name}} {{contact.last_name}} · {{contact.origen}} · {{contact.phone}}
+https://app.gohighlevel.com/v2/location/kdmmFxEbJjSpgMtbaZ6F/contacts/detail/{{contact.id}}
 ```
+
+**Dos líneas, y la segunda es el link a la ficha.** El tier no va en el texto
+porque cada tier tiene su propio canal. La campaña, la profesión, la situación y
+la respuesta de inversión tampoco: son frases largas que convierten el canal en
+un muro y ya están en la ficha. Verificar que el token `{{contact.id}}` exista
+en el selector antes de quitar el detalle.
 
 **Diferencias con `[ADS] 1` actual, a propósito:**
 - La oportunidad de descalificadas **sí lleva etapa** (hoy el nodo está en error, F-10).
