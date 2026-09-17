@@ -18,6 +18,7 @@ emails y nuevos productos.
 | [`Casos-de-Exito.md`](./Casos-de-Exito.md) | Transformaciones reales de alumnas, testimonios en video y números de respaldo. Prueba social. |
 | [`FAQ.md`](./FAQ.md) | Preguntas frecuentes reales con respuestas en la voz de la marca. Ideal para web y bot/setter. |
 | [`Voz-y-Marca.md`](./Voz-y-Marca.md) | Tono, frases marca registrada, palabras prohibidas, paleta de color, historia y autoridad de Josefina. |
+| [`Agenda-Closers.md`](./Agenda-Closers.md) | Estructura de agenda en GHL para tres closers: prioridad horaria de Gabriela y Josefina, plan de transición de salida de Rafa, configuración paso a paso y QA. |
 | [`Operaciones-y-Embudo.md`](./Operaciones-y-Embudo.md) | Funnel, onboarding, plataforma Skool (niveles), mentorías, equipo, stack tecnológico, modelo 2026 y datos de audiencias. |
 
 ## Fuentes
