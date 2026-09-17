@@ -53,10 +53,10 @@ Son embudos distintos (ads y orgánico) con la misma operación detrás.
 
 Horarios expresados en **hora de Chile (America/Santiago)**.
 
-| Closer | Ventana | Prioridad | Rol |
+| Closer | Ventana cargada | Prioridad | Último inicio ofrecido |
 |---|---|---|---|
-| **Gabriela** | L-V 09:00–19:00 | **Alta** | Titular. Toma todo lo que pueda. |
-| **Josefina** | L-V 18:00–21:00 | **Baja** | Solo tarde/noche y desborde. |
+| **Gabriela** | L-V 09:00–19:00 | **Alta** | 18:00 (9 a 10 llamadas/día) |
+| **Josefina** | L-J 18:00–22:00 · V 18:00–20:00 | **Baja** | 21:00 L-J · 19:00 V |
 
 Cómo se comporta:
 
@@ -64,12 +64,18 @@ Cómo se comporta:
 - **18:00** → ambas disponibles, pero Gabriela es Alta: el slot se le ofrece a
   ella; Josefina lo recibe **solo si Gabriela ya está tomada** a esa hora. Esta
   es la "hora de tarde que puede llegar a Gabriela" para no saturar a Josefina.
-- **19:00 y 20:00** → solo Josefina. Máximo **2-3 llamadas/noche** por diseño de
-  la ventana (45 min + 15 de buffer, un inicio por hora).
+- **19:00 en adelante** → solo Josefina. Máximo **3 llamadas/noche** por diseño
+  de la ventana (45 min + 15 de buffer, un inicio por hora).
+
+**La ventana de Gabriela tiene que cerrar a las 19:00, no a las 18:00.** Si
+cierra a las 18:00, su último inicio es a las 17:00 y la hora de las 18:00 no se
+la ofrece a nadie: queda una hora muerta entre las dos agendas. Lo mismo del otro
+lado: si Josefina parte a las 19:00 en vez de las 18:00, no hay solapamiento y la
+prioridad nunca llega a usarse (cada hora tiene una sola persona posible). Eso
+funciona igual, pero se pierde el respaldo de esa hora.
 
 Si Josefina igual queda muy cargada, el ajuste es mover la frontera: estirar a
-Gabriela hasta las 19:30 o recortar la ventana de Josefina a 19:00–21:00. No se
-toca la prioridad.
+Gabriela hasta las 19:30 o recortar la ventana de Josefina. No se toca la prioridad.
 
 Si se quiere el tope duro, además de la ventana: en el usuario de Josefina,
 *Maximum appointments per day*. El `appointmentPerDay: 10` del calendario es del
@@ -77,6 +83,19 @@ calendario completo, no por persona.
 
 **Sábado (decisión pendiente):** hoy Rafa cubre sábado 10:00–16:00. Hay que
 definir si Gabriela lo hereda, si se reparte, o si el sábado se cierra.
+
+### Los Schedules hay que aplicarlos a los calendarios
+
+En GHL un *Schedule* se crea aparte y luego se **aplica** a uno o más
+calendarios (campo **Active on**). Un schedule en "Active on: 0 calendars" no
+hace nada, aunque tenga los horarios bien cargados. Cada horario (el de Gabriela
+y el de Josefina) tiene que quedar aplicado a **los dos** calendarios del
+programa, `[A]` y `[ORG]`.
+
+Verificar además la **zona horaria de cada schedule** por separado: Gabriela y
+Josefina en `America/Santiago`; el horario viejo de Rafa está en
+`America/Bogota`, que hoy va dos horas atrás de Chile (sus 08:00 son las 10:00
+en Chile).
 
 ## Plan de transición (4 semanas)
 
