@@ -975,3 +975,64 @@ promo no existe`**.
 - El prompt del **seguimiento automático** (escenario 7131746) todavía dice 17.
   Está apagado desde el 15 de septiembre, así que no hace daño, pero hay que
   corregirlo antes de volver a encenderlo.
+
+---
+
+## Los feriados: cuatro fechas, no un calendario (2026-09-18)
+
+Nadie puede llegar a una escuela cerrada por culpa del bot. Ese es el riesgo real
+de esta función, y es asimétrico: equivocarse hacia "está abierto" hace que
+alguien pierda un viaje; equivocarse hacia "está cerrado" solo pospone una visita.
+
+### La simplificación que hace esto seguro
+
+La tentación era cargarle el calendario de feriados de Chile. Mala idea: son
+quince fechas al año, varias **se mueven** por la Ley 19.973 según el día de la
+semana en que caen, y un prompt con lógica de traslados es un prompt que se
+equivoca.
+
+La salida fue darse cuenta de que **la escuela ya cierra sábados y domingos**. Los
+únicos feriados que cambian algo son los que caen de lunes a viernes. En lo que
+queda de 2026 son **cuatro**:
+
+| Fecha | Día | Feriado |
+|---|---|---|
+| 18 de septiembre | viernes | Independencia Nacional |
+| 12 de octubre | lunes | Encuentro de Dos Mundos |
+| 8 de diciembre | martes | Inmaculada Concepción |
+| 25 de diciembre | viernes | Navidad |
+
+El 19 de septiembre, el 31 de octubre y el 1 de noviembre también son feriados,
+pero caen en fin de semana y la escuela ya estaba cerrada igual. Ninguno de los
+movibles se traslada este año, así que no hay nada que calcular.
+
+Cuatro fechas fijas, verificadas, sin lógica. Eso el bot no lo puede equivocar.
+
+### El límite declarado
+
+La sección dice explícitamente que **la lista llega hasta el 31 de diciembre de
+2026**. Para 2027 el bot no tiene el calendario, y tiene prohibido afirmar que
+está abierto: dice que confirma antes y pide que le escriban antes de salir de la
+casa. Un prompt que sabe dónde termina su conocimiento vale más que uno que
+adivina.
+
+### El comportamiento
+
+1. **Si la persona dice que va a venir un día feriado, se lo avisa antes** y le
+   ofrece el día hábil más cercano. Es el punto que justifica toda la sección.
+2. **Si hoy o mañana es feriado** y la conversación va de venir, lo menciona sin
+   que le pregunten, usando el dato de HOY/MAÑANA que ya recibe calculado.
+3. **No anuncia feriados que no vienen al caso.** Si están hablando de octubre,
+   no le cuenta que el 8 de diciembre es feriado.
+4. **El feriado no frena la venta.** El link y la transferencia funcionan todos
+   los días y la teoría es online. Solo se corre lo presencial.
+
+La regla nº16 también cambió: antes de anotar una visita, el bot revisa que el día
+no sea feriado ni fin de semana. Reservar un cupo para un día cerrado es peor que
+no reservarlo.
+
+### Lo que hay que refrescar
+
+En enero de 2027 hay que actualizar la lista, y ahí sí conviene revisar los
+traslados: en 2027 el 29 de junio cae martes y el 12 de octubre también, y ambos
+se mueven al lunes anterior por ley.
